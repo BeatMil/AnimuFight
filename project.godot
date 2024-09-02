@@ -13,6 +13,7 @@ config_version=5
 config/name="Animu Fight"
 run/main_scene="res://scenes/test.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=120
 config/icon="res://icon.svg"
 
 [autoload]

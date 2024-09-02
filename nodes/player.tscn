@@ -92,7 +92,7 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [1],
@@ -100,6 +100,20 @@ tracks/3/keys = {
 }, {
 "args": [2],
 "method": &"_set_state"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2000],
+"method": &"_push_x"
 }]
 }
 
@@ -154,7 +168,7 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [1],
@@ -162,6 +176,20 @@ tracks/3/keys = {
 }, {
 "args": [3],
 "method": &"_set_state"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2000],
+"method": &"_push_x"
 }]
 }
 
@@ -216,7 +244,7 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [1],
@@ -224,6 +252,20 @@ tracks/3/keys = {
 }, {
 "args": [4],
 "method": &"_set_state"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2000],
+"method": &"_push_x"
 }]
 }
 
@@ -255,6 +297,8 @@ shape = SubResource("RectangleShape2D_n8fcv")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.6875, 0.6875)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 2

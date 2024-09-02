@@ -145,6 +145,17 @@ func _set_state(new_state: int) -> void:
 	state = States.values()[new_state]
 
 
+func _push_x(_power: int) -> void:
+	var tween = get_tree().create_tween()
+	var new_pos := Vector2.ZERO
+	if sprite_2d.flip_h: ## facing left
+		new_pos = Vector2(position.x-50, position.y)
+	else: ## facing left
+		new_pos = Vector2(position.x+50, position.y)
+
+	tween.tween_property(self, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
+
+
 func _z_index_equal_to_y() -> void:
 	z_index = int(position.y)
 
