@@ -112,7 +112,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [2000],
+"args": [50],
 "method": &"_push_x"
 }]
 }
@@ -188,7 +188,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [2000],
+"args": [50],
 "method": &"_push_x"
 }]
 }
@@ -264,7 +264,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [2000],
+"args": [50],
 "method": &"_push_x"
 }]
 }

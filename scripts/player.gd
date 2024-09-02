@@ -145,13 +145,13 @@ func _set_state(new_state: int) -> void:
 	state = States.values()[new_state]
 
 
-func _push_x(_power: int) -> void:
+func _push_x(pixel: int) -> void:
 	var tween = get_tree().create_tween()
 	var new_pos := Vector2.ZERO
 	if sprite_2d.flip_h: ## facing left
-		new_pos = Vector2(position.x-50, position.y)
+		new_pos = Vector2(position.x-pixel, position.y)
 	else: ## facing left
-		new_pos = Vector2(position.x+50, position.y)
+		new_pos = Vector2(position.x+pixel, position.y)
 
 	tween.tween_property(self, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
 
