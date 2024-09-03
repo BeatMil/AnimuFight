@@ -113,11 +113,34 @@ func _push_x(pixel: int) -> void:
 	tween.tween_property(self, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
 
 
+func _push_x_backward(pixel: int) -> void:
+	var tween = get_tree().create_tween()
+	var new_pos := Vector2.ZERO
+	if sprite_2d.flip_h: ## facing left
+		new_pos = Vector2(position.x+pixel, position.y)
+	else: ## facing left
+		new_pos = Vector2(position.x-pixel, position.y)
+
+	tween.tween_property(self, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
+
+
+#############################################################
+## Public functions
+#############################################################
+"""
+hitbox.gd uses this
+"""
+func hitted() -> void:
+	animation_player.stop(true)
+	animation_player.play("hitted")
+	_push_x_backward(100)
+
+
 #############################################################
 ## Signals
 #############################################################
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	pass
-	if anim_name in ["lp1", "lp2", "lp3"]:
+	if anim_name in ["lp1", "lp2", "lp3", "hitted"]:
 		animation_player.play("idle")
 		state = States.IDLE

@@ -1,144 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cuxv8dck1u3r8"]
+[gd_scene load_steps=5 format=3 uid="uid://cuxv8dck1u3r8"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_18bea"]
 [ext_resource type="Texture2D" uid="uid://bytgy7otax0fb" path="res://media/sprites/char2/SecondChar_idle.png" id="2_p6wtt"]
-[ext_resource type="Texture2D" uid="uid://b6syt0rhv2dwx" path="res://media/sprites/char2/SecondChar_hitted.png" id="3_y433u"]
-[ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="4_7g8r0"]
-[ext_resource type="AudioStream" uid="uid://3eyk8460sfvf" path="res://media/sfxs/charge01.wav" id="5_pfawe"]
-[ext_resource type="Texture2D" uid="uid://dxod1gcjs71jv" path="res://media/sprites/char2/SecondChar_fireball.png" id="5_w11kl"]
-[ext_resource type="AudioStream" uid="uid://dy3bxvokjiup5" path="res://media/sfxs/big_fireball.wav" id="6_li7ys"]
+[ext_resource type="AnimationLibrary" uid="uid://d3yrwecnjsc81" path="res://nodes/animations/enemy.res" id="3_b4xsf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xb7m"]
 size = Vector2(128, 32)
-
-[sub_resource type="Animation" id="Animation_eq3us"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_p6wtt")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_36fxd"]
-resource_name = "hitted"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_y433u")]
-}
-tracks/1/type = "audio"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.255825,
-"stream": ExtResource("4_7g8r0")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/1/use_blend = true
-
-[sub_resource type="Animation" id="Animation_goxpd"]
-resource_name = "idle"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_p6wtt")]
-}
-
-[sub_resource type="Animation" id="Animation_klaw2"]
-resource_name = "lp1"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("2_p6wtt"), ExtResource("5_w11kl")]
-}
-tracks/1/type = "audio"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("5_pfawe")
-}, {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("6_li7ys")
-}],
-"times": PackedFloat32Array(0, 0.4)
-}
-tracks/1/use_blend = true
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(0, 1),
-"update": 0,
-"values": [Color(0.9375, 0.920477, 0.501709, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jl5s0"]
-_data = {
-"RESET": SubResource("Animation_eq3us"),
-"hitted": SubResource("Animation_36fxd"),
-"idle": SubResource("Animation_goxpd"),
-"lp1": SubResource("Animation_klaw2")
-}
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_18bea")
@@ -154,7 +21,7 @@ shape = SubResource("RectangleShape2D_0xb7m")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_jl5s0")
+"": ExtResource("3_b4xsf")
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

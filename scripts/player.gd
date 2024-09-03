@@ -2,6 +2,12 @@ extends "res://scripts/character_template.gd"
 
 
 #############################################################
+## Node Ref
+#############################################################
+@onready var debug_label: Label = $CanvasLayer/DebugLabel
+
+
+#############################################################
 ## Built-in
 #############################################################
 func _ready() -> void:
@@ -9,9 +15,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	pass
-	## Debuger
-	# debug_label.texat = "PlayerState: %s"%States.keys()[state]
+	# Debuger
+	debug_label.text = "PlayerState: %s"%States.keys()[state]
 
 
 func _physics_process(delta: float) -> void:
@@ -53,8 +58,3 @@ func _unhandled_key_input(event: InputEvent) -> void:
 #############################################################
 ## Signals
 #############################################################
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	pass
-	if anim_name in ["lp1", "lp2", "lp3"]:
-		animation_player.play("idle")
-		state = States.IDLE

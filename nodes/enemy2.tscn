@@ -1,0 +1,183 @@
+[gd_scene load_steps=16 format=3 uid="uid://dsgid218xceg6"]
+
+[ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/character_template.tscn" id="1_5vg7s"]
+[ext_resource type="Texture2D" uid="uid://bytgy7otax0fb" path="res://media/sprites/char2/SecondChar_idle.png" id="2_2tmba"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="2_4bw38"]
+[ext_resource type="Texture2D" uid="uid://dxod1gcjs71jv" path="res://media/sprites/char2/SecondChar_fireball.png" id="2_mstor"]
+[ext_resource type="Texture2D" uid="uid://b6syt0rhv2dwx" path="res://media/sprites/char2/SecondChar_hitted.png" id="3_k4ru4"]
+[ext_resource type="AnimationLibrary" uid="uid://d3yrwecnjsc81" path="res://nodes/animations/enemy.res" id="3_y3pb8"]
+[ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="4_hs54k"]
+[ext_resource type="AudioStream" uid="uid://3eyk8460sfvf" path="res://media/sfxs/charge01.wav" id="6_bvcgc"]
+[ext_resource type="AudioStream" uid="uid://dy3bxvokjiup5" path="res://media/sfxs/big_fireball.wav" id="7_5e30b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4r71"]
+size = Vector2(160, 32)
+
+[sub_resource type="Animation" id="Animation_lm1a0"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_2tmba")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2jsqy"]
+resource_name = "hitted"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_k4ru4")]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.255825,
+"stream": ExtResource("4_hs54k")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_4rncu"]
+resource_name = "idle"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_2tmba")]
+}
+
+[sub_resource type="Animation" id="Animation_kkrsd"]
+resource_name = "lp1"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_2tmba"), ExtResource("2_mstor")]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_bvcgc")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_5e30b")
+}],
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0, 1),
+"update": 0,
+"values": [Color(0.9375, 0.920477, 0.501709, 1), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spawn_lp_hitbox"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ia3ec"]
+_data = {
+"RESET": SubResource("Animation_lm1a0"),
+"hitted": SubResource("Animation_2jsqy"),
+"idle": SubResource("Animation_4rncu"),
+"lp1": SubResource("Animation_kkrsd")
+}
+
+[node name="Enemy" groups=["enemy"] instance=ExtResource("1_5vg7s")]
+script = ExtResource("2_4bw38")
+
+[node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(1, 1, 1, 1)
+texture = ExtResource("2_2tmba")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 144)
+shape = SubResource("RectangleShape2D_x4r71")
+
+[node name="LpPos" parent="HitBoxPos" index="0"]
+position = Vector2(168, 144)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_ia3ec"),
+"enemy": ExtResource("3_y3pb8")
+}
+
+[node name="Timer" type="Timer" parent="." index="5"]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
