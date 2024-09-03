@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://3j7usofbjob2"]
+[gd_scene load_steps=5 format=3 uid="uid://3j7usofbjob2"]
 
 [ext_resource type="Texture2D" uid="uid://dhg03s02r5p3n" path="res://media/backgrounds/rooftop_no_clouds.png" id="1_2is0x"]
-[ext_resource type="PackedScene" uid="uid://dx6uc5wajq0wc" path="res://nodes/player.tscn" id="2_i7udv"]
 [ext_resource type="PackedScene" uid="uid://c6ncyc7dw8v3o" path="res://nodes/dummy.tscn" id="3_tgcpc"]
+[ext_resource type="PackedScene" uid="uid://cuxv8dck1u3r8" path="res://nodes/enemy.tscn" id="4_04sct"]
+[ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player2.tscn" id="4_38wnk"]
 
 [node name="Test" type="Node2D"]
 
@@ -11,8 +12,11 @@ z_index = -10
 texture = ExtResource("1_2is0x")
 centered = false
 
-[node name="Player" parent="." instance=ExtResource("2_i7udv")]
-position = Vector2(790, 697)
-
 [node name="Dummy" parent="." instance=ExtResource("3_tgcpc")]
 position = Vector2(1320, 722)
+
+[node name="Enemy" parent="." instance=ExtResource("4_04sct")]
+position = Vector2(1185, 856)
+
+[node name="Player" parent="." instance=ExtResource("4_38wnk")]
+position = Vector2(709, 697)

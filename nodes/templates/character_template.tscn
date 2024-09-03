@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://kniacsvw6ecd"]
+
+[ext_resource type="Script" path="res://scripts/character_template.gd" id="1_1e06d"]
+[ext_resource type="Texture2D" uid="uid://44is7mymlst6" path="res://media/sprites/temp_char/template_girl_hitted.png" id="3_stsp2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyba8"]
+size = Vector2(60, 32)
+
+[node name="CharacterTemplate" type="CharacterBody2D"]
+script = ExtResource("1_1e06d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.980469, 0.486404, 0.486404, 1)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_stsp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-118, 0)
+shape = SubResource("RectangleShape2D_kyba8")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="HitBoxPos" type="Node2D" parent="."]
+
+[node name="LpPos" type="Marker2D" parent="HitBoxPos"]
+position = Vector2(200, 104)
