@@ -14,5 +14,6 @@ centered = false
 [node name="Player2" parent="." instance=ExtResource("4_38wnk")]
 position = Vector2(1020, 697)
 
-[node name="Enemy" parent="." instance=ExtResource("3_gxdtw")]
+[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_gxdtw")]
 position = Vector2(706, 717)
+target = NodePath("../Player2")
