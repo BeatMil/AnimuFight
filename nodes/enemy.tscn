@@ -8,6 +8,7 @@
 size = Vector2(128, 32)
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+position = Vector2(-1, 0)
 script = ExtResource("1_18bea")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

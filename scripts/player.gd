@@ -8,9 +8,17 @@ extends "res://scripts/base_character.gd"
 
 
 #############################################################
+## Config
+#############################################################
+# var is_face_right:bool = true
+
+
+#############################################################
 ## Built-in
 #############################################################
 func _ready() -> void:
+	print_rich("[img]res://media/sprites/char1/FirstChar_block.png[/img]")
+	print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	pass # Replace with function body.
 
 
@@ -46,6 +54,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	is_face_right = not sprite_2d.flip_h
 	_z_index_equal_to_y()
 
 

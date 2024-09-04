@@ -41,7 +41,17 @@ const HITBOX_LP = preload("res://nodes/hitboxes/hitbox_lp.tscn")
 var state = States.IDLE
 var MOVE_SPEED: int = 30000
 var MOVE_SPEED_VERT: int = 20000
+var is_face_right:bool = true
+var hp: int = 5
 const FRICTION: float = 0.5
+
+
+#############################################################
+## Built-in
+#############################################################
+### Seems like it doesn't run the process functions when used as inheritance
+func _physics_process(_delta: float) -> void:
+	pass
 
 
 #############################################################
@@ -109,6 +119,9 @@ func _set_state(new_state: int) -> void:
 	state = States.values()[new_state]
 
 
+"""
+animation_player uses
+"""
 func _push_x(pixel: int) -> void:
 	var tween = get_tree().create_tween()
 	var new_pos := Vector2.ZERO
@@ -120,14 +133,10 @@ func _push_x(pixel: int) -> void:
 	tween.tween_property(self, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
 
 
-func _push_x_backward(pixel: int) -> void:
+func _push_x_direct(pixel: int) -> void:
 	var tween = get_tree().create_tween()
 	var new_pos := Vector2.ZERO
-	if sprite_2d.flip_h: ## facing left
-		new_pos = Vector2(position.x+pixel, position.y)
-	else: ## facing left
-		new_pos = Vector2(position.x-pixel, position.y)
-
+	new_pos = Vector2(position.x+pixel, position.y)
 	tween.tween_property(self, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
 
 
@@ -137,14 +146,22 @@ func _push_x_backward(pixel: int) -> void:
 """
 hitbox.gd uses this
 """
-func hitted(_attacker: CharacterBody2D) -> void:
+func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool) -> void:
 	if state in [States.PARRY]:
 		animation_player.play("parry_success")
-		_attacker.hitted(self)
+		_attacker.hitted(self, is_face_right)
 	else:
-		animation_player.stop(true)
-		animation_player.play("hitted")
-		_push_x_backward(100)
+		hp -= 1
+		if hp <= 0:
+			animation_player.stop(true)
+			animation_player.play("ded")
+		else:
+			animation_player.stop(true)
+			animation_player.play("hitted")
+		if is_push_to_the_right:
+			_push_x_direct(100)
+		else:
+			_push_x_direct(-100)
 
 
 #############################################################

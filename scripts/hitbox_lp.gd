@@ -18,7 +18,8 @@ func _ready() -> void:
 #############################################################
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.has_method("hitted"):
-		body.hitted(get_parent())
+		body.hitted(get_parent(), get_parent().is_face_right)
+
 
 
 func _on_timer_timeout() -> void:
