@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwih0xhe7lqho"]
+
+[ext_resource type="Script" path="res://scripts/hp_bar.gd" id="1_rawco"]
+
+[node name="HpBar" type="ProgressBar"]
+offset_left = -120.0
+offset_top = -192.0
+offset_right = 136.0
+offset_bottom = -165.0
+max_value = 5.0
+step = 1.0
+value = 5.0
+script = ExtResource("1_rawco")

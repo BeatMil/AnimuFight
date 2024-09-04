@@ -18,5 +18,5 @@ func _ready() -> void:
 
 
 func _on_timer_timeout() -> void:
-	if hp > 0:
+	if hp_bar.get_hp() > 0:
 		_lp()

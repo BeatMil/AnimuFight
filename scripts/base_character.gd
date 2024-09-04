@@ -33,6 +33,7 @@ const HITBOX_LP = preload("res://nodes/hitboxes/hitbox_lp.tscn")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var lp_pos: Marker2D = $HitBoxPos/LpPos
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var hp_bar: ProgressBar = $HpBar
 
 
 #############################################################
@@ -49,6 +50,10 @@ const FRICTION: float = 0.5
 #############################################################
 ## Built-in
 #############################################################
+func _ready() -> void:
+	hp_bar.set_hp(hp)
+
+
 ### Seems like it doesn't run the process functions when used as inheritance
 func _physics_process(_delta: float) -> void:
 	pass
@@ -151,8 +156,8 @@ func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool) -> void:
 		animation_player.play("parry_success")
 		_attacker.hitted(self, is_face_right)
 	else:
-		hp -= 1
-		if hp <= 0:
+		hp_bar.hp_down(1)
+		if hp_bar.get_hp() <= 0:
 			animation_player.stop(true)
 			animation_player.play("ded")
 		else:
