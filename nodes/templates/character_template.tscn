@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://kniacsvw6ecd"]
 
-[ext_resource type="Script" path="res://scripts/character_template.gd" id="1_1e06d"]
+[ext_resource type="Script" path="res://scripts/base_character.gd" id="1_wm7l8"]
 [ext_resource type="Texture2D" uid="uid://44is7mymlst6" path="res://media/sprites/temp_char/template_girl_hitted.png" id="3_stsp2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyba8"]
 size = Vector2(160, 32)
 
 [node name="CharacterTemplate" type="CharacterBody2D"]
-script = ExtResource("1_1e06d")
+script = ExtResource("1_wm7l8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.980469, 0.486404, 0.486404, 1)

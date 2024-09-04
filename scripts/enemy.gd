@@ -1,4 +1,4 @@
-extends "res://scripts/character_template.gd"
+extends "res://scripts/base_character.gd"
 
 
 func _ready() -> void:
