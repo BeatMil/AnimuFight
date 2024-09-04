@@ -12,7 +12,7 @@ enum {
 ## Config
 #############################################################
 # var is_face_right:bool = true
-var SPEED: int = 100
+var SPEED: int = 300
 var is_player_in_range: bool = false
 
 

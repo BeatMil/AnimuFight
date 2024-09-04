@@ -86,7 +86,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_2jsqy"]
 resource_name = "hitted"
-length = 0.4
+length = 1.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -127,6 +127,18 @@ tracks/2/keys = {
 "args": [5],
 "method": &"_set_state"
 }]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.51973, 0.51973, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_4rncu"]
@@ -169,7 +181,7 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [ExtResource("2_2tmba"), ExtResource("2_mstor")]
@@ -190,7 +202,7 @@ tracks/1/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("7_5e30b")
 }],
-"times": PackedFloat32Array(0, 0.4)
+"times": PackedFloat32Array(0, 0.5)
 }
 tracks/1/use_blend = true
 tracks/2/type = "value"
@@ -200,7 +212,7 @@ tracks/2/path = NodePath("Sprite2D:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(0, 1),
 "update": 0,
 "values": [Color(0.9375, 0.920477, 0.501709, 1), Color(1, 1, 1, 1)]
@@ -212,7 +224,7 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [1],

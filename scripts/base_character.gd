@@ -42,6 +42,7 @@ const HITBOX_LP2 = preload("res://nodes/hitboxes/hitbox_lp2.tscn")
 @onready var lp_pos: Marker2D = $HitBoxPos/LpPos
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var hp_bar: ProgressBar = $HpBar
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 
 #############################################################
@@ -135,10 +136,8 @@ func _spawn_lp_hitbox(_size: Hitbox_size) -> void:
 	## Set hitbox collision target
 	if self.is_in_group("player"):
 		hitbox.is_hit_enemy = true
-		print_rich("[color=Orange][b]hit player![/b][/color]")
 	elif self.is_in_group("enemy"):
 		hitbox.is_hit_player = true
-		print_rich("[color=Purple][b]hit enemy![/b][/color]")
 
 	add_child(hitbox)
 
@@ -183,13 +182,14 @@ func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool) -> void:
 		if hp_bar.get_hp() <= 0:
 			animation_player.stop(true)
 			animation_player.play("ded")
+			collision_shape_2d.queue_free()
 		else:
 			animation_player.stop(true)
 			animation_player.play("hitted")
 		if is_push_to_the_right:
-			_push_x_direct(100)
+			_push_x_direct(20)
 		else:
-			_push_x_direct(-100)
+			_push_x_direct(-20)
 
 
 #############################################################
@@ -200,3 +200,5 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name in ["lp1", "lp2", "lp3", "hitted", "block", "parry_success"]:
 		animation_player.play("idle")
 		state = States.IDLE
+	if anim_name in ["ded"]:
+		queue_free()

@@ -19,7 +19,19 @@ position = Vector2(706, 717)
 target = NodePath("../Player")
 
 [node name="Enemy2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_gxdtw")]
-position = Vector2(1204, 944)
+position = Vector2(1025, 982)
+target = NodePath("../Player")
+
+[node name="Enemy4" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_gxdtw")]
+position = Vector2(1067, 518)
+target = NodePath("../Player")
+
+[node name="Enemy5" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_gxdtw")]
+position = Vector2(349, 730)
+target = NodePath("../Player")
+
+[node name="Enemy6" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_gxdtw")]
+position = Vector2(1896, 883)
 target = NodePath("../Player")
 
 [node name="Enemy3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_gxdtw")]
