@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuxv8dck1u3r8"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_18bea"]
+[ext_resource type="Texture2D" uid="uid://bytgy7otax0fb" path="res://media/sprites/char2/SecondChar_idle.png" id="2_p6wtt"]
+[ext_resource type="AnimationLibrary" uid="uid://d3yrwecnjsc81" path="res://nodes/animations/enemy.res" id="3_b4xsf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xb7m"]
+size = Vector2(128, 32)
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+position = Vector2(-1, 0)
+script = ExtResource("1_18bea")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_p6wtt")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 144)
+shape = SubResource("RectangleShape2D_0xb7m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": ExtResource("3_b4xsf")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="HitBoxPos" type="Node2D" parent="."]
+
+[node name="LpPos" type="Marker2D" parent="HitBoxPos"]
+position = Vector2(128, 144)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
