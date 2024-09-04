@@ -55,7 +55,13 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("lp"):
 		_lp()
 
-	if state in [States.IDLE, States.PARRY_SUCCESS]:
+	if state in [
+		States.IDLE,
+		States.PARRY_SUCCESS,
+		States.LP1,
+		States.LP2,
+		States.LP3,
+		]:
 		## BLOCK
 		if event.is_action_pressed("block"):
 			_block()
