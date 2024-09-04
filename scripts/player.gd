@@ -54,6 +54,16 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("lp"):
 		_lp()
 
+	if state == States.IDLE:
+		if event.is_action_pressed("block"):
+			_block()
+
+	if state in [States.BLOCK, States.PARRY]:
+		if event.is_action_released("block"):
+			animation_player.play("idle")
+			state = States.IDLE
+
+
 
 #############################################################
 ## Signals

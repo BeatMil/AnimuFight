@@ -14,7 +14,10 @@ enum States {
 	LP1,
 	LP2,
 	LP3,
-	HIT_STUNNED
+	HIT_STUNNED,
+	BLOCK,
+	PARRY,
+	PARRY_SUCCESS,
 	}
 
 
@@ -86,6 +89,10 @@ func _lp() ->  void:
 		# state = States.LP1
 
 
+func _block() ->  void:
+	animation_player.play("block")
+
+
 """
 animation_player uses
 """
@@ -130,10 +137,14 @@ func _push_x_backward(pixel: int) -> void:
 """
 hitbox.gd uses this
 """
-func hitted() -> void:
-	animation_player.stop(true)
-	animation_player.play("hitted")
-	_push_x_backward(100)
+func hitted(_attacker: CharacterBody2D) -> void:
+	if state in [States.PARRY]:
+		animation_player.play("parry_success")
+		_attacker.hitted(self)
+	else:
+		animation_player.stop(true)
+		animation_player.play("hitted")
+		_push_x_backward(100)
 
 
 #############################################################
@@ -141,6 +152,6 @@ func hitted() -> void:
 #############################################################
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	pass
-	if anim_name in ["lp1", "lp2", "lp3", "hitted"]:
+	if anim_name in ["lp1", "lp2", "lp3", "hitted", "block", "parry_success"]:
 		animation_player.play("idle")
 		state = States.IDLE
