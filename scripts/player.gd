@@ -51,10 +51,12 @@ func _physics_process(delta: float) -> void:
 
 ## Godot said this built-in is better for performance (me no understand tho...)
 func _unhandled_key_input(event: InputEvent) -> void:
+	## LP (Light Punch)
 	if event.is_action_pressed("lp"):
 		_lp()
 
-	if state == States.IDLE:
+	if state in [States.IDLE, States.PARRY_SUCCESS]:
+		## BLOCK
 		if event.is_action_pressed("block"):
 			_block()
 

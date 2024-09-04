@@ -374,7 +374,6 @@ tracks/4/keys = {
 [sub_resource type="Animation" id="Animation_tdvq7"]
 resource_name = "block"
 length = 20.0
-step = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -416,7 +415,7 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [7],
@@ -444,7 +443,7 @@ tracks/5/path = NodePath("Sprite2D:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(0, 1),
 "update": 0,
 "values": [Color(0.689885, 1, 0.560204, 1), Color(1, 1, 1, 1)]

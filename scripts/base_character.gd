@@ -84,7 +84,7 @@ func _lp() ->  void:
 	elif state == States.LP2:
 		animation_player.play("lp3")
 		# state = States.LP3
-	elif state == States.IDLE:
+	elif state in [States.IDLE, States.PARRY_SUCCESS]: ## <<-- start with this one
 		animation_player.play("lp1")
 		# state = States.LP1
 
