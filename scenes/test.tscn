@@ -11,9 +11,17 @@ z_index = -10
 texture = ExtResource("1_2is0x")
 centered = false
 
-[node name="Player2" parent="." instance=ExtResource("4_38wnk")]
+[node name="Player" parent="." instance=ExtResource("4_38wnk")]
 position = Vector2(1020, 697)
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_gxdtw")]
 position = Vector2(706, 717)
-target = NodePath("../Player2")
+target = NodePath("../Player")
+
+[node name="Enemy2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_gxdtw")]
+position = Vector2(1204, 944)
+target = NodePath("../Player")
+
+[node name="Enemy3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_gxdtw")]
+position = Vector2(1517, 836)
+target = NodePath("../Player")

@@ -21,10 +21,18 @@ enum States {
 	}
 
 
+enum Hitbox_size {
+	SMALL,
+	MEDIUM,
+	LARGE,
+	}
+
+
 #############################################################
 ## Preloads
 #############################################################
 const HITBOX_LP = preload("res://nodes/hitboxes/hitbox_lp.tscn")
+const HITBOX_LP2 = preload("res://nodes/hitboxes/hitbox_lp2.tscn")
 
 
 #############################################################
@@ -111,12 +119,27 @@ func _block() ->  void:
 """
 animation_player uses
 """
-func _spawn_lp_hitbox() -> void:
-	var hitbox = HITBOX_LP.instantiate()
+func _spawn_lp_hitbox(_size: Hitbox_size) -> void:
+	var hitbox: Node2D
+
+	if _size == Hitbox_size.MEDIUM:
+		hitbox = HITBOX_LP.instantiate()
+	elif _size == Hitbox_size.LARGE:
+		hitbox = HITBOX_LP2.instantiate()
+
 	if sprite_2d.flip_h: ## facing left
 		hitbox.position = Vector2(-lp_pos.position.x, lp_pos.position.y)
 	else: ## facing left
 		hitbox.position = Vector2(lp_pos.position.x, lp_pos.position.y)
+	
+	## Set hitbox collision target
+	if self.is_in_group("player"):
+		hitbox.is_hit_enemy = true
+		print_rich("[color=Orange][b]hit player![/b][/color]")
+	elif self.is_in_group("enemy"):
+		hitbox.is_hit_player = true
+		print_rich("[color=Purple][b]hit enemy![/b][/color]")
+
 	add_child(hitbox)
 
 

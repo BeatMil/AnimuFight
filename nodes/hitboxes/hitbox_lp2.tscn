@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqcq3synxmyul"]
+[gd_scene load_steps=3 format=3 uid="uid://cyeax2ed7ead5"]
 
-[ext_resource type="Script" path="res://scripts/hitbox_lp.gd" id="1_315a8"]
+[ext_resource type="Script" path="res://scripts/hitbox_lp.gd" id="1_kcp0r"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ahg1"]
-size = Vector2(128, 48)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0cl5"]
+size = Vector2(192, 64)
 
 [node name="HitboxLP" type="Node2D"]
-script = ExtResource("1_315a8")
+script = ExtResource("1_kcp0r")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_4ahg1")
+shape = SubResource("RectangleShape2D_m0cl5")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
