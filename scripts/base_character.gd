@@ -174,7 +174,7 @@ func _push_x_direct(pixel: int) -> void:
 hitbox.gd uses this
 """
 func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool) -> void:
-	if state in [States.PARRY]:
+	if state in [States.PARRY, States.PARRY_SUCCESS]:
 		animation_player.play("parry_success")
 		_attacker.hitted(self, is_face_right)
 	else:

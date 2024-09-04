@@ -60,9 +60,19 @@ func _physics_process(delta: float) -> void:
 
 ## Godot said this built-in is better for performance (me no understand tho...)
 func _unhandled_key_input(event: InputEvent) -> void:
-	## LP (Light Punch)
+	## LP (Light Punch) can also change direction while lping
 	if event.is_action_pressed("lp"):
 		_lp()
+
+	if Input.is_action_pressed("ui_left"):
+		if event.is_action_pressed("lp"):
+			sprite_2d.flip_h = true
+			_lp()
+
+	if Input.is_action_pressed("ui_right"):
+		if event.is_action_pressed("lp"):
+			sprite_2d.flip_h = false
+			_lp()
 
 	if state in [
 		States.IDLE,

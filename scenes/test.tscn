@@ -12,7 +12,7 @@ texture = ExtResource("1_2is0x")
 centered = false
 
 [node name="Player" parent="." instance=ExtResource("4_38wnk")]
-position = Vector2(1020, 697)
+position = Vector2(1018, 669)
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_gxdtw")]
 position = Vector2(706, 717)
