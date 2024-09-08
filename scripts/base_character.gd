@@ -102,18 +102,6 @@ func _move_down(delta) ->  void:
 	velocity = Vector2(velocity.x, MOVE_SPEED_VERT*delta)
 
 
-func _lp() ->  void:
-	if state == States.LP1:
-		animation_player.play("lp2")
-		# state = States.LP2
-	elif state == States.LP2:
-		animation_player.play("lp3")
-		# state = States.LP3
-	elif state in [States.IDLE, States.PARRY_SUCCESS]: ## <<-- start with this one
-		animation_player.play("lp1")
-		# state = States.LP1
-
-
 func _block() ->  void:
 	animation_player.play("block")
 
