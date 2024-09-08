@@ -74,6 +74,12 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			sprite_2d.flip_h = false
 			_lp()
 
+
+	## HP (Heavy Punch)
+	if event.is_action_pressed("hp"):
+		_hp()
+
+	## BLOCK
 	if state in [
 		States.IDLE,
 		States.PARRY_SUCCESS,
@@ -81,7 +87,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		States.LP2,
 		States.LP3,
 		]:
-		## BLOCK
 		if event.is_action_pressed("block"):
 			_block()
 
@@ -91,13 +96,17 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			state = States.IDLE
 
 
+func _hp() ->  void:
+	if state in [States.IDLE, States.PARRY_SUCCESS]:
+		animation_player.play("hp")
+
 
 #############################################################
 ## Signals
 #############################################################
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	pass
-	if anim_name in ["lp1", "lp2", "lp3", "hitted", "block", "parry_success"]:
+	if anim_name in ["lp1", "lp2", "lp3", "hitted", "block", "parry_success", "hp"]:
 		animation_player.play("idle")
 		state = States.IDLE
 	if anim_name in ["ded"]:

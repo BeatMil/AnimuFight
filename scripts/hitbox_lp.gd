@@ -13,6 +13,7 @@ extends Node2D
 var is_hit_player: bool = false
 var is_hit_enemy: bool = false
 var time_left_before_queue_free: float = 1.0
+var push_power: int = 20
 
 #############################################################
 ## Built-in
@@ -43,7 +44,7 @@ func _set_collision_hit_player() -> void:
 #############################################################
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.has_method("hitted"):
-		body.hitted(get_parent(), get_parent().is_face_right)
+		body.hitted(get_parent(), get_parent().is_face_right, push_power)
 
 
 

@@ -18,6 +18,7 @@ enum States {
 	BLOCK,
 	PARRY,
 	PARRY_SUCCESS,
+	F_LP,
 	}
 
 
@@ -120,7 +121,7 @@ func _block() ->  void:
 """
 animation_player uses
 """
-func _spawn_lp_hitbox(_size: Hitbox_size, _time: float = 0.1) -> void:
+func _spawn_lp_hitbox(_size: Hitbox_size, _time: float = 0.1, _push_power: int = 20) -> void:
 	var hitbox: Node2D
 
 	if _size == Hitbox_size.MEDIUM:
@@ -140,6 +141,7 @@ func _spawn_lp_hitbox(_size: Hitbox_size, _time: float = 0.1) -> void:
 		hitbox.is_hit_player = true
 
 	hitbox.time_left_before_queue_free = _time
+	hitbox.push_power = _push_power
 
 	add_child(hitbox)
 
@@ -175,7 +177,7 @@ func _push_x_direct(pixel: int) -> void:
 """
 hitbox.gd uses this
 """
-func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool) -> void:
+func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool, push_power: int = 20) -> void:
 	if state in [States.PARRY, States.PARRY_SUCCESS]:
 		animation_player.play("parry_success")
 		_attacker.hitted(self, is_face_right)
@@ -190,8 +192,6 @@ func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool) -> void:
 			animation_player.stop(true)
 			animation_player.play("hitted")
 		if is_push_to_the_right:
-			_push_x_direct(20)
+			_push_x_direct(push_power)
 		else:
-			_push_x_direct(-20)
-
-
+			_push_x_direct(-push_power)
