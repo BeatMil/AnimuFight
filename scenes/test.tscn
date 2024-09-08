@@ -17,7 +17,3 @@ position = Vector2(1018, 669)
 [node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_gxdtw")]
 position = Vector2(396, 717)
 target = NodePath("../Player")
-
-[node name="Enemy2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_gxdtw")]
-position = Vector2(1302, 717)
-target = NodePath("../Player")

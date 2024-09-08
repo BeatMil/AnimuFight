@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dsgid218xceg6"]
+[gd_scene load_steps=23 format=3 uid="uid://dsgid218xceg6"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_5vg7s"]
 [ext_resource type="Texture2D" uid="uid://bytgy7otax0fb" path="res://media/sprites/char2/SecondChar_idle.png" id="2_2tmba"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dy3bxvokjiup5" path="res://media/sfxs/big_fireball.wav" id="7_5e30b"]
 [ext_resource type="Texture2D" uid="uid://b37gvfgvbnllu" path="res://media/sprites/char2/attack01/enemy01_jump_attack01.png" id="9_p0p0k"]
 [ext_resource type="Texture2D" uid="uid://bv3b4qfbwkkfp" path="res://media/sprites/char2/attack01/enemy01_jump_attack02.png" id="10_1ovol"]
+[ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="12_031mq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x4r71"]
 size = Vector2(160, 32)
@@ -437,39 +438,48 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="." index="5"]
 
-[node name="AttackRangeR" type="Area2D" parent="." index="7"]
+[node name="LpRangeR" type="Area2D" parent="." index="7"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRangeR" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LpRangeR" index="0"]
 position = Vector2(136, 144)
 shape = SubResource("RectangleShape2D_1h3d5")
 
-[node name="AttackRangeL" type="Area2D" parent="." index="8"]
+[node name="LpRangeL" type="Area2D" parent="." index="8"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRangeL" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LpRangeL" index="0"]
 position = Vector2(-136, 144)
 shape = SubResource("RectangleShape2D_1h3d5")
 
-[node name="AttackRange01R" type="Area2D" parent="." index="9"]
+[node name="Attack01RangeR" type="Area2D" parent="." index="9"]
 position = Vector2(256, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange01R" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack01RangeR" index="0"]
 position = Vector2(136, 144)
 shape = SubResource("RectangleShape2D_oysbf")
 
-[node name="AttackRange01L" type="Area2D" parent="." index="10"]
+[node name="Attack01RangeL" type="Area2D" parent="." index="10"]
 position = Vector2(-592, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange01L" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack01RangeL" index="0"]
 position = Vector2(136, 144)
 shape = SubResource("RectangleShape2D_oysbf")
+
+[node name="DebugLabel" type="Label" parent="." index="11"]
+offset_left = -128.0
+offset_top = -264.0
+offset_right = 144.0
+offset_bottom = -208.0
+theme_override_fonts/font = ExtResource("12_031mq")
+theme_override_font_sizes/font_size = 39
+text = "bob"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="body_entered" from="AttackRangeR" to="." method="_on_attack_range_body_entered"]
-[connection signal="body_exited" from="AttackRangeR" to="." method="_on_attack_range_body_exited"]
-[connection signal="body_entered" from="AttackRangeL" to="." method="_on_attack_range_body_entered"]
-[connection signal="body_exited" from="AttackRangeL" to="." method="_on_attack_range_body_exited"]
-[connection signal="body_entered" from="AttackRange01R" to="." method="_on_attack_range_01r_body_entered"]
-[connection signal="body_exited" from="AttackRange01R" to="." method="_on_attack_range_01r_body_exited"]
-[connection signal="body_entered" from="AttackRange01L" to="." method="_on_attack_range_01r_body_entered"]
-[connection signal="body_exited" from="AttackRange01L" to="." method="_on_attack_range_01r_body_exited"]
+[connection signal="body_entered" from="LpRangeR" to="." method="_on_lp_range_r_body_entered"]
+[connection signal="body_exited" from="LpRangeR" to="." method="_on_lp_range_r_body_exited"]
+[connection signal="body_entered" from="LpRangeL" to="." method="_on_lp_range_l_body_entered"]
+[connection signal="body_exited" from="LpRangeL" to="." method="_on_lp_range_r_body_exited"]
+[connection signal="body_entered" from="Attack01RangeR" to="." method="_on_attack_01_range_r_body_entered"]
+[connection signal="body_exited" from="Attack01RangeR" to="." method="_on_attack_range_01r_body_exited"]
+[connection signal="body_entered" from="Attack01RangeL" to="." method="_on_attack_01_range_l_body_entered"]
+[connection signal="body_exited" from="Attack01RangeL" to="." method="_on_attack_range_01r_body_exited"]
