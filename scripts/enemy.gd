@@ -84,7 +84,12 @@ func _on_attack_range_body_exited(body: Node2D) -> void:
 
 func _on_attack_range_01r_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		is_player_in_range_attack01 = true
+		var result = randi() % 2  # This will give either 0 or 1 randomly.
+
+		if result == 0:
+			is_player_in_range_attack01 = true
+		else:
+			is_player_in_range_attack01 = false
 
 
 func _on_attack_range_01r_body_exited(body: Node2D) -> void:
