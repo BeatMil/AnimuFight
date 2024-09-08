@@ -120,7 +120,7 @@ func _block() ->  void:
 """
 animation_player uses
 """
-func _spawn_lp_hitbox(_size: Hitbox_size) -> void:
+func _spawn_lp_hitbox(_size: Hitbox_size, _time: float = 0.1) -> void:
 	var hitbox: Node2D
 
 	if _size == Hitbox_size.MEDIUM:
@@ -138,6 +138,8 @@ func _spawn_lp_hitbox(_size: Hitbox_size) -> void:
 		hitbox.is_hit_enemy = true
 	elif self.is_in_group("enemy"):
 		hitbox.is_hit_player = true
+
+	hitbox.time_left_before_queue_free = _time
 
 	add_child(hitbox)
 
@@ -180,6 +182,7 @@ func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool) -> void:
 	else:
 		hp_bar.hp_down(1)
 		if hp_bar.get_hp() <= 0:
+			state = States.HIT_STUNNED
 			animation_player.stop(true)
 			animation_player.play("ded")
 			collision_shape_2d.queue_free()
@@ -192,13 +195,3 @@ func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool) -> void:
 			_push_x_direct(-20)
 
 
-#############################################################
-## Signals
-#############################################################
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	pass
-	if anim_name in ["lp1", "lp2", "lp3", "hitted", "block", "parry_success"]:
-		animation_player.play("idle")
-		state = States.IDLE
-	if anim_name in ["ded"]:
-		queue_free()

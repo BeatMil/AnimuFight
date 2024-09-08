@@ -95,3 +95,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 #############################################################
 ## Signals
 #############################################################
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	pass
+	if anim_name in ["lp1", "lp2", "lp3", "hitted", "block", "parry_success"]:
+		animation_player.play("idle")
+		state = States.IDLE
+	if anim_name in ["ded"]:
+		queue_free()

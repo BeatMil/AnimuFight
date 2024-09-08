@@ -12,11 +12,13 @@ extends Node2D
 #############################################################
 var is_hit_player: bool = false
 var is_hit_enemy: bool = false
+var time_left_before_queue_free: float = 1.0
 
 #############################################################
 ## Built-in
 #############################################################
 func _ready() -> void:
+	timer.wait_time = time_left_before_queue_free
 	timer.start()
 	if is_hit_player:
 		_set_collision_hit_player()
