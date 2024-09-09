@@ -109,7 +109,9 @@ func _block() ->  void:
 """
 animation_player uses
 """
-func _spawn_lp_hitbox(_size: Hitbox_size, _time: float = 0.1, _push_power: int = 20) -> void:
+func _spawn_lp_hitbox(_size: Hitbox_size, _time: float = 0.1, _push_power: int = 20,
+	_push_type: Enums.Push_types = Enums.Push_types.NORMAL) -> void:
+
 	var hitbox: Node2D
 
 	if _size == Hitbox_size.MEDIUM:
@@ -127,6 +129,9 @@ func _spawn_lp_hitbox(_size: Hitbox_size, _time: float = 0.1, _push_power: int =
 		hitbox.is_hit_enemy = true
 	elif self.is_in_group("enemy"):
 		hitbox.is_hit_player = true
+	
+	## Set push_type
+	hitbox.push_type = _push_type
 
 	hitbox.time_left_before_queue_free = _time
 	hitbox.push_power = _push_power
@@ -165,7 +170,7 @@ func _push_x_direct(pixel: int) -> void:
 """
 hitbox.gd uses this
 """
-func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool, push_power: int = 20) -> void:
+func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool, push_power: int = 20, push_type: int = 0) -> void:
 	if state in [States.PARRY, States.PARRY_SUCCESS]:
 		animation_player.play("parry_success")
 		_attacker.hitted(self, is_face_right)
@@ -177,8 +182,16 @@ func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool, push_power: 
 			animation_player.play("ded")
 			collision_shape_2d.queue_free()
 		else:
-			animation_player.stop(true)
-			animation_player.play("hitted")
+			match push_type:
+				0:
+					animation_player.stop(true)
+					animation_player.play("hitted")
+				1:
+					animation_player.stop(true)
+					animation_player.play("down")
+				_:
+					animation_player.stop(true)
+					animation_player.play("hitted")
 		if is_push_to_the_right:
 			_push_x_direct(push_power)
 		else:

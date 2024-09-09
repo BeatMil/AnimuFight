@@ -15,17 +15,7 @@ centered = false
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_m2gto")]
 position = Vector2(396, 717)
-target = NodePath("../Enemy2")
-
-[node name="Enemy2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_m2gto")]
-position = Vector2(396, 717)
-target = NodePath("../Enemy")
-
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-autostart = true
+target = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("4_6s7w5")]
 position = Vector2(1060, 700)
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
