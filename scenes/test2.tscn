@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://3j7usofbjob2"]
+
+[ext_resource type="Texture2D" uid="uid://dhg03s02r5p3n" path="res://media/backgrounds/rooftop_no_clouds.png" id="1_2is0x"]
+
+[node name="Test2" type="Node2D"]
+
+[node name="RooftopNoClouds" type="Sprite2D" parent="."]
+modulate = Color(1, 0.585495, 0.585495, 1)
+z_index = -10
+texture = ExtResource("1_2is0x")
+centered = false
