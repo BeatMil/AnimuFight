@@ -12,14 +12,14 @@ enum {
 ## Config
 #############################################################
 # var is_face_right:bool = true
-var SPEED: int = 300
+var speed: int = 600
 var is_player_in_range_lp: bool = false
 var is_player_in_range_attack01: bool = false
 
 
 func _physics_process(delta: float) -> void:
 	is_face_right = not sprite_2d.flip_h
-	_z_index_equal_to_y()
+	# _z_index_equal_to_y()
 	_move(delta)
 	if state == States.IDLE:
 		_facing()
@@ -50,7 +50,7 @@ func _ready() -> void:
 func _move( delta) -> void:
 	if state == States.IDLE:
 		var direction = (target.position - global_position).normalized() 
-		var desired_velocity =  direction * SPEED
+		var desired_velocity =  direction * speed
 		var steering = (desired_velocity - velocity) * delta * 2.5
 		velocity += steering
 
