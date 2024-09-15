@@ -100,6 +100,16 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("hp"):
 		_hp()
 
+	if Input.is_action_pressed("ui_left"):
+		if event.is_action_pressed("hp"):
+			sprite_2d.flip_h = true
+			_hp()
+
+	if Input.is_action_pressed("ui_right"):
+		if event.is_action_pressed("hp"):
+			sprite_2d.flip_h = false
+			_hp()
+
 	## BLOCK
 	if state in [
 		States.IDLE,
