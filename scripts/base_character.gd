@@ -19,6 +19,7 @@ enum States {
 	PARRY,
 	PARRY_SUCCESS,
 	F_LP,
+	AIR,
 	}
 
 
@@ -50,9 +51,11 @@ const HITBOX_LP2 = preload("res://nodes/hitboxes/hitbox_lp2.tscn")
 ## Config
 #############################################################
 var state = States.IDLE
-var MOVE_SPEED: int = 30000
-var MOVE_SPEED_VERT: int = 20000
+var move_speed: int = 100000
+var move_speed_vert: int = 20000
 var is_face_right:bool = true
+var gravity_power = 10000
+var jump_power = 250000
 var hp: int = 5
 const FRICTION: float = 0.5
 
@@ -84,22 +87,34 @@ func _lerp_velocity_y():
 	velocity = velocity.lerp(Vector2(velocity.x, 0), FRICTION)
 
 
+func _gravity(delta):
+	if not is_on_floor():
+		velocity += Vector2(0, gravity_power*delta)
+
+
 func _move_left(delta) ->  void:
-	velocity = Vector2(-MOVE_SPEED * delta, velocity.y)
+	velocity = Vector2(-move_speed * delta, velocity.y)
 	sprite_2d.flip_h = true
 
 
 func _move_right(delta) ->  void:
-	velocity = Vector2(MOVE_SPEED * delta, velocity.y)
+	velocity = Vector2(move_speed * delta, velocity.y)
 	sprite_2d.flip_h = false
 
 
 func _move_up(delta) ->  void:
-	velocity = Vector2(velocity.x, -MOVE_SPEED_VERT*delta)
+	velocity = Vector2(velocity.x, -move_speed_vert*delta)
 
 
 func _move_down(delta) ->  void:
-	velocity = Vector2(velocity.x, MOVE_SPEED_VERT*delta)
+	velocity = Vector2(velocity.x, move_speed_vert*delta)
+
+
+func _jump(delta) -> void:
+	if is_on_floor():
+		print_rich("[color=pink][b]_jump! Nyaaa > w <[/b][/color]")
+		velocity += Vector2(0, -jump_power*delta)
+		animation_player.play("jump")
 
 
 func _block() ->  void:

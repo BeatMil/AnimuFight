@@ -28,7 +28,22 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if state == States.IDLE:
+	## Check is_on_floor
+	if is_on_floor():
+		if state == States.AIR:
+			state = States.IDLE
+			# if not animation_player.is_playing():
+			animation_player.play("idle")
+			print_rich("[color=BLACK][b]Nyaaa > w <[/b][/color]")
+	else:
+		if state == States.IDLE:
+			state = States.AIR
+	
+	if state == States.AIR:
+		animation_player.play("air")
+
+	if state in [States.IDLE, States.AIR]:
+
 		# Left/Right movement
 		if Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_right"):
 			_lerp_velocity_x()
@@ -40,22 +55,28 @@ func _physics_process(delta: float) -> void:
 			_lerp_velocity_x()
 
 		# Up/Down movement
-		if Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_down"):
-			_lerp_velocity_y()
-		elif Input.is_action_pressed("ui_up"):
-			_move_up(delta)
-		elif Input.is_action_pressed("ui_down"):
-			_move_down(delta)
-		else:
-			_lerp_velocity_y()
+		# if Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_down"):
+		# 	_lerp_velocity_y()
+		# elif Input.is_action_pressed("ui_up"):
+		# 	pass
+		# 	# _move_up(delta)
+		# elif Input.is_action_pressed("ui_down"):
+		# 	pass
+		# 	# _move_down(delta)
+		# else:
+		# 	_lerp_velocity_y()
+
+		if Input.is_action_just_pressed("jump"):
+			_jump(delta)
 	else:
 		_lerp_velocity_y()
 		_lerp_velocity_x()
 
+	_gravity(delta)
 	move_and_slide()
 
 	is_face_right = not sprite_2d.flip_h
-	_z_index_equal_to_y()
+	# _z_index_equal_to_y()
 
 
 ## Godot said this built-in is better for performance (me no understand tho...)
@@ -96,6 +117,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			state = States.IDLE
 
 
+#############################################################
+## Private function
+#############################################################
 func _lp() ->  void:
 	if state == States.LP1:
 		animation_player.play("lp2")

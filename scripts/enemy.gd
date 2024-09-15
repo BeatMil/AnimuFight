@@ -17,10 +17,10 @@ var is_player_in_range_lp: bool = false
 var is_player_in_range_attack01: bool = false
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	is_face_right = not sprite_2d.flip_h
 	_z_index_equal_to_y()
-	_move(_delta)
+	_move(delta)
 	if state == States.IDLE:
 		_facing()
 
@@ -30,6 +30,9 @@ func _physics_process(_delta: float) -> void:
 	elif is_player_in_range_attack01:
 		velocity = Vector2.ZERO
 		_attack01()
+
+	_gravity(delta)
+	move_and_slide()
 
 	## debug
 	$DebugLabel.text = "%s"%velocity
@@ -50,7 +53,6 @@ func _move( delta) -> void:
 		var desired_velocity =  direction * SPEED
 		var steering = (desired_velocity - velocity) * delta * 2.5
 		velocity += steering
-		move_and_slide()
 
 
 func _attack01() -> void:
