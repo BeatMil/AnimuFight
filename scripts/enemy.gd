@@ -98,7 +98,7 @@ func _on_lp_range_l_body_entered(body: Node2D) -> void:
 func _on_attack_01_range_r_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		sprite_2d.flip_h = false
-		var result = randi() % 2  # This will give either 0 or 1 randomly.
+		var result = randi_range(0, 1)
 		if result == 0:
 			is_player_in_range_attack01 = true
 
@@ -106,7 +106,7 @@ func _on_attack_01_range_r_body_entered(body: Node2D) -> void:
 func _on_attack_01_range_l_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		sprite_2d.flip_h = true
-		var result = randi() % 2  # This will give either 0 or 1 randomly.
+		var result = randi_range(0, 1)
 		if result == 0:
 			is_player_in_range_attack01 = true
 
