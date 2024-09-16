@@ -14,8 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://b22ob737caxc1" path="res://media/sprites/char2/enemy01_down.png" id="11_qdbvh"]
 [ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="12_031mq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4r71"]
-size = Vector2(160, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
+size = Vector2(128, 304)
 
 [sub_resource type="Animation" id="Animation_lm1a0"]
 resource_name = "RESET"
@@ -480,10 +480,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1h3d5"]
-size = Vector2(96, 48)
+size = Vector2(96, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oysbf"]
-size = Vector2(96, 48)
+size = Vector2(96, 256)
 
 [node name="Enemy" groups=["enemy"] instance=ExtResource("1_5vg7s")]
 collision_layer = 2
@@ -495,8 +495,8 @@ self_modulate = Color(1, 1, 1, 1)
 texture = ExtResource("2_2tmba")
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, 144)
-shape = SubResource("RectangleShape2D_x4r71")
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_8jfq2")
 
 [node name="LpPos" parent="HitBoxPos" index="0"]
 position = Vector2(168, 144)
@@ -512,27 +512,27 @@ libraries = {
 [node name="LpRangeR" type="Area2D" parent="." index="7"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LpRangeR" index="0"]
-position = Vector2(136, 144)
+position = Vector2(136, 0)
 shape = SubResource("RectangleShape2D_1h3d5")
 
 [node name="LpRangeL" type="Area2D" parent="." index="8"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LpRangeL" index="0"]
-position = Vector2(-136, 144)
+position = Vector2(-136, 0)
 shape = SubResource("RectangleShape2D_1h3d5")
 
 [node name="Attack01RangeR" type="Area2D" parent="." index="9"]
 position = Vector2(256, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack01RangeR" index="0"]
-position = Vector2(136, 144)
+position = Vector2(136, 0)
 shape = SubResource("RectangleShape2D_oysbf")
 
 [node name="Attack01RangeL" type="Area2D" parent="." index="10"]
 position = Vector2(-592, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack01RangeL" index="0"]
-position = Vector2(136, 144)
+position = Vector2(136, 0)
 shape = SubResource("RectangleShape2D_oysbf")
 
 [node name="DebugLabel" type="Label" parent="." index="11"]
