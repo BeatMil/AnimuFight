@@ -1,6 +1,7 @@
 extends "res://scripts/base_character.gd"
 
 @export var target: CharacterBody2D
+@export var is_notarget: bool
 
 
 enum {
@@ -18,6 +19,13 @@ var is_player_in_range_attack01: bool = false
 
 
 func _physics_process(delta: float) -> void:
+	## notarget 
+	if is_notarget:
+		is_player_in_range_lp = false
+		is_player_in_range_attack01 = false
+
+
+
 	is_face_right = not sprite_2d.flip_h
 	# _z_index_equal_to_y()
 	_move(delta)
@@ -48,7 +56,7 @@ func _ready() -> void:
 ## Private Function
 #############################################################
 func _move( delta) -> void:
-	if is_instance_valid(target):
+	if is_instance_valid(target) and not is_notarget:
 		if state == States.IDLE:
 			var direction = (target.position - global_position).normalized() 
 			var desired_velocity =  direction * speed
