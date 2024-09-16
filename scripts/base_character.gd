@@ -57,7 +57,7 @@ var is_face_right:bool = true
 var gravity_power = 10000
 var jump_power = 250000
 var hp: int = 5
-const FRICTION: float = 0.5
+var friction: float = 0.1
 
 
 #############################################################
@@ -80,11 +80,11 @@ func _z_index_equal_to_y() -> void:
 
 
 func _lerp_velocity_x():
-	velocity = velocity.lerp(Vector2(0, velocity.y), FRICTION)
+	velocity = velocity.lerp(Vector2(0, velocity.y), friction)
 
 
 func _lerp_velocity_y():
-	velocity = velocity.lerp(Vector2(velocity.x, 0), FRICTION)
+	velocity = velocity.lerp(Vector2(velocity.x, 0), friction)
 
 
 func _gravity(delta):
@@ -160,15 +160,23 @@ func _set_state(new_state: int) -> void:
 """
 animation_player uses
 """
-func _push_x(pixel: int) -> void:
+func _push_x_old(pixel: int) -> void:
 	var tween = get_tree().create_tween()
 	var new_pos := Vector2.ZERO
 	if sprite_2d.flip_h: ## facing left
 		new_pos = Vector2(position.x-pixel, position.y)
 	else: ## facing left
 		new_pos = Vector2(position.x+pixel, position.y)
-
 	tween.tween_property(self, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
+
+
+func _push_x(pixel: int) -> void:
+	print_rich("pixel: [color=green][b]%s[/b][/color] Nyaaa > w <"%pixel)
+	var multiplier = 10
+	if sprite_2d.flip_h: ## facing left
+		velocity += Vector2(pixel*-multiplier, 0)
+	else: ## facing left
+		velocity += Vector2(pixel*multiplier, 0)
 
 
 func _push_x_direct(pixel: int) -> void:

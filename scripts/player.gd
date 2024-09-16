@@ -54,6 +54,8 @@ func _physics_process(delta: float) -> void:
 		elif Input.is_action_pressed("ui_right"):
 			_move_right(delta)
 		else:
+			pass
+			friction = 0.5
 			_lerp_velocity_x()
 
 		# Jump buffer
@@ -65,7 +67,8 @@ func _physics_process(delta: float) -> void:
 		if jump_buffer_timer > 0:
 			_jump(delta)
 	else:
-		_lerp_velocity_y()
+		## Adding friction like this is not gonna go well (っ˘̩╭╮˘̩)っ 
+		friction = 0.1
 		_lerp_velocity_x()
 
 	_gravity(delta)
