@@ -797,7 +797,7 @@ position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_47ont")
 
 [node name="LpPos" parent="HitBoxPos" index="0"]
-position = Vector2(144, 160)
+position = Vector2(144, 8)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 libraries = {
