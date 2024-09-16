@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dsgid218xceg6" path="res://nodes/enemy.tscn" id="5_1m1ih"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iwbeg"]
-size = Vector2(3334, 64)
+size = Vector2(3334, 470)
 
 [node name="Test" type="Node2D"]
 script = ExtResource("1_qjwej")
@@ -18,17 +18,30 @@ texture = ExtResource("2_3yg43")
 centered = false
 
 [node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(1195, 928)
+position = Vector2(1195, 1117)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("RectangleShape2D_iwbeg")
 
 [node name="Ground" type="Sprite2D" parent="Floor"]
+position = Vector2(-211, -108)
+texture = ExtResource("4_nawmu")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(1899, 648)
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(0, 203)
+shape = SubResource("RectangleShape2D_iwbeg")
+
+[node name="Ground" type="Sprite2D" parent="Wall"]
 position = Vector2(-211, 95)
 texture = ExtResource("4_nawmu")
 
-[node name="Player" parent="." instance=ExtResource("4_6s7w5")]
-position = Vector2(749, 475)
-
 [node name="Enemy" parent="." instance=ExtResource("5_1m1ih")]
 position = Vector2(1499.56, 549.515)
+is_notarget = true
+
+[node name="Player" parent="." instance=ExtResource("4_6s7w5")]
+position = Vector2(492.832, 482.666)
