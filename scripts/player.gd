@@ -36,13 +36,13 @@ func _physics_process(delta: float) -> void:
 			state = States.IDLE
 			# if not animation_player.is_playing():
 			animation_player.play("idle")
-			print_rich("[color=BLACK][b]Nyaaa > w <[/b][/color]")
 	else:
 		if state == States.IDLE:
 			state = States.AIR
 	
 	if state == States.AIR:
-		animation_player.play("air")
+		if not animation_player.is_playing():
+			animation_player.play("air")
 
 	if state in [States.IDLE, States.AIR]:
 

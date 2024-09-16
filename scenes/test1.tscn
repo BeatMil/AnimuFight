@@ -32,4 +32,3 @@ position = Vector2(749, 475)
 
 [node name="Enemy" parent="." instance=ExtResource("5_1m1ih")]
 position = Vector2(1499.56, 549.515)
-target = NodePath("")
