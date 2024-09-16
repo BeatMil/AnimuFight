@@ -33,12 +33,12 @@ func _physics_process(delta: float) -> void:
 		_facing()
 
 	if is_player_in_range_lp:
-		velocity = Vector2.ZERO
 		_lp()
 	elif is_player_in_range_attack01:
-		velocity = Vector2.ZERO
 		_attack01()
 
+	if state not in [States.IDLE]:
+		_lerp_velocity_x()
 	_gravity(delta)
 	move_and_slide()
 
@@ -109,7 +109,6 @@ func _on_attack_01_range_r_body_entered(body: Node2D) -> void:
 		var result = randi_range(0, 1)
 		if result == 0:
 			is_player_in_range_attack01 = true
-
 
 func _on_attack_01_range_l_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):

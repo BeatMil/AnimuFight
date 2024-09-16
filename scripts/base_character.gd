@@ -170,20 +170,25 @@ func _push_x_old(pixel: int) -> void:
 	tween.tween_property(self, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
 
 
-func _push_x(pixel: int) -> void:
-	print_rich("pixel: [color=green][b]%s[/b][/color] Nyaaa > w <"%pixel)
-	var multiplier = 10
-	if sprite_2d.flip_h: ## facing left
-		velocity += Vector2(pixel*-multiplier, 0)
-	else: ## facing left
-		velocity += Vector2(pixel*multiplier, 0)
-
-
-func _push_x_direct(pixel: int) -> void:
+func _push_x_direct_old(pixel: int) -> void:
 	var tween = get_tree().create_tween()
 	var new_pos := Vector2.ZERO
 	new_pos = Vector2(position.x+pixel, position.y)
 	tween.tween_property(self, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
+
+
+func _push_x(power: int) -> void:
+	var multiplier = 10
+	if sprite_2d.flip_h: ## facing left
+		velocity += Vector2(power*-multiplier, 0)
+	else: ## facing left
+		velocity += Vector2(power*multiplier, 0)
+
+
+func _push_x_direct(power: int) -> void:
+	var multiplier = 10
+	velocity += Vector2(power*multiplier, 0)
+
 
 
 #############################################################
