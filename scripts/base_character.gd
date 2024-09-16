@@ -112,7 +112,6 @@ func _move_down(delta) ->  void:
 
 func _jump(delta) -> void:
 	if is_on_floor():
-		print_rich("[color=pink][b]_jump! Nyaaa > w <[/b][/color]")
 		velocity += Vector2(0, -jump_power*delta)
 		animation_player.play("jump")
 

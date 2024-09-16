@@ -11,6 +11,8 @@ extends "res://scripts/base_character.gd"
 ## Config
 #############################################################
 # var is_face_right:bool = true
+var jump_buffer_time = 0.15
+var jump_buffer_timer = 0.0
 
 
 #############################################################
@@ -54,19 +56,13 @@ func _physics_process(delta: float) -> void:
 		else:
 			_lerp_velocity_x()
 
-		# Up/Down movement
-		# if Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_down"):
-		# 	_lerp_velocity_y()
-		# elif Input.is_action_pressed("ui_up"):
-		# 	pass
-		# 	# _move_up(delta)
-		# elif Input.is_action_pressed("ui_down"):
-		# 	pass
-		# 	# _move_down(delta)
-		# else:
-		# 	_lerp_velocity_y()
-
+		# Jump buffer
 		if Input.is_action_just_pressed("jump"):
+			jump_buffer_timer = jump_buffer_time
+		elif jump_buffer_timer > 0:
+			jump_buffer_timer -= delta
+
+		if jump_buffer_timer > 0:
 			_jump(delta)
 	else:
 		_lerp_velocity_y()
@@ -130,6 +126,13 @@ func _unhandled_key_input(event: InputEvent) -> void:
 #############################################################
 ## Private function
 #############################################################
+func handle_jump_buffer(delta):
+	if Input.is_action_just_pressed("jump"):
+		jump_buffer_timer = jump_buffer_time
+	elif jump_buffer_timer > 0:
+		jump_buffer_timer -= delta
+
+
 func _lp() ->  void:
 	if state == States.LP1:
 		animation_player.play("lp2")
