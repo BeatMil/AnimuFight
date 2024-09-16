@@ -33,8 +33,8 @@ enum Hitbox_size {
 #############################################################
 ## Preloads
 #############################################################
-const HITBOX_LP = preload("res://nodes/hitboxes/hitbox_lp.tscn")
-const HITBOX_LP2 = preload("res://nodes/hitboxes/hitbox_lp2.tscn")
+const HITBOX_LP_MEDIUM = preload("res://nodes/hitboxes/hitbox_lp.tscn")
+const HITBOX_LP_LARGE = preload("res://nodes/hitboxes/hitbox_lp2.tscn")
 
 
 #############################################################
@@ -129,9 +129,9 @@ func _spawn_lp_hitbox(_size: Hitbox_size, _time: float = 0.1, _push_power: int =
 	var hitbox: Node2D
 
 	if _size == Hitbox_size.MEDIUM:
-		hitbox = HITBOX_LP.instantiate()
+		hitbox = HITBOX_LP_MEDIUM.instantiate()
 	elif _size == Hitbox_size.LARGE:
-		hitbox = HITBOX_LP2.instantiate()
+		hitbox = HITBOX_LP_LARGE.instantiate()
 
 	if sprite_2d.flip_h: ## facing left
 		hitbox.position = Vector2(-lp_pos.position.x, lp_pos.position.y)
