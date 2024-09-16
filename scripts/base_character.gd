@@ -197,10 +197,10 @@ func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool, push_power: 
 			collision_shape_2d.queue_free()
 		else:
 			match push_type:
-				0:
+				0: ## NORMAL
 					animation_player.stop(true)
 					animation_player.play("hitted")
-				1:
+				1: ## KNOCKDOWN
 					animation_player.stop(true)
 					animation_player.play("down")
 				_:
