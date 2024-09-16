@@ -48,11 +48,12 @@ func _ready() -> void:
 ## Private Function
 #############################################################
 func _move( delta) -> void:
-	if state == States.IDLE:
-		var direction = (target.position - global_position).normalized() 
-		var desired_velocity =  direction * speed
-		var steering = (desired_velocity - velocity) * delta * 2.5
-		velocity += steering
+	if is_instance_valid(target):
+		if state == States.IDLE:
+			var direction = (target.position - global_position).normalized() 
+			var desired_velocity =  direction * speed
+			var steering = (desired_velocity - velocity) * delta * 2.5
+			velocity += steering
 
 
 func _attack01() -> void:
