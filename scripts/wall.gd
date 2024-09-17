@@ -10,12 +10,23 @@ func _ready() -> void:
 
 func _on_area_2dl_body_entered(body: Node2D) -> void:
 	if body.is_in_group("character"):
-		if body.state == 5: ## HIT_STUNNED
-			body.hitted(null, false, push_power, Enums.Push_types.NORMAL)
+		if "is_touching_wall_right" in body:
+			body.is_touching_wall_right = true
 
 
 func _on_area_2dr_body_entered(body: Node2D) -> void:
-	print_rich("[color=pink][b]body: %sNyaaa > w <[/b][/color]"%body)
 	if body.is_in_group("character"):
-		if body.state == 5: ## HIT_STUNNED
-			body.hitted(null, true, push_power, Enums.Push_types.NORMAL)
+		if "is_touching_wall_left" in body:
+			body.is_touching_wall_left = true
+
+
+func _on_area_2dr_body_exited(body: Node2D) -> void:
+	if body.is_in_group("character"):
+		if "is_touching_wall_left" in body:
+			body.is_touching_wall_left = false
+
+
+func _on_area_2dl_body_exited(body: Node2D) -> void:
+	if body.is_in_group("character"):
+		if "is_touching_wall_right" in body:
+			body.is_touching_wall_right = false

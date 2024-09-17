@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://8bwj2eqc53h4"]
+[gd_scene load_steps=6 format=3 uid="uid://8bwj2eqc53h4"]
 
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_3ye4n"]
 [ext_resource type="Script" path="res://scripts/wall.gd" id="1_abvhr"]
@@ -7,6 +7,9 @@
 size = Vector2(256, 2176)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x7pyg"]
+size = Vector2(136, 2208)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c6b6l"]
 size = Vector2(144, 2208)
 
 [node name="Wall" type="StaticBody2D" groups=["wall"]]
@@ -28,7 +31,7 @@ collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DL"]
-position = Vector2(-72, 0)
+position = Vector2(-68, 0)
 shape = SubResource("RectangleShape2D_x7pyg")
 
 [node name="Area2DR" type="Area2D" parent="."]
@@ -37,7 +40,9 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DR"]
 position = Vector2(72, 0)
-shape = SubResource("RectangleShape2D_x7pyg")
+shape = SubResource("RectangleShape2D_c6b6l")
 
 [connection signal="body_entered" from="Area2DL" to="." method="_on_area_2dl_body_entered"]
+[connection signal="body_exited" from="Area2DL" to="." method="_on_area_2dl_body_exited"]
 [connection signal="body_entered" from="Area2DR" to="." method="_on_area_2dr_body_entered"]
+[connection signal="body_exited" from="Area2DR" to="." method="_on_area_2dr_body_exited"]

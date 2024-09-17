@@ -22,6 +22,7 @@ enum States {
 	F_LP,
 	AIR,
 	HP,
+	WALL_BOUNCED
 	}
 
 
@@ -61,6 +62,9 @@ var jump_power = 250000
 var hp: int = 5
 var friction: float = 0.1
 
+## wall bounce helper
+var is_touching_wall_left: bool = false
+var is_touching_wall_right: bool = false
 
 #############################################################
 ## Built-in
@@ -71,6 +75,7 @@ func _ready() -> void:
 
 ### Seems like it doesn't run the process functions when used as inheritance
 func _physics_process(_delta: float) -> void:
+	print_rich("[color=red][b]Nyaaa > w <[/b][/color]")
 	pass
 
 
@@ -92,6 +97,23 @@ func _lerp_velocity_y() -> void:
 func _gravity(delta) -> void:
 	if not is_on_floor():
 		velocity += Vector2(0, gravity_power*delta)
+
+
+func _check_wall_bounce() -> void:
+	if state in [States.HIT_STUNNED]:
+		if is_touching_wall_left:
+			animation_player.stop(true)
+			animation_player.play("hitted")
+			state = States.WALL_BOUNCED
+			_push_direct(Vector2(400, -200))
+			is_touching_wall_left = false
+		elif is_touching_wall_right:
+			animation_player.stop(true)
+			animation_player.play("hitted")
+			state = States.WALL_BOUNCED
+			_push_direct(Vector2(-400, -200))
+			is_touching_wall_right = false
+
 
 
 func _move_left(delta) ->  void:
@@ -222,7 +244,8 @@ func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool, push_power: 
 			state = States.HIT_STUNNED
 			animation_player.stop(true)
 			animation_player.play("ded")
-			collision_shape_2d.queue_free()
+			if is_instance_valid(collision_shape_2d):
+				collision_shape_2d.queue_free()
 		else:
 			match push_type:
 				0: ## NORMAL
@@ -238,3 +261,5 @@ func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool, push_power: 
 			_push_direct(push_power)
 		else:
 			_push_direct(Vector2(-push_power.x, push_power.y))
+
+

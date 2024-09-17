@@ -18,6 +18,16 @@ var is_player_in_range_lp: bool = false
 var is_player_in_range_attack01: bool = false
 
 
+#############################################################
+## Built-in
+#############################################################
+func _ready() -> void:
+	gravity_power = 5000
+	pass
+	# $Timer.start()
+	# _lp()
+
+
 func _physics_process(delta: float) -> void:
 	## notarget 
 	if is_notarget:
@@ -25,6 +35,8 @@ func _physics_process(delta: float) -> void:
 		is_player_in_range_attack01 = false
 
 
+	## wall bounce
+	_check_wall_bounce()
 
 	is_face_right = not sprite_2d.flip_h
 	# _z_index_equal_to_y()
@@ -44,12 +56,6 @@ func _physics_process(delta: float) -> void:
 
 	## debug
 	$DebugLabel.text = "%s"%velocity
-
-
-func _ready() -> void:
-	pass
-	# $Timer.start()
-	# _lp()
 
 
 #############################################################
