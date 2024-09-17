@@ -15,6 +15,12 @@ var jump_buffer_time := 0.15
 var jump_buffer_timer := 0.0
 
 
+var input_buffer_time := 0.1
+var input_buffer_timer := 0.0
+var is_performing_move: bool = false
+var next_move = null
+
+
 #############################################################
 ## Built-in
 #############################################################
@@ -27,6 +33,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# Debuger
 	debug_label.text = "PlayerState: %s"%States.keys()[state]
+	debug_label.text += "\n%s"%input_buffer_timer
 
 
 func _physics_process(delta: float) -> void:
@@ -77,27 +84,28 @@ func _physics_process(delta: float) -> void:
 	is_face_right = not sprite_2d.flip_h
 	# _z_index_equal_to_y()
 
+	##################
+	## Input buffer
+	##################
+	if next_move and input_buffer_timer > 0 and state not in [States.ATTACK]:
+		next_move.call()
+		next_move = null
+		input_buffer_timer = 0
+		print_rich("[color=brown][b]Nyaaa > w <[/b][/color]")
+
+	if Input.is_action_just_pressed("lp"):
+		queue_move(_lp)
+
+
+	if Input.is_action_just_pressed("hp"):
+		queue_move(_hp)
+
+	if input_buffer_timer > 0:
+		input_buffer_timer -= delta
+
 
 ## Godot said this built-in is better for performance (me no understand tho...)
 func _unhandled_key_input(event: InputEvent) -> void:
-	## LP (Light Punch) can also change direction while lping
-	if event.is_action_pressed("lp"):
-		_lp()
-
-	if Input.is_action_pressed("ui_left"):
-		if event.is_action_pressed("lp"):
-			sprite_2d.flip_h = true
-			_lp()
-
-	if Input.is_action_pressed("ui_right"):
-		if event.is_action_pressed("lp"):
-			sprite_2d.flip_h = false
-			_lp()
-
-	## HP (Heavy Punch)
-	if event.is_action_pressed("hp"):
-		_hp()
-
 	## BLOCK
 	if state in [
 		States.IDLE,
@@ -125,7 +133,18 @@ func handle_jump_buffer(delta):
 		jump_buffer_timer -= delta
 
 
+func queue_move(the_move) -> void:
+	next_move = the_move
+	input_buffer_timer = input_buffer_time
+
+
 func _lp() ->  void:
+	if Input.is_action_pressed("ui_left"):
+		sprite_2d.flip_h = true
+
+	if Input.is_action_pressed("ui_right"):
+		sprite_2d.flip_h = false
+
 	if state == States.LP1:
 		animation_player.play("lp2")
 		# state = States.LP2
