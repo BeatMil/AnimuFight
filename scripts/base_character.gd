@@ -7,7 +7,8 @@ flip_h == true;  facing left
 flip_h == false; facing right
 """
 
-# Beat's own state machine XD
+## Do not reorder this
+## animation_player uses this
 enum States {
 	IDLE,
 	ATTACK,
@@ -20,6 +21,7 @@ enum States {
 	PARRY_SUCCESS,
 	F_LP,
 	AIR,
+	HP,
 	}
 
 

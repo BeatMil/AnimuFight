@@ -94,20 +94,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			sprite_2d.flip_h = false
 			_lp()
 
-
 	## HP (Heavy Punch)
 	if event.is_action_pressed("hp"):
 		_hp()
-
-	if Input.is_action_pressed("ui_left"):
-		if event.is_action_pressed("hp"):
-			sprite_2d.flip_h = true
-			_hp()
-
-	if Input.is_action_pressed("ui_right"):
-		if event.is_action_pressed("hp"):
-			sprite_2d.flip_h = false
-			_hp()
 
 	## BLOCK
 	if state in [
@@ -150,6 +139,12 @@ func _lp() ->  void:
 
 func _hp() ->  void:
 	if state in [States.IDLE, States.PARRY_SUCCESS, States.LP1, States.LP2, States.LP3,]:
+		if Input.is_action_pressed("ui_left"):
+			sprite_2d.flip_h = true
+
+		if Input.is_action_pressed("ui_right"):
+			sprite_2d.flip_h = false
+
 		animation_player.play("hp")
 
 
