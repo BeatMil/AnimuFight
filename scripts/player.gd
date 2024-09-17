@@ -11,8 +11,8 @@ extends "res://scripts/base_character.gd"
 ## Config
 #############################################################
 # var is_face_right:bool = true
-var jump_buffer_time = 0.15
-var jump_buffer_timer = 0.0
+var jump_buffer_time := 0.15
+var jump_buffer_timer := 0.0
 
 
 #############################################################
