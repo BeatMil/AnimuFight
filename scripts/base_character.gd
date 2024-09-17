@@ -81,15 +81,15 @@ func _z_index_equal_to_y() -> void:
 	z_index = int(position.y)
 
 
-func _lerp_velocity_x():
+func _lerp_velocity_x() -> void:
 	velocity = velocity.lerp(Vector2(0, velocity.y), friction)
 
 
-func _lerp_velocity_y():
+func _lerp_velocity_y() -> void:
 	velocity = velocity.lerp(Vector2(velocity.x, 0), friction)
 
 
-func _gravity(delta):
+func _gravity(delta) -> void:
 	if not is_on_floor():
 		velocity += Vector2(0, gravity_power*delta)
 
