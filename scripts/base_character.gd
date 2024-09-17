@@ -190,6 +190,20 @@ func _push_x_direct(power: int) -> void:
 	velocity += Vector2(power*multiplier, 0)
 
 
+func _push(power: Vector2) -> void:
+	var multiplier = 10
+	if sprite_2d.flip_h: ## facing left
+		velocity += power * Vector2(-multiplier, multiplier)
+		# velocity += Vector2(power*-multiplier, 0)
+	else: ## facing left
+		pass
+		velocity += power * Vector2(multiplier, multiplier)
+
+
+func _push_direct(power: Vector2) -> void:
+	var multiplier = 10
+	velocity += power * multiplier
+
 
 #############################################################
 ## Public functions
