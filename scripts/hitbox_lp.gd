@@ -13,7 +13,7 @@ extends Node2D
 var is_hit_player: bool = false
 var is_hit_enemy: bool = false
 var time_left_before_queue_free: float = 1.0
-var push_power: int = 20
+var push_power: Vector2 = Vector2(20, 0)
 var push_type: Enums.Push_types = Enums.Push_types.NORMAL
 
 #############################################################
