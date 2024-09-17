@@ -237,4 +237,4 @@ func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool, push_power: 
 		if is_push_to_the_right:
 			_push_direct(push_power)
 		else:
-			_push_direct(-push_power)
+			_push_direct(Vector2(-push_power.x, push_power.y))
