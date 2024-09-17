@@ -22,7 +22,8 @@ enum States {
 	F_LP,
 	AIR,
 	HP,
-	WALL_BOUNCED
+	WALL_BOUNCED,
+	BOUNCE_STUNNED,
 	}
 
 
@@ -100,7 +101,7 @@ func _gravity(delta) -> void:
 
 
 func _check_wall_bounce() -> void:
-	if state in [States.HIT_STUNNED]:
+	if state in [States.BOUNCE_STUNNED]:
 		if is_touching_wall_left:
 			animation_player.stop(true)
 			animation_player.play("hitted")
