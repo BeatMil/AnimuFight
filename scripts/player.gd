@@ -15,7 +15,7 @@ var jump_buffer_time := 0.15
 var jump_buffer_timer := 0.0
 
 
-var input_buffer_time := 0.1
+var input_buffer_time := 0.2
 var input_buffer_timer := 0.0
 var is_performing_move: bool = false
 var next_move = null
@@ -87,7 +87,7 @@ func _physics_process(delta: float) -> void:
 	##################
 	## Input buffer
 	##################
-	if next_move and input_buffer_timer > 0 and state not in [States.ATTACK]:
+	if next_move and input_buffer_timer > 0 and state not in [States.ATTACK, States.HP]:
 		next_move.call()
 		next_move = null
 		input_buffer_timer = 0
