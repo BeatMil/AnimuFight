@@ -148,7 +148,7 @@ func _block() ->  void:
 """
 animation_player uses
 """
-func _spawn_lp_hitbox(_size: Hitbox_size, _time: float = 0.1, _push_power: Vector2 = Vector2(20, 0), _push_type: Enums.Push_types = Enums.Push_types.NORMAL) -> void:
+func _spawn_lp_hitbox(_size: Hitbox_size, _time: float = 0.1, _push_power_ground: Vector2 = Vector2(20, 0), _push_type_ground: Enums.Push_types = Enums.Push_types.NORMAL, _push_power_air: Vector2 = Vector2(100,-150), _push_type_air: Enums.Push_types = Enums.Push_types.KNOCKDOWN) -> void:
 
 	var hitbox: Node2D
 
@@ -168,11 +168,13 @@ func _spawn_lp_hitbox(_size: Hitbox_size, _time: float = 0.1, _push_power: Vecto
 	elif self.is_in_group("enemy"):
 		hitbox.is_hit_player = true
 	
-	## Set push_type
-	hitbox.push_type = _push_type
+	## Set push_type and power
+	hitbox.push_type_ground = _push_type_ground
+	hitbox.push_power_ground = _push_power_ground
+	hitbox.push_type_air = _push_type_air
+	hitbox.push_power_air = _push_power_air
 
 	hitbox.time_left_before_queue_free = _time
-	hitbox.push_power = _push_power
 
 	add_child(hitbox)
 
@@ -217,16 +219,16 @@ func _push_x_direct(power: int) -> void:
 func _push(power: Vector2) -> void:
 	var multiplier = 10
 	if sprite_2d.flip_h: ## facing left
-		velocity += power * Vector2(-multiplier, multiplier)
+		velocity = power * Vector2(-multiplier, multiplier)
 		# velocity += Vector2(power*-multiplier, 0)
 	else: ## facing left
 		pass
-		velocity += power * Vector2(multiplier, multiplier)
+		velocity = power * Vector2(multiplier, multiplier)
 
 
 func _push_direct(power: Vector2) -> void:
 	var multiplier = 10
-	velocity += power * multiplier
+	velocity = power * multiplier
 
 
 #############################################################

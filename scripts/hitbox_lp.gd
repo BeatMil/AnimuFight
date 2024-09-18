@@ -13,8 +13,10 @@ extends Node2D
 var is_hit_player: bool = false
 var is_hit_enemy: bool = false
 var time_left_before_queue_free: float = 1.0
-var push_power: Vector2 = Vector2(20, 0)
-var push_type: Enums.Push_types = Enums.Push_types.NORMAL
+var push_power_ground: Vector2 = Vector2(20, 0)
+var push_type_ground: Enums.Push_types = Enums.Push_types.NORMAL
+var push_power_air: Vector2 = Vector2(20, 0)
+var push_type_air: Enums.Push_types = Enums.Push_types.NORMAL
 
 #############################################################
 ## Built-in
@@ -45,7 +47,10 @@ func _set_collision_hit_player() -> void:
 #############################################################
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.has_method("hitted"):
-		body.hitted(get_parent(), get_parent().is_face_right, push_power, push_type)
+		if body.is_on_floor():
+			body.hitted(get_parent(), get_parent().is_face_right, push_power_ground, push_type_ground)
+		else:
+			body.hitted(get_parent(), get_parent().is_face_right, push_power_air, push_type_air)
 
 
 
