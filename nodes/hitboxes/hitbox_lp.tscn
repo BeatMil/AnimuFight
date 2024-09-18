@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/hitbox_lp.gd" id="1_315a8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ahg1"]
-size = Vector2(128, 48)
+size = Vector2(128, 256)
 
 [node name="HitboxLP" type="Node2D"]
 script = ExtResource("1_315a8")
