@@ -23,6 +23,7 @@ var is_player_in_range_attack01: bool = false
 #############################################################
 func _ready() -> void:
 	gravity_power = 5000
+	hp_bar.set_hp(hp)
 	pass
 	# $Timer.start()
 	# _lp()

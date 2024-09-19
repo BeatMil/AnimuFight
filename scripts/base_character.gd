@@ -60,7 +60,7 @@ var move_speed_vert: int = 20000
 var is_face_right:bool = true
 var gravity_power = 10000
 var jump_power = 250000
-var hp: int = 5
+@export var hp: int = 5
 var friction: float = 0.1
 
 ## wall bounce helper
@@ -70,13 +70,13 @@ var is_touching_wall_right: bool = false
 #############################################################
 ## Built-in
 #############################################################
+### Built-in can be overide.... (っ˘̩╭╮˘̩)っ 
 func _ready() -> void:
-	hp_bar.set_hp(hp)
+	pass
 
 
 ### Seems like it doesn't run the process functions when used as inheritance
 func _physics_process(_delta: float) -> void:
-	print_rich("[color=red][b]Nyaaa > w <[/b][/color]")
 	pass
 
 

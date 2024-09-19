@@ -17,4 +17,5 @@ func get_hp() -> int:
 
 
 func set_hp(_amount: int) -> void:
-	value = _amount
+	max_value = _amount
+	value = max_value
