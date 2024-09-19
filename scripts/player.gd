@@ -164,7 +164,22 @@ func _hp() ->  void:
 		if Input.is_action_pressed("ui_right"):
 			sprite_2d.flip_h = false
 
-		animation_player.play("hp")
+		if Input.is_action_pressed("ui_down"):
+			animation_player.play("down_hp")
+		else:
+			animation_player.play("hp")
+
+
+
+func _down_hp() ->  void:
+	if state in [States.IDLE, States.PARRY_SUCCESS, States.LP1, States.LP2, States.LP3,]:
+		if Input.is_action_pressed("ui_left"):
+			sprite_2d.flip_h = true
+
+		if Input.is_action_pressed("ui_right"):
+			sprite_2d.flip_h = false
+
+		animation_player.play("down_hp")
 
 
 #############################################################
@@ -172,7 +187,16 @@ func _hp() ->  void:
 #############################################################
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	pass
-	if anim_name in ["lp1", "lp2", "lp3", "hitted", "block", "parry_success", "hp"]:
+	if anim_name in [
+		"lp1",
+		"lp2",
+		"lp3",
+		"hitted",
+		"block",
+		"parry_success",
+		"hp",
+		"down_hp",
+		]:
 		animation_player.play("idle")
 		state = States.IDLE
 	if anim_name in ["ded"]:

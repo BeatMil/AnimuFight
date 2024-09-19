@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=35 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://ttir1yqeqdbl" path="res://media/sprites/char1/vanilla_3nd_hit.png" id="2_3lude"]
@@ -17,6 +17,8 @@
 [ext_resource type="AudioStream" uid="uid://bgq36rpoccy71" path="res://media/sfxs/explosion.wav" id="14_3ws5c"]
 [ext_resource type="Texture2D" uid="uid://ccmmerxgq5u0a" path="res://media/sprites/char1/vanilla_jump.png" id="16_10xrx"]
 [ext_resource type="AudioStream" uid="uid://cwale1oro4x1p" path="res://media/sfxs/smol_jump.wav" id="17_7a5mg"]
+[ext_resource type="Texture2D" uid="uid://bkd5rb8d2xh1a" path="res://media/sprites/char1/vanilla_upper.png" id="18_22gxy"]
+[ext_resource type="AudioStream" uid="uid://0ixccgp3lh4q" path="res://media/sfxs/upper.wav" id="19_yr2fr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47ont"]
 size = Vector2(128, 288)
@@ -753,12 +755,89 @@ tracks/5/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_3kip1"]
+resource_name = "down_hp"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("18_22gxy")]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("19_yr2fr")
+}],
+"times": PackedFloat32Array(0.2)
+}
+tracks/1/use_blend = true
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2, 0.1, Vector2(0, -200), 1],
+"method": &"_spawn_lp_hitbox"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [1],
+"method": &"_set_state"
+}, {
+"args": [11],
+"method": &"_set_state"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector2(180, 0)],
+"method": &"_push"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1o8ps"]
 _data = {
 "RESET": SubResource("Animation_0olpk"),
 "air": SubResource("Animation_6j2vb"),
 "block": SubResource("Animation_tdvq7"),
 "ded": SubResource("Animation_a7sym"),
+"down_hp": SubResource("Animation_3kip1"),
 "hitted": SubResource("Animation_jqf8x"),
 "hp": SubResource("Animation_v1xnu"),
 "idle": SubResource("Animation_epwwg"),
