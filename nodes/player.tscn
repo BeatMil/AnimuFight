@@ -849,7 +849,7 @@ _data = {
 }
 
 [node name="Player" groups=["character", "player"] instance=ExtResource("1_gva5u")]
-collision_mask = 7
+collision_mask = 13
 script = ExtResource("2_t4427")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
