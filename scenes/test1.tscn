@@ -36,17 +36,9 @@ texture = ExtResource("4_nawmu")
 position = Vector2(2384, 0)
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_1m1ih")]
-position = Vector2(2176, 728)
-collision_mask = 15
+position = Vector2(430.391, 595.303)
 target = NodePath("../Player")
-is_notarget = true
-
-[node name="Enemy2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_1m1ih")]
-position = Vector2(704, 720)
-collision_mask = 14
-target = NodePath("../Player")
-is_notarget = true
+hp = 50
 
 [node name="Player" parent="." instance=ExtResource("4_6s7w5")]
-position = Vector2(1024, 680)
-collision_mask = 15
+position = Vector2(1027.29, 638.066)
