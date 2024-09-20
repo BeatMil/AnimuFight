@@ -116,7 +116,6 @@ func _check_wall_bounce() -> void:
 			is_touching_wall_right = false
 
 
-
 func _move_left(delta) ->  void:
 	velocity = Vector2(-move_speed * delta, velocity.y)
 	sprite_2d.flip_h = true
@@ -148,7 +147,13 @@ func _block() ->  void:
 """
 animation_player uses
 """
-func _spawn_lp_hitbox(_size: Hitbox_size, _time: float = 0.1, _push_power_ground: Vector2 = Vector2(20, 0), _push_type_ground: Enums.Push_types = Enums.Push_types.NORMAL, _push_power_air: Vector2 = Vector2(100,-150), _push_type_air: Enums.Push_types = Enums.Push_types.KNOCKDOWN) -> void:
+func _spawn_lp_hitbox(
+	_size: Hitbox_size,
+	_time: float = 0.1,
+	_push_power_ground: Vector2 = Vector2(20, 0),
+	_push_type_ground: Enums.Push_types = Enums.Push_types.NORMAL,
+	_push_power_air: Vector2 = Vector2(100,-150),
+	_push_type_air: Enums.Push_types = Enums.Push_types.NORMAL) -> void:
 
 	var hitbox: Node2D
 
@@ -237,7 +242,11 @@ func _push_direct(power: Vector2) -> void:
 """
 hitbox.gd uses this
 """
-func hitted(_attacker: CharacterBody2D, is_push_to_the_right: bool, push_power: Vector2 = Vector2(20, 0), push_type: int = 0) -> void:
+func hitted(
+	_attacker: CharacterBody2D,
+	is_push_to_the_right: bool,
+	push_power: Vector2 = Vector2(20, 0),
+	push_type: int = 0) -> void:
 	if state in [States.PARRY, States.PARRY_SUCCESS]:
 		animation_player.play("parry_success")
 		_attacker.hitted(self, is_face_right)
