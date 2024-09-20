@@ -153,7 +153,9 @@ func _spawn_lp_hitbox(
 	_push_power_ground: Vector2 = Vector2(20, 0),
 	_push_type_ground: Enums.Push_types = Enums.Push_types.NORMAL,
 	_push_power_air: Vector2 = Vector2(100,-150),
-	_push_type_air: Enums.Push_types = Enums.Push_types.NORMAL) -> void:
+	_push_type_air: Enums.Push_types = Enums.Push_types.NORMAL,
+	_hitlag_amount: float = 0,
+	) -> void:
 
 	var hitbox: Node2D
 
@@ -178,6 +180,7 @@ func _spawn_lp_hitbox(
 	hitbox.push_power_ground = _push_power_ground
 	hitbox.push_type_air = _push_type_air
 	hitbox.push_power_air = _push_power_air
+	hitbox.hitlag_amount = _hitlag_amount
 
 	hitbox.time_left_before_queue_free = _time
 
@@ -236,6 +239,13 @@ func _push_direct(power: Vector2) -> void:
 	velocity = power * multiplier
 
 
+func hitlag(_amount: float = 0.3) -> void:
+	if _amount:
+		set_physics_process(false)
+		await get_tree().create_timer(_amount).timeout
+		set_physics_process(true)
+
+
 #############################################################
 ## Public functions
 #############################################################
@@ -246,7 +256,8 @@ func hitted(
 	_attacker: CharacterBody2D,
 	is_push_to_the_right: bool,
 	push_power: Vector2 = Vector2(20, 0),
-	push_type: int = 0) -> void:
+	push_type: int = 0,
+	hitlag_amount: float = 0) -> void:
 	if state in [States.PARRY, States.PARRY_SUCCESS]:
 		animation_player.play("parry_success")
 		_attacker.hitted(self, is_face_right)
@@ -273,5 +284,8 @@ func hitted(
 			_push_direct(push_power)
 		else:
 			_push_direct(Vector2(-push_power.x, push_power.y))
+		if hitlag_amount:
+			hitlag(hitlag_amount)
+			_attacker.hitlag(hitlag_amount)
 
 
