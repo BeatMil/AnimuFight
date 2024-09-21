@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=36 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://ttir1yqeqdbl" path="res://media/sprites/char1/vanilla_3nd_hit.png" id="2_3lude"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="3_q6yga"]
 [ext_resource type="Texture2D" uid="uid://lo6pn004mau8" path="res://media/sprites/char1/FirstChar_idle.png" id="3_uo2uk"]
 [ext_resource type="AudioStream" uid="uid://bog1y5jqih0kp" path="res://media/sfxs/equip01.wav" id="4_jjwj2"]
+[ext_resource type="PackedScene" uid="uid://bebekibsp4il2" path="res://nodes/camera_2d.tscn" id="4_uqopg"]
 [ext_resource type="Texture2D" uid="uid://d0ww3f5rxit2p" path="res://media/sprites/char1/vanilla_2nd_hit.png" id="5_8u3yh"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="8_g2x0t"]
 [ext_resource type="Texture2D" uid="uid://b8oot3yuu2abo" path="res://media/sprites/char1/FirstChar_block.png" id="11_xlakb"]
@@ -885,27 +886,22 @@ offset_bottom = 344.0
 theme_override_fonts/font = ExtResource("3_q6yga")
 theme_override_font_sizes/font_size = 39
 
-[node name="Camera2D" type="Camera2D" parent="." index="1"]
-scale = Vector2(0.6875, 0.6875)
-offset = Vector2(0, -100)
-zoom = Vector2(0.8, 0.8)
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-
-[node name="Sprite2D" parent="." index="2"]
+[node name="Sprite2D" parent="." index="1"]
 self_modulate = Color(1, 1, 1, 1)
 texture = ExtResource("3_uo2uk")
 
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_47ont")
 
 [node name="LpPos" parent="HitBoxPos" index="0"]
 position = Vector2(144, 8)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_1o8ps")
 }
+
+[node name="Camera" parent="." index="7" instance=ExtResource("4_uqopg")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

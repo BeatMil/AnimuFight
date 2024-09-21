@@ -109,6 +109,7 @@ func _check_wall_bounce() -> void:
 			_push_direct(Vector2(400, -200))
 			is_touching_wall_left = false
 			hitlag()
+			$"../Player/Camera".start_screen_shake(100, 0.1)
 		elif is_touching_wall_right:
 			animation_player.stop(true)
 			animation_player.play("hitted")
@@ -116,6 +117,7 @@ func _check_wall_bounce() -> void:
 			_push_direct(Vector2(-400, -200))
 			is_touching_wall_right = false
 			hitlag()
+			$"../Player/Camera".start_screen_shake(100, 0.1)
 
 
 func _move_left(delta) ->  void:
@@ -279,6 +281,7 @@ func hitted(
 				1: ## KNOCKDOWN
 					animation_player.stop(true)
 					animation_player.play("down")
+					$"../Player/Camera".start_screen_shake(100, 0.1)
 				_:
 					animation_player.stop(true)
 					animation_player.play("hitted")
