@@ -287,5 +287,6 @@ func hitted(
 		if hitlag_amount:
 			hitlag(hitlag_amount)
 			_attacker.hitlag(hitlag_amount)
+		ObjectPooling.spawn_hitSpark_1(position)
 
 
