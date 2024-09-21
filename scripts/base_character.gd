@@ -67,6 +67,10 @@ var friction: float = 0.1
 var is_touching_wall_left: bool = false
 var is_touching_wall_right: bool = false
 
+## hitstun helper
+var stun_duration: float = 0
+
+
 #############################################################
 ## Built-in
 #############################################################
@@ -159,6 +163,7 @@ func _spawn_lp_hitbox(
 	_push_power_air: Vector2 = Vector2(100,-150),
 	_push_type_air: Enums.Push_types = Enums.Push_types.NORMAL,
 	_hitlag_amount: float = 0,
+	_hitstun_amount: float = 2,
 	) -> void:
 
 	var hitbox: Node2D
@@ -185,6 +190,7 @@ func _spawn_lp_hitbox(
 	hitbox.push_type_air = _push_type_air
 	hitbox.push_power_air = _push_power_air
 	hitbox.hitlag_amount = _hitlag_amount
+	hitbox.hitstun_amount = _hitstun_amount
 
 	hitbox.time_left_before_queue_free = _time
 
@@ -261,10 +267,12 @@ func hitted(
 	is_push_to_the_right: bool,
 	push_power: Vector2 = Vector2(20, 0),
 	push_type: int = 0,
-	hitlag_amount: float = 0) -> void:
+	hitlag_amount: float = 0,
+	hitstun_amount: float = 0.5,
+	) -> void:
 	if state in [States.PARRY, States.PARRY_SUCCESS]:
 		animation_player.play("parry_success")
-		_attacker.hitted(self, is_face_right)
+		_attacker.hitted(self, is_face_right, Vector2(20, 0), 0, 0, 1)
 	else:
 		hp_bar.hp_down(1)
 		if hp_bar.get_hp() <= 0:
@@ -277,10 +285,14 @@ func hitted(
 			match push_type:
 				0: ## NORMAL
 					animation_player.stop(true)
+					stun_duration = hitstun_amount
+					state = States.HIT_STUNNED
 					animation_player.play("hitted")
 				1: ## KNOCKDOWN
 					animation_player.stop(true)
 					animation_player.play("down")
+					stun_duration = hitstun_amount
+					state = States.BOUNCE_STUNNED
 					$"../Player/Camera".start_screen_shake(100, 0.1)
 				_:
 					animation_player.stop(true)
@@ -293,5 +305,4 @@ func hitted(
 			hitlag(hitlag_amount)
 			_attacker.hitlag(hitlag_amount)
 		ObjectPooling.spawn_hitSpark_1(position)
-
 

@@ -41,9 +41,9 @@ func _physics_process(delta: float) -> void:
 
 	is_face_right = not sprite_2d.flip_h
 	# _z_index_equal_to_y()
-	_move(delta)
 	if state == States.IDLE:
 		_facing()
+		_move(delta)
 
 	if is_player_in_range_lp:
 		_lp()
@@ -55,8 +55,17 @@ func _physics_process(delta: float) -> void:
 	_gravity(delta)
 	move_and_slide()
 
+	## hitstun...
+	if stun_duration > 0 and state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED]:
+		## remain in stun state
+		stun_duration -= delta
+	elif stun_duration < 0:
+		# state = States.IDLE
+		animation_player.play("idle")
+		stun_duration = 0
+
 	## debug
-	$DebugLabel.text = "%s"%velocity
+	$DebugLabel.text = "%s"%States.keys()[state]
 
 
 #############################################################
@@ -64,11 +73,10 @@ func _physics_process(delta: float) -> void:
 #############################################################
 func _move( delta) -> void:
 	if is_instance_valid(target) and not is_notarget:
-		if state == States.IDLE:
-			var direction = (target.position - global_position).normalized() 
-			var desired_velocity =  direction * speed
-			var steering = (desired_velocity - velocity) * delta * 2.5
-			velocity += steering
+		var direction = (target.position - global_position).normalized() 
+		var desired_velocity =  direction * speed
+		var steering = (desired_velocity - velocity) * delta * 2.5
+		velocity += steering
 
 
 func _attack01() -> void:
@@ -136,7 +144,8 @@ func _on_lp_range_r_body_exited(body: Node2D) -> void:
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name in ["lp1", "attack01_1", "hitted", "down"]:
+	# if anim_name in ["lp1", "attack01_1", "hitted", "down"]:
+	if anim_name in ["lp1", "attack01_1"]:
 		animation_player.play("idle")
 		state = States.IDLE
 	if anim_name in ["ded"]:

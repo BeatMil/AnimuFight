@@ -18,6 +18,7 @@ var push_type_ground: Enums.Push_types = Enums.Push_types.NORMAL
 var push_power_air: Vector2 = Vector2(20, 0)
 var push_type_air: Enums.Push_types = Enums.Push_types.NORMAL
 var hitlag_amount: float = 0
+var hitstun_amount: float = 0
 
 #############################################################
 ## Built-in
