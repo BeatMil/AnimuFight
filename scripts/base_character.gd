@@ -108,12 +108,14 @@ func _check_wall_bounce() -> void:
 			state = States.WALL_BOUNCED
 			_push_direct(Vector2(400, -200))
 			is_touching_wall_left = false
+			hitlag()
 		elif is_touching_wall_right:
 			animation_player.stop(true)
 			animation_player.play("hitted")
 			state = States.WALL_BOUNCED
 			_push_direct(Vector2(-400, -200))
 			is_touching_wall_right = false
+			hitlag()
 
 
 func _move_left(delta) ->  void:
