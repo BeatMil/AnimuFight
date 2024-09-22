@@ -50,10 +50,9 @@ func _set_collision_hit_player() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.has_method("hitted"):
 		if body.is_on_floor():
-			body.hitted(get_parent(), get_parent().is_face_right, push_power_ground, push_type_ground, hitlag_amount)
+			body.hitted(get_parent(), get_parent().is_face_right, push_power_ground, push_type_ground, hitlag_amount, hitstun_amount)
 		else:
-			body.hitted(get_parent(), get_parent().is_face_right, push_power_air, push_type_air, hitlag_amount)
-
+			body.hitted(get_parent(), get_parent().is_face_right, push_power_air, push_type_air, hitlag_amount, hitstun_amount)
 
 
 func _on_timer_timeout() -> void:
