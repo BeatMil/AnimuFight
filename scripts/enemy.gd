@@ -79,16 +79,6 @@ func _move( delta) -> void:
 		velocity += steering
 
 
-func _attack01() -> void:
-	if state == States.IDLE:
-		animation_player.play("attack01_1")
-
-
-func _lp() -> void:
-	if state == States.IDLE:
-		animation_player.play("lp1")
-
-
 func _facing() -> void:
 	if velocity.x > 0 :
 		sprite_2d.flip_h = false
@@ -98,14 +88,27 @@ func _facing() -> void:
 		pass
 
 
-func _on_timer_timeout() -> void:
-	if hp_bar.get_hp() > 0:
-		_lp()
+#############################################################
+## Attack Info
+#############################################################
+func _lp() -> void:
+	if state == States.IDLE:
+		animation_player.play("lp1")
+
+
+func _attack01() -> void:
+	if state == States.IDLE:
+		animation_player.play("attack01_1")
 
 
 #############################################################
 ## Signals
 #############################################################
+func _on_timer_timeout() -> void:
+	if hp_bar.get_hp() > 0:
+		_lp()
+
+
 func _on_lp_range_r_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		sprite_2d.flip_h = false
