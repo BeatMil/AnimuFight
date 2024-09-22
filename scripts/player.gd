@@ -147,6 +147,9 @@ func queue_move(the_move) -> void:
 	input_buffer_timer = input_buffer_time
 
 
+#############################################################
+## Attack info
+#############################################################
 func _lp() ->  void:
 	if Input.is_action_pressed("ui_left"):
 		sprite_2d.flip_h = true
@@ -163,6 +166,40 @@ func _lp() ->  void:
 	elif state in [States.IDLE, States.PARRY_SUCCESS]: ## <<-- start with this one
 		animation_player.play("lp1")
 		# state = States.LP1
+
+func lp1_info() -> void:
+	_spawn_lp_hitbox(
+	Hitbox_size.MEDIUM,
+	0.1,
+	Vector2(50, 0),
+	Enums.Push_types.NORMAL,
+	Vector2(100, -150),
+	Enums.Push_types.KNOCKDOWN,
+	0,
+	0.5
+	)
+func lp2_info() -> void:
+	_spawn_lp_hitbox(
+	Hitbox_size.MEDIUM,
+	0.1,
+	Vector2(50, 0),
+	Enums.Push_types.NORMAL,
+	Vector2(100, -150),
+	Enums.Push_types.KNOCKDOWN,
+	0,
+	0.5
+	)
+func lp3_info() -> void:
+	_spawn_lp_hitbox(
+	Hitbox_size.MEDIUM,
+	0.1,
+	Vector2(300, -100),
+	Enums.Push_types.KNOCKDOWN,
+	Vector2(100, -150),
+	Enums.Push_types.KNOCKDOWN,
+	0,
+	1
+	)
 
 
 func _hp() ->  void:
