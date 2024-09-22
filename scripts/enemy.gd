@@ -91,40 +91,54 @@ func _facing() -> void:
 #############################################################
 ## Attack Info
 #############################################################
+## This whole thing is to make it easire to adjust attack info ┐(￣～￣)┌ 
+## This func is used by attack moves below
+func dict_to_spawn_hitbox(info: Dictionary) -> void:
+	_spawn_lp_hitbox(
+	info["size"],
+	info["time"],
+	info["push_power_ground"],
+	info["push_type_ground"],
+	info["push_power_air"],
+	info["push_type_air"],
+	info["hitlag_amount"],
+	info["hitstun_amount"],
+	)
+
+
 func _lp() -> void:
 	if state == States.IDLE:
 		animation_player.play("lp1")
-
-
 func lp_info() -> void:
-	_spawn_lp_hitbox(
-	Hitbox_size.MEDIUM,
-	0.1,
-	Vector2(1000, -300),
-	Enums.Push_types.NORMAL,
-	Vector2(100, 0),
-	Enums.Push_types.KNOCKDOWN,
-	0,
-	0.2
-	)
+	var info = {
+	"size": Hitbox_size.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(500, 0),
+	"push_type_ground": Enums.Push_types.NORMAL,
+	"push_power_air": Vector2(100, -150),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount": 0,
+	"hitstun_amount": 0.5,
+	}
+	dict_to_spawn_hitbox(info)
 
 
 func _attack01() -> void:
 	if state == States.IDLE:
 		animation_player.play("attack01_1")
-
-
 func attack01_info() -> void:
-	_spawn_lp_hitbox(
-	Hitbox_size.MEDIUM,
-	0.1,
-	Vector2(500, 0),
-	Enums.Push_types.NORMAL,
-	Vector2(300, 0),
-	Enums.Push_types.KNOCKDOWN,
-	0,
-	0.5
-	)
+	var info = {
+	"size": Hitbox_size.MEDIUM,
+	"time": 0.3,
+	"push_power_ground": Vector2(800, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(300, 0),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount": 0,
+	"hitstun_amount": 0.5,
+	}
+	dict_to_spawn_hitbox(info)
+
 
 #############################################################
 ## Signals
