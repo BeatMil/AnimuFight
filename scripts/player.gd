@@ -37,6 +37,9 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	## wall bounce
+	_check_wall_bounce()
+
 	## Check is_on_floor
 	if is_on_floor():
 		if state == States.AIR:
