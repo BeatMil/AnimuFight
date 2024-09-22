@@ -103,7 +103,6 @@ func _physics_process(delta: float) -> void:
 		next_move.call()
 		next_move = null
 		input_buffer_timer = 0
-		print_rich("[color=brown][b]Nyaaa > w <[/b][/color]")
 
 	if Input.is_action_just_pressed("lp"):
 		queue_move(_lp)
