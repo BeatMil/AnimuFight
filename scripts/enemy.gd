@@ -96,10 +96,35 @@ func _lp() -> void:
 		animation_player.play("lp1")
 
 
+func lp_info() -> void:
+	_spawn_lp_hitbox(
+	Hitbox_size.MEDIUM,
+	0.1,
+	Vector2(1000, -300),
+	Enums.Push_types.NORMAL,
+	Vector2(100, 0),
+	Enums.Push_types.KNOCKDOWN,
+	0,
+	0.2
+	)
+
+
 func _attack01() -> void:
 	if state == States.IDLE:
 		animation_player.play("attack01_1")
 
+
+func attack01_info() -> void:
+	_spawn_lp_hitbox(
+	Hitbox_size.MEDIUM,
+	0.1,
+	Vector2(500, 0),
+	Enums.Push_types.NORMAL,
+	Vector2(300, 0),
+	Enums.Push_types.KNOCKDOWN,
+	0,
+	0.5
+	)
 
 #############################################################
 ## Signals
