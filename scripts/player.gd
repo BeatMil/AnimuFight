@@ -150,6 +150,21 @@ func queue_move(the_move) -> void:
 #############################################################
 ## Attack info
 #############################################################
+## This whole thing is to make it easire to adjust attack info ┐(￣～￣)┌ 
+## This func is used by attack moves below
+func dict_to_spawn_hitbox(info: Dictionary) -> void:
+	_spawn_lp_hitbox(
+	info["size"],
+	info["time"],
+	info["push_power_ground"],
+	info["push_type_ground"],
+	info["push_power_air"],
+	info["push_type_air"],
+	info["hitlag_amount"],
+	info["hitstun_amount"],
+	)
+
+
 func _lp() ->  void:
 	if Input.is_action_pressed("ui_left"):
 		sprite_2d.flip_h = true
@@ -168,38 +183,41 @@ func _lp() ->  void:
 		# state = States.LP1
 
 func lp1_info() -> void:
-	_spawn_lp_hitbox(
-	Hitbox_size.MEDIUM,
-	0.1,
-	Vector2(50, 0),
-	Enums.Push_types.NORMAL,
-	Vector2(100, -150),
-	Enums.Push_types.KNOCKDOWN,
-	0,
-	0.5
-	)
+	var info = {
+	"size": Hitbox_size.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(50, 0),
+	"push_type_ground": Enums.Push_types.NORMAL,
+	"push_power_air": Vector2(100, -150),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount": 0,
+	"hitstun_amount": 0.5,
+	}
+	dict_to_spawn_hitbox(info)
 func lp2_info() -> void:
-	_spawn_lp_hitbox(
-	Hitbox_size.MEDIUM,
-	0.1,
-	Vector2(50, 0),
-	Enums.Push_types.NORMAL,
-	Vector2(100, -150),
-	Enums.Push_types.KNOCKDOWN,
-	0,
-	0.5
-	)
+	var info = {
+	"size": Hitbox_size.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(50, 0),
+	"push_type_ground": Enums.Push_types.NORMAL,
+	"push_power_air": Vector2(100, -150),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount": 0,
+	"hitstun_amount": 0.5
+	}
+	dict_to_spawn_hitbox(info)
 func lp3_info() -> void:
-	_spawn_lp_hitbox(
-	Hitbox_size.MEDIUM,
-	0.1,
-	Vector2(300, -100),
-	Enums.Push_types.KNOCKDOWN,
-	Vector2(100, -150),
-	Enums.Push_types.KNOCKDOWN,
-	0,
-	1
-	)
+	var info = {
+	"size": Hitbox_size.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(3000, -100),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(100, -150),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount": 0,
+	"hitstun_amount": 0.5
+	}
+	dict_to_spawn_hitbox(info)
 
 
 func _hp() ->  void:
