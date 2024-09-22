@@ -163,8 +163,12 @@ func dict_to_spawn_hitbox(info: Dictionary) -> void:
 	info["push_type_ground"],
 	info["push_power_air"],
 	info["push_type_air"],
-	info["hitlag_amount"],
-	info["hitstun_amount"],
+	info["hitlag_amount_ground"],
+	info["hitstun_amount_ground"],
+	info["hitlag_amount_air"],
+	info["hitstun_amount_air"],
+	info["screenshake_amount"],
+	info["damage"],
 	)
 
 
@@ -193,8 +197,12 @@ func lp1_info() -> void:
 	"push_type_ground": Enums.Push_types.NORMAL,
 	"push_power_air": Vector2(100, -150),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
-	"hitlag_amount": 0,
-	"hitstun_amount": 0.5,
+	"hitlag_amount_ground": 0,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.5,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 1,
 	}
 	dict_to_spawn_hitbox(info)
 func lp2_info() -> void:
@@ -205,20 +213,28 @@ func lp2_info() -> void:
 	"push_type_ground": Enums.Push_types.NORMAL,
 	"push_power_air": Vector2(100, -150),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
-	"hitlag_amount": 0,
-	"hitstun_amount": 0.5
+	"hitlag_amount_ground": 0,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.5,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 1,
 	}
 	dict_to_spawn_hitbox(info)
 func lp3_info() -> void:
 	var info = {
 	"size": Hitbox_size.MEDIUM,
 	"time": 0.1,
-	"push_power_ground": Vector2(3000, -100),
+	"push_power_ground": Vector2(300, -100),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
 	"push_power_air": Vector2(100, -150),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
-	"hitlag_amount": 0,
-	"hitstun_amount": 0.5
+	"hitlag_amount_ground": 0,
+	"hitstun_amount_ground": 0.7,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.7,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 2,
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -235,6 +251,22 @@ func _hp() ->  void:
 			animation_player.play("down_hp")
 		else:
 			animation_player.play("hp")
+func hp_info() ->  void:
+	var info = {
+	"size": Hitbox_size.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(1200, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(1200, 0),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.3,
+	"hitstun_amount_ground": 1,
+	"hitlag_amount_air": 0.2,
+	"hitstun_amount_air": 1,
+	"screenshake_amount": Vector2(100, 0.2),
+	"damage": 3,
+	}
+	dict_to_spawn_hitbox(info)
 
 
 

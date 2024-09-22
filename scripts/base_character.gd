@@ -162,8 +162,12 @@ func _spawn_lp_hitbox(
 	_push_type_ground: Enums.Push_types = Enums.Push_types.NORMAL,
 	_push_power_air: Vector2 = Vector2(100,-150),
 	_push_type_air: Enums.Push_types = Enums.Push_types.NORMAL,
-	_hitlag_amount: float = 0,
-	_hitstun_amount: float = 0.5,
+	_hitlag_amount_ground: float = 0,
+	_hitstun_amount_ground: float = 0.5,
+	_hitlag_amount_air: float = 0,
+	_hitstun_amount_air: float = 0.5,
+	_screenshake_amount: Vector2 = Vector2(0, 0),
+	_damage: int = 1
 	) -> void:
 
 	var hitbox: Node2D
@@ -191,8 +195,12 @@ func _spawn_lp_hitbox(
 	hitbox.push_power_ground = _push_power_ground
 	hitbox.push_type_air = _push_type_air
 	hitbox.push_power_air = _push_power_air
-	hitbox.hitlag_amount = _hitlag_amount
-	hitbox.hitstun_amount = _hitstun_amount
+	hitbox.hitlag_amount_ground = _hitlag_amount_ground
+	hitbox.hitstun_amount_ground = _hitstun_amount_ground
+	hitbox.hitlag_amount_air = _hitlag_amount_air
+	hitbox.hitstun_amount_air = _hitstun_amount_air
+	hitbox.screenshake_amount = _screenshake_amount
+	hitbox.damage = _damage
 
 	hitbox.time_left_before_queue_free = _time
 
@@ -271,12 +279,14 @@ func hitted(
 	push_type: int = 0,
 	hitlag_amount: float = 0,
 	hitstun_amount: float = 0.5,
+	_screenshake_amount: Vector2 = Vector2(100, 0.1),
+	_damage: int = 1
 	) -> void:
 	if state in [States.PARRY, States.PARRY_SUCCESS]:
 		animation_player.play("parry_success")
 		_attacker.hitted(self, is_face_right, Vector2(20, 0), 0, 0, 1)
 	else:
-		hp_bar.hp_down(1)
+		hp_bar.hp_down(_damage)
 		if hp_bar.get_hp() <= 0:
 			state = States.HIT_STUNNED
 			animation_player.stop(true)
@@ -295,7 +305,6 @@ func hitted(
 					animation_player.play("down")
 					stun_duration = hitstun_amount
 					state = States.BOUNCE_STUNNED
-					$"../Player/Camera".start_screen_shake(100, 0.1)
 				_:
 					animation_player.stop(true)
 					animation_player.play("hitted")
@@ -306,5 +315,7 @@ func hitted(
 		if hitlag_amount:
 			hitlag(hitlag_amount)
 			_attacker.hitlag(hitlag_amount)
+		if _screenshake_amount:
+			$"../Player/Camera".start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
 		ObjectPooling.spawn_hitSpark_1(position)
 
