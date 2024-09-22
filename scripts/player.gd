@@ -84,6 +84,15 @@ func _physics_process(delta: float) -> void:
 	is_face_right = not sprite_2d.flip_h
 	# _z_index_equal_to_y()
 
+	## hitstun...
+	if stun_duration > 0 and state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED]:
+		## remain in stun state
+		stun_duration -= delta
+	elif stun_duration < 0:
+		# state = States.IDLE
+		animation_player.play("idle")
+		stun_duration = 0
+
 	##################
 	## Input buffer
 	##################
@@ -191,7 +200,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"lp1",
 		"lp2",
 		"lp3",
-		"hitted",
 		"block",
 		"parry_success",
 		"hp",

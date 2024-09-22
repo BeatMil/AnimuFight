@@ -163,7 +163,7 @@ func _spawn_lp_hitbox(
 	_push_power_air: Vector2 = Vector2(100,-150),
 	_push_type_air: Enums.Push_types = Enums.Push_types.NORMAL,
 	_hitlag_amount: float = 0,
-	_hitstun_amount: float = 2,
+	_hitstun_amount: float = 0.5,
 	) -> void:
 
 	var hitbox: Node2D
@@ -172,6 +172,8 @@ func _spawn_lp_hitbox(
 		hitbox = HITBOX_LP_MEDIUM.instantiate()
 	elif _size == Hitbox_size.LARGE:
 		hitbox = HITBOX_LP_LARGE.instantiate()
+	else:
+		hitbox = HITBOX_LP_MEDIUM.instantiate()
 
 	if sprite_2d.flip_h: ## facing left
 		hitbox.position = Vector2(-lp_pos.position.x, lp_pos.position.y)
