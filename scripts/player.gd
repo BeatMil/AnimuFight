@@ -128,9 +128,6 @@ func _physics_process(delta: float) -> void:
 	## Block buffer
 	_check_block_buffer(delta)
 
-
-## Godot said this built-in is better for performance (me no understand tho...)
-func _unhandled_key_input(_event: InputEvent) -> void:
 	## BLOCK
 	if state in [
 		States.IDLE,
@@ -139,9 +136,12 @@ func _unhandled_key_input(_event: InputEvent) -> void:
 		States.LP2,
 		States.LP3,
 		]:
-		if Input.is_action_just_pressed("block"):
+		if Input.is_action_pressed("block"):
 			_block()
 
+
+## Godot said this built-in is better for performance (me no understand tho...)
+func _unhandled_key_input(_event: InputEvent) -> void:
 	if state in [States.BLOCK, States.PARRY]:
 		if Input.is_action_just_released("block"):
 			block_buffer_timer = block_buffer_time
