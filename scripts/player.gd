@@ -92,8 +92,12 @@ func _physics_process(delta: float) -> void:
 	## Keep the stun duration while in air
 	## start stun duration when on floor
 	if stun_duration > 0 and \
-		state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED] \
-		and is_on_floor():
+		state in [
+		States.HIT_STUNNED,
+		States.WALL_BOUNCED,
+		States.BOUNCE_STUNNED,
+		States.BLOCK_STUNNED
+		] and is_on_floor():
 		## remain in stun state
 		stun_duration -= delta
 	elif stun_duration < 0:

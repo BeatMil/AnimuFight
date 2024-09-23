@@ -24,6 +24,7 @@ enum States {
 	HP,
 	WALL_BOUNCED,
 	BOUNCE_STUNNED,
+	BLOCK_STUNNED,
 	}
 
 
@@ -285,6 +286,15 @@ func hitted(
 	if state in [States.PARRY, States.PARRY_SUCCESS]:
 		animation_player.play("parry_success")
 		_attacker.hitted(self, is_face_right, Vector2(20, 0), 0, 0, 1)
+	elif state in [States.BLOCK, States.BLOCK_STUNNED]:
+		animation_player.play("blockstunned")
+		stun_duration = hitstun_amount/2
+		_push_direct(push_power/2)
+		if hitlag_amount:
+			hitlag(hitlag_amount)
+			_attacker.hitlag(hitlag_amount)
+		if _screenshake_amount:
+			$"../Player/Camera".start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
 	else:
 		hp_bar.hp_down(_damage)
 		if hp_bar.get_hp() <= 0:
