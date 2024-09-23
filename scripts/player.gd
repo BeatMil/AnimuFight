@@ -20,6 +20,9 @@ var input_buffer_timer := 0.0
 var is_performing_move: bool = false
 var next_move = null
 
+var block_buffer_time := 0.2
+var block_buffer_timer := 0.0
+
 
 #############################################################
 ## Built-in
@@ -35,6 +38,7 @@ func _process(_delta: float) -> void:
 	# Debuger
 	debug_label.text = "PlayerState: %s"%States.keys()[state]
 	debug_label.text += "\n%s"%input_buffer_timer
+	debug_label.text += "\n%s"%block_buffer_timer
 
 
 func _physics_process(delta: float) -> void:
@@ -44,8 +48,6 @@ func _physics_process(delta: float) -> void:
 	## Check is_on_floor
 	if is_on_floor():
 		if state == States.AIR:
-			state = States.IDLE
-			# if not animation_player.is_playing():
 			animation_player.play("idle")
 	else:
 		if state == States.IDLE:
@@ -123,9 +125,12 @@ func _physics_process(delta: float) -> void:
 	if input_buffer_timer > 0:
 		input_buffer_timer -= delta
 
+	## Block buffer
+	_check_block_buffer(delta)
+
 
 ## Godot said this built-in is better for performance (me no understand tho...)
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_key_input(_event: InputEvent) -> void:
 	## BLOCK
 	if state in [
 		States.IDLE,
@@ -134,13 +139,12 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		States.LP2,
 		States.LP3,
 		]:
-		if event.is_action_pressed("block"):
+		if Input.is_action_just_pressed("block"):
 			_block()
 
 	if state in [States.BLOCK, States.PARRY]:
-		if event.is_action_released("block"):
-			animation_player.play("idle")
-			state = States.IDLE
+		if Input.is_action_just_released("block"):
+			block_buffer_timer = block_buffer_time
 
 
 #############################################################
@@ -156,6 +160,14 @@ func handle_jump_buffer(delta):
 func queue_move(the_move) -> void:
 	next_move = the_move
 	input_buffer_timer = input_buffer_time
+
+
+func _check_block_buffer(delta) -> void:
+	if block_buffer_timer > 0 and state in [States.BLOCK, States.PARRY] :
+		block_buffer_timer -= delta
+	elif block_buffer_timer < 0 and state in [States.BLOCK, States.PARRY] :
+		animation_player.play("idle")
+		block_buffer_timer = 0
 
 
 #############################################################
