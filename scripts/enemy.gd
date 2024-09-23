@@ -55,8 +55,12 @@ func _physics_process(delta: float) -> void:
 	_gravity(delta)
 	move_and_slide()
 
-	## hitstun...
-	if stun_duration > 0 and state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED]:
+	## Hitstun
+	## Keep the stun duration while in air
+	## start stun duration when on floor
+	if stun_duration > 0 and \
+		state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED] \
+		and is_on_floor():
 		## remain in stun state
 		stun_duration -= delta
 	elif stun_duration < 0:
@@ -138,7 +142,7 @@ func attack01_info() -> void:
 	var info = {
 	"size": Hitbox_size.MEDIUM,
 	"time": 0.3,
-	"push_power_ground": Vector2(800, 0),
+	"push_power_ground": Vector2(800, -300),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
 	"push_power_air": Vector2(300, 0),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,

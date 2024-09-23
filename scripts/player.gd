@@ -25,6 +25,7 @@ var next_move = null
 ## Built-in
 #############################################################
 func _ready() -> void:
+	hp_bar.set_hp(hp)
 	print_rich("[img]res://media/sprites/char1/FirstChar_block.png[/img]")
 	print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	pass # Replace with function body.
@@ -87,8 +88,12 @@ func _physics_process(delta: float) -> void:
 	is_face_right = not sprite_2d.flip_h
 	# _z_index_equal_to_y()
 
-	## hitstun...
-	if stun_duration > 0 and state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED]:
+	## Hitstun
+	## Keep the stun duration while in air
+	## start stun duration when on floor
+	if stun_duration > 0 and \
+		state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED] \
+		and is_on_floor():
 		## remain in stun state
 		stun_duration -= delta
 	elif stun_duration < 0:
