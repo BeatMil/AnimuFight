@@ -289,7 +289,10 @@ func hitted(
 	elif state in [States.BLOCK, States.BLOCK_STUNNED]:
 		animation_player.play("blockstunned")
 		stun_duration = hitstun_amount/2
-		_push_direct(push_power/2)
+		if is_push_to_the_right:
+			_push_direct(push_power/2)
+		else:
+			_push_direct(Vector2(-push_power.x, push_power.y) / 2)
 		if hitlag_amount:
 			hitlag(hitlag_amount)
 			_attacker.hitlag(hitlag_amount)
