@@ -109,7 +109,7 @@ func _check_wall_bounce() -> void:
 	if state in [States.BOUNCE_STUNNED]:
 		if is_touching_wall_left:
 			animation_player.stop(true)
-			animation_player.play("hitted")
+			animation_player.play("down")
 			state = States.WALL_BOUNCED
 			_push_direct(Vector2(400, -200))
 			is_touching_wall_left = false
@@ -117,7 +117,7 @@ func _check_wall_bounce() -> void:
 			$"../Player/Camera".start_screen_shake(100, 0.1)
 		elif is_touching_wall_right:
 			animation_player.stop(true)
-			animation_player.play("hitted")
+			animation_player.play("down")
 			state = States.WALL_BOUNCED
 			_push_direct(Vector2(-400, -200))
 			is_touching_wall_right = false
