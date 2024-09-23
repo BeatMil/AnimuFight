@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dsgid218xceg6"]
+[gd_scene load_steps=26 format=3 uid="uid://dsgid218xceg6"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_5vg7s"]
 [ext_resource type="Texture2D" uid="uid://bytgy7otax0fb" path="res://media/sprites/char2/SecondChar_idle.png" id="2_2tmba"]
@@ -485,6 +485,9 @@ size = Vector2(96, 256)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oysbf"]
 size = Vector2(96, 256)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8qvtx"]
+size = Vector2(128, 304)
+
 [node name="Enemy" groups=["character", "enemy"] instance=ExtResource("1_5vg7s")]
 collision_layer = 2
 collision_mask = 14
@@ -546,6 +549,13 @@ theme_override_fonts/font = ExtResource("12_031mq")
 theme_override_font_sizes/font_size = 39
 text = "bob"
 
+[node name="BounceTogether" type="Area2D" parent="." index="12"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceTogether" index="0"]
+shape = SubResource("RectangleShape2D_8qvtx")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="LpRangeR" to="." method="_on_lp_range_r_body_entered"]
@@ -556,3 +566,4 @@ text = "bob"
 [connection signal="body_exited" from="Attack01RangeR" to="." method="_on_attack_range_01r_body_exited"]
 [connection signal="body_entered" from="Attack01RangeL" to="." method="_on_attack_01_range_l_body_entered"]
 [connection signal="body_exited" from="Attack01RangeL" to="." method="_on_attack_range_01r_body_exited"]
+[connection signal="body_entered" from="BounceTogether" to="." method="_on_bounce_together_body_entered"]

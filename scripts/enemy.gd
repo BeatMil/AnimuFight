@@ -208,3 +208,16 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		state = States.IDLE
 	if anim_name in ["ded"]:
 		queue_free()
+
+
+func _on_bounce_together_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy") and body.state in [States.BOUNCE_STUNNED]:
+		hitted(
+		self,
+		is_face_right,
+		body.velocity,
+		1,
+		0,
+		0.5,
+		Vector2.ZERO,
+		1)
