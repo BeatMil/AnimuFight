@@ -1,0 +1,148 @@
+[gd_scene load_steps=7 format=3 uid="uid://r4y0vb2x3ued"]
+
+[ext_resource type="Script" path="res://scripts/enemy_02.gd" id="1_j4sfk"]
+[ext_resource type="Texture2D" uid="uid://02np5p02m64c" path="res://media/sprites/enemy02/enemy02_idle.png" id="1_sdneh"]
+
+[sub_resource type="Animation" id="Animation_p0nai"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/hip/chest/sho_L:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.000139818]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/hip/chest/sho_L/arm_L:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0610359]
+}
+
+[sub_resource type="Animation" id="Animation_6ttkd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/hip/chest/sho_L:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.217036]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/hip/chest/sho_L/arm_L:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0528425]
+}
+
+[sub_resource type="Animation" id="Animation_lf0ll"]
+resource_name = "punch"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/hip/chest/sho_L:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7, 0.9, 1.2, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.00508688, 0.44582, 0.44582, -0.805638, -0.805638, 0.00508688]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/hip/chest/sho_L/arm_L:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7, 0.9, 1.2, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.206643, -0.934503, -0.934503, 0.993091, 0.993091, 0.206643]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n66nn"]
+_data = {
+"RESET": SubResource("Animation_6ttkd"),
+"idle": SubResource("Animation_p0nai"),
+"punch": SubResource("Animation_lf0ll")
+}
+
+[node name="Enemy02" type="CharacterBody2D"]
+script = ExtResource("1_j4sfk")
+
+[node name="polygons" type="Node2D" parent="."]
+
+[node name="arm_L" type="Polygon2D" parent="polygons"]
+texture = ExtResource("1_sdneh")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(324.37, 207.983, 321.849, 232.353, 378.992, 228.992, 379.832, 216.387, 410.504, 210.084, 407.983, 186.555, 382.353, 186.975)
+uv = PackedVector2Array(324.37, 207.983, 321.849, 232.353, 378.992, 228.992, 379.832, 216.387, 410.504, 210.084, 407.983, 186.555, 382.353, 186.975)
+bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "hip/chest", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "hip/chest/sho_L", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "hip/chest/sho_L/arm_L", PackedFloat32Array(0.76, 0.76, 0.76, 0.76, 0.76, 0.76, 0.76)]
+
+[node name="sho_L" type="Polygon2D" parent="polygons"]
+texture = ExtResource("1_sdneh")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(257.563, 153.361, 270.168, 189.496, 317.647, 229.412, 325.21, 213.025, 276.471, 147.479)
+uv = PackedVector2Array(257.563, 153.361, 270.168, 189.496, 317.647, 229.412, 325.21, 213.025, 276.471, 147.479)
+bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0), "hip/chest", PackedFloat32Array(0, 0, 0, 0, 0), "hip/chest/sho_L", PackedFloat32Array(1, 1, 1, 1, 1), "hip/chest/sho_L/arm_L", PackedFloat32Array(0, 0, 0, 0, 0)]
+
+[node name="full" type="Polygon2D" parent="polygons"]
+texture = ExtResource("1_sdneh")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(152.414, 86.2069, 160, 53.1034, 180.69, 60.6897, 213.793, 36.5517, 264.138, 42.069, 282.759, 60, 275.862, 153.103, 271.724, 194.483, 275.862, 237.931, 331.724, 344.138, 358.621, 491.034, 127.586, 503.448, 134.483, 208.276)
+uv = PackedVector2Array(152.414, 86.2069, 160, 53.1034, 180.69, 60.6897, 213.793, 36.5517, 264.138, 42.069, 282.759, 60, 275.862, 153.103, 271.724, 194.483, 275.862, 237.931, 331.724, 344.138, 358.621, 491.034, 127.586, 503.448, 134.483, 208.276)
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="hip" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(243, 295)
+rest = Transform2D(1, 0, 0, 1, 243, 295)
+
+[node name="chest" type="Bone2D" parent="Skeleton2D/hip"]
+position = Vector2(-1, -97)
+rest = Transform2D(1, 0, 0, 1, -1, -97)
+
+[node name="sho_L" type="Bone2D" parent="Skeleton2D/hip/chest"]
+position = Vector2(27, -31)
+rotation = 0.217036
+rest = Transform2D(1, 0, 0, 1, 27, -31)
+
+[node name="arm_L" type="Bone2D" parent="Skeleton2D/hip/chest/sho_L"]
+position = Vector2(54, 52)
+rotation = 0.0528425
+rest = Transform2D(1, 0, 0, 1, 54, 52)
+auto_calculate_length_and_angle = false
+length = 73.0
+bone_angle = -16.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n66nn")
+}
+autoplay = "punch"
