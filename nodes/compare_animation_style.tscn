@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://36ib3isxy573"]
+[gd_scene load_steps=12 format=3 uid="uid://r4y0vb2x3ued"]
 
-[ext_resource type="Script" path="res://scripts/enemy_02.gd" id="1_vuvl1"]
-[ext_resource type="Texture2D" uid="uid://1e6a2308ecwk" path="res://media/sprites/enemy02/enemy02_ske2.png" id="2_sicau"]
+[ext_resource type="Script" path="res://scripts/enemy_02.gd" id="1_65v2r"]
+[ext_resource type="Texture2D" uid="uid://1e6a2308ecwk" path="res://media/sprites/enemy02/enemy02_ske2.png" id="2_bteqx"]
+[ext_resource type="Texture2D" uid="uid://clhbpqw5kn6j3" path="res://media/sprites/enemy02/enemy02_punch_s.png" id="3_25ygi"]
 
 [sub_resource type="Animation" id="Animation_6ttkd"]
 length = 0.001
@@ -119,79 +120,6 @@ resource_name = "idle"
 
 [sub_resource type="Animation" id="Animation_dssp2"]
 resource_name = "kick"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Skeleton2D/base/lower/thi_L:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 0.7, 0.9, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.420143, -0.420143, -1.0472, -1.0472, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Skeleton2D/base/lower/thi_L/leg_L:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 0.7, 0.9, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.149702, 0.149702, -0.523598, -0.523598, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Skeleton2D/base/upper/sho_R:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 0.7, 0.9, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.198754, 0.198754, 0.159076, 0.159076, 0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Skeleton2D/base/upper/sho_R/arm_R:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 0.7, 0.9, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.221223, -0.221223, 1.76684, 1.76684, 0.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Skeleton2D/base/upper/sho_L:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 0.7, 0.9, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.101748, -0.122373, -0.122373, -0.505499, -0.505499, 0.101748]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Skeleton2D/base/upper/sho_L/arm_L:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 0.7, 0.9, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [-0.0260148, 0.114273, 0.114273, -1.33737, -1.33737, -0.0260148]
-}
 
 [sub_resource type="Animation" id="Animation_lf0ll"]
 resource_name = "punch"
@@ -315,15 +243,53 @@ _data = {
 "punch": SubResource("Animation_lf0ll")
 }
 
+[sub_resource type="Animation" id="Animation_pc0ha"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fpesk"]
+resource_name = "punch"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tiyxl"]
+_data = {
+"RESET": SubResource("Animation_pc0ha"),
+"punch": SubResource("Animation_fpesk")
+}
+
 [node name="Enemy02" type="CharacterBody2D"]
-script = ExtResource("1_vuvl1")
+script = ExtResource("1_65v2r")
 
 [node name="polygons" type="Node2D" parent="."]
 metadata/_edit_group_ = true
 
 [node name="arm_L" type="Polygon2D" parent="polygons"]
 position = Vector2(-33.4138, 4.61028)
-texture = ExtResource("2_sicau")
+texture = ExtResource("2_bteqx")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(355.577, 220.406, 429.058, 228.135, 444.498, 255.818, 395.836, 265.737, 340.419, 236.98)
 uv = PackedVector2Array(382.944, 199.365, 451.728, 172.381, 478.183, 189.841, 439.558, 221.058, 377.124, 221.058)
@@ -331,7 +297,7 @@ bones = ["base", PackedFloat32Array(0, 0, 0, 0, 0), "base/upper", PackedFloat32A
 
 [node name="sho_L" type="Polygon2D" parent="polygons"]
 position = Vector2(-100.765, 126.586)
-texture = ExtResource("2_sicau")
+texture = ExtResource("2_bteqx")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(359.808, 33.491, 391.249, 24.3207, 450.201, 93.3163, 444.088, 117.77, 391.686, 83.2726)
 uv = PackedVector2Array(357.699, 29.7248, 389.14, 20.5545, 448.092, 89.5501, 441.978, 114.004, 389.576, 79.5065)
@@ -339,7 +305,7 @@ bones = ["base", PackedFloat32Array(0, 0, 0, 0, 0), "base/upper", PackedFloat32A
 
 [node name="neck" type="Polygon2D" parent="polygons"]
 position = Vector2(127.971, 33.8308)
-texture = ExtResource("2_sicau")
+texture = ExtResource("2_bteqx")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(30.0284, 26.1135, 121.295, -0.524014, 170.203, 32.6638, 160.596, 136.594, 70.2031, 156.245, 52.2991, 229.607, 13.4345, 224.804)
 uv = PackedVector2Array(30.0284, 26.1135, 121.295, -0.524014, 170.203, 32.6638, 160.596, 136.594, 70.2031, 156.245, 52.2991, 229.607, 13.4345, 224.804)
@@ -347,7 +313,7 @@ bones = ["base", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "base/upper", PackedFl
 
 [node name="leg_L" type="Polygon2D" parent="polygons"]
 position = Vector2(-78.0932, 12.2615)
-texture = ExtResource("2_sicau")
+texture = ExtResource("2_bteqx")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(373.697, 327.424, 414.745, 323.493, 447.496, 488.122, 385.924, 487.249)
 uv = PackedVector2Array(373.697, 327.424, 414.745, 323.493, 447.496, 488.122, 385.924, 487.249)
@@ -355,7 +321,7 @@ bones = ["base", PackedFloat32Array(0, 0, 0, 0), "base/upper", PackedFloat32Arra
 
 [node name="thi_L" type="Polygon2D" parent="polygons"]
 position = Vector2(-33.7311, 40.5778)
-texture = ExtResource("2_sicau")
+texture = ExtResource("2_bteqx")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(276.317, 261.048, 323.915, 215.633, 378.5, 317.38, 338.325, 338.777)
 uv = PackedVector2Array(276.317, 261.048, 323.915, 215.633, 378.5, 317.38, 338.325, 338.777)
@@ -363,7 +329,7 @@ bones = ["base", PackedFloat32Array(0, 0, 0, 0), "base/upper", PackedFloat32Arra
 
 [node name="leg_R" type="Polygon2D" parent="polygons"]
 position = Vector2(94.6358, 5.2576)
-texture = ExtResource("2_sicau")
+texture = ExtResource("2_bteqx")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(84.6135, 357.991, 121.295, 350.131, 139.199, 492.926, 51.8624, 496.419)
 uv = PackedVector2Array(84.6135, 357.991, 121.295, 350.131, 139.199, 492.926, 51.8624, 496.419)
@@ -371,7 +337,7 @@ bones = ["base", PackedFloat32Array(0, 0, 0, 0), "base/upper", PackedFloat32Arra
 
 [node name="thi_R" type="Polygon2D" parent="polygons"]
 position = Vector2(5.4397, 49.0727)
-texture = ExtResource("2_sicau")
+texture = ExtResource("2_bteqx")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(195.967, 215.197, 260.159, 244.891, 213.871, 357.555, 164.09, 335.721)
 uv = PackedVector2Array(195.967, 215.197, 260.159, 244.891, 213.871, 357.555, 164.09, 335.721)
@@ -379,7 +345,7 @@ bones = ["base", PackedFloat32Array(0, 0, 0, 0), "base/upper", PackedFloat32Arra
 
 [node name="upper" type="Polygon2D" parent="polygons"]
 position = Vector2(-17.8799, 131.789)
-texture = ExtResource("2_sicau")
+texture = ExtResource("2_bteqx")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(215.383, 33.6508, 252.685, 10.6349, 299.113, 17.381, 341.573, 174.921, 274.51, 206.667, 193.558, 177.302, 224.51, 112.222, 249.406, 146.538, 294.118, 144.615, 326.81, 122.019)
 uv = PackedVector2Array(215.383, 33.6508, 252.685, 10.6349, 299.113, 17.381, 341.573, 174.921, 274.51, 206.667, 193.558, 177.302, 224.51, 112.222, 249.406, 146.538, 294.118, 144.615, 326.81, 122.019)
@@ -389,7 +355,7 @@ internal_vertex_count = 3
 
 [node name="arm_R" type="Polygon2D" parent="polygons"]
 position = Vector2(149.852, -67.4958)
-texture = ExtResource("2_sicau")
+texture = ExtResource("2_bteqx")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(26.535, 294.673, 126.972, 280.262, 133.959, 336.157, 28.2817, 339.651)
 uv = PackedVector2Array(26.535, 294.673, 126.972, 280.262, 133.959, 336.157, 28.2817, 339.651)
@@ -397,7 +363,7 @@ bones = ["base", PackedFloat32Array(0, 0, 0, 0), "base/upper", PackedFloat32Arra
 
 [node name="sho_R" type="Polygon2D" parent="polygons"]
 position = Vector2(36.5875, 16.981)
-texture = ExtResource("2_sicau")
+texture = ExtResource("2_bteqx")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(146.622, 148.384, 178.063, 144.017, 187.67, 171.092, 171.95, 244.017, 137.889, 239.214)
 uv = PackedVector2Array(146.622, 148.384, 178.063, 144.017, 187.67, 171.092, 171.95, 244.017, 137.889, 239.214)
@@ -474,5 +440,17 @@ bone_angle = 112.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_n66nn")
+}
+autoplay = "punch"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(704.443, 256.706)
+texture = ExtResource("3_25ygi")
+hframes = 2
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_tiyxl")
 }
 autoplay = "punch"

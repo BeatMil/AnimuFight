@@ -147,7 +147,7 @@ func attack01_info() -> void:
 	"push_power_air": Vector2(300, 0),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
 	"hitlag_amount_ground": 0,
-	"hitstun_amount_ground": 0.5,
+	"hitstun_amount_ground": 0.6,
 	"hitlag_amount_air": 0,
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(100, 0.1),
