@@ -95,25 +95,6 @@ func _facing() -> void:
 #############################################################
 ## Attack Info
 #############################################################
-## This whole thing is to make it easire to adjust attack info ┐(￣～￣)┌ 
-## This func is used by attack moves below
-func dict_to_spawn_hitbox(info: Dictionary) -> void:
-	_spawn_lp_hitbox(
-	info["size"],
-	info["time"],
-	info["push_power_ground"],
-	info["push_type_ground"],
-	info["push_power_air"],
-	info["push_type_air"],
-	info["hitlag_amount_ground"],
-	info["hitstun_amount_ground"],
-	info["hitlag_amount_air"],
-	info["hitstun_amount_air"],
-	info["screenshake_amount"],
-	info["damage"],
-	)
-
-
 func _lp() -> void:
 	if state == States.IDLE:
 		animation_player.play("lp1")
@@ -131,6 +112,7 @@ func lp_info() -> void: # for animation_player
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(0, 0),
 	"damage": 1,
+	"type": Enums.Attack.NORMAL,
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -152,6 +134,7 @@ func attack01_info() -> void: # for animation_player
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(100, 0.1),
 	"damage": 3,
+	"type": Enums.Attack.NORMAL,
 	}
 	dict_to_spawn_hitbox(info)
 

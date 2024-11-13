@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://02np5p02m64c" path="res://media/sprites/enemy02/enemy02_idle.png" id="1_3e6vd"]
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_3ialr"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_8kjut"]
+[ext_resource type="Script" path="res://scripts/enemy_02.gd" id="2_tp74s"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="3_yfbxy"]
 [ext_resource type="Texture2D" uid="uid://ca5h1ehiakphp" path="res://media/sprites/enemy02/enemy02_unblock.png" id="4_qqolc"]
 [ext_resource type="Texture2D" uid="uid://clhbpqw5kn6j3" path="res://media/sprites/enemy02/enemy02_punch_s.png" id="5_vxmgf"]
@@ -150,7 +150,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0.6),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [300],
+"args": [400],
 "method": &"_push_x"
 }]
 }
@@ -668,11 +668,11 @@ size = Vector2(128, 304)
 [node name="Enemy02" groups=["character", "enemy"] instance=ExtResource("1_3ialr")]
 collision_layer = 2
 collision_mask = 14
-script = ExtResource("1_8kjut")
+script = ExtResource("2_tp74s")
 is_notarget = false
 
 [node name="Sprite2D" parent="." index="0"]
-self_modulate = Color(1, 0.51973, 0.51973, 1)
+self_modulate = Color(1, 1, 1, 1)
 texture = ExtResource("1_3e6vd")
 
 [node name="CollisionShape2D" parent="." index="1"]

@@ -168,7 +168,8 @@ func _spawn_lp_hitbox(
 	_hitlag_amount_air: float = 0,
 	_hitstun_amount_air: float = 0.5,
 	_screenshake_amount: Vector2 = Vector2(0, 0),
-	_damage: int = 1
+	_damage: int = 1,
+	_type: int = 0
 	) -> void:
 
 	var hitbox: Node2D
@@ -202,6 +203,7 @@ func _spawn_lp_hitbox(
 	hitbox.hitstun_amount_air = _hitstun_amount_air
 	hitbox.screenshake_amount = _screenshake_amount
 	hitbox.damage = _damage
+	hitbox.type = _type
 
 	hitbox.time_left_before_queue_free = _time
 
@@ -281,12 +283,13 @@ func hitted(
 	hitlag_amount: float = 0,
 	hitstun_amount: float = 0.5,
 	_screenshake_amount: Vector2 = Vector2(100, 0.1),
-	_damage: int = 1
+	_damage: int = 1,
+	_type: int = 0
 	) -> void:
-	if state in [States.PARRY, States.PARRY_SUCCESS]:
+	if state in [States.PARRY, States.PARRY_SUCCESS] and _type == Enums.Attack.NORMAL:
 		animation_player.play("parry_success")
 		_attacker.hitted(self, is_face_right, Vector2(20, 0), 0, 0, 1)
-	elif state in [States.BLOCK, States.BLOCK_STUNNED]:
+	elif state in [States.BLOCK, States.BLOCK_STUNNED] and _type == Enums.Attack.NORMAL:
 		animation_player.play("blockstunned")
 		stun_duration = hitstun_amount/2
 		if is_push_to_the_right:
@@ -332,3 +335,22 @@ func hitted(
 			$"../Player/Camera".start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
 		ObjectPooling.spawn_hitSpark_1(position)
 
+
+## This whole thing is to make it easire to adjust attack info ┐(￣～￣)┌ 
+## This func is used by attack moves below
+func dict_to_spawn_hitbox(info: Dictionary) -> void:
+	_spawn_lp_hitbox(
+	info["size"],
+	info["time"],
+	info["push_power_ground"],
+	info["push_type_ground"],
+	info["push_power_air"],
+	info["push_type_air"],
+	info["hitlag_amount_ground"],
+	info["hitstun_amount_ground"],
+	info["hitlag_amount_air"],
+	info["hitstun_amount_air"],
+	info["screenshake_amount"],
+	info["damage"],
+	info["type"],
+	)
