@@ -26,6 +26,7 @@ enum States {
 	BOUNCE_STUNNED,
 	BLOCK_STUNNED,
 	DODGE,
+	DODGE_SUCCESS,
 	}
 
 
@@ -302,8 +303,8 @@ func hitted(
 			_attacker.hitlag(hitlag_amount)
 		if _screenshake_amount:
 			$"../Player/Camera".start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
-	elif state in [States.DODGE] and _type != Enums.Attack.THROW:
-		pass
+	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW:
+		animation_player.play("dodge_success")
 	else:
 		hp_bar.hp_down(_damage)
 		if hp_bar.get_hp() <= 0:

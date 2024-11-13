@@ -133,14 +133,15 @@ func _physics_process(delta: float) -> void:
 	if state in [
 		States.IDLE,
 		States.PARRY_SUCCESS,
+		States.DODGE_SUCCESS,
 		States.LP1,
 		States.LP2,
 		States.LP3,
 		]:
-		if Input.is_action_pressed("block"):
-			queue_move(_block)
-		if Input.is_action_pressed("dodge"):
-			queue_move(_dodge)
+		if Input.is_action_just_pressed("block"):
+			_block()
+		if Input.is_action_just_pressed("dodge"):
+			_dodge()
 
 
 ## Godot said this built-in is better for performance (me no understand tho...)
@@ -185,13 +186,10 @@ func _lp() ->  void:
 
 	if state == States.LP1:
 		animation_player.play("lp2")
-		# state = States.LP2
 	elif state == States.LP2:
 		animation_player.play("lp3")
-		# state = States.LP3
-	elif state in [States.IDLE, States.PARRY_SUCCESS]: ## <<-- start with this one
+	elif state in [States.IDLE, States.PARRY_SUCCESS, States.DODGE_SUCCESS]: ## <<-- start with this one
 		animation_player.play("lp1")
-		# state = States.LP1
 
 func lp1_info() -> void:
 	var info = {
@@ -247,7 +245,14 @@ func lp3_info() -> void:
 
 
 func _hp() ->  void:
-	if state in [States.IDLE, States.PARRY_SUCCESS, States.LP1, States.LP2, States.LP3,]:
+	if state in [
+		States.IDLE,
+		States.PARRY_SUCCESS,
+		States.LP1,
+		States.LP2,
+		States.LP3,
+		States.DODGE_SUCCESS
+		]:
 		if Input.is_action_pressed("ui_left"):
 			sprite_2d.flip_h = true
 
@@ -310,6 +315,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"hp",
 		"down_hp",
 		"dodge",
+		"dodge_success",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded"]:
