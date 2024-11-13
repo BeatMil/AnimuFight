@@ -117,7 +117,7 @@ func dict_to_spawn_hitbox(info: Dictionary) -> void:
 func _lp() -> void:
 	if state == States.IDLE:
 		animation_player.play("lp1")
-func lp_info() -> void:
+func lp_info() -> void: # for animation_player
 	var info = {
 	"size": Hitbox_size.MEDIUM,
 	"time": 0.1,
@@ -138,7 +138,7 @@ func lp_info() -> void:
 func _attack01() -> void:
 	if state == States.IDLE:
 		animation_player.play("attack01_1")
-func attack01_info() -> void:
+func attack01_info() -> void: # for animation_player
 	var info = {
 	"size": Hitbox_size.MEDIUM,
 	"time": 0.3,
