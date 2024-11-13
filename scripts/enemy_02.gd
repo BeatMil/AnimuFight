@@ -139,7 +139,6 @@ func attack01_info() -> void: # for animation_player
 	"type": Enums.Attack.UNBLOCK,
 	}
 	dict_to_spawn_hitbox(info)
-	print("UNBLOCK!")
 
 
 #############################################################
