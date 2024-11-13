@@ -129,6 +129,7 @@ func _physics_process(delta: float) -> void:
 	_check_block_buffer(delta)
 
 	## BLOCK
+	## DODGE
 	if state in [
 		States.IDLE,
 		States.PARRY_SUCCESS,
@@ -137,7 +138,9 @@ func _physics_process(delta: float) -> void:
 		States.LP3,
 		]:
 		if Input.is_action_pressed("block"):
-			_block()
+			queue_move(_block)
+		if Input.is_action_pressed("dodge"):
+			queue_move(_dodge)
 
 
 ## Godot said this built-in is better for performance (me no understand tho...)
@@ -287,6 +290,13 @@ func _down_hp() ->  void:
 
 
 #############################################################
+## Defense
+#############################################################
+func _dodge() -> void:
+	animation_player.play("dodge")
+
+
+#############################################################
 ## Signals
 #############################################################
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -299,8 +309,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"parry_success",
 		"hp",
 		"down_hp",
+		"dodge",
 		]:
 		animation_player.play("idle")
-		state = States.IDLE
 	if anim_name in ["ded"]:
 		queue_free()
