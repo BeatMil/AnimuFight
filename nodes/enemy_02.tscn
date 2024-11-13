@@ -672,7 +672,7 @@ script = ExtResource("1_8kjut")
 is_notarget = false
 
 [node name="Sprite2D" parent="." index="0"]
-self_modulate = Color(0.9375, 0.920477, 0.501709, 1)
+self_modulate = Color(1, 0.51973, 0.51973, 1)
 texture = ExtResource("1_3e6vd")
 
 [node name="CollisionShape2D" parent="." index="1"]
