@@ -42,4 +42,5 @@ hp = 100
 [node name="Enemy02" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_gqdm1")]
 position = Vector2(1696, 696)
 target = NodePath("../Player")
+is_notarget = true
 hp = 20

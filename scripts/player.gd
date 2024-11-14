@@ -64,8 +64,10 @@ func _physics_process(delta: float) -> void:
 			_lerp_velocity_x()
 		elif Input.is_action_pressed("ui_left"):
 			_move_left(delta)
+			animation_player.play("walk")
 		elif Input.is_action_pressed("ui_right"):
 			_move_right(delta)
+			animation_player.play("walk")
 		else:
 			pass
 			friction = 0.5
