@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=46 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://ttir1yqeqdbl" path="res://media/sprites/char1/vanilla_3nd_hit.png" id="2_3lude"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="3_q6yga"]
 [ext_resource type="Texture2D" uid="uid://lo6pn004mau8" path="res://media/sprites/char1/FirstChar_idle.png" id="3_uo2uk"]
 [ext_resource type="AudioStream" uid="uid://bog1y5jqih0kp" path="res://media/sfxs/equip01.wav" id="4_jjwj2"]
+[ext_resource type="Texture2D" uid="uid://d0dvqqt71egsx" path="res://media/sprites/char1/hp_smear_fx.png" id="4_oa44t"]
 [ext_resource type="PackedScene" uid="uid://bebekibsp4il2" path="res://nodes/camera_2d.tscn" id="4_uqopg"]
 [ext_resource type="Texture2D" uid="uid://d0ww3f5rxit2p" path="res://media/sprites/char1/vanilla_2nd_hit.png" id="5_8u3yh"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="8_g2x0t"]
@@ -16,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cpb8fs74sngbi" path="res://media/sprites/char1/vanilla_upper_smear.png" id="13_2d60o"]
 [ext_resource type="AudioStream" uid="uid://df46krxsmcibv" path="res://media/sfxs/parry_success.wav" id="13_utayp"]
 [ext_resource type="AudioStream" uid="uid://bgq36rpoccy71" path="res://media/sfxs/explosion.wav" id="14_3ws5c"]
-[ext_resource type="Texture2D" uid="uid://m3lcymqlr4ni" path="res://media/sprites/char1/vanilla_hp_smear2.png" id="15_gjs6q"]
+[ext_resource type="Texture2D" uid="uid://yrt3sen6gru3" path="res://media/sprites/char1/vanilla_hp_smear3.png" id="15_nfs1e"]
 [ext_resource type="Texture2D" uid="uid://ccmmerxgq5u0a" path="res://media/sprites/char1/vanilla_jump.png" id="16_10xrx"]
 [ext_resource type="AudioStream" uid="uid://cwale1oro4x1p" path="res://media/sfxs/smol_jump.wav" id="17_7a5mg"]
 [ext_resource type="AudioStream" uid="uid://0ixccgp3lh4q" path="res://media/sfxs/upper.wav" id="19_yr2fr"]
@@ -102,6 +103,30 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HpSmearFx:region_rect")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 8, 376, 504)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HpSmearFx:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-49, 12)]
 }
 
 [sub_resource type="Animation" id="Animation_6j2vb"]
@@ -721,7 +746,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_v1xnu"]
 resource_name = "hp"
 length = 0.6
-step = 0.05
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -732,7 +757,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("15_gjs6q")]
+"values": [ExtResource("15_nfs1e")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -837,10 +862,34 @@ tracks/8/path = NodePath("Sprite2D:frame")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0.2, 0.3, 0.35),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.2, 0.35, 0.366667, 0.4, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 3, 5]
+"values": [0, 1, 2, 3, 4]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("HpSmearFx:region_rect")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.316667, 0.45),
+"transitions": PackedFloat32Array(0, 1, 1, 1),
+"update": 0,
+"values": [Rect2(368, 8, 8, 504), Rect2(0, 8, 376, 504), Rect2(0, 8, 376, 504), Rect2(368, 8, 8, 504)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("HpSmearFx:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.2, 0.316667, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-49, 12), Vector2(-49, 12), Vector2(74, 12)]
 }
 
 [sub_resource type="Animation" id="Animation_epwwg"]
@@ -1413,21 +1462,29 @@ offset_bottom = 344.0
 theme_override_fonts/font = ExtResource("3_q6yga")
 theme_override_font_sizes/font_size = 39
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="HpSmearFx" type="Sprite2D" parent="." index="1"]
+visible = false
+position = Vector2(-49, 12)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_oa44t")
+region_enabled = true
+region_rect = Rect2(0, 8, 376, 504)
+
+[node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("3_uo2uk")
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_47ont")
 
 [node name="LpPos" parent="HitBoxPos" index="0"]
 position = Vector2(144, 8)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 libraries = {
 "": SubResource("AnimationLibrary_1o8ps")
 }
 
-[node name="Camera" parent="." index="7" instance=ExtResource("4_uqopg")]
+[node name="Camera" parent="." index="8" instance=ExtResource("4_uqopg")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
