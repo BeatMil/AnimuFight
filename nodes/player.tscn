@@ -1,7 +1,6 @@
 [gd_scene load_steps=46 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
-[ext_resource type="Texture2D" uid="uid://ttir1yqeqdbl" path="res://media/sprites/char1/vanilla_3nd_hit.png" id="2_3lude"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
 [ext_resource type="Texture2D" uid="uid://be73s7hey0vwb" path="res://media/sprites/char1/FirstChar_hitted_color.png" id="2_sy3ui"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_t4427"]
@@ -23,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://0ixccgp3lh4q" path="res://media/sfxs/upper.wav" id="19_yr2fr"]
 [ext_resource type="Texture2D" uid="uid://8ueeqlkuv6rt" path="res://media/sprites/char1/vanilla_down.png" id="20_vhipq"]
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="21_l3vk0"]
+[ext_resource type="Texture2D" uid="uid://snfln513kjvc" path="res://media/sprites/char1/vanilla_3nd_hit_smear.png" id="22_ke4by"]
 [ext_resource type="Texture2D" uid="uid://nyqrh0rlatpr" path="res://media/sprites/char1/vanilla_dodge.png" id="22_tqltk"]
 [ext_resource type="AudioStream" uid="uid://bgcop0cshwtdm" path="res://media/sfxs/wippy_noise.wav" id="23_iau4t"]
 
@@ -1206,6 +1206,7 @@ tracks/4/keys = {
 [sub_resource type="Animation" id="Animation_88oa4"]
 resource_name = "lp3"
 length = 0.6
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1216,7 +1217,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_3lude")]
+"values": [ExtResource("22_ke4by")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -1277,6 +1278,42 @@ tracks/4/keys = {
 "args": [50],
 "method": &"_push_x"
 }]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:hframes")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:vframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.183333, 0.2, 0.216667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_d5ek5"]
