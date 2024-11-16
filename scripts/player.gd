@@ -50,29 +50,28 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		if state == States.AIR:
 			animation_player.play("idle")
+			state = States.IDLE
 	else:
 		if state == States.IDLE:
 			state = States.AIR
 	
 	if state == States.AIR:
-		if not animation_player.is_playing():
-			animation_player.play("air")
+		# if not animation_player.is_playing():
+		# 	animation_player.play("air")
+		animation_player.play("jump")
+		pass
 
+	# Left/Right movement
 	if state in [States.IDLE, States.AIR]:
-		# Left/Right movement
 		if Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_right"):
 			_lerp_velocity_x()
 		elif Input.is_action_pressed("ui_left"):
 			_move_left(delta)
-			animation_player.play("walk")
 		elif Input.is_action_pressed("ui_right"):
 			_move_right(delta)
-			animation_player.play("walk")
 		else:
-			pass
 			friction = 0.5
 			_lerp_velocity_x()
-			animation_player.play("idle")
 
 		# Jump buffer
 		if Input.is_action_just_pressed("jump"):
@@ -86,6 +85,18 @@ func _physics_process(delta: float) -> void:
 		## Adding friction like this is not gonna go well (っ˘̩╭╮˘̩)っ 
 		friction = 0.1
 		_lerp_velocity_x()
+	
+	## Animation Section
+	# Walking animation
+	if state in [States.IDLE]:
+		if Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_right"):
+			animation_player.play("idle")
+		elif Input.is_action_pressed("ui_left"):
+			animation_player.play("walk")
+		elif Input.is_action_pressed("ui_right"):
+			animation_player.play("walk")
+		else:
+			animation_player.play("idle")
 
 	_gravity(delta)
 	move_and_slide()
