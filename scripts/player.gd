@@ -242,6 +242,7 @@ func lp3_info() -> void:
 	"screenshake_amount": Vector2(0, 0),
 	"damage": 2,
 	"type": Enums.Attack.NORMAL,
+	"zoom": Vector2(0.9, 0.9),
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -265,6 +266,7 @@ func _hp() ->  void:
 			animation_player.play("down_hp")
 		else:
 			animation_player.play("hp")
+
 func hp_info() ->  void:
 	var info = {
 	"size": Hitbox_size.MEDIUM,
@@ -280,6 +282,7 @@ func hp_info() ->  void:
 	"screenshake_amount": Vector2(100, 0.2),
 	"damage": 3,
 	"type": Enums.Attack.NORMAL,
+	"zoom": Vector2(1, 1),
 	}
 	dict_to_spawn_hitbox(info)
 

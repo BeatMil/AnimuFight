@@ -24,6 +24,7 @@ var hitstun_amount_air: float = 0
 var screenshake_amount: Vector2 = Vector2(0, 0)
 var damage: int = 0
 var type = Enums.Attack.NORMAL
+var zoom = Vector2(0.8, 0.8)
 
 
 #############################################################
@@ -56,9 +57,9 @@ func _set_collision_hit_player() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.has_method("hitted"):
 		if body.is_on_floor():
-			body.hitted(get_parent(), get_parent().is_face_right, push_power_ground, push_type_ground, hitlag_amount_ground, hitstun_amount_ground, screenshake_amount, damage, type)
+			body.hitted(get_parent(), get_parent().is_face_right, push_power_ground, push_type_ground, hitlag_amount_ground, hitstun_amount_ground, screenshake_amount, damage, type, zoom)
 		else:
-			body.hitted(get_parent(), get_parent().is_face_right, push_power_air, push_type_air, hitlag_amount_air, hitstun_amount_air, screenshake_amount, damage, type)
+			body.hitted(get_parent(), get_parent().is_face_right, push_power_air, push_type_air, hitlag_amount_air, hitstun_amount_air, screenshake_amount, damage, type, zoom)
 
 
 func _on_timer_timeout() -> void:

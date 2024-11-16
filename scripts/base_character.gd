@@ -171,7 +171,8 @@ func _spawn_lp_hitbox(
 	_hitstun_amount_air: float = 0.5,
 	_screenshake_amount: Vector2 = Vector2(0, 0),
 	_damage: int = 1,
-	_type: int = 0
+	_type: int = 0,
+	_zoom: Vector2 = Vector2(0.8, 0.8)
 	) -> void:
 
 	var hitbox: Node2D
@@ -206,6 +207,7 @@ func _spawn_lp_hitbox(
 	hitbox.screenshake_amount = _screenshake_amount
 	hitbox.damage = _damage
 	hitbox.type = _type
+	hitbox.zoom = _zoom
 
 	hitbox.time_left_before_queue_free = _time
 
@@ -286,7 +288,8 @@ func hitted(
 	hitstun_amount: float = 0.5,
 	_screenshake_amount: Vector2 = Vector2(100, 0.1),
 	_damage: int = 1,
-	_type: int = 0
+	_type: int = 0,
+	_zoom: Vector2 = Vector2(0.8, 0.8)
 	) -> void:
 	if state in [States.PARRY, States.PARRY_SUCCESS] and _type == Enums.Attack.NORMAL:
 		animation_player.play("parry_success")
@@ -337,6 +340,9 @@ func hitted(
 			_attacker.hitlag(hitlag_amount)
 		if _screenshake_amount:
 			$"../Player/Camera".start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
+		if _zoom:
+			$"../Player/Camera".zoom(_zoom)
+
 		ObjectPooling.spawn_hitSpark_1(position)
 
 
@@ -344,17 +350,18 @@ func hitted(
 ## This func is used by attack moves below
 func dict_to_spawn_hitbox(info: Dictionary) -> void:
 	_spawn_lp_hitbox(
-	info["size"],
-	info["time"],
-	info["push_power_ground"],
-	info["push_type_ground"],
-	info["push_power_air"],
-	info["push_type_air"],
-	info["hitlag_amount_ground"],
-	info["hitstun_amount_ground"],
-	info["hitlag_amount_air"],
-	info["hitstun_amount_air"],
-	info["screenshake_amount"],
-	info["damage"],
-	info["type"],
+	info.get("size", Hitbox_size.MEDIUM),
+	info.get("time", 0.1),
+	info.get("push_power_ground", Vector2(50, 0)),
+	info.get("push_type_ground", Enums.Push_types.NORMAL),
+	info.get("push_power_air", Vector2(100, -150)),
+	info.get("push_type_air", Enums.Push_types.KNOCKDOWN),
+	info.get("hitlag_amount_ground", 0),
+	info.get("hitstun_amount_ground", 0.5),
+	info.get("hitlag_amount_air", 0),
+	info.get("hitstun_amount_air", 0.5),
+	info.get("screenshake_amount", Vector2(0, 0)),
+	info.get("damage", 1),
+	info.get("type", Enums.Attack.NORMAL),
+	info.get("zoom", Vector2(0.8, 0.8)),
 	)
