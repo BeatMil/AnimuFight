@@ -43,12 +43,11 @@ hp = 100
 
 [node name="Enemy" parent="." instance=ExtResource("6_332nv")]
 position = Vector2(1534.07, 522.47)
-collision_mask = 12
 is_notarget = true
 
 [node name="Enemy02" parent="." instance=ExtResource("6_gqdm1")]
-position = Vector2(894.151, 573.324)
-collision_mask = 12
+position = Vector2(2064, 576)
+is_notarget = true
 
 [node name="Enemy2" parent="." instance=ExtResource("6_332nv")]
 position = Vector2(1840, 520)

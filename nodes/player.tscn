@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=47 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://snfln513kjvc" path="res://media/sprites/char1/vanilla_3nd_hit_smear.png" id="22_ke4by"]
 [ext_resource type="Texture2D" uid="uid://nyqrh0rlatpr" path="res://media/sprites/char1/vanilla_dodge.png" id="22_tqltk"]
 [ext_resource type="AudioStream" uid="uid://bgcop0cshwtdm" path="res://media/sfxs/wippy_noise.wav" id="23_iau4t"]
+[ext_resource type="Texture2D" uid="uid://qmkiulh3xujh" path="res://media/sprites/char1/vanilla_walk_sprite.png" id="25_pe3tb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47ont"]
 size = Vector2(128, 288)
@@ -442,6 +443,30 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(0, 0),
 "update": 0,
 "values": [Color(1, 1, 1, 0.270588), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:hframes")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:vframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_ksrqi"]
@@ -1126,6 +1151,30 @@ tracks/5/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:hframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:vframes")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="Animation" id="Animation_gcdel"]
 resource_name = "lp2"
@@ -1375,9 +1424,9 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_rqcud"]
 resource_name = "walk"
-length = 0.3
+length = 1.0
 loop_mode = 1
-step = 0.05
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1388,7 +1437,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_uo2uk")]
+"values": [ExtResource("25_pe3tb")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1423,10 +1472,10 @@ tracks/3/path = NodePath("Sprite2D:offset")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(0, 0),
+"times": PackedFloat32Array(0.133333, 0.433333, 0.716667, 0.95),
+"transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -10)]
+"values": [Vector2(0, -10), Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1435,10 +1484,10 @@ tracks/4/path = NodePath("Sprite2D:hframes")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [8]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1447,10 +1496,10 @@ tracks/5/path = NodePath("Sprite2D:vframes")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [1]
+"values": [1, 1]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1459,10 +1508,10 @@ tracks/6/path = NodePath("Sprite2D:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.133333, 0.283333, 0.433333, 0.583333, 0.716667, 0.833333, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1o8ps"]

@@ -28,6 +28,7 @@ var block_buffer_timer := 0.0
 ## Built-in
 #############################################################
 func _ready() -> void:
+	move_speed = 50000
 	hp_bar.set_hp(hp)
 	print_rich("[img]res://media/sprites/char1/FirstChar_block.png[/img]")
 	print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
@@ -58,7 +59,6 @@ func _physics_process(delta: float) -> void:
 			animation_player.play("air")
 
 	if state in [States.IDLE, States.AIR]:
-
 		# Left/Right movement
 		if Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_right"):
 			_lerp_velocity_x()
@@ -72,6 +72,7 @@ func _physics_process(delta: float) -> void:
 			pass
 			friction = 0.5
 			_lerp_velocity_x()
+			animation_player.play("idle")
 
 		# Jump buffer
 		if Input.is_action_just_pressed("jump"):
@@ -282,7 +283,7 @@ func hp_info() ->  void:
 	"screenshake_amount": Vector2(100, 0.2),
 	"damage": 3,
 	"type": Enums.Attack.NORMAL,
-	"zoom": Vector2(1, 1),
+	# "zoom": Vector2(1, 1),
 	}
 	dict_to_spawn_hitbox(info)
 
