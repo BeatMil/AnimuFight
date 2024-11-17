@@ -199,7 +199,7 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 		hitted(
 			self,
 			is_face_right,
-			body.velocity,
+			body.velocity / 10,
 			1,
 			0,
 			0.5,

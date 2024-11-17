@@ -198,13 +198,14 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy") and body.state in [States.BOUNCE_STUNNED]\
 		and state not in [States.BOUNCE_STUNNED]:
 		hitted(
-		self,
-		is_face_right,
-		body.velocity,
-		1,
-		0,
-		0.5,
-		Vector2.ZERO,
-		1)
+			self,
+			is_face_right,
+			body.velocity / 10,
+			1,
+			0,
+			0.5,
+			Vector2.ZERO,
+			1
+		)
 
 

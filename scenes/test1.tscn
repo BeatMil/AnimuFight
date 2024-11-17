@@ -42,13 +42,16 @@ collision_mask = 15
 hp = 100
 
 [node name="Enemy" parent="." instance=ExtResource("6_332nv")]
-position = Vector2(1534.07, 522.47)
+position = Vector2(1504, 680)
 is_notarget = true
-
-[node name="Enemy02" parent="." instance=ExtResource("6_gqdm1")]
-position = Vector2(2064, 576)
-is_notarget = true
+hp = 20
 
 [node name="Enemy2" parent="." instance=ExtResource("6_332nv")]
-position = Vector2(1840, 520)
+modulate = Color(1, 0.32549, 1, 1)
+position = Vector2(1824, 680)
+is_notarget = true
+hp = 20
+
+[node name="Enemy02" parent="." instance=ExtResource("6_gqdm1")]
+position = Vector2(2080, 712)
 is_notarget = true

@@ -1458,7 +1458,6 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_rqcud"]
 resource_name = "walk"
-length = 1.0
 loop_mode = 1
 step = 0.0166667
 tracks/0/type = "value"
