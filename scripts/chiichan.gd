@@ -374,4 +374,3 @@ func _on_animation_player_animation_started(anim_name):
 	
 	if anim_name == "parry_success":
 		display_health()
-

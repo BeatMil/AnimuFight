@@ -207,5 +207,3 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 			Vector2.ZERO,
 			1
 		)
-
-
