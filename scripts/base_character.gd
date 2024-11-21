@@ -34,6 +34,7 @@ enum Hitbox_size {
 	SMALL,
 	MEDIUM,
 	LARGE,
+	TOWL,
 	}
 
 
