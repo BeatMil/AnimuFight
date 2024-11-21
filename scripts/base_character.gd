@@ -173,7 +173,8 @@ func _spawn_lp_hitbox(
 	_screenshake_amount: Vector2 = Vector2(0, 0),
 	_damage: int = 1,
 	_type: int = 0,
-	_zoom: Vector2 = Vector2(0.8, 0.8)
+	_zoom: Vector2 = Vector2(0.8, 0.8),
+	_pos: Vector2 = Vector2(168, 0)
 	) -> void:
 
 	var hitbox: Node2D
@@ -193,9 +194,9 @@ func _spawn_lp_hitbox(
 			hitbox = HITBOX_LP_MEDIUM.instantiate()
 
 	if sprite_2d.flip_h: ## facing left
-		hitbox.position = Vector2(-lp_pos.position.x, lp_pos.position.y)
-	else: ## facing left
-		hitbox.position = Vector2(lp_pos.position.x, lp_pos.position.y)
+		hitbox.position = Vector2(-_pos.x, _pos.y)
+	else: ## facing right
+		hitbox.position = Vector2(_pos.x, _pos.y)
 	
 	## Set hitbox collision target
 	if self.is_in_group("player"):
@@ -372,4 +373,5 @@ func dict_to_spawn_hitbox(info: Dictionary) -> void:
 	info.get("damage", 1),
 	info.get("type", Enums.Attack.NORMAL),
 	info.get("zoom", Vector2(0.8, 0.8)),
+	info.get("pos", Vector2(168, 0)),
 	)
