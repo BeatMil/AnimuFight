@@ -110,7 +110,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(0, 1),
 "update": 0,
-"values": [Color(0.9375, 0.920477, 0.501709, 1), Color(1, 1, 1, 1)]
+"values": [Color(0.9375, 0.439652, 0.334152, 1), Color(1, 1, 1, 1)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -703,12 +703,11 @@ size = Vector2(144, 304)
 
 [node name="Enemy02" groups=["character", "enemy"] instance=ExtResource("1_3ialr")]
 collision_layer = 2
-collision_mask = 12
+collision_mask = 13
 script = ExtResource("2_tp74s")
 is_notarget = false
 
 [node name="Sprite2D" parent="." index="0"]
-self_modulate = Color(1, 0.51973, 0.51973, 1)
 texture = ExtResource("1_3e6vd")
 
 [node name="CollisionShape2D" parent="." index="1"]
