@@ -178,12 +178,19 @@ func _spawn_lp_hitbox(
 
 	var hitbox: Node2D
 
-	if _size == Hitbox_size.MEDIUM:
-		hitbox = HITBOX_LP_MEDIUM.instantiate()
-	elif _size == Hitbox_size.LARGE:
-		hitbox = HITBOX_LP_LARGE.instantiate()
-	else:
-		hitbox = HITBOX_LP_MEDIUM.instantiate()
+	match _size:
+		Hitbox_size.MEDIUM:
+			hitbox = HITBOX_LP_MEDIUM.instantiate()
+		Hitbox_size.LARGE:
+			hitbox = HITBOX_LP_LARGE.instantiate()
+		Hitbox_size.TOWL:
+			hitbox = HITBOX_TOWL.instantiate()
+			## Flip towl sprite here so that 
+			## it doesn't interfere with others
+			if sprite_2d.flip_h: 
+				hitbox.scale.x = -1
+		_:
+			hitbox = HITBOX_LP_MEDIUM.instantiate()
 
 	if sprite_2d.flip_h: ## facing left
 		hitbox.position = Vector2(-lp_pos.position.x, lp_pos.position.y)
