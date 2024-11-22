@@ -36,17 +36,14 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	# Debuger
 	debug_label.text = "PlayerState: %s"%States.keys()[state]
 	debug_label.text += "\n%s"%input_buffer_timer
 	debug_label.text += "\n%s"%block_buffer_timer
 
 
 func _physics_process(delta: float) -> void:
-	## wall bounce
 	_check_wall_bounce()
 
-	## Check is_on_floor
 	if is_on_floor():
 		if state == States.AIR:
 			animation_player.play("idle")
@@ -157,6 +154,11 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("dodge"):
 			_dodge()
 
+	if state in [States.THROW_BREAKABLE]:
+		if Input.is_action_just_pressed("hp"):
+			# Throw break
+			animation_player.play("parry_success")
+			next_move = null
 
 ## Godot said this built-in is better for performance (me no understand tho...)
 func _unhandled_key_input(_event: InputEvent) -> void:
@@ -316,6 +318,25 @@ func _down_hp() ->  void:
 #############################################################
 func _dodge() -> void:
 	animation_player.play("dodge")
+
+
+
+#############################################################
+## Get thrown
+#############################################################
+func _get_thrown_by_towl() -> void:
+	hitted(
+		self,
+		$Sprite2D.flip_h,
+		Vector2(400, -300),
+		2,
+		0,
+		0.1,
+		Vector2(100, 0.2),
+		3,
+		0,
+		Vector2(0.8, 0.8)
+	)
 
 
 #############################################################

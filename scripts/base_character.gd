@@ -27,6 +27,8 @@ enum States {
 	BLOCK_STUNNED,
 	DODGE,
 	DODGE_SUCCESS,
+	THROW_BREAKABLE,
+	THROWN
 	}
 
 
@@ -43,6 +45,7 @@ enum Hitbox_size {
 #############################################################
 const HITBOX_LP_MEDIUM = preload("res://nodes/hitboxes/hitbox_lp.tscn")
 const HITBOX_LP_LARGE = preload("res://nodes/hitboxes/hitbox_lp2.tscn")
+const HITBOX_TOWL = preload("res://nodes/hitboxes/hitbox_towl.tscn")
 
 
 #############################################################
@@ -288,6 +291,7 @@ func hitlag(_amount: float = 0.3) -> void:
 """
 hitbox.gd uses this
 """
+### Turn it into class ! Wowww
 func hitted(
 	_attacker: CharacterBody2D,
 	is_push_to_the_right: bool,
@@ -317,6 +321,9 @@ func hitted(
 			$"../Player/Camera".start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
 	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW:
 		animation_player.play("dodge_success")
+	elif _type == Enums.Attack.THROW:
+		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
+		animation_player.play("throw_stunned")
 	else:
 		hp_bar.hp_down(_damage)
 		if hp_bar.get_hp() <= 0:
@@ -340,6 +347,7 @@ func hitted(
 				_:
 					animation_player.stop(true)
 					animation_player.play("hitted")
+					stun_duration = hitstun_amount
 		if is_push_to_the_right:
 			_push_direct(push_power)
 		else:
