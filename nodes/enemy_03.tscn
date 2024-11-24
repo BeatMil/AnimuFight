@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://deiem1ppktdd1"]
+[gd_scene load_steps=25 format=3 uid="uid://deiem1ppktdd1"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_s0c21"]
 [ext_resource type="Script" path="res://scripts/enemy_03.gd" id="2_ojqxk"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="8_xittt"]
 [ext_resource type="Texture2D" uid="uid://cq28026prrhnf" path="res://media/sprites/enemy02/enemy02_down.png" id="9_yjomr"]
 [ext_resource type="Texture2D" uid="uid://dt7aq70jrt5oi" path="res://media/sprites/enemy03/enemy03_idle.png" id="10_4ttuv"]
+[ext_resource type="Texture2D" uid="uid://12ulqmdbst3h" path="res://media/sprites/enemy03/enemy03_towl_hitted.png" id="10_5hbsv"]
 [ext_resource type="Texture2D" uid="uid://clhbpqw5kn6j3" path="res://media/sprites/enemy02/enemy02_punch_s.png" id="10_u2ahg"]
 [ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="11_35in3"]
 
@@ -388,7 +389,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_8o6qe")]
+"values": [ExtResource("10_5hbsv")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -708,6 +709,7 @@ script = ExtResource("2_ojqxk")
 is_notarget = false
 
 [node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(1, 0.51973, 0.51973, 1)
 texture = ExtResource("10_4ttuv")
 
 [node name="CollisionShape2D" parent="." index="1"]
