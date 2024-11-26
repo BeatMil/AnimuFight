@@ -1782,7 +1782,7 @@ shape = SubResource("RectangleShape2D_47ont")
 position = Vector2(144, 8)
 
 [node name="DownHpPos" type="Marker2D" parent="HitBoxPos" index="1"]
-position = Vector2(80, 8)
+position = Vector2(120, 8)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 libraries = {
