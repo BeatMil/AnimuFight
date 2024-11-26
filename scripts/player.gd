@@ -160,11 +160,17 @@ func _physics_process(delta: float) -> void:
 			animation_player.play("parry_success")
 			next_move = null
 
-## Godot said this built-in is better for performance (me no understand tho...)
-func _unhandled_key_input(_event: InputEvent) -> void:
 	if state in [States.BLOCK, States.PARRY]:
 		if Input.is_action_just_released("block"):
+			print("▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦")
 			block_buffer_timer = block_buffer_time
+
+## Godot said this built-in is better for performance (me no understand tho...)
+# func _unhandled_key_input(_event: InputEvent) -> void:
+# 	if state in [States.BLOCK, States.PARRY]:
+# 		if Input.is_action_just_released("block"):
+# 			print("▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦")
+# 			block_buffer_timer = block_buffer_time
 
 
 #############################################################
