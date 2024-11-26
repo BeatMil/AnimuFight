@@ -148,11 +148,12 @@ func _physics_process(delta: float) -> void:
 		States.LP1,
 		States.LP2,
 		States.LP3,
+		States.HP,
 		]:
 		if Input.is_action_just_pressed("block"):
-			_block()
+			queue_move(_block)
 		if Input.is_action_just_pressed("dodge"):
-			_dodge()
+			queue_move(_dodge)
 
 	if state in [States.THROW_BREAKABLE]:
 		if Input.is_action_just_pressed("hp"):
@@ -162,7 +163,6 @@ func _physics_process(delta: float) -> void:
 
 	if state in [States.BLOCK, States.PARRY]:
 		if Input.is_action_just_released("block"):
-			print("▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦")
 			block_buffer_timer = block_buffer_time
 
 ## Godot said this built-in is better for performance (me no understand tho...)
