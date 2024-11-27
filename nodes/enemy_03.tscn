@@ -729,14 +729,18 @@ libraries = {
 editor_description = "Prevent lp() when ded"
 
 [node name="LpRangeR" type="Area2D" parent="." index="7"]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LpRangeR" index="0"]
+visible = false
 position = Vector2(136, 0)
 shape = SubResource("RectangleShape2D_1h3d5")
 
 [node name="LpRangeL" type="Area2D" parent="." index="8"]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LpRangeL" index="0"]
+visible = false
 position = Vector2(-136, 0)
 shape = SubResource("RectangleShape2D_1h3d5")
 
