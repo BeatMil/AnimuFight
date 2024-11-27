@@ -163,7 +163,7 @@ func _physics_process(delta: float) -> void:
 
 	if state in [States.BLOCK, States.PARRY]:
 		if Input.is_action_just_released("block"):
-			block_buffer_timer = block_buffer_time
+			_add_block_buffer_time()
 
 ## Godot said this built-in is better for performance (me no understand tho...)
 # func _unhandled_key_input(_event: InputEvent) -> void:
@@ -194,6 +194,13 @@ func _check_block_buffer(delta) -> void:
 	elif block_buffer_timer < 0 and state in [States.BLOCK, States.PARRY] :
 		animation_player.play("idle")
 		block_buffer_timer = 0
+	
+
+#############################################################
+## Fix stuck in blocking
+#############################################################
+func _add_block_buffer_time() -> void:
+	block_buffer_timer = block_buffer_time
 
 
 #############################################################
