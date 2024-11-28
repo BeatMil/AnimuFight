@@ -142,6 +142,13 @@ func attack01_info() -> void: # for animation_player
 
 
 #############################################################
+## Helper
+#############################################################
+func _show_attack_indicator(type: int) -> void:
+	ObjectPooling.spawn_attack_type_indicator(type, self.position)
+
+
+#############################################################
 ## Signals
 #############################################################
 func _on_timer_timeout() -> void:
@@ -174,6 +181,7 @@ func _on_attack_01_range_l_body_entered(body: Node2D) -> void:
 		var result = randi_range(0, 1)
 		if result == 0:
 			is_player_in_range_attack01 = true
+		is_player_in_range_attack01 = true
 
 func _on_attack_range_01r_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
