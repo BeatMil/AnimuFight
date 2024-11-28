@@ -199,6 +199,7 @@ tracks/4/keys = {
 [sub_resource type="Animation" id="Animation_tdvq7"]
 resource_name = "block"
 length = 20.0
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
