@@ -320,7 +320,10 @@ func hitted(
 		if _screenshake_amount:
 			$"../Player/Camera".start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
 	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW:
-		animation_player.play("dodge_success")
+		if _type == Enums.Attack.UNBLOCK:
+			animation_player.play("dodge_success_zoom")
+		else:
+			animation_player.play("dodge_success")
 	elif _type == Enums.Attack.THROW:
 		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
 		animation_player.play("throw_stunned")
