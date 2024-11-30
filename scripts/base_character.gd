@@ -359,9 +359,16 @@ func hitted(
 			hitlag(hitlag_amount)
 			_attacker.hitlag(hitlag_amount)
 		if _screenshake_amount:
-			$"../Player/Camera".start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
+			if get_tree().current_scene.get_node_or_null("Player/Camera"):
+				get_tree().current_scene.get_node_or_null("Player/Camera"). \
+				start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
+			else:
+				print_debug("screenshake can't find player/camera")
 		if _zoom:
-			$"../Player/Camera".zoom(_zoom)
+			if get_tree().current_scene.get_node_or_null("Player/Camera"):
+				get_tree().current_scene.get_node_or_null("Player/Camera").zoom(_zoom)
+			else:
+				print_debug("_zoom can't find player/camera")
 
 		ObjectPooling.spawn_hitSpark_1(position)
 
