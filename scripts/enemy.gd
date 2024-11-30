@@ -4,6 +4,12 @@ extends "res://scripts/base_character.gd"
 @export var is_notarget: bool
 
 
+#############################################################
+## Node Ref
+#############################################################
+@onready var attack_timer: Timer = $AttackTimer
+
+
 enum {
 	FOLLOW,
 	}
@@ -22,6 +28,7 @@ var is_player_in_range_attack01: bool = false
 ## Built-in
 #############################################################
 func _ready() -> void:
+	randomize()
 	gravity_power = 5000
 	hp_bar.set_hp(hp)
 	pass
@@ -43,12 +50,15 @@ func _physics_process(delta: float) -> void:
 	# _z_index_equal_to_y()
 	if state == States.IDLE:
 		_facing()
-		_move(delta)
+		if not is_player_in_range_lp:
+			_move(delta)
+		else:
+			_lerp_velocity_x()
 
-	if is_player_in_range_lp:
-		_lp()
-	elif is_player_in_range_attack01:
-		_attack01()
+	# if is_player_in_range_lp:
+	# 	_lp()
+	# elif is_player_in_range_attack01:
+	# 	_attack01()
 
 	if state not in [States.IDLE]:
 		_lerp_velocity_x()
@@ -151,12 +161,16 @@ func _on_lp_range_r_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		sprite_2d.flip_h = false
 		is_player_in_range_lp = true
+		_on_attack_timer_timeout()
+		attack_timer.start()
 
 
 func _on_lp_range_l_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		sprite_2d.flip_h = true
 		is_player_in_range_lp = true
+		_on_attack_timer_timeout()
+		attack_timer.start()
 
 
 func _on_attack_01_range_r_body_entered(body: Node2D) -> void:
@@ -177,11 +191,13 @@ func _on_attack_01_range_l_body_entered(body: Node2D) -> void:
 func _on_attack_range_01r_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		is_player_in_range_attack01 = false
+		attack_timer.stop()
 
 
 func _on_lp_range_r_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		is_player_in_range_lp = false
+		attack_timer.stop()
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -206,3 +222,12 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 			Vector2.ZERO,
 			1
 		)
+
+
+func _on_attack_timer_timeout() -> void:
+	print("ATK gacha!")
+	if randi_range(0, 1) == 0:
+		return
+
+	if is_player_in_range_lp:
+		_lp()
