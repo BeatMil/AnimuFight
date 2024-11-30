@@ -153,7 +153,7 @@ tracks/5/keys = {
 "args": [1],
 "method": &"_show_attack_indicator"
 }, {
-"args": [400],
+"args": [600],
 "method": &"_push_x"
 }]
 }
