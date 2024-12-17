@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=50 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://bgq36rpoccy71" path="res://media/sfxs/explosion.wav" id="14_3ws5c"]
 [ext_resource type="Texture2D" uid="uid://yrt3sen6gru3" path="res://media/sprites/char1/vanilla_hp_smear3.png" id="15_nfs1e"]
 [ext_resource type="Texture2D" uid="uid://ccmmerxgq5u0a" path="res://media/sprites/char1/vanilla_jump.png" id="16_10xrx"]
+[ext_resource type="Texture2D" uid="uid://cfk4dmqkxym1k" path="res://media/sprites/char1/vanilla_shoulder_start.png" id="16_e8vx7"]
 [ext_resource type="AudioStream" uid="uid://cwale1oro4x1p" path="res://media/sfxs/smol_jump.wav" id="17_7a5mg"]
 [ext_resource type="AudioStream" uid="uid://0ixccgp3lh4q" path="res://media/sfxs/upper.wav" id="19_yr2fr"]
 [ext_resource type="Texture2D" uid="uid://8ueeqlkuv6rt" path="res://media/sprites/char1/vanilla_down.png" id="20_vhipq"]
@@ -953,10 +954,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("15_nfs1e")]
+"values": [ExtResource("16_e8vx7"), ExtResource("15_nfs1e")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -1037,10 +1038,10 @@ tracks/6/path = NodePath("Sprite2D:hframes")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [3]
+"values": [1, 3]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -1049,10 +1050,10 @@ tracks/7/path = NodePath("Sprite2D:vframes")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [2]
+"values": [1, 2]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
