@@ -41,6 +41,28 @@ func _process(_delta: float) -> void:
 	debug_label.text += "\n%s"%block_buffer_timer
 
 
+func _input(event: InputEvent) -> void:
+	## BLOCK
+	## DODGE
+	if state in [
+		States.IDLE,
+		States.PARRY_SUCCESS,
+		States.DODGE_SUCCESS,
+		States.LP1,
+		States.LP2,
+		States.LP3,
+		States.HP,
+		]:
+		# if Input.is_action_just_pressed("block"):
+		# 	queue_move(_block)
+		if event.is_action_pressed("block"):
+			state = States.PARRY
+			queue_move(_block)
+		if event.is_action_pressed("dodge"):
+			queue_move(_dodge)
+
+
+
 func _physics_process(delta: float) -> void:
 	_check_wall_bounce()
 
@@ -138,22 +160,6 @@ func _physics_process(delta: float) -> void:
 
 	## Block buffer
 	_check_block_buffer(delta)
-
-	## BLOCK
-	## DODGE
-	if state in [
-		States.IDLE,
-		States.PARRY_SUCCESS,
-		States.DODGE_SUCCESS,
-		States.LP1,
-		States.LP2,
-		States.LP3,
-		States.HP,
-		]:
-		if Input.is_action_just_pressed("block"):
-			queue_move(_block)
-		if Input.is_action_just_pressed("dodge"):
-			queue_move(_dodge)
 
 	if state in [States.THROW_BREAKABLE]:
 		if Input.is_action_just_pressed("hp"):
