@@ -16,6 +16,7 @@ var pooling_pos = Vector2(-100000, -10000)
 
 func _ready() -> void:
 	spawn_hitSpark_1()
+	spawn_attack_type_indicator()
 
 
 func spawn_hitSpark_1(_position: Vector2 = pooling_pos) -> void:
@@ -24,7 +25,7 @@ func spawn_hitSpark_1(_position: Vector2 = pooling_pos) -> void:
 	get_tree().current_scene.add_child(hitspark)
 
 
-func spawn_attack_type_indicator(_type: int, pos: Vector2) -> void:
+func spawn_attack_type_indicator(_type: int = 0, pos: Vector2 = pooling_pos) -> void:
 	var bob = ATTACK_TYPE_INDICATOR.instantiate()
 	bob.type = _type
 	bob.position = pos
