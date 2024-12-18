@@ -34,7 +34,9 @@ target = NodePath("../Player")
 [node name="EnemySpawner4" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_76owy")]
 position = Vector2(80, 624)
 target = NodePath("../Player")
+is_active = false
 
 [node name="EnemySpawner5" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_76owy")]
 position = Vector2(1448, 640)
 target = NodePath("../Player")
+is_active = false
