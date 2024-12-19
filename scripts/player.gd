@@ -5,8 +5,6 @@ extends "res://scripts/base_character.gd"
 ## Node Ref
 #############################################################
 @onready var debug_label: Label = $CanvasLayer/DebugLabel
-@onready var execute_l: RayCast2D = $ExecuteL
-@onready var execute_r: RayCast2D = $ExecuteR
 
 
 #############################################################
@@ -24,6 +22,8 @@ var next_move = null
 
 var block_buffer_time := 0.2
 var block_buffer_timer := 0.0
+
+var body_in_execution_ranges = []
 
 
 #############################################################
@@ -64,19 +64,29 @@ func _input(event: InputEvent) -> void:
 			queue_move(_dodge)
 
 	if event.is_action_pressed("execute"):
-		var object: Object
-		if execute_r.is_colliding():
-			if execute_r.get_collider().state == States.EXECUTETABLE:
-				object = execute_r.get_collider()
-		if execute_l.is_colliding():
-			if execute_l.get_collider().state == States.EXECUTETABLE:
-				object = execute_l.get_collider()
+		"""
+		Find the closest body to player then execute it
+		"""
+		var closest_range: float
+		var closest_body: Object
+		for b in body_in_execution_ranges:
+			if b.state != States.EXECUTETABLE:
+				continue
 
-		if object:
-			state = States.ATTACK # cause the order of operation and stuff
-			execute_carnaging(object.position)
+			var new_dist = position.distance_to(b.position)
+			if not closest_range:
+				closest_range = new_dist
+				closest_body = b
+				continue
+			
+			if new_dist < closest_range:
+				closest_range = new_dist
+				closest_body = b
+
+		if closest_body:
+			execute_carnaging(closest_body.position)
+			state = States.ATTACK # order of operation and stuff
 			animation_player.play("exe_hadoken")
-
 
 
 func _physics_process(delta: float) -> void:
@@ -453,3 +463,11 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:
 		queue_free()
+
+
+func _on_execute_area_r_body_entered(body: Node2D) -> void:
+	body_in_execution_ranges.append(body)
+
+
+func _on_execute_area_r_body_exited(body: Node2D) -> void:
+	body_in_execution_ranges.erase(body)

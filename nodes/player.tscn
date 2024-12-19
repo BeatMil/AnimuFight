@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=54 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
@@ -1957,6 +1957,9 @@ _data = {
 "walk": SubResource("Animation_rqcud")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8u5p4"]
+size = Vector2(634, 20)
+
 [node name="Player" groups=["character", "player"] instance=ExtResource("1_gva5u")]
 collision_layer = 2
 collision_mask = 14
@@ -1990,14 +1993,26 @@ libraries = {
 
 [node name="Camera" parent="." index="7" instance=ExtResource("4_uqopg")]
 
-[node name="ExecuteL" type="RayCast2D" parent="." index="8"]
-position = Vector2(-64, 0)
-target_position = Vector2(-640, 0)
+[node name="ExecuteAreaL" type="Area2D" parent="." index="8"]
+collision_layer = 0
 collision_mask = 2
+monitorable = false
 
-[node name="ExecuteR" type="RayCast2D" parent="." index="9"]
-position = Vector2(64, 0)
-target_position = Vector2(640, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExecuteAreaL" index="0"]
+position = Vector2(-392, 0)
+shape = SubResource("RectangleShape2D_8u5p4")
+
+[node name="ExecuteAreaR" type="Area2D" parent="." index="9"]
+collision_layer = 0
 collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExecuteAreaR" index="0"]
+position = Vector2(387, 0)
+shape = SubResource("RectangleShape2D_8u5p4")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="ExecuteAreaL" to="." method="_on_execute_area_r_body_entered"]
+[connection signal="body_exited" from="ExecuteAreaL" to="." method="_on_execute_area_r_body_exited"]
+[connection signal="body_entered" from="ExecuteAreaR" to="." method="_on_execute_area_r_body_entered"]
+[connection signal="body_exited" from="ExecuteAreaR" to="." method="_on_execute_area_r_body_exited"]
