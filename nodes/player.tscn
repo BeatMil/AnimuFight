@@ -881,9 +881,13 @@ tracks/2/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
+"stream": ExtResource("23_iau4t")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
 "stream": ExtResource("27_gkh8s")
 }],
-"times": PackedFloat32Array(0.25)
+"times": PackedFloat32Array(0, 0.25)
 }
 tracks/2/use_blend = true
 tracks/3/type = "method"
