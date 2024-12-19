@@ -357,9 +357,6 @@ func hitted(
 					animation_player.stop(true)
 					animation_player.play("ded")
 					stun_duration = hitstun_amount
-					state = States.HIT_STUNNED
-					if is_instance_valid(collision_shape_2d):
-						collision_shape_2d.queue_free()
 				_:
 					animation_player.stop(true)
 					animation_player.play("hitted")
@@ -407,3 +404,10 @@ func dict_to_spawn_hitbox(info: Dictionary) -> void:
 	info.get("zoom", Vector2(0.8, 0.8)),
 	info.get("zoom_duration", 0.1)
 	)
+
+#############################################################
+## Helper
+#############################################################
+func _remove_collision() -> void:
+	if is_instance_valid(collision_shape_2d):
+		collision_shape_2d.queue_free()
