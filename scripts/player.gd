@@ -383,7 +383,7 @@ func _get_thrown_by_towl() -> void:
 		self,
 		$Sprite2D.flip_h,
 		Vector2(400, -300),
-		2,
+		1,
 		0,
 		0.1,
 		Vector2(100, 0.2),
@@ -444,5 +444,5 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"dodge_success",
 		]:
 		animation_player.play("idle")
-	if anim_name in ["ded"]:
+	if anim_name in ["ded", "execute"]:
 		queue_free()
