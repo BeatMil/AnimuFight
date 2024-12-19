@@ -28,7 +28,8 @@ enum States {
 	DODGE,
 	DODGE_SUCCESS,
 	THROW_BREAKABLE,
-	THROWN
+	THROWN,
+	EXECUTETABLE
 	}
 
 
@@ -37,6 +38,7 @@ enum Hitbox_size {
 	MEDIUM,
 	LARGE,
 	TOWL,
+	EXECUTE,
 	}
 
 
@@ -46,6 +48,7 @@ enum Hitbox_size {
 const HITBOX_LP_MEDIUM = preload("res://nodes/hitboxes/hitbox_lp.tscn")
 const HITBOX_LP_LARGE = preload("res://nodes/hitboxes/hitbox_lp2.tscn")
 const HITBOX_TOWL = preload("res://nodes/hitboxes/hitbox_towl.tscn")
+const HITBOX_EXE = preload("res://nodes/hitboxes/hitbox_execute.tscn")
 
 
 #############################################################
@@ -176,8 +179,9 @@ func _spawn_lp_hitbox(
 	_screenshake_amount: Vector2 = Vector2(0, 0),
 	_damage: int = 1,
 	_type: int = 0,
+	_pos: Vector2 = Vector2(168, 0),
 	_zoom: Vector2 = Vector2(0.8, 0.8),
-	_pos: Vector2 = Vector2(168, 0)
+	_zoom_duration: float = 0.1,
 	) -> void:
 
 	var hitbox: Node2D
@@ -193,6 +197,8 @@ func _spawn_lp_hitbox(
 			## it doesn't interfere with others
 			if sprite_2d.flip_h: 
 				hitbox.scale.x = -1
+		Hitbox_size.EXECUTE:
+			hitbox = HITBOX_EXE.instantiate()
 		_:
 			hitbox = HITBOX_LP_MEDIUM.instantiate()
 
@@ -220,6 +226,7 @@ func _spawn_lp_hitbox(
 	hitbox.damage = _damage
 	hitbox.type = _type
 	hitbox.zoom = _zoom
+	hitbox.zoom_duration = _zoom_duration
 
 	hitbox.time_left_before_queue_free = _time
 
@@ -302,7 +309,8 @@ func hitted(
 	_screenshake_amount: Vector2 = Vector2(100, 0.1),
 	_damage: int = 1,
 	_type: int = 0,
-	_zoom: Vector2 = Vector2(0.8, 0.8)
+	_zoom: Vector2 = Vector2(0.8, 0.8),
+	_zoom_duration: float = 0.1
 	) -> void:
 	if state in [States.PARRY, States.PARRY_SUCCESS] and _type == Enums.Attack.NORMAL:
 		animation_player.play("parry_success")
@@ -329,12 +337,10 @@ func hitted(
 		animation_player.play("throw_stunned")
 	else:
 		hp_bar.hp_down(_damage)
-		if hp_bar.get_hp() <= 0:
+		if hp_bar.get_hp() <= 0 and state != States.EXECUTETABLE:
 			state = States.HIT_STUNNED
 			animation_player.stop(true)
-			animation_player.play("ded")
-			if is_instance_valid(collision_shape_2d):
-				collision_shape_2d.queue_free()
+			animation_player.play("execute")
 		else:
 			match push_type:
 				0: ## NORMAL
@@ -347,6 +353,13 @@ func hitted(
 					animation_player.play("down")
 					stun_duration = hitstun_amount
 					state = States.BOUNCE_STUNNED
+				2: ## EXECUTE
+					animation_player.stop(true)
+					animation_player.play("ded")
+					stun_duration = hitstun_amount
+					state = States.HIT_STUNNED
+					if is_instance_valid(collision_shape_2d):
+						collision_shape_2d.queue_free()
 				_:
 					animation_player.stop(true)
 					animation_player.play("hitted")
@@ -366,7 +379,7 @@ func hitted(
 				print_debug("screenshake can't find player/camera")
 		if _zoom:
 			if get_tree().current_scene.get_node_or_null("Player/Camera"):
-				get_tree().current_scene.get_node_or_null("Player/Camera").zoom(_zoom)
+				get_tree().current_scene.get_node_or_null("Player/Camera").zoom(_zoom, _zoom_duration)
 			else:
 				print_debug("_zoom can't find player/camera")
 
@@ -390,6 +403,7 @@ func dict_to_spawn_hitbox(info: Dictionary) -> void:
 	info.get("screenshake_amount", Vector2(0, 0)),
 	info.get("damage", 1),
 	info.get("type", Enums.Attack.NORMAL),
-	info.get("zoom", Vector2(0.8, 0.8)),
 	info.get("pos", Vector2(168, 0)),
+	info.get("zoom", Vector2(0.8, 0.8)),
+	info.get("zoom_duration", 0.1)
 	)

@@ -5,6 +5,8 @@ extends "res://scripts/base_character.gd"
 ## Node Ref
 #############################################################
 @onready var debug_label: Label = $CanvasLayer/DebugLabel
+@onready var execute_l: RayCast2D = $ExecuteL
+@onready var execute_r: RayCast2D = $ExecuteR
 
 
 #############################################################
@@ -60,6 +62,20 @@ func _input(event: InputEvent) -> void:
 			queue_move(_block)
 		if event.is_action_pressed("dodge"):
 			queue_move(_dodge)
+
+	if event.is_action_pressed("execute"):
+		if execute_r.is_colliding():
+			# Ensure that object is alive
+			var object = execute_r.get_collider()
+			if object.state == States.EXECUTETABLE:
+				state = States.ATTACK # cause the order of operation and stuff
+				animation_player.play("exe_hadoken")
+		if execute_l.is_colliding():
+			# Ensure that object is alive
+			var object = execute_l.get_collider()
+			if object.state == States.EXECUTETABLE:
+				state = States.ATTACK # cause the order of operation and stuff
+				animation_player.play("exe_hadoken")
 
 
 
@@ -381,6 +397,34 @@ func _get_thrown_by_towl() -> void:
 #############################################################
 func _zoom() -> void:
 	$Camera.zoom(Vector2(0.9, 0.9))
+
+
+func _hitbox_exe_hadoken() -> void:
+	var hadoken = HITBOX_EXE.instantiate()
+	hadoken.position = lp_pos.position
+	add_child(hadoken)
+
+
+func exe_hadoken_info() ->  void:
+	var info = {
+	"size": Hitbox_size.EXECUTE,
+	"time": 0.1,
+	"push_power_ground": Vector2(1200, -200),
+	"push_type_ground": Enums.Push_types.EXECUTE,
+	"push_power_air": Vector2(1200, -200),
+	"push_type_air": Enums.Push_types.EXECUTE,
+	"hitlag_amount_ground": 0.5,
+	"hitstun_amount_ground": 1,
+	"hitlag_amount_air": 1,
+	"hitstun_amount_air": 1,
+	"screenshake_amount": Vector2(50, 0.5),
+	"damage": 2,
+	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/DownHpPos.position,
+	"zoom": Vector2(1, 1),
+	"zoom_duration": 0.5,
+	}
+	dict_to_spawn_hitbox(info)
 
 
 #############################################################

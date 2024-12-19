@@ -32,8 +32,8 @@ func start_screen_shake(intensity: float, duration: float):
 	shake_duration = duration
 
 
-func zoom(zoom_level: Vector2):
+func zoom(zoom_level: Vector2, duration: float = 0.1):
 	var tween = get_tree().create_tween()
 	tween.tween_property(camera_2d, "zoom", zoom_level, 0.1)
-	tween.tween_interval(0.1)
+	tween.tween_interval(duration)
 	tween.tween_property(camera_2d, "zoom", Vector2(0.8, 0.8), 0.1)

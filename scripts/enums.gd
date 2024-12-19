@@ -7,6 +7,7 @@ extends Node
 enum Push_types{
 	NORMAL,
 	KNOCKDOWN,
+	EXECUTE,
 }
 
 

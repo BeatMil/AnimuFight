@@ -225,7 +225,6 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 
 
 func _on_attack_timer_timeout() -> void:
-	print("ATK gacha!")
 	if randi_range(0, 1) == 0:
 		return
 
