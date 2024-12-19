@@ -431,7 +431,6 @@ func execute_carnaging(pos: Vector2) -> void:
 	if not sprite_2d.flip_h:
 		offset.x *= -1
 	var tween = get_tree().create_tween()
-	tween.tween_interval(0.1)
 	tween.tween_property(self, "position", pos+offset, 0.2).set_trans(Tween.TRANS_CUBIC)
 
 
