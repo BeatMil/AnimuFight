@@ -75,11 +75,13 @@ func _physics_process(delta: float) -> void:
 		stun_duration -= delta
 	elif stun_duration < 0:
 		# state = States.IDLE
+		if hp_bar.get_hp() <= 0:
+			queue_free()
 		animation_player.play("idle")
 		stun_duration = 0
 
 	## debug
-	$DebugLabel.text = "%s"%States.keys()[state]
+	$DebugLabel.text = "%s, %s"%[States.keys()[state], animation_player.current_animation]
 
 
 #############################################################

@@ -337,10 +337,15 @@ func hitted(
 		animation_player.play("throw_stunned")
 	else:
 		hp_bar.hp_down(_damage)
-		if hp_bar.get_hp() <= 0 and state != States.EXECUTETABLE:
-			state = States.HIT_STUNNED
-			animation_player.stop(true)
-			animation_player.play("execute")
+		if hp_bar.get_hp() <= 0:
+			if push_type in [Enums.Push_types.KNOCKDOWN, Enums.Push_types.EXECUTE]:
+				animation_player.stop(true)
+				animation_player.play("ded")
+				stun_duration = hitstun_amount
+			else:
+				state = States.HIT_STUNNED
+				animation_player.stop(true)
+				animation_player.play("execute")
 		else:
 			match push_type:
 				0: ## NORMAL
