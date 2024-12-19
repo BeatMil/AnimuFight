@@ -64,18 +64,18 @@ func _input(event: InputEvent) -> void:
 			queue_move(_dodge)
 
 	if event.is_action_pressed("execute"):
+		var object: Object
 		if execute_r.is_colliding():
-			# Ensure that object is alive
-			var object = execute_r.get_collider()
-			if object.state == States.EXECUTETABLE:
-				state = States.ATTACK # cause the order of operation and stuff
-				animation_player.play("exe_hadoken")
+			if execute_r.get_collider().state == States.EXECUTETABLE:
+				object = execute_r.get_collider()
 		if execute_l.is_colliding():
-			# Ensure that object is alive
-			var object = execute_l.get_collider()
-			if object.state == States.EXECUTETABLE:
-				state = States.ATTACK # cause the order of operation and stuff
-				animation_player.play("exe_hadoken")
+			if execute_l.get_collider().state == States.EXECUTETABLE:
+				object = execute_l.get_collider()
+
+		if object:
+			state = States.ATTACK # cause the order of operation and stuff
+			execute_carnaging(object.position)
+			animation_player.play("exe_hadoken")
 
 
 
@@ -425,6 +425,14 @@ func exe_hadoken_info() ->  void:
 	"zoom_duration": 0.5,
 	}
 	dict_to_spawn_hitbox(info)
+
+func execute_carnaging(pos: Vector2) -> void:
+	var offset = Vector2(180, 0)
+	if not sprite_2d.flip_h:
+		offset.x *= -1
+	var tween = get_tree().create_tween()
+	tween.tween_interval(0.1)
+	tween.tween_property(self, "position", pos+offset, 0.2).set_trans(Tween.TRANS_CUBIC)
 
 
 #############################################################
