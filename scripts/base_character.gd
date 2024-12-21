@@ -119,21 +119,29 @@ func _gravity(delta) -> void:
 func _check_wall_bounce() -> void:
 	if state in [States.BOUNCE_STUNNED]:
 		if is_touching_wall_left:
-			animation_player.stop(true)
-			animation_player.play("down")
-			state = States.WALL_BOUNCED
 			_push_direct(Vector2(400, -200))
 			is_touching_wall_left = false
-			hitlag()
-			$"../Player/Camera".start_screen_shake(100, 0.1)
-		elif is_touching_wall_right:
+			hp_bar.hp_down(1)
+
 			animation_player.stop(true)
 			animation_player.play("down")
 			state = States.WALL_BOUNCED
+			hitlag()
+			if get_tree().current_scene.get_node_or_null("Player/Camera"):
+				get_tree().current_scene.get_node_or_null("Player/Camera"). \
+				start_screen_shake(100, 0.1)
+		elif is_touching_wall_right:
 			_push_direct(Vector2(-400, -200))
 			is_touching_wall_right = false
+			hp_bar.hp_down(1)
+
+			animation_player.stop(true)
+			animation_player.play("down")
+			state = States.WALL_BOUNCED
 			hitlag()
-			$"../Player/Camera".start_screen_shake(100, 0.1)
+			if get_tree().current_scene.get_node_or_null("Player/Camera"):
+				get_tree().current_scene.get_node_or_null("Player/Camera"). \
+				start_screen_shake(100, 0.1)
 
 
 func _move_left(delta) ->  void:
@@ -328,7 +336,9 @@ func hitted(
 			hitlag(hitlag_amount)
 			_attacker.hitlag(hitlag_amount)
 		if _screenshake_amount:
-			$"../Player/Camera".start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
+			if get_tree().current_scene.get_node_or_null("Player/Camera"):
+				get_tree().current_scene.get_node_or_null("Player/Camera"). \
+				start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
 	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW:
 		if _type == Enums.Attack.UNBLOCK:
 			animation_player.play("dodge_success_zoom")
@@ -369,6 +379,7 @@ func hitted(
 						state = States.BOUNCE_STUNNED
 					else:
 						animation_player.play("ded")
+						state = States.BOUNCE_STUNNED
 					stun_duration = hitstun_amount
 				_:
 					animation_player.stop(true)
