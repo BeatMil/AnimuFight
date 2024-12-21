@@ -361,7 +361,11 @@ func hitted(
 					state = States.BOUNCE_STUNNED
 				2: ## EXECUTE
 					animation_player.stop(true)
-					animation_player.play("ded")
+					if hp_bar.get_hp() > 0:
+						animation_player.play("down")
+						state = States.BOUNCE_STUNNED
+					else:
+						animation_player.play("ded")
 					stun_duration = hitstun_amount
 				_:
 					animation_player.stop(true)
