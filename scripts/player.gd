@@ -44,26 +44,6 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	## BLOCK
-	## DODGE
-	if state in [
-		States.IDLE,
-		States.PARRY_SUCCESS,
-		States.DODGE_SUCCESS,
-		States.LP1,
-		States.LP2,
-		States.LP3,
-		States.HP,
-		]:
-		# if Input.is_action_just_pressed("block"):
-		# 	queue_move(_block)
-		if event.is_action_pressed("block"):
-			state = States.PARRY
-			queue_move(_block)
-		if event.is_action_pressed("dodge"):
-			state = States.DODGE
-			queue_move(_dodge)
-
 	if event.is_action_pressed("execute") and \
 		state not in [States.EXECUTE, States.HIT_STUNNED, States.BOUNCE_STUNNED]:
 		"""
@@ -198,6 +178,32 @@ func _physics_process(delta: float) -> void:
 	if state in [States.BLOCK, States.PARRY]:
 		if Input.is_action_just_released("block"):
 			_add_block_buffer_time()
+
+
+	## BLOCK
+	## DODGE
+	if state in [
+		States.IDLE,
+		States.PARRY_SUCCESS,
+		States.DODGE_SUCCESS,
+		States.LP1,
+		States.LP2,
+		States.LP3,
+		States.HP,
+		]:
+
+		if Input.is_action_just_pressed("block"):
+			state = States.PARRY
+			queue_move(_block)
+
+		if Input.is_action_just_pressed("dodge"):
+			state = States.DODGE
+			queue_move(_dodge)
+	
+	if state in [States.PARRY, States.BLOCK]:
+		if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
+			state = States.DODGE
+			queue_move(_dodge)
 
 ## Godot said this built-in is better for performance (me no understand tho...)
 # func _unhandled_key_input(_event: InputEvent) -> void:
