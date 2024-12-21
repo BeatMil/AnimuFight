@@ -30,7 +30,8 @@ enum States {
 	THROW_BREAKABLE,
 	THROWN,
 	EXECUTETABLE,
-	EXECUTE
+	EXECUTE,
+	IFRAME,
 	}
 
 
@@ -333,6 +334,8 @@ func hitted(
 			animation_player.play("dodge_success_zoom")
 		else:
 			animation_player.play("dodge_success")
+	elif state in [States.IFRAME, States.EXECUTE]:
+		pass
 	elif _type == Enums.Attack.THROW:
 		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
 		animation_player.play("throw_stunned")
