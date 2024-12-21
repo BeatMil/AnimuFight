@@ -63,7 +63,7 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("dodge"):
 			queue_move(_dodge)
 
-	if event.is_action_pressed("execute"):
+	if event.is_action_pressed("execute") and state != States.EXECUTE:
 		"""
 		Find the closest body to player then execute it
 		"""
