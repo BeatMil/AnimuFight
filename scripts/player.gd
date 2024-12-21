@@ -61,6 +61,7 @@ func _input(event: InputEvent) -> void:
 			state = States.PARRY
 			queue_move(_block)
 		if event.is_action_pressed("dodge"):
+			state = States.DODGE
 			queue_move(_dodge)
 
 	if event.is_action_pressed("execute") and \
