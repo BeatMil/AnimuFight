@@ -45,7 +45,7 @@ func _ready() -> void:
 ## Private Function
 #############################################################
 func _set_collision_hit_enemy() -> void:
-	area_2d.collision_mask = 0b00000000000000000010
+	area_2d.collision_mask = 0b00000000000000010010
 
 
 func _set_collision_hit_player() -> void:

@@ -823,7 +823,7 @@ size = Vector2(144, 304)
 
 [node name="Enemy02" groups=["character", "enemy"] instance=ExtResource("1_3ialr")]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 15
 script = ExtResource("2_tp74s")
 is_notarget = false
 
