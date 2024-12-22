@@ -1,5 +1,7 @@
 extends "res://scripts/enemy.gd"
 
+
+
 #############################################################
 ## Attack Info
 #############################################################
@@ -42,7 +44,7 @@ func attack01_info() -> void: # for animation_player
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(100, 0.1),
 	"damage": 3,
-	"type": Enums.Attack.UNBLOCK,
+	"type": Enums.Attack.NORMAL,
 	}
 	dict_to_spawn_hitbox(info)
 

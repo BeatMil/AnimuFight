@@ -887,6 +887,9 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceTogether" index="0"]
 shape = SubResource("RectangleShape2D_8qvtx")
 
+[node name="AttackTimer" type="Timer" parent="." index="13"]
+wait_time = 0.5
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="LpRangeR" to="." method="_on_lp_range_r_body_entered"]
@@ -898,3 +901,4 @@ shape = SubResource("RectangleShape2D_8qvtx")
 [connection signal="body_entered" from="Attack01RangeL" to="." method="_on_attack_01_range_l_body_entered"]
 [connection signal="body_exited" from="Attack01RangeL" to="." method="_on_attack_range_01r_body_exited"]
 [connection signal="body_entered" from="BounceTogether" to="." method="_on_bounce_together_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

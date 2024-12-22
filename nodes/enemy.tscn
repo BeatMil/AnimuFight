@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_5vg7s"]
 [ext_resource type="Texture2D" uid="uid://bytgy7otax0fb" path="res://media/sprites/char2/SecondChar_idle.png" id="2_2tmba"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="2_4bw38"]
+[ext_resource type="Script" path="res://scripts/enemy_01.gd" id="2_tew54"]
 [ext_resource type="AnimationLibrary" uid="uid://d3yrwecnjsc81" path="res://nodes/animations/enemy.res" id="3_y3pb8"]
 [ext_resource type="AnimationLibrary" uid="uid://d0oivs2snrbj3" path="res://nodes/animations/enemy1.res" id="4_0wnv3"]
 [ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="12_031mq"]
@@ -21,10 +21,9 @@ size = Vector2(144, 304)
 
 [node name="Enemy" groups=["character", "enemy"] instance=ExtResource("1_5vg7s")]
 collision_layer = 2
-collision_mask = 13
-script = ExtResource("2_4bw38")
+collision_mask = 15
+script = ExtResource("2_tew54")
 is_notarget = false
-hp = 1
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_2tmba")

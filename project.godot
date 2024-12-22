@@ -27,6 +27,7 @@ ObjectPooling="*res://scripts/object_pooling.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/always_on_top=true
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
@@ -112,6 +113,8 @@ execute={
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="wall"
 2d_physics/layer_4="ground"
+2d_physics/layer_5="enemy_air"
+2d_physics/layer_9="Layer 9"
 
 [physics]
 

@@ -69,15 +69,16 @@ func _physics_process(delta: float) -> void:
 	## Keep the stun duration while in air
 	## start stun duration when on floor
 	if stun_duration > 0 and \
-		state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED] \
-		and is_on_floor():
-		## remain in stun state
-		stun_duration -= delta
+		state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED]:
+		if is_on_floor():
+			stun_duration -= delta
+		collision_layer = 0b00000000000000010000
 	elif stun_duration < 0:
 		# state = States.IDLE
 		if hp_bar.get_hp() <= 0:
 			queue_free()
 		animation_player.play("idle")
+		collision_layer = 0b00000000000000000010
 		stun_duration = 0
 
 	## debug
@@ -105,132 +106,7 @@ func _facing() -> void:
 
 
 #############################################################
-## Attack Info
+## Helper
 #############################################################
-func _lp() -> void:
-	if state == States.IDLE:
-		animation_player.play("lp1")
-func lp_info() -> void: # for animation_player
-	var info = {
-	"size": Hitbox_size.MEDIUM,
-	"time": 0.1,
-	"push_power_ground": Vector2(500, 0),
-	"push_type_ground": Enums.Push_types.NORMAL,
-	"push_power_air": Vector2(100, -150),
-	"push_type_air": Enums.Push_types.KNOCKDOWN,
-	"hitlag_amount_ground": 0,
-	"hitstun_amount_ground": 0.5,
-	"hitlag_amount_air": 0,
-	"hitstun_amount_air": 0.5,
-	"screenshake_amount": Vector2(0, 0),
-	"damage": 1,
-	"type": Enums.Attack.NORMAL,
-	}
-	dict_to_spawn_hitbox(info)
-
-
-func _attack01() -> void:
-	if state == States.IDLE:
-		animation_player.play("attack01_1")
-func attack01_info() -> void: # for animation_player
-	var info = {
-	"size": Hitbox_size.MEDIUM,
-	"time": 0.3,
-	"push_power_ground": Vector2(800, -300),
-	"push_type_ground": Enums.Push_types.KNOCKDOWN,
-	"push_power_air": Vector2(300, 0),
-	"push_type_air": Enums.Push_types.KNOCKDOWN,
-	"hitlag_amount_ground": 0,
-	"hitstun_amount_ground": 0.6,
-	"hitlag_amount_air": 0,
-	"hitstun_amount_air": 0.5,
-	"screenshake_amount": Vector2(100, 0.1),
-	"damage": 3,
-	"type": Enums.Attack.NORMAL,
-	}
-	dict_to_spawn_hitbox(info)
-
-
-#############################################################
-## Signals
-#############################################################
-func _on_timer_timeout() -> void:
-	if hp_bar.get_hp() > 0:
-		_lp()
-
-
-func _on_lp_range_r_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		sprite_2d.flip_h = false
-		is_player_in_range_lp = true
-		_on_attack_timer_timeout()
-		attack_timer.start()
-
-
-func _on_lp_range_l_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		sprite_2d.flip_h = true
-		is_player_in_range_lp = true
-		_on_attack_timer_timeout()
-		attack_timer.start()
-
-
-func _on_attack_01_range_r_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		sprite_2d.flip_h = false
-		is_player_in_range_attack01 = true
-		_on_attack_timer_timeout()
-		attack_timer.start()
-
-func _on_attack_01_range_l_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		sprite_2d.flip_h = true
-		is_player_in_range_attack01 = true
-		_on_attack_timer_timeout()
-		attack_timer.start()
-
-
-func _on_attack_range_01r_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		is_player_in_range_attack01 = false
-		attack_timer.stop()
-
-
-func _on_lp_range_r_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		is_player_in_range_lp = false
-		attack_timer.stop()
-
-
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	# if anim_name in ["lp1", "attack01_1", "hitted", "down"]:
-	if anim_name in ["lp1", "attack01_1"]:
-		animation_player.play("idle")
-		state = States.IDLE
-	if anim_name in ["ded"]:
-		queue_free()
-
-
-func _on_bounce_together_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy") and body.state in [States.BOUNCE_STUNNED]\
-		and state not in [States.BOUNCE_STUNNED]:
-		hitted(
-			self,
-			is_face_right,
-			body.velocity / 10,
-			1,
-			0,
-			0.5,
-			Vector2.ZERO,
-			1
-		)
-
-
-func _on_attack_timer_timeout() -> void:
-	if randi_range(0, 1) == 0:
-		return
-
-	if is_player_in_range_attack01:
-		_attack01()
-	if is_player_in_range_lp:
-		_lp()
+func _show_attack_indicator(type: int) -> void:
+	ObjectPooling.spawn_attack_type_indicator(type, self.position)

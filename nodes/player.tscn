@@ -2018,7 +2018,7 @@ libraries = {
 
 [node name="ExecuteAreaL" type="Area2D" parent="." index="8"]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 18
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExecuteAreaL" index="0"]
@@ -2027,7 +2027,7 @@ shape = SubResource("RectangleShape2D_8u5p4")
 
 [node name="ExecuteAreaR" type="Area2D" parent="." index="9"]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 18
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExecuteAreaR" index="0"]
