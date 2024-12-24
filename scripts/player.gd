@@ -201,9 +201,10 @@ func _physics_process(delta: float) -> void:
 			queue_move(_dodge)
 	
 	if state in [States.PARRY, States.BLOCK]:
-		if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
-			state = States.DODGE
-			queue_move(_dodge)
+		if Input.is_action_pressed("block"):
+			if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
+				state = States.DODGE
+				queue_move(_dodge)
 
 ## Godot said this built-in is better for performance (me no understand tho...)
 # func _unhandled_key_input(_event: InputEvent) -> void:
