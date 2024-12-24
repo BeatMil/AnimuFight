@@ -73,12 +73,14 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			stun_duration -= delta
 		collision_layer = 0b00000000000000010000
+		collision_mask = 0b00000000000000001100
 	elif stun_duration < 0:
 		# state = States.IDLE
 		if hp_bar.get_hp() <= 0:
 			queue_free()
 		animation_player.play("idle")
 		collision_layer = 0b00000000000000000010
+		collision_mask = 0b00000000000000001111
 		stun_duration = 0
 
 	## debug
@@ -110,3 +112,20 @@ func _facing() -> void:
 #############################################################
 func _show_attack_indicator(type: int) -> void:
 	ObjectPooling.spawn_attack_type_indicator(type, self.position)
+
+
+func _on_bounce_together_body_entered(body: Node2D) -> void:
+	print(self.name,self.state,"-->", body.name, body.state," ", velocity.length())
+	if velocity.length() < 1000:
+		return
+	if self.state in [States.BOUNCE_STUNNED] and body.state != States.BOUNCE_STUNNED:
+		body.hitted(
+			self,
+			true,
+			velocity / 10,
+			1,
+			0,
+			0.5,
+			Vector2.ZERO,
+			1
+		)

@@ -108,21 +108,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		queue_free()
 
 
-func _on_bounce_together_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy") and body.state in [States.BOUNCE_STUNNED]\
-		and state not in [States.BOUNCE_STUNNED]:
-		hitted(
-			self,
-			is_face_right,
-			body.velocity / 10,
-			1,
-			0,
-			0.5,
-			Vector2.ZERO,
-			1
-		)
-
-
 func _on_attack_timer_timeout() -> void:
 	if randi_range(0, 1) == 0:
 		return
