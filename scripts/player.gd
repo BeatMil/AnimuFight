@@ -445,6 +445,13 @@ func exe_hadoken_info() ->  void:
 	dict_to_spawn_hitbox(info)
 
 func execute_carnaging(pos: Vector2) -> void:
+	# choose to go through enemy or not
+	if Input.is_action_pressed("ui_left"):
+		sprite_2d.flip_h = true
+
+	if Input.is_action_pressed("ui_right"):
+		sprite_2d.flip_h = false
+
 	var offset = Vector2(180, 0)
 	if not sprite_2d.flip_h:
 		offset.x *= -1
