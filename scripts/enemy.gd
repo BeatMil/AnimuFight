@@ -115,7 +115,6 @@ func _show_attack_indicator(type: int) -> void:
 
 
 func _on_bounce_together_body_entered(body: Node2D) -> void:
-	print(self.name,self.state,"-->", body.name, body.state," ", velocity.length())
 	if velocity.length() < 1000:
 		return
 	if self.state in [States.BOUNCE_STUNNED] and body.state != States.BOUNCE_STUNNED:
