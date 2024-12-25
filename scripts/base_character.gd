@@ -322,9 +322,24 @@ func hitted(
 	_zoom: Vector2 = Vector2(0.8, 0.8),
 	_zoom_duration: float = 0.1
 	) -> void:
+	if is_in_group("enemy") and _type != Enums.Attack.UNBLOCK and state not in [States.HIT_STUNNED, States.EXECUTETABLE, States.BOUNCE_STUNNED]:
+		if randi_range(0, 1) == 0:
+			state = States.BLOCK
+			animation_player.stop()
+			animation_player.play("blockstunned")
 	if state in [States.PARRY, States.PARRY_SUCCESS] and _type == Enums.Attack.NORMAL:
 		animation_player.play("parry_success")
-		_attacker.hitted(self, is_face_right, Vector2(20, 0), 0, 0, 1)
+		_attacker.hitted(
+			self,
+			is_face_right,
+			Vector2(20, 0),
+			0,
+			0,
+			1,
+			Vector2(100, 0.1),
+			1,
+			Enums.Attack.UNBLOCK
+		)
 	elif state in [States.BLOCK, States.BLOCK_STUNNED] and _type == Enums.Attack.NORMAL:
 		animation_player.play("blockstunned")
 		stun_duration = hitstun_amount/2

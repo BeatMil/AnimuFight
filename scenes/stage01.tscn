@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://bixvcfmu8c77i"]
+
+[ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
+[ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="2_i8ayn"]
+[ext_resource type="PackedScene" uid="uid://dy6yy7k35k271" path="res://nodes/enemy_spawner.tscn" id="3_65q8b"]
+[ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="4_ts7c8"]
+[ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="5_guyb5"]
+[ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="6_7tguj"]
+[ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="7_oruto"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
+size = Vector2(3334, 470)
+
+[node name="Stage01" type="Node2D"]
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(1195, 1117)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_jd0co")
+
+[node name="Ground" type="Sprite2D" parent="Floor"]
+position = Vector2(4.99989, -108)
+scale = Vector2(0.866667, 1)
+texture = ExtResource("1_spkcn")
+
+[node name="Floor2" type="StaticBody2D" parent="."]
+position = Vector2(4536, 1117)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+shape = SubResource("RectangleShape2D_jd0co")
+
+[node name="Ground" type="Sprite2D" parent="Floor2"]
+position = Vector2(4.99989, -108)
+scale = Vector2(0.866667, 1)
+texture = ExtResource("1_spkcn")
+
+[node name="Player" parent="." instance=ExtResource("2_i8ayn")]
+position = Vector2(936, 704)
+hp = 10
+
+[node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_65q8b")]
+position = Vector2(1912, -112)
+target = NodePath("../Player")
+enemy_to_spawn = [ExtResource("4_ts7c8"), ExtResource("5_guyb5"), ExtResource("6_7tguj")]
+is_active = false
+
+[node name="EnemySpawner8" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_65q8b")]
+position = Vector2(5664, -120)
+target = NodePath("../Player")
+enemy_to_spawn = [ExtResource("4_ts7c8")]
+
+[node name="Enemy03" parent="." instance=ExtResource("6_7tguj")]
+position = Vector2(-912, 664)
+
+[node name="Enemy02" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_guyb5")]
+position = Vector2(-912, 976)
+target = NodePath("../Player")
+
+[node name="Wall" parent="." instance=ExtResource("7_oruto")]
+position = Vector2(-296, 0)
+
+[node name="Wall2" parent="." instance=ExtResource("7_oruto")]
+position = Vector2(6336, 112)
