@@ -354,6 +354,7 @@ func hitted(
 			if get_tree().current_scene.get_node_or_null("Player/Camera"):
 				get_tree().current_scene.get_node_or_null("Player/Camera"). \
 				start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
+		ObjectPooling.spawn_blockSpark_1(position)
 	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW:
 		if _type == Enums.Attack.UNBLOCK:
 			animation_player.play("dodge_success_zoom")
