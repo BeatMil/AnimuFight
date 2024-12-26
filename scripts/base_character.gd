@@ -341,6 +341,7 @@ func hitted(
 			Enums.Attack.UNBLOCK
 		)
 	elif state in [States.BLOCK, States.BLOCK_STUNNED] and _type == Enums.Attack.NORMAL:
+		animation_player.stop()
 		animation_player.play("blockstunned")
 		stun_duration = hitstun_amount/2
 		if is_push_to_the_right:
