@@ -82,8 +82,7 @@ func _input(event: InputEvent) -> void:
 		States.LP3,
 		States.HP,
 		]:
-		if event.is_action_pressed("block"):
-			print("===Press 'Block'===")
+		if Input.is_action_pressed("block"):
 			state = States.PARRY
 			animation_player.play("block")
 
