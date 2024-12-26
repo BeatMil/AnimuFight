@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqaw43dsdi3ia"]
+[gd_scene load_steps=10 format=3 uid="uid://bqaw43dsdi3ia"]
 
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_pm5nb"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="2_6sixx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="4_j53nk"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="5_k8amv"]
 [ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="7_tk53t"]
+[ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="8_kotue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
 size = Vector2(3334, 470)
@@ -49,7 +50,11 @@ position = Vector2(-912, 976)
 target = NodePath("../Player")
 
 [node name="Wall" parent="." instance=ExtResource("7_tk53t")]
-position = Vector2(-296, 0)
+position = Vector2(-632, 0)
 
 [node name="Wall2" parent="." instance=ExtResource("7_tk53t")]
 position = Vector2(2392, 88)
+
+[node name="DeathZone" parent="." instance=ExtResource("8_kotue")]
+position = Vector2(13.2295, 462.343)
+scale = Vector2(1, 19.44)

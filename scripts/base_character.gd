@@ -310,7 +310,7 @@ hitbox.gd uses this
 """
 ### Turn it into class ! Wowww
 func hitted(
-	_attacker: CharacterBody2D,
+	_attacker: Object,
 	is_push_to_the_right: bool,
 	push_power: Vector2 = Vector2(20, 0),
 	push_type: int = 0,
@@ -368,7 +368,12 @@ func hitted(
 		animation_player.play("throw_stunned")
 	else:
 		hp_bar.hp_down(_damage)
-		if hp_bar.get_hp() <= 0:
+		if _attacker.is_in_group("death_zone"):
+			animation_player.stop(true)
+			animation_player.play("ded")
+			stun_duration = hitstun_amount
+			state = States.BOUNCE_STUNNED
+		elif hp_bar.get_hp() <= 0:
 			if push_type in [Enums.Push_types.KNOCKDOWN, Enums.Push_types.EXECUTE]:
 				animation_player.stop(true)
 				animation_player.play("ded")
@@ -402,6 +407,7 @@ func hitted(
 					animation_player.stop(true)
 					animation_player.play("hitted")
 					stun_duration = hitstun_amount
+
 		if is_push_to_the_right:
 			_push_direct(push_power)
 		else:
