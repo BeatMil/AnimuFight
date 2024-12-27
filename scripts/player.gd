@@ -25,6 +25,18 @@ var block_buffer_timer := 0.0
 
 var body_in_execution_ranges = []
 
+var debug_input_event = null
+
+var can_block_states = [
+		States.IDLE,
+		States.PARRY_SUCCESS,
+		States.PARRY,
+		States.BLOCK,
+		States.LP1,
+		States.LP2,
+		States.LP3,
+		States.HP,
+		]
 
 #############################################################
 ## Built-in
@@ -41,6 +53,8 @@ func _process(_delta: float) -> void:
 	debug_label.text = "PlayerState: %s"%States.keys()[state]
 	debug_label.text += "\n%s"%input_buffer_timer
 	debug_label.text += "\n%s"%block_buffer_timer
+	debug_label.text += "\n%s"%Input.is_action_pressed("block")
+	debug_label.text += "\n%s"%debug_input_event
 
 
 func _input(event: InputEvent) -> void:
@@ -73,16 +87,9 @@ func _input(event: InputEvent) -> void:
 
 	## BLOCK
 	## DODGE
-	if state in [
-		States.IDLE,
-		States.PARRY_SUCCESS,
-		States.DODGE_SUCCESS,
-		States.LP1,
-		States.LP2,
-		States.LP3,
-		States.HP,
-		]:
-		if Input.is_action_pressed("block"):
+	if state in can_block_states:
+		if Input.is_action_just_pressed("block", true):
+			print("==ME blocking==")
 			state = States.PARRY
 			animation_player.play("block")
 
@@ -96,6 +103,8 @@ func _input(event: InputEvent) -> void:
 			if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
 				state = States.DODGE
 				animation_player.play("dodge")
+
+	debug_input_event = event
 
 
 func _physics_process(delta: float) -> void:
@@ -205,6 +214,13 @@ func _physics_process(delta: float) -> void:
 	if state in [States.BLOCK, States.PARRY]:
 		if Input.is_action_just_released("block"):
 			_add_block_buffer_time()
+
+	## BLOCK
+	## DODGE
+	if state in can_block_states:
+		if Input.is_action_pressed("block"):
+			state = States.PARRY
+			animation_player.play("block")
 
 
 #############################################################
@@ -466,8 +482,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"parry_success",
 		"hp",
 		"down_hp",
-		"dodge",
-		"dodge_success",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:

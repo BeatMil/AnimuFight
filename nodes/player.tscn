@@ -2018,7 +2018,7 @@ script = ExtResource("2_t4427")
 offset_right = 792.0
 offset_bottom = 344.0
 theme_override_fonts/font = ExtResource("3_q6yga")
-theme_override_font_sizes/font_size = 39
+theme_override_font_sizes/font_size = 30
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("3_uo2uk")
