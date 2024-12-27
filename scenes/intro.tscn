@@ -1,0 +1,201 @@
+[gd_scene load_steps=12 format=3 uid="uid://dyjh8s2js473w"]
+
+[ext_resource type="Texture2D" uid="uid://dha81mc15kyq0" path="res://media/sprites/intro/vanilla01_big.png" id="1_fekf1"]
+[ext_resource type="Texture2D" uid="uid://b35kk1n5ljxw7" path="res://media/sprites/intro/vanilla02_big.png" id="2_8qjfv"]
+[ext_resource type="Texture2D" uid="uid://wbl2ln313oxe" path="res://media/sprites/intro/gacha_machine.png" id="3_en7jn"]
+[ext_resource type="AudioStream" uid="uid://ce2udyyndlaoa" path="res://media/sfxs/block-heel-footstep-1.mp3" id="3_pulv8"]
+[ext_resource type="AudioStream" uid="uid://8dpb5hfdf3ts" path="res://media/sfxs/block-heel-footstep-2.mp3" id="4_iuibl"]
+[ext_resource type="AudioStream" uid="uid://3dn1n5dkplcd" path="res://media/sfxs/cartoony-whooshes-7114.mp3" id="5_irmtt"]
+[ext_resource type="Texture2D" uid="uid://ccikbwx7y8iji" path="res://media/sprites/intro/vanilla03_big.png" id="7_tin8u"]
+[ext_resource type="Texture2D" uid="uid://bf7u6xke6q6w1" path="res://media/sprites/intro/gacha_machine02.png" id="8_h0hhs"]
+
+[sub_resource type="Animation" id="Animation_q5q8l"]
+resource_name = "a"
+length = 10.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Vanilla01Big:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 0, 1),
+"update": 0,
+"values": [Vector2(-352, 1104), Vector2(56, 1000), Vector2(360, 1096), Vector2(544, 992), Vector2(696, 1056), Vector2(768, 1000), Vector2(840, 1040), Vector2(840, 1040), Vector2(472, 1040), Vector2(-352, 1040)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Vanilla01Big:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_fekf1"), ExtResource("2_8qjfv")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GachaMachine:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.5, 3, 3.3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 0, 1),
+"update": 0,
+"values": [Vector2(2136, 736), Vector2(2096, 736), Vector2(2096, 736), Vector2(1696, 736), Vector2(2216, 1440)]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.350333,
+"start_offset": 0.0428979,
+"stream": ExtResource("3_pulv8")
+}, {
+"end_offset": 0.411531,
+"start_offset": 0.0408552,
+"stream": ExtResource("4_iuibl")
+}, {
+"end_offset": 0.350333,
+"start_offset": 0.0428979,
+"stream": ExtResource("3_pulv8")
+}, {
+"end_offset": 0.411531,
+"start_offset": 0.0408552,
+"stream": ExtResource("4_iuibl")
+}, {
+"end_offset": 1.96719,
+"start_offset": 0.0291005,
+"stream": ExtResource("5_irmtt")
+}],
+"times": PackedFloat32Array(0, 0.959145, 2, 3, 5)
+}
+tracks/3/use_blend = true
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Vanilla03Big:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(5, 5.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-288, 720), Vector2(512, 720)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GachaMachine02:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(0, 1),
+"update": 0,
+"values": [Vector2(2472, 704), Vector2(1680, 704)]
+}
+
+[sub_resource type="Animation" id="Animation_nlqrd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Vanilla01Big:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-352, 1104)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Vanilla01Big:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_fekf1")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GachaMachine:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2136, 736)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Vanilla03Big:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-288, 720)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GachaMachine02:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1680, 704)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5ivo"]
+_data = {
+"RESET": SubResource("Animation_nlqrd"),
+"a": SubResource("Animation_q5q8l")
+}
+
+[node name="Intro" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r5ivo")
+}
+autoplay = "a"
+
+[node name="Vanilla01Big" type="Sprite2D" parent="."]
+position = Vector2(-352, 1104)
+texture = ExtResource("1_fekf1")
+
+[node name="GachaMachine" type="Sprite2D" parent="."]
+position = Vector2(2136, 736)
+texture = ExtResource("3_en7jn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Vanilla03Big" type="Sprite2D" parent="."]
+position = Vector2(-288, 720)
+texture = ExtResource("7_tin8u")
+
+[node name="GachaMachine02" type="Sprite2D" parent="."]
+position = Vector2(1680, 704)
+texture = ExtResource("8_h0hhs")
