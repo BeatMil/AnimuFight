@@ -38,6 +38,15 @@ var can_block_states = [
 		States.HP,
 		]
 
+# Hold block input helper
+var can_block_states_hold = [
+		States.IDLE,
+		States.LP1,
+		States.LP2,
+		States.LP3,
+		States.HP,
+		]
+
 #############################################################
 ## Built-in
 #############################################################
@@ -216,8 +225,8 @@ func _physics_process(delta: float) -> void:
 			_add_block_buffer_time()
 
 	## BLOCK
-	## DODGE
-	if state in can_block_states:
+	## Must check every frame, can't put in _input cause it only check when press and release
+	if state in can_block_states_hold:
 		if Input.is_action_pressed("block"):
 			state = States.PARRY
 			animation_player.play("block")
