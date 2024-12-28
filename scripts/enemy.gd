@@ -23,6 +23,8 @@ var speed: int = 600
 var is_player_in_range_lp: bool = false
 var is_player_in_range_attack01: bool = false
 
+var block_count := 0
+
 
 #############################################################
 ## Built-in
@@ -42,7 +44,6 @@ func _physics_process(delta: float) -> void:
 		is_player_in_range_lp = false
 		is_player_in_range_attack01 = false
 
-
 	## wall bounce
 	_check_wall_bounce()
 
@@ -54,11 +55,6 @@ func _physics_process(delta: float) -> void:
 			_move(delta)
 		else:
 			_lerp_velocity_x()
-
-	# if is_player_in_range_lp:
-	# 	_lp()
-	# elif is_player_in_range_attack01:
-	# 	_attack01()
 
 	if state not in [States.IDLE]:
 		_lerp_velocity_x()
@@ -82,6 +78,8 @@ func _physics_process(delta: float) -> void:
 		collision_layer = 0b00000000000000000010
 		collision_mask = 0b00000000000000001111
 		stun_duration = 0
+
+	_check_block_count()
 
 	## debug
 	$DebugLabel.text = "%s, %s"%[States.keys()[state], animation_player.current_animation]
@@ -107,11 +105,23 @@ func _facing() -> void:
 		pass
 
 
+func _check_block_count() -> void:
+	if block_count >= 3:
+		# do the attack!
+		_attack01()
+		block_count = 0
+		print_rich("[color=orange][b]_check_block_count:[/b][/color]", block_count)
+
+
 #############################################################
 ## Helper
 #############################################################
 func _show_attack_indicator(type: int) -> void:
 	ObjectPooling.spawn_attack_type_indicator(type, self.position)
+
+
+func _add_block_count(amount: int):
+	block_count += amount
 
 
 func _on_bounce_together_body_entered(body: Node2D) -> void:
@@ -128,3 +138,10 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 			Vector2.ZERO,
 			1
 		)
+
+
+#############################################################
+## Attacks
+#############################################################
+func _attack01() -> void: # suppress error
+	pass

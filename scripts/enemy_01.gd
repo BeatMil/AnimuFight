@@ -28,7 +28,7 @@ func lp_info() -> void: # for animation_player
 
 
 func _attack01() -> void:
-	if state == States.IDLE:
+	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK]:
 		animation_player.play("attack01_1")
 func attack01_info() -> void: # for animation_player
 	var info = {
