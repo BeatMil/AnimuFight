@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dyjh8s2js473w"]
+[gd_scene load_steps=15 format=3 uid="uid://dyjh8s2js473w"]
 
 [ext_resource type="Texture2D" uid="uid://dha81mc15kyq0" path="res://media/sprites/intro/vanilla01_big.png" id="1_fekf1"]
+[ext_resource type="Script" path="res://scripts/intro.gd" id="1_g0bkf"]
 [ext_resource type="Texture2D" uid="uid://b35kk1n5ljxw7" path="res://media/sprites/intro/vanilla02_big.png" id="2_8qjfv"]
 [ext_resource type="Texture2D" uid="uid://wbl2ln313oxe" path="res://media/sprites/intro/gacha_machine.png" id="3_en7jn"]
 [ext_resource type="AudioStream" uid="uid://ce2udyyndlaoa" path="res://media/sfxs/block-heel-footstep-1.mp3" id="3_pulv8"]
@@ -8,10 +9,110 @@
 [ext_resource type="AudioStream" uid="uid://3dn1n5dkplcd" path="res://media/sfxs/cartoony-whooshes-7114.mp3" id="5_irmtt"]
 [ext_resource type="Texture2D" uid="uid://ccikbwx7y8iji" path="res://media/sprites/intro/vanilla03_big.png" id="7_tin8u"]
 [ext_resource type="Texture2D" uid="uid://bf7u6xke6q6w1" path="res://media/sprites/intro/gacha_machine02.png" id="8_h0hhs"]
+[ext_resource type="Texture2D" uid="uid://b30b11byem8hb" path="res://media/sprites/intro/gacha_machine_big.png" id="9_kj3mo"]
+
+[sub_resource type="Animation" id="Animation_nlqrd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Vanilla01Big:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-352, 1104)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Vanilla01Big:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_fekf1")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GachaMachine:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2136, 736)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Vanilla03Big:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-288, 720)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GachaMachine02:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1680, 704)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Camera2D:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GachaMachineBig:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(992, 1880)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GachaMachineBig:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
 
 [sub_resource type="Animation" id="Animation_q5q8l"]
 resource_name = "a"
-length = 10.0
+length = 9.0
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -87,10 +188,10 @@ tracks/4/path = NodePath("Vanilla03Big:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(5, 5.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(5, 5.2, 9),
+"transitions": PackedFloat32Array(1, 0, 1),
 "update": 0,
-"values": [Vector2(-288, 720), Vector2(512, 720)]
+"values": [Vector2(-288, 720), Vector2(1088, 720), Vector2(-352, 720)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -99,88 +200,112 @@ tracks/5/path = NodePath("GachaMachine02:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 5, 9),
+"transitions": PackedFloat32Array(0, 0, 1),
 "update": 0,
-"values": [Vector2(2472, 704), Vector2(1680, 704)]
+"values": [Vector2(2472, 704), Vector2(2152, 704), Vector2(2608, 704)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Camera2D:offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(5.4, 8.1, 9),
+"transitions": PackedFloat32Array(1, 0, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(600, 0), Vector2(0, 0)]
+}
+tracks/7/type = "audio"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayerLoud")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"clips": [{
+"end_offset": 1.96719,
+"start_offset": 0.0291005,
+"stream": ExtResource("5_irmtt")
+}],
+"times": PackedFloat32Array(5)
+}
+tracks/7/use_blend = true
 
-[sub_resource type="Animation" id="Animation_nlqrd"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_a760e"]
+resource_name = "b"
+length = 5.0
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Vanilla01Big:position")
+tracks/0/path = NodePath("GachaMachineBig:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-352, 1104)]
+"values": [Vector2(992, 808), Vector2(992, 808), Vector2(992, 880)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Vanilla01Big:texture")
+tracks/1/path = NodePath("GachaMachineBig:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_fekf1")]
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(1.9, 1.9)]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("GachaMachine:position")
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2136, 736)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Vanilla03Big:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-288, 720)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("GachaMachine02:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1680, 704)]
+"times": PackedFloat32Array(0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["ssr"],
+"method": &"_spawn_label_1"
+}, {
+"args": ["a"],
+"method": &"_spawn_label_2"
+}, {
+"args": ["a"],
+"method": &"_spawn_label_3"
+}, {
+"args": ["b"],
+"method": &"_spawn_label_4"
+}, {
+"args": ["b"],
+"method": &"_spawn_label_5"
+}, {
+"args": ["b"],
+"method": &"_spawn_label_6"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r5ivo"]
 _data = {
 "RESET": SubResource("Animation_nlqrd"),
-"a": SubResource("Animation_q5q8l")
+"a": SubResource("Animation_q5q8l"),
+"b": SubResource("Animation_a760e")
 }
 
 [node name="Intro" type="Node2D"]
+script = ExtResource("1_g0bkf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_r5ivo")
 }
-autoplay = "a"
+autoplay = "b"
 
 [node name="Vanilla01Big" type="Sprite2D" parent="."]
 position = Vector2(-352, 1104)
@@ -192,6 +317,9 @@ texture = ExtResource("3_en7jn")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="AudioStreamPlayerLoud" type="AudioStreamPlayer" parent="."]
+bus = &"LouderBus"
+
 [node name="Vanilla03Big" type="Sprite2D" parent="."]
 position = Vector2(-288, 720)
 texture = ExtResource("7_tin8u")
@@ -199,3 +327,31 @@ texture = ExtResource("7_tin8u")
 [node name="GachaMachine02" type="Sprite2D" parent="."]
 position = Vector2(1680, 704)
 texture = ExtResource("8_h0hhs")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="GachaMachineBig" type="Sprite2D" parent="."]
+position = Vector2(992, 1880)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("9_kj3mo")
+
+[node name="SsrLabelMarker2D" type="Marker2D" parent="."]
+position = Vector2(1112, 136)
+
+[node name="ALabelMarker2D" type="Marker2D" parent="."]
+position = Vector2(776, 320)
+
+[node name="ALabelMarker2D2" type="Marker2D" parent="."]
+position = Vector2(1256, 320)
+
+[node name="BLabelMarker2D" type="Marker2D" parent="."]
+position = Vector2(632, 688)
+
+[node name="BLabelMarker2D2" type="Marker2D" parent="."]
+position = Vector2(1016, 688)
+
+[node name="BLabelMarker2D3" type="Marker2D" parent="."]
+position = Vector2(1368, 688)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
