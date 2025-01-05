@@ -2,6 +2,7 @@ extends Node2D
 
 
 var SSR_LABEL = preload("res://nodes/ssr_label.tscn")
+var NEXT = preload("res://scenes/intro_2.tscn")
 
 
 func _spawn_label_1(_label: String) -> void:
@@ -43,5 +44,10 @@ func _spawn_label_6(_label: String) -> void:
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "a":
-		$AnimationPlayer.play("b")
+	match anim_name:
+		"a":
+			$AnimationPlayer.play("b")
+		"b":
+			$AnimationPlayer.play("c")
+		"c":
+			get_tree().change_scene_to_file("res://scenes/intro_2.tscn")
