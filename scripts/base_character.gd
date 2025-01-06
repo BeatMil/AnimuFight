@@ -32,6 +32,7 @@ enum States {
 	EXECUTETABLE,
 	EXECUTE,
 	IFRAME,
+	ARMOR,
 	}
 
 
@@ -322,7 +323,12 @@ func hitted(
 	_zoom: Vector2 = Vector2(0.8, 0.8),
 	_zoom_duration: float = 0.1
 	) -> void:
-	if is_in_group("enemy") and _type != Enums.Attack.UNBLOCK and state not in [States.HIT_STUNNED, States.EXECUTETABLE, States.BOUNCE_STUNNED]:
+	if is_in_group("enemy") and _type != Enums.Attack.UNBLOCK and state not in [
+		States.HIT_STUNNED,
+		States.EXECUTETABLE,
+		States.BOUNCE_STUNNED,
+		States.ARMOR,
+		]:
 		if randi_range(0, 1) == 0:
 			state = States.BLOCK
 			animation_player.stop()
@@ -340,9 +346,12 @@ func hitted(
 			1,
 			Enums.Attack.UNBLOCK
 		)
-	elif state in [States.BLOCK, States.BLOCK_STUNNED] and _type == Enums.Attack.NORMAL:
-		animation_player.stop()
-		animation_player.play("blockstunned")
+	elif state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR] and _type == Enums.Attack.NORMAL:
+		if state == States.ARMOR:
+			hp_bar.hp_down(_damage)
+		else:
+			animation_player.stop()
+			animation_player.play("blockstunned")
 		stun_duration = hitstun_amount/2
 		if is_push_to_the_right:
 			_push_direct(push_power/2)
