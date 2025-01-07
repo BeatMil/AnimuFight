@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnfg20gv8kp6s"]
+[gd_scene load_steps=10 format=3 uid="uid://cnfg20gv8kp6s"]
 
 [ext_resource type="Script" path="res://scripts/test.gd" id="1_qjwej"]
 [ext_resource type="Texture2D" uid="uid://dhg03s02r5p3n" path="res://media/backgrounds/rooftop_no_clouds.png" id="2_3yg43"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="4_nawmu"]
 [ext_resource type="PackedScene" uid="uid://dsgid218xceg6" path="res://nodes/enemy.tscn" id="6_332nv"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="6_gqdm1"]
+[ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="8_abcw4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iwbeg"]
 size = Vector2(3334, 470)
@@ -41,17 +42,16 @@ position = Vector2(512, 640)
 collision_mask = 15
 hp = 100
 
-[node name="Enemy" parent="." instance=ExtResource("6_332nv")]
-position = Vector2(1504, 680)
-is_notarget = true
-hp = 20
-
 [node name="Enemy2" parent="." instance=ExtResource("6_332nv")]
 modulate = Color(1, 0.32549, 1, 1)
-position = Vector2(1824, 680)
+position = Vector2(1984, 704)
 is_notarget = true
 hp = 20
 
-[node name="Enemy02" parent="." instance=ExtResource("6_gqdm1")]
-position = Vector2(2080, 712)
-is_notarget = true
+[node name="Enemy02" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_gqdm1")]
+position = Vector2(1512, 712)
+target = NodePath("../Player")
+hp = 20
+
+[node name="Enemy03" parent="." instance=ExtResource("8_abcw4")]
+position = Vector2(-680, 720)

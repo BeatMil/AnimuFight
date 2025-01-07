@@ -1,5 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=15 format=3 uid="uid://bixvcfmu8c77i"]
 
+[ext_resource type="Texture2D" uid="uid://d3rg7jxypamt" path="res://media/sprites/stage01/background.png" id="1_ktkfo"]
+[ext_resource type="Script" path="res://scripts/stage_01.gd" id="1_peto1"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="2_i8ayn"]
 [ext_resource type="PackedScene" uid="uid://dy6yy7k35k271" path="res://nodes/enemy_spawner.tscn" id="3_65q8b"]
@@ -7,11 +9,45 @@
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="5_guyb5"]
 [ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="6_7tguj"]
 [ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="7_oruto"]
+[ext_resource type="AudioStream" uid="uid://empmuouv5f00" path="res://media/sfxs/small-rock-break-194553.mp3" id="10_xveav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
 size = Vector2(3334, 470)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trh1p"]
+size = Vector2(32, 528)
+
+[sub_resource type="Animation" id="Animation_o4icx"]
+resource_name = "break_in"
+length = 3.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("10_xveav")
+}],
+"times": PackedFloat32Array(0.0333333)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7tgyn"]
+_data = {
+"break_in": SubResource("Animation_o4icx")
+}
+
 [node name="Stage01" type="Node2D"]
+script = ExtResource("1_peto1")
+
+[node name="Background" type="Sprite2D" parent="."]
+self_modulate = Color(0.90625, 0.90625, 0.90625, 1)
+texture = ExtResource("1_ktkfo")
+centered = false
 
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(1195, 1117)
@@ -52,7 +88,7 @@ enemy_to_spawn = [ExtResource("4_ts7c8"), ExtResource("5_guyb5"), ExtResource("6
 is_active = false
 
 [node name="EnemySpawner8" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_65q8b")]
-position = Vector2(5664, -120)
+position = Vector2(2552, 536)
 target = NodePath("../Player")
 enemy_to_spawn = [ExtResource("4_ts7c8")]
 
@@ -68,3 +104,24 @@ position = Vector2(-296, 0)
 
 [node name="Wall2" parent="." instance=ExtResource("7_oruto")]
 position = Vector2(6336, 112)
+
+[node name="DebrisMarker2D" type="Marker2D" parent="."]
+position = Vector2(1880, 624)
+
+[node name="DebrisArea2D" type="Area2D" parent="."]
+position = Vector2(1880, 624)
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DebrisArea2D"]
+shape = SubResource("RectangleShape2D_trh1p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DebrisArea2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7tgyn")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DebrisArea2D"]
+
+[connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]

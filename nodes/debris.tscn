@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://xcraqili7lb3"]
+
+[ext_resource type="Script" path="res://scripts/hit_spark.gd" id="1_i1c3q"]
+[ext_resource type="Texture2D" uid="uid://dbrgujfjdctli" path="res://media/sprites/stage01/debris.png" id="2_gdhmu"]
+
+[sub_resource type="Gradient" id="Gradient_8s3yv"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_b3aqj"]
+gradient = SubResource("Gradient_8s3yv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_og31b"]
+particle_flag_disable_z = true
+angle_min = -120.0
+angle_max = 180.0
+direction = Vector3(-1, 0, 0)
+spread = 80.0
+initial_velocity_min = 150.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 98, 0)
+color_ramp = SubResource("GradientTexture1D_b3aqj")
+
+[node name="Debris" type="Node2D"]
+script = ExtResource("1_i1c3q")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 14
+process_material = SubResource("ParticleProcessMaterial_og31b")
+texture = ExtResource("2_gdhmu")
+lifetime = 6.0
+speed_scale = 4.0
+explosiveness = 1.0
+fixed_fps = 0
+
+[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

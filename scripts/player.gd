@@ -98,7 +98,6 @@ func _input(event: InputEvent) -> void:
 	## DODGE
 	if state in can_block_states:
 		if Input.is_action_just_pressed("block", true):
-			print("==ME blocking==")
 			state = States.PARRY
 			animation_player.play("block")
 
