@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=16 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Texture2D" uid="uid://d3rg7jxypamt" path="res://media/sprites/stage01/background.png" id="1_ktkfo"]
 [ext_resource type="Script" path="res://scripts/stage_01.gd" id="1_peto1"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="6_7tguj"]
 [ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="7_oruto"]
 [ext_resource type="AudioStream" uid="uid://empmuouv5f00" path="res://media/sfxs/small-rock-break-194553.mp3" id="10_xveav"]
+[ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="11_g2h18"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
 size = Vector2(3334, 470)
@@ -100,19 +101,21 @@ position = Vector2(-912, 976)
 target = NodePath("../Player")
 
 [node name="Wall" parent="." instance=ExtResource("7_oruto")]
-position = Vector2(-296, 0)
+position = Vector2(-112, 0)
 
-[node name="Wall2" parent="." instance=ExtResource("7_oruto")]
-position = Vector2(6336, 112)
+[node name="WallInvi" parent="." instance=ExtResource("11_g2h18")]
+position = Vector2(1944, 352)
+scale = Vector2(0.320002, 1)
 
 [node name="DebrisMarker2D" type="Marker2D" parent="."]
-position = Vector2(1880, 624)
+position = Vector2(1888, 624)
 
 [node name="DebrisArea2D" type="Area2D" parent="."]
-position = Vector2(1880, 624)
+position = Vector2(2016, 608)
 collision_layer = 0
 collision_mask = 18
 monitorable = false
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DebrisArea2D"]
 shape = SubResource("RectangleShape2D_trh1p")

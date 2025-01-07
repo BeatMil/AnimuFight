@@ -265,7 +265,9 @@ func _push_x_direct_old(pixel: int) -> void:
 	var tween = get_tree().create_tween()
 	var new_pos := Vector2.ZERO
 	new_pos = Vector2(position.x+pixel, position.y)
+	tween.tween_property(self, "collision_mask", 0b00000000000000001011, 0)
 	tween.tween_property(self, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "collision_mask", 0b00000000000000001111, 0)
 
 
 func _push_x(power: int) -> void:

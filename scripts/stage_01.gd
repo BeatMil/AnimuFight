@@ -18,4 +18,4 @@ func _on_debris_area_2d_body_entered(body: Node2D) -> void:
 		print("Spawn debris!")
 		
 		debris_animation_player.play("break_in")
-		body._push_direct(Vector2(-200, 100))
+		body._push_x_direct_old(-300)
