@@ -371,7 +371,7 @@ func hitted(
 		else:
 			animation_player.play("dodge_success")
 	elif state in [States.IFRAME, States.EXECUTE]:
-		pass
+		ObjectPooling.spawn_blockSpark_1(position)
 	elif _type == Enums.Attack.THROW:
 		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
 		animation_player.play("throw_stunned")

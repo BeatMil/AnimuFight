@@ -8,6 +8,9 @@ extends "res://scripts/enemy.gd"
 func _lp() -> void:
 	if state == States.IDLE:
 		animation_player.play("lp1")
+func _lp_chain() -> void:
+	if state == States.IDLE:
+		animation_player.play("lp1_chain")
 func lp_info() -> void: # for animation_player
 	var info = {
 	"size": Hitbox_size.MEDIUM,
@@ -102,7 +105,7 @@ func _on_lp_range_r_body_exited(body: Node2D) -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	# if anim_name in ["lp1", "attack01_1", "hitted", "down"]:
-	if anim_name in ["lp1", "attack01_1"]:
+	if anim_name in ["lp1", "attack01_1", "lp1_chain"]:
 		animation_player.play("idle")
 		state = States.IDLE
 	if anim_name in ["ded"]:
@@ -116,4 +119,8 @@ func _on_attack_timer_timeout() -> void:
 	if is_player_in_range_attack01:
 		_attack01()
 	if is_player_in_range_lp:
-		_lp()
+		match randi_range(0, 1):
+			0:
+				_lp()
+			1:
+				_lp_chain()
