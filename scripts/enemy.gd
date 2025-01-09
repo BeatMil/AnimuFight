@@ -89,6 +89,11 @@ func _physics_process(delta: float) -> void:
 ## Private Function
 #############################################################
 func _move( delta) -> void:
+	if animation_player.has_animation("walk"):
+		if velocity.length() > 300:
+			animation_player.play("walk")
+		else:
+			animation_player.play("idle")
 	if is_instance_valid(target) and not is_notarget:
 		var direction = (target.position - global_position).normalized() 
 		var desired_velocity =  direction * speed

@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://derpnighpvd6t"]
+
+[ext_resource type="Script" path="res://scripts/wall.gd" id="1_ajmhb"]
+[ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="2_7t1y3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sn1oj"]
+size = Vector2(256, 2176)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7pyg"]
+size = Vector2(136, 2208)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c6b6l"]
+size = Vector2(144, 2208)
+
+[node name="Wall" type="StaticBody2D" groups=["wall"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_ajmhb")
+
+[node name="Ground" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-128, -1088)
+scale = Vector2(0.0666667, 8.5)
+texture = ExtResource("2_7t1y3")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sn1oj")
+
+[node name="Area2DL" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 19
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DL"]
+position = Vector2(-68, 0)
+shape = SubResource("RectangleShape2D_x7pyg")
+
+[node name="Area2DR" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 19
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DR"]
+position = Vector2(72, 0)
+shape = SubResource("RectangleShape2D_c6b6l")
+
+[connection signal="body_entered" from="Area2DL" to="." method="_on_area_2dl_body_entered"]
+[connection signal="body_exited" from="Area2DL" to="." method="_on_area_2dl_body_exited"]
+[connection signal="body_entered" from="Area2DR" to="." method="_on_area_2dr_body_entered"]
+[connection signal="body_exited" from="Area2DR" to="." method="_on_area_2dr_body_exited"]

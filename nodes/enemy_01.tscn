@@ -27,6 +27,7 @@ is_notarget = false
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_0yexx")
+hframes = 4
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, 0)
