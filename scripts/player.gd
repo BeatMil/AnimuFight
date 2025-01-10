@@ -432,7 +432,7 @@ func _get_thrown_by_towl() -> void:
 ## Helper
 #############################################################
 func _zoom() -> void:
-	$Camera.zoom(Vector2(0.9, 0.9))
+	$Camera.zoom(Vector2(1, 1), 0.3)
 
 
 func _hitbox_exe_hadoken() -> void:
