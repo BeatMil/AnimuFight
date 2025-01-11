@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://by4mdvdte0wet"]
+[gd_scene load_steps=29 format=3 uid="uid://by4mdvdte0wet"]
 
 [ext_resource type="Texture2D" uid="uid://02np5p02m64c" path="res://media/sprites/enemy02/enemy02_idle.png" id="1_3e6vd"]
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_3ialr"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cq28026prrhnf" path="res://media/sprites/enemy02/enemy02_down.png" id="10_n3oej"]
 [ext_resource type="Texture2D" uid="uid://cahavby2a224l" path="res://media/sprites/enemy02/enemy02_hitted.png" id="11_2d5ht"]
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="11_humr2"]
+[ext_resource type="Texture2D" uid="uid://jcwaglsmga6f" path="res://media/sprites/enemy02/enemy02_walk.png" id="12_6yiwp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(128, 336)
@@ -929,6 +930,71 @@ tracks/8/keys = {
 "values": [1, 2]
 }
 
+[sub_resource type="Animation" id="Animation_j1kgh"]
+resource_name = "walk"
+length = 1.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("12_6yiwp")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667),
+"transitions": PackedFloat32Array(0, 0, 0, 0, 0),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, -10), Vector2(0, 0), Vector2(0, -10)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vpy1p"]
 _data = {
 "RESET": SubResource("Animation_6qu24"),
@@ -939,7 +1005,8 @@ _data = {
 "execute": SubResource("Animation_hs1m8"),
 "hitted": SubResource("Animation_us36h"),
 "idle": SubResource("Animation_5se3t"),
-"lp1": SubResource("Animation_uesu2")
+"lp1": SubResource("Animation_uesu2"),
+"walk": SubResource("Animation_j1kgh")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1h3d5"]
@@ -959,6 +1026,7 @@ is_notarget = false
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_3e6vd")
+offset = Vector2(0, -10)
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, 0)
