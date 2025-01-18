@@ -115,7 +115,6 @@ func _check_block_count() -> void:
 		# do the attack!
 		_attack01()
 		block_count = 0
-		print_rich("[color=orange][b]_check_block_count:[/b][/color]", block_count)
 
 
 #############################################################

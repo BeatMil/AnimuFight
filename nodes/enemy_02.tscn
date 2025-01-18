@@ -932,7 +932,6 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_j1kgh"]
 resource_name = "walk"
-length = 1.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -977,10 +976,10 @@ tracks/3/path = NodePath("Sprite2D:offset")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667),
-"transitions": PackedFloat32Array(0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.166667, 0.5, 0.666667),
+"transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, -10), Vector2(0, 0), Vector2(0, -10)]
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0), Vector2(0, -10)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1026,7 +1025,6 @@ is_notarget = false
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_3e6vd")
-offset = Vector2(0, -10)
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, 0)

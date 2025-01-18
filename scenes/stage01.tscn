@@ -93,13 +93,6 @@ position = Vector2(2552, 536)
 target = NodePath("../Player")
 enemy_to_spawn = [ExtResource("4_ts7c8")]
 
-[node name="Enemy03" parent="." instance=ExtResource("6_7tguj")]
-position = Vector2(-912, 664)
-
-[node name="Enemy02" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_guyb5")]
-position = Vector2(-912, 976)
-target = NodePath("../Player")
-
 [node name="Wall" parent="." instance=ExtResource("7_oruto")]
 position = Vector2(-112, 0)
 
