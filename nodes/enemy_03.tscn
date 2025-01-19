@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://deiem1ppktdd1"]
+[gd_scene load_steps=30 format=3 uid="uid://deiem1ppktdd1"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_s0c21"]
 [ext_resource type="Script" path="res://scripts/enemy_03.gd" id="2_ojqxk"]
@@ -13,6 +13,7 @@
 [ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="11_35in3"]
 [ext_resource type="Texture2D" uid="uid://osos3gvq2n72" path="res://media/sprites/enemy03/enemy03_towl_block.png" id="11_i4yli"]
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="12_xaxak"]
+[ext_resource type="Texture2D" uid="uid://b1nah03fw34tw" path="res://media/sprites/enemy03/enemy03_walk.png" id="13_pxj6g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(128, 336)
@@ -889,6 +890,70 @@ tracks/8/keys = {
 "values": [1, 2]
 }
 
+[sub_resource type="Animation" id="Animation_fngeq"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("13_pxj6g")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.5, 0.666667),
+"transitions": PackedFloat32Array(0, 0, 0, 0),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0), Vector2(0, -10)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vpy1p"]
 _data = {
 "RESET": SubResource("Animation_6qu24"),
@@ -899,7 +964,8 @@ _data = {
 "execute": SubResource("Animation_rcrsp"),
 "hitted": SubResource("Animation_us36h"),
 "idle": SubResource("Animation_5se3t"),
-"lp1": SubResource("Animation_uesu2")
+"lp1": SubResource("Animation_uesu2"),
+"walk": SubResource("Animation_fngeq")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1h3d5"]
@@ -919,6 +985,7 @@ is_notarget = false
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("10_4ttuv")
+offset = Vector2(0, -10)
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, 0)
