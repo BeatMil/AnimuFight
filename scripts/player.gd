@@ -216,7 +216,7 @@ func _physics_process(delta: float) -> void:
 	if state in [States.THROW_BREAKABLE]:
 		if Input.is_action_just_pressed("hp"):
 			# Throw break
-			animation_player.play("parry_success")
+			animation_player.play("burst")
 			next_move = null
 
 	if state in [States.BLOCK, States.PARRY]:
@@ -387,6 +387,25 @@ func down_hp_info() ->  void:
 	"type": Enums.Attack.NORMAL,
 	"pos": $HitBoxPos/DownHpPos.position,
 	# "zoom": Vector2(1, 1),
+	}
+	dict_to_spawn_hitbox(info)
+func burst_info() ->  void:
+	var info = {
+	"size": Hitbox_size.BURST,
+	"time": 0.1,
+	"push_power_ground": Vector2(0, -200),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(0, -200),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 1,
+	"hitlag_amount_air": 0.0,
+	"hitstun_amount_air": 1,
+	"screenshake_amount": Vector2(20, 0.1),
+	"damage": 2,
+	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/BurstPos.position,
+	"zoom": Vector2(1, 1),
 	}
 	dict_to_spawn_hitbox(info)
 

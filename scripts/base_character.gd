@@ -41,6 +41,7 @@ enum Hitbox_size {
 	MEDIUM,
 	LARGE,
 	TOWL,
+	BURST,
 	EXECUTE,
 	}
 
@@ -50,6 +51,7 @@ enum Hitbox_size {
 #############################################################
 const HITBOX_LP_MEDIUM = preload("res://nodes/hitboxes/hitbox_lp.tscn")
 const HITBOX_LP_LARGE = preload("res://nodes/hitboxes/hitbox_lp2.tscn")
+const HITBOX_BURST = preload("res://nodes/hitboxes/hitbox_burst.tscn")
 const HITBOX_TOWL = preload("res://nodes/hitboxes/hitbox_towl.tscn")
 const HITBOX_EXE = preload("res://nodes/hitboxes/hitbox_execute.tscn")
 
@@ -208,6 +210,8 @@ func _spawn_lp_hitbox(
 			## it doesn't interfere with others
 			if sprite_2d.flip_h: 
 				hitbox.scale.x = -1
+		Hitbox_size.BURST:
+			hitbox = HITBOX_BURST.instantiate()
 		Hitbox_size.EXECUTE:
 			hitbox = HITBOX_EXE.instantiate()
 		_:
