@@ -1,19 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=17 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Texture2D" uid="uid://d3rg7jxypamt" path="res://media/sprites/stage01/background.png" id="1_ktkfo"]
 [ext_resource type="Script" path="res://scripts/stage_01.gd" id="1_peto1"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="2_i8ayn"]
 [ext_resource type="PackedScene" uid="uid://dy6yy7k35k271" path="res://nodes/enemy_spawner.tscn" id="3_65q8b"]
+[ext_resource type="Texture2D" uid="uid://eyys8bj4gwe" path="res://media/sprites/stage01/no_door.png" id="3_d2a2l"]
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="4_ts7c8"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="5_guyb5"]
 [ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="6_7tguj"]
 [ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="7_oruto"]
 [ext_resource type="AudioStream" uid="uid://empmuouv5f00" path="res://media/sfxs/small-rock-break-194553.mp3" id="10_xveav"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="11_g2h18"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
-size = Vector2(3334, 470)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trh1p"]
 size = Vector2(32, 528)
@@ -42,6 +40,9 @@ _data = {
 "break_in": SubResource("Animation_o4icx")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
+size = Vector2(3334, 470)
+
 [node name="Stage01" type="Node2D"]
 script = ExtResource("1_peto1")
 
@@ -49,6 +50,28 @@ script = ExtResource("1_peto1")
 self_modulate = Color(0.90625, 0.90625, 0.90625, 1)
 texture = ExtResource("1_ktkfo")
 centered = false
+
+[node name="DebrisArea2D" type="Area2D" parent="."]
+position = Vector2(2015, 608)
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_group_ = true
+
+[node name="NoDoor" type="Sprite2D" parent="DebrisArea2D"]
+self_modulate = Color(0.90625, 0.90625, 0.90625, 1)
+position = Vector2(-277, 11)
+texture = ExtResource("3_d2a2l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DebrisArea2D"]
+shape = SubResource("RectangleShape2D_trh1p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DebrisArea2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7tgyn")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DebrisArea2D"]
 
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(1195, 1117)
@@ -91,7 +114,7 @@ is_active = false
 [node name="EnemySpawner8" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_65q8b")]
 position = Vector2(2552, 536)
 target = NodePath("../Player")
-enemy_to_spawn = [ExtResource("4_ts7c8")]
+enemy_to_spawn = [ExtResource("6_7tguj")]
 
 [node name="Wall" parent="." instance=ExtResource("7_oruto")]
 position = Vector2(-112, 0)
@@ -102,22 +125,5 @@ scale = Vector2(0.320002, 1)
 
 [node name="DebrisMarker2D" type="Marker2D" parent="."]
 position = Vector2(1888, 624)
-
-[node name="DebrisArea2D" type="Area2D" parent="."]
-position = Vector2(2016, 608)
-collision_layer = 0
-collision_mask = 18
-monitorable = false
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DebrisArea2D"]
-shape = SubResource("RectangleShape2D_trh1p")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="DebrisArea2D"]
-libraries = {
-"": SubResource("AnimationLibrary_7tgyn")
-}
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DebrisArea2D"]
 
 [connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]
