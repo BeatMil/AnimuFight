@@ -406,6 +406,7 @@ func burst_info() ->  void:
 	"type": Enums.Attack.NORMAL,
 	"pos": $HitBoxPos/BurstPos.position,
 	"zoom": Vector2(1, 1),
+	"zoom_duration": 0.05,
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -507,6 +508,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"lp3",
 		"block",
 		"parry_success",
+		"burst",
 		"hp",
 		"down_hp",
 		]:
