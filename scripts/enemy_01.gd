@@ -6,10 +6,12 @@ extends "res://scripts/enemy.gd"
 ## Attack Info
 #############################################################
 func _lp() -> void:
-	if state == States.IDLE:
+	if state in [States.IDLE, States.ATTACK]:
+		state = States.ATTACK
 		animation_player.play("lp1")
 func _lp_chain() -> void:
-	if state == States.IDLE:
+	if state in [States.IDLE, States.ATTACK]:
+		state = States.ATTACK
 		animation_player.play("lp1_chain")
 func lp_info() -> void: # for animation_player
 	var info = {

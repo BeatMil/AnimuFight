@@ -54,8 +54,11 @@ func _physics_process(delta: float) -> void:
 		if not is_player_in_range_lp:
 			_move(delta)
 		else:
+			# lerp when finding player
 			_lerp_velocity_x()
+			animation_player.play("idle")
 
+	# lerp when attacking player
 	if state not in [States.IDLE]:
 		_lerp_velocity_x()
 	_gravity(delta)
@@ -90,10 +93,7 @@ func _physics_process(delta: float) -> void:
 #############################################################
 func _move( delta) -> void:
 	if animation_player.has_animation("walk"):
-		if velocity.length() > 300:
-			animation_player.play("walk")
-		else:
-			animation_player.play("idle")
+		animation_player.play("walk")
 	if is_instance_valid(target) and not is_notarget:
 		var direction = (target.position - global_position).normalized() 
 		var desired_velocity =  direction * speed

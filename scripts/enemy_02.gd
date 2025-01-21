@@ -4,7 +4,8 @@ extends "res://scripts/enemy.gd"
 ## Attack Info
 #############################################################
 func _lp() -> void:
-	if state == States.IDLE:
+	if state in [States.IDLE, States.ATTACK]:
+		state = States.ATTACK
 		animation_player.play("lp1")
 func lp_info() -> void: # for animation_player
 	var info = {
@@ -79,6 +80,7 @@ func _on_attack_01_range_r_body_entered(body: Node2D) -> void:
 		_on_attack_timer_timeout()
 		attack_timer.start()
 
+
 func _on_attack_01_range_l_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		sprite_2d.flip_h = true
@@ -102,8 +104,8 @@ func _on_lp_range_r_body_exited(body: Node2D) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	# if anim_name in ["lp1", "attack01_1", "hitted", "down"]:
 	if anim_name in ["lp1", "attack01_1"]:
-		animation_player.play("idle")
 		state = States.IDLE
+		animation_player.play("idle")
 	if anim_name in ["ded"]:
 		queue_free()
 
