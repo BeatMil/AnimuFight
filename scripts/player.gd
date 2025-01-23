@@ -64,6 +64,7 @@ func _process(_delta: float) -> void:
 	debug_label.text += "\n%s"%block_buffer_timer
 	debug_label.text += "\n%s"%Input.is_action_pressed("block")
 	debug_label.text += "\n%s"%debug_input_event
+	debug_label.text += "\nCameraPos: %s"%$Camera.global_position
 
 
 func _input(event: InputEvent) -> void:
@@ -229,6 +230,13 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("block"):
 			state = States.PARRY
 			animation_player.play("block")
+
+
+#############################################################
+## Public function
+#############################################################
+func set_camera(value: bool):
+	$Camera.get_node("Camera2D").enabled = value
 
 
 #############################################################

@@ -6,10 +6,12 @@ var DEBRIS = preload("res://nodes/debris.tscn")
 @onready var debris_animation_player: AnimationPlayer = $DebrisArea2D/AnimationPlayer
 @onready var debris_area_2d: Area2D = $DebrisArea2D
 @onready var no_door: Sprite2D = $DebrisArea2D/NoDoor
+@onready var player: CharacterBody2D = $Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	# Set camera lock
+	get_node_or_null("Player/Camera").set_screen_lock(0, 1920, -10000000, 1129)
 
 
 func _on_debris_area_2d_body_entered(body: Node2D) -> void:

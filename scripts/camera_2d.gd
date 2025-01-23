@@ -37,3 +37,10 @@ func zoom(zoom_level: Vector2, duration: float = 0.1):
 	tween.tween_property(camera_2d, "zoom", zoom_level, 0.1)
 	tween.tween_interval(duration)
 	tween.tween_property(camera_2d, "zoom", Vector2(0.8, 0.8), 0.1)
+
+
+func set_screen_lock(left: int, right: int, top: int = -10000000, bottom: int = -10000000):
+	camera_2d.limit_left = left
+	camera_2d.limit_right = right
+	camera_2d.limit_top = top
+	camera_2d.limit_bottom = bottom

@@ -56,7 +56,6 @@ position = Vector2(2015, 608)
 collision_layer = 0
 collision_mask = 18
 monitorable = false
-metadata/_edit_group_ = true
 
 [node name="NoDoor" type="Sprite2D" parent="DebrisArea2D"]
 self_modulate = Color(0.90625, 0.90625, 0.90625, 1)
@@ -114,7 +113,7 @@ is_active = false
 [node name="EnemySpawner8" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_65q8b")]
 position = Vector2(2552, 536)
 target = NodePath("../Player")
-enemy_to_spawn = [ExtResource("6_7tguj")]
+enemy_to_spawn = [ExtResource("4_ts7c8")]
 
 [node name="Wall" parent="." instance=ExtResource("7_oruto")]
 position = Vector2(-112, 0)
@@ -122,6 +121,9 @@ position = Vector2(-112, 0)
 [node name="WallInvi" parent="." instance=ExtResource("11_g2h18")]
 position = Vector2(1944, 352)
 scale = Vector2(0.320002, 1)
+
+[node name="CameraPos" type="Marker2D" parent="."]
+position = Vector2(942, 683)
 
 [node name="DebrisMarker2D" type="Marker2D" parent="."]
 position = Vector2(1888, 624)
