@@ -335,7 +335,7 @@ func lp3_info() -> void:
 	"screenshake_amount": Vector2(0, 0),
 	"damage": 2,
 	"type": Enums.Attack.NORMAL,
-	"zoom": Vector2(0.9, 0.9),
+	"zoom": Vector2(0.1, 0.1),
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -485,7 +485,7 @@ func exe_hadoken_info() ->  void:
 	"damage": 2,
 	"type": Enums.Attack.NORMAL,
 	"pos": $HitBoxPos/DownHpPos.position,
-	"zoom": Vector2(1, 1),
+	"zoom": Vector2(0.5, 0.5),
 	"zoom_duration": 0.5,
 	}
 	dict_to_spawn_hitbox(info)

@@ -326,7 +326,7 @@ func hitted(
 	_screenshake_amount: Vector2 = Vector2(100, 0.1),
 	_damage: int = 1,
 	_type: int = 0,
-	_zoom: Vector2 = Vector2(0.8, 0.8),
+	_zoom: Vector2 = Vector2(0, 0),
 	_zoom_duration: float = 0.1
 	) -> void:
 	if is_in_group("enemy") and _type != Enums.Attack.UNBLOCK and state not in [
@@ -463,7 +463,7 @@ func dict_to_spawn_hitbox(info: Dictionary) -> void:
 	info.get("damage", 1),
 	info.get("type", Enums.Attack.NORMAL),
 	info.get("pos", Vector2(168, 0)),
-	info.get("zoom", Vector2(0.8, 0.8)),
+	info.get("zoom", Vector2(0, 0)),
 	info.get("zoom_duration", 0.1)
 	)
 
