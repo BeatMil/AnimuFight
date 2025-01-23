@@ -4,7 +4,7 @@ extends Node2D
 #############################################################
 ## Config
 #############################################################
-var current_zoom: Vector2 = Vector2(1, 1)
+@onready var current_zoom: Vector2 = $Camera2D.zoom
 
 
 #############################################################
@@ -25,11 +25,12 @@ func _process(delta: float) -> void:
 	if shake_duration > 0:
 		shake_duration -= delta
 		# Randomize the offset for the screen shake effect
-		position = Vector2(randf_range(-shake_intensity, shake_intensity), randf_range(-shake_intensity, shake_intensity))
+		camera_2d.offset = Vector2(randf_range(-shake_intensity, shake_intensity), randf_range(-shake_intensity, shake_intensity))
+		# position = Vector2(randf_range(-shake_intensity, shake_intensity), randf_range(-shake_intensity, shake_intensity))
 		shake_intensity = max(shake_intensity - shake_decay, 0)
 	else:
 		# Reset the position when done shaking
-		position = Vector2.ZERO
+		camera_2d.offset = Vector2.ZERO
 	
 
 func start_screen_shake(intensity: float, duration: float):
@@ -49,3 +50,8 @@ func set_screen_lock(left: int, right: int, top: int = -10000000, bottom: int = 
 	camera_2d.limit_right = right
 	camera_2d.limit_top = top
 	camera_2d.limit_bottom = bottom
+
+
+func set_zoom(zoom_level: Vector2):
+	camera_2d.zoom = zoom_level
+	current_zoom = zoom_level

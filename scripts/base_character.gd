@@ -123,28 +123,18 @@ func _check_wall_bounce() -> void:
 	if state in [States.BOUNCE_STUNNED]:
 		if is_touching_wall_left:
 			_push_direct(Vector2(400, -200))
-			is_touching_wall_left = false
-			hp_bar.hp_down(1)
-
-			animation_player.stop(true)
-			animation_player.play("down")
-			state = States.WALL_BOUNCED
-			hitlag()
-			if get_tree().current_scene.get_node_or_null("Player/Camera"):
-				get_tree().current_scene.get_node_or_null("Player/Camera"). \
-				start_screen_shake(100, 0.1)
 		elif is_touching_wall_right:
 			_push_direct(Vector2(-400, -200))
-			is_touching_wall_right = false
-			hp_bar.hp_down(1)
 
+		if is_touching_wall_right or is_touching_wall_left:
+			hp_bar.hp_down(1)
 			animation_player.stop(true)
 			animation_player.play("down")
 			state = States.WALL_BOUNCED
 			hitlag()
-			if get_tree().current_scene.get_node_or_null("Player/Camera"):
-				get_tree().current_scene.get_node_or_null("Player/Camera"). \
-				start_screen_shake(100, 0.1)
+			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
+			is_touching_wall_left = false
+			is_touching_wall_right = false
 
 
 func _move_left(delta) ->  void:
@@ -348,7 +338,7 @@ func hitted(
 			0,
 			0,
 			1,
-			Vector2(100, 0.1),
+			Vector2(10, 0.1),
 			1,
 			Enums.Attack.UNBLOCK
 		)
