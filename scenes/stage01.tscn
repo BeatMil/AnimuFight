@@ -52,14 +52,14 @@ texture = ExtResource("1_ktkfo")
 centered = false
 
 [node name="DebrisArea2D" type="Area2D" parent="."]
-position = Vector2(2015, 608)
+position = Vector2(2403, 609)
 collision_layer = 0
 collision_mask = 18
 monitorable = false
 
 [node name="NoDoor" type="Sprite2D" parent="DebrisArea2D"]
 self_modulate = Color(0.90625, 0.90625, 0.90625, 1)
-position = Vector2(-277, 11)
+position = Vector2(-664, 10)
 texture = ExtResource("3_d2a2l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DebrisArea2D"]
@@ -119,8 +119,8 @@ enemy_to_spawn = [ExtResource("4_ts7c8")]
 position = Vector2(-112, 0)
 
 [node name="WallInvi" parent="." instance=ExtResource("11_g2h18")]
-position = Vector2(1944, 352)
-scale = Vector2(0.320002, 1)
+position = Vector2(2146, 352)
+scale = Vector2(1.64324, 1)
 
 [node name="CameraPos" type="Marker2D" parent="."]
 position = Vector2(942, 683)

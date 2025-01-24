@@ -19,7 +19,7 @@ func _ready() -> void:
 func _on_debris_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		if get_node_or_null("DebrisArea2D/NoDoor"):
-			body._push_x_direct_old(-300)
+			body._push_x_direct_old(-600)
 			var debris = DEBRIS.instantiate()
 			debris.position = $DebrisMarker2D.position
 			add_child(debris)
@@ -27,4 +27,4 @@ func _on_debris_area_2d_body_entered(body: Node2D) -> void:
 			await get_tree().create_timer(0.1).timeout
 			no_door.queue_free()
 		else:
-			body._push_x_direct_old(-200)
+			body._push_x_direct_old(-600)
