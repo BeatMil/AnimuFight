@@ -481,11 +481,11 @@ func exe_hadoken_info() ->  void:
 	"hitstun_amount_ground": 1,
 	"hitlag_amount_air": 1,
 	"hitstun_amount_air": 1,
-	"screenshake_amount": Vector2(30, 0.4),
+	"screenshake_amount": Vector2(20, 0.4),
 	"damage": 2,
 	"type": Enums.Attack.NORMAL,
 	"pos": $HitBoxPos/DownHpPos.position,
-	"zoom": Vector2(0.5, 0.5),
+	"zoom": Vector2(0.3, 0.3),
 	"zoom_duration": 0.5,
 	}
 	dict_to_spawn_hitbox(info)
