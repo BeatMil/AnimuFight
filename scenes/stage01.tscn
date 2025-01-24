@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=19 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Texture2D" uid="uid://d3rg7jxypamt" path="res://media/sprites/stage01/background.png" id="1_ktkfo"]
 [ext_resource type="Script" path="res://scripts/stage_01.gd" id="1_peto1"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="7_oruto"]
 [ext_resource type="AudioStream" uid="uid://empmuouv5f00" path="res://media/sfxs/small-rock-break-194553.mp3" id="10_xveav"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="11_g2h18"]
+[ext_resource type="Script" path="res://scripts/enemy_spawner2.gd" id="11_lcbfr"]
+[ext_resource type="Script" path="res://scripts/enemy_spawn_helper.gd" id="13_4slru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trh1p"]
 size = Vector2(32, 528)
@@ -110,11 +112,6 @@ target = NodePath("../Player")
 enemy_to_spawn = [ExtResource("4_ts7c8"), ExtResource("5_guyb5"), ExtResource("6_7tguj")]
 is_active = false
 
-[node name="EnemySpawner8" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_65q8b")]
-position = Vector2(2552, 536)
-target = NodePath("../Player")
-enemy_to_spawn = [ExtResource("4_ts7c8")]
-
 [node name="Wall" parent="." instance=ExtResource("7_oruto")]
 position = Vector2(-112, 0)
 
@@ -127,5 +124,42 @@ position = Vector2(942, 683)
 
 [node name="DebrisMarker2D" type="Marker2D" parent="."]
 position = Vector2(1888, 624)
+
+[node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
+script = ExtResource("11_lcbfr")
+target = NodePath("../Player")
+enemy_to_spawn = [NodePath("../EnemySpawnHelper/e1"), NodePath("../EnemySpawnHelper/e2"), NodePath("../EnemySpawnHelper/e1"), NodePath("../EnemySpawnHelper/e3")]
+
+[node name="enemyCount" type="Node" parent="EnemySpawnerNew"]
+
+[node name="SpawnPos" type="Node" parent="."]
+
+[node name="pos1" type="Marker2D" parent="SpawnPos"]
+position = Vector2(1497, -340)
+
+[node name="pos2" type="Marker2D" parent="SpawnPos"]
+position = Vector2(2842, 585)
+
+[node name="EnemySpawnHelper" type="Node" parent="."]
+
+[node name="e1" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../SpawnPos/pos1")
+hp = 10
+object = ExtResource("4_ts7c8")
+
+[node name="e2" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../SpawnPos/pos2")
+hp = 10
+phase = 2
+object = ExtResource("5_guyb5")
+
+[node name="e3" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../SpawnPos/pos2")
+hp = 20
+phase = 3
+object = ExtResource("6_7tguj")
 
 [connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]
