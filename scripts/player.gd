@@ -409,11 +409,11 @@ func burst_info() ->  void:
 	"hitstun_amount_ground": 1,
 	"hitlag_amount_air": 0.0,
 	"hitstun_amount_air": 1,
-	"screenshake_amount": Vector2(20, 0.1),
+	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 2,
 	"type": Enums.Attack.NORMAL,
 	"pos": $HitBoxPos/BurstPos.position,
-	"zoom": Vector2(1, 1),
+	"zoom": Vector2(0.1, 0.1),
 	"zoom_duration": 0.05,
 	}
 	dict_to_spawn_hitbox(info)
@@ -450,10 +450,9 @@ func _get_thrown_by_towl() -> void:
 		1,
 		0,
 		0.1,
-		Vector2(100, 0.2),
+		Vector2(10, 0.2),
 		3,
 		0,
-		Vector2(0.8, 0.8)
 	)
 
 #############################################################
