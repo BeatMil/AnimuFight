@@ -324,8 +324,8 @@ func lp3_info() -> void:
 	var info = {
 	"size": Hitbox_size.MEDIUM,
 	"time": 0.1,
-	"push_power_ground": Vector2(300, -100),
-	"push_type_ground": Enums.Push_types.NORMAL,
+	"push_power_ground": Vector2(800, -100),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
 	"push_power_air": Vector2(100, -150),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
 	"hitlag_amount_ground": 0,
