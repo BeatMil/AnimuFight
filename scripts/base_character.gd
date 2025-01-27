@@ -324,6 +324,7 @@ func hitted(
 		States.EXECUTETABLE,
 		States.BOUNCE_STUNNED,
 		States.ARMOR,
+		States.ATTACK,
 		]:
 		if randi_range(0, 1) == 0:
 			state = States.BLOCK
@@ -366,7 +367,7 @@ func hitted(
 			animation_player.play("dodge_success_zoom")
 		else:
 			animation_player.play("dodge_success")
-	elif state in [States.IFRAME, States.EXECUTE]:
+	elif state in [States.IFRAME, States.EXECUTE, States.ATTACK]:
 		ObjectPooling.spawn_blockSpark_1(position)
 	elif _type == Enums.Attack.THROW:
 		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
