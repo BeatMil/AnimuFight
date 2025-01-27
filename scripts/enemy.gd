@@ -124,6 +124,7 @@ func _show_attack_indicator(type: int) -> void:
 	ObjectPooling.spawn_attack_type_indicator(type, self.position)
 
 
+## Use in AnimationPlayer
 func _add_block_count(amount: int):
 	block_count += amount
 
