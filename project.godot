@@ -20,9 +20,10 @@ config/icon="res://icon.svg"
 
 Settings="*res://scripts/settings.gd"
 Enums="*res://scripts/enums.gd"
-DiscordRPCLoader="res://addons/discord-rpc-gd/nodes/discord_autoload.gd"
+DiscordRPCLoader="*res://addons/discord-rpc-gd/nodes/discord_autoload.gd"
 ObjectPooling="*res://scripts/object_pooling.gd"
 EnemySpawnHelper="*res://scripts/enemy_spawn_helper.gd"
+SceneTransition="*res://nodes/scene_transition.tscn"
 
 [display]
 
