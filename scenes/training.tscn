@@ -33,6 +33,13 @@ offset_right = 1709.0
 offset_bottom = 147.0
 text = "Heavy ATK"
 
+[node name="BlockLabel" parent="CanvasLayer" instance=ExtResource("2_rxoxm")]
+offset_left = 1532.0
+offset_top = 144.0
+offset_right = 1679.0
+offset_bottom = 194.0
+text = "Block"
+
 [node name="SfivTrainingStage" type="Sprite2D" parent="."]
 position = Vector2(982.5, 310)
 scale = Vector2(2.33359, 2)
