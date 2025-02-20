@@ -21,24 +21,36 @@ script = ExtResource("1_5jbvl")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="LightAtkLabel" parent="CanvasLayer" instance=ExtResource("2_rxoxm")]
-offset_left = 1562.0
-offset_top = 42.0
-offset_right = 1709.0
-offset_bottom = 92.0
+offset_left = 1560.0
+offset_top = 40.0
+offset_right = 1707.0
+offset_bottom = 90.0
+horizontal_alignment = 0
 
 [node name="HeavyAtkLabel" parent="CanvasLayer" instance=ExtResource("2_rxoxm")]
-offset_left = 1562.0
-offset_top = 97.0
-offset_right = 1709.0
-offset_bottom = 147.0
+offset_left = 1560.0
+offset_top = 96.0
+offset_right = 1725.0
+offset_bottom = 146.0
 text = "Heavy ATK"
+horizontal_alignment = 0
 
 [node name="BlockLabel" parent="CanvasLayer" instance=ExtResource("2_rxoxm")]
-offset_left = 1532.0
+offset_left = 1560.0
 offset_top = 144.0
-offset_right = 1679.0
+offset_right = 1707.0
 offset_bottom = 194.0
 text = "Block"
+horizontal_alignment = 0
+
+[node name="DodgeLabel" parent="CanvasLayer" instance=ExtResource("2_rxoxm")]
+offset_left = 1560.0
+offset_top = 200.0
+offset_right = 1707.0
+offset_bottom = 250.0
+text = "Dodge
+"
+horizontal_alignment = 0
 
 [node name="SfivTrainingStage" type="Sprite2D" parent="."]
 position = Vector2(982.5, 310)

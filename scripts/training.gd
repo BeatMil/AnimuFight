@@ -5,7 +5,7 @@ extends Node2D
 @onready var light_atk_label: Label = $CanvasLayer/LightAtkLabel
 @onready var heavy_atk_label: Label = $CanvasLayer/HeavyAtkLabel
 @onready var block_label: Label = $CanvasLayer/BlockLabel
-
+@onready var dodge_label: Label = $CanvasLayer/DodgeLabel
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("lp"):
@@ -14,3 +14,5 @@ func _input(event: InputEvent) -> void:
 		heavy_atk_label.turn_green()
 	if event.is_action_pressed("block"):
 		block_label.turn_green()
+	if event.is_action_pressed("dodge"):
+		dodge_label.turn_green()
