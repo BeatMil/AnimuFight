@@ -5,6 +5,8 @@ extends "res://scripts/base_character.gd"
 ## Node Ref
 #############################################################
 @onready var debug_label: Label = $CanvasLayer/DebugLabel
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var hit_noise = preload("res://media/sfxs/equip01.wav")
 
 
 #############################################################
@@ -261,6 +263,12 @@ func _check_block_buffer(delta) -> void:
 		animation_player.play("idle")
 		block_buffer_timer = 0
 	
+
+func play_hit_random_pitch():
+	audio_stream_player.stream = hit_noise
+	audio_stream_player.pitch_scale = randf_range(0.8, 1.2)
+	audio_stream_player.play()
+
 
 #############################################################
 ## Fix stuck in blocking
