@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://biftwohdsvnpf"]
+
+[ext_resource type="Script" path="res://scripts/hit_spark.gd" id="1_rrg7c"]
+[ext_resource type="AudioStream" uid="uid://pm04aj4d4cfb" path="res://media/sfxs/high-clank-86142.mp3" id="2_awl25"]
+
+[sub_resource type="Gradient" id="Gradient_fopcf"]
+colors = PackedColorArray(0.709515, 0.710938, 0.686098, 1, 0.788628, 0.920897, 0.87156, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7ibbc"]
+gradient = SubResource("Gradient_fopcf")
+
+[sub_resource type="Curve" id="Curve_i13q5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2btck"]
+curve = SubResource("Curve_i13q5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_se36l"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -8.16
+tangential_accel_max = 16.16
+scale_min = 5.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_2btck")
+color_ramp = SubResource("GradientTexture1D_7ibbc")
+
+[sub_resource type="Animation" id="Animation_0h6dr"]
+resource_name = "sfx"
+length = 0.5
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.065414,
+"stream": ExtResource("2_awl25")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3s426"]
+_data = {
+"sfx": SubResource("Animation_0h6dr")
+}
+
+[node name="HitSpark" type="Node2D"]
+z_index = 5
+script = ExtResource("1_rrg7c")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_se36l")
+lifetime = 3.0
+speed_scale = 15.0
+explosiveness = 1.0
+fixed_fps = 120
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3s426")
+}
+autoplay = "sfx"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+
+[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

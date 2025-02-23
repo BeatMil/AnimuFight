@@ -40,6 +40,7 @@ enum Hitbox_size {
 	SMALL,
 	MEDIUM,
 	LARGE,
+	HAMMER,
 	TOWL,
 	BURST,
 	EXECUTE,
@@ -51,6 +52,7 @@ enum Hitbox_size {
 #############################################################
 const HITBOX_LP_MEDIUM = preload("res://nodes/hitboxes/hitbox_lp.tscn")
 const HITBOX_LP_LARGE = preload("res://nodes/hitboxes/hitbox_lp2.tscn")
+const HITBOX_HAMMER = preload("res://nodes/hitboxes/hitbox_hammer.tscn")
 const HITBOX_BURST = preload("res://nodes/hitboxes/hitbox_burst.tscn")
 const HITBOX_TOWL = preload("res://nodes/hitboxes/hitbox_towl.tscn")
 const HITBOX_EXE = preload("res://nodes/hitboxes/hitbox_execute.tscn")
@@ -194,6 +196,8 @@ func _spawn_lp_hitbox(
 			hitbox = HITBOX_LP_MEDIUM.instantiate()
 		Hitbox_size.LARGE:
 			hitbox = HITBOX_LP_LARGE.instantiate()
+		Hitbox_size.HAMMER:
+			hitbox = HITBOX_HAMMER.instantiate()
 		Hitbox_size.TOWL:
 			hitbox = HITBOX_TOWL.instantiate()
 			## Flip towl sprite here so that 
@@ -326,7 +330,7 @@ func hitted(
 		States.ARMOR,
 		States.ATTACK,
 		]:
-		if randi_range(0, 1) == 0:
+		if is_in_group("tank") or randi_range(0, 1) == 0:
 			state = States.BLOCK
 			animation_player.stop()
 			animation_player.play("blockstunned")
@@ -361,7 +365,10 @@ func hitted(
 			if get_tree().current_scene.get_node_or_null("Player/Camera"):
 				get_tree().current_scene.get_node_or_null("Player/Camera"). \
 				start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
-		ObjectPooling.spawn_blockSpark_1(position)
+		if is_in_group("tank"):
+			ObjectPooling.spawn_blockSpark_2(position)
+		else:
+			ObjectPooling.spawn_blockSpark_1(position)
 	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW:
 		if _type == Enums.Attack.UNBLOCK:
 			animation_player.play("dodge_success_zoom")
@@ -415,9 +422,15 @@ func hitted(
 					stun_duration = hitstun_amount
 
 		if is_push_to_the_right:
-			_push_direct(push_power)
+			if is_in_group("tank"):
+				_push_direct(push_power/3)
+			else:
+				_push_direct(push_power)
 		else:
-			_push_direct(Vector2(-push_power.x, push_power.y))
+			if is_in_group("tank"):
+				_push_direct(Vector2(-push_power.x, push_power.y)/3)
+			else:
+				_push_direct(Vector2(-push_power.x, push_power.y))
 		if hitlag_amount:
 			hitlag(hitlag_amount)
 			_attacker.hitlag(hitlag_amount)

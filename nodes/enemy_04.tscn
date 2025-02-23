@@ -7,15 +7,15 @@
 [ext_resource type="Script" path="res://scripts/enemy_04_hammer.gd" id="4_mex7q"]
 [ext_resource type="AudioStream" uid="uid://3eyk8460sfvf" path="res://media/sfxs/charge01.wav" id="5_qhlbo"]
 [ext_resource type="AudioStream" uid="uid://dy3bxvokjiup5" path="res://media/sfxs/big_fireball.wav" id="6_0oegj"]
-[ext_resource type="Texture2D" uid="uid://osos3gvq2n72" path="res://media/sprites/enemy03/enemy03_towl_block.png" id="7_jqyyo"]
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="8_554pp"]
 [ext_resource type="Texture2D" uid="uid://12ulqmdbst3h" path="res://media/sprites/enemy03/enemy03_towl_hitted.png" id="9_bhh7r"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="10_twk88"]
-[ext_resource type="Texture2D" uid="uid://05n3pj7lrni8" path="res://media/sprites/enemy03/enemy03_down.png" id="11_24evw"]
+[ext_resource type="Texture2D" uid="uid://cboka0yjby1ls" path="res://media/sprites/enemy04/enemy04_ded.png" id="11_8h0cb"]
 [ext_resource type="Texture2D" uid="uid://bnsak0jt1kttk" path="res://media/sprites/enemy04/enemy04_idle.png" id="12_ec2cw"]
 [ext_resource type="AudioStream" uid="uid://pm04aj4d4cfb" path="res://media/sfxs/high-clank-86142.mp3" id="12_ni0j3"]
 [ext_resource type="Texture2D" uid="uid://clhbpqw5kn6j3" path="res://media/sprites/enemy02/enemy02_punch_s.png" id="12_tdgwy"]
 [ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="14_81cr7"]
+[ext_resource type="Texture2D" uid="uid://btakjvsl54yax" path="res://media/sprites/enemy04/enemy04_hurt.png" id="15_4e8dg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(240, 336)
@@ -151,7 +151,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(0, 1),
 "update": 0,
-"values": [Color(0.9375, 0.439652, 0.334152, 1), Color(1, 1, 1, 1)]
+"values": [Color(0.9375, 0.840152, 0.528326, 1), Color(1, 1, 1, 1)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -272,7 +272,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_jqyyo")]
+"values": [ExtResource("15_4e8dg")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -371,7 +371,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_bhh7r")]
+"values": [ExtResource("11_8h0cb")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -464,7 +464,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_24evw")]
+"values": [ExtResource("15_4e8dg")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -659,7 +659,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_bhh7r")]
+"values": [ExtResource("15_4e8dg")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -700,7 +700,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 1.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 0.51973, 0.51973, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 0.622999, 0.353401, 1), Color(1, 1, 1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -749,6 +749,20 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"return_hammer"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_5se3t"]
@@ -1063,11 +1077,12 @@ size = Vector2(336, 256)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8qvtx"]
 size = Vector2(240, 304)
 
-[node name="Enemy04" groups=["character", "enemy"] instance=ExtResource("1_0oxe2")]
+[node name="Enemy04" groups=["character", "enemy", "tank"] instance=ExtResource("1_0oxe2")]
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("2_g0tmf")
 is_notarget = false
+hp = 1000
 
 [node name="HammerPivot" type="Node2D" parent="." index="0"]
 script = ExtResource("4_mex7q")
@@ -1078,7 +1093,7 @@ texture = ExtResource("3_o3tk8")
 offset = Vector2(-7.27271, -256)
 
 [node name="Sprite2D" parent="." index="1"]
-self_modulate = Color(0.9375, 0.439652, 0.334152, 1)
+self_modulate = Color(1, 0.622999, 0.353401, 1)
 position = Vector2(0, -104)
 scale = Vector2(1, 1)
 texture = ExtResource("3_b5ln6")

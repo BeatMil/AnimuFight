@@ -6,6 +6,7 @@ extends Node
 #############################################################
 const HITSPARK = preload("res://nodes/hitsparks/hit_spark.tscn")
 const BLOCKSPARK = preload("res://nodes/hitsparks/block_spark.tscn")
+const BLOCKSPARK2 = preload("res://nodes/hitsparks/block_spark2.tscn")
 const ATTACK_TYPE_INDICATOR = preload("res://nodes/attack_type_indicator.tscn")
 
 
@@ -29,6 +30,12 @@ func spawn_hitSpark_1(_position: Vector2 = pooling_pos) -> void:
 
 func spawn_blockSpark_1(_position: Vector2 = pooling_pos) -> void:
 	var hitspark = BLOCKSPARK.instantiate()
+	hitspark.position = _position
+	get_tree().current_scene.add_child(hitspark)
+
+
+func spawn_blockSpark_2(_position: Vector2 = pooling_pos) -> void:
+	var hitspark = BLOCKSPARK2.instantiate()
 	hitspark.position = _position
 	get_tree().current_scene.add_child(hitspark)
 

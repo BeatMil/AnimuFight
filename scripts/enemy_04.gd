@@ -1,4 +1,14 @@
 extends "res://scripts/enemy.gd"
+@onready var enemy_04_hammer: Sprite2D = $HammerPivot/Enemy04Hammer
+
+
+#############################################################
+## Private function
+#############################################################
+func return_hammer():
+	var tween = get_tree().create_tween()
+	tween.tween_property(enemy_04_hammer, "rotation_degrees", 0, 0.2).set_trans(Tween.TRANS_CUBIC)
+
 
 #############################################################
 ## Attack Info
@@ -31,7 +41,7 @@ func _attack01() -> void:
 		animation_player.play("attack01_1")
 func attack01_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_size.HAMMER,
 	"time": 0.3,
 	"push_power_ground": Vector2(800, -300),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -43,7 +53,7 @@ func attack01_info() -> void: # for animation_player
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(20, 0.3),
 	"damage": 3,
-	"type": Enums.Attack.UNBLOCK,
+	"type": Enums.Attack.NORMAL,
 	"pos": $HitBoxPos/LpPos.position,
 	}
 	dict_to_spawn_hitbox(info)
