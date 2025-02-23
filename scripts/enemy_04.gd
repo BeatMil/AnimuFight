@@ -1,5 +1,7 @@
 extends "res://scripts/enemy.gd"
 @onready var enemy_04_hammer: Sprite2D = $HammerPivot/Enemy04Hammer
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var clank_noise = preload("res://media/sfxs/high-clank.ogg")
 
 
 #############################################################
@@ -8,6 +10,12 @@ extends "res://scripts/enemy.gd"
 func return_hammer():
 	var tween = get_tree().create_tween()
 	tween.tween_property(enemy_04_hammer, "rotation_degrees", 0, 0.2).set_trans(Tween.TRANS_CUBIC)
+
+
+func play_metal_clank_random_pitch():
+	audio_stream_player.stream = clank_noise
+	audio_stream_player.pitch_scale = randf_range(0.9, 1.1)
+	audio_stream_player.play()
 
 
 #############################################################
