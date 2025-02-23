@@ -60,7 +60,7 @@ func attack01_info() -> void: # for animation_player
 	"hitlag_amount_air": 0,
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(20, 0.3),
-	"damage": 3,
+	"damage": 5,
 	"type": Enums.Attack.NORMAL,
 	"pos": $HitBoxPos/LpPos.position,
 	}

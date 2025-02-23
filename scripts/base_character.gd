@@ -350,6 +350,8 @@ func hitted(
 	elif state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR] and _type == Enums.Attack.NORMAL:
 		if state == States.ARMOR:
 			hp_bar.hp_down(_damage)
+		elif is_in_group("player"):
+			hp_bar.hp_down(_damage/2)
 		else:
 			animation_player.stop()
 			animation_player.play("blockstunned")
