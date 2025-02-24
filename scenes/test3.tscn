@@ -35,6 +35,7 @@ hp = 10
 position = Vector2(1912, -112)
 target = NodePath("../Player")
 enemy_to_spawn = [ExtResource("4_j53nk"), ExtResource("5_k8amv"), ExtResource("4_adibb")]
+is_active = false
 
 [node name="EnemySpawner9" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_76owy")]
 position = Vector2(392, -112)
@@ -45,7 +46,7 @@ is_active = false
 [node name="EnemySpawner8" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_76owy")]
 position = Vector2(392, -120)
 target = NodePath("../Player")
-enemy_to_spawn = [ExtResource("4_adibb")]
+enemy_to_spawn = [ExtResource("5_k8amv")]
 
 [node name="Enemy03" parent="." instance=ExtResource("4_adibb")]
 position = Vector2(-912, 664)

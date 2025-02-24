@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://dewex1ur78joj"]
+
+[ext_resource type="Script" path="res://scripts/training_menu.gd" id="1_s6n2h"]
+
+[sub_resource type="Animation" id="Animation_ueteo"]
+resource_name = "pop_up"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gcqki"]
+_data = {
+"pop_up": SubResource("Animation_ueteo")
+}
+
+[node name="TrainingMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.319977
+offset_right = 0.319977
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_s6n2h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -72.0
+offset_right = 224.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Enemy1"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Enemy2"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Enemy3"
+
+[node name="Button4" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Enemy4"
+
+[node name="Button5" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Clear"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gcqki")
+}

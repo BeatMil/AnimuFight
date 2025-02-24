@@ -53,6 +53,46 @@ text = "Dodge
 "
 horizontal_alignment = 0
 
+[node name="TrainingMenu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TrainingMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 905.0
+offset_top = 434.5
+offset_right = 975.0
+offset_bottom = 605.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Enemy1" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
+layout_mode = 2
+text = "Enemy1"
+
+[node name="Button2" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
+layout_mode = 2
+text = "Enemy2"
+
+[node name="Button3" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
+layout_mode = 2
+text = "Enemy3"
+
+[node name="Button4" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
+layout_mode = 2
+text = "Enemy4"
+
+[node name="Clear" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
+layout_mode = 2
+text = "clear"
+
 [node name="SfivTrainingStage" type="Sprite2D" parent="."]
 position = Vector2(982.5, 310)
 scale = Vector2(2.33359, 2)
@@ -101,3 +141,6 @@ position = Vector2(2392, 88)
 [node name="DeathZone" parent="." instance=ExtResource("8_yi24k")]
 position = Vector2(2104, 464)
 scale = Vector2(1, 19.44)
+
+[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/Enemy1" to="." method="_on_enemy_1_button_down"]
+[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/Clear" to="." method="_on_clear_button_down"]

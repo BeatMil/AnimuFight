@@ -11,13 +11,19 @@ func _ready() -> void:
 
 
 func _spawn_enemy() -> void:
+	if not enemy_to_spawn:
+		return
 	var bob = enemy_to_spawn.pick_random()
 	var e = bob.instantiate()
 	e.position = self.position
 	e.target = target
 	enemy_count.add_child(e)
-	
-	
+
+
+func clear_enemy() -> void:
+	for node in enemy_count.get_children():
+		node.queue_free()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
