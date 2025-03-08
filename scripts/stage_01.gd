@@ -12,7 +12,7 @@ var DEBRIS = preload("res://nodes/debris.tscn")
 func _ready() -> void:
 	pass
 	# Set camera lock
-	get_node_or_null("Player/Camera").set_screen_lock(0, 1920, -10000000, 1129)
+	get_node_or_null("Player/Camera").set_screen_lock(0, 1920, 135, 1129)
 	get_node_or_null("Player/Camera").set_zoom(Vector2(1,1))
 
 
