@@ -9,6 +9,9 @@ extends Node2D
 @onready var training_menu: Control = $CanvasLayer/TrainingMenu
 @onready var enemy_spawner_8: Node2D = $EnemySpawner8
 @onready var enemy1: Object = preload("res://nodes/enemy_01.tscn")
+@onready var enemy2: Object = preload("res://nodes/enemy_02.tscn")
+@onready var enemy3: Object = preload("res://nodes/enemy_03.tscn")
+@onready var enemy4: Object = preload("res://nodes/enemy_04.tscn")
 
 
 func _ready() -> void:
@@ -36,3 +39,15 @@ func _on_clear_button_down() -> void:
 
 func _on_enemy_1_button_down() -> void:
 	enemy_spawner_8.enemy_to_spawn.append(enemy1)
+
+
+func _on_enemy_2_button_down() -> void:
+	enemy_spawner_8.enemy_to_spawn.append(enemy2)
+
+
+func _on_enemy_3_button_down() -> void:
+	enemy_spawner_8.enemy_to_spawn.append(enemy3)
+
+
+func _on_enemy_4_button_down() -> void:
+	enemy_spawner_8.enemy_to_spawn.append(enemy4)
