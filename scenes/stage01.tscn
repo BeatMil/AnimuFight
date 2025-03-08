@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=20 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Texture2D" uid="uid://d3rg7jxypamt" path="res://media/sprites/stage01/background.png" id="1_ktkfo"]
 [ext_resource type="Script" path="res://scripts/stage_01.gd" id="1_peto1"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="11_g2h18"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner2.gd" id="11_lcbfr"]
 [ext_resource type="Script" path="res://scripts/enemy_spawn_helper.gd" id="13_4slru"]
+[ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_04.tscn" id="15_4fs8c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trh1p"]
 size = Vector2(32, 528)
@@ -128,7 +129,7 @@ position = Vector2(1888, 624)
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("11_lcbfr")
 target = NodePath("../Player")
-enemy_to_spawn = [NodePath("../EnemySpawnHelper/e1"), NodePath("../EnemySpawnHelper/e2"), NodePath("../EnemySpawnHelper/e1"), NodePath("../EnemySpawnHelper/e3")]
+enemy_to_spawn = [NodePath("../EnemySpawnHelper/e1"), NodePath("../EnemySpawnHelper/e2"), NodePath("../EnemySpawnHelper/e1"), NodePath("../EnemySpawnHelper/e3"), NodePath("../EnemySpawnHelper/e4")]
 
 [node name="enemyCount" type="Node" parent="EnemySpawnerNew"]
 
@@ -161,5 +162,12 @@ position = NodePath("../../SpawnPos/pos2")
 hp = 20
 phase = 3
 object = ExtResource("6_7tguj")
+
+[node name="e4" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../SpawnPos/pos2")
+hp = 1000
+phase = 0
+object = ExtResource("15_4fs8c")
 
 [connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]
