@@ -16,7 +16,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
 size = Vector2(3334, 470)
 
-[node name="test3" type="Node2D"]
+[node name="training" type="Node2D"]
 script = ExtResource("1_5jbvl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -59,7 +59,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TrainingMenu"]
+[node name="VBoxContainer" type="HBoxContainer" parent="CanvasLayer/TrainingMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,30 +68,43 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 905.0
 offset_top = 434.5
-offset_right = 975.0
-offset_bottom = 605.5
+offset_right = 979.0
+offset_bottom = 609.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Enemy1" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Enemy1" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Enemy1"
 
-[node name="Enemy2" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
+[node name="Enemy2" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Enemy2"
 
-[node name="Enemy3" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
+[node name="Enemy3" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Enemy3"
 
-[node name="Enemy4" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
+[node name="Enemy4" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Enemy4"
 
-[node name="Clear" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
+[node name="Clear" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "clear"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="DeathZone" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+text = "DeathZone
+"
 
 [node name="SfivTrainingStage" type="Sprite2D" parent="."]
 position = Vector2(982.5, 310)
@@ -142,8 +155,10 @@ position = Vector2(2392, 88)
 position = Vector2(2104, 464)
 scale = Vector2(1, 19.44)
 
-[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/Enemy1" to="." method="_on_enemy_1_button_down"]
-[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/Enemy2" to="." method="_on_enemy_2_button_down"]
-[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/Enemy3" to="." method="_on_enemy_3_button_down"]
-[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/Enemy4" to="." method="_on_enemy_4_button_down"]
-[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/Clear" to="." method="_on_clear_button_down"]
+[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer/Enemy1" to="." method="_on_enemy_1_button_down"]
+[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer/Enemy2" to="." method="_on_enemy_2_button_down"]
+[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer/Enemy3" to="." method="_on_enemy_3_button_down"]
+[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer/Enemy4" to="." method="_on_enemy_4_button_down"]
+[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer/Clear" to="." method="_on_clear_button_down"]
+[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer2/DeathZone" to="." method="_on_death_zone_button_down"]
+[connection signal="toggled" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer2/DeathZone" to="." method="_on_death_zone_toggled"]

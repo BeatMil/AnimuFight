@@ -12,7 +12,7 @@ extends Node2D
 @onready var enemy2: Object = preload("res://nodes/enemy_02.tscn")
 @onready var enemy3: Object = preload("res://nodes/enemy_03.tscn")
 @onready var enemy4: Object = preload("res://nodes/enemy_04.tscn")
-
+@onready var death_zone: Node2D = $DeathZone
 
 func _ready() -> void:
 	training_menu.visible = false
@@ -51,3 +51,10 @@ func _on_enemy_3_button_down() -> void:
 
 func _on_enemy_4_button_down() -> void:
 	enemy_spawner_8.enemy_to_spawn.append(enemy4)
+
+
+func _on_death_zone_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		death_zone.turn_on()
+	else:
+		death_zone.turn_off()
