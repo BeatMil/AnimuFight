@@ -1,11 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://q1ydmwguookf"]
+[gd_scene load_steps=15 format=3 uid="uid://q1ydmwguookf"]
 
-[ext_resource type="Script" path="res://scripts/training.gd" id="1_5jbvl"]
+[ext_resource type="Script" uid="uid://cgmpx4iqj73rb" path="res://scripts/training.gd" id="1_5jbvl"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_ee4pl"]
 [ext_resource type="Texture2D" uid="uid://c43igrs7x6k5i" path="res://media/backgrounds/sfiv_training_stage.jpg" id="1_nitho"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="2_5llpx"]
 [ext_resource type="PackedScene" uid="uid://j5tjsuf8kmky" path="res://nodes/training_label.tscn" id="2_rxoxm"]
 [ext_resource type="PackedScene" uid="uid://dy6yy7k35k271" path="res://nodes/enemy_spawner.tscn" id="3_0jf8f"]
+[ext_resource type="Script" uid="uid://capwo1l2fq5f8" path="res://scripts/training_menu.gd" id="3_8ihin"]
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="4_wfxnw"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="5_4aqt5"]
 [ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="6_blm5w"]
@@ -54,10 +55,18 @@ text = "Dodge
 horizontal_alignment = 0
 
 [node name="TrainingMenu" type="Control" parent="CanvasLayer"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("3_8ihin")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TrainingMenu"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1256.0
+color = Color(0, 0, 0, 0.247059)
 
 [node name="VBoxContainer" type="HBoxContainer" parent="CanvasLayer/TrainingMenu"]
 layout_mode = 1

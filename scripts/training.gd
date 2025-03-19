@@ -28,9 +28,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("dodge"):
 		dodge_label.turn_green()
 	
-	if event.is_action_pressed("pause"):
-		training_menu.visible = !training_menu.visible
-
 
 func _on_clear_button_down() -> void:
 	enemy_spawner_8.enemy_to_spawn.clear()

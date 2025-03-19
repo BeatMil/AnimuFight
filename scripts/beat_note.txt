@@ -1,0 +1,29 @@
+[Doing]
+- Add each attack types has it's own unique sound and indicator (normal, unblock, throw)
+
+
+[Thougths]
+- Multi hit attack for enemy
+- Add slo-mo
+- combo system (enemy block after 3 hits)
+- enemy can block (mainly for combo system)
+- Something feels off playing my game
+- crawling enemy (soilder)
+
+
+[Bugs]
+- parry on the exact frame of getting hit result in nothing
+
+
+[Done]
+- Add random timer when enemy can attack ✓
+- Fix execute kills other enemy also ✓
+- Fixx chain executing ✓
+- Add player is iframe when executing ✓
+- Add execute animation to every enemy ✓
+- Add Finisher ✓
+- sifu block button ✓
+- Execute turn left and right ✓
+- Fix bounce together ✓
+- enemy01 block ✓
+- enemy counter attack after blocking 3 hits
