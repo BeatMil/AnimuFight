@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://dyjh8s2js473w"]
 
 [ext_resource type="Texture2D" uid="uid://dha81mc15kyq0" path="res://media/sprites/intro/vanilla01_big.png" id="1_fekf1"]
-[ext_resource type="Script" path="res://scripts/intro.gd" id="1_g0bkf"]
+[ext_resource type="Script" uid="uid://cnaw0ddi306st" path="res://scripts/intro.gd" id="1_g0bkf"]
 [ext_resource type="Texture2D" uid="uid://b35kk1n5ljxw7" path="res://media/sprites/intro/vanilla02_big.png" id="2_8qjfv"]
 [ext_resource type="AudioStream" uid="uid://ce2udyyndlaoa" path="res://media/sfxs/block-heel-footstep-1.mp3" id="3_pulv8"]
 [ext_resource type="AudioStream" uid="uid://8dpb5hfdf3ts" path="res://media/sfxs/block-heel-footstep-2.mp3" id="4_iuibl"]
@@ -500,10 +500,10 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r5ivo"]
 _data = {
-"RESET": SubResource("Animation_nlqrd"),
-"a": SubResource("Animation_q5q8l"),
-"b": SubResource("Animation_a760e"),
-"c": SubResource("Animation_h4ivh")
+&"RESET": SubResource("Animation_nlqrd"),
+&"a": SubResource("Animation_q5q8l"),
+&"b": SubResource("Animation_a760e"),
+&"c": SubResource("Animation_h4ivh")
 }
 
 [node name="Intro" type="Node2D"]
@@ -511,7 +511,7 @@ script = ExtResource("1_g0bkf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_r5ivo")
+&"": SubResource("AnimationLibrary_r5ivo")
 }
 autoplay = "a"
 

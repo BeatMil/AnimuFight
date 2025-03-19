@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Texture2D" uid="uid://d3rg7jxypamt" path="res://media/sprites/stage01/background.png" id="1_ktkfo"]
-[ext_resource type="Script" path="res://scripts/stage_01.gd" id="1_peto1"]
+[ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="2_i8ayn"]
 [ext_resource type="PackedScene" uid="uid://dy6yy7k35k271" path="res://nodes/enemy_spawner.tscn" id="3_65q8b"]
@@ -12,8 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="7_oruto"]
 [ext_resource type="AudioStream" uid="uid://empmuouv5f00" path="res://media/sfxs/small-rock-break-194553.mp3" id="10_xveav"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="11_g2h18"]
-[ext_resource type="Script" path="res://scripts/enemy_spawner2.gd" id="11_lcbfr"]
-[ext_resource type="Script" path="res://scripts/enemy_spawn_helper.gd" id="13_4slru"]
+[ext_resource type="Script" uid="uid://ckudchaksw6pd" path="res://scripts/enemy_spawner2.gd" id="11_lcbfr"]
+[ext_resource type="Script" uid="uid://duxhld58ww51q" path="res://scripts/enemy_spawn_helper.gd" id="13_4slru"]
 [ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_04.tscn" id="15_4fs8c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trh1p"]
@@ -40,7 +40,7 @@ tracks/0/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7tgyn"]
 _data = {
-"break_in": SubResource("Animation_o4icx")
+&"break_in": SubResource("Animation_o4icx")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
@@ -70,7 +70,7 @@ shape = SubResource("RectangleShape2D_trh1p")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DebrisArea2D"]
 libraries = {
-"": SubResource("AnimationLibrary_7tgyn")
+&"": SubResource("AnimationLibrary_7tgyn")
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DebrisArea2D"]
