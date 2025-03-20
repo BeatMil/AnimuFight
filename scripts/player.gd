@@ -287,7 +287,9 @@ func _lp() ->  void:
 	if Input.is_action_pressed("ui_right"):
 		sprite_2d.flip_h = false
 
-	if state == States.LP1:
+	if state == States.JF_SHOULDER:
+		animation_player.play("hp")
+	elif state == States.LP1:
 		animation_player.play("lp2")
 	elif state == States.LP2:
 		animation_player.play("lp3")
@@ -344,6 +346,24 @@ func lp3_info() -> void:
 	"damage": 2,
 	"type": Enums.Attack.NORMAL,
 	"zoom": Vector2(0.1, 0.1),
+	}
+	dict_to_spawn_hitbox(info)
+func lp4_info() -> void:
+	var info = {
+	"size": Hitbox_size.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(1200, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(1200, 0),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.3,
+	"hitstun_amount_ground": 1,
+	"hitlag_amount_air": 0.2,
+	"hitstun_amount_air": 1,
+	"screenshake_amount": Vector2(10, 0.2),
+	"damage": 3,
+	"type": Enums.Attack.NORMAL,
+	# "zoom": Vector2(1, 1),
 	}
 	dict_to_spawn_hitbox(info)
 

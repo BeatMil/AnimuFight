@@ -33,6 +33,7 @@ enum States {
 	EXECUTE,
 	IFRAME,
 	ARMOR,
+	JF_SHOULDER,
 	}
 
 
@@ -480,3 +481,7 @@ func dict_to_spawn_hitbox(info: Dictionary) -> void:
 func _remove_collision() -> void:
 	if is_instance_valid(collision_shape_2d):
 		collision_shape_2d.queue_free()
+
+
+func _show_attack_indicator(type: int) -> void:
+	ObjectPooling.spawn_attack_type_indicator(type, self.position)

@@ -7,13 +7,16 @@ var DEBRIS = preload("res://nodes/debris.tscn")
 @onready var debris_area_2d: Area2D = $DebrisArea2D
 @onready var no_door: Sprite2D = $DebrisArea2D/NoDoor
 @onready var player: CharacterBody2D = $Player
+@onready var music_player: AnimationPlayer = $MusicPlayer
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
-	pass
 	# Set camera lock
 	get_node_or_null("Player/Camera").set_screen_lock(0, 1920, 135, 1129)
 	get_node_or_null("Player/Camera").set_zoom(Vector2(1,1))
+
+	# Player ost
+	music_player.play("stage01_track_copyright")
 
 
 func _on_debris_area_2d_body_entered(body: Node2D) -> void:

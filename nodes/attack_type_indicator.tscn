@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bve7bot5aqykv"]
+[gd_scene load_steps=9 format=3 uid="uid://bve7bot5aqykv"]
 
 [ext_resource type="Texture2D" uid="uid://bkv2s7ayov3aa" path="res://media/sprites/vfx/attack_type_indicator.png" id="1_rw5cv"]
-[ext_resource type="Script" path="res://scripts/attack_type_indicator.gd" id="1_y41th"]
+[ext_resource type="Script" uid="uid://cnd6dhnufgsk7" path="res://scripts/attack_type_indicator.gd" id="1_y41th"]
 [ext_resource type="AudioStream" uid="uid://byhjsp00vvyku" path="res://media/sfxs/attack_indicator01.wav" id="2_jksnv"]
 
 [sub_resource type="Animation" id="Animation_83ccr"]
@@ -117,15 +117,54 @@ tracks/2/keys = {
 "values": [Color(1, 0.980098, 0.238933, 1), Color(1, 0.980098, 0.238933, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_0pbwi"]
+resource_name = "jf"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackTypeIndicator:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [Vector2(0.05, 0.05), Vector2(0.6, 0.6), Vector2(0.8, 0.8)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackTypeIndicator:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.44071, 1, 0.887259, 1), Color(0.176717, 0.366711, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i8s4r"]
 _data = {
-"RESET": SubResource("Animation_83ccr"),
-"alert_dodgable": SubResource("Animation_oecma"),
-"alert_parryable": SubResource("Animation_kblen")
+&"RESET": SubResource("Animation_83ccr"),
+&"alert_dodgable": SubResource("Animation_oecma"),
+&"alert_parryable": SubResource("Animation_kblen"),
+&"jf": SubResource("Animation_0pbwi")
 }
 
 [node name="AttackTypeIndicator" type="Node2D"]
-position = Vector2(720, 328)
 script = ExtResource("1_y41th")
 
 [node name="AttackTypeIndicator" type="Sprite2D" parent="."]
@@ -134,7 +173,7 @@ texture = ExtResource("1_rw5cv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_i8s4r")
+&"": SubResource("AnimationLibrary_i8s4r")
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

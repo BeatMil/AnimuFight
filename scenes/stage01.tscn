@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=25 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Texture2D" uid="uid://d3rg7jxypamt" path="res://media/sprites/stage01/background.png" id="1_ktkfo"]
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://ckudchaksw6pd" path="res://scripts/enemy_spawner2.gd" id="11_lcbfr"]
 [ext_resource type="Script" uid="uid://duxhld58ww51q" path="res://scripts/enemy_spawn_helper.gd" id="13_4slru"]
 [ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_04.tscn" id="15_4fs8c"]
+[ext_resource type="AudioStream" uid="uid://mt276xkpxtcc" path="res://media/ost/beat_river_city_detention.wav" id="16_puonp"]
+[ext_resource type="AudioStream" uid="uid://cns33kc20b478" path="res://media/ost/RCG_Detention.mp3" id="17_n5wlp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trh1p"]
 size = Vector2(32, 528)
@@ -45,6 +47,54 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
 size = Vector2(3334, 470)
+
+[sub_resource type="Animation" id="Animation_n5wlp"]
+resource_name = "stage01_track"
+length = 38.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MusicPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("16_puonp")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="Animation" id="Animation_apweq"]
+resource_name = "stage01_track_copyright"
+length = 130.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MusicPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.676579,
+"stream": ExtResource("17_n5wlp")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_apweq"]
+_data = {
+&"stage01_track": SubResource("Animation_n5wlp"),
+&"stage01_track_copyright": SubResource("Animation_apweq")
+}
 
 [node name="Stage01" type="Node2D"]
 script = ExtResource("1_peto1")
@@ -169,5 +219,12 @@ position = NodePath("../../SpawnPos/pos2")
 hp = 1000
 phase = 0
 object = ExtResource("15_4fs8c")
+
+[node name="MusicPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_apweq")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MusicPlayer"]
 
 [connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]
