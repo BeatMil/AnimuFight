@@ -34,6 +34,9 @@ enum States {
 	IFRAME,
 	ARMOR,
 	JF_SHOULDER,
+	TA,
+	SPELL,
+	TAN,
 	}
 
 

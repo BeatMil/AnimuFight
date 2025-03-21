@@ -198,14 +198,13 @@ func _physics_process(delta: float) -> void:
 	##################
 	## Input buffer
 	##################
-	if next_move and input_buffer_timer > 0 and state not in [States.ATTACK, States.HP]:
+	if next_move and input_buffer_timer > 0 and state not in [States.ATTACK]:
 		next_move.call()
 		next_move = null
 		input_buffer_timer = 0
 
 	if Input.is_action_just_pressed("lp"):
 		queue_move(_lp)
-
 
 	if Input.is_action_just_pressed("hp"):
 		queue_move(_hp)
@@ -369,24 +368,20 @@ func lp4_info() -> void:
 
 
 func _hp() ->  void:
-	if state in [
-		States.IDLE,
-		States.PARRY_SUCCESS,
-		States.LP1,
-		States.LP2,
-		States.LP3,
-		States.DODGE_SUCCESS
-		]:
-		if Input.is_action_pressed("ui_left"):
-			sprite_2d.flip_h = true
+	if Input.is_action_pressed("ui_left"):
+		sprite_2d.flip_h = true
 
-		if Input.is_action_pressed("ui_right"):
-			sprite_2d.flip_h = false
+	if Input.is_action_pressed("ui_right"):
+		sprite_2d.flip_h = false
 
-		if Input.is_action_pressed("ui_down"):
-			animation_player.play("down_hp")
-		else:
-			animation_player.play("hp")
+	if state == States.TA:
+		animation_player.play("spell")
+	elif state == States.SPELL:
+		animation_player.play("tan")
+	elif Input.is_action_pressed("ui_down"):
+		animation_player.play("down_hp")
+	elif state in [States.IDLE, States.PARRY_SUCCESS, States.DODGE_SUCCESS]: ## <<-- start with this one
+		animation_player.play("ta")
 
 func hp_info() ->  void:
 	var info = {
@@ -445,7 +440,41 @@ func burst_info() ->  void:
 	"zoom_duration": 0.05,
 	}
 	dict_to_spawn_hitbox(info)
-
+func ta_info() -> void:
+	var info = {
+	"size": Hitbox_size.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(200, 0),
+	"push_type_ground": Enums.Push_types.NORMAL,
+	"push_power_air": Vector2(100, -150),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.8,
+	"hitlag_amount_air": 0.1,
+	"hitstun_amount_air": 0.8,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 2,
+	"type": Enums.Attack.NORMAL,
+	}
+	dict_to_spawn_hitbox(info)
+func tan_info() -> void:
+	var info = {
+	"size": Hitbox_size.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(300, -250),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(50, -300),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.5,
+	"hitstun_amount_ground": 2,
+	"hitlag_amount_air": 0.5,
+	"hitstun_amount_air": 2,
+	"screenshake_amount": Vector2(10, 0.2),
+	"damage": 4,
+	"type": Enums.Attack.NORMAL,
+	"zoom": Vector2(0.2, 0.2),
+	}
+	dict_to_spawn_hitbox(info)
 
 
 func _down_hp() ->  void:
@@ -546,6 +575,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"burst",
 		"hp",
 		"down_hp",
+		"ta",
+		"spell",
+		"tan",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:
