@@ -12,6 +12,7 @@ collision_layer = 0
 wait_time = 2.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SmolBus"
 
 [node name="QueueFreeTimer" type="Timer" parent="."]
 one_shot = true

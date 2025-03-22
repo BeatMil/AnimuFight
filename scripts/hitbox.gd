@@ -89,7 +89,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			type,
 			zoom,
 			zoom_duration)
-		if body.state not in [body.States.BLOCK, body.States.ARMOR]:
+		if body.state not in [
+			body.States.BLOCK,
+			body.States.PARRY,
+			body.States.ARMOR,
+			]:
 			_play_hit_random_pitch()
 
 
