@@ -1,22 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://crrt1gda6poxi"]
 
-[ext_resource type="Script" path="res://scripts/hitbox_lp.gd" id="1_y8fx6"]
+[ext_resource type="PackedScene" uid="uid://jgmjqpnytm3v" path="res://nodes/hitboxes/hitbox_base.tscn" id="1_ru3k1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0cl5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jpqck"]
 size = Vector2(1152, 512)
 
-[node name="HitboxBurst" type="Node2D"]
-editor_description = "Large hitbox"
-script = ExtResource("1_y8fx6")
+[node name="HitboxLP" instance=ExtResource("1_ru3k1")]
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_m0cl5")
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_jpqck")

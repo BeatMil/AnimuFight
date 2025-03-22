@@ -3,8 +3,10 @@ extends Node2D
 #############################################################
 ## Node Ref
 #############################################################
-@onready var timer: Timer = $Timer
+@onready var active_frame_timer: Timer = $ActiveFrameTimer
 @onready var area_2d: Area2D = $Area2D
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var hit_noise = preload("res://media/sfxs/gc_punch.wav")
 
 
 #############################################################
@@ -12,7 +14,7 @@ extends Node2D
 #############################################################
 var is_hit_player: bool = false
 var is_hit_enemy: bool = false
-var time_left_before_queue_free: float = 1.0
+var active_frame: float = 1.0
 var push_power_ground: Vector2 = Vector2(20, 0)
 var push_type_ground: Enums.Push_types = Enums.Push_types.NORMAL
 var push_power_air: Vector2 = Vector2(20, 0)
@@ -32,8 +34,8 @@ var zoom_duration = 0.1
 ## Built-in
 #############################################################
 func _ready() -> void:
-	timer.wait_time = time_left_before_queue_free
-	timer.start()
+	active_frame_timer.wait_time = active_frame
+	active_frame_timer.start()
 	if is_hit_player:
 		_set_collision_hit_player()
 	
@@ -50,6 +52,12 @@ func _set_collision_hit_enemy() -> void:
 
 func _set_collision_hit_player() -> void:
 	area_2d.collision_mask = 0b00000000000000000001
+
+
+func _play_hit_random_pitch():
+	audio_stream_player.stream = hit_noise
+	audio_stream_player.pitch_scale = randf_range(0.8, 1.2)
+	audio_stream_player.play()
 
 
 #############################################################
@@ -81,7 +89,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			type,
 			zoom,
 			zoom_duration)
+		if body.state not in [body.States.BLOCK, body.States.ARMOR]:
+			_play_hit_random_pitch()
+
 
 
 func _on_timer_timeout() -> void:
+	area_2d.monitoring = false
+
+
+func _on_queue_free_timer_timeout() -> void:
 	queue_free()

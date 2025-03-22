@@ -242,7 +242,7 @@ func _spawn_lp_hitbox(
 	hitbox.zoom = _zoom
 	hitbox.zoom_duration = _zoom_duration
 
-	hitbox.time_left_before_queue_free = _time
+	hitbox.active_frame = _time
 
 	add_child(hitbox)
 
