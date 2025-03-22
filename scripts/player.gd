@@ -6,7 +6,7 @@ extends "res://scripts/base_character.gd"
 #############################################################
 @onready var debug_label: Label = $CanvasLayer/DebugLabel
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
-@onready var hit_noise = preload("res://media/sfxs/equip01.wav")
+@onready var hit_noise = preload("res://media/sfxs/gc_punch_whiff.wav")
 
 
 #############################################################
