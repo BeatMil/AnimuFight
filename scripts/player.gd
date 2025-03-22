@@ -202,6 +202,8 @@ func _physics_process(delta: float) -> void:
 		next_move.call()
 		next_move = null
 		input_buffer_timer = 0
+	elif input_buffer_timer > 0:
+		input_buffer_timer -= delta
 
 	if Input.is_action_just_pressed("lp"):
 		queue_move(_lp)
@@ -209,10 +211,10 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("hp"):
 		queue_move(_hp)
 
-	if input_buffer_timer > 0:
-		input_buffer_timer -= delta
 
+	##################
 	## Block buffer
+	##################
 	_check_block_buffer(delta)
 
 	if state in [States.THROW_BREAKABLE]:

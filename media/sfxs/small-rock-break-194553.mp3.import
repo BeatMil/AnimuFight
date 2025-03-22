@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/small-rock-break-194553.mp3-dea9d30fe65bd77d5
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

@@ -37,6 +37,7 @@ enum States {
 	TA,
 	SPELL,
 	TAN,
+	NOBUFFER,
 	}
 
 
