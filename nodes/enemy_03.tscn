@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://deiem1ppktdd1"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_s0c21"]
-[ext_resource type="Script" path="res://scripts/enemy_03.gd" id="2_ojqxk"]
+[ext_resource type="Script" uid="uid://c83k5mr0day5l" path="res://scripts/enemy_03.gd" id="2_ojqxk"]
 [ext_resource type="Texture2D" uid="uid://cgfatex7tr6k4" path="res://media/sprites/enemy03/enemy03_towl_attack_sprite.png" id="4_null1"]
 [ext_resource type="AudioStream" uid="uid://3eyk8460sfvf" path="res://media/sfxs/charge01.wav" id="5_o5mf3"]
 [ext_resource type="AudioStream" uid="uid://dy3bxvokjiup5" path="res://media/sfxs/big_fireball.wav" id="6_qyyl8"]
@@ -956,16 +956,16 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vpy1p"]
 _data = {
-"RESET": SubResource("Animation_6qu24"),
-"attack01_1": SubResource("Animation_ivnih"),
-"blockstunned": SubResource("Animation_mdpfo"),
-"ded": SubResource("Animation_2lu41"),
-"down": SubResource("Animation_1md8d"),
-"execute": SubResource("Animation_rcrsp"),
-"hitted": SubResource("Animation_us36h"),
-"idle": SubResource("Animation_5se3t"),
-"lp1": SubResource("Animation_uesu2"),
-"walk": SubResource("Animation_fngeq")
+&"RESET": SubResource("Animation_6qu24"),
+&"attack01_1": SubResource("Animation_ivnih"),
+&"blockstunned": SubResource("Animation_mdpfo"),
+&"ded": SubResource("Animation_2lu41"),
+&"down": SubResource("Animation_1md8d"),
+&"execute": SubResource("Animation_rcrsp"),
+&"hitted": SubResource("Animation_us36h"),
+&"idle": SubResource("Animation_5se3t"),
+&"lp1": SubResource("Animation_uesu2"),
+&"walk": SubResource("Animation_fngeq")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1h3d5"]
@@ -995,11 +995,11 @@ shape = SubResource("RectangleShape2D_8jfq2")
 position = Vector2(168, 0)
 
 [node name="TowlPos" type="Marker2D" parent="HitBoxPos" index="1"]
-position = Vector2(88, -56)
+position = Vector2(256, -56)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 libraries = {
-"": SubResource("AnimationLibrary_vpy1p")
+&"": SubResource("AnimationLibrary_vpy1p")
 }
 
 [node name="Timer" type="Timer" parent="." index="5"]
