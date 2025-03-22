@@ -93,7 +93,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			body.States.BLOCK,
 			body.States.PARRY,
 			body.States.ARMOR,
-			]:
+			] and name != "HitboxTowl":
 			_play_hit_random_pitch()
 
 
