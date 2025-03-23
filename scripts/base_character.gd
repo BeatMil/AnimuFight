@@ -394,7 +394,9 @@ func hitted(
 			stun_duration = hitstun_amount
 			state = States.BOUNCE_STUNNED
 		elif hp_bar.get_hp() <= 0:
-			if push_type in [Enums.Push_types.KNOCKDOWN, Enums.Push_types.EXECUTE]:
+			if push_type in [
+			Enums.Push_types.KNOCKDOWN,
+			Enums.Push_types.EXECUTE] and state == States.EXECUTETABLE:
 				animation_player.stop(true)
 				animation_player.play("ded")
 				stun_duration = hitstun_amount
