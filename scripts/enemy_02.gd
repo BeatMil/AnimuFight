@@ -115,8 +115,14 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_attack_timer_timeout() -> void:
+	if state != States.IDLE:
+		return
 	if randi_range(0, 1) == 0:
 		return
+	if not AttackQueue.can_attack:
+		return
+	# Reset attack queue
+	AttackQueue.start_queue_timer()
 
 	if is_player_in_range_attack01:
 		_attack01()
