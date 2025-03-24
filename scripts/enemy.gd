@@ -126,9 +126,12 @@ func _add_block_count(amount: int):
 
 
 func _on_bounce_together_body_entered(body: Node2D) -> void:
-	if velocity.length() < 1000:
+	if velocity.length() < 500:
 		return
-	if self.state in [States.BOUNCE_STUNNED] and body.state != States.BOUNCE_STUNNED:
+	## Hit other enemy
+	if self.state in [States.BOUNCE_STUNNED, States.EXECUTETABLE] \
+	and body.state != States.BOUNCE_STUNNED:
+		printt("===bounce_together===")
 		body.hitted(
 			self,
 			true,
