@@ -15,4 +15,5 @@ enum Attack{
 	NORMAL,
 	UNBLOCK,
 	THROW,
+	P_THROW,
 }

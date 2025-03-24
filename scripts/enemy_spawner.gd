@@ -16,7 +16,10 @@ func _spawn_enemy() -> void:
 	var bob = enemy_to_spawn.pick_random()
 	var e = bob.instantiate()
 	e.position = self.position
-	e.target = target
+	if not target:
+		e.is_notarget = true
+	else:
+		e.target = target
 	enemy_count.add_child(e)
 
 

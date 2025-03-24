@@ -26,6 +26,7 @@ var block_buffer_time := 0.2
 var block_buffer_timer := 0.0
 
 var body_in_execution_ranges = []
+var grabbed_enemy: Object
 
 var debug_input_event = null
 
@@ -211,6 +212,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("hp"):
 		queue_move(_hp)
 
+	if Input.is_action_just_pressed("grab"):
+		queue_move(_grab)
+
 
 	##################
 	## Block buffer
@@ -240,6 +244,10 @@ func _physics_process(delta: float) -> void:
 #############################################################
 func set_camera(value: bool):
 	$Camera.get_node("Camera2D").enabled = value
+
+
+func set_grabbed_enemy(enemy: Object) -> void:
+	grabbed_enemy = enemy
 
 
 #############################################################
@@ -403,25 +411,6 @@ func hp_info() ->  void:
 	# "zoom": Vector2(1, 1),
 	}
 	dict_to_spawn_hitbox(info)
-func down_hp_info() ->  void:
-	var info = {
-	"size": Hitbox_size.LARGE,
-	"time": 0.1,
-	"push_power_ground": Vector2(0, -200),
-	"push_type_ground": Enums.Push_types.KNOCKDOWN,
-	"push_power_air": Vector2(0, -200),
-	"push_type_air": Enums.Push_types.KNOCKDOWN,
-	"hitlag_amount_ground": 0.1,
-	"hitstun_amount_ground": 1,
-	"hitlag_amount_air": 0.0,
-	"hitstun_amount_air": 1,
-	"screenshake_amount": Vector2(10, 0.1),
-	"damage": 2,
-	"type": Enums.Attack.NORMAL,
-	"pos": $HitBoxPos/DownHpPos.position,
-	# "zoom": Vector2(1, 1),
-	}
-	dict_to_spawn_hitbox(info)
 func burst_info() ->  void:
 	var info = {
 	"size": Hitbox_size.BURST,
@@ -488,6 +477,89 @@ func _down_hp() ->  void:
 			sprite_2d.flip_h = false
 
 		animation_player.play("down_hp")
+func down_hp_info() ->  void:
+	var info = {
+	"size": Hitbox_size.LARGE,
+	"time": 0.1,
+	"push_power_ground": Vector2(0, -200),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(0, -200),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 1,
+	"hitlag_amount_air": 0.0,
+	"hitstun_amount_air": 1,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 2,
+	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/DownHpPos.position,
+	# "zoom": Vector2(1, 1),
+	}
+	dict_to_spawn_hitbox(info)
+
+
+func _grab() ->  void:
+	if Input.is_action_pressed("ui_left"):
+		sprite_2d.flip_h = true
+
+	if Input.is_action_pressed("ui_right"):
+		sprite_2d.flip_h = false
+
+	if state in [States.GRABSTANCE]:
+		animation_player.play("throw_enemy")
+		
+		grabbed_enemy.set_physics_process(true)
+		grabbed_enemy.hitted(
+			self,
+			$Sprite2D.flip_h,
+			Vector2(-1200, -30),
+			1,
+			0.1,
+			0.1,
+			Vector2(0, 0),
+			1,
+			0,
+		)
+		grabbed_enemy = null
+	elif state in [States.IDLE, States.PARRY_SUCCESS, States.LP1, States.LP2, States.LP3,]: ## <<-- start with this one
+		animation_player.play("grab")
+func grab_info() -> void:
+	var info = {
+	"size": Hitbox_size.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(50, 0),
+	"push_type_ground": Enums.Push_types.NORMAL,
+	"push_power_air": Vector2(100, -150),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.5,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 1,
+	"type": Enums.Attack.P_THROW,
+	}
+	dict_to_spawn_hitbox(info)
+func throw_info() -> void:
+	var info = {
+	"size": Hitbox_size.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(600, -10),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(1200, -10),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.2,
+	"hitstun_amount_ground": 2,
+	"hitlag_amount_air": 0.2,
+	"hitstun_amount_air": 2,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 1,
+	"type": Enums.Attack.NORMAL,
+	"zoom": Vector2(0.2, 0.2),
+	"pos": $HitBoxPos/GrabAttackPos.position,
+	}
+	print("throw_info()")
+	dict_to_spawn_hitbox(info)
 
 
 #############################################################
@@ -562,6 +634,8 @@ func execute_carnaging(pos: Vector2) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", pos+offset, 0.2).set_trans(Tween.TRANS_CUBIC)
 
+func enter_grab_stance() -> void:
+	animation_player.play("grab_stance")
 
 #############################################################
 ## Signals
@@ -580,6 +654,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"ta",
 		"spell",
 		"tan",
+		"grab",
+		"throw_enemy",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:

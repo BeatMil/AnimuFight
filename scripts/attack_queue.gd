@@ -12,6 +12,11 @@ func start_queue_timer():
 	print_rich("[color=yellow][b]run: wait 1 sec[/b][/color]")
 
 
+func stop_queue_timer():
+	can_attack = false
+	attack_queue_timer.stop()
+
+
 func _on_attack_queue_timer_timeout() -> void:
 	can_attack = true
 	attack_queue_timer.stop()

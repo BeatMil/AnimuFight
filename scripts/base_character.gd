@@ -38,6 +38,8 @@ enum States {
 	SPELL,
 	TAN,
 	NOBUFFER,
+	GRABSTANCE,
+	GRABBED,
 	}
 
 
@@ -328,17 +330,21 @@ func hitted(
 	_zoom: Vector2 = Vector2(0, 0),
 	_zoom_duration: float = 0.1
 	) -> void:
+	## TANK
 	if is_in_group("enemy") and _type != Enums.Attack.UNBLOCK and state not in [
 		States.HIT_STUNNED,
 		States.EXECUTETABLE,
 		States.BOUNCE_STUNNED,
 		States.ARMOR,
 		States.ATTACK,
+		States.GRABBED,
 		]:
-		if is_in_group("tank") or randi_range(0, 1) == 0:
+		if is_in_group("tank") or randi_range(0, 0) == 0:
 			state = States.BLOCK
 			animation_player.stop()
 			animation_player.play("blockstunned")
+
+	## Parry & Parry Success
 	if state in [States.PARRY, States.PARRY_SUCCESS] and _type == Enums.Attack.NORMAL:
 		animation_player.play("parry_success")
 		_attacker.hitted(
@@ -352,6 +358,7 @@ func hitted(
 			1,
 			Enums.Attack.UNBLOCK
 		)
+	## BLOCK & ARMOR
 	elif state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR] and _type == Enums.Attack.NORMAL:
 		if state == States.ARMOR:
 			hp_bar.hp_down(_damage)
@@ -376,17 +383,51 @@ func hitted(
 			ObjectPooling.spawn_blockSpark_2(position)
 		else:
 			ObjectPooling.spawn_blockSpark_1(position)
+
+	## DODGE & DODGE_SUCCESS
 	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW:
 		if _type == Enums.Attack.UNBLOCK:
 			animation_player.play("dodge_success_zoom")
 		else:
 			animation_player.play("dodge_success")
+
+	## Spawn blockspark on IFRAME
 	elif state in [States.IFRAME, States.EXECUTE]:
 		ObjectPooling.spawn_blockSpark_1(position)
 	elif _type == Enums.Attack.THROW:
 		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
 		animation_player.play("throw_stunned")
-	else:
+
+	## Player grab hits
+	elif _type == Enums.Attack.P_THROW:
+		# Player enter grab stance
+		if _attacker.has_method("enter_grab_stance"):
+			_attacker.enter_grab_stance()
+			_attacker.set_grabbed_enemy(self)
+
+		# Enemy got grabbed into position
+		animation_player.play("throw_stunned")
+		self.can_move = false
+		var grab_pos :Vector2
+		if _attacker.sprite_2d.flip_h:
+			grab_pos = _attacker.get_node_or_null("HitBoxPos/GrabPosL").global_position
+		else:
+			grab_pos = _attacker.get_node_or_null("HitBoxPos/GrabPosR").global_position
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "position", grab_pos, 0.1).set_trans(Tween.TRANS_CUBIC)
+		await get_tree().create_timer(0.1).timeout
+		set_physics_process(false)
+
+	##################
+	# - Do damage
+	# - play animation base on push type
+	# - hit stun
+	# - hit lag
+	# - screenshake
+	# - zoom
+	# - Too many things T^T
+	##################
+	else: # Do damage and push type
 		hp_bar.hp_down(_damage)
 		if _attacker.is_in_group("death_zone"):
 			animation_player.stop(true)

@@ -22,6 +22,7 @@ enum {
 var speed: int = 600
 var is_player_in_range_lp: bool = false
 var is_player_in_range_attack01: bool = false
+var can_move: bool = true
 
 var block_count := 0
 
@@ -68,7 +69,7 @@ func _physics_process(delta: float) -> void:
 	## Keep the stun duration while in air
 	## start stun duration when on floor
 	if stun_duration > 0 and \
-		state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED]:
+		state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED, States.GRABBED]:
 		if is_on_floor():
 			stun_duration -= delta
 		collision_layer = 0b00000000000000010000
@@ -92,6 +93,8 @@ func _physics_process(delta: float) -> void:
 ## Private Function
 #############################################################
 func _move( delta) -> void:
+	if not can_move:
+		return
 	if animation_player.has_animation("walk"):
 		animation_player.play("walk")
 	if is_instance_valid(target) and not is_notarget:
@@ -123,6 +126,12 @@ func _check_block_count() -> void:
 ## Use in AnimationPlayer
 func _add_block_count(amount: int):
 	block_count += amount
+
+
+func set_collision_no_hit_player() -> void:
+	collision_layer = 0b00000000000000010000
+	collision_mask = 0b00000000000000001100
+
 
 
 func _on_bounce_together_body_entered(body: Node2D) -> void:
