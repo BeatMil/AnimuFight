@@ -164,7 +164,8 @@ enemy_to_spawn = [ExtResource("4_ts7c8"), ExtResource("5_guyb5"), ExtResource("6
 is_active = false
 
 [node name="Wall" parent="." instance=ExtResource("7_oruto")]
-position = Vector2(-112, 0)
+position = Vector2(-232, 0)
+scale = Vector2(1.88, 1)
 
 [node name="WallInvi" parent="." instance=ExtResource("11_g2h18")]
 position = Vector2(2146, 352)
