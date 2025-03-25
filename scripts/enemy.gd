@@ -48,6 +48,16 @@ func _physics_process(delta: float) -> void:
 	## wall bounce
 	_check_wall_bounce()
 
+	if state in [States.IDLE]:
+		if is_on_floor():
+			# touch everything
+			collision_layer = 0b00000000000000000010
+			collision_mask = 0b00000000000000001111
+		else:
+			# no touch both player & enemy
+			collision_layer = 0b00000000000000010000
+			collision_mask = 0b00000000000000001100
+
 	is_face_right = not sprite_2d.flip_h
 	# _z_index_equal_to_y()
 	if state == States.IDLE:
@@ -72,15 +82,11 @@ func _physics_process(delta: float) -> void:
 		state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED, States.GRABBED]:
 		if is_on_floor():
 			stun_duration -= delta
-		collision_layer = 0b00000000000000010000
-		collision_mask = 0b00000000000000001100
 	elif stun_duration < 0:
 		# state = States.IDLE
 		if hp_bar.get_hp() <= 0:
 			queue_free()
 		animation_player.play("idle")
-		collision_layer = 0b00000000000000000010
-		collision_mask = 0b00000000000000001111
 		stun_duration = 0
 
 	_check_block_count()
