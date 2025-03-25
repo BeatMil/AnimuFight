@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="8_yi24k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
-size = Vector2(3334, 470)
+size = Vector2(4478, 470)
 
 [node name="training" type="Node2D"]
 script = ExtResource("1_5jbvl")
@@ -125,6 +125,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(-572, 0)
 shape = SubResource("RectangleShape2D_jd0co")
 
 [node name="Ground" type="Sprite2D" parent="Floor"]
@@ -142,18 +143,23 @@ target = NodePath("../Player")
 enemy_to_spawn = [ExtResource("4_wfxnw"), ExtResource("5_4aqt5"), ExtResource("6_blm5w")]
 is_active = false
 
-[node name="EnemySpawner9" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
-position = Vector2(392, -112)
+[node name="EnemySpawner8" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
+position = Vector2(-184, -168)
 target = NodePath("../Player")
-enemy_to_spawn = [ExtResource("4_wfxnw"), ExtResource("5_4aqt5"), ExtResource("6_blm5w")]
 is_active = false
 
-[node name="EnemySpawner8" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
-position = Vector2(1560, -120)
+[node name="EnemySpawner9" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
+position = Vector2(248, -168)
 target = NodePath("../Player")
+is_active = false
+
+[node name="EnemySpawner10" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
+position = Vector2(248, -168)
+target = NodePath("../Player")
+enemy_to_spawn = [ExtResource("6_blm5w")]
 
 [node name="Wall" parent="." instance=ExtResource("7_8vboe")]
-position = Vector2(-632, 0)
+position = Vector2(-1160, -24)
 
 [node name="Wall2" parent="." instance=ExtResource("7_8vboe")]
 position = Vector2(2392, 88)

@@ -16,6 +16,7 @@ extends Node2D
 
 func _ready() -> void:
 	training_menu.visible = false
+	# AttackQueue.stop_queue_timer()
 
 
 func _input(event: InputEvent) -> void:
