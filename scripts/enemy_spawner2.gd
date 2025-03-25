@@ -5,7 +5,7 @@ extends Node2D
 # @export var enemy_to_spawn: Array[Node]
 @export var enemy_to_spawn: Array[Node]
 @export var is_active: bool = true
-var phase: int = 0
+var phase: int = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,11 +13,12 @@ func _ready() -> void:
 
 
 func _spawn_enemy() -> void:
-	var enemy_to_spawn_copy = enemy_to_spawn.duplicate()
+	# Parry array out of index error
+	if phase-1 >= len(enemy_to_spawn):
+		return
+	var enemy_to_spawn_copy = enemy_to_spawn[phase-1].get_children().duplicate()
 
 	for enemy in enemy_to_spawn_copy:
-		if enemy.phase != phase:
-			continue
 		var e = enemy.object.instantiate()
 		e.position = enemy.position.position
 		e.target = target

@@ -179,9 +179,93 @@ position = Vector2(1888, 624)
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("11_lcbfr")
 target = NodePath("../Player")
-enemy_to_spawn = [NodePath("../EnemySpawnHelper/e1"), NodePath("../EnemySpawnHelper/e2"), NodePath("../EnemySpawnHelper/e1"), NodePath("../EnemySpawnHelper/e3"), NodePath("../EnemySpawnHelper/e4")]
+enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpawnHelper/Phase2"), NodePath("../EnemySpawnHelper/Phase3"), NodePath("../EnemySpawnHelper/Phase4"), NodePath("../EnemySpawnHelper/Phase5")]
 
 [node name="enemyCount" type="Node" parent="EnemySpawnerNew"]
+
+[node name="EnemySpawnHelper" type="Node" parent="."]
+
+[node name="e4" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../SpawnPos/pos2")
+hp = 1000
+object = ExtResource("15_4fs8c")
+
+[node name="Phase1" type="Node" parent="EnemySpawnHelper"]
+
+[node name="e1" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos1")
+hp = 10
+object = ExtResource("4_ts7c8")
+
+[node name="e2" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos1")
+hp = 10
+object = ExtResource("4_ts7c8")
+
+[node name="Phase2" type="Node" parent="EnemySpawnHelper"]
+
+[node name="e2" type="Node" parent="EnemySpawnHelper/Phase2" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos2")
+hp = 10
+object = ExtResource("5_guyb5")
+
+[node name="Phase3" type="Node" parent="EnemySpawnHelper"]
+
+[node name="e3" type="Node" parent="EnemySpawnHelper/Phase3" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos2")
+hp = 20
+object = ExtResource("6_7tguj")
+
+[node name="Phase4" type="Node" parent="EnemySpawnHelper"]
+
+[node name="e2" type="Node" parent="EnemySpawnHelper/Phase4" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos1")
+hp = 10
+object = ExtResource("4_ts7c8")
+
+[node name="e3" type="Node" parent="EnemySpawnHelper/Phase4" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos1")
+hp = 10
+object = ExtResource("4_ts7c8")
+
+[node name="e4" type="Node" parent="EnemySpawnHelper/Phase4" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos2")
+hp = 10
+object = ExtResource("5_guyb5")
+
+[node name="Phase5" type="Node" parent="EnemySpawnHelper"]
+
+[node name="e2" type="Node" parent="EnemySpawnHelper/Phase5" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos3")
+hp = 10
+object = ExtResource("4_ts7c8")
+
+[node name="e3" type="Node" parent="EnemySpawnHelper/Phase5" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos3")
+hp = 10
+object = ExtResource("4_ts7c8")
+
+[node name="e4" type="Node" parent="EnemySpawnHelper/Phase5" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos2")
+hp = 10
+object = ExtResource("5_guyb5")
+
+[node name="e5" type="Node" parent="EnemySpawnHelper/Phase5" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos2")
+hp = 10
+object = ExtResource("5_guyb5")
 
 [node name="SpawnPos" type="Node" parent="."]
 
@@ -191,34 +275,8 @@ position = Vector2(1497, -340)
 [node name="pos2" type="Marker2D" parent="SpawnPos"]
 position = Vector2(2842, 585)
 
-[node name="EnemySpawnHelper" type="Node" parent="."]
-
-[node name="e1" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
-script = ExtResource("13_4slru")
-position = NodePath("../../SpawnPos/pos1")
-hp = 10
-object = ExtResource("4_ts7c8")
-
-[node name="e2" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
-script = ExtResource("13_4slru")
-position = NodePath("../../SpawnPos/pos2")
-hp = 10
-phase = 2
-object = ExtResource("5_guyb5")
-
-[node name="e3" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
-script = ExtResource("13_4slru")
-position = NodePath("../../SpawnPos/pos2")
-hp = 20
-phase = 3
-object = ExtResource("6_7tguj")
-
-[node name="e4" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
-script = ExtResource("13_4slru")
-position = NodePath("../../SpawnPos/pos2")
-hp = 1000
-phase = 0
-object = ExtResource("15_4fs8c")
+[node name="pos3" type="Marker2D" parent="SpawnPos"]
+position = Vector2(186, -351)
 
 [node name="MusicPlayer" type="AnimationPlayer" parent="."]
 libraries = {
