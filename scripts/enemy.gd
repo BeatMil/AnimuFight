@@ -116,6 +116,10 @@ func _facing() -> void:
 func _check_block_count() -> void:
 	if block_count >= 3:
 		# do the attack!
+		if not AttackQueue.can_attack:
+			return
+		# Reset attack queue
+		AttackQueue.start_queue_timer()
 		_attack01()
 		block_count = 0
 
@@ -132,6 +136,15 @@ func set_collision_no_hit_player() -> void:
 	collision_layer = 0b00000000000000010000
 	collision_mask = 0b00000000000000001100
 
+
+func set_collision_no_hit_enemy() -> void:
+	collision_layer = 0b00000000000000010000
+	collision_mask = 0b00000000000000001101
+
+
+func set_collision_normal() -> void:
+	collision_layer = 0b00000000000000000010
+	collision_mask = 0b00000000000000001111
 
 
 func _on_bounce_together_body_entered(body: Node2D) -> void:

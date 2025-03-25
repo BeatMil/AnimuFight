@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://byhjsp00vvyku" path="res://media/sfxs/attack_indicator01.wav" id="13_l7sfr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
-size = Vector2(128, 336)
+size = Vector2(64, 336)
 
 [sub_resource type="Animation" id="Animation_6qu24"]
 length = 0.001
@@ -134,9 +134,12 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.8),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"set_collision_no_hit_enemy"
+}, {
 "args": [],
 "method": &"attack01_info"
 }]
@@ -789,11 +792,14 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [0],
 "method": &"_set_state"
+}, {
+"args": [],
+"method": &"set_collision_normal"
 }]
 }
 
@@ -1263,6 +1269,20 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_collision_normal"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vpy1p"]
