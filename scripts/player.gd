@@ -637,6 +637,15 @@ func execute_carnaging(pos: Vector2) -> void:
 func enter_grab_stance() -> void:
 	animation_player.play("grab_stance")
 
+
+func set_collision_no_hit_enemy() -> void:
+	collision_layer = 0b00000000000000000001
+	collision_mask = 0b00000000000000001101
+
+
+func set_collision_normal() -> void:
+	collision_layer = 0b00000000000000000001
+	collision_mask = 0b00000000000000001110
 #############################################################
 ## Signals
 #############################################################
