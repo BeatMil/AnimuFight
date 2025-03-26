@@ -33,8 +33,7 @@ var debug_input_event = null
 var can_block_states = [
 		States.IDLE,
 		States.PARRY_SUCCESS,
-		# States.PARRY,
-		# States.BLOCK,
+		States.DODGE_SUCCESS,
 		States.LP1,
 		States.LP2,
 		States.LP3,
