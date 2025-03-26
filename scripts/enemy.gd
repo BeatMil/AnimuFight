@@ -21,6 +21,7 @@ enum {
 # var is_face_right:bool = true
 var speed: int = 600
 var is_player_in_range_lp: bool = false
+var is_enemy_in_range_lp: bool = false
 var is_player_in_range_attack01: bool = false
 var can_move: bool = true
 
@@ -62,7 +63,7 @@ func _physics_process(delta: float) -> void:
 	# _z_index_equal_to_y()
 	if state == States.IDLE:
 		_facing()
-		if not is_player_in_range_lp:
+		if not is_player_in_range_lp and not is_enemy_in_range_lp:
 			_move(delta)
 		else:
 			# lerp when finding player
