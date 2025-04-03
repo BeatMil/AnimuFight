@@ -619,6 +619,7 @@ func exe_hadoken_info() ->  void:
 	}
 	dict_to_spawn_hitbox(info)
 
+
 func execute_carnaging(pos: Vector2) -> void:
 	# choose to go through enemy or not
 	if Input.is_action_pressed("ui_left"):

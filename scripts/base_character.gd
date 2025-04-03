@@ -339,7 +339,7 @@ func hitted(
 		States.ATTACK,
 		States.GRABBED,
 		]:
-		if is_in_group("tank") or randi_range(0, 0) == 0:
+		if is_in_group("tank") or randi_range(0, 1) == 0:
 			state = States.BLOCK
 			animation_player.stop()
 			animation_player.play("blockstunned")

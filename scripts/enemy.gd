@@ -83,6 +83,7 @@ func _physics_process(delta: float) -> void:
 		state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED, States.GRABBED]:
 		if is_on_floor():
 			stun_duration -= delta
+			set_collision_normal()
 		else:
 			set_collision_no_hit_player()
 	elif stun_duration < 0:

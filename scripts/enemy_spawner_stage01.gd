@@ -2,12 +2,11 @@ extends Node2D
 
 @onready var enemy_count: Node = $enemyCount
 @export var target: CharacterBody2D
-# @export var enemy_to_spawn: Array[Node]
 @export var enemy_to_spawn: Array[Node]
 @export var is_active: bool = true
-var phase: int = 3
+var phase: int = 0
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	pass
 
@@ -28,8 +27,9 @@ func _spawn_enemy() -> void:
 		await get_tree().create_timer(0.1).timeout
 	
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if len(enemy_count.get_children()) <= 0 and is_active:
+		if phase == 5:
+			get_parent().emit_signal("shoot_up_house")
 		phase += 1
 		_spawn_enemy()
