@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d1lat4kavmnt0"]
 
-[ext_resource type="Script" path="res://scripts/hit_spark.gd" id="1_rv1cv"]
+[ext_resource type="Script" uid="uid://bmc7j7j0ykd0g" path="res://scripts/hit_spark.gd" id="1_rv1cv"]
 
 [sub_resource type="Gradient" id="Gradient_fopcf"]
 colors = PackedColorArray(0.934474, 0.215268, 0.215268, 1, 0.920897, 0.916355, 0.363548, 1)
@@ -32,11 +32,11 @@ script = ExtResource("1_rv1cv")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 16
-process_material = SubResource("ParticleProcessMaterial_se36l")
 lifetime = 6.0
 one_shot = true
 speed_scale = 10.0
 explosiveness = 1.0
 fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_se36l")
 
 [connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]
