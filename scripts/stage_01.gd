@@ -10,6 +10,7 @@ var DEBRIS_UP = preload("res://nodes/debris_upward.tscn")
 @onready var player: CharacterBody2D = $Player
 @onready var music_player: AnimationPlayer = $MusicPlayer
 @onready var animation_player: AnimationPlayer = $Background/AnimationPlayer
+@onready var wind_sound_player: AnimationPlayer = $Background/WindSoundPlayer
 @onready var bounce_to_left: Area2D = $BounceToLeft
 @onready var bounce_to_right: Area2D = $BounceToRight
 @onready var spawn_debris_fx: Node = $SpawnDebrisFX
@@ -30,6 +31,7 @@ func _ready() -> void:
 
 func _shoot_up_house() -> void:
 	animation_player.play("shoot_up")
+	wind_sound_player.play("wind_sound")
 	get_node_or_null("Player/Camera").set_screen_lock(-200, 2200, 0, -1300)
 	get_node_or_null("Player/Camera").zoom_permanent(Vector2(-0.2, -0.2))
 	for pos in spawn_debris_fx.get_children():

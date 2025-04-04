@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=42 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Texture2D" uid="uid://d3rg7jxypamt" path="res://media/sprites/stage01/background.png" id="1_ktkfo"]
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="4_ts7c8"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="5_guyb5"]
 [ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="6_7tguj"]
+[ext_resource type="AudioStream" uid="uid://cytm062ygh22j" path="res://media/sfxs/wind-artificial-18750.mp3" id="7_k6ebi"]
 [ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="7_oruto"]
 [ext_resource type="AudioStream" uid="uid://empmuouv5f00" path="res://media/sfxs/small-rock-break-194553.mp3" id="10_xveav"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="11_g2h18"]
@@ -20,6 +21,21 @@
 [ext_resource type="AudioStream" uid="uid://cns33kc20b478" path="res://media/ost/RCG_Detention.mp3" id="17_n5wlp"]
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="20_k6ebi"]
 [ext_resource type="Texture2D" uid="uid://np2no54r3gdy" path="res://media/vfx/animu_fast_fx_3f.png" id="20_xgmne"]
+
+[sub_resource type="Animation" id="Animation_qfycc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_aodgi"]
 resource_name = "cloud"
@@ -37,21 +53,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
-}
-
-[sub_resource type="Animation" id="Animation_qfycc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tfhs6"]
@@ -343,6 +344,31 @@ _data = {
 &"shoot_up": SubResource("Animation_xgmne")
 }
 
+[sub_resource type="Animation" id="Animation_tfhs6"]
+resource_name = "wind_sound"
+length = 330.0
+loop_mode = 1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WindSoundPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_k6ebi")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_up7wt"]
+_data = {
+&"wind_sound": SubResource("Animation_tfhs6")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trh1p"]
 size = Vector2(32, 528)
 
@@ -526,6 +552,13 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Background"]
+
+[node name="WindSoundPlayer" type="AnimationPlayer" parent="Background"]
+libraries = {
+&"": SubResource("AnimationLibrary_up7wt")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Background/WindSoundPlayer"]
 
 [node name="DebrisArea2D" type="Area2D" parent="."]
 position = Vector2(2403, 609)
@@ -715,6 +748,17 @@ position = Vector2(-552, 840)
 
 [node name="pos5" type="Marker2D" parent="SpawnPos"]
 position = Vector2(2648, 874)
+
+[node name="SpawnDebrisFX" type="Node" parent="."]
+
+[node name="pos1" type="Marker2D" parent="SpawnDebrisFX"]
+position = Vector2(496, 1008)
+
+[node name="pos2" type="Marker2D" parent="SpawnDebrisFX"]
+position = Vector2(1040, 1016)
+
+[node name="pos3" type="Marker2D" parent="SpawnDebrisFX"]
+position = Vector2(1584, 1000)
 
 [node name="BounceToLeft" type="Area2D" parent="."]
 position = Vector2(2536, 1186)
