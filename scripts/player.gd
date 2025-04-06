@@ -443,7 +443,7 @@ func ta_info() -> void:
 	"hitlag_amount_air": 0.1,
 	"hitstun_amount_air": 0.8,
 	"screenshake_amount": Vector2(10, 0.1),
-	"damage": 2,
+	"damage": 3,
 	"type": Enums.Attack.NORMAL,
 	}
 	dict_to_spawn_hitbox(info)

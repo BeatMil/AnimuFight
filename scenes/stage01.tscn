@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=44 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Texture2D" uid="uid://d3rg7jxypamt" path="res://media/sprites/stage01/background.png" id="1_ktkfo"]
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://duxhld58ww51q" path="res://scripts/enemy_spawn_helper.gd" id="13_4slru"]
 [ext_resource type="AudioStream" uid="uid://mt276xkpxtcc" path="res://media/ost/beat_river_city_detention.wav" id="16_puonp"]
 [ext_resource type="AudioStream" uid="uid://cns33kc20b478" path="res://media/ost/RCG_Detention.mp3" id="17_n5wlp"]
+[ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_04.tscn" id="19_ymxnp"]
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="20_k6ebi"]
 [ext_resource type="Texture2D" uid="uid://np2no54r3gdy" path="res://media/vfx/animu_fast_fx_3f.png" id="20_xgmne"]
 
@@ -405,6 +406,9 @@ size = Vector2(1600, 470)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ebi"]
 size = Vector2(560, 48)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymxnp"]
+size = Vector2(304, 20)
+
 [sub_resource type="Animation" id="Animation_n5wlp"]
 resource_name = "stage01_track"
 length = 38.4
@@ -636,7 +640,7 @@ position = Vector2(1888, 624)
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("11_lcbfr")
 target = NodePath("../Player")
-enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpawnHelper/Phase2"), NodePath("../EnemySpawnHelper/Phase3"), NodePath("../EnemySpawnHelper/Phase4"), NodePath("../EnemySpawnHelper/Phase5"), NodePath("../EnemySpawnHelper/Phase6")]
+enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpawnHelper/Phase2"), NodePath("../EnemySpawnHelper/Phase3"), NodePath("../EnemySpawnHelper/Phase4"), NodePath("../EnemySpawnHelper/Phase5"), NodePath("../EnemySpawnHelper/Phase6"), NodePath("../EnemySpawnHelper/Phase7")]
 
 [node name="enemyCount" type="Node" parent="EnemySpawnerNew"]
 
@@ -732,6 +736,14 @@ position = NodePath("../../../SpawnPos/pos5")
 hp = 10
 object = ExtResource("5_guyb5")
 
+[node name="Phase7" type="Node" parent="EnemySpawnHelper"]
+
+[node name="e4" type="Node" parent="EnemySpawnHelper/Phase7" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos6")
+hp = 200
+object = ExtResource("19_ymxnp")
+
 [node name="SpawnPos" type="Node" parent="."]
 
 [node name="pos1" type="Marker2D" parent="SpawnPos"]
@@ -748,6 +760,9 @@ position = Vector2(-552, 840)
 
 [node name="pos5" type="Marker2D" parent="SpawnPos"]
 position = Vector2(2648, 874)
+
+[node name="pos6" type="Marker2D" parent="SpawnPos"]
+position = Vector2(3520, 368)
 
 [node name="SpawnDebrisFX" type="Node" parent="."]
 
@@ -776,6 +791,15 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceToRight"]
 shape = SubResource("RectangleShape2D_k6ebi")
 
+[node name="HelicopSpawn" type="Area2D" parent="."]
+position = Vector2(3328, 816)
+collision_layer = 0
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HelicopSpawn"]
+shape = SubResource("RectangleShape2D_ymxnp")
+metadata/_edit_group_ = true
+
 [node name="MusicPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_apweq")
@@ -790,3 +814,4 @@ scale = Vector2(2966.4, 27.747)
 [connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]
 [connection signal="body_entered" from="BounceToLeft" to="." method="_on_bounce_to_left_body_entered"]
 [connection signal="body_entered" from="BounceToRight" to="." method="_on_bounce_to_right_body_entered"]
+[connection signal="body_entered" from="HelicopSpawn" to="." method="_on_helicop_spawn_body_entered"]
