@@ -492,7 +492,8 @@ func hitted(
 				print_debug("screenshake can't find player/camera")
 		if _zoom:
 			if get_tree().current_scene.get_node_or_null("Player/Camera"):
-				get_tree().current_scene.get_node_or_null("Player/Camera").zoom(_zoom, _zoom_duration)
+				get_tree().current_scene.get_node_or_null(
+				"Player/Camera").zoom(_zoom, _zoom_duration)
 			else:
 				print_debug("_zoom can't find player/camera")
 

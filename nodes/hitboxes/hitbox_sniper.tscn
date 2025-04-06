@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwsruq8f6pn7t"]
+
+[ext_resource type="Script" uid="uid://cykug20ebc6x7" path="res://scripts/hitbox_sniper.gd" id="1_j0uuw"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_j0uuw"]
+b = Vector2(-192, 64)
+
+[node name="HitboxSniper" type="Node2D"]
+script = ExtResource("1_j0uuw")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("SegmentShape2D_j0uuw")
+
+[node name="ActiveFrameTimer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SmolBus"
+
+[node name="QueueFreeTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="ActiveFrameTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="QueueFreeTimer" to="." method="_on_queue_free_timer_timeout"]
