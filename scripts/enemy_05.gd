@@ -188,8 +188,7 @@ func _on_lp_range_r_body_exited(body: Node2D) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	# if anim_name in ["lp1", "attack01_1", "hitted", "down"]:
 	if anim_name in ["lp1", "attack01_1"]:
-		animation_player.play("idle")
-		state = States.IDLE
+		animation_player.play("ded")
 	if anim_name in ["ded"]:
 		queue_free()
 
