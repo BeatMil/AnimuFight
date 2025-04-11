@@ -1136,6 +1136,7 @@ hp = 10
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("11_wp7b3")
 hframes = 2
+frame = 1
 
 [node name="CollisionShape2D" parent="." index="1"]
 visible = false
