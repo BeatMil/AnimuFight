@@ -118,11 +118,17 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.8),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
+"method": &"look_at_player"
+}, {
+"args": [],
 "method": &"attack01_info"
+}, {
+"args": [],
+"method": &"look_normal"
 }]
 }
 tracks/4/type = "method"
@@ -149,11 +155,14 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.6),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [20],
 "method": &"_push_x"
+}, {
+"args": [],
+"method": &"look_at_player"
 }]
 }
 tracks/6/type = "value"

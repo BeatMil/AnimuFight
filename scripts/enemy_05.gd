@@ -49,6 +49,14 @@ func _physics_process(delta: float) -> void:
 	$DebugLabel.text = "%s, %s"%[States.keys()[state], animation_player.current_animation]
 
 
+func look_at_player() -> void:
+	sprite_2d.look_at(target.position)
+
+
+func look_normal() -> void:
+	sprite_2d.rotation = 0
+
+
 #############################################################
 ## Attack Info
 #############################################################
@@ -87,6 +95,7 @@ func attack01_info() -> void: # for animation_player
 	hit_box_sniper.push_type_air = Enums.Push_types.KNOCKDOWN
 	hit_box_sniper.hitstun_amount_ground = 0.2
 	hit_box_sniper.hitstun_amount_air = 0.2
+	hit_box_sniper.type = Enums.Attack.UNBLOCK
 	hit_box_sniper.damage = 3
 	hit_box_sniper.screenshake_amount = Vector2(50, 0.1)
 	hit_box_sniper.self_pos = self.position
