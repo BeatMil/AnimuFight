@@ -192,7 +192,7 @@ tracks/4/keys = {
 "args": [22],
 "method": &"_set_state"
 }, {
-"args": [5],
+"args": [22],
 "method": &"_set_state"
 }]
 }
@@ -1116,6 +1116,7 @@ texture = ExtResource("3_o3tk8")
 offset = Vector2(-7.27271, -256)
 
 [node name="Sprite2D" parent="." index="1"]
+self_modulate = Color(1, 0.622999, 0.353401, 1)
 position = Vector2(0, -104)
 scale = Vector2(1, 1)
 texture = ExtResource("3_b5ln6")
