@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c4m5deiee8q8w"]
+[gd_scene load_steps=34 format=3 uid="uid://c4m5deiee8q8w"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_uha72"]
 [ext_resource type="Texture2D" uid="uid://hfw58i0oa1gv" path="res://media/sprites/boss01/boss01_idle.png" id="2_410lf"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://b6syt0rhv2dwx" path="res://media/sprites/char2/SecondChar_hitted.png" id="11_udaod"]
 [ext_resource type="Texture2D" uid="uid://0oyannu7by8u" path="res://media/sprites/char2/enemy01_lp_01.png" id="12_fe8ni"]
 [ext_resource type="Texture2D" uid="uid://dxod1gcjs71jv" path="res://media/sprites/char2/SecondChar_fireball.png" id="13_884lv"]
+[ext_resource type="Texture2D" uid="uid://dbnp5jxael7oj" path="res://media/sprites/boss01/boss01_hitted.png" id="13_n4s7b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(64, 304)
@@ -621,7 +622,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_udaod")]
+"values": [ExtResource("13_n4s7b")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
