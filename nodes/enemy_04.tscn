@@ -1102,7 +1102,7 @@ size = Vector2(240, 304)
 
 [node name="Enemy04" groups=["character", "enemy", "tank"] instance=ExtResource("1_0oxe2")]
 collision_layer = 2
-collision_mask = 15
+collision_mask = 14
 script = ExtResource("2_g0tmf")
 is_notarget = false
 hp = 1000
@@ -1124,12 +1124,6 @@ texture = ExtResource("3_b5ln6")
 position = Vector2(0, 0)
 shape = SubResource("RectangleShape2D_8jfq2")
 
-[node name="LpPos" parent="HitBoxPos" index="0"]
-position = Vector2(352, 0)
-
-[node name="TowlPos" type="Marker2D" parent="HitBoxPos" index="1"]
-position = Vector2(88, -56)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 libraries = {
 &"": SubResource("AnimationLibrary_vpy1p")
@@ -1137,6 +1131,12 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="." index="6"]
 editor_description = "Prevent lp() when ded"
+
+[node name="LpPos" parent="HitBoxPos" index="0"]
+position = Vector2(352, 0)
+
+[node name="TowlPos" type="Marker2D" parent="HitBoxPos" index="1"]
+position = Vector2(88, -56)
 
 [node name="LpRangeR" type="Area2D" parent="." index="8"]
 monitoring = false

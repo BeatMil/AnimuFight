@@ -58,16 +58,17 @@ func _on_debris_area_2d_body_entered(body: Node2D) -> void:
 
 func _on_bounce_to_left_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		body._push_direct(Vector2(-200, -500))
-		await get_tree().create_timer(5).timeout
-		bounce_to_left.queue_free()
+		if !body.is_jump_spawn:
+			body._push_direct(Vector2(-200, -500))
+			body.is_jump_spawn = true
+
 
 
 func _on_bounce_to_right_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		body._push_direct(Vector2(200, -500))
-		await get_tree().create_timer(5).timeout
-		bounce_to_right.queue_free()
+		if !body.is_jump_spawn:
+			body._push_direct(Vector2(200, -500))
+			body.is_jump_spawn = true
 
 
 func _on_helicop_spawn_body_entered(body: Node2D) -> void:

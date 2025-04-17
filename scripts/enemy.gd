@@ -24,6 +24,7 @@ var is_player_in_range_lp: bool = false
 var is_enemy_in_range_lp: bool = false
 var is_player_in_range_attack01: bool = false
 var can_move: bool = true
+var is_jump_spawn: bool = false
 
 var block_count := 0
 
