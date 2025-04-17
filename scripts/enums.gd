@@ -16,4 +16,5 @@ enum Attack{
 	UNBLOCK,
 	THROW,
 	P_THROW,
+	P_PARRY,
 }

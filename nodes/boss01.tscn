@@ -864,7 +864,7 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.533333),
+"times": PackedFloat32Array(0, 0.5, 1.05),
 "transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [21],
@@ -1283,9 +1283,6 @@ hframes = 4
 position = Vector2(0, 0)
 shape = SubResource("RectangleShape2D_8jfq2")
 
-[node name="LpPos" parent="HitBoxPos" index="0"]
-position = Vector2(168, 0)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 libraries = {
 &"": SubResource("AnimationLibrary_i6yam")
@@ -1293,6 +1290,9 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="." index="5"]
 editor_description = "Prevent lp() when ded"
+
+[node name="LpPos" parent="HitBoxPos" index="0"]
+position = Vector2(168, 0)
 
 [node name="LpRangeR" type="Area2D" parent="." index="7"]
 collision_mask = 3

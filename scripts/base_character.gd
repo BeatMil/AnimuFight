@@ -63,7 +63,7 @@ const HITBOX_HAMMER = preload("res://nodes/hitboxes/hitbox_hammer.tscn")
 const HITBOX_BURST = preload("res://nodes/hitboxes/hitbox_burst.tscn")
 const HITBOX_TOWL = preload("res://nodes/hitboxes/hitbox_towl.tscn")
 const HITBOX_EXE = preload("res://nodes/hitboxes/hitbox_execute.tscn")
-
+const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 
 #############################################################
 ## Node Ref
@@ -338,6 +338,7 @@ func hitted(
 		States.ARMOR,
 		States.ATTACK,
 		States.GRABBED,
+		States.IFRAME,
 		]:
 		if is_in_group("tank") or randi_range(0, 1) == 0:
 			state = States.BLOCK
@@ -356,10 +357,11 @@ func hitted(
 			1,
 			Vector2(10, 0.1),
 			1,
-			Enums.Attack.UNBLOCK
+			Enums.Attack.P_PARRY
 		)
 	## BLOCK & ARMOR
-	elif state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR] and _type == Enums.Attack.NORMAL:
+	elif state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR] and \
+		_type in [Enums.Attack.NORMAL, Enums.Attack.P_PARRY]:
 		if state == States.ARMOR:
 			hp_bar.hp_down(_damage)
 		elif is_in_group("player"):
@@ -498,6 +500,10 @@ func hitted(
 				print_debug("_zoom can't find player/camera")
 
 		ObjectPooling.spawn_hitSpark_1(position)
+		## Player Parries
+		if _type == Enums.Attack.P_PARRY:
+			$AudioStreamPlayer2.stream = HIT_2
+			$AudioStreamPlayer2.play()
 
 
 ## This whole thing is to make it easire to adjust attack info ┐(￣～￣)┌ 

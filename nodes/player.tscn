@@ -10,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="8_g2x0t"]
 [ext_resource type="Texture2D" uid="uid://b8oot3yuu2abo" path="res://media/sprites/char1/FirstChar_block.png" id="11_xlakb"]
 [ext_resource type="Texture2D" uid="uid://lv36w4jharr6" path="res://media/sprites/char1/vanilla_parry.png" id="12_qibk4"]
-[ext_resource type="AudioStream" uid="uid://df46krxsmcibv" path="res://media/sfxs/parry_success.wav" id="13_utayp"]
 [ext_resource type="AudioStream" uid="uid://bgq36rpoccy71" path="res://media/sfxs/explosion.wav" id="14_3ws5c"]
 [ext_resource type="Texture2D" uid="uid://yrt3sen6gru3" path="res://media/sprites/char1/vanilla_hp_smear3.png" id="15_nfs1e"]
 [ext_resource type="Texture2D" uid="uid://biakq81e3u6ff" path="res://media/sprites/char1/upper_new.png" id="15_r80xo"]
@@ -27,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://qmkiulh3xujh" path="res://media/sprites/char1/vanilla_walk_sprite.png" id="25_pe3tb"]
 [ext_resource type="Texture2D" uid="uid://cicwhb3qtkp6g" path="res://media/sprites/char1/FirstChar_fireball.png" id="26_qgu4g"]
 [ext_resource type="Texture2D" uid="uid://bjx3xcvn7uxj8" path="res://media/sprites/char1/ta_spell_tan.png" id="26_wq1x7"]
+[ext_resource type="AudioStream" uid="uid://12ywm87vlbh2" path="res://media/sfxs/Landing_RawMeat02.wav" id="27_7y217"]
 [ext_resource type="AudioStream" uid="uid://dy3bxvokjiup5" path="res://media/sfxs/big_fireball.wav" id="27_gkh8s"]
 [ext_resource type="Texture2D" uid="uid://cwyapci5xu52d" path="res://media/sprites/char1/grab_stance.png" id="28_2bfwe"]
 [ext_resource type="AudioStream" uid="uid://chnn83cu2f3jx" path="res://media/sfxs/grabbed.wav" id="28_7y217"]
@@ -2184,7 +2184,7 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("13_utayp")
+"stream": ExtResource("27_7y217")
 }],
 "times": PackedFloat32Array(0)
 }

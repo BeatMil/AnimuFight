@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://kniacsvw6ecd"]
 
-[ext_resource type="Script" path="res://scripts/base_character.gd" id="1_bdlv5"]
+[ext_resource type="Script" uid="uid://didjqt6ro50xj" path="res://scripts/base_character.gd" id="1_bdlv5"]
 [ext_resource type="Texture2D" uid="uid://44is7mymlst6" path="res://media/sprites/temp_char/template_girl_hitted.png" id="2_22dny"]
 [ext_resource type="PackedScene" uid="uid://cwih0xhe7lqho" path="res://nodes/hp_bar.tscn" id="3_w1yxx"]
 
@@ -19,6 +19,8 @@ position = Vector2(-118, 0)
 shape = SubResource("RectangleShape2D_kyba8")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 
 [node name="HitBoxPos" type="Node2D" parent="."]
 
