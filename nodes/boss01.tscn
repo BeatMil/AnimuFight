@@ -1,21 +1,25 @@
-[gd_scene load_steps=34 format=3 uid="uid://c4m5deiee8q8w"]
+[gd_scene load_steps=38 format=3 uid="uid://c4m5deiee8q8w"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_uha72"]
 [ext_resource type="Texture2D" uid="uid://hfw58i0oa1gv" path="res://media/sprites/boss01/boss01_idle.png" id="2_410lf"]
-[ext_resource type="Script" uid="uid://hyjgv4558hu" path="res://scripts/enemy_01.gd" id="2_t8hwo"]
+[ext_resource type="Script" uid="uid://c0wmpifdv685d" path="res://scripts/boss01.gd" id="2_n4s7b"]
 [ext_resource type="Texture2D" uid="uid://b37gvfgvbnllu" path="res://media/sprites/char2/attack01/enemy01_jump_attack01.png" id="3_2tsd0"]
 [ext_resource type="Texture2D" uid="uid://bv3b4qfbwkkfp" path="res://media/sprites/char2/attack01/enemy01_jump_attack02.png" id="4_fxlhn"]
 [ext_resource type="AudioStream" uid="uid://3eyk8460sfvf" path="res://media/sfxs/charge01.wav" id="5_xbwuq"]
 [ext_resource type="AudioStream" uid="uid://dy3bxvokjiup5" path="res://media/sfxs/big_fireball.wav" id="6_n4s7b"]
 [ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="6_prwho"]
-[ext_resource type="Texture2D" uid="uid://crek0vunmpec" path="res://media/sprites/char2/SecondChar_block.png" id="7_hr7wc"]
+[ext_resource type="Texture2D" uid="uid://cjnolmhpi5gha" path="res://media/sprites/boss01/boss01_block.png" id="8_hr7wc"]
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="8_inh40"]
-[ext_resource type="Texture2D" uid="uid://b22ob737caxc1" path="res://media/sprites/char2/enemy01_down.png" id="9_5k0ii"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="10_uhi2f"]
 [ext_resource type="Texture2D" uid="uid://b6syt0rhv2dwx" path="res://media/sprites/char2/SecondChar_hitted.png" id="11_udaod"]
 [ext_resource type="Texture2D" uid="uid://0oyannu7by8u" path="res://media/sprites/char2/enemy01_lp_01.png" id="12_fe8ni"]
+[ext_resource type="Texture2D" uid="uid://bv5ugu5wvlbs8" path="res://media/sprites/boss01/boss01_down.png" id="12_hr7wc"]
 [ext_resource type="Texture2D" uid="uid://dxod1gcjs71jv" path="res://media/sprites/char2/SecondChar_fireball.png" id="13_884lv"]
+[ext_resource type="Texture2D" uid="uid://ippwfwsdixpq" path="res://media/sprites/boss01/boss01_tatsu_anim.png" id="13_inh40"]
 [ext_resource type="Texture2D" uid="uid://dbnp5jxael7oj" path="res://media/sprites/boss01/boss01_hitted.png" id="13_n4s7b"]
+[ext_resource type="Texture2D" uid="uid://bswk48xnujm50" path="res://media/sprites/boss01/boss01_tatsu.png" id="14_5k0ii"]
+[ext_resource type="Texture2D" uid="uid://c3vbjp5ndcvay" path="res://media/sprites/boss01/boss01_tatsu2.png" id="15_5k0ii"]
+[ext_resource type="AudioStream" uid="uid://debrnx2edkqvf" path="res://media/sfxs/PunchAttack2.wav" id="16_uhi2f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(64, 304)
@@ -240,7 +244,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_hr7wc")]
+"values": [ExtResource("8_hr7wc")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -350,7 +354,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_5k0ii")]
+"values": [ExtResource("12_hr7wc")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -443,7 +447,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_5k0ii")]
+"values": [ExtResource("12_hr7wc")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -533,7 +537,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_udaod")]
+"values": [ExtResource("13_n4s7b")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -671,7 +675,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -25)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -781,7 +785,7 @@ tracks/5/keys = {
 [sub_resource type="Animation" id="Animation_12rkp"]
 resource_name = "lp1"
 length = 1.5
-step = 0.0166667
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -789,10 +793,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 0.65, 0.8, 0.95, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("12_fe8ni"), ExtResource("13_884lv")]
+"values": [ExtResource("13_inh40"), ExtResource("14_5k0ii"), ExtResource("15_5k0ii"), ExtResource("14_5k0ii"), ExtResource("15_5k0ii"), ExtResource("14_5k0ii")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -806,11 +810,19 @@ tracks/1/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("5_xbwuq")
 }, {
-"end_offset": 0.0,
+"end_offset": 0.144746,
 "start_offset": 0.0,
-"stream": ExtResource("6_n4s7b")
+"stream": ExtResource("16_uhi2f")
+}, {
+"end_offset": 0.144746,
+"start_offset": 0.0,
+"stream": ExtResource("16_uhi2f")
+}, {
+"end_offset": 0.144746,
+"start_offset": 0.0,
+"stream": ExtResource("16_uhi2f")
 }],
-"times": PackedFloat32Array(0, 0.5)
+"times": PackedFloat32Array(0, 0.5, 0.8, 1.1)
 }
 tracks/1/use_blend = true
 tracks/2/type = "value"
@@ -832,11 +844,17 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.5, 0.8, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
 "method": &"lp_info"
+}, {
+"args": [],
+"method": &"lp_info"
+}, {
+"args": [],
+"method": &"tatsu_end_info"
 }]
 }
 tracks/4/type = "method"
@@ -849,7 +867,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.5, 0.533333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
-"args": [1],
+"args": [21],
 "method": &"_set_state"
 }, {
 "args": [400],
@@ -866,10 +884,10 @@ tracks/5/path = NodePath("Sprite2D:offset")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0, 1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, -50)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1253,7 +1271,7 @@ size = Vector2(144, 304)
 [node name="Enemy" groups=["character", "enemy"] instance=ExtResource("1_uha72")]
 collision_layer = 2
 collision_mask = 15
-script = ExtResource("2_t8hwo")
+script = ExtResource("2_n4s7b")
 is_notarget = false
 hp = 20
 
