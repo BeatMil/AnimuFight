@@ -90,7 +90,6 @@ func _on_lp_range_r_body_entered(body: Node2D) -> void:
 		sprite_2d.flip_h = false
 		is_player_in_range_lp = true
 		_on_attack_timer_timeout()
-		attack_timer.start()
 	elif body.is_in_group("enemy") \
 		and target.position.x > position.x:
 		is_enemy_in_range_lp = true
@@ -101,37 +100,14 @@ func _on_lp_range_l_body_entered(body: Node2D) -> void:
 		sprite_2d.flip_h = true
 		is_player_in_range_lp = true
 		_on_attack_timer_timeout()
-		attack_timer.start()
 	elif body.is_in_group("enemy") \
 		and target.position.x < position.x:
 		is_enemy_in_range_lp = true
 
 
-func _on_attack_01_range_r_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		sprite_2d.flip_h = false
-		is_player_in_range_attack01 = true
-		_on_attack_timer_timeout()
-		attack_timer.start()
-
-func _on_attack_01_range_l_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		sprite_2d.flip_h = true
-		is_player_in_range_attack01 = true
-		_on_attack_timer_timeout()
-		attack_timer.start()
-
-
-func _on_attack_range_01r_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		is_player_in_range_attack01 = false
-		attack_timer.stop()
-
-
 func _on_lp_range_r_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		is_player_in_range_lp = false
-		attack_timer.stop()
 	elif body.is_in_group("enemy"):
 		is_enemy_in_range_lp = false
 

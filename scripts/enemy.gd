@@ -98,7 +98,7 @@ func _physics_process(delta: float) -> void:
 	_check_block_count()
 
 	## debug
-	$DebugLabel.text = "%s, %s"%[States.keys()[state], animation_player.current_animation]
+	$DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
 
 
 #############################################################
@@ -117,12 +117,10 @@ func _move( delta) -> void:
 
 
 func _facing() -> void:
-	if velocity.x > 0 :
+	if target.position.x > position.x:
 		sprite_2d.flip_h = false
-	elif velocity.x < 0 :
+	else:
 		sprite_2d.flip_h = true
-	elif velocity.x == 0:
-		pass
 
 
 func _check_block_count() -> void:

@@ -349,7 +349,7 @@ func hitted(
 			animation_player.play("blockstunned")
 
 	## Parry & Parry Success
-	if state in [States.PARRY, States.PARRY_SUCCESS] and _type == Enums.Attack.NORMAL:
+	if state in [States.PARRY] and _type == Enums.Attack.NORMAL:
 		animation_player.play("parry_success")
 		_attacker.hitted(
 			self,
@@ -371,11 +371,12 @@ func hitted(
 			else:
 				print_debug("_zoom can't find player/camera")
 	## BLOCK & ARMOR
-	elif state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR] and \
+	elif state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR, States.PARRY_SUCCESS] and \
 		_type in [Enums.Attack.NORMAL, Enums.Attack.P_PARRY]:
 		if state == States.ARMOR:
 			hp_bar.hp_down(_damage)
 		elif is_in_group("player"):
+			animation_player.play("blockstunned")
 			hp_bar.hp_down(_damage/2)
 		else:
 			animation_player.stop()
