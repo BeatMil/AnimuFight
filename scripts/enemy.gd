@@ -117,6 +117,8 @@ func _move( delta) -> void:
 
 
 func _facing() -> void:
+	if not target:
+		return
 	if target.position.x > position.x:
 		sprite_2d.flip_h = false
 	else:
