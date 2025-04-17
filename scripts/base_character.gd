@@ -194,6 +194,7 @@ func _spawn_lp_hitbox(
 	_pos: Vector2 = Vector2(168, 0),
 	_zoom: Vector2 = Vector2(0.8, 0.8),
 	_zoom_duration: float = 0.1,
+	_slow_mo_on_block: Vector2 = Vector2.ZERO
 	) -> void:
 
 	var hitbox: Node2D
@@ -243,6 +244,7 @@ func _spawn_lp_hitbox(
 	hitbox.type = _type
 	hitbox.zoom = _zoom
 	hitbox.zoom_duration = _zoom_duration
+	hitbox.slow_mo_on_block = _slow_mo_on_block
 
 	hitbox.active_frame = _time
 
@@ -328,7 +330,8 @@ func hitted(
 	_damage: int = 1,
 	_type: int = 0,
 	_zoom: Vector2 = Vector2(0, 0),
-	_zoom_duration: float = 0.1
+	_zoom_duration: float = 0.1,
+	slow_mo_on_block: Vector2 = Vector2(0, 0)
 	) -> void:
 	## TANK
 	if is_in_group("enemy") and _type != Enums.Attack.UNBLOCK and state not in [
@@ -359,6 +362,14 @@ func hitted(
 			1,
 			Enums.Attack.P_PARRY
 		)
+		print_rich("[color=pink][b]COOL SLOW MO!![/b][/color]", slow_mo_on_block)
+		if slow_mo_on_block:
+			_slow_moion(slow_mo_on_block.x, slow_mo_on_block.y)
+			if get_tree().current_scene.get_node_or_null("Player/Camera"):
+				get_tree().current_scene.get_node_or_null(
+				"Player/Camera").zoom_zoom(_zoom, _zoom_duration)
+			else:
+				print_debug("_zoom can't find player/camera")
 	## BLOCK & ARMOR
 	elif state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR] and \
 		_type in [Enums.Attack.NORMAL, Enums.Attack.P_PARRY]:
@@ -525,7 +536,8 @@ func dict_to_spawn_hitbox(info: Dictionary) -> void:
 	info.get("type", Enums.Attack.NORMAL),
 	info.get("pos", Vector2(168, 0)),
 	info.get("zoom", Vector2(0, 0)),
-	info.get("zoom_duration", 0.1)
+	info.get("zoom_duration", 0.1),
+	info.get("slow_mo_on_block", Vector2.ZERO)
 	)
 
 
@@ -539,3 +551,9 @@ func _remove_collision() -> void:
 
 func _show_attack_indicator(type: int) -> void:
 	ObjectPooling.spawn_attack_type_indicator(type, self.position)
+
+
+func _slow_moion(level, length) -> void:
+	Engine.time_scale = level
+	await get_tree().create_timer(length/level).timeout
+	Engine.time_scale = 1.0

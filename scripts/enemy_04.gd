@@ -154,7 +154,8 @@ func hitted(
 	_damage: int = 1,
 	_type: int = 0,
 	_zoom: Vector2 = Vector2(0, 0),
-	_zoom_duration: float = 0.1
+	_zoom_duration: float = 0.1,
+	slow_mo_on_block: Vector2 = Vector2(0, 0)
 	) -> void:
 	## TANK
 	if is_in_group("enemy") and _type != Enums.Attack.UNBLOCK and state not in [

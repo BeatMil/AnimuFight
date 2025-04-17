@@ -2162,6 +2162,7 @@ tracks/7/keys = {
 [sub_resource type="Animation" id="Animation_d5ek5"]
 resource_name = "parry_success"
 length = 0.3
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2196,10 +2197,13 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [8],
+"method": &"_set_state"
+}, {
+"args": [6],
 "method": &"_set_state"
 }]
 }
@@ -2953,6 +2957,11 @@ texture = ExtResource("3_uo2uk")
 position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_47ont")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_1o8ps")
+}
+
 [node name="LpPos" parent="HitBoxPos" index="0"]
 position = Vector2(144, 8)
 
@@ -2970,11 +2979,6 @@ position = Vector2(-112, -120)
 
 [node name="BurstPos" type="Marker2D" parent="HitBoxPos" index="5"]
 position = Vector2(0, 8)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
-libraries = {
-&"": SubResource("AnimationLibrary_1o8ps")
-}
 
 [node name="Camera" parent="." index="7" instance=ExtResource("4_uqopg")]
 

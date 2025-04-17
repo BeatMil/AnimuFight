@@ -28,6 +28,7 @@ var damage: int = 0
 var type = Enums.Attack.NORMAL
 var zoom = Vector2(0.8, 0.8)
 var zoom_duration = 0.1
+var slow_mo_on_block = Vector2(0, 0)
 
 
 #############################################################
@@ -76,7 +77,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			damage,
 			type,
 			zoom,
-			zoom_duration)
+			zoom_duration,
+			slow_mo_on_block
+			)
 		else:
 			body.hitted(get_parent(),
 			get_parent().is_face_right,
@@ -88,7 +91,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			damage,
 			type,
 			zoom,
-			zoom_duration)
+			zoom_duration,
+			slow_mo_on_block
+			)
 		if body.state not in [
 			body.States.BLOCK,
 			body.States.PARRY,

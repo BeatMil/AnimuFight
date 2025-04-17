@@ -28,6 +28,9 @@ func lp_info() -> void: # for animation_player
 	"screenshake_amount": Vector2(0, 0),
 	"damage": 1,
 	"type": Enums.Attack.NORMAL,
+	"zoom": Vector2(0.5, 0.5),
+	"zoom_duration": 1,
+	"slow_mo_on_block": Vector2(0.5, 0.2),
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -145,7 +148,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_attack_timer_timeout() -> void:
 	if state != States.IDLE:
 		return
-	if randi_range(0, 1) == 0:
+	if randi_range(0, 0) == 1:
 		return
 	if not AttackQueue.can_attack:
 		return

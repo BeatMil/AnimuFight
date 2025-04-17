@@ -1105,7 +1105,6 @@ collision_layer = 2
 collision_mask = 14
 script = ExtResource("2_g0tmf")
 is_notarget = false
-hp = 1000
 
 [node name="HammerPivot" type="Node2D" parent="." index="0"]
 script = ExtResource("4_mex7q")
