@@ -25,6 +25,7 @@ ObjectPooling="*res://scripts/object_pooling.gd"
 EnemySpawnHelper="*res://scripts/enemy_spawn_helper.gd"
 SceneTransition="*res://nodes/scene_transition.tscn"
 AttackQueue="*res://nodes/attack_queue.tscn"
+GlobalSoundPlayer="*res://nodes/global_sound_player.tscn"
 
 [display]
 

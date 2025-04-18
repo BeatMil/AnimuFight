@@ -64,6 +64,8 @@ const HITBOX_BURST = preload("res://nodes/hitboxes/hitbox_burst.tscn")
 const HITBOX_TOWL = preload("res://nodes/hitboxes/hitbox_towl.tscn")
 const HITBOX_EXE = preload("res://nodes/hitboxes/hitbox_execute.tscn")
 const HIT_2 = preload("res://media/sfxs/Hit2.wav")
+const SLOW_MO_START = preload("res://media/sfxs/slow_mo_start.wav")
+const SLOW_MO_END = preload("res://media/sfxs/slow_mo_end.wav")
 
 #############################################################
 ## Node Ref
@@ -555,6 +557,10 @@ func _show_attack_indicator(type: int) -> void:
 
 
 func _slow_moion(level, length) -> void:
+	GlobalSoundPlayer.stream = SLOW_MO_START
+	GlobalSoundPlayer.play()
 	Engine.time_scale = level
 	await get_tree().create_timer(length/level).timeout
 	Engine.time_scale = 1.0
+	GlobalSoundPlayer.stream = SLOW_MO_END
+	GlobalSoundPlayer.play()

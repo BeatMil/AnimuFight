@@ -47,9 +47,9 @@ func zoom(zoom_level: Vector2, duration: float = 0.1):
 
 func zoom_zoom(zoom_level: Vector2, duration: float = 0.1):
 	var tween = get_tree().create_tween()
-	tween.tween_property(camera_2d, "zoom", current_zoom+zoom_level, 0.1)
+	tween.tween_property(camera_2d, "zoom", current_zoom+zoom_level, 0.3)
 	tween.tween_interval(duration)
-	tween.tween_property(camera_2d, "zoom", current_zoom, 0.1)
+	tween.tween_property(camera_2d, "zoom", current_zoom, 0.25)
 
 func zoom_permanent(zoom_level: Vector2):
 	var tween = get_tree().create_tween()
