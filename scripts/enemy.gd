@@ -159,6 +159,14 @@ func set_collision_normal() -> void:
 	collision_mask = 0b00000000000000001111
 
 
+func set_flip_h(value: bool) -> void:
+	sprite_2d.flip_h = value
+
+
+func toggle_flip_h() -> void:
+	sprite_2d.flip_h = !sprite_2d.flip_h
+
+
 func _on_bounce_together_body_entered(body: Node2D) -> void:
 	if velocity.length() < 500:
 		return
