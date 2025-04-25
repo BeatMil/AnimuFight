@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c35ggfhhtmj8g"]
+
+[ext_resource type="PackedScene" uid="uid://jgmjqpnytm3v" path="res://nodes/hitboxes/hitbox_base.tscn" id="1_rfivi"]
+[ext_resource type="Script" uid="uid://b1fsgl8x8b85k" path="res://scripts/hitbox_meteo_crash.gd" id="2_o5p8o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfivi"]
+size = Vector2(640, 464)
+
+[node name="HitboxMeteo" instance=ExtResource("1_rfivi")]
+script = ExtResource("2_o5p8o")
+
+[node name="Area2D" parent="." index="0"]
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_rfivi")

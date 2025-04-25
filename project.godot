@@ -41,6 +41,8 @@ window/stretch/mode="canvas_items"
 
 enemy=""
 tank=""
+wall=""
+ground=""
 
 [input]
 

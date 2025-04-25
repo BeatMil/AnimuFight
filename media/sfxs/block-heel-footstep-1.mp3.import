@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/block-heel-footstep-1.mp3-de122e07b8fa0c77d40
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

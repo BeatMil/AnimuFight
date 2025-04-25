@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c4m5deiee8q8w"]
+[gd_scene load_steps=43 format=3 uid="uid://c4m5deiee8q8w"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_uha72"]
 [ext_resource type="Texture2D" uid="uid://hfw58i0oa1gv" path="res://media/sprites/boss01/boss01_idle.png" id="2_410lf"]
@@ -22,6 +22,8 @@
 [ext_resource type="AudioStream" uid="uid://debrnx2edkqvf" path="res://media/sfxs/PunchAttack2.wav" id="16_uhi2f"]
 [ext_resource type="Texture2D" uid="uid://c66ep3rlga24a" path="res://media/sprites/boss01/boss01_burn_knuckle_start.png" id="20_fe8ni"]
 [ext_resource type="Texture2D" uid="uid://c5ouq1o78dmir" path="res://media/sprites/boss01/boss01_burn_knuckle.png" id="21_884lv"]
+[ext_resource type="Texture2D" uid="uid://cp7aifoftt4c6" path="res://media/sprites/boss01/boss01_meteo_crash_start.png" id="22_kseif"]
+[ext_resource type="Texture2D" uid="uid://b5eux66s71gyq" path="res://media/sprites/boss01/boss01_meteo_crash_end.png" id="23_umypt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(64, 304)
@@ -341,6 +343,151 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_kseif"]
+resource_name = "burn_knuckle"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("20_fe8ni"), ExtResource("21_884lv"), ExtResource("20_fe8ni"), ExtResource("21_884lv")]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_xbwuq")
+}, {
+"end_offset": 0.144746,
+"start_offset": 0.0,
+"stream": ExtResource("16_uhi2f")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_xbwuq")
+}],
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.216667, 0.5, 1, 1.21667, 1.5),
+"transitions": PackedFloat32Array(1, 0, 1, 1, 0, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.9375, 0.920477, 0.501709, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0.9375, 0.920477, 0.501709, 1), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"set_collision_no_hit_player"
+}, {
+"args": [],
+"method": &"burn_knuckle_info"
+}, {
+"args": [],
+"method": &"burn_knuckle_info"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.49042, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [21],
+"method": &"_set_state"
+}, {
+"args": [1500],
+"method": &"_push_x"
+}, {
+"args": [5],
+"method": &"_set_state"
+}, {
+"args": [1500],
+"method": &"_push_x"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(0, 0, 0, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50), Vector2(0, 0), Vector2(0, -50)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:hframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:vframes")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"toggle_flip_h"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_17bum"]
@@ -1048,6 +1195,155 @@ tracks/7/keys = {
 "values": [1]
 }
 
+[sub_resource type="Animation" id="Animation_55le4"]
+resource_name = "meteo_crash"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("22_kseif"), ExtResource("23_umypt")]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_xbwuq")
+}, {
+"end_offset": 0.144746,
+"start_offset": 0.0,
+"stream": ExtResource("16_uhi2f")
+}],
+"times": PackedFloat32Array(0, 1.1)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.216667, 1.1),
+"transitions": PackedFloat32Array(1, 0, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.9375, 0.449955, 0.294427, 1), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"set_collision_no_hit_player"
+}, {
+"args": [],
+"method": &"meteo_crash_info"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [21],
+"method": &"_set_state"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(0, 0),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:hframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:vframes")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.716013),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [1],
+"method": &"_show_attack_indicator"
+}, {
+"args": [],
+"method": &"push_to_target"
+}]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [Vector2(100, -500)],
+"method": &"_push_x_old"
+}, {
+"args": [0.5],
+"method": &"hitlag"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_67sqk"]
 resource_name = "throw_stunned"
 length = 0.3
@@ -1245,151 +1541,6 @@ tracks/5/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_kseif"]
-resource_name = "burn_knuckle"
-length = 3.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("20_fe8ni"), ExtResource("21_884lv"), ExtResource("20_fe8ni"), ExtResource("21_884lv")]
-}
-tracks/1/type = "audio"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("5_xbwuq")
-}, {
-"end_offset": 0.144746,
-"start_offset": 0.0,
-"stream": ExtResource("16_uhi2f")
-}, {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("5_xbwuq")
-}],
-"times": PackedFloat32Array(0, 0.5, 1)
-}
-tracks/1/use_blend = true
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.216667, 0.5, 1, 1.21667, 1.5),
-"transitions": PackedFloat32Array(1, 0, 1, 1, 0, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.9375, 0.920477, 0.501709, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0.9375, 0.920477, 0.501709, 1), Color(1, 1, 1, 1)]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"values": [{
-"args": [],
-"method": &"set_collision_no_hit_player"
-}, {
-"args": [],
-"method": &"burn_knuckle_info"
-}, {
-"args": [],
-"method": &"burn_knuckle_info"
-}]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.49042, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"values": [{
-"args": [21],
-"method": &"_set_state"
-}, {
-"args": [1500],
-"method": &"_push_x"
-}, {
-"args": [5],
-"method": &"_set_state"
-}, {
-"args": [1500],
-"method": &"_push_x"
-}]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite2D:offset")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5),
-"transitions": PackedFloat32Array(0, 0, 0, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -50), Vector2(0, 0), Vector2(0, -50)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite2D:hframes")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite2D:vframes")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/8/type = "method"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath(".")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"toggle_flip_h"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i6yam"]
 _data = {
 &"RESET": SubResource("Animation_u133i"),
@@ -1403,6 +1554,7 @@ _data = {
 &"idle": SubResource("Animation_2ad64"),
 &"lp1": SubResource("Animation_12rkp"),
 &"lp1_chain": SubResource("Animation_r35ev"),
+&"meteo_crash": SubResource("Animation_55le4"),
 &"throw_stunned": SubResource("Animation_67sqk"),
 &"walk": SubResource("Animation_w6o0s")
 }
@@ -1438,6 +1590,9 @@ editor_description = "Prevent lp() when ded"
 
 [node name="LpPos" parent="HitBoxPos" index="0"]
 position = Vector2(168, 0)
+
+[node name="MeteoPos" type="Marker2D" parent="HitBoxPos" index="1"]
+position = Vector2(0, 168)
 
 [node name="LpRangeR" type="Area2D" parent="." index="7"]
 collision_mask = 3

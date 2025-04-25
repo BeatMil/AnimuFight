@@ -1,0 +1,112 @@
+[gd_scene load_steps=11 format=3 uid="uid://d2pkeuiucvewf"]
+
+[ext_resource type="Script" uid="uid://cxlm7u372ve4g" path="res://scripts/hit_spark2.gd" id="1_pl656"]
+[ext_resource type="Texture2D" uid="uid://bxnxfqaknnul6" path="res://media/sprites/particle_fx/particle_material01.png" id="1_t5307"]
+[ext_resource type="AudioStream" uid="uid://cj88rrwq4fria" path="res://media/sfxs/bomb.wav" id="3_0aoln"]
+
+[sub_resource type="Curve" id="Curve_pl656"]
+_limits = [-90.0, 90.0, 0.0, 1.0]
+_data = [Vector2(0, 45.5056), 0.0, 0.0, 0, 0, Vector2(0.253112, 27.3034), 0.0, 0.0, 0, 0, Vector2(0.506224, 17.191), 0.0, 0.0, 0, 0, Vector2(1, 11.1236), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_0aoln"]
+curve = SubResource("Curve_pl656")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e43ln"]
+particle_flag_disable_z = true
+angle_min = -90.0
+angle_max = 90.0
+angle_curve = SubResource("CurveTexture_0aoln")
+direction = Vector3(0, -1, 0)
+spread = 60.0
+initial_velocity_min = 225.8
+initial_velocity_max = 290.32
+gravity = Vector3(0, 98, 0)
+scale_min = 3.0
+scale_max = 3.0
+color = Color(1, 0.933987, 0.566846, 1)
+hue_variation_min = -0.3
+hue_variation_max = 0.18
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0aoln"]
+particle_flag_disable_z = true
+direction = Vector3(-3, -1, 0)
+spread = 10.0
+initial_velocity_min = 303.55
+initial_velocity_max = 314.3
+scale_min = 12.0
+scale_max = 12.0
+color = Color(0.894531, 0.720651, 0.388068, 1)
+hue_variation_min = -0.14
+hue_variation_max = 0.18
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pl656"]
+particle_flag_disable_z = true
+direction = Vector3(3, -1, 0)
+spread = 10.0
+initial_velocity_min = 303.55
+initial_velocity_max = 314.3
+scale_min = 12.0
+scale_max = 12.0
+color = Color(0.894531, 0.720651, 0.388068, 1)
+hue_variation_min = -0.14
+hue_variation_max = 0.18
+
+[sub_resource type="Animation" id="Animation_e43ln"]
+resource_name = "crash"
+length = 1.5
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_0aoln")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47ax6"]
+_data = {
+&"crash": SubResource("Animation_e43ln")
+}
+
+[node name="GroundParticle" type="Node2D"]
+script = ExtResource("1_pl656")
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Particles"]
+amount = 24
+texture = ExtResource("1_t5307")
+lifetime = 12.0
+speed_scale = 4.0
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_e43ln")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Particles"]
+lifetime = 10.0
+speed_scale = 5.0
+explosiveness = 0.95
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_0aoln")
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="Particles"]
+lifetime = 10.0
+speed_scale = 5.0
+explosiveness = 0.95
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_pl656")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_47ax6")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]

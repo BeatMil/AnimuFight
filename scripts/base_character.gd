@@ -51,6 +51,7 @@ enum Hitbox_size {
 	TOWL,
 	BURST,
 	EXECUTE,
+	METEO,
 	}
 
 
@@ -63,6 +64,7 @@ const HITBOX_HAMMER = preload("res://nodes/hitboxes/hitbox_hammer.tscn")
 const HITBOX_BURST = preload("res://nodes/hitboxes/hitbox_burst.tscn")
 const HITBOX_TOWL = preload("res://nodes/hitboxes/hitbox_towl.tscn")
 const HITBOX_EXE = preload("res://nodes/hitboxes/hitbox_execute.tscn")
+const HITBOX_METEO = preload("res://nodes/hitboxes/hitbox_meteo_crash.tscn")
 const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 const SLOW_MO_START = preload("res://media/sfxs/slow_mo_start.wav")
 const SLOW_MO_END = preload("res://media/sfxs/slow_mo_end.wav")
@@ -218,6 +220,8 @@ func _spawn_lp_hitbox(
 			hitbox = HITBOX_BURST.instantiate()
 		Hitbox_size.EXECUTE:
 			hitbox = HITBOX_EXE.instantiate()
+		Hitbox_size.METEO:
+			hitbox = HITBOX_METEO.instantiate()
 		_:
 			hitbox = HITBOX_LP_MEDIUM.instantiate()
 
@@ -260,13 +264,13 @@ func _set_state(new_state: int) -> void:
 """
 animation_player uses
 """
-func _push_x_old(pixel: int) -> void:
+func _push_x_old(power: Vector2) -> void:
 	var tween = get_tree().create_tween()
 	var new_pos := Vector2.ZERO
 	if sprite_2d.flip_h: ## facing left
-		new_pos = Vector2(position.x-pixel, position.y)
+		new_pos = Vector2(position.x-power.x, position.y+power.y)
 	else: ## facing left
-		new_pos = Vector2(position.x+pixel, position.y)
+		new_pos = Vector2(position.x+power.x, position.y+power.y)
 	tween.tween_property(self, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
 
 
@@ -552,6 +556,7 @@ func _remove_collision() -> void:
 		collision_shape_2d.queue_free()
 
 
+# AnimationPlayer
 func _show_attack_indicator(type: int) -> void:
 	ObjectPooling.spawn_attack_type_indicator(type, self.position)
 

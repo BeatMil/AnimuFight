@@ -1,5 +1,6 @@
 extends "res://scripts/enemy.gd"
 
+@onready var meteo_pos: Marker2D = $HitBoxPos/MeteoPos
 
 
 #############################################################
@@ -99,6 +100,30 @@ func burn_knuckle_info() -> void: # for animation_player
 	dict_to_spawn_hitbox(info)
 
 
+func meteo_crash() -> void:
+	if state in [States.IDLE, States.ATTACK]:
+		state = States.ATTACK
+		animation_player.play("meteo_crash")
+func meteo_crash_info() -> void: # for animation_player
+	var info = {
+	"size": Hitbox_size.METEO,
+	"time": 5,
+	"push_power_ground": Vector2(1000, -200),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(1000, -200),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.3,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0.3,
+	"hitstun_amount_air": 0.5,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 4,
+	"type": Enums.Attack.UNBLOCK,
+	"pos": meteo_pos.position,
+	}
+	dict_to_spawn_hitbox(info)
+
+
 #############################################################
 ## Signals
 #############################################################
@@ -134,7 +159,13 @@ func _on_lp_range_r_body_exited(body: Node2D) -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	# if anim_name in ["lp1", "attack01_1", "hitted", "down"]:
-	if anim_name in ["lp1", "attack01_1", "lp1_chain", "burn_knuckle"]:
+	if anim_name in [
+		"lp1",
+		"attack01_1",
+		"lp1_chain",
+		"burn_knuckle",
+		"meteo_crash",
+		]:
 		animation_player.play("idle")
 		state = States.IDLE
 	if anim_name in ["ded"]:
@@ -154,5 +185,6 @@ func _on_attack_timer_timeout() -> void:
 	# if is_player_in_range_attack01:
 	# 	_attack01()
 	if is_player_in_range_lp:
-		burn_knuckle()
+		meteo_crash()
+		# burn_knuckle()
 		# _lp()

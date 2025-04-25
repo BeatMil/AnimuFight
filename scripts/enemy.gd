@@ -154,6 +154,14 @@ func set_collision_no_hit_enemy() -> void:
 	collision_mask = 0b00000000000000001101
 
 
+func push_to_target() -> void:
+	var tween = get_tree().create_tween()
+	var new_pos := Vector2.ZERO
+	new_pos.x = target.position.x
+	new_pos.y = position.y
+	tween.tween_property(self, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
+
+
 func set_collision_normal() -> void:
 	collision_layer = 0b00000000000000000010
 	collision_mask = 0b00000000000000001111
