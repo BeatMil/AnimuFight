@@ -12,8 +12,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		ObjectPooling.spawn_ground_spark(global_position, false)
 	if body.has_method("hitted"):
 		if body.is_on_floor():
+			var facing = true
+			if global_position.x > body.position.x:
+				facing = false
+			else:
+				facing = true
 			body.hitted(get_parent(),
-			get_parent().is_face_right,
+			facing,
 			push_power_ground,
 			push_type_ground,
 			hitlag_amount_ground,
