@@ -1324,9 +1324,6 @@ texture = ExtResource("1_3e6vd")
 position = Vector2(0, 0)
 shape = SubResource("RectangleShape2D_8jfq2")
 
-[node name="LpPos" parent="HitBoxPos" index="0"]
-position = Vector2(168, 0)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 libraries = {
 &"": SubResource("AnimationLibrary_vpy1p")
@@ -1334,6 +1331,9 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="." index="5"]
 editor_description = "Prevent lp() when ded"
+
+[node name="LpPos" parent="HitBoxPos" index="0"]
+position = Vector2(168, 0)
 
 [node name="LpRangeR" type="Area2D" parent="." index="7"]
 collision_mask = 3
