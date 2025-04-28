@@ -480,9 +480,9 @@ func down_hp_info() ->  void:
 	var info = {
 	"size": Hitbox_size.LARGE,
 	"time": 0.1,
-	"push_power_ground": Vector2(0, -200),
+	"push_power_ground": Vector2(100, -200),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
-	"push_power_air": Vector2(0, -200),
+	"push_power_air": Vector2(100, -200),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
 	"hitlag_amount_ground": 0.1,
 	"hitstun_amount_ground": 1,
