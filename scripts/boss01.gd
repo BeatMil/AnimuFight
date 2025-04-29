@@ -6,6 +6,31 @@ extends "res://scripts/enemy.gd"
 #############################################################
 ## Attack Info
 #############################################################
+
+
+func _attack01() -> void:
+	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK]:
+		state = States.BLOCK
+		animation_player.play("attack01_1")
+func attack01_info() -> void: # for animation_player
+	var info = {
+	"size": Hitbox_size.MEDIUM,
+	"time": 0.3,
+	"push_power_ground": Vector2(800, -300),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(300, 0),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.3,
+	"hitstun_amount_ground": 0.6,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.5,
+	"screenshake_amount": Vector2(20, 0.3),
+	"damage": 3,
+	"type": Enums.Attack.UNBLOCK,
+	}
+	dict_to_spawn_hitbox(info)
+
+
 func _lp() -> void:
 	if state in [States.IDLE, States.ATTACK]:
 		state = States.ATTACK
