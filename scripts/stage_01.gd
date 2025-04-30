@@ -74,5 +74,6 @@ func _on_bounce_to_right_body_entered(body: Node2D) -> void:
 func _on_helicop_spawn_body_entered(body: Node2D) -> void:
 	print_rich("[color=brown][b]HeliSpawn![/b][/color]")
 	if body.is_in_group("enemy"):
+		body.is_jump_spawn = true
 		var tween = get_tree().create_tween()
 		tween.tween_property(body, "position", Vector2(1900, 288), 1).set_trans(Tween.TRANS_CUBIC)
