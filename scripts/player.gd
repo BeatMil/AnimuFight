@@ -320,6 +320,7 @@ func lp1_info() -> void:
 	"screenshake_amount": Vector2(0, 0),
 	"damage": 1,
 	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/LpPos.position,
 	}
 	dict_to_spawn_hitbox(info)
 func lp2_info() -> void:
@@ -337,6 +338,7 @@ func lp2_info() -> void:
 	"screenshake_amount": Vector2(0, 0),
 	"damage": 1,
 	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/LpPos.position,
 	}
 	dict_to_spawn_hitbox(info)
 func lp3_info() -> void:
@@ -348,9 +350,9 @@ func lp3_info() -> void:
 	"push_power_air": Vector2(800, -100),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
 	"hitlag_amount_ground": 0.2,
-	"hitstun_amount_ground": 0.7,
+	"hitstun_amount_ground": 0.3,
 	"hitlag_amount_air": 0.2,
-	"hitstun_amount_air": 0.7,
+	"hitstun_amount_air": 0.3,
 	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 2,
 	"type": Enums.Attack.NORMAL,
@@ -461,7 +463,7 @@ func tan_info() -> void:
 	"hitlag_amount_air": 0.5,
 	"hitstun_amount_air": 2,
 	"screenshake_amount": Vector2(10, 0.2),
-	"damage": 4,
+	"damage": 5,
 	"type": Enums.Attack.NORMAL,
 	"zoom": Vector2(0.2, 0.2),
 	}

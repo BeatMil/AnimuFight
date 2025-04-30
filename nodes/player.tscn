@@ -2938,6 +2938,7 @@ size = Vector2(634, 1104)
 [node name="Player" groups=["character", "player"] instance=ExtResource("1_gva5u")]
 collision_mask = 14
 script = ExtResource("2_t4427")
+hp = 20
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
 
@@ -2960,7 +2961,7 @@ libraries = {
 }
 
 [node name="LpPos" parent="HitBoxPos" index="0"]
-position = Vector2(144, 8)
+position = Vector2(104, 8)
 
 [node name="DownHpPos" type="Marker2D" parent="HitBoxPos" index="1"]
 position = Vector2(120, 8)
