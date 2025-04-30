@@ -4,6 +4,13 @@ extends "res://scripts/enemy.gd"
 
 var is_player_in_range_burn_knuckle = false
 
+
+func _ready() -> void:
+	randomize()
+	gravity_power = 5000
+	hp_bar.set_hp(hp)
+	block_rate = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
 #############################################################
 ## Attack Info
 #############################################################

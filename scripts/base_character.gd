@@ -90,6 +90,7 @@ var gravity_power = 10000
 var jump_power = 250000
 @export var hp: int = 5
 var friction: float = 0.1
+var block_rate = [1, 2, 3, 4, 5]
 
 ## wall bounce helper
 var is_touching_wall_left: bool = false
@@ -349,7 +350,7 @@ func hitted(
 		States.GRABBED,
 		States.IFRAME,
 		]:
-		if is_in_group("tank") or randi_range(0, 1) == 0:
+		if is_in_group("tank") or randi_range(1, 10) in block_rate:
 			state = States.BLOCK
 			animation_player.stop()
 			animation_player.play("blockstunned")
