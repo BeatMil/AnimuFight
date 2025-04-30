@@ -2,6 +2,7 @@ extends "res://scripts/enemy.gd"
 
 @onready var meteo_pos: Marker2D = $HitBoxPos/MeteoPos
 
+var is_player_in_range_burn_knuckle = false
 
 #############################################################
 ## Attack Info
@@ -26,7 +27,7 @@ func attack01_info() -> void: # for animation_player
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(20, 0.3),
 	"damage": 3,
-	"type": Enums.Attack.UNBLOCK,
+	"type": Enums.Attack.NORMAL,
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -157,7 +158,7 @@ func _on_timer_timeout() -> void:
 		_lp()
 
 
-func _on_lp_range_r_body_entered(body: Node2D) -> void:
+func _on_lp_range_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		is_player_in_range_lp = true
 		_on_attack_timer_timeout()
@@ -166,20 +167,22 @@ func _on_lp_range_r_body_entered(body: Node2D) -> void:
 		is_enemy_in_range_lp = true
 
 
-func _on_lp_range_l_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		is_player_in_range_lp = true
-		_on_attack_timer_timeout()
-	elif body.is_in_group("enemy") \
-		and target.position.x < position.x:
-		is_enemy_in_range_lp = true
-
-
-func _on_lp_range_r_body_exited(body: Node2D) -> void:
+func _on_lp_range_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		is_player_in_range_lp = false
 	elif body.is_in_group("enemy"):
 		is_enemy_in_range_lp = false
+
+
+func _on_burn_knuckle_range_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		is_player_in_range_burn_knuckle = true
+		_on_attack_timer_timeout()
+
+
+func _on_burn_knuckle_range_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		is_player_in_range_lp = false
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -207,9 +210,14 @@ func _on_attack_timer_timeout() -> void:
 	# Reset attack queue
 	AttackQueue.start_queue_timer()
 
-	# if is_player_in_range_attack01:
-	# 	_attack01()
+	if is_player_in_range_burn_knuckle:
+		burn_knuckle()
+
 	if is_player_in_range_lp:
-		meteo_crash()
-		# burn_knuckle()
-		# _lp()
+		match randi_range(0, 1):
+			0:
+				meteo_crash()
+			1:
+				_lp()
+			_:
+				_lp()

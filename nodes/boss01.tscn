@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c4m5deiee8q8w"]
+[gd_scene load_steps=44 format=3 uid="uid://c4m5deiee8q8w"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_uha72"]
 [ext_resource type="Texture2D" uid="uid://hfw58i0oa1gv" path="res://media/sprites/boss01/boss01_idle.png" id="2_410lf"]
@@ -993,9 +993,12 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.5, 0.8, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.5, 0.8, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
+"args": [],
+"method": &"set_collision_normal"
+}, {
 "args": [],
 "method": &"lp_info"
 }, {
@@ -1568,6 +1571,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1h3d5"]
 size = Vector2(192, 256)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kseif"]
+size = Vector2(304, 256)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8qvtx"]
 size = Vector2(144, 304)
 
@@ -1576,7 +1582,7 @@ collision_layer = 2
 collision_mask = 15
 script = ExtResource("2_n4s7b")
 is_notarget = false
-hp = 20
+hp = 50
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_410lf")
@@ -1600,19 +1606,27 @@ position = Vector2(168, 0)
 [node name="MeteoPos" type="Marker2D" parent="HitBoxPos" index="1"]
 position = Vector2(0, 168)
 
-[node name="LpRangeR" type="Area2D" parent="." index="7"]
+[node name="LpRange" type="Area2D" parent="." index="7"]
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LpRangeR" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LpRange" index="0"]
 position = Vector2(184, 0)
 shape = SubResource("RectangleShape2D_1h3d5")
 
-[node name="LpRangeL" type="Area2D" parent="." index="8"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LpRangeL" index="0"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LpRange" index="1"]
 position = Vector2(-192, 0)
 shape = SubResource("RectangleShape2D_1h3d5")
+
+[node name="BurnKnuckleRange" type="Area2D" parent="." index="8"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BurnKnuckleRange" index="0"]
+position = Vector2(-480, 0)
+shape = SubResource("RectangleShape2D_kseif")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BurnKnuckleRange" index="1"]
+position = Vector2(472, 0)
+shape = SubResource("RectangleShape2D_kseif")
 
 [node name="DebugLabel" type="Label" parent="." index="9"]
 offset_left = -128.0
@@ -1636,9 +1650,9 @@ autostart = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="body_entered" from="LpRangeR" to="." method="_on_lp_range_r_body_entered"]
-[connection signal="body_exited" from="LpRangeR" to="." method="_on_lp_range_r_body_exited"]
-[connection signal="body_entered" from="LpRangeL" to="." method="_on_lp_range_l_body_entered"]
-[connection signal="body_exited" from="LpRangeL" to="." method="_on_lp_range_r_body_exited"]
+[connection signal="body_entered" from="LpRange" to="." method="_on_lp_range_body_entered"]
+[connection signal="body_exited" from="LpRange" to="." method="_on_lp_range_body_exited"]
+[connection signal="body_entered" from="BurnKnuckleRange" to="." method="_on_burn_knuckle_range_body_entered"]
+[connection signal="body_exited" from="BurnKnuckleRange" to="." method="_on_burn_knuckle_range_body_exited"]
 [connection signal="body_entered" from="BounceTogether" to="." method="_on_bounce_together_body_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
