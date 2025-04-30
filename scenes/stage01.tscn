@@ -585,7 +585,7 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DebrisArea2D"]
 
-[node name="Floor" type="StaticBody2D" parent="."]
+[node name="Floor" type="StaticBody2D" parent="." groups=["ground"]]
 position = Vector2(1192, 1448)
 scale = Vector2(1, 2.44)
 collision_layer = 8
@@ -600,7 +600,7 @@ position = Vector2(4.99989, -108)
 scale = Vector2(0.866667, 1)
 texture = ExtResource("1_spkcn")
 
-[node name="FloorFloat" type="StaticBody2D" parent="."]
+[node name="FloorFloat" type="StaticBody2D" parent="." groups=["ground"]]
 position = Vector2(944, 1824)
 collision_layer = 8
 collision_mask = 0
@@ -640,7 +640,7 @@ position = Vector2(1888, 624)
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("11_lcbfr")
 target = NodePath("../Player")
-enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpawnHelper/Phase2"), NodePath("../EnemySpawnHelper/Phase3"), NodePath("../EnemySpawnHelper/Phase4"), NodePath("../EnemySpawnHelper/Phase5"), NodePath("../EnemySpawnHelper/Phase6"), NodePath("../EnemySpawnHelper/Phase7"), NodePath("../EnemySpawnHelper/Phase8"), NodePath("../EnemySpawnHelper/Phase9")]
+enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpawnHelper/Phase2"), NodePath("../EnemySpawnHelper/Phase3"), NodePath("../EnemySpawnHelper/Phase4"), NodePath("../EnemySpawnHelper/Phase5"), NodePath("../EnemySpawnHelper/Phase9"), NodePath("../EnemySpawnHelper/Phase7"), NodePath("../EnemySpawnHelper/Phase8"), NodePath("../EnemySpawnHelper/Phase9")]
 
 [node name="enemyCount" type="Node" parent="EnemySpawnerNew"]
 
