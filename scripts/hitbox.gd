@@ -105,7 +105,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 func _on_timer_timeout() -> void:
 	area_2d.monitoring = false
-	queue_free()
+	area_2d.visible = false
 
 
 func _on_queue_free_timer_timeout() -> void:
