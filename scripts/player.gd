@@ -66,6 +66,7 @@ func _process(_delta: float) -> void:
 	debug_label.text += "\n%s"%block_buffer_timer
 	debug_label.text += "\n%s"%Input.is_action_pressed("block")
 	debug_label.text += "\n%s"%debug_input_event
+	debug_label.text += "\n%s"%next_move
 	debug_label.text += "\nCameraPos: %s"%$Camera.global_position
 
 
@@ -310,7 +311,7 @@ func lp1_info() -> void:
 	"time": 0.1,
 	"push_power_ground": Vector2(50, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
-	"push_power_air": Vector2(100, -150),
+	"push_power_air": Vector2(200, -50),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
 	"hitlag_amount_ground": 0,
 	"hitstun_amount_ground": 0.5,
@@ -327,7 +328,7 @@ func lp2_info() -> void:
 	"time": 0.1,
 	"push_power_ground": Vector2(50, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
-	"push_power_air": Vector2(100, -150),
+	"push_power_air": Vector2(200, -50),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
 	"hitlag_amount_ground": 0,
 	"hitstun_amount_ground": 0.5,
@@ -344,11 +345,11 @@ func lp3_info() -> void:
 	"time": 0.1,
 	"push_power_ground": Vector2(800, -100),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
-	"push_power_air": Vector2(100, -150),
+	"push_power_air": Vector2(800, -100),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
 	"hitlag_amount_ground": 0.2,
 	"hitstun_amount_ground": 0.7,
-	"hitlag_amount_air": 0,
+	"hitlag_amount_air": 0.2,
 	"hitstun_amount_air": 0.7,
 	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 2,
