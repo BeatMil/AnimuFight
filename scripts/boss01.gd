@@ -189,7 +189,7 @@ func _on_burn_knuckle_range_body_entered(body: Node2D) -> void:
 
 func _on_burn_knuckle_range_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		is_player_in_range_lp = false
+		is_player_in_range_burn_knuckle = false
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
