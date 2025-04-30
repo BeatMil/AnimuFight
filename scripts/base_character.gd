@@ -135,9 +135,9 @@ func _gravity(delta) -> void:
 func _check_wall_bounce() -> void:
 	if state in [States.BOUNCE_STUNNED]:
 		if is_touching_wall_left:
-			_push_direct(Vector2(400, -200))
+			_push_direct(Vector2(400, -100))
 		elif is_touching_wall_right:
-			_push_direct(Vector2(-400, -200))
+			_push_direct(Vector2(-400, -100))
 
 		if is_touching_wall_right or is_touching_wall_left:
 			hp_bar.hp_down(1)
