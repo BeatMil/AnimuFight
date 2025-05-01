@@ -4,7 +4,7 @@ extends Node2D
 @export var target: CharacterBody2D
 @export var enemy_to_spawn: Array[Node]
 @export var is_active: bool = true
-var phase: int = 5
+var phase: int = 0
 
 
 func _ready() -> void:
