@@ -347,7 +347,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_kseif"]
 resource_name = "burn_knuckle"
-length = 3.0
+length = 1.60001
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -432,7 +432,7 @@ tracks/4/keys = {
 "args": [1500],
 "method": &"_push_x"
 }, {
-"args": [5],
+"args": [1],
 "method": &"_set_state"
 }, {
 "args": [1500],
