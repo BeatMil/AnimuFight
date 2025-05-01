@@ -19,7 +19,10 @@ func _ready() -> void:
 func _attack01() -> void:
 	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK]:
 		state = States.BLOCK
-		animation_player.play("attack01_1")
+		if randi_range(0, 1) == 1:
+			animation_player.play("meteo_crash")
+		else:
+			animation_player.play("burn_knuckle")
 func attack01_info() -> void: # for animation_player
 	var info = {
 	"size": Hitbox_size.MEDIUM,
