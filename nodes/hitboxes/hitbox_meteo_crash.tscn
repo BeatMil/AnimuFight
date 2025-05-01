@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b1fsgl8x8b85k" path="res://scripts/hitbox_meteo_crash.gd" id="2_o5p8o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rfivi"]
-size = Vector2(640, 464)
+size = Vector2(640, 128)
 
 [node name="HitboxMeteo" instance=ExtResource("1_rfivi")]
 script = ExtResource("2_o5p8o")

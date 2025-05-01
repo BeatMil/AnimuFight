@@ -9,6 +9,7 @@ func _set_collision_hit_player() -> void:
 ## Spawn ground spark
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("ground"):
+		get_parent().set_collision_normal()
 		ObjectPooling.spawn_ground_spark(global_position, false)
 	if body.has_method("hitted"):
 		if body.is_on_floor():
