@@ -40,6 +40,7 @@ enum States {
 	NOBUFFER,
 	GRABSTANCE,
 	GRABBED,
+	PUNISHABLE,
 	}
 
 
@@ -349,6 +350,7 @@ func hitted(
 		States.ATTACK,
 		States.GRABBED,
 		States.IFRAME,
+		States.PUNISHABLE,
 		]:
 		if is_in_group("tank") or randi_range(1, 10) in block_rate:
 			state = States.BLOCK
