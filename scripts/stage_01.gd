@@ -82,6 +82,8 @@ func _on_helicop_spawn_body_entered(body: Node2D) -> void:
 
 func _on_bounce_boss_back_body_entered(body: Node2D) -> void:
 	if body.is_in_group("boss"):
+		if body.hp_bar.get_hp() <= 0:
+			return
 		boss_bounce_player.stream = BOSS_BOUNCE_SFX
 		boss_bounce_player.pitch_scale = randf_range(0.8, 1.2)
 		boss_bounce_player.play()
