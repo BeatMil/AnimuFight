@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=46 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Texture2D" uid="uid://d3rg7jxypamt" path="res://media/sprites/stage01/background.png" id="1_ktkfo"]
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
@@ -409,6 +409,9 @@ size = Vector2(560, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymxnp"]
 size = Vector2(304, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmevm"]
+size = Vector2(256, 1312)
 
 [sub_resource type="Animation" id="Animation_n5wlp"]
 resource_name = "stage01_track"
@@ -828,6 +831,22 @@ collision_mask = 18
 shape = SubResource("RectangleShape2D_ymxnp")
 metadata/_edit_group_ = true
 
+[node name="BounceBossBack" type="Area2D" parent="."]
+position = Vector2(-64, 696)
+collision_layer = 0
+collision_mask = 18
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceBossBack"]
+position = Vector2(96, 8)
+shape = SubResource("RectangleShape2D_nmevm")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BounceBossBack"]
+position = Vector2(1976, 8)
+shape = SubResource("RectangleShape2D_nmevm")
+
+[node name="BossBouncePlayer" type="AudioStreamPlayer" parent="BounceBossBack"]
+
 [node name="MusicPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_apweq")
@@ -843,3 +862,4 @@ scale = Vector2(2966.4, 27.747)
 [connection signal="body_entered" from="BounceToLeft" to="." method="_on_bounce_to_left_body_entered"]
 [connection signal="body_entered" from="BounceToRight" to="." method="_on_bounce_to_right_body_entered"]
 [connection signal="body_entered" from="HelicopSpawn" to="." method="_on_helicop_spawn_body_entered"]
+[connection signal="body_entered" from="BounceBossBack" to="." method="_on_bounce_boss_back_body_entered"]

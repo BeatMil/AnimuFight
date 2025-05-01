@@ -3,6 +3,7 @@ extends Node2D
 
 var DEBRIS = preload("res://nodes/debris.tscn")
 var DEBRIS_UP = preload("res://nodes/debris_upward.tscn")
+const BOSS_BOUNCE_SFX = preload("res://media/sfxs/unequip01.wav")
 
 @onready var debris_animation_player: AnimationPlayer = $DebrisArea2D/AnimationPlayer
 @onready var debris_area_2d: Area2D = $DebrisArea2D
@@ -14,7 +15,7 @@ var DEBRIS_UP = preload("res://nodes/debris_upward.tscn")
 @onready var bounce_to_left: Area2D = $BounceToLeft
 @onready var bounce_to_right: Area2D = $BounceToRight
 @onready var spawn_debris_fx: Node = $SpawnDebrisFX
-
+@onready var boss_bounce_player: AudioStreamPlayer = $BounceBossBack/BossBouncePlayer
 
 signal shoot_up_house
 
@@ -77,3 +78,18 @@ func _on_helicop_spawn_body_entered(body: Node2D) -> void:
 		body.is_jump_spawn = true
 		var tween = get_tree().create_tween()
 		tween.tween_property(body, "position", Vector2(1900, 288), 1).set_trans(Tween.TRANS_CUBIC)
+
+
+func _on_bounce_boss_back_body_entered(body: Node2D) -> void:
+	if body.is_in_group("boss"):
+		boss_bounce_player.stream = BOSS_BOUNCE_SFX
+		boss_bounce_player.pitch_scale = randf_range(0.8, 1.2)
+		boss_bounce_player.play()
+
+		body.animation_player.play("idle")
+
+		if body.position.x > 900:
+			body._push_direct(Vector2(-200, -200))
+		else:
+			body._push_direct(Vector2(200, -200))
+			

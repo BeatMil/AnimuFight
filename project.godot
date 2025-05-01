@@ -43,6 +43,7 @@ enemy=""
 tank=""
 wall=""
 ground=""
+boss=""
 
 [input]
 
