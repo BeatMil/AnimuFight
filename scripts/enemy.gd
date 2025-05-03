@@ -25,6 +25,8 @@ var is_enemy_in_range_lp: bool = false
 var is_player_in_range_attack01: bool = false
 var can_move: bool = true
 var is_jump_spawn: bool = false
+var ground_friction: float = 0.1
+var air_friction: float = 0.07
 
 var block_count := 0
 
@@ -83,10 +85,12 @@ func _physics_process(delta: float) -> void:
 	if stun_duration > 0 and \
 		state in [States.HIT_STUNNED, States.WALL_BOUNCED, States.BOUNCE_STUNNED, States.GRABBED]:
 		if is_on_floor():
+			friction = ground_friction
 			stun_duration -= delta
 			set_collision_normal()
 		else:
 			set_collision_no_hit_player()
+			friction = air_friction
 	elif stun_duration < 0:
 		# state = States.IDLE
 		if hp_bar.get_hp() <= 0:
