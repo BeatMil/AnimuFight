@@ -356,7 +356,7 @@ func lp3_info() -> void:
 	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 2,
 	"type": Enums.Attack.NORMAL,
-	"zoom": Vector2(0.1, 0.1),
+	"zoom": Vector2(0.05, 0.05),
 	}
 	dict_to_spawn_hitbox(info)
 func lp4_info() -> void:
