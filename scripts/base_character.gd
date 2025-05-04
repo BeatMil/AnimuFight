@@ -76,7 +76,7 @@ const SLOW_MO_END = preload("res://media/sfxs/slow_mo_end.wav")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var lp_pos: Marker2D = $HitBoxPos/LpPos
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var hp_bar: ProgressBar = $HpBar
+@onready var hp_bar: TextureProgressBar = $HpBar
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 

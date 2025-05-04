@@ -1,13 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwih0xhe7lqho"]
+[gd_scene load_steps=6 format=3 uid="uid://cwih0xhe7lqho"]
 
-[ext_resource type="Script" path="res://scripts/hp_bar.gd" id="1_rawco"]
+[ext_resource type="Texture2D" uid="uid://c3b6kk7qnc1da" path="res://media/sprites/hp_bar/hp_bar_background.png" id="1_8oovt"]
+[ext_resource type="Script" uid="uid://cflm7852np3ah" path="res://scripts/hp_bar.gd" id="1_rawco"]
+[ext_resource type="Texture2D" uid="uid://deiwkhjig4ipl" path="res://media/sprites/hp_bar/hp_bar_foreground.png" id="2_e7xo8"]
+[ext_resource type="Texture2D" uid="uid://dx1iv6cw3fqwe" path="res://media/sprites/hp_bar/hp_bar_inner.png" id="3_gcqa6"]
 
-[node name="HpBar" type="ProgressBar"]
-offset_left = -120.0
+[sub_resource type="Theme" id="Theme_cs48e"]
+
+[node name="HpBar" type="TextureProgressBar"]
+offset_left = -128.0
 offset_top = -192.0
-offset_right = 136.0
-offset_bottom = -165.0
+offset_right = 128.0
+offset_bottom = -176.0
+theme = SubResource("Theme_cs48e")
 max_value = 5.0
-step = 1.0
-value = 5.0
+value = 3.0
+texture_under = ExtResource("1_8oovt")
+texture_over = ExtResource("2_e7xo8")
+texture_progress = ExtResource("3_gcqa6")
 script = ExtResource("1_rawco")
