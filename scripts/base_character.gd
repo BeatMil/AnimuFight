@@ -69,6 +69,7 @@ const HITBOX_METEO = preload("res://nodes/hitboxes/hitbox_meteo_crash.tscn")
 const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 const SLOW_MO_START = preload("res://media/sfxs/slow_mo_start.wav")
 const SLOW_MO_END = preload("res://media/sfxs/slow_mo_end.wav")
+const HIT_BOUNCE = preload("res://media/sfxs/Landing_RawMeat02.wav")
 
 #############################################################
 ## Node Ref
@@ -140,16 +141,18 @@ func _check_wall_bounce() -> void:
 			_push_direct(Vector2(400, -100))
 		elif is_touching_wall_right:
 			_push_direct(Vector2(-400, -100))
+		else:
+			return
 
-		if is_touching_wall_right or is_touching_wall_left:
-			hp_bar.hp_down(1)
-			animation_player.stop(true)
-			animation_player.play("down")
-			state = States.WALL_BOUNCED
-			hitlag()
-			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
-			is_touching_wall_left = false
-			is_touching_wall_right = false
+		hp_bar.hp_down(1)
+		animation_player.stop(true)
+		animation_player.play("down")
+		state = States.WALL_BOUNCED
+		hitlag()
+		get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
+		is_touching_wall_left = false
+		is_touching_wall_right = false
+		play_bounce_sfx()
 
 
 func _move_left(delta) ->  void:
@@ -572,3 +575,9 @@ func _slow_moion(level, length) -> void:
 	Engine.time_scale = 1.0
 	GlobalSoundPlayer.stream = SLOW_MO_END
 	GlobalSoundPlayer.play()
+
+
+func play_bounce_sfx() -> void:
+		$AudioStreamPlayer2.stream = HIT_BOUNCE
+		$AudioStreamPlayer2.pitch_scale = randf_range(0.8, 1.2)
+		$AudioStreamPlayer2.play()

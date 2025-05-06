@@ -186,6 +186,7 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 	if self.state in [States.BOUNCE_STUNNED, States.EXECUTETABLE] \
 	and body.state != States.BOUNCE_STUNNED:
 		printt("===bounce_together===")
+		play_bounce_sfx()
 		body.hitted(
 			self,
 			true,
