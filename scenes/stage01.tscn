@@ -1,6 +1,5 @@
-[gd_scene load_steps=46 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=45 format=3 uid="uid://bixvcfmu8c77i"]
 
-[ext_resource type="Texture2D" uid="uid://d3rg7jxypamt" path="res://media/sprites/stage01/background.png" id="1_ktkfo"]
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="2_i8ayn"]
@@ -10,9 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://decg2r6h1bvnh" path="res://media/vfx/cloud_sprite.png" id="3_xgmne"]
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="4_ts7c8"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="5_guyb5"]
+[ext_resource type="Texture2D" uid="uid://u3a7t54kbtb8" path="res://media/sprites/stage01/stage01_home.png" id="5_nmevm"]
 [ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="6_7tguj"]
 [ext_resource type="AudioStream" uid="uid://cytm062ygh22j" path="res://media/sfxs/wind-artificial-18750.mp3" id="7_k6ebi"]
-[ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="7_oruto"]
 [ext_resource type="AudioStream" uid="uid://empmuouv5f00" path="res://media/sfxs/small-rock-break-194553.mp3" id="10_xveav"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="11_g2h18"]
 [ext_resource type="Script" uid="uid://ckudchaksw6pd" path="res://scripts/enemy_spawner_stage01.gd" id="11_lcbfr"]
@@ -155,31 +154,31 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Wall:position")
+tracks/4/path = NodePath("../DebrisArea2D:monitoring")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-232, 0)]
+"update": 1,
+"values": [true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../WallInvi:position")
+tracks/5/path = NodePath("../WallInvi2:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2146, 352)]
+"values": [Vector2(-104, 352)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../WallInvi:collision_layer")
+tracks/6/path = NodePath("../WallInvi2:collision_layer")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -191,11 +190,11 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("../Wall:collision_layer")
+tracks/7/path = NodePath("../WallInvi:collision_layer")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.001),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
@@ -203,14 +202,14 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("../DebrisArea2D:monitoring")
+tracks/8/path = NodePath("../WallInvi:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.001),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(2146, 352)]
 }
 
 [sub_resource type="Animation" id="Animation_xgmne"]
@@ -282,62 +281,62 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../Wall:position")
+tracks/5/path = NodePath("../WallInvi:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-232, 0), Vector2(-1664, 0)]
+"values": [Vector2(2146, 352), Vector2(3224, 352)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../WallInvi:position")
+tracks/6/path = NodePath("../WallInvi:collision_layer")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(2146, 352), Vector2(3224, 352)]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("../Wall:collision_layer")
+tracks/7/path = NodePath("../DebrisArea2D:monitoring")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [false]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("../WallInvi:collision_layer")
+tracks/8/path = NodePath("../WallInvi2:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-104, 352), Vector2(-1352, 352)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../DebrisArea2D:monitoring")
+tracks/9/path = NodePath("../WallInvi2:collision_layer")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k6ebi"]
@@ -551,7 +550,7 @@ autoplay = "go_fast_vertical"
 
 [node name="Background" type="Sprite2D" parent="."]
 self_modulate = Color(0.90625, 0.90625, 0.90625, 1)
-texture = ExtResource("1_ktkfo")
+texture = ExtResource("5_nmevm")
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
@@ -575,7 +574,7 @@ collision_mask = 18
 
 [node name="NoDoor" type="Sprite2D" parent="DebrisArea2D"]
 self_modulate = Color(0.90625, 0.90625, 0.90625, 1)
-position = Vector2(-664, 10)
+position = Vector2(-659, 31)
 texture = ExtResource("3_d2a2l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DebrisArea2D"]
@@ -626,9 +625,9 @@ target = NodePath("../Player")
 enemy_to_spawn = [ExtResource("4_ts7c8"), ExtResource("5_guyb5"), ExtResource("6_7tguj")]
 is_active = false
 
-[node name="Wall" parent="." instance=ExtResource("7_oruto")]
-position = Vector2(-232, 0)
-scale = Vector2(1.88, 1)
+[node name="WallInvi2" parent="." instance=ExtResource("11_g2h18")]
+position = Vector2(-104, 352)
+scale = Vector2(1.64324, 1)
 
 [node name="WallInvi" parent="." instance=ExtResource("11_g2h18")]
 position = Vector2(2146, 352)
