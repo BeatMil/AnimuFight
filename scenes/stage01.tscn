@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=46 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://eyys8bj4gwe" path="res://media/sprites/stage01/no_door.png" id="3_d2a2l"]
 [ext_resource type="Texture2D" uid="uid://decg2r6h1bvnh" path="res://media/vfx/cloud_sprite.png" id="3_xgmne"]
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="4_ts7c8"]
+[ext_resource type="Texture2D" uid="uid://drqu1b3bvj1hn" path="res://media/sprites/stage01/computer_screen.png" id="5_aodgi"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="5_guyb5"]
 [ext_resource type="Texture2D" uid="uid://u3a7t54kbtb8" path="res://media/sprites/stage01/stage01_home.png" id="5_nmevm"]
 [ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="6_7tguj"]
@@ -211,6 +212,18 @@ tracks/8/keys = {
 "update": 0,
 "values": [Vector2(2146, 352)]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../ComputerScreen:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(984, 608)]
+}
 
 [sub_resource type="Animation" id="Animation_xgmne"]
 resource_name = "shoot_up"
@@ -337,6 +350,18 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../ComputerScreen:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(984, 608), Vector2(984.63, 1600)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k6ebi"]
@@ -548,6 +573,11 @@ libraries = {
 }
 autoplay = "go_fast_vertical"
 
+[node name="ComputerScreen" type="Sprite2D" parent="."]
+position = Vector2(984, 608)
+scale = Vector2(0.0944445, 0.0944445)
+texture = ExtResource("5_aodgi")
+
 [node name="Background" type="Sprite2D" parent="."]
 self_modulate = Color(0.90625, 0.90625, 0.90625, 1)
 texture = ExtResource("5_nmevm")
@@ -617,7 +647,7 @@ scale = Vector2(0.423437, 1)
 texture = ExtResource("1_spkcn")
 
 [node name="Player" parent="." instance=ExtResource("2_i8ayn")]
-position = Vector2(936, 704)
+position = Vector2(800, 704)
 
 [node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_65q8b")]
 position = Vector2(1912, -112)
