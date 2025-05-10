@@ -102,7 +102,7 @@ func _physics_process(delta: float) -> void:
 	_check_block_count()
 
 	## debug
-	$DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
+	# $DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
 
 
 #############################################################

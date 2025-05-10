@@ -116,7 +116,7 @@ func _input(event: InputEvent) -> void:
 				state = States.DODGE
 				animation_player.play("dodge")
 
-	debug_input_event = event
+	# debug_input_event = event
 
 
 func _physics_process(delta: float) -> void:
