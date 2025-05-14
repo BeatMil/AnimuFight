@@ -2243,7 +2243,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_wq1x7"]
 resource_name = "spell"
-length = 0.416668
+length = 0.8
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2373,7 +2373,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_me6mg"]
 resource_name = "ta"
-length = 0.416668
+length = 0.9
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
