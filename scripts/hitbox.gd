@@ -55,6 +55,10 @@ func _set_collision_hit_player() -> void:
 	area_2d.collision_mask = 0b00000000000000000001
 
 
+func _set_collision_no_hit() -> void:
+	area_2d.collision_mask = 0b00000000000000000000
+
+
 func _play_hit_random_pitch():
 	audio_stream_player.stream = hit_noise
 	audio_stream_player.pitch_scale = randf_range(0.8, 1.2)
@@ -102,9 +106,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			_play_hit_random_pitch()
 
 
-
 func _on_timer_timeout() -> void:
-	area_2d.monitoring = false
+	_set_collision_no_hit() # background_object shake twice if I use monitoring
 	area_2d.visible = false
 
 

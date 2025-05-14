@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://6vyccoqw70jj" path="res://scripts/hitbox.gd" id="1_sdtl1"]
 
-[node name="HitboxLP" type="Node2D"]
+[node name="HitboxLP" type="Node2D" groups=["hitbox"]]
 script = ExtResource("1_sdtl1")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
+[node name="Area2D" type="Area2D" parent="." groups=["hitbox"]]
+collision_layer = 32
 
 [node name="ActiveFrameTimer" type="Timer" parent="."]
 wait_time = 2.0

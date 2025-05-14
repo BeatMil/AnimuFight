@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=47 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
@@ -10,9 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="4_ts7c8"]
 [ext_resource type="Texture2D" uid="uid://drqu1b3bvj1hn" path="res://media/sprites/stage01/computer_screen.png" id="5_aodgi"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="5_guyb5"]
-[ext_resource type="Texture2D" uid="uid://u3a7t54kbtb8" path="res://media/sprites/stage01/stage01_home.png" id="5_nmevm"]
 [ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="6_7tguj"]
+[ext_resource type="Texture2D" uid="uid://bpjwhsui8ie7h" path="res://media/sprites/stage01/stage01_home_clear.png" id="6_nmevm"]
 [ext_resource type="AudioStream" uid="uid://cytm062ygh22j" path="res://media/sfxs/wind-artificial-18750.mp3" id="7_k6ebi"]
+[ext_resource type="PackedScene" uid="uid://b5q177ldu87bs" path="res://nodes/stage01/bed.tscn" id="9_aodgi"]
 [ext_resource type="AudioStream" uid="uid://empmuouv5f00" path="res://media/sfxs/small-rock-break-194553.mp3" id="10_xveav"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="11_g2h18"]
 [ext_resource type="Script" uid="uid://ckudchaksw6pd" path="res://scripts/enemy_spawner_stage01.gd" id="11_lcbfr"]
@@ -224,6 +225,18 @@ tracks/9/keys = {
 "update": 0,
 "values": [Vector2(984, 608)]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../Bed:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(441, 710)]
+}
 
 [sub_resource type="Animation" id="Animation_xgmne"]
 resource_name = "shoot_up"
@@ -362,6 +375,18 @@ tracks/10/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(984, 608), Vector2(984.63, 1600)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../Bed:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(441, 710), Vector2(441, 2014)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k6ebi"]
@@ -580,7 +605,7 @@ texture = ExtResource("5_aodgi")
 
 [node name="Background" type="Sprite2D" parent="."]
 self_modulate = Color(0.90625, 0.90625, 0.90625, 1)
-texture = ExtResource("5_nmevm")
+texture = ExtResource("6_nmevm")
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
@@ -596,6 +621,9 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Background/WindSoundPlayer"]
+
+[node name="Bed" parent="." instance=ExtResource("9_aodgi")]
+position = Vector2(441, 710)
 
 [node name="DebrisArea2D" type="Area2D" parent="."]
 position = Vector2(2403, 609)
@@ -662,6 +690,7 @@ scale = Vector2(1.64324, 1)
 [node name="WallInvi" parent="." instance=ExtResource("11_g2h18")]
 position = Vector2(2146, 352)
 scale = Vector2(1.64324, 1)
+collision_layer = 0
 
 [node name="CameraPos" type="Marker2D" parent="."]
 position = Vector2(942, 683)

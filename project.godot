@@ -31,7 +31,7 @@ GlobalSoundPlayer="*res://nodes/global_sound_player.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/initial_position_type=2
+window/size/initial_position_type=3
 window/size/always_on_top=true
 window/size/window_width_override=1600
 window/size/window_height_override=900
@@ -44,6 +44,8 @@ tank=""
 wall=""
 ground=""
 boss=""
+hitbox=""
+background_object=""
 
 [input]
 
@@ -138,6 +140,8 @@ grab={
 2d_physics/layer_3="wall"
 2d_physics/layer_4="ground"
 2d_physics/layer_5="enemy_air"
+2d_physics/layer_6="hitbox"
+2d_physics/layer_7="background_object"
 2d_physics/layer_9="Layer 9"
 
 [physics]
