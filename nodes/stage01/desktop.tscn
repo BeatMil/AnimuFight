@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=3 uid="uid://c0bp186y0vvc"]
 
 [ext_resource type="Script" uid="uid://cnqadldjogfkq" path="res://scripts/bed.gd" id="1_yk18u"]
+[ext_resource type="AudioStream" uid="uid://cd0pyf1nhyep6" path="res://media/sfxs/unequip01.wav" id="2_c5wp5"]
 [ext_resource type="Texture2D" uid="uid://dpeilcpbtofpk" path="res://media/sprites/stage01/desktop/desk.png" id="3_232ke"]
 [ext_resource type="Texture2D" uid="uid://depey3pdr6v2d" path="res://media/sprites/stage01/desktop/monitor.png" id="4_c5wp5"]
 [ext_resource type="Texture2D" uid="uid://drqu1b3bvj1hn" path="res://media/sprites/stage01/computer_screen.png" id="4_qi5p6"]
 [ext_resource type="Texture2D" uid="uid://uk71ajiqmyi7" path="res://media/sprites/stage01/desktop/left_keyboard.png" id="5_qi5p6"]
 [ext_resource type="Texture2D" uid="uid://dnx7m2uv2xgp7" path="res://media/sprites/stage01/desktop/right_keyboard.png" id="6_ksd4g"]
-[ext_resource type="AudioStream" uid="uid://fc4q3ckswybm" path="res://media/sfxs/bed_shake.wav" id="6_qi5p6"]
 [ext_resource type="Texture2D" uid="uid://6b5nu5mr3owp" path="res://media/sprites/stage01/desktop/mouse.png" id="7_4evvo"]
 [ext_resource type="Texture2D" uid="uid://c55hjg67lq6cb" path="res://media/sprites/stage01/desktop/couch.png" id="8_sneg3"]
 [ext_resource type="Texture2D" uid="uid://c2dyfn7108aua" path="res://media/sprites/stage01/desktop/cpu.png" id="9_bxfpd"]
@@ -211,7 +211,7 @@ tracks/0/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("6_qi5p6")
+"stream": ExtResource("2_c5wp5")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -419,7 +419,6 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
-bus = &"SmolBus"
 
 [node name="Desk" type="Sprite2D" parent="."]
 position = Vector2(-1, 61)
