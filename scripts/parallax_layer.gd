@@ -2,7 +2,7 @@ extends ParallaxLayer
 
 
 @export var MIN_SPEED: int = 500
-@export var MAX_SPEED: int = 3000
+@export var MAX_SPEED: int = 1000
 var actual_speed: int
 
 
