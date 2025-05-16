@@ -649,6 +649,11 @@ func set_collision_no_hit_enemy() -> void:
 func set_collision_normal() -> void:
 	collision_layer = 0b00000000000000000001
 	collision_mask = 0b00000000000000001110
+
+
+func set_collision_noclip() -> void:
+	collision_layer = 0b00000000000000000000
+	collision_mask = 0b00000000000000000000
 #############################################################
 ## Signals
 #############################################################
@@ -671,7 +676,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:
-		queue_free()
+		set_collision_noclip()
+		get_parent().get_node("CanvasLayer/RestartMenu").open_menu()
+		# queue_free()
 
 
 func _on_execute_area_r_body_entered(body: Node2D) -> void:
