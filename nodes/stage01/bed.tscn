@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://7vnu74rgv87x" path="res://media/sprites/stage01/bed/pillow_weeb.png" id="2_wvqv3"]
 [ext_resource type="Texture2D" uid="uid://c8oy6my3j17v3" path="res://media/sprites/stage01/bed/pillow_yes.png" id="3_8eijh"]
 [ext_resource type="Texture2D" uid="uid://bkjqh67b1afou" path="res://media/sprites/stage01/bed/bed.png" id="4_u6v84"]
-[ext_resource type="AudioStream" uid="uid://fc4q3ckswybm" path="res://media/sfxs/bed_shake.wav" id="6_8eijh"]
+[ext_resource type="AudioStream" uid="uid://cd0pyf1nhyep6" path="res://media/sfxs/unequip01.wav" id="6_8eijh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjwa2"]
 size = Vector2(592, 316)

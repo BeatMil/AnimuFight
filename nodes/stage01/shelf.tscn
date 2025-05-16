@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://bdvm6x1ynbejn"]
 
 [ext_resource type="Script" uid="uid://cnqadldjogfkq" path="res://scripts/bed.gd" id="1_1r3fp"]
+[ext_resource type="AudioStream" uid="uid://cd0pyf1nhyep6" path="res://media/sfxs/unequip01.wav" id="2_1r3fp"]
 [ext_resource type="Texture2D" uid="uid://c3s8i7uw2gwd1" path="res://media/sprites/stage01/shelf/shelf.png" id="3_1r3fp"]
 [ext_resource type="Texture2D" uid="uid://bdxqtv13qoq87" path="res://media/sprites/stage01/shelf/green_fig.png" id="4_xnaqd"]
 [ext_resource type="Texture2D" uid="uid://duonsc8gmd8d1" path="res://media/sprites/stage01/shelf/pink_fig.png" id="5_sh34x"]
 [ext_resource type="Texture2D" uid="uid://b266gj534am2c" path="res://media/sprites/stage01/shelf/yellow_fig.png" id="6_4jvbx"]
-[ext_resource type="AudioStream" uid="uid://fc4q3ckswybm" path="res://media/sfxs/bed_shake.wav" id="6_t5o54"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjwa2"]
 size = Vector2(342, 454)
@@ -147,7 +147,7 @@ tracks/2/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("6_t5o54")
+"stream": ExtResource("2_1r3fp")
 }],
 "times": PackedFloat32Array(0)
 }
