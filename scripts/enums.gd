@@ -18,3 +18,9 @@ enum Attack{
 	P_THROW,
 	P_PARRY,
 }
+
+
+enum Stage {
+	STAGE01,
+	STAGE02,
+}

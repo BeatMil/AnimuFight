@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://doxua3aowxdbj"]
 
 [ext_resource type="Texture2D" uid="uid://q02h3jto8e3p" path="res://media/sprites/transitions/blurry_transition.png" id="1_5rx8t"]
-[ext_resource type="Script" path="res://scripts/scene_transition.gd" id="1_vmmq5"]
+[ext_resource type="Script" uid="uid://dfsgkl15xcldx" path="res://scripts/scene_transition.gd" id="1_vmmq5"]
 [ext_resource type="AudioStream" uid="uid://j88ctaixkkys" path="res://media/sfxs/scene_transition/scene_trans2.wav" id="3_332ls"]
 [ext_resource type="AudioStream" uid="uid://b1bvse2al623r" path="res://media/sfxs/scene_transition/scene_trans3.wav" id="4_qmx1l"]
 
@@ -120,12 +120,13 @@ tracks/2/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1hkla"]
 _data = {
-"RESET": SubResource("Animation_yhesr"),
-"in": SubResource("Animation_iffcy"),
-"out": SubResource("Animation_k0s1t")
+&"RESET": SubResource("Animation_yhesr"),
+&"in": SubResource("Animation_iffcy"),
+&"out": SubResource("Animation_k0s1t")
 }
 
 [node name="CanvasLayer" type="CanvasLayer"]
+process_mode = 3
 layer = 100
 script = ExtResource("1_vmmq5")
 
@@ -136,7 +137,7 @@ texture = ExtResource("1_5rx8t")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_1hkla")
+&"": SubResource("AnimationLibrary_1hkla")
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

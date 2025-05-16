@@ -1,9 +1,10 @@
-[gd_scene load_steps=52 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=53 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="2_i8ayn"]
 [ext_resource type="Script" uid="uid://pwpucxtlx40w" path="res://scripts/parallax_layer.gd" id="2_p53fx"]
+[ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/restart_menu.tscn" id="2_up7wt"]
 [ext_resource type="PackedScene" uid="uid://dy6yy7k35k271" path="res://nodes/enemy_spawner.tscn" id="3_65q8b"]
 [ext_resource type="Texture2D" uid="uid://eyys8bj4gwe" path="res://media/sprites/stage01/no_door.png" id="3_d2a2l"]
 [ext_resource type="Texture2D" uid="uid://decg2r6h1bvnh" path="res://media/vfx/cloud_sprite.png" id="3_xgmne"]
@@ -577,6 +578,11 @@ _data = {
 [node name="Stage01" type="Node2D"]
 script = ExtResource("1_peto1")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_up7wt")]
+visible = false
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="SkyBackground" type="Sprite2D" parent="ParallaxBackground"]
@@ -673,7 +679,6 @@ libraries = {
 autoplay = "go_fast_vertical"
 
 [node name="Background" type="Sprite2D" parent="."]
-visible = false
 self_modulate = Color(0.90625, 0.90625, 0.90625, 1)
 texture = ExtResource("6_nmevm")
 centered = false
@@ -682,9 +687,6 @@ centered = false
 libraries = {
 &"": SubResource("AnimationLibrary_k6ebi")
 }
-
-[node name="Enemy04" parent="Background/AnimationPlayer" instance=ExtResource("19_ymxnp")]
-position = Vector2(2172, 1645)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Background"]
 

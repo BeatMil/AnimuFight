@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://dewex1ur78joj"]
 
-[ext_resource type="Script" path="res://scripts/training_menu.gd" id="1_s6n2h"]
+[ext_resource type="Script" uid="uid://capwo1l2fq5f8" path="res://scripts/training_menu.gd" id="1_s6n2h"]
 
 [sub_resource type="Animation" id="Animation_ueteo"]
 resource_name = "pop_up"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gcqki"]
 _data = {
-"pop_up": SubResource("Animation_ueteo")
+&"pop_up": SubResource("Animation_ueteo")
 }
 
 [node name="TrainingMenu" type="Control"]
@@ -60,5 +60,5 @@ text = "Clear"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_gcqki")
+&"": SubResource("AnimationLibrary_gcqki")
 }

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqen74k88vcic"]
+
+[ext_resource type="Script" uid="uid://cr0cfgq0yfu36" path="res://scripts/menu_cursor.gd" id="1_jwdhn"]
+
+[node name="MenuCursor" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_jwdhn")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.995572, 0.648376, 0.648376, 1)
+polygon = PackedVector2Array(-64, -64, 64, 0, -64, 64, -32, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

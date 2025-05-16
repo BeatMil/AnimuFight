@@ -1,0 +1,21 @@
+extends Control
+
+
+@onready var restart_button: Button = $VBoxContainer/RestartButton
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		self.visible = !self.visible
+		get_tree().paused = !get_tree().paused
+		if get_tree().paused:
+			restart_button.grab_focus()
+			%MenuCursor.move_to(Vector2(778, 530))
+
+
+func _on_restart_button_pressed() -> void:
+	SceneTransition.change_scene(Settings.current_stage)
+
+
+func _on_main_menu_button_pressed() -> void:
+	SceneTransition.change_scene("res://nodes/main_menu.tscn")
