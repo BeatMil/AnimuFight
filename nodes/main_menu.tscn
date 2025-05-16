@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dystn5u444ihq"]
+[gd_scene load_steps=6 format=3 uid="uid://dystn5u444ihq"]
 
 [ext_resource type="Texture2D" uid="uid://be73s7hey0vwb" path="res://media/sprites/char1/FirstChar_hitted_color.png" id="1_arvow"]
 [ext_resource type="Script" uid="uid://c4nvks00nrim2" path="res://scripts/main_menu.gd" id="1_urejr"]
+[ext_resource type="PackedScene" uid="uid://nbspcwp0gb2l" path="res://nodes/menu/menu_button.tscn" id="2_efjf0"]
+[ext_resource type="PackedScene" uid="uid://bqen74k88vcic" path="res://nodes/menu_cursor.tscn" id="3_ahhaq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urejr"]
 bg_color = Color(0.414083, 0.863281, 0.553725, 1)
@@ -49,53 +51,34 @@ popup/item_0/id = 0
 popup/item_1/text = "800x600"
 popup/item_1/id = 1
 
-[node name="ButtonStart" type="Button" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -704.0
-offset_top = 100.0
-offset_right = -536.0
-offset_bottom = 164.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 184.0
+offset_top = 576.0
+offset_right = 448.0
+offset_bottom = 1024.0
+alignment = 1
+
+[node name="StartButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_efjf0")]
+layout_mode = 2
 text = "Start"
 
-[node name="Button2" type="Button" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -704.0
-offset_top = 164.0
-offset_right = -536.0
-offset_bottom = 228.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="OptionButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_efjf0")]
+layout_mode = 2
 text = "Option"
 
-[node name="Button3" type="Button" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -704.0
-offset_top = 228.0
-offset_right = -536.0
-offset_bottom = 300.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="QuitButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_efjf0")]
+layout_mode = 2
 text = "Quit"
+
+[node name="MenuCursor" parent="CanvasLayer" instance=ExtResource("3_ahhaq")]
+unique_name_in_owner = true
+position = Vector2(160, 768)
 
 [node name="FirstCharHittedColor" type="Sprite2D" parent="."]
 position = Vector2(1608, 760)
 texture = ExtResource("1_arvow")
 
 [connection signal="about_to_popup" from="CanvasLayer/Option/MenuButton" to="." method="_on_menu_button_about_to_popup"]
-[connection signal="button_down" from="CanvasLayer/ButtonStart" to="." method="_on_button_start_button_down"]
-[connection signal="button_down" from="CanvasLayer/Button2" to="." method="_on_button_2_button_down"]
-[connection signal="button_down" from="CanvasLayer/Button3" to="." method="_on_button_3_button_down"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

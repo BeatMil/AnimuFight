@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://nbspcwp0gb2l"]
+
+[ext_resource type="Script" uid="uid://bu46sjl6ilb3u" path="res://scripts/menu_button.gd" id="1_5ovj1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77yv0"]
+bg_color = Color(0.208088, 0.124357, 0.110886, 1)
+
+[node name="MenuButton" type="Button"]
+custom_minimum_size = Vector2(0, 24)
+theme_override_colors/font_color = Color(0.988783, 0.715485, 0.715485, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_77yv0")
+action_mode = 0
+text = "Button"
+script = ExtResource("1_5ovj1")
+metadata/_edit_use_anchors_ = true
+
+[node name="CursorPos" type="Marker2D" parent="."]
+position = Vector2(-22, 12)
