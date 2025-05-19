@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://n0dw2rsyryh1"]
 
-[ext_resource type="Script" path="res://scripts/intro_2.gd" id="1_p87rb"]
+[ext_resource type="Script" uid="uid://bh41docoalv8u" path="res://scripts/intro_2.gd" id="1_p87rb"]
 [ext_resource type="Texture2D" uid="uid://bvljjloeqmb3t" path="res://media/sprites/intro/final_boss_intro.png" id="1_twajg"]
 [ext_resource type="Texture2D" uid="uid://dovtxxu3u0j7p" path="res://media/sprites/intro/vanilla_happy2.png" id="2_rre6l"]
 [ext_resource type="AudioStream" uid="uid://c6ujj67viq54t" path="res://media/sfxs/anime-wow-sound-effect.mp3" id="3_ly4th"]
@@ -67,8 +67,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uo5gm"]
 _data = {
-"RESET": SubResource("Animation_xx6yl"),
-"a": SubResource("Animation_rsp08")
+&"RESET": SubResource("Animation_xx6yl"),
+&"a": SubResource("Animation_rsp08")
 }
 
 [sub_resource type="Animation" id="Animation_0lxls"]
@@ -215,8 +215,8 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wdjk1"]
 _data = {
-"RESET": SubResource("Animation_0lxls"),
-"a": SubResource("Animation_yaafw")
+&"RESET": SubResource("Animation_0lxls"),
+&"a": SubResource("Animation_yaafw")
 }
 
 [node name="Intro2" type="Node2D"]
@@ -237,7 +237,7 @@ texture = ExtResource("3_rclfl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VanillaHappy/Glowing"]
 libraries = {
-"": SubResource("AnimationLibrary_uo5gm")
+&"": SubResource("AnimationLibrary_uo5gm")
 }
 autoplay = "a"
 
@@ -248,7 +248,7 @@ texture = ExtResource("5_5b4wn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_wdjk1")
+&"": SubResource("AnimationLibrary_wdjk1")
 }
 autoplay = "a"
 

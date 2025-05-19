@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dyjh8s2js473w"]
+[gd_scene load_steps=22 format=3 uid="uid://dyjh8s2js473w"]
 
 [ext_resource type="Texture2D" uid="uid://dha81mc15kyq0" path="res://media/sprites/intro/vanilla01_big.png" id="1_fekf1"]
 [ext_resource type="Script" uid="uid://cnaw0ddi306st" path="res://scripts/intro.gd" id="1_g0bkf"]
@@ -13,6 +13,44 @@
 [ext_resource type="Texture2D" uid="uid://cqgd7duvn848k" path="res://media/sprites/intro/gacha_machine_big_strip.png" id="11_cgx8r"]
 [ext_resource type="Texture2D" uid="uid://chf7ejs614yr3" path="res://media/sprites/intro/hand_right.png" id="11_v2gp3"]
 [ext_resource type="Texture2D" uid="uid://wp7dtqieq51k" path="res://media/sprites/intro/ssr_ball.png" id="13_cbsjw"]
+
+[sub_resource type="Animation" id="Animation_m3r7s"]
+resource_name = "fade_in"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xwriy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u5myo"]
+_data = {
+&"RESET": SubResource("Animation_xwriy"),
+&"fade_in": SubResource("Animation_m3r7s")
+}
 
 [sub_resource type="Animation" id="Animation_nlqrd"]
 length = 0.001
@@ -509,6 +547,23 @@ _data = {
 [node name="Intro" type="Node2D"]
 script = ExtResource("1_g0bkf")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SkipBar" type="ProgressBar" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = 0.9
+anchor_right = 1.0
+anchor_bottom = 0.0592593
+max_value = 80.0
+step = 1.0
+metadata/_edit_use_anchors_ = true
+
+[node name="SkipBarPlayer" type="AnimationPlayer" parent="CanvasLayer/SkipBar"]
+libraries = {
+&"": SubResource("AnimationLibrary_u5myo")
+}
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_r5ivo")
@@ -574,4 +629,6 @@ position = Vector2(920, 176)
 scale = Vector2(1.28409, 1.28409)
 texture = ExtResource("13_cbsjw")
 
+[connection signal="value_changed" from="CanvasLayer/SkipBar" to="." method="_on_skip_bar_value_changed"]
+[connection signal="animation_finished" from="CanvasLayer/SkipBar/SkipBarPlayer" to="." method="_on_skip_bar_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
