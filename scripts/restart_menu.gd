@@ -18,6 +18,7 @@ func toggle_menu() -> void:
 		%MenuCursor.move_to(Vector2(778, 530))
 
 
+## used when player dies XD
 func open_menu() -> void:
 	self.visible = true
 	get_tree().paused = true
