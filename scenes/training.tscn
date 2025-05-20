@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://q1ydmwguookf"]
+[gd_scene load_steps=15 format=3 uid="uid://q1ydmwguookf"]
 
 [ext_resource type="Script" uid="uid://cgmpx4iqj73rb" path="res://scripts/training.gd" id="1_5jbvl"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_ee4pl"]
@@ -6,14 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="2_5llpx"]
 [ext_resource type="PackedScene" uid="uid://j5tjsuf8kmky" path="res://nodes/training_label.tscn" id="2_rxoxm"]
 [ext_resource type="PackedScene" uid="uid://dy6yy7k35k271" path="res://nodes/enemy_spawner.tscn" id="3_0jf8f"]
-[ext_resource type="Script" uid="uid://capwo1l2fq5f8" path="res://scripts/training_menu.gd" id="3_8ihin"]
+[ext_resource type="PackedScene" uid="uid://cctmkul6r5mty" path="res://nodes/ui/training_menu.tscn" id="3_8ihin"]
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="4_wfxnw"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="5_4aqt5"]
 [ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="6_blm5w"]
 [ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="7_8vboe"]
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="8_yi24k"]
 [ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_04.tscn" id="11_4njoh"]
-[ext_resource type="PackedScene" uid="uid://c4m5deiee8q8w" path="res://nodes/boss01.tscn" id="14_4njoh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
 size = Vector2(4478, 470)
@@ -55,66 +54,7 @@ text = "Dodge
 "
 horizontal_alignment = 0
 
-[node name="TrainingMenu" type="Control" parent="CanvasLayer"]
-process_mode = 3
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("3_8ihin")
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TrainingMenu"]
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1256.0
-color = Color(0, 0, 0, 0.247059)
-
-[node name="VBoxContainer" type="HBoxContainer" parent="CanvasLayer/TrainingMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 905.0
-offset_top = 434.5
-offset_right = 979.0
-offset_bottom = 609.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
-layout_mode = 2
-
-[node name="Enemy1" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Enemy1"
-
-[node name="Enemy2" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Enemy2"
-
-[node name="Enemy3" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Enemy3"
-
-[node name="Enemy4" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Enemy4"
-
-[node name="Clear" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "clear"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/TrainingMenu/VBoxContainer"]
-layout_mode = 2
-
-[node name="DeathZone" type="Button" parent="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-toggle_mode = true
-button_pressed = true
-text = "DeathZone
-"
+[node name="TrainingMenu" parent="CanvasLayer" instance=ExtResource("3_8ihin")]
 
 [node name="SfivTrainingStage" type="Sprite2D" parent="."]
 position = Vector2(982.5, 310)
@@ -139,16 +79,15 @@ texture = ExtResource("1_ee4pl")
 position = Vector2(864, 672)
 hp = 10
 
-[node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
-position = Vector2(1912, -112)
-target = NodePath("../Player")
-enemy_to_spawn = [ExtResource("4_wfxnw"), ExtResource("5_4aqt5"), ExtResource("6_blm5w")]
-is_active = false
-
 [node name="EnemySpawner8" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
 position = Vector2(1832, -120)
 target = NodePath("../Player")
 enemy_to_spawn = [ExtResource("11_4njoh")]
+
+[node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
+position = Vector2(1912, -112)
+target = NodePath("../Player")
+enemy_to_spawn = [ExtResource("4_wfxnw"), ExtResource("5_4aqt5"), ExtResource("6_blm5w")]
 is_active = false
 
 [node name="EnemySpawner11" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
@@ -181,15 +120,3 @@ scale = Vector2(1, 19.44)
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2(256, -128)
 points = PackedVector2Array(-64, 0, 64, 0)
-
-[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("14_4njoh")]
-position = Vector2(32, 640)
-target = NodePath("../Player")
-
-[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer/Enemy1" to="." method="_on_enemy_1_button_down"]
-[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer/Enemy2" to="." method="_on_enemy_2_button_down"]
-[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer/Enemy3" to="." method="_on_enemy_3_button_down"]
-[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer/Enemy4" to="." method="_on_enemy_4_button_down"]
-[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer/Clear" to="." method="_on_clear_button_down"]
-[connection signal="button_down" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer2/DeathZone" to="." method="_on_death_zone_button_down"]
-[connection signal="toggled" from="CanvasLayer/TrainingMenu/VBoxContainer/VBoxContainer2/DeathZone" to="." method="_on_death_zone_toggled"]

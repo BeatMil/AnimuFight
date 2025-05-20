@@ -16,6 +16,12 @@ extends Node2D
 
 func _ready() -> void:
 	training_menu.visible = false
+	training_menu.enemy1.connect(_on_enemy_1_button_down)
+	training_menu.enemy2.connect(_on_enemy_2_button_down)
+	training_menu.enemy3.connect(_on_enemy_3_button_down)
+	training_menu.enemy4.connect(_on_enemy_4_button_down)
+	training_menu.clear.connect(_on_clear_button_down)
+	training_menu.death_zone.connect(_on_death_zone_toggled)
 	# AttackQueue.stop_queue_timer()
 
 
