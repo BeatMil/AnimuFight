@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dystn5u444ihq"]
 
-[ext_resource type="Texture2D" uid="uid://be73s7hey0vwb" path="res://media/sprites/char1/FirstChar_hitted_color.png" id="1_arvow"]
-[ext_resource type="Script" uid="uid://c4nvks00nrim2" path="res://scripts/main_menu.gd" id="1_urejr"]
-[ext_resource type="PackedScene" uid="uid://nbspcwp0gb2l" path="res://nodes/menu/menu_button.tscn" id="2_efjf0"]
-[ext_resource type="PackedScene" uid="uid://bqen74k88vcic" path="res://nodes/menu_cursor.tscn" id="3_ahhaq"]
+[ext_resource type="Script" uid="uid://c4nvks00nrim2" path="res://scripts/main_menu.gd" id="1_wu84c"]
+[ext_resource type="PackedScene" uid="uid://nbspcwp0gb2l" path="res://nodes/menu/menu_button.tscn" id="2_8ln24"]
+[ext_resource type="PackedScene" uid="uid://bqen74k88vcic" path="res://nodes/menu_cursor.tscn" id="3_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://be73s7hey0vwb" path="res://media/sprites/char1/FirstChar_hitted_color.png" id="4_oa1go"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urejr"]
 bg_color = Color(0.414083, 0.863281, 0.553725, 1)
@@ -15,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_urejr")
+script = ExtResource("1_wu84c")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -58,25 +58,25 @@ offset_right = 448.0
 offset_bottom = 1024.0
 alignment = 1
 
-[node name="StartButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_efjf0")]
+[node name="StartButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_8ln24")]
 layout_mode = 2
 text = "Start"
 
-[node name="OptionButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_efjf0")]
+[node name="OptionButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_8ln24")]
 layout_mode = 2
 text = "Option"
 
-[node name="QuitButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_efjf0")]
+[node name="QuitButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_8ln24")]
 layout_mode = 2
 text = "Quit"
 
-[node name="MenuCursor" parent="CanvasLayer" instance=ExtResource("3_ahhaq")]
+[node name="MenuCursor" parent="CanvasLayer" instance=ExtResource("3_rtw2f")]
 unique_name_in_owner = true
 position = Vector2(160, 768)
 
 [node name="FirstCharHittedColor" type="Sprite2D" parent="."]
-position = Vector2(1608, 760)
-texture = ExtResource("1_arvow")
+position = Vector2(1410, 737)
+texture = ExtResource("4_oa1go")
 
 [connection signal="about_to_popup" from="CanvasLayer/Option/MenuButton" to="." method="_on_menu_button_about_to_popup"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
