@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://n0dw2rsyryh1"]
+[gd_scene load_steps=17 format=3 uid="uid://n0dw2rsyryh1"]
 
 [ext_resource type="Script" uid="uid://bh41docoalv8u" path="res://scripts/intro_2.gd" id="1_p87rb"]
 [ext_resource type="Texture2D" uid="uid://bvljjloeqmb3t" path="res://media/sprites/intro/final_boss_intro.png" id="1_twajg"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b2wwp5xajo7yw" path="res://media/sprites/intro/ssr_figure.png" id="5_5b4wn"]
 [ext_resource type="AudioStream" uid="uid://3dn1n5dkplcd" path="res://media/sfxs/cartoony-whooshes-7114.mp3" id="7_oro7x"]
 [ext_resource type="AudioStream" uid="uid://bhxb1bqx7kn0m" path="res://media/sfxs/cartoon_phone_voice.mp3" id="8_4rrap"]
+[ext_resource type="PackedScene" uid="uid://dma2fegm70eq4" path="res://nodes/skip_bar.tscn" id="10_r4x5a"]
 
 [sub_resource type="Animation" id="Animation_xx6yl"]
 length = 0.001
@@ -263,5 +264,9 @@ offset_top = -376.0
 offset_right = 2864.0
 offset_bottom = 1304.0
 color = Color(0, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SkipBar" parent="CanvasLayer" instance=ExtResource("10_r4x5a")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
