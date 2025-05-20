@@ -62,6 +62,11 @@ alignment = 1
 layout_mode = 2
 text = "Start"
 
+[node name="TrainingButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_8ln24")]
+layout_mode = 2
+text = "Training Mode
+"
+
 [node name="OptionButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_8ln24")]
 layout_mode = 2
 text = "Option"
@@ -80,5 +85,6 @@ texture = ExtResource("4_oa1go")
 
 [connection signal="about_to_popup" from="CanvasLayer/Option/MenuButton" to="." method="_on_menu_button_about_to_popup"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/TrainingButton" to="." method="_on_training_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

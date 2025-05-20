@@ -2,6 +2,7 @@ extends Control
 
 
 @onready var restart_button: Button = $VBoxContainer/RestartButton
+const MAIN_MENU = preload("res://scenes/main_menu.tscn")
 
 
 func _input(event: InputEvent) -> void:
@@ -29,4 +30,4 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_main_menu_button_pressed() -> void:
-	SceneTransition.change_scene("res://nodes/main_menu.tscn")
+	SceneTransition.change_scene_packed(MAIN_MENU)

@@ -1,7 +1,11 @@
 extends Control
+
+
 @onready var menu_button: MenuButton = $CanvasLayer/Option/MenuButton
 @onready var option: Control = $CanvasLayer/Option
 @onready var start_button: Button = $CanvasLayer/VBoxContainer/StartButton
+const TRAINING_MODE = preload("res://scenes/training.tscn")
+const INTRO = preload("res://scenes/intro.tscn")
 
 
 var resolution = {
@@ -32,7 +36,7 @@ func change_resolution(id: int) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	SceneTransition.change_scene("res://scenes/intro.tscn")
+	SceneTransition.change_scene_packed(INTRO)
 
 
 func _on_option_button_pressed() -> void:
@@ -41,3 +45,7 @@ func _on_option_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_training_button_pressed() -> void:
+	SceneTransition.change_scene_packed(TRAINING_MODE)

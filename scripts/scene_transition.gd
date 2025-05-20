@@ -7,3 +7,11 @@ func change_scene(target: String) -> void:
 	get_tree().change_scene_to_file(target)
 	$AnimationPlayer.play("out")
 	get_tree().paused = false
+
+
+func change_scene_packed(scene: PackedScene) -> void:
+	$AnimationPlayer.play("in")
+	await $AnimationPlayer.animation_finished
+	get_tree().change_scene_to_packed(scene)
+	$AnimationPlayer.play("out")
+	get_tree().paused = false
