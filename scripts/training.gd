@@ -36,24 +36,32 @@ func _input(event: InputEvent) -> void:
 		dodge_label.turn_green()
 	
 
-func _on_clear_button_down() -> void:
+func clear_enemy() -> void:
 	enemy_spawner_8.enemy_to_spawn.clear()
 	enemy_spawner_8.clear_enemy()
 
 
+func _on_clear_button_down() -> void:
+	clear_enemy()
+
+
 func _on_enemy_1_button_down() -> void:
+	clear_enemy()
 	enemy_spawner_8.enemy_to_spawn.append(enemy1)
 
 
 func _on_enemy_2_button_down() -> void:
+	clear_enemy()
 	enemy_spawner_8.enemy_to_spawn.append(enemy2)
 
 
 func _on_enemy_3_button_down() -> void:
+	clear_enemy()
 	enemy_spawner_8.enemy_to_spawn.append(enemy3)
 
 
 func _on_enemy_4_button_down() -> void:
+	clear_enemy()
 	enemy_spawner_8.enemy_to_spawn.append(enemy4)
 
 
