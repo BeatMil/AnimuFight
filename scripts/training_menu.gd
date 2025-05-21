@@ -4,7 +4,6 @@ extends Control
 @onready var enemy_1_button: Button = $VBoxContainer/VBoxContainerL/Enemy1Button
 @onready var death_zone_button: Button = $VBoxContainer/VBoxContainerL/DeathZoneButton
 
-
 signal enemy1
 signal enemy2
 signal enemy3
@@ -49,3 +48,7 @@ func _on_enemy_4_button_pressed() -> void:
 
 func _on_death_zone_button_toggled(toggled_on: bool) -> void:
 	emit_signal("death_zone", toggled_on)
+
+
+func _on_main_menu_button_pressed() -> void:
+	SceneTransition.change_scene("res://scenes/main_menu.tscn")
