@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://q1ydmwguookf"]
+[gd_scene load_steps=14 format=3 uid="uid://q1ydmwguookf"]
 
 [ext_resource type="Script" uid="uid://cgmpx4iqj73rb" path="res://scripts/training.gd" id="1_5jbvl"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_ee4pl"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="6_blm5w"]
 [ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="7_8vboe"]
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="8_yi24k"]
-[ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_04.tscn" id="11_4njoh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
 size = Vector2(4478, 470)
@@ -77,12 +76,11 @@ texture = ExtResource("1_ee4pl")
 
 [node name="Player" parent="." instance=ExtResource("2_5llpx")]
 position = Vector2(864, 672)
-hp = 10
+hp = 10110
 
 [node name="EnemySpawner8" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
 position = Vector2(1832, -120)
 target = NodePath("../Player")
-enemy_to_spawn = [ExtResource("11_4njoh")]
 
 [node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
 position = Vector2(1912, -112)

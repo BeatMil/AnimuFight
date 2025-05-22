@@ -49,3 +49,7 @@ func _on_quit_button_pressed() -> void:
 
 func _on_training_button_pressed() -> void:
 	SceneTransition.change_scene_packed(TRAINING_MODE)
+
+
+func _on_change_key_bind_button_pressed() -> void:
+	pass # Replace with function body.

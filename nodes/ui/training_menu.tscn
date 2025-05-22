@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cctmkul6r5mty"]
+[gd_scene load_steps=5 format=3 uid="uid://cctmkul6r5mty"]
 
 [ext_resource type="Script" uid="uid://capwo1l2fq5f8" path="res://scripts/training_menu.gd" id="1_s6n2h"]
 [ext_resource type="PackedScene" uid="uid://nbspcwp0gb2l" path="res://nodes/menu/menu_button.tscn" id="2_lieai"]
 [ext_resource type="PackedScene" uid="uid://bqen74k88vcic" path="res://nodes/menu_cursor.tscn" id="3_emk5n"]
+[ext_resource type="PackedScene" uid="uid://bhyp02lurgb04" path="res://nodes/ui/key_bind_menu.tscn" id="3_x861g"]
 
 [node name="TrainingMenu" type="Control"]
 process_mode = 3
@@ -66,9 +67,17 @@ toggle_mode = true
 button_pressed = true
 text = "Death Zone"
 
+[node name="KeyBindButton" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
+layout_mode = 2
+text = "Change Key Bind"
+
 [node name="MainMenuButton" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
 layout_mode = 2
 text = "Main Menu"
+
+[node name="KeyBindMenu" parent="." instance=ExtResource("3_x861g")]
+visible = false
+layout_mode = 1
 
 [node name="MenuCursor" parent="." instance=ExtResource("3_emk5n")]
 unique_name_in_owner = true
@@ -80,4 +89,5 @@ position = Vector2(557, 452)
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy4Button" to="." method="_on_enemy_4_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/ClearButton" to="." method="_on_clear_button_pressed"]
 [connection signal="toggled" from="VBoxContainer/VBoxContainerL/DeathZoneButton" to="." method="_on_death_zone_button_toggled"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainerL/KeyBindButton" to="." method="_on_key_bind_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
