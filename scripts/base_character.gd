@@ -337,7 +337,7 @@ func hitted(
 	push_type: int = 0,
 	hitlag_amount: float = 0,
 	hitstun_amount: float = 0.5,
-	_screenshake_amount: Vector2 = Vector2(100, 0.1),
+	_screenshake_amount: Vector2 = Vector2(10, 0.1),
 	_damage: int = 1,
 	_type: int = 0,
 	_zoom: Vector2 = Vector2(0, 0),

@@ -33,6 +33,9 @@ func _ready() -> void:
 	# Player ost
 	music_player.play("stage01_track_copyright")
 
+	# Attack!
+	AttackQueue.start_queue_timer()
+
 
 func _shoot_up_house() -> void:
 	animation_player.play("shoot_up")
