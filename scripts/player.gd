@@ -387,14 +387,26 @@ func _hp() ->  void:
 	if Input.is_action_pressed("ui_right"):
 		sprite_2d.flip_h = false
 
-	if state == States.TA:
-		animation_player.play("spell")
-	elif state == States.SPELL:
-		animation_player.play("tan")
-	elif Input.is_action_pressed("ui_down"):
-		animation_player.play("down_hp")
-	elif state in [States.IDLE, States.PARRY_SUCCESS, States.DODGE_SUCCESS]: ## <<-- start with this one
-		animation_player.play("ta")
+	if state in [
+		States.IDLE,
+		States.PARRY_SUCCESS,
+		States.DODGE_SUCCESS,
+		States.LP1,
+		States.LP2,
+		States.LP3,
+		]: ## <<-- start with this one
+		if Input.is_action_pressed("ui_down"):
+			animation_player.play("down_hp")
+		else:
+			animation_player.play("hp")
+	# if state == States.TA:
+	# 	animation_player.play("spell")
+	# elif state == States.SPELL:
+	# 	animation_player.play("tan")
+	# elif Input.is_action_pressed("ui_down"):
+	# 	animation_player.play("down_hp")
+	# elif state in [States.IDLE, States.PARRY_SUCCESS, States.DODGE_SUCCESS]: ## <<-- start with this one
+	# 	animation_player.play("ta")
 
 func hp_info() ->  void:
 	var info = {
