@@ -24,7 +24,7 @@ func spawn_executable_enemy() -> void:
 	en.is_notarget = true
 	en.position = $SpawnPos.position
 	add_child(en)
-	await get_tree().create_timer(3.8).timeout
+	await get_tree().create_timer(0.8).timeout
 	en.hitted(
 		self,
 		true,
