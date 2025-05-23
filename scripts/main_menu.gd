@@ -5,6 +5,7 @@ extends Control
 @onready var option: Control = $CanvasLayer/Option
 @onready var start_button: Button = $CanvasLayer/VBoxContainer/StartButton
 const TRAINING_MODE = preload("res://scenes/training.tscn")
+const TUTORIAL = preload("res://scenes/tutorial.tscn")
 const INTRO = preload("res://scenes/intro.tscn")
 @onready var key_bind_menu: Control = $CanvasLayer/KeyBindMenu
 @onready var change_key_bind_button: Button = $CanvasLayer/Option/ChangeKeyBindButton
@@ -75,3 +76,7 @@ func _on_key_bind_menu_close() -> void:
 func _on_back_button_pressed() -> void:
 	option.visible = false
 	option_button.grab_focus()
+
+
+func _on_tutorial_button_pressed() -> void:
+	SceneTransition.change_scene_packed(TUTORIAL)

@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckwt7te7yy1ld"]
+
+[ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_8ho6b"]
+[ext_resource type="Script" uid="uid://lqd56fdmu1nh" path="res://scripts/tutorial.gd" id="1_ph3nu"]
+[ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/restart_menu.tscn" id="2_cq4me"]
+[ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="2_ph3nu"]
+[ext_resource type="PackedScene" uid="uid://bdvm6x1ynbejn" path="res://nodes/stage01/shelf.tscn" id="4_4kmhl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kmhl"]
+size = Vector2(3334, 470)
+
+[node name="Tutorial" type="Node2D"]
+script = ExtResource("1_ph3nu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CommandLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.0
+offset_top = 88.0
+offset_right = 104.0
+offset_bottom = 138.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "Light Attack"
+
+[node name="PressKeyLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -88.0
+offset_top = 176.0
+offset_right = 92.0
+offset_bottom = 226.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "Press 'key'"
+
+[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_cq4me")]
+visible = false
+
+[node name="Floor" type="StaticBody2D" parent="." groups=["ground"]]
+position = Vector2(1168, 1536)
+scale = Vector2(1, 2.44)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_4kmhl")
+
+[node name="Ground" type="Sprite2D" parent="Floor"]
+position = Vector2(4.99989, -108)
+scale = Vector2(0.866667, 1)
+texture = ExtResource("2_ph3nu")
+
+[node name="Shelf" parent="." instance=ExtResource("4_4kmhl")]
+position = Vector2(1160, 728)
+
+[node name="Player" parent="." instance=ExtResource("1_8ho6b")]
+position = Vector2(888, 736)

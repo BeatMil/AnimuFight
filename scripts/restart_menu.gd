@@ -2,9 +2,9 @@ extends Control
 
 
 @onready var restart_button: Button = $VBoxContainer/RestartButton
-const MAIN_MENU = preload("res://scenes/main_menu.tscn")
 @onready var key_bind_menu: Control = $KeyBindMenu
 @onready var v_box_container: VBoxContainer = $VBoxContainer
+const MAIN_MENU = preload("res://scenes/main_menu.tscn")
 
 
 func _ready() -> void:
@@ -39,7 +39,7 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_main_menu_button_pressed() -> void:
-	SceneTransition.change_scene_packed(MAIN_MENU)
+	SceneTransition.change_scene("res://scenes/main_menu.tscn")
 
 
 func _on_key_bind_button_pressed() -> void:

@@ -36,6 +36,10 @@ layout_mode = 2
 text = "Training Mode
 "
 
+[node name="TutorialButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_8ln24")]
+layout_mode = 2
+text = "Quick Tutorial"
+
 [node name="OptionButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_8ln24")]
 layout_mode = 2
 text = "Option"
@@ -95,6 +99,7 @@ texture = ExtResource("4_oa1go")
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/TrainingButton" to="." method="_on_training_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="about_to_popup" from="CanvasLayer/Option/MenuButton" to="." method="_on_menu_button_about_to_popup"]
