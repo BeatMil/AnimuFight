@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://da0dtoj0kt1oe"]
+[gd_scene load_steps=5 format=3 uid="uid://da0dtoj0kt1oe"]
 
 [ext_resource type="Script" uid="uid://bpw1t6s1k2u76" path="res://scripts/restart_menu.gd" id="1_77yv0"]
 [ext_resource type="PackedScene" uid="uid://nbspcwp0gb2l" path="res://nodes/menu/menu_button.tscn" id="2_241t5"]
 [ext_resource type="PackedScene" uid="uid://bqen74k88vcic" path="res://nodes/menu_cursor.tscn" id="3_r7x2c"]
+[ext_resource type="PackedScene" uid="uid://bhyp02lurgb04" path="res://nodes/ui/key_bind_menu.tscn" id="4_241t5"]
 
 [node name="RestartMenu" type="Control"]
 process_mode = 3
@@ -42,6 +43,10 @@ alignment = 1
 layout_mode = 2
 text = "Restart"
 
+[node name="KeyBindButton" parent="VBoxContainer" instance=ExtResource("2_241t5")]
+layout_mode = 2
+text = "Change Key Bind"
+
 [node name="MainMenuButton" parent="VBoxContainer" instance=ExtResource("2_241t5")]
 layout_mode = 2
 text = "Main Menu"
@@ -51,5 +56,10 @@ unique_name_in_owner = true
 position = Vector2(778, 530)
 scale = Vector2(0.7, 0.7)
 
+[node name="KeyBindMenu" parent="." instance=ExtResource("4_241t5")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/KeyBindButton" to="." method="_on_key_bind_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

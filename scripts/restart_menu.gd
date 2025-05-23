@@ -3,6 +3,12 @@ extends Control
 
 @onready var restart_button: Button = $VBoxContainer/RestartButton
 const MAIN_MENU = preload("res://scenes/main_menu.tscn")
+@onready var key_bind_menu: Control = $KeyBindMenu
+@onready var v_box_container: VBoxContainer = $VBoxContainer
+
+
+func _ready() -> void:
+	key_bind_menu.close.connect(_on_key_bind_menu_close)
 
 
 func _input(event: InputEvent) -> void:
@@ -16,6 +22,8 @@ func toggle_menu() -> void:
 	if get_tree().paused:
 		restart_button.grab_focus()
 		%MenuCursor.move_to(Vector2(778, 530))
+		key_bind_menu.visible = false
+		v_box_container.visible = true
 
 
 ## used when player dies XD
@@ -32,3 +40,17 @@ func _on_restart_button_pressed() -> void:
 
 func _on_main_menu_button_pressed() -> void:
 	SceneTransition.change_scene_packed(MAIN_MENU)
+
+
+func _on_key_bind_button_pressed() -> void:
+	key_bind_menu.visible = true
+	key_bind_menu.grab_focus_move_left()
+	key_bind_menu.display_keys()
+	v_box_container.visible = false
+
+
+func _on_key_bind_menu_close() -> void:
+	key_bind_menu.visible = false
+	v_box_container.visible = true
+	restart_button.grab_focus()
+	%MenuCursor.move_to(Vector2(778, 530))
