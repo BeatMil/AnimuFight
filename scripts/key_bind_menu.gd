@@ -11,6 +11,7 @@ var is_light_attack_key_change: bool = false
 var is_heavy_attack_key_change: bool = false
 var is_block_key_change: bool = false
 var is_dodge_key_change: bool = false
+var is_execute_key_change: bool = false
 
 var last_focus: Object
 
@@ -23,6 +24,7 @@ var last_focus: Object
 @onready var heavy_attack_button: Button = $HBoxContainer/HeavyAttackButton
 @onready var block_button: Button = $HBoxContainer/BlockButton
 @onready var dodge_button: Button = $HBoxContainer/DodgeButton
+@onready var execute_button: Button = $HBoxContainer/ExecuteButton
 
 @onready var left_key_label: Label = $HBoxContainer/MoveLeftButton/LeftKeyLabel
 @onready var right_key_label: Label = $HBoxContainer/MoveRightButton/RightKeyLabel
@@ -31,6 +33,7 @@ var last_focus: Object
 @onready var heavy_key_label: Label = $HBoxContainer/HeavyAttackButton/HeavyKeyLabel
 @onready var block_key_label: Label = $HBoxContainer/BlockButton/BlockKeyLabel
 @onready var dodge_key_label: Label = $HBoxContainer/DodgeButton/DodgeKeyLabel
+@onready var execute_key_label: Label = $HBoxContainer/ExecuteButton/ExecuteKeyLabel
 
 
 func display_keys() -> void:
@@ -68,6 +71,11 @@ func display_keys() -> void:
 	keys = InputMap.action_get_events("dodge")
 	for key in keys:
 		dodge_key_label.text += key.as_text()
+
+	execute_key_label.text = ""
+	keys = InputMap.action_get_events("execute")
+	for key in keys:
+		execute_key_label.text += key.as_text()
 
 
 func grab_focus_move_left() -> void:
@@ -183,6 +191,18 @@ func _input(event: InputEvent) -> void:
 		press_any_key_screen.visible = false
 		last_focus.grab_focus()
 
+	if event.is_pressed() and is_execute_key_change:
+		if event is InputEventJoypadButton:
+			if event.button_index == 0 and event.pressed:
+				await get_tree().create_timer(0.1).timeout
+				press_any_key_screen.visible = false
+		InputMap.action_erase_events("execute")
+		InputMap.action_add_event("execute", event)
+		is_execute_key_change = false
+		execute_key_label.text = event.as_text()
+		press_any_key_screen.visible = false
+		last_focus.grab_focus()
+
 
 func _on_move_left_button_pressed() -> void:
 	is_move_left_key_change = true
@@ -235,3 +255,10 @@ func _on_dodge_button_pressed() -> void:
 
 func _on_back_button_pressed() -> void:
 	emit_signal("close")
+
+
+func _on_execute_button_pressed() -> void:
+	is_execute_key_change = true
+	press_any_key_screen.visible = true
+	press_any_key_screen.grab_focus()
+	last_focus = execute_button

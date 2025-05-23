@@ -235,6 +235,35 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="ExecuteButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+action_mode = 0
+
+[node name="Label" type="Label" parent="HBoxContainer/ExecuteButton"]
+layout_mode = 2
+anchor_top = 0.0625
+anchor_right = 0.500391
+anchor_bottom = 0.9375
+theme_override_font_sizes/font_size = 24
+text = "Execute"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ExecuteKeyLabel" type="Label" parent="HBoxContainer/ExecuteButton"]
+layout_mode = 2
+anchor_left = 0.500391
+anchor_top = 0.0625
+anchor_right = 0.994527
+anchor_bottom = 0.9375
+theme_override_font_sizes/font_size = 24
+text = "'key'"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="BackButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
@@ -277,4 +306,5 @@ text = "PRESS ANY KEY"
 [connection signal="pressed" from="HBoxContainer/HeavyAttackButton" to="." method="_on_heavy_attack_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/BlockButton" to="." method="_on_block_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/DodgeButton" to="." method="_on_dodge_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/ExecuteButton" to="." method="_on_execute_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -6,6 +6,9 @@ extends Control
 @onready var start_button: Button = $CanvasLayer/VBoxContainer/StartButton
 const TRAINING_MODE = preload("res://scenes/training.tscn")
 const INTRO = preload("res://scenes/intro.tscn")
+@onready var key_bind_menu: Control = $CanvasLayer/KeyBindMenu
+@onready var change_key_bind_button: Button = $CanvasLayer/Option/ChangeKeyBindButton
+@onready var option_button: Button = $CanvasLayer/VBoxContainer/OptionButton
 
 
 var resolution = {
@@ -20,8 +23,14 @@ func _ready() -> void:
 	print(DisplayServer.window_get_size())
 	# id_pressed
 	menu_button.get_popup().id_pressed.connect(change_resolution)
-	pass
+	key_bind_menu.close.connect(_on_key_bind_menu_close)
 
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		option.visible = false
+		key_bind_menu.visible = false
+		option_button.grab_focus()
 
 func _on_menu_button_about_to_popup() -> void:
 	print("==bob==")
@@ -40,7 +49,8 @@ func _on_start_button_pressed() -> void:
 
 
 func _on_option_button_pressed() -> void:
-	option.visible = !option.visible
+	option.visible = true
+	change_key_bind_button.grab_focus()
 
 
 func _on_quit_button_pressed() -> void:
@@ -52,4 +62,16 @@ func _on_training_button_pressed() -> void:
 
 
 func _on_change_key_bind_button_pressed() -> void:
-	pass # Replace with function body.
+	key_bind_menu.visible = true
+	key_bind_menu.grab_focus_move_left()
+	key_bind_menu.display_keys()
+
+
+func _on_key_bind_menu_close() -> void:
+	key_bind_menu.visible = false
+	change_key_bind_button.grab_focus()
+
+
+func _on_back_button_pressed() -> void:
+	option.visible = false
+	option_button.grab_focus()
