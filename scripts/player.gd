@@ -61,13 +61,14 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	debug_label.text = "PlayerState: %s"%States.keys()[state]
-	debug_label.text += "\n%s"%input_buffer_timer
-	debug_label.text += "\n%s"%block_buffer_timer
-	debug_label.text += "\n%s"%Input.is_action_pressed("block")
-	debug_label.text += "\n%s"%debug_input_event
-	debug_label.text += "\n%s"%next_move
-	debug_label.text += "\nCameraPos: %s"%$Camera.global_position
+	if OS.is_debug_build():
+		debug_label.text = "PlayerState: %s"%States.keys()[state]
+		debug_label.text += "\n%s"%input_buffer_timer
+		debug_label.text += "\n%s"%block_buffer_timer
+		debug_label.text += "\n%s"%Input.is_action_pressed("block")
+		debug_label.text += "\n%s"%debug_input_event
+		debug_label.text += "\n%s"%next_move
+		debug_label.text += "\nCameraPos: %s"%$Camera.global_position
 
 
 func _input(event: InputEvent) -> void:

@@ -11,10 +11,15 @@ config_version=5
 [application]
 
 config/name="Animu Fight"
+config/description="First game in the series of AnimuFight from one man dev beatmil"
 run/main_scene="uid://dystn5u444ihq"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=120
 config/icon="uid://bq45huemr8c6d"
+
+[audio]
+
+general/default_playback_type.web=0
 
 [autoload]
 
