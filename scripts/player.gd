@@ -113,7 +113,8 @@ func _input(event: InputEvent) -> void:
 	
 	if state in [States.PARRY, States.BLOCK]:
 		if Input.is_action_pressed("block"):
-			if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
+			if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right") or\
+				Input.is_action_just_pressed("dodge"):
 				state = States.DODGE
 				animation_player.play("dodge")
 
@@ -690,7 +691,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:
 		set_collision_noclip()
-		get_parent().get_node("CanvasLayer/RestartMenu").open_menu()
+		if get_tree().current_scene.name == "training":
+			SceneTransition.change_scene("res://scenes/training.tscn")
+		else:
+			get_parent().get_node("CanvasLayer/RestartMenu").open_menu()
 		# queue_free()
 
 
