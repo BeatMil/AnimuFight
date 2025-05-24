@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="2_i8ayn"]
 [ext_resource type="Script" uid="uid://pwpucxtlx40w" path="res://scripts/parallax_layer.gd" id="2_p53fx"]
-[ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/restart_menu.tscn" id="2_up7wt"]
+[ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/ui/restart_menu.tscn" id="2_up7wt"]
 [ext_resource type="PackedScene" uid="uid://dy6yy7k35k271" path="res://nodes/enemy_spawner.tscn" id="3_65q8b"]
 [ext_resource type="Texture2D" uid="uid://eyys8bj4gwe" path="res://media/sprites/stage01/no_door.png" id="3_d2a2l"]
 [ext_resource type="Texture2D" uid="uid://decg2r6h1bvnh" path="res://media/vfx/cloud_sprite.png" id="3_xgmne"]
@@ -20,13 +20,13 @@
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="11_g2h18"]
 [ext_resource type="Script" uid="uid://ckudchaksw6pd" path="res://scripts/enemy_spawner_stage01.gd" id="11_lcbfr"]
 [ext_resource type="Script" uid="uid://duxhld58ww51q" path="res://scripts/enemy_spawn_helper.gd" id="13_4slru"]
-[ext_resource type="AudioStream" uid="uid://mt276xkpxtcc" path="res://media/ost/beat_river_city_detention.wav" id="16_puonp"]
 [ext_resource type="AudioStream" uid="uid://cns33kc20b478" path="res://media/ost/RCG_Detention.mp3" id="17_n5wlp"]
 [ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_04.tscn" id="19_ymxnp"]
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="20_k6ebi"]
 [ext_resource type="PackedScene" uid="uid://c4m5deiee8q8w" path="res://nodes/boss01.tscn" id="20_nmevm"]
 [ext_resource type="Texture2D" uid="uid://np2no54r3gdy" path="res://media/vfx/animu_fast_fx_3f.png" id="20_xgmne"]
 [ext_resource type="PackedScene" uid="uid://bdvm6x1ynbejn" path="res://nodes/stage01/shelf.tscn" id="25_qfycc"]
+[ext_resource type="AudioStream" uid="uid://ipghqhrcfviu" path="res://media/ost/beat_RCG_Detention_louder.wav" id="25_up7wt"]
 
 [sub_resource type="Animation" id="Animation_4g6yn"]
 length = 0.001
@@ -542,7 +542,7 @@ tracks/0/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("16_puonp")
+"stream": ExtResource("25_up7wt")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -757,7 +757,6 @@ texture = ExtResource("1_spkcn")
 
 [node name="Player" parent="." instance=ExtResource("2_i8ayn")]
 position = Vector2(800, 704)
-hp = 10
 
 [node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_65q8b")]
 position = Vector2(1912, -112)

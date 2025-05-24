@@ -31,7 +31,8 @@ func _ready() -> void:
 	Settings.current_stage = "res://scenes/stage01.tscn"
 
 	# Player ost
-	music_player.play("stage01_track_copyright")
+	# music_player.play("stage01_track_copyrigh")
+	music_player.play("stage01_track")
 
 	# Attack!
 	AttackQueue.start_queue_timer()
