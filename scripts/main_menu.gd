@@ -26,6 +26,7 @@ func _ready() -> void:
 	menu_button.get_popup().id_pressed.connect(change_resolution)
 	key_bind_menu.close.connect(_on_key_bind_menu_close)
 	AttackQueue.start_queue_timer()
+	Settings.checkpoint = 0
 
 
 func _input(event: InputEvent) -> void:

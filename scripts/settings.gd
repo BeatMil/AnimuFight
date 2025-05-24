@@ -2,6 +2,7 @@ extends Node
 
 
 var current_stage = Enums.Stage.STAGE01
+var checkpoint = 0
 
 
 # Called when the node enters the scene tree for the first time.

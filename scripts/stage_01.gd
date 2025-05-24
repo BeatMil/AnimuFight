@@ -17,6 +17,7 @@ const BOSS_BOUNCE_SFX = preload("res://media/sfxs/unequip01.wav")
 @onready var spawn_debris_fx: Node = $SpawnDebrisFX
 @onready var boss_bounce_player: AudioStreamPlayer = $BounceBossBack/BossBouncePlayer
 @onready var sky_animation_player: AnimationPlayer = $ParallaxBackground/SkyBackground/AnimationPlayer
+@onready var enemy_spawner_new: Node2D = $EnemySpawnerNew
 
 
 signal shoot_up_house
@@ -36,6 +37,9 @@ func _ready() -> void:
 
 	# Attack!
 	AttackQueue.start_queue_timer()
+
+	# if enemy_spawner_new.phase >= 5:
+	# 	_shoot_up_house()
 
 
 func _shoot_up_house() -> void:

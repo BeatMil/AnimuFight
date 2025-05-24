@@ -4,11 +4,12 @@ extends Node2D
 @export var target: CharacterBody2D
 @export var enemy_to_spawn: Array[Node]
 @export var is_active: bool = true
+var is_shoot_up_house: bool = false
 var phase: int = 0
 
 
 func _ready() -> void:
-	pass
+	phase = Settings.checkpoint
 
 
 func _spawn_enemy() -> void:
@@ -29,7 +30,14 @@ func _spawn_enemy() -> void:
 	
 func _process(_delta: float) -> void:
 	if len(enemy_count.get_children()) <= 0 and is_active:
-		if phase == 5:
-			get_parent().emit_signal("shoot_up_house")
+		if phase == 8:
+			Settings.checkpoint = 8
+		elif phase == 5:
+			Settings.checkpoint = 5
+
+		if phase >= 5:
+			if not is_shoot_up_house:
+				is_shoot_up_house = true
+				get_parent()._shoot_up_house()
 		phase += 1
 		_spawn_enemy()
