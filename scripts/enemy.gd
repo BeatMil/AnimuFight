@@ -35,6 +35,7 @@ var block_count := 0
 ## Built-in
 #############################################################
 func _ready() -> void:
+	self.tree_exited.connect(_on_tree_exited)
 	randomize()
 	gravity_power = 5000
 	hp_bar.set_hp(hp)
@@ -204,3 +205,7 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 #############################################################
 func _attack01() -> void: # suppress error
 	pass
+
+
+func _on_tree_exited() -> void:
+	target.hp_bar.hp_up(2)
