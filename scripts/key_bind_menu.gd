@@ -94,19 +94,24 @@ func _input(event: InputEvent) -> void:
 			if event.button_index == 0 and event.pressed:
 				await get_tree().create_timer(0.1).timeout
 				press_any_key_screen.visible = false
+		elif event is InputEventKey:
+			if event.keycode == KEY_SPACE and event.pressed:
+				await get_tree().create_timer(0.1).timeout
+				press_any_key_screen.visible = false
 		InputMap.action_erase_events("ui_left")
 		InputMap.action_add_event("ui_left", event)
 		is_move_left_key_change = false
 		left_key_label.text = event.as_text()
 		press_any_key_screen.visible = false
 		last_focus.grab_focus()
-		if event is InputEventJoypadButton:
-			if event.button_index == 0 and not event.pressed:
-				press_any_key_screen.visible = false
 
 	if event.is_pressed() and is_move_right_key_change:
 		if event is InputEventJoypadButton:
 			if event.button_index == 0 and event.pressed:
+				await get_tree().create_timer(0.1).timeout
+				press_any_key_screen.visible = false
+		elif event is InputEventKey:
+			if event.keycode == KEY_SPACE and event.pressed:
 				await get_tree().create_timer(0.1).timeout
 				press_any_key_screen.visible = false
 		InputMap.action_erase_events("ui_right")
@@ -115,13 +120,14 @@ func _input(event: InputEvent) -> void:
 		right_key_label.text = event.as_text()
 		press_any_key_screen.visible = false
 		last_focus.grab_focus()
-		if event is InputEventJoypadButton:
-			if event.button_index == 0 and not event.pressed:
-				press_any_key_screen.visible = false
 
 	if event.is_pressed() and is_jump_key_change:
 		if event is InputEventJoypadButton:
 			if event.button_index == 0 and event.pressed:
+				await get_tree().create_timer(0.1).timeout
+				press_any_key_screen.visible = false
+		elif event is InputEventKey:
+			if event.keycode == KEY_SPACE and event.pressed:
 				await get_tree().create_timer(0.1).timeout
 				press_any_key_screen.visible = false
 		InputMap.action_erase_events("jump")
@@ -130,13 +136,14 @@ func _input(event: InputEvent) -> void:
 		jump_key_label.text = event.as_text()
 		press_any_key_screen.visible = false
 		last_focus.grab_focus()
-		if event is InputEventJoypadButton:
-			if event.button_index == 0 and not event.pressed:
-				press_any_key_screen.visible = false
 
 	if event.is_pressed() and is_light_attack_key_change:
 		if event is InputEventJoypadButton:
 			if event.button_index == 0 and event.pressed:
+				await get_tree().create_timer(0.1).timeout
+				press_any_key_screen.visible = false
+		elif event is InputEventKey:
+			if event.keycode == KEY_SPACE and event.pressed:
 				await get_tree().create_timer(0.1).timeout
 				press_any_key_screen.visible = false
 		InputMap.action_erase_events("lp")
@@ -145,13 +152,14 @@ func _input(event: InputEvent) -> void:
 		light_key_label.text = event.as_text()
 		press_any_key_screen.visible = false
 		last_focus.grab_focus()
-		if event is InputEventJoypadButton:
-			if event.button_index == 0 and not event.pressed:
-				press_any_key_screen.visible = false
 
 	if event.is_pressed() and is_heavy_attack_key_change:
 		if event is InputEventJoypadButton:
 			if event.button_index == 0 and event.pressed:
+				await get_tree().create_timer(0.1).timeout
+				press_any_key_screen.visible = false
+		elif event is InputEventKey:
+			if event.keycode == KEY_SPACE and event.pressed:
 				await get_tree().create_timer(0.1).timeout
 				press_any_key_screen.visible = false
 		InputMap.action_erase_events("hp")
@@ -160,13 +168,14 @@ func _input(event: InputEvent) -> void:
 		heavy_key_label.text = event.as_text()
 		press_any_key_screen.visible = false
 		last_focus.grab_focus()
-		if event is InputEventJoypadButton:
-			if event.button_index == 0 and not event.pressed:
-				press_any_key_screen.visible = false
 
 	if event.is_pressed() and is_block_key_change:
 		if event is InputEventJoypadButton:
 			if event.button_index == 0 and event.pressed:
+				await get_tree().create_timer(0.1).timeout
+				press_any_key_screen.visible = false
+		elif event is InputEventKey:
+			if event.keycode == KEY_SPACE and event.pressed:
 				await get_tree().create_timer(0.1).timeout
 				press_any_key_screen.visible = false
 		InputMap.action_erase_events("block")
@@ -175,13 +184,14 @@ func _input(event: InputEvent) -> void:
 		block_key_label.text = event.as_text()
 		press_any_key_screen.visible = false
 		last_focus.grab_focus()
-		if event is InputEventJoypadButton:
-			if event.button_index == 0 and not event.pressed:
-				press_any_key_screen.visible = false
 
 	if event.is_pressed() and is_dodge_key_change:
 		if event is InputEventJoypadButton:
 			if event.button_index == 0 and event.pressed:
+				await get_tree().create_timer(0.1).timeout
+				press_any_key_screen.visible = false
+		elif event is InputEventKey:
+			if event.keycode == KEY_SPACE and event.pressed:
 				await get_tree().create_timer(0.1).timeout
 				press_any_key_screen.visible = false
 		InputMap.action_erase_events("dodge")
@@ -194,6 +204,10 @@ func _input(event: InputEvent) -> void:
 	if event.is_pressed() and is_execute_key_change:
 		if event is InputEventJoypadButton:
 			if event.button_index == 0 and event.pressed:
+				await get_tree().create_timer(0.1).timeout
+				press_any_key_screen.visible = false
+		elif event is InputEventKey:
+			if event.keycode == KEY_SPACE and event.pressed:
 				await get_tree().create_timer(0.1).timeout
 				press_any_key_screen.visible = false
 		InputMap.action_erase_events("execute")
