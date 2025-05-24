@@ -208,4 +208,5 @@ func _attack01() -> void: # suppress error
 
 
 func _on_tree_exited() -> void:
-	target.hp_bar.hp_up(2)
+	if target:
+		target.hp_bar.hp_up(2)
