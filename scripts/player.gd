@@ -38,6 +38,7 @@ var can_block_states = [
 		States.LP2,
 		States.LP3,
 		States.HP,
+		States.EXECUTE,
 		]
 
 # Hold block input helper
@@ -64,7 +65,7 @@ func _process(_delta: float) -> void:
 	if OS.is_debug_build():
 		debug_label.text = "PlayerState: %s"%States.keys()[state]
 		# debug_label.text += "\n%s"%input_buffer_timer
-		# debug_label.text += "\n%s"%block_buffer_timer
+		debug_label.text += "\n%s"%block_buffer_timer
 		# debug_label.text += "\n%s"%Input.is_action_pressed("block")
 		# debug_label.text += "\n%s"%debug_input_event
 		# debug_label.text += "\n%s"%next_move
@@ -117,6 +118,8 @@ func _input(event: InputEvent) -> void:
 				Input.is_action_just_pressed("dodge"):
 				state = States.DODGE
 				animation_player.play("dodge")
+		elif Input.is_action_just_released("block"):
+			_add_block_buffer_time()
 
 	# debug_input_event = event
 
@@ -229,9 +232,6 @@ func _physics_process(delta: float) -> void:
 			animation_player.play("burst")
 			next_move = null
 
-	if state in [States.BLOCK, States.PARRY]:
-		if Input.is_action_just_released("block"):
-			_add_block_buffer_time()
 
 	## BLOCK
 	## Must check every frame, can't put in _input cause it only check when press and release
@@ -625,7 +625,7 @@ func exe_hadoken_info() ->  void:
 	"push_type_air": Enums.Push_types.EXECUTE,
 	"hitlag_amount_ground": 0.5,
 	"hitstun_amount_ground": 1,
-	"hitlag_amount_air": 1,
+	"hitlag_amount_air": 0.5,
 	"hitstun_amount_air": 1,
 	"screenshake_amount": Vector2(20, 0.4),
 	"damage": 2,
