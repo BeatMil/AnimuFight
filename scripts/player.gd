@@ -114,7 +114,7 @@ func _input(event: InputEvent) -> void:
 	
 	if state in [States.PARRY, States.BLOCK]:
 		if Input.is_action_pressed("block"):
-			if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right") or\
+			if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right") or\
 				Input.is_action_just_pressed("dodge"):
 				state = States.DODGE
 				animation_player.play("dodge")
@@ -143,11 +143,11 @@ func _physics_process(delta: float) -> void:
 
 	# Left/Right movement
 	if state in [States.IDLE, States.AIR]:
-		if Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 			_lerp_velocity_x()
-		elif Input.is_action_pressed("ui_left"):
+		elif Input.is_action_pressed("left"):
 			_move_left(delta)
-		elif Input.is_action_pressed("ui_right"):
+		elif Input.is_action_pressed("right"):
 			_move_right(delta)
 		else:
 			friction = 0.5
@@ -169,11 +169,11 @@ func _physics_process(delta: float) -> void:
 	## Animation Section
 	# Walking animation
 	if state in [States.IDLE]:
-		if Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 			animation_player.play("idle")
-		elif Input.is_action_pressed("ui_left"):
+		elif Input.is_action_pressed("left"):
 			animation_player.play("walk")
-		elif Input.is_action_pressed("ui_right"):
+		elif Input.is_action_pressed("right"):
 			animation_player.play("walk")
 		else:
 			animation_player.play("idle")
@@ -292,10 +292,10 @@ func _add_block_buffer_time() -> void:
 ## Attack info
 #############################################################
 func _lp() ->  void:
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("left"):
 		sprite_2d.flip_h = true
 
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("right"):
 		sprite_2d.flip_h = false
 
 	if state == States.JF_SHOULDER:
@@ -382,10 +382,10 @@ func lp4_info() -> void:
 
 
 func _hp() ->  void:
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("left"):
 		sprite_2d.flip_h = true
 
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("right"):
 		sprite_2d.flip_h = false
 
 	if state in [
@@ -396,7 +396,7 @@ func _hp() ->  void:
 		States.LP2,
 		States.LP3,
 		]: ## <<-- start with this one
-		if Input.is_action_pressed("ui_down"):
+		if Input.is_action_pressed("down"):
 			animation_player.play("down_hp")
 		else:
 			animation_player.play("hp")
@@ -486,10 +486,10 @@ func tan_info() -> void:
 
 func _down_hp() ->  void:
 	if state in [States.IDLE, States.PARRY_SUCCESS, States.LP1, States.LP2, States.LP3,]:
-		if Input.is_action_pressed("ui_left"):
+		if Input.is_action_pressed("left"):
 			sprite_2d.flip_h = true
 
-		if Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed("right"):
 			sprite_2d.flip_h = false
 
 		animation_player.play("down_hp")
@@ -515,10 +515,10 @@ func down_hp_info() ->  void:
 
 
 func _grab() ->  void:
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("left"):
 		sprite_2d.flip_h = true
 
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("right"):
 		sprite_2d.flip_h = false
 
 	if state in [States.GRABSTANCE]:
@@ -639,10 +639,10 @@ func exe_hadoken_info() ->  void:
 
 func execute_carnaging(pos: Vector2) -> void:
 	# choose to go through enemy or not
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("left"):
 		sprite_2d.flip_h = true
 
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("right"):
 		sprite_2d.flip_h = false
 
 	var offset = Vector2(180, 0)

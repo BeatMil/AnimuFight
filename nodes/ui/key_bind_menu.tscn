@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhyp02lurgb04"]
+[gd_scene load_steps=3 format=3 uid="uid://bhyp02lurgb04"]
 
 [ext_resource type="Script" uid="uid://dfiakrvnw1evu" path="res://scripts/key_bind_menu.gd" id="1_os1c4"]
+[ext_resource type="PackedScene" uid="uid://duhhbxeauuj02" path="res://nodes/ui/remap_button.tscn" id="2_ybffu"]
 
 [node name="KeyBindMenu" type="Control"]
 layout_mode = 3
@@ -32,237 +33,50 @@ grow_vertical = 2
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="MoveLeftButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+[node name="MoveLeftButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
 layout_mode = 2
-size_flags_horizontal = 3
-action_mode = 0
+action = "left"
+action_label_show = "Left"
 
-[node name="Label" type="Label" parent="HBoxContainer/MoveLeftButton"]
+[node name="MoveRightButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
 layout_mode = 2
-anchor_top = 0.0625
-anchor_right = 0.500391
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "Move Left"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+action = "right"
+action_label_show = "Right"
 
-[node name="LeftKeyLabel" type="Label" parent="HBoxContainer/MoveLeftButton"]
+[node name="UpButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
 layout_mode = 2
-anchor_left = 0.500391
-anchor_top = 0.0625
-anchor_right = 0.994527
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "'key'"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+action = "up"
+action_label_show = "Up"
 
-[node name="MoveRightButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+[node name="DownButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
 layout_mode = 2
-size_flags_horizontal = 3
-action_mode = 0
+action = "down"
+action_label_show = "Down"
 
-[node name="Label" type="Label" parent="HBoxContainer/MoveRightButton"]
+[node name="LightAttackButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
 layout_mode = 2
-anchor_top = 0.0625
-anchor_right = 0.500391
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "Move Right"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+action = "lp"
+action_label_show = "Light Attack"
 
-[node name="RightKeyLabel" type="Label" parent="HBoxContainer/MoveRightButton"]
+[node name="HeavyAttackButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
 layout_mode = 2
-anchor_left = 0.500391
-anchor_top = 0.0625
-anchor_right = 0.994527
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "'key'"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+action = "hp"
+action_label_show = "Heavy Attack"
 
-[node name="JumpButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+[node name="BlockButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
 layout_mode = 2
-size_flags_horizontal = 3
-action_mode = 0
+action = "block"
+action_label_show = "Block"
 
-[node name="Label" type="Label" parent="HBoxContainer/JumpButton"]
+[node name="DodgeButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
 layout_mode = 2
-anchor_top = 0.0625
-anchor_right = 0.500391
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "Jump"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+action = "dodge"
+action_label_show = "Dodge"
 
-[node name="JumpKeyLabel" type="Label" parent="HBoxContainer/JumpButton"]
+[node name="ExecuteButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
 layout_mode = 2
-anchor_left = 0.500391
-anchor_top = 0.0625
-anchor_right = 0.994527
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "'key'"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="LightAttackButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-size_flags_horizontal = 3
-action_mode = 0
-
-[node name="Label" type="Label" parent="HBoxContainer/LightAttackButton"]
-layout_mode = 2
-anchor_top = 0.0625
-anchor_right = 0.500391
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "Light Attack"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="LightKeyLabel" type="Label" parent="HBoxContainer/LightAttackButton"]
-layout_mode = 2
-anchor_left = 0.500391
-anchor_top = 0.0625
-anchor_right = 0.994527
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "'key'"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="HeavyAttackButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-size_flags_horizontal = 3
-action_mode = 0
-
-[node name="Label" type="Label" parent="HBoxContainer/HeavyAttackButton"]
-layout_mode = 2
-anchor_top = 0.0625
-anchor_right = 0.500391
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "Heavy Attack"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="HeavyKeyLabel" type="Label" parent="HBoxContainer/HeavyAttackButton"]
-layout_mode = 2
-anchor_left = 0.500391
-anchor_top = 0.0625
-anchor_right = 0.994527
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "'key'"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="BlockButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-size_flags_horizontal = 3
-action_mode = 0
-
-[node name="Label" type="Label" parent="HBoxContainer/BlockButton"]
-layout_mode = 2
-anchor_top = 0.0625
-anchor_right = 0.500391
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "Block"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="BlockKeyLabel" type="Label" parent="HBoxContainer/BlockButton"]
-layout_mode = 2
-anchor_left = 0.500391
-anchor_top = 0.0625
-anchor_right = 0.994527
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "'key'"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="DodgeButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-size_flags_horizontal = 3
-action_mode = 0
-
-[node name="Label" type="Label" parent="HBoxContainer/DodgeButton"]
-layout_mode = 2
-anchor_top = 0.0625
-anchor_right = 0.500391
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "Dodge"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="DodgeKeyLabel" type="Label" parent="HBoxContainer/DodgeButton"]
-layout_mode = 2
-anchor_left = 0.500391
-anchor_top = 0.0625
-anchor_right = 0.994527
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "'key'"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="ExecuteButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-size_flags_horizontal = 3
-action_mode = 0
-
-[node name="Label" type="Label" parent="HBoxContainer/ExecuteButton"]
-layout_mode = 2
-anchor_top = 0.0625
-anchor_right = 0.500391
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "Execute"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="ExecuteKeyLabel" type="Label" parent="HBoxContainer/ExecuteButton"]
-layout_mode = 2
-anchor_left = 0.500391
-anchor_top = 0.0625
-anchor_right = 0.994527
-anchor_bottom = 0.9375
-theme_override_font_sizes/font_size = 24
-text = "'key'"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+action = "execute"
+action_label_show = "Execute"
 
 [node name="BackButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(0, 64)
@@ -299,12 +113,4 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 128
 text = "PRESS ANY KEY"
 
-[connection signal="pressed" from="HBoxContainer/MoveLeftButton" to="." method="_on_move_left_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/MoveRightButton" to="." method="_on_move_right_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/JumpButton" to="." method="_on_jump_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/LightAttackButton" to="." method="_on_light_attack_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/HeavyAttackButton" to="." method="_on_heavy_attack_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/BlockButton" to="." method="_on_block_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/DodgeButton" to="." method="_on_dodge_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/ExecuteButton" to="." method="_on_execute_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
