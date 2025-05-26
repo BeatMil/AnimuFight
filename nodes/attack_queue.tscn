@@ -6,6 +6,7 @@
 script = ExtResource("1_f8t4c")
 
 [node name="AttackQueueTimer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
 [connection signal="timeout" from="AttackQueueTimer" to="." method="_on_attack_queue_timer_timeout"]
