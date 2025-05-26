@@ -9,7 +9,7 @@ var can_attack: bool = false
 func start_queue_timer():
 	can_attack = false
 	attack_queue_timer.start()
-	# print_rich("[color=yellow][b]run: wait 1 sec[/b][/color]")
+	# print_rich("[color=yellow][b]I Attack![/b][/color]")
 
 
 func stop_queue_timer():

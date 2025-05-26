@@ -121,7 +121,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_ivnih"]
 resource_name = "attack01_1"
-length = 3.0
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

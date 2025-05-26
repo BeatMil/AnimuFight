@@ -9,7 +9,7 @@ func _ready() -> void:
 	randomize()
 	gravity_power = 5000
 	hp_bar.set_hp(hp)
-	block_rate = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+	block_rate = 10
 
 #############################################################
 ## Attack Info

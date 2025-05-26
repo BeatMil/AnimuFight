@@ -13,14 +13,15 @@ func _ready() -> void:
 func _spawn_enemy() -> void:
 	if not enemy_to_spawn:
 		return
-	var bob = enemy_to_spawn.pick_random()
-	var e = bob.instantiate()
-	e.position = self.position
-	if not target:
-		e.is_notarget = true
-	else:
-		e.target = target
-	enemy_count.add_child(e)
+	# var bob = enemy_to_spawn.pick_random()
+	for enemy in enemy_to_spawn:
+		var e = enemy.instantiate()
+		e.position = self.position
+		if not target:
+			e.is_notarget = true
+		else:
+			e.target = target
+		enemy_count.add_child(e)
 
 
 func clear_enemy() -> void:

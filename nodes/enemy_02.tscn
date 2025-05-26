@@ -83,7 +83,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_ivnih"]
 resource_name = "attack01_1"
-length = 1.5
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -157,7 +157,7 @@ tracks/4/keys = {
 "args": [21],
 "method": &"_set_state"
 }, {
-"args": [5],
+"args": [30],
 "method": &"_set_state"
 }]
 }
@@ -888,7 +888,7 @@ tracks/4/keys = {
 "args": [1],
 "method": &"_set_state"
 }, {
-"args": [5],
+"args": [30],
 "method": &"_set_state"
 }]
 }
@@ -1035,7 +1035,7 @@ tracks/4/keys = {
 "args": [600],
 "method": &"_push_x"
 }, {
-"args": [5],
+"args": [30],
 "method": &"_set_state"
 }]
 }
