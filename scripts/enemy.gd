@@ -88,7 +88,8 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			friction = ground_friction
 			stun_duration -= delta
-			set_collision_normal()
+			if hp_bar.get_hp() > 0:
+				set_collision_normal()
 		else:
 			set_collision_no_hit_player()
 			friction = air_friction
@@ -103,6 +104,7 @@ func _physics_process(delta: float) -> void:
 	_check_block_count()
 
 	## debug
+	$DebugLabel.text = "%s, %s"%[States.keys()[state], animation_player.current_animation]
 	# $DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
 
 

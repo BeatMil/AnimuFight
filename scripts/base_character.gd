@@ -374,7 +374,7 @@ func hitted(
 			1,
 			Enums.Attack.P_PARRY
 		)
-		print_rich("[color=pink][b]COOL SLOW MO!![/b][/color]", slow_mo_on_block)
+		# print_rich("[color=pink][b]COOL SLOW MO!![/b][/color]", slow_mo_on_block)
 		if slow_mo_on_block:
 			_slow_moion(slow_mo_on_block.x, slow_mo_on_block.y)
 			if get_tree().current_scene.get_node_or_null("Player/Camera"):
@@ -460,17 +460,21 @@ func hitted(
 			animation_player.play("ded")
 			stun_duration = hitstun_amount
 			state = States.BOUNCE_STUNNED
+			set_collision_no_hit_player()
 		elif hp_bar.get_hp() <= 0:
 			if push_type in [
 			Enums.Push_types.KNOCKDOWN,
-			Enums.Push_types.EXECUTE] and state == States.EXECUTETABLE:
+			Enums.Push_types.EXECUTE,
+			Enums.Push_types.NORMAL] and state == States.EXECUTETABLE:
 				animation_player.stop(true)
 				animation_player.play("ded")
 				stun_duration = hitstun_amount
+				set_collision_no_hit_player()
 			else:
 				state = States.HIT_STUNNED
 				animation_player.stop(true)
 				animation_player.play("execute")
+				print("==purple execute==")
 		else:
 			match push_type:
 				0: ## NORMAL
@@ -491,6 +495,7 @@ func hitted(
 					else:
 						animation_player.play("ded")
 						state = States.BOUNCE_STUNNED
+						set_collision_no_hit_player()
 					stun_duration = hitstun_amount
 				_:
 					animation_player.stop(true)
@@ -581,3 +586,9 @@ func play_bounce_sfx() -> void:
 		$AudioStreamPlayer2.stream = HIT_BOUNCE
 		$AudioStreamPlayer2.pitch_scale = randf_range(0.8, 1.2)
 		$AudioStreamPlayer2.play()
+
+
+func set_collision_no_hit_player() -> void: # suppress error
+	pass
+	collision_layer = 0b00000000000000010000
+	collision_mask = 0b00000000000000001100
