@@ -16,10 +16,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("ui_accept") or event.is_action_pressed("pause"):
 		is_skipping = true
 		skip_bar_player.play("fade_in")
-	elif event.is_action_released("ui_cancel") or event.is_action_released("ui_accept"):
+	elif event.is_action_released("ui_cancel") or event.is_action_released("ui_accept") or event.is_action_released("pause"):
 		is_skipping = false
 		skip_bar_player.play_backwards("fade_in")
 
