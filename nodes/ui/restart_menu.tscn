@@ -41,6 +41,7 @@ alignment = 1
 
 [node name="RestartButton" parent="VBoxContainer" instance=ExtResource("2_241t5")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../MainMenuButton")
 text = "Restart"
 
 [node name="KeyBindButton" parent="VBoxContainer" instance=ExtResource("2_241t5")]
@@ -49,6 +50,7 @@ text = "Change Key Bind"
 
 [node name="MainMenuButton" parent="VBoxContainer" instance=ExtResource("2_241t5")]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../RestartButton")
 text = "Main Menu"
 
 [node name="MenuCursor" parent="." instance=ExtResource("3_r7x2c")]

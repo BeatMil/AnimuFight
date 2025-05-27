@@ -35,6 +35,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="MoveLeftButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../BackButton")
 action = "left"
 action_label_show = "Left"
 
@@ -82,6 +83,7 @@ action_label_show = "Execute"
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_horizontal = 3
+focus_neighbor_bottom = NodePath("../MoveLeftButton")
 theme_override_font_sizes/font_size = 32
 action_mode = 0
 text = "Back"

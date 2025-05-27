@@ -29,6 +29,7 @@ alignment = 1
 
 [node name="StartButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_8ln24")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
 text = "Start"
 
 [node name="TrainingButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_8ln24")]
@@ -46,6 +47,7 @@ text = "Option"
 
 [node name="QuitButton" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_8ln24")]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../StartButton")
 text = "Quit"
 
 [node name="Option" type="VBoxContainer" parent="CanvasLayer"]
