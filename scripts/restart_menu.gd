@@ -14,6 +14,9 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		toggle_menu()
+	elif event.is_action_pressed("ui_cancel"):
+		self.visible = false
+		get_tree().paused = false
 
 
 func toggle_menu() -> void:
@@ -47,6 +50,7 @@ func _on_key_bind_button_pressed() -> void:
 	key_bind_menu.grab_focus_move_left()
 	key_bind_menu.display_keys()
 	v_box_container.visible = false
+	set_process_input(false)
 
 
 func _on_key_bind_menu_close() -> void:
@@ -54,3 +58,4 @@ func _on_key_bind_menu_close() -> void:
 	v_box_container.visible = true
 	restart_button.grab_focus()
 	%MenuCursor.move_to(Vector2(778, 530))
+	set_process_input(true)

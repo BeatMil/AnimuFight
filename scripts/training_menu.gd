@@ -7,6 +7,7 @@ extends Control
 @onready var v_box_container_l: VBoxContainer = $VBoxContainer/VBoxContainerL
 @onready var key_bind_button: Button = $VBoxContainer/VBoxContainerL/KeyBindButton
 
+
 signal enemy1
 signal enemy2
 signal enemy3
@@ -29,6 +30,9 @@ func _input(event: InputEvent) -> void:
 			v_box_container_l.visible = true
 			enemy_1_button.grab_focus()
 			%MenuCursor.move_to(Vector2(576, 472))
+	elif event.is_action_pressed("ui_cancel"):
+		self.visible = false
+		get_tree().paused = false
 
 
 func _on_enemy_1_button_pressed() -> void:
@@ -65,6 +69,7 @@ func _on_key_bind_button_pressed() -> void:
 	key_bind_menu.display_keys()
 	v_box_container_l.visible = false
 	%MenuCursor.visible = false
+	set_process_input(false)
 
 
 func _on_key_bind_menu_close() -> void:
@@ -72,3 +77,4 @@ func _on_key_bind_menu_close() -> void:
 	%MenuCursor.visible = true
 	key_bind_menu.visible = false
 	key_bind_button.grab_focus()
+	set_process_input(true)

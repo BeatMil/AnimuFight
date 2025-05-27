@@ -28,9 +28,11 @@ func update_key_text():
 
 func _on_toggled(toggled_on: bool) -> void:
 	if button_pressed:
+		get_parent().get_parent().set_process_input(false)
 		key_label.text = "... Awaiting Input ..."
 		release_focus()
 	else:
+		get_parent().get_parent().set_process_input(true)
 		update_key_text()
 		grab_focus()
 	await get_tree().create_timer(0.01).timeout
