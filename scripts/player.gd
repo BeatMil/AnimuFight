@@ -66,6 +66,7 @@ func _process(_delta: float) -> void:
 		debug_label.text = "PlayerState: %s"%States.keys()[state]
 		# debug_label.text += "\n%s"%input_buffer_timer
 		debug_label.text += "\n%s"%block_buffer_timer
+		debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
 		# debug_label.text += "\n%s"%Input.is_action_pressed("block")
 		# debug_label.text += "\n%s"%debug_input_event
 		# debug_label.text += "\n%s"%next_move

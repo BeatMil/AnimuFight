@@ -65,7 +65,7 @@ func _physics_process(delta: float) -> void:
 
 	is_face_right = not sprite_2d.flip_h
 	# _z_index_equal_to_y()
-	if state == States.IDLE:
+	if state in [States.IDLE]:
 		_facing()
 		if not is_player_in_range_lp and not is_enemy_in_range_lp:
 			_move(delta)
@@ -134,10 +134,12 @@ func _facing() -> void:
 
 func _check_block_count() -> void:
 	if block_count >= 3:
-		# Reset attack queue
-		AttackQueue.start_queue_timer()
-		_attack01()
+		# do the attack!
+			# Reset attack queue
+		AttackQueue.queueing_to_attack(self)
+		AttackQueue._on_attack_queue_timer_timeout()
 		block_count = 0
+		print("==I block too much!==")
 
 
 #############################################################

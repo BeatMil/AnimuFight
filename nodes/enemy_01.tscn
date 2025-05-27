@@ -1266,7 +1266,7 @@ _data = {
 size = Vector2(96, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oysbf"]
-size = Vector2(96, 256)
+size = Vector2(128, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8qvtx"]
 size = Vector2(144, 304)
@@ -1315,14 +1315,14 @@ shape = SubResource("RectangleShape2D_1h3d5")
 position = Vector2(256, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack01RangeR" index="0"]
-position = Vector2(136, 0)
+position = Vector2(128, 0)
 shape = SubResource("RectangleShape2D_oysbf")
 
 [node name="Attack01RangeL" type="Area2D" parent="." index="10"]
 position = Vector2(-592, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack01RangeL" index="0"]
-position = Vector2(136, 0)
+position = Vector2(208, 0)
 shape = SubResource("RectangleShape2D_oysbf")
 
 [node name="DebugLabel" type="Label" parent="." index="11"]

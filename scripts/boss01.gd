@@ -17,7 +17,7 @@ func _ready() -> void:
 
 
 func _attack01() -> void:
-	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK]:
+	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
 		state = States.BLOCK
 		match randi_range(0, 2):
 			0:
@@ -216,21 +216,18 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_attack_timer_timeout() -> void:
 	if state != States.IDLE:
 		return
-	if randi_range(0, 0) == 1:
+	if randi_range(0, 1) == 0:
 		return
-	if not AttackQueue.can_attack:
-		return
-	# Reset attack queue
-	AttackQueue.start_queue_timer()
 
-	if is_player_in_range_burn_knuckle:
-		burn_knuckle()
+	AttackQueue.queueing_to_attack(self)
 
-	if is_player_in_range_lp:
-		match randi_range(0, 1):
+
+func do_attack() -> void:
+	if is_player_in_range_attack01:
+		state = States.ATTACK
+		_attack01()
+	elif is_player_in_range_lp:
+		state = States.ATTACK
+		match randi_range(0, 0):
 			0:
-				meteo_crash()
-			1:
-				_lp()
-			_:
 				_lp()

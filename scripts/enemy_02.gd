@@ -11,7 +11,6 @@ func _ready() -> void:
 #############################################################
 func _lp() -> void:
 	if state in [States.IDLE, States.ATTACK]:
-		state = States.ATTACK
 		animation_player.play("lp1")
 func _lp_chain() -> void:
 	if state in [States.IDLE, States.ATTACK]:
@@ -37,8 +36,7 @@ func lp_info() -> void: # for animation_player
 
 
 func _attack01() -> void:
-	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK]:
-		state = States.BLOCK
+	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
 		animation_player.play("attack01_1")
 func attack01_info() -> void: # for animation_player
 	var info = {
@@ -133,14 +131,16 @@ func _on_attack_timer_timeout() -> void:
 		return
 	if randi_range(0, 1) == 0:
 		return
-	if not AttackQueue.can_attack:
-		return
-	# Reset attack queue
-	AttackQueue.start_queue_timer()
 
+	AttackQueue.queueing_to_attack(self)
+
+
+func do_attack() -> void:
 	if is_player_in_range_attack01:
+		state = States.ATTACK
 		_attack01()
-	if is_player_in_range_lp:
+	elif is_player_in_range_lp:
+		state = States.ATTACK
 		match randi_range(0, 1):
 			0:
 				_lp()
