@@ -37,6 +37,7 @@ func _ready() -> void:
 
 	# Attack!
 	AttackQueue.start_queue_timer()
+	# AttackQueue.stop_queue_timer()
 
 	# if enemy_spawner_new.phase >= 5:
 	# 	_shoot_up_house()

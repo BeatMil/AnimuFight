@@ -2944,10 +2944,15 @@ hp = 20
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
 
 [node name="DebugLabel" type="Label" parent="CanvasLayer" index="0"]
-offset_right = 792.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -396.0
+offset_right = 396.0
 offset_bottom = 344.0
+grow_horizontal = 2
 theme_override_fonts/font = ExtResource("3_q6yga")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 64
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("3_uo2uk")

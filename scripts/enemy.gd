@@ -45,14 +45,15 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	## notarget 
 	if is_notarget:
 		is_player_in_range_lp = false
 		is_player_in_range_attack01 = false
 
-	## wall bounce
+	is_face_right = not sprite_2d.flip_h
+
 	_check_wall_bounce()
 
+	# collision_layer
 	if state in [States.IDLE]:
 		if is_on_floor():
 			# touch everything
@@ -63,8 +64,7 @@ func _physics_process(delta: float) -> void:
 			collision_layer = 0b00000000000000010000
 			collision_mask = 0b00000000000000001100
 
-	is_face_right = not sprite_2d.flip_h
-	# _z_index_equal_to_y()
+	# Move and Facing
 	if state in [States.IDLE]:
 		_facing()
 		if not is_player_in_range_lp and not is_enemy_in_range_lp:
@@ -73,10 +73,12 @@ func _physics_process(delta: float) -> void:
 			# lerp when finding player
 			_lerp_velocity_x()
 			animation_player.play("idle")
+			block_count = 0
 
 	# lerp when attacking player
 	if state not in [States.IDLE]:
 		_lerp_velocity_x()
+
 	_gravity(delta)
 	move_and_slide()
 
@@ -136,8 +138,8 @@ func _check_block_count() -> void:
 	if block_count >= 3:
 		# do the attack!
 			# Reset attack queue
-		AttackQueue.queueing_to_attack(self)
-		AttackQueue._on_attack_queue_timer_timeout()
+		AttackQueue.queueing_priority(self)
+		AttackQueue.queue_go()
 		block_count = 0
 		print("==I block too much!==")
 

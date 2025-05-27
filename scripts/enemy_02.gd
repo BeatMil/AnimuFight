@@ -3,7 +3,7 @@ extends "res://scripts/enemy.gd"
 
 func _ready() -> void:
 	super._ready()
-	block_rate = 10
+	block_rate = 5
 
 
 #############################################################

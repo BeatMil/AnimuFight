@@ -354,16 +354,21 @@ func hitted(
 		States.GRABBED,
 		States.IFRAME,
 		States.PUNISHABLE,
-		]:
-		if is_in_group("tank") or (randi_range(1, 10) <= block_rate):
-			state = States.BLOCK
-			animation_player.stop()
-			animation_player.play("blockstunned")
-			if has_method("_add_block_count"):
-				self._add_block_count(1)
-
+		] and randi_range(1, 10) <= block_rate:
+		state = States.BLOCK
+		animation_player.stop()
+		animation_player.play("blockstunned")
+		if has_method("_add_block_count"):
+			self._add_block_count(1)
+		block_effect_helper(
+			hitstun_amount,
+			is_push_to_the_right,
+			push_power,
+			hitlag_amount,
+			_screenshake_amount,
+			_attacker)
 	## Parry & Parry Success
-	if state in [States.PARRY] and _type == Enums.Attack.NORMAL:
+	elif state in [States.PARRY] and _type == Enums.Attack.NORMAL:
 		animation_player.play("parry_success")
 		_attacker.hitted(
 			self,
@@ -387,30 +392,20 @@ func hitted(
 	## BLOCK & ARMOR
 	elif state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR, States.PARRY_SUCCESS] and \
 		_type in [Enums.Attack.NORMAL, Enums.Attack.P_PARRY]:
-		if state == States.ARMOR:
-			hp_bar.hp_down(_damage)
-		elif is_in_group("player"):
+		# if state == States.ARMOR:
+		# 	hp_bar.hp_down(_damage)
+		if is_in_group("player"):
 			animation_player.play("blockstunned")
 			hp_bar.hp_down(_damage/2)
 		else:
-			animation_player.stop()
-			animation_player.play("blockstunned")
-		stun_duration = hitstun_amount/2
-		if is_push_to_the_right:
-			_push_direct(push_power/2)
-		else:
-			_push_direct(Vector2(-push_power.x, push_power.y) / 2)
-		if hitlag_amount:
-			hitlag(hitlag_amount)
-			_attacker.hitlag(hitlag_amount)
-		if _screenshake_amount:
-			if get_tree().current_scene.get_node_or_null("Player/Camera"):
-				get_tree().current_scene.get_node_or_null("Player/Camera"). \
-				start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
-		if is_in_group("tank"):
-			ObjectPooling.spawn_blockSpark_2(position)
-		else:
-			ObjectPooling.spawn_blockSpark_1(position)
+			return
+		block_effect_helper(
+			hitstun_amount,
+			is_push_to_the_right,
+			push_power,
+			hitlag_amount,
+			_screenshake_amount,
+			_attacker)
 
 	## DODGE & DODGE_SUCCESS
 	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW:
@@ -598,3 +593,28 @@ func set_collision_no_hit_player() -> void: # suppress error
 
 func _add_block_count(amount: int):
 	pass
+
+
+func block_effect_helper(
+	hitstun_amount,
+	is_push_to_the_right,
+	push_power,
+	hitlag_amount,
+	_screenshake_amount,
+	_attacker
+	) -> void:
+	stun_duration = hitstun_amount/2
+	if is_push_to_the_right:
+		_push_direct(push_power/2)
+	else:
+		_push_direct(Vector2(-push_power.x, push_power.y) / 2)
+	if hitlag_amount:
+		hitlag(hitlag_amount)
+		_attacker.hitlag(hitlag_amount)
+	if _screenshake_amount:
+		if get_tree().current_scene.get_node_or_null("Player/Camera"):
+			get_tree().current_scene.get_node_or_null("Player/Camera"). \
+			start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
+	# if is_in_group("tank"):
+	# 	ObjectPooling.spawn_blockSpark_2(position)
+	ObjectPooling.spawn_blockSpark_1(position)

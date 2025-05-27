@@ -81,6 +81,7 @@ hp = 10110
 [node name="EnemySpawner8" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
 position = Vector2(1104, -144)
 target = NodePath("../Player")
+enemy_to_spawn = [ExtResource("5_4aqt5")]
 
 [node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
 position = Vector2(1912, -112)

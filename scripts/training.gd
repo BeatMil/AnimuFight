@@ -22,7 +22,8 @@ func _ready() -> void:
 	training_menu.enemy4.connect(_on_enemy_4_button_down)
 	training_menu.clear.connect(_on_clear_button_down)
 	training_menu.death_zone.connect(_on_death_zone_toggled)
-	# AttackQueue.stop_queue_timer()
+	death_zone.turn_off()
+	AttackQueue.stop_queue_timer()
 
 
 func _input(event: InputEvent) -> void:

@@ -313,12 +313,9 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [1],
-"method": &"_add_block_count"
-}]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1586,7 +1583,7 @@ size = Vector2(304, 256)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8qvtx"]
 size = Vector2(144, 304)
 
-[node name="Enemy" groups=["boss", "character", "enemy"] instance=ExtResource("1_uha72")]
+[node name="Boss01" groups=["boss", "character", "enemy"] instance=ExtResource("1_uha72")]
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("2_n4s7b")
@@ -1630,11 +1627,11 @@ shape = SubResource("RectangleShape2D_1h3d5")
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BurnKnuckleRange" index="0"]
-position = Vector2(-480, 0)
+position = Vector2(-448, 0)
 shape = SubResource("RectangleShape2D_kseif")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="BurnKnuckleRange" index="1"]
-position = Vector2(472, 0)
+position = Vector2(440, 0)
 shape = SubResource("RectangleShape2D_kseif")
 
 [node name="DebugLabel" type="Label" parent="." index="9"]
