@@ -1,6 +1,11 @@
 extends "res://scripts/enemy.gd"
 
 
+func _ready() -> void:
+	super._ready()
+	block_rate = 10
+
+
 #############################################################
 ## Attack Info
 #############################################################
@@ -41,7 +46,7 @@ func attack01_info() -> void: # for animation_player
 	"time": 0.3,
 	"push_power_ground": Vector2(800, -300),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
-	"push_power_air": Vector2(300, 0),
+	"push_power_air": Vector2(800, -300),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
 	"hitlag_amount_ground": 0.2,
 	"hitstun_amount_ground": 0.05,

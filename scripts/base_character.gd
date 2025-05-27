@@ -359,6 +359,8 @@ func hitted(
 			state = States.BLOCK
 			animation_player.stop()
 			animation_player.play("blockstunned")
+			if has_method("_add_block_count"):
+				self._add_block_count(1)
 
 	## Parry & Parry Success
 	if state in [States.PARRY] and _type == Enums.Attack.NORMAL:
@@ -592,3 +594,7 @@ func set_collision_no_hit_player() -> void: # suppress error
 	pass
 	collision_layer = 0b00000000000000010000
 	collision_mask = 0b00000000000000001100
+
+
+func _add_block_count(amount: int):
+	pass

@@ -104,7 +104,7 @@ func _physics_process(delta: float) -> void:
 	_check_block_count()
 
 	## debug
-	$DebugLabel.text = "%s, %s"%[States.keys()[state], animation_player.current_animation]
+	$DebugLabel.text = "%s, %s %s"%[States.keys()[state], animation_player.current_animation, block_count]
 	# $DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
 
 
@@ -134,9 +134,6 @@ func _facing() -> void:
 
 func _check_block_count() -> void:
 	if block_count >= 3:
-		# do the attack!
-		if not AttackQueue.can_attack:
-			return
 		# Reset attack queue
 		AttackQueue.start_queue_timer()
 		_attack01()
