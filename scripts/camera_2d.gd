@@ -5,6 +5,19 @@ extends Node2D
 ## Config
 #############################################################
 @onready var current_zoom: Vector2 = $Camera2D.zoom
+@onready var current_lock: Dictionary = {
+	"left": -10000000,
+	"right": 10000000,
+	"top": -10000000,
+	"bottom": 10000000,
+}
+
+var no_screen_lock: = {
+	"left": -10000000,
+	"right": 10000000,
+	"top": -10000000,
+	"bottom": 10000000,
+}
 
 
 #############################################################
@@ -46,10 +59,12 @@ func zoom(zoom_level: Vector2, duration: float = 0.1):
 
 
 func zoom_zoom(zoom_level: Vector2, duration: float = 0.1):
+	# disable_screen_lock()
 	var tween = get_tree().create_tween()
 	tween.tween_property(camera_2d, "zoom", current_zoom+zoom_level, 0.3)
 	tween.tween_interval(duration)
 	tween.tween_property(camera_2d, "zoom", current_zoom, 0.25)
+
 
 func zoom_permanent(zoom_level: Vector2):
 	var tween = get_tree().create_tween()
@@ -62,6 +77,17 @@ func set_screen_lock(left: int, right: int, top: int = -10000000, bottom: int = 
 	camera_2d.limit_right = right
 	camera_2d.limit_top = top
 	camera_2d.limit_bottom = bottom
+	current_lock["left"] = left
+	current_lock["right"] = right
+	current_lock["top"] = top
+	current_lock["bottom"] = bottom
+
+
+func disable_screen_lock() -> void:
+	camera_2d.limit_left = no_screen_lock["left"]
+	camera_2d.limit_right = no_screen_lock["right"]
+	camera_2d.limit_top = no_screen_lock["top"]
+	camera_2d.limit_bottom = no_screen_lock["bottom"]
 
 
 func set_zoom(zoom_level: Vector2):
