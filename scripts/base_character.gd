@@ -345,21 +345,21 @@ func hitted(
 	slow_mo_on_block: Vector2 = Vector2(0, 0)
 	) -> void:
 	## TANK
-	if is_in_group("enemy") and _type != Enums.Attack.UNBLOCK and state not in [
-		States.HIT_STUNNED,
-		States.EXECUTETABLE,
-		States.BOUNCE_STUNNED,
-		States.ARMOR,
-		States.ATTACK,
-		States.GRABBED,
-		States.IFRAME,
-		States.PUNISHABLE,
-		] and randi_range(1, 10) <= block_rate:
-		state = States.BLOCK
-		animation_player.stop()
-		animation_player.play("blockstunned")
+	if is_in_group("enemy") and _type != Enums.Attack.UNBLOCK and state in [States.IDLE]:
+		if randi_range(1, 10) <= block_rate:
+			state = States.BLOCK
+
+	## BLOCK & ARMOR
+	if state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR, States.PARRY_SUCCESS] and \
+		_type in [Enums.Attack.NORMAL, Enums.Attack.P_PARRY]:
+		# if state == States.ARMOR:
+		# 	hp_bar.hp_down(_damage)
 		if has_method("_add_block_count"):
 			self._add_block_count(1)
+
+		animation_player.stop()
+		animation_player.play("blockstunned")
+		# hp_bar.hp_down(_damage/2)
 		block_effect_helper(
 			hitstun_amount,
 			is_push_to_the_right,
@@ -389,24 +389,6 @@ func hitted(
 				"Player/Camera").zoom_zoom(_zoom, _zoom_duration)
 			else:
 				print_debug("_zoom can't find player/camera")
-	## BLOCK & ARMOR
-	elif state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR, States.PARRY_SUCCESS] and \
-		_type in [Enums.Attack.NORMAL, Enums.Attack.P_PARRY]:
-		# if state == States.ARMOR:
-		# 	hp_bar.hp_down(_damage)
-		if is_in_group("player"):
-			animation_player.play("blockstunned")
-			hp_bar.hp_down(_damage/2)
-		else:
-			return
-		block_effect_helper(
-			hitstun_amount,
-			is_push_to_the_right,
-			push_power,
-			hitlag_amount,
-			_screenshake_amount,
-			_attacker)
-
 	## DODGE & DODGE_SUCCESS
 	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW:
 		if _type == Enums.Attack.UNBLOCK:

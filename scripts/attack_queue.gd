@@ -22,7 +22,6 @@ func queueing_priority(node: Object) -> void:
 
 func start_queue_timer():
 	attack_queue_timer.start()
-	# print_rich("[color=yellow][b]I Attack![/b][/color]")
 
 
 func stop_queue_timer():
