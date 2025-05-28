@@ -101,6 +101,8 @@ var is_touching_wall_right: bool = false
 ## hitstun helper
 var stun_duration: float = 0
 
+var is_ded := false
+
 
 #############################################################
 ## Built-in
@@ -434,26 +436,55 @@ func hitted(
 	##################
 	else: # Do damage and push type
 		hp_bar.hp_down(_damage)
+
+		# Death Zone
 		if _attacker.is_in_group("death_zone"):
 			animation_player.stop(true)
 			animation_player.play("ded")
 			stun_duration = hitstun_amount
 			state = States.BOUNCE_STUNNED
-			set_collision_no_hit_player()
+			# set_collision_no_hit_player()
+		# Hp <= 0
 		elif hp_bar.get_hp() <= 0:
 			if push_type in [
 			Enums.Push_types.KNOCKDOWN,
 			Enums.Push_types.EXECUTE,
-			Enums.Push_types.NORMAL] and state == States.EXECUTETABLE:
+			] and state == States.EXECUTETABLE:
 				animation_player.stop(true)
 				animation_player.play("ded")
 				stun_duration = hitstun_amount
-				set_collision_no_hit_player()
+				# set_collision_no_hit_player()
+			elif is_ded and state != States.EXECUTETABLE:
+				animation_player.stop(true)
+				animation_player.play("down")
+				stun_duration = hitstun_amount
+				# set_collision_no_hit_player()
 			else:
 				state = States.HIT_STUNNED
 				animation_player.stop(true)
 				animation_player.play("execute")
-				print("==purple execute==")
+				is_ded = true
+			# if push_type in [
+			# Enums.Push_types.KNOCKDOWN,
+			# Enums.Push_types.EXECUTE,
+			# ] and state == States.EXECUTETABLE:
+			# 	animation_player.stop(true)
+			# 	animation_player.play("down")
+			# 	stun_duration = hitstun_amount
+				# set_collision_no_hit_player()
+			# 	is_ded = true
+			# elif push_type == Enums.Push_types.NORMAL and \
+			# 	state != States.EXECUTETABLE and is_ded:
+			# 	animation_player.stop(true)
+			# 	animation_player.play("down")
+			# 	stun_duration = hitstun_amount
+			# 	set_collision_no_hit_player()
+			# else:
+			# 	state = States.HIT_STUNNED
+			# 	animation_player.stop(true)
+			# 	animation_player.play("execute")
+			# 	print("==purple execute==")
+		# Hitstunned or down
 		else:
 			match push_type:
 				0: ## NORMAL
@@ -474,7 +505,7 @@ func hitted(
 					else:
 						animation_player.play("ded")
 						state = States.BOUNCE_STUNNED
-						set_collision_no_hit_player()
+						# set_collision_no_hit_player()
 					stun_duration = hitstun_amount
 				_:
 					animation_player.stop(true)
@@ -567,10 +598,10 @@ func play_bounce_sfx() -> void:
 		$AudioStreamPlayer2.play()
 
 
-func set_collision_no_hit_player() -> void: # suppress error
-	pass
-	collision_layer = 0b00000000000000010000
-	collision_mask = 0b00000000000000001100
+# func set_collision_no_hit_player() -> void: # suppress error
+# 	pass
+# 	collision_layer = 0b00000000000000010000
+# 	collision_mask = 0b00000000000000001100
 
 
 func _add_block_count(amount: int):
