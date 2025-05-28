@@ -1130,8 +1130,8 @@ size = Vector2(144, 304)
 collision_layer = 0
 collision_mask = 15
 script = ExtResource("2_wp7b3")
-is_notarget = false
 hp = 10
+is_notarget = false
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("11_wp7b3")
@@ -1143,12 +1143,6 @@ visible = false
 position = Vector2(0, 0)
 shape = SubResource("RectangleShape2D_8jfq2")
 
-[node name="LpPos" parent="HitBoxPos" index="0"]
-position = Vector2(168, 0)
-
-[node name="TowlPos" type="Marker2D" parent="HitBoxPos" index="1"]
-position = Vector2(256, -56)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 libraries = {
 &"": SubResource("AnimationLibrary_vpy1p")
@@ -1156,6 +1150,12 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="." index="5"]
 editor_description = "Prevent lp() when ded"
+
+[node name="LpPos" parent="HitBoxPos" index="0"]
+position = Vector2(168, 0)
+
+[node name="TowlPos" type="Marker2D" parent="HitBoxPos" index="1"]
+position = Vector2(256, -56)
 
 [node name="LpRangeR" type="Area2D" parent="." index="7"]
 monitoring = false

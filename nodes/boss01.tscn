@@ -404,7 +404,7 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
-"method": &"set_collision_no_hit_player"
+"method": &"set_collision_no_hit_all"
 }, {
 "args": [],
 "method": &"burn_knuckle_info"
@@ -1265,7 +1265,7 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"set_collision_no_hit_player"
+"method": &"set_collision_no_hit_all"
 }, {
 "args": [],
 "method": &"meteo_crash_info"
@@ -1645,7 +1645,7 @@ text = "bob"
 
 [node name="BounceTogether" type="Area2D" parent="." index="10"]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceTogether" index="0"]
 shape = SubResource("RectangleShape2D_8qvtx")

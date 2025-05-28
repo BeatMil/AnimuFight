@@ -90,17 +90,16 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			friction = ground_friction
 			stun_duration -= delta
-			if hp_bar.get_hp() > 0:
-				set_collision_normal()
-		else:
-			set_collision_no_hit_player()
+		else: # not on_floor
+			set_collision_no_hit_all()
 			friction = air_friction
+	elif state == States.EXECUTETABLE:
+		set_collision_no_hit_all()
 	elif stun_duration < 0:
-		# state = States.IDLE
 		if hp_bar.get_hp() <= 0:
 			queue_free()
-		animation_player.play("idle")
 		stun_duration = 0
+		animation_player.play("idle")
 		set_collision_normal()
 
 	_check_block_count()
@@ -152,7 +151,7 @@ func _add_block_count(amount: int):
 	block_count += amount
 
 
-func set_collision_no_hit_player() -> void:
+func set_collision_no_hit_all() -> void:
 	collision_layer = 0b00000000000000010000
 	collision_mask = 0b00000000000000001100
 
