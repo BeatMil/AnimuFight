@@ -771,6 +771,7 @@ scale = Vector2(1.64324, 1)
 [node name="WallInvi" parent="." instance=ExtResource("11_g2h18")]
 position = Vector2(2146, 352)
 scale = Vector2(1.64324, 1)
+collision_layer = 0
 
 [node name="CameraPos" type="Marker2D" parent="."]
 position = Vector2(942, 683)
@@ -976,11 +977,13 @@ collision_mask = 18
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceBossBack"]
-position = Vector2(96, 8)
+position = Vector2(-149, 87)
+rotation = -0.526948
 shape = SubResource("RectangleShape2D_nmevm")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="BounceBossBack"]
-position = Vector2(1976, 8)
+position = Vector2(2108, 77)
+rotation = 0.261799
 shape = SubResource("RectangleShape2D_nmevm")
 
 [node name="BossBouncePlayer" type="AudioStreamPlayer" parent="BounceBossBack"]
