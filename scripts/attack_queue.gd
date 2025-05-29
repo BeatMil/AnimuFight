@@ -2,7 +2,7 @@ extends Node
 
 
 @onready var attack_queue_timer: Timer = $AttackQueueTimer
-@export var secs_between_attack: float = 2.0
+@export var secs_between_attack: float = 1.5
 
 
 var enemies_ready_to_attack = []
