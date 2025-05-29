@@ -73,7 +73,7 @@ func _physics_process(delta: float) -> void:
 			# lerp when finding player
 			_lerp_velocity_x()
 			animation_player.play("idle")
-			block_count = 0
+			# block_count = 0
 
 	# lerp when attacking player
 	if state not in [States.IDLE]:
@@ -183,8 +183,9 @@ func toggle_flip_h() -> void:
 
 
 func _on_bounce_together_body_entered(body: Node2D) -> void:
-	if velocity.length() < 500:
+	if velocity.length() < 5000:
 		return
+	print(velocity.length())
 	## Hit other enemy
 	if self.state in [States.BOUNCE_STUNNED, States.EXECUTETABLE] \
 	and body.state != States.BOUNCE_STUNNED:
