@@ -789,12 +789,6 @@ enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpaw
 
 [node name="Phase1" type="Node" parent="EnemySpawnHelper"]
 
-[node name="e3" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
-script = ExtResource("13_4slru")
-position = NodePath("../../../SpawnPos/pos1")
-hp = 10
-object = ExtResource("4_ts7c8")
-
 [node name="e2" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
 script = ExtResource("13_4slru")
 position = NodePath("../../../SpawnPos/pos1")
