@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://c4m5deiee8q8w"]
+[gd_scene load_steps=45 format=3 uid="uid://c4m5deiee8q8w"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_uha72"]
 [ext_resource type="Texture2D" uid="uid://hfw58i0oa1gv" path="res://media/sprites/boss01/boss01_idle.png" id="2_410lf"]
@@ -22,7 +22,6 @@
 [ext_resource type="AudioStream" uid="uid://debrnx2edkqvf" path="res://media/sfxs/PunchAttack2.wav" id="16_uhi2f"]
 [ext_resource type="Texture2D" uid="uid://c1v0bb82c56rg" path="res://media/sprites/boss01/tatsukamki_startup2.png" id="16_umypt"]
 [ext_resource type="AudioStream" uid="uid://bg8cifedlb5iu" path="res://media/sfxs/attack_warning_01.wav" id="19_55le4"]
-[ext_resource type="Texture2D" uid="uid://c66ep3rlga24a" path="res://media/sprites/boss01/boss01_burn_knuckle_start.png" id="20_fe8ni"]
 [ext_resource type="Texture2D" uid="uid://c5ouq1o78dmir" path="res://media/sprites/boss01/boss01_burn_knuckle.png" id="21_884lv"]
 [ext_resource type="Texture2D" uid="uid://cp7aifoftt4c6" path="res://media/sprites/boss01/boss01_meteo_crash_start.png" id="22_kseif"]
 [ext_resource type="Texture2D" uid="uid://b5eux66s71gyq" path="res://media/sprites/boss01/boss01_meteo_crash_end.png" id="23_umypt"]
@@ -358,7 +357,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.541667, 1.04167, 1.54167),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("10_55le4"), ExtResource("21_884lv"), ExtResource("20_fe8ni"), ExtResource("21_884lv")]
+"values": [ExtResource("10_55le4"), ExtResource("21_884lv"), ExtResource("10_55le4"), ExtResource("21_884lv")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -461,10 +460,10 @@ tracks/6/path = NodePath("Sprite2D:hframes")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.541667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.541667, 1.04167, 1.54167),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [4, 1]
+"values": [4, 1, 4, 1]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -499,10 +498,10 @@ tracks/9/path = NodePath("Sprite2D:frame")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.416667, 0.458333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.416667, 0.458333, 0.5, 1.04167, 1.375, 1.41667, 1.45833),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 3, 0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_17bum"]
