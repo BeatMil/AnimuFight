@@ -1,6 +1,7 @@
 extends "res://scripts/base_character.gd"
 
 @export var target: CharacterBody2D
+@export var air_throw_follow_pos: Marker2D
 @export var is_notarget: bool
 
 
@@ -52,6 +53,9 @@ func _physics_process(delta: float) -> void:
 	is_face_right = not sprite_2d.flip_h
 
 	_check_wall_bounce()
+
+	if state in [States.GRABBED]:
+		_follow_pos()
 
 	# collision_layer
 	if state in [States.IDLE]:
@@ -122,6 +126,11 @@ func _move( delta) -> void:
 		var desired_velocity =  direction * speed
 		var steering = (desired_velocity - velocity) * delta * 2.5
 		velocity += steering
+
+
+func _follow_pos() -> void:
+	if is_instance_valid(air_throw_follow_pos):
+		position = air_throw_follow_pos.global_position
 
 
 func _facing() -> void:

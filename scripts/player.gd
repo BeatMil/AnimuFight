@@ -7,6 +7,8 @@ extends "res://scripts/base_character.gd"
 @onready var debug_label: Label = $CanvasLayer/DebugLabel
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var hit_noise = preload("res://media/sfxs/gc_punch_whiff.wav")
+@onready var air_throw_pos_r: Marker2D = $HitBoxPos/AirThrowPosR
+@onready var air_throw_pos_l: Marker2D = $HitBoxPos/AirThrowPosL
 
 
 #############################################################
@@ -240,6 +242,13 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("block"):
 			state = States.PARRY
 			animation_player.play("block")
+	
+	## Air SPD burst
+	if is_on_floor() and state == States.AIR_SPD:
+		# state = States.ATTACK
+		animation_player.play("burst")
+
+		# spawn hitbox
 
 
 #############################################################
@@ -251,6 +260,13 @@ func set_camera(value: bool):
 
 func set_grabbed_enemy(enemy: Object) -> void:
 	grabbed_enemy = enemy
+
+
+func give_air_throw_pos() -> Marker2D:
+	if sprite_2d.flip_h:
+		return air_throw_pos_l
+	else:
+		return air_throw_pos_r
 
 
 #############################################################
@@ -399,6 +415,8 @@ func _hp() ->  void:
 		]: ## <<-- start with this one
 		if Input.is_action_pressed("down"):
 			animation_player.play("down_hp")
+		elif Input.is_action_pressed("up"):
+			animation_player.play("air_throw")
 		else:
 			animation_player.play("hp")
 	# if state == States.TA:
@@ -483,17 +501,34 @@ func tan_info() -> void:
 	"zoom": Vector2(0.2, 0.2),
 	}
 	dict_to_spawn_hitbox(info)
+func air_throw_info() ->  void:
+	var info = {
+	"size": Hitbox_size.AIR_THROW,
+	"time": 0.1,
+	"push_power_ground": Vector2(1200, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(1200, 0),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.3,
+	"hitstun_amount_ground": 1,
+	"hitlag_amount_air": 0.2,
+	"hitstun_amount_air": 1,
+	"screenshake_amount": Vector2(10, 0.2),
+	"damage": 0,
+	"type": Enums.Attack.P_AIR_THROW,
+	}
+	dict_to_spawn_hitbox(info)
 
 
-func _down_hp() ->  void:
-	if state in [States.IDLE, States.PARRY_SUCCESS, States.LP1, States.LP2, States.LP3,]:
-		if Input.is_action_pressed("left"):
-			sprite_2d.flip_h = true
+# func _down_hp() ->  void:
+# 	if state in [States.IDLE, States.PARRY_SUCCESS, States.LP1, States.LP2, States.LP3,]:
+# 		if Input.is_action_pressed("left"):
+# 			sprite_2d.flip_h = true
 
-		if Input.is_action_pressed("right"):
-			sprite_2d.flip_h = false
+# 		if Input.is_action_pressed("right"):
+# 			sprite_2d.flip_h = false
 
-		animation_player.play("down_hp")
+# 		animation_player.play("down_hp")
 func down_hp_info() ->  void:
 	var info = {
 	"size": Hitbox_size.LARGE,
@@ -688,6 +723,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"tan",
 		"grab",
 		"throw_enemy",
+		"air_throw",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:

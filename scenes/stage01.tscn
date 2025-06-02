@@ -771,7 +771,6 @@ scale = Vector2(1.64324, 1)
 [node name="WallInvi" parent="." instance=ExtResource("11_g2h18")]
 position = Vector2(2146, 352)
 scale = Vector2(1.64324, 1)
-collision_layer = 0
 
 [node name="CameraPos" type="Marker2D" parent="."]
 position = Vector2(942, 683)

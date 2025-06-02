@@ -41,6 +41,7 @@ enum States {
 	GRABSTANCE,
 	GRABBED,
 	PUNISHABLE,
+	AIR_SPD,
 	}
 
 
@@ -53,6 +54,7 @@ enum Hitbox_size {
 	BURST,
 	EXECUTE,
 	METEO,
+	AIR_THROW,
 	}
 
 
@@ -66,6 +68,7 @@ const HITBOX_BURST = preload("res://nodes/hitboxes/hitbox_burst.tscn")
 const HITBOX_TOWL = preload("res://nodes/hitboxes/hitbox_towl.tscn")
 const HITBOX_EXE = preload("res://nodes/hitboxes/hitbox_execute.tscn")
 const HITBOX_METEO = preload("res://nodes/hitboxes/hitbox_meteo_crash.tscn")
+const HITBOX_AIR_THROW = preload("res://nodes/hitboxes/hitbox_air_throw.tscn")
 const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 const SLOW_MO_START = preload("res://media/sfxs/slow_mo_start.wav")
 const SLOW_MO_END = preload("res://media/sfxs/slow_mo_end.wav")
@@ -229,6 +232,8 @@ func _spawn_lp_hitbox(
 			hitbox = HITBOX_EXE.instantiate()
 		Hitbox_size.METEO:
 			hitbox = HITBOX_METEO.instantiate()
+		Hitbox_size.AIR_THROW:
+			hitbox = HITBOX_AIR_THROW.instantiate()
 		_:
 			hitbox = HITBOX_LP_MEDIUM.instantiate()
 
@@ -397,14 +402,6 @@ func hitted(
 			animation_player.play("dodge_success_zoom")
 		else:
 			animation_player.play("dodge_success")
-
-	## Spawn blockspark on IFRAME
-	elif state in [States.IFRAME, States.EXECUTE]:
-		ObjectPooling.spawn_blockSpark_1(position)
-	elif _type == Enums.Attack.THROW:
-		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
-		animation_player.play("throw_stunned")
-
 	## Player grab hits
 	elif _type == Enums.Attack.P_THROW:
 		# Player enter grab stance
@@ -424,6 +421,24 @@ func hitted(
 		tween.tween_property(self, "position", grab_pos, 0.1).set_trans(Tween.TRANS_CUBIC)
 		await get_tree().create_timer(0.1).timeout
 		set_physics_process(false)
+	## Player air grab hits
+	elif _type == Enums.Attack.P_AIR_THROW and not is_on_floor():
+		# if self.has_meta('air_throw_follow_pos'):
+		state = States.GRABBED
+		animation_player.play("throw_stunned")
+		self.air_throw_follow_pos = _attacker.give_air_throw_pos()
+		# set_physics_process(false)
+		print(self.air_throw_follow_pos)
+		_attacker.animation_player.play("air_spd")
+	elif _type == Enums.Attack.P_AIR_THROW and is_on_floor():
+		## make air throw whiff
+		pass
+	## Spawn blockspark on IFRAME
+	elif state in [States.IFRAME, States.EXECUTE]:
+		ObjectPooling.spawn_blockSpark_1(position)
+	elif _type == Enums.Attack.THROW:
+		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
+		animation_player.play("throw_stunned")
 
 	##################
 	# - Do damage

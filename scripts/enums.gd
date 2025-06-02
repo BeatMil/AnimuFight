@@ -17,6 +17,7 @@ enum Attack{
 	THROW,
 	P_THROW,
 	P_PARRY,
+	P_AIR_THROW,
 }
 
 
