@@ -6,9 +6,7 @@ var is_player_in_range_burn_knuckle = false
 
 
 func _ready() -> void:
-	randomize()
-	gravity_power = 5000
-	hp_bar.set_hp(hp)
+	super._ready()
 	block_rate = 10
 
 #############################################################
@@ -226,13 +224,10 @@ func do_attack() -> void:
 	if is_player_in_range_burn_knuckle:
 		state = States.ATTACK
 		_attack01()
-		print("_attack01")
 	elif is_player_in_range_lp:
 		state = States.ATTACK
 		match randi_range(0, 1):
 			0:
 				_lp()
-				print("tatsumaki")
 			1:
 				meteo_crash()
-				print("meteo_crash")

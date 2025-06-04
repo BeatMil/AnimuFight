@@ -6,9 +6,7 @@ var is_pooling_check := true
 
 
 func _ready() -> void:
-	print("is_pooling_check: ", is_pooling_check)
 	if not is_pooling_check:
-		print("play crash sounds!")
 		$AnimationPlayer.play("crash")
 		if get_tree().current_scene.get_node_or_null("Player/Camera"):
 			get_tree().current_scene.get_node_or_null("Player/Camera"). \

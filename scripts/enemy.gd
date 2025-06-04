@@ -30,6 +30,7 @@ var ground_friction: float = 0.1
 var air_friction: float = 0.07
 
 var block_count := 0
+var is_bound := false
 
 
 #############################################################
@@ -37,6 +38,8 @@ var block_count := 0
 #############################################################
 func _ready() -> void:
 	self.tree_exited.connect(_on_tree_exited)
+	var status = $AnimationPlayer.animation_started.connect(_on_current_anim_start)
+	print(status, "bob")
 	randomize()
 	gravity_power = 5000
 	hp_bar.set_hp(hp)
@@ -149,7 +152,6 @@ func _check_block_count() -> void:
 		AttackQueue.queueing_priority(self)
 		AttackQueue.queue_go()
 		block_count = 0
-		print("==I block too much!==")
 
 
 #############################################################
@@ -191,14 +193,20 @@ func toggle_flip_h() -> void:
 	sprite_2d.flip_h = !sprite_2d.flip_h
 
 
+func get_is_bound() -> bool:
+	return is_bound
+
+
+func set_is_bound(value: bool) -> void:
+	is_bound = value
+
+
 func _on_bounce_together_body_entered(body: Node2D) -> void:
 	if velocity.length() < 5000:
 		return
-	print(velocity.length())
 	## Hit other enemy
 	if self.state in [States.BOUNCE_STUNNED, States.EXECUTETABLE] \
 	and body.state != States.BOUNCE_STUNNED:
-		printt("===bounce_together===")
 		play_bounce_sfx()
 		body.hitted(
 			self,
@@ -210,6 +218,12 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 			Vector2.ZERO,
 			1
 		)
+
+
+func _on_current_anim_start(anim_name: String) -> void:
+	print(anim_name)
+	if anim_name in ["idle", "walk"]:
+		is_bound = false
 
 
 #############################################################

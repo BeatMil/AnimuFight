@@ -2,7 +2,7 @@ extends Node
 
 
 @onready var attack_queue_timer: Timer = $AttackQueueTimer
-@export var secs_between_attack: float = 1.5
+@export var secs_between_attack: float = 1.0
 
 
 var enemies_ready_to_attack = []
@@ -39,13 +39,11 @@ func _on_attack_queue_timer_timeout() -> void:
 		if enemy:
 			if enemy.has_method("do_attack"):
 				enemy.do_attack()
-				print("%s attacks! priority"%enemy.name)
 	elif enemies_ready_to_attack:
 		var enemy = enemies_ready_to_attack.pick_random()
 		if enemy:
 			if enemy.has_method("do_attack") and enemy.state == 0:
 				enemy.do_attack()
-				print("%s attacks!"%enemy.name)
 
 	if enemies_priority_attack or enemies_ready_to_attack:
 		enemies_ready_to_attack.clear()

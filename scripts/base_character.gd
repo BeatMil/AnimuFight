@@ -55,6 +55,7 @@ enum Hitbox_size {
 	EXECUTE,
 	METEO,
 	AIR_THROW,
+	BOUND,
 	}
 
 
@@ -69,6 +70,7 @@ const HITBOX_TOWL = preload("res://nodes/hitboxes/hitbox_towl.tscn")
 const HITBOX_EXE = preload("res://nodes/hitboxes/hitbox_execute.tscn")
 const HITBOX_METEO = preload("res://nodes/hitboxes/hitbox_meteo_crash.tscn")
 const HITBOX_AIR_THROW = preload("res://nodes/hitboxes/hitbox_air_throw.tscn")
+const HITBOX_BOUND = preload("res://nodes/hitboxes/hitbox_bound.tscn")
 const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 const SLOW_MO_START = preload("res://media/sfxs/slow_mo_start.wav")
 const SLOW_MO_END = preload("res://media/sfxs/slow_mo_end.wav")
@@ -234,6 +236,8 @@ func _spawn_lp_hitbox(
 			hitbox = HITBOX_METEO.instantiate()
 		Hitbox_size.AIR_THROW:
 			hitbox = HITBOX_AIR_THROW.instantiate()
+		Hitbox_size.BOUND:
+			hitbox = HITBOX_BOUND.instantiate()
 		_:
 			hitbox = HITBOX_LP_MEDIUM.instantiate()
 
@@ -428,7 +432,6 @@ func hitted(
 		animation_player.play("throw_stunned")
 		self.air_throw_follow_pos = _attacker.give_air_throw_pos()
 		# set_physics_process(false)
-		print(self.air_throw_follow_pos)
 		_attacker.animation_player.play("air_spd")
 	elif _type == Enums.Attack.P_AIR_THROW and is_on_floor():
 		## make air throw whiff

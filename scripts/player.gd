@@ -246,7 +246,7 @@ func _physics_process(delta: float) -> void:
 	## Air SPD burst
 	if is_on_floor() and state == States.AIR_SPD:
 		# state = States.ATTACK
-		animation_player.play("burst")
+		animation_player.play("air_spd_burst")
 
 		# spawn hitbox
 
@@ -518,6 +518,26 @@ func air_throw_info() ->  void:
 	"type": Enums.Attack.P_AIR_THROW,
 	}
 	dict_to_spawn_hitbox(info)
+func spd_burst_info() ->  void:
+	var info = {
+	"size": Hitbox_size.BOUND,
+	"time": 0.1,
+	"push_power_ground": Vector2(0, -200),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(0, -200),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.1,
+	"hitlag_amount_air": 0.0,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 5,
+	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/BurstPos.position,
+	"zoom": Vector2(0.1, 0.1),
+	"zoom_duration": 0.05,
+	}
+	dict_to_spawn_hitbox(info)
 
 
 # func _down_hp() ->  void:
@@ -724,6 +744,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"grab",
 		"throw_enemy",
 		"air_throw",
+		"air_spd_burst",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:

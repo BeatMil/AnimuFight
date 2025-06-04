@@ -36,7 +36,7 @@ func _input(event: InputEvent) -> void:
 		option_button.grab_focus()
 
 func _on_menu_button_about_to_popup() -> void:
-	print("==bob==")
+	pass
 	# change_resolution()
 
 
