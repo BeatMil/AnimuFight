@@ -26,7 +26,7 @@ func _attack01() -> void:
 				animation_player.play("lp1")
 func attack01_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.3,
 	"push_power_ground": Vector2(800, -300),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -53,7 +53,7 @@ func _lp_chain() -> void:
 		animation_player.play("lp1_chain")
 func lp_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(10, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
@@ -75,7 +75,7 @@ func lp_info() -> void: # for animation_player
 
 func tatsu_2nd_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(10, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
@@ -97,7 +97,7 @@ func tatsu_2nd_info() -> void: # for animation_player
 
 func tatsu_end_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(1000, -100),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -120,7 +120,7 @@ func burn_knuckle() -> void:
 		animation_player.play("burn_knuckle")
 func burn_knuckle_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(10, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
@@ -143,7 +143,7 @@ func meteo_crash() -> void:
 		animation_player.play("meteo_crash")
 func meteo_crash_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_size.METEO,
+	"size": Hitbox_type.METEO,
 	"time": 5,
 	"push_power_ground": Vector2(1000, -200),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,

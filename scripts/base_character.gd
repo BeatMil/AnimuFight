@@ -45,7 +45,7 @@ enum States {
 	}
 
 
-enum Hitbox_size {
+enum Hitbox_type {
 	SMALL,
 	MEDIUM,
 	LARGE,
@@ -194,7 +194,7 @@ func _block() ->  void:
 animation_player uses
 """
 func _spawn_lp_hitbox(
-	_size: Hitbox_size,
+	_size: Hitbox_type,
 	_time: float = 0.1,
 	_push_power_ground: Vector2 = Vector2(20, 0),
 	_push_type_ground: Enums.Push_types = Enums.Push_types.NORMAL,
@@ -216,27 +216,27 @@ func _spawn_lp_hitbox(
 	var hitbox: Node2D
 
 	match _size:
-		Hitbox_size.MEDIUM:
+		Hitbox_type.MEDIUM:
 			hitbox = HITBOX_LP_MEDIUM.instantiate()
-		Hitbox_size.LARGE:
+		Hitbox_type.LARGE:
 			hitbox = HITBOX_LP_LARGE.instantiate()
-		Hitbox_size.HAMMER:
+		Hitbox_type.HAMMER:
 			hitbox = HITBOX_HAMMER.instantiate()
-		Hitbox_size.TOWL:
+		Hitbox_type.TOWL:
 			hitbox = HITBOX_TOWL.instantiate()
 			## Flip towl sprite here so that 
 			## it doesn't interfere with others
 			if sprite_2d.flip_h: 
 				hitbox.scale.x = -1
-		Hitbox_size.BURST:
+		Hitbox_type.BURST:
 			hitbox = HITBOX_BURST.instantiate()
-		Hitbox_size.EXECUTE:
+		Hitbox_type.EXECUTE:
 			hitbox = HITBOX_EXE.instantiate()
-		Hitbox_size.METEO:
+		Hitbox_type.METEO:
 			hitbox = HITBOX_METEO.instantiate()
-		Hitbox_size.AIR_THROW:
+		Hitbox_type.AIR_THROW:
 			hitbox = HITBOX_AIR_THROW.instantiate()
-		Hitbox_size.BOUND:
+		Hitbox_type.BOUND:
 			hitbox = HITBOX_BOUND.instantiate()
 		_:
 			hitbox = HITBOX_LP_MEDIUM.instantiate()
@@ -567,7 +567,7 @@ func hitted(
 ## This func is used by attack moves below
 func dict_to_spawn_hitbox(info: Dictionary) -> void:
 	_spawn_lp_hitbox(
-	info.get("size", Hitbox_size.MEDIUM),
+	info.get("size", Hitbox_type.MEDIUM),
 	info.get("time", 0.1),
 	info.get("push_power_ground", Vector2(50, 0)),
 	info.get("push_type_ground", Enums.Push_types.NORMAL),

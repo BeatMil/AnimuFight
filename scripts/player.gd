@@ -326,7 +326,7 @@ func _lp() ->  void:
 
 func lp1_info() -> void:
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(50, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
@@ -344,7 +344,7 @@ func lp1_info() -> void:
 	dict_to_spawn_hitbox(info)
 func lp2_info() -> void:
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(50, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
@@ -362,7 +362,7 @@ func lp2_info() -> void:
 	dict_to_spawn_hitbox(info)
 func lp3_info() -> void:
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(800, -100),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -380,7 +380,7 @@ func lp3_info() -> void:
 	dict_to_spawn_hitbox(info)
 func lp4_info() -> void:
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(1200, 0),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -430,7 +430,7 @@ func _hp() ->  void:
 
 func hp_info() ->  void:
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(1200, 0),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -448,7 +448,7 @@ func hp_info() ->  void:
 	dict_to_spawn_hitbox(info)
 func burst_info() ->  void:
 	var info = {
-	"size": Hitbox_size.BURST,
+	"size": Hitbox_type.BURST,
 	"time": 0.1,
 	"push_power_ground": Vector2(0, -200),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -468,7 +468,7 @@ func burst_info() ->  void:
 	dict_to_spawn_hitbox(info)
 func ta_info() -> void:
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(200, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
@@ -485,7 +485,7 @@ func ta_info() -> void:
 	dict_to_spawn_hitbox(info)
 func tan_info() -> void:
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(300, -250),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -503,7 +503,7 @@ func tan_info() -> void:
 	dict_to_spawn_hitbox(info)
 func air_throw_info() ->  void:
 	var info = {
-	"size": Hitbox_size.AIR_THROW,
+	"size": Hitbox_type.AIR_THROW,
 	"time": 0.1,
 	"push_power_ground": Vector2(1200, 0),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -520,7 +520,7 @@ func air_throw_info() ->  void:
 	dict_to_spawn_hitbox(info)
 func spd_burst_info() ->  void:
 	var info = {
-	"size": Hitbox_size.BOUND,
+	"size": Hitbox_type.BOUND,
 	"time": 0.1,
 	"push_power_ground": Vector2(0, -200),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -551,7 +551,7 @@ func spd_burst_info() ->  void:
 # 		animation_player.play("down_hp")
 func down_hp_info() ->  void:
 	var info = {
-	"size": Hitbox_size.LARGE,
+	"size": Hitbox_type.LARGE,
 	"time": 0.1,
 	"push_power_ground": Vector2(100, -200),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -597,7 +597,7 @@ func _grab() ->  void:
 		animation_player.play("grab")
 func grab_info() -> void:
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(50, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
@@ -614,7 +614,7 @@ func grab_info() -> void:
 	dict_to_spawn_hitbox(info)
 func throw_info() -> void:
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(600, -10),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -673,7 +673,7 @@ func _hitbox_exe_hadoken() -> void:
 
 func exe_hadoken_info() ->  void:
 	var info = {
-	"size": Hitbox_size.EXECUTE,
+	"size": Hitbox_type.EXECUTE,
 	"time": 0.1,
 	"push_power_ground": Vector2(1200, -200),
 	"push_type_ground": Enums.Push_types.EXECUTE,

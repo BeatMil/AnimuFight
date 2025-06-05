@@ -8,7 +8,7 @@ func _lp() -> void:
 		animation_player.play("lp1")
 func lp_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_size.MEDIUM,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(500, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
@@ -31,7 +31,7 @@ func _attack01() -> void:
 		animation_player.play("attack01_1")
 func attack01_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_size.TOWL,
+	"size": Hitbox_type.TOWL,
 	"time": 0.3,
 	"push_power_ground": Vector2(800, -300),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
