@@ -38,8 +38,7 @@ var is_bound := false
 #############################################################
 func _ready() -> void:
 	self.tree_exited.connect(_on_tree_exited)
-	var status = $AnimationPlayer.animation_started.connect(_on_current_anim_start)
-	print(status, "bob")
+	$AnimationPlayer.animation_started.connect(_on_current_anim_start)
 	randomize()
 	gravity_power = 5000
 	hp_bar.set_hp(hp)
@@ -221,7 +220,6 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 
 
 func _on_current_anim_start(anim_name: String) -> void:
-	print(anim_name)
 	if anim_name in ["idle", "walk"]:
 		is_bound = false
 

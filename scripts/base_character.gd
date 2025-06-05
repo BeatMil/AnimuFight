@@ -367,7 +367,6 @@ func hitted(
 		# 	hp_bar.hp_down(_damage)
 		if has_method("_add_block_count"):
 			self._add_block_count(1)
-
 		animation_player.stop()
 		animation_player.play("blockstunned")
 		# hp_bar.hp_down(_damage/2)
@@ -378,6 +377,7 @@ func hitted(
 			hitlag_amount,
 			_screenshake_amount,
 			_attacker)
+
 	## Parry & Parry Success
 	elif state in [States.PARRY] and _type == Enums.Attack.NORMAL:
 		animation_player.play("parry_success")
@@ -400,19 +400,20 @@ func hitted(
 				"Player/Camera").zoom_zoom(_zoom, _zoom_duration)
 			else:
 				print_debug("_zoom can't find player/camera")
+
 	## DODGE & DODGE_SUCCESS
 	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW:
 		if _type == Enums.Attack.UNBLOCK:
 			animation_player.play("dodge_success_zoom")
 		else:
 			animation_player.play("dodge_success")
+
 	## Player grab hits
 	elif _type == Enums.Attack.P_THROW:
 		# Player enter grab stance
 		if _attacker.has_method("enter_grab_stance"):
 			_attacker.enter_grab_stance()
 			_attacker.set_grabbed_enemy(self)
-
 		# Enemy got grabbed into position
 		animation_player.play("throw_stunned")
 		self.can_move = false
@@ -425,6 +426,7 @@ func hitted(
 		tween.tween_property(self, "position", grab_pos, 0.1).set_trans(Tween.TRANS_CUBIC)
 		await get_tree().create_timer(0.1).timeout
 		set_physics_process(false)
+
 	## Player air grab hits
 	elif _type == Enums.Attack.P_AIR_THROW and not is_on_floor():
 		# if self.has_meta('air_throw_follow_pos'):
@@ -433,12 +435,15 @@ func hitted(
 		self.air_throw_follow_pos = _attacker.give_air_throw_pos()
 		# set_physics_process(false)
 		_attacker.animation_player.play("air_spd")
+
 	elif _type == Enums.Attack.P_AIR_THROW and is_on_floor():
 		## make air throw whiff
 		pass
+
 	## Spawn blockspark on IFRAME
 	elif state in [States.IFRAME, States.EXECUTE]:
 		ObjectPooling.spawn_blockSpark_1(position)
+
 	elif _type == Enums.Attack.THROW:
 		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
 		animation_player.play("throw_stunned")
@@ -454,7 +459,6 @@ func hitted(
 	##################
 	else: # Do damage and push type
 		hp_bar.hp_down(_damage)
-
 		# Death Zone
 		if _attacker.is_in_group("death_zone"):
 			animation_player.stop(true)
@@ -482,82 +486,47 @@ func hitted(
 				animation_player.stop(true)
 				animation_player.play("execute")
 				is_ded = true
-			# if push_type in [
-			# Enums.Push_types.KNOCKDOWN,
-			# Enums.Push_types.EXECUTE,
-			# ] and state == States.EXECUTETABLE:
-			# 	animation_player.stop(true)
-			# 	animation_player.play("down")
-			# 	stun_duration = hitstun_amount
-				# set_collision_no_hit_player()
-			# 	is_ded = true
-			# elif push_type == Enums.Push_types.NORMAL and \
-			# 	state != States.EXECUTETABLE and is_ded:
-			# 	animation_player.stop(true)
-			# 	animation_player.play("down")
-			# 	stun_duration = hitstun_amount
-			# 	set_collision_no_hit_player()
-			# else:
-			# 	state = States.HIT_STUNNED
-			# 	animation_player.stop(true)
-			# 	animation_player.play("execute")
-			# 	print("==purple execute==")
 		# Hitstunned or down
 		else:
+			animation_player.stop(true)
 			match push_type:
 				0: ## NORMAL
-					animation_player.stop(true)
-					stun_duration = hitstun_amount
 					state = States.HIT_STUNNED
 					animation_player.play("hitted")
 				1: ## KNOCKDOWN
-					animation_player.stop(true)
-					animation_player.play("down")
-					stun_duration = hitstun_amount
 					state = States.BOUNCE_STUNNED
+					animation_player.play("down")
 				2: ## EXECUTE
-					animation_player.stop(true)
-					if hp_bar.get_hp() > 0:
-						animation_player.play("down")
-						state = States.BOUNCE_STUNNED
-					else:
-						animation_player.play("ded")
-						state = States.BOUNCE_STUNNED
-						# set_collision_no_hit_player()
-					stun_duration = hitstun_amount
+					state = States.BOUNCE_STUNNED
+					animation_player.play("down")
 				_:
-					animation_player.stop(true)
 					animation_player.play("hitted")
-					stun_duration = hitstun_amount
-
+			stun_duration = hitstun_amount
+		# Push direction (Left/Right)
 		if is_push_to_the_right:
-			if is_in_group("tank"):
-				_push_direct(push_power/3)
-			else:
-				_push_direct(push_power)
+			_push_direct(push_power)
 		else:
-			if is_in_group("tank"):
-				_push_direct(Vector2(-push_power.x, push_power.y)/3)
-			else:
-				_push_direct(Vector2(-push_power.x, push_power.y))
+			_push_direct(Vector2(-push_power.x, push_power.y))
+		# Hitlag
 		if hitlag_amount:
 			hitlag(hitlag_amount)
 			_attacker.hitlag(hitlag_amount)
+		# Screenshake
 		if _screenshake_amount:
 			if get_tree().current_scene.get_node_or_null("Player/Camera"):
 				get_tree().current_scene.get_node_or_null("Player/Camera"). \
 				start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
 			else:
 				print_debug("screenshake can't find player/camera")
+		# Zoom
 		if _zoom:
 			if get_tree().current_scene.get_node_or_null("Player/Camera"):
 				get_tree().current_scene.get_node_or_null(
 				"Player/Camera").zoom(_zoom, _zoom_duration)
 			else:
 				print_debug("_zoom can't find player/camera")
-
 		ObjectPooling.spawn_hitSpark_1(position)
-		## Player Parries
+		# Player Parries
 		if _type == Enums.Attack.P_PARRY:
 			$AudioStreamPlayer2.stream = HIT_2
 			$AudioStreamPlayer2.play()
@@ -646,6 +615,4 @@ func block_effect_helper(
 		if get_tree().current_scene.get_node_or_null("Player/Camera"):
 			get_tree().current_scene.get_node_or_null("Player/Camera"). \
 			start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
-	# if is_in_group("tank"):
-	# 	ObjectPooling.spawn_blockSpark_2(position)
 	ObjectPooling.spawn_blockSpark_1(position)
