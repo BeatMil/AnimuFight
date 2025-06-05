@@ -1239,7 +1239,7 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"set_collision_no_hit_player"
+"method": &"set_collision_no_hit_all"
 }]
 }
 tracks/9/type = "value"
