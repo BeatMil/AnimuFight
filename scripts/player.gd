@@ -52,6 +52,12 @@ var can_block_states_hold = [
 		States.HP,
 		]
 
+# var input_history := ["right","left","n","right","right","n","n","n","n","right"]
+# var input_history := ["right","left","n","right","right","n","n","n","n","right","left"]
+# var input_history := ["n","n","n","n","right","right","right","right","right"]
+# var input_history := ["n","right","n","n","n","n","right","right","right","right","right"]
+var input_history := []
+
 #############################################################
 ## Built-in
 #############################################################
@@ -62,13 +68,17 @@ func _ready() -> void:
 	print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	pass # Replace with function body.
 
+	# _check_input_history()
+
 
 func _process(_delta: float) -> void:
 	if OS.is_debug_build():
 		debug_label.text = "PlayerState: %s"%States.keys()[state]
 		# debug_label.text += "\n%s"%input_buffer_timer
-		debug_label.text += "\n%s"%block_buffer_timer
+		debug_label.text += "\n%0.3f"%block_buffer_timer
 		debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
+		# debug_label.text += "\n%s"%[input_history]
+		debug_label.text += "\nGoh"
 		# debug_label.text += "\n%s"%Input.is_action_pressed("block")
 		# debug_label.text += "\n%s"%debug_input_event
 		# debug_label.text += "\n%s"%next_move
@@ -129,6 +139,7 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	_check_wall_bounce()
+
 
 	if is_on_floor():
 		if state == States.AIR:
@@ -250,6 +261,8 @@ func _physics_process(delta: float) -> void:
 
 		# spawn hitbox
 
+	_check_input_history()
+
 
 #############################################################
 ## Public function
@@ -296,6 +309,34 @@ func play_hit_random_pitch():
 	audio_stream_player.stream = hit_noise
 	audio_stream_player.pitch_scale = randf_range(0.8, 1.2)
 	audio_stream_player.play()
+
+
+func _check_input_history() -> void:
+	if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
+		input_history.append("n")
+	elif Input.is_action_pressed("left"):
+		input_history.append("left")
+	elif Input.is_action_pressed("right"):
+		input_history.append("right")
+	else:
+		input_history.append("n")
+	if len(input_history) > 20:
+		input_history.pop_front()
+		
+	var dash_right = Command.new(["right","n","right"])
+	var dash_left = Command.new(["left","n","left"])
+	for i in range(len(input_history)-1, -1, -1):
+		dash_right.calculate(input_history[i])
+		dash_left.calculate(input_history[i])
+	if dash_right.get_command_complete() or dash_left.get_command_complete():
+		print("Time to dash!")
+		animation_player.play("dash")
+	dash_right.reset()
+	dash_left.reset()
+	# print("dash_right", is_dash_right)
+	# print(input_history)
+
+
 
 
 #############################################################
