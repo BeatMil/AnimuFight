@@ -19,9 +19,7 @@ func calculate(_input: String) -> void:
 	elif _input == command_input[pointer+1]:
 		pass
 	else:
-		is_command_complete = false
-		pointer = -1
-		is_not_doable = true
+		reset()
 
 	if abs(pointer) > len(command_input):
 		is_command_complete = true

@@ -42,6 +42,7 @@ enum States {
 	GRABBED,
 	PUNISHABLE,
 	AIR_SPD,
+	DASH,
 	}
 
 

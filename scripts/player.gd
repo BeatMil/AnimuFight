@@ -19,7 +19,7 @@ var jump_buffer_time := 0.15
 var jump_buffer_timer := 0.0
 
 
-var input_buffer_time := 0.2
+var input_buffer_time := 0.1
 var input_buffer_timer := 0.0
 var is_performing_move: bool = false
 var next_move = null
@@ -74,7 +74,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if OS.is_debug_build():
 		debug_label.text = "PlayerState: %s"%States.keys()[state]
-		# debug_label.text += "\n%s"%input_buffer_timer
+		debug_label.text += "\n%0.3f"%input_buffer_timer
 		debug_label.text += "\n%0.3f"%block_buffer_timer
 		debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
 		# debug_label.text += "\n%s"%[input_history]
@@ -123,7 +123,6 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("dodge"):
 			state = States.DODGE
 			animation_player.play("dodge")
-			# queue_move(_dodge)
 	
 	if state in [States.PARRY, States.BLOCK]:
 		if Input.is_action_pressed("block"):
@@ -218,7 +217,8 @@ func _physics_process(delta: float) -> void:
 	##################
 	## Input buffer
 	##################
-	if next_move and input_buffer_timer > 0 and state not in [States.ATTACK]:
+	if next_move and input_buffer_timer > 0 and state not in [States.ATTACK, States.DASH]:
+		print("call:", next_move)
 		next_move.call()
 		next_move = null
 		input_buffer_timer = 0
@@ -234,6 +234,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("grab"):
 		queue_move(_grab)
 
+	_check_input_history()
 
 	##################
 	## Block buffer
@@ -261,7 +262,6 @@ func _physics_process(delta: float) -> void:
 
 		# spawn hitbox
 
-	_check_input_history()
 
 
 #############################################################
@@ -318,6 +318,8 @@ func _check_input_history() -> void:
 		input_history.append("left")
 	elif Input.is_action_pressed("right"):
 		input_history.append("right")
+	elif Input.is_action_pressed("block"):
+		input_history.append("block")
 	else:
 		input_history.append("n")
 	if len(input_history) > 20:
@@ -328,15 +330,10 @@ func _check_input_history() -> void:
 	for i in range(len(input_history)-1, -1, -1):
 		dash_right.calculate(input_history[i])
 		dash_left.calculate(input_history[i])
-	if dash_right.get_command_complete() or dash_left.get_command_complete():
-		print("Time to dash!")
-		animation_player.play("dash")
-	dash_right.reset()
-	dash_left.reset()
-	# print("dash_right", is_dash_right)
-	# print(input_history)
-
-
+	if dash_right.get_command_complete(): 
+		queue_move(_dash_right)
+	if dash_left.get_command_complete():
+		queue_move(_dash_left)
 
 
 #############################################################
@@ -347,9 +344,23 @@ func _add_block_buffer_time() -> void:
 
 
 #############################################################
+## Command list?
+#############################################################
+func _dash_left() -> void:
+	sprite_2d.flip_h = true
+	animation_player.play("dash")
+
+
+func _dash_right() -> void:
+	sprite_2d.flip_h = false
+	animation_player.play("dash")
+
+
+#############################################################
 ## Attack info
 #############################################################
 func _lp() ->  void:
+	print("lp!")
 	if Input.is_action_pressed("left"):
 		sprite_2d.flip_h = true
 
