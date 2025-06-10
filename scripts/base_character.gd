@@ -108,6 +108,7 @@ var is_touching_wall_right: bool = false
 var stun_duration: float = 0
 
 var is_ded := false
+var is_wall_bounced := false
 
 
 #############################################################
@@ -144,17 +145,20 @@ func _gravity(delta) -> void:
 
 
 func _check_wall_bounce() -> void:
-	if state in [States.BOUNCE_STUNNED]:
-		if is_touching_wall_left:
-			_push_direct(Vector2(400, -100))
-		elif is_touching_wall_right:
-			_push_direct(Vector2(-400, -100))
-		else:
-			return
+	if state not in [States.BOUNCE_STUNNED]:
+		return
 
-		hp_bar.hp_down(1)
+	if is_touching_wall_left or is_touching_wall_right:
 		animation_player.stop(true)
-		animation_player.play("down")
+		if is_wall_bounced:
+			animation_player.play("wallsplat")
+		else:
+			is_wall_bounced = true
+			var push_power = Vector2(400, -100) if is_touching_wall_left else Vector2(-400, -100)
+			_push_direct(push_power)
+			animation_player.play("down")
+	
+		hp_bar.hp_down(1)
 		state = States.WALL_BOUNCED
 		hitlag()
 		get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
@@ -442,7 +446,7 @@ func hitted(
 		pass
 
 	## Spawn blockspark on IFRAME
-	elif state in [States.IFRAME, States.EXECUTE]:
+	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD]:
 		ObjectPooling.spawn_blockSpark_1(position)
 
 	elif _type == Enums.Attack.THROW:

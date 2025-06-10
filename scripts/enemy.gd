@@ -73,6 +73,7 @@ func _physics_process(delta: float) -> void:
 	# Move and Facing
 	if state in [States.IDLE]:
 		_facing()
+		is_wall_bounced = false
 		if not is_player_in_range_lp and not is_enemy_in_range_lp:
 			_move(delta)
 		else:
