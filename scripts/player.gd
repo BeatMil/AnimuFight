@@ -332,8 +332,10 @@ func _check_input_history() -> void:
 		dash_left.calculate(input_history[i])
 	if dash_right.get_command_complete(): 
 		queue_move(_dash_right)
+		input_history.clear()
 	if dash_left.get_command_complete():
 		queue_move(_dash_left)
+		input_history.clear()
 
 
 #############################################################
