@@ -47,7 +47,7 @@ func attack01_info() -> void: # for animation_player
 	"push_power_air": Vector2(300, 0),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
 	"hitlag_amount_ground": 0.3,
-	"hitstun_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.8,
 	"hitlag_amount_air": 0,
 	"hitstun_amount_air": 0.1,
 	"screenshake_amount": Vector2(20, 0.3),

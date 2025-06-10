@@ -18,6 +18,8 @@ extends "res://scripts/base_character.gd"
 var jump_buffer_time := 0.15
 var jump_buffer_timer := 0.0
 
+var tech_roll_time := 0.1
+var tech_roll_timer := 0.0
 
 var input_buffer_time := 0.1
 var input_buffer_timer := 0.0
@@ -77,6 +79,7 @@ func _process(_delta: float) -> void:
 		debug_label.text += "\n%0.3f"%input_buffer_timer
 		debug_label.text += "\n%0.3f"%block_buffer_timer
 		debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
+		debug_label.text += "\n%0.3f"%tech_roll_timer
 		# debug_label.text += "\n%s"%[input_history]
 		debug_label.text += "\nGoh"
 		# debug_label.text += "\n%s"%Input.is_action_pressed("block")
@@ -139,7 +142,6 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	_check_wall_bounce()
 
-
 	if is_on_floor():
 		if state == States.AIR:
 			animation_player.play("idle")
@@ -178,6 +180,19 @@ func _physics_process(delta: float) -> void:
 		## Adding friction like this is not gonna go well (っ˘̩╭╮˘̩)っ 
 		friction = 0.1
 		_lerp_velocity_x()
+	
+	# Tech roll
+	if state in [States.BOUNCE_STUNNED, States.WALL_BOUNCED]:
+		if is_on_floor():
+			tech_roll_timer -= delta
+			print("bob on floor")
+		else:
+			tech_roll_timer = tech_roll_time
+			print("bob not floor")
+	
+	if Input.is_action_just_pressed("down") and state in [States.BOUNCE_STUNNED, States.WALL_BOUNCED] and is_on_floor() and tech_roll_timer > 0:
+		animation_player.play("burst")
+	
 	
 	## Animation Section
 	# Walking animation
