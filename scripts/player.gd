@@ -82,8 +82,9 @@ func _process(_delta: float) -> void:
 		debug_label.text += "\n%0.3f"%block_buffer_timer
 		debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
 		debug_label.text += "\n%0.3f"%tech_roll_timer
+		debug_label.text += "\n%s"%animation_player.current_animation
 		# debug_label.text += "\n%s"%[input_history]
-		debug_label.text += "\nGoh"
+		# debug_label.text += "\nGoh"
 		# debug_label.text += "\n%s"%Input.is_action_pressed("block")
 		# debug_label.text += "\n%s"%debug_input_event
 		# debug_label.text += "\n%s"%next_move
@@ -639,7 +640,10 @@ func _lp_hp() ->  void:
 		States.LP3,
 		States.ATTACK,
 		]: ## <<-- start with this one
-		animation_player.play("forward_hp")
+		if Input.is_action_pressed("down"):
+			animation_player.play("ground_grab")
+		else:
+			animation_player.play("forward_hp")
 func down_hp_info() ->  void:
 	var info = {
 	"size": Hitbox_type.LARGE,
@@ -692,6 +696,23 @@ func wall_throw_info() ->  void:
 	"screenshake_amount": Vector2(10, 0.2),
 	"damage": 0,
 	"type": Enums.Attack.P_WALL_THROW,
+	}
+	dict_to_spawn_hitbox(info)
+func ground_throw_info() ->  void:
+	var info = {
+	"size": Hitbox_type.GROUND_THROW,
+	"time": 0.5,
+	"push_power_ground": Vector2(100, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(100, 0),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.3,
+	"hitstun_amount_ground": 1,
+	"hitlag_amount_air": 0.2,
+	"hitstun_amount_air": 1,
+	"screenshake_amount": Vector2(10, 0.2),
+	"damage": 0,
+	"type": Enums.Attack.P_GROUND_THROW,
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -872,6 +893,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"air_spd_burst",
 		"forward_hp",
 		"wall_throw",
+		"ground_grab",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:

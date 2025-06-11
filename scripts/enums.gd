@@ -19,6 +19,7 @@ enum Attack{
 	P_PARRY,
 	P_AIR_THROW,
 	P_WALL_THROW,
+	P_GROUND_THROW,
 }
 
 

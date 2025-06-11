@@ -59,6 +59,7 @@ enum Hitbox_type {
 	AIR_THROW,
 	BOUND,
 	WAILL_THROW,
+	GROUND_THROW,
 	}
 
 
@@ -74,6 +75,7 @@ const HITBOX_TOWL = preload("res://nodes/hitboxes/hitbox_towl.tscn")
 const HITBOX_EXE = preload("res://nodes/hitboxes/hitbox_execute.tscn")
 const HITBOX_METEO = preload("res://nodes/hitboxes/hitbox_meteo_crash.tscn")
 const HITBOX_AIR_THROW = preload("res://nodes/hitboxes/hitbox_air_throw.tscn")
+const HITBOX_GROUND_THROW = preload("res://nodes/hitboxes/hitbox_ground_throw.tscn")
 const HITBOX_BOUND = preload("res://nodes/hitboxes/hitbox_bound.tscn")
 const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 const SLOW_MO_START = preload("res://media/sfxs/slow_mo_start.wav")
@@ -246,6 +248,8 @@ func _spawn_lp_hitbox(
 			hitbox = HITBOX_METEO.instantiate()
 		Hitbox_type.AIR_THROW:
 			hitbox = HITBOX_AIR_THROW.instantiate()
+		Hitbox_type.GROUND_THROW:
+			hitbox = HITBOX_GROUND_THROW.instantiate()
 		Hitbox_type.BOUND:
 			hitbox = HITBOX_BOUND.instantiate()
 		_:
@@ -439,7 +443,6 @@ func hitted(
 
 	## Player air grab hits
 	elif _type == Enums.Attack.P_AIR_THROW and not is_on_floor():
-		# if self.has_meta('air_throw_follow_pos'):
 		state = States.GRABBED
 		animation_player.play("throw_stunned")
 		self.air_throw_follow_pos = _attacker.give_air_throw_pos()
@@ -451,7 +454,6 @@ func hitted(
 	## Player Wall throw hits
 	elif _type == Enums.Attack.P_WALL_THROW and \
 		(animation_player.current_animation == "wallsplat" or is_wall_bounced):
-		# if self.has_meta('air_throw_follow_pos'):
 		state = States.GRABBED
 		animation_player.play("thrown")
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
@@ -462,6 +464,16 @@ func hitted(
 	## make wall throw whiff
 	elif _type == Enums.Attack.P_WALL_THROW and  not (is_touching_wall_left or is_touching_wall_right):
 		pass
+
+	elif _type == Enums.Attack.P_GROUND_THROW:
+		_attacker.state = States.HIT_STUNNED
+		_attacker.animation_player.play("wall_throw")
+		state = States.GRABBED
+		animation_player.play("thrown")
+		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
+		await get_tree().create_timer(0.2).timeout
+		self.air_throw_follow_pos = null
+		_push(Vector2(600, -100))
 
 	## Spawn blockspark on IFRAME
 	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD]:
