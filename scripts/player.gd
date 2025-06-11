@@ -649,7 +649,7 @@ func down_hp_info() ->  void:
 	"push_power_air": Vector2(100, -50),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
 	"hitlag_amount_ground": 0.1,
-	"hitstun_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.8,
 	"hitlag_amount_air": 0.0,
 	"hitstun_amount_air": 0.1,
 	"screenshake_amount": Vector2(10, 0.1),

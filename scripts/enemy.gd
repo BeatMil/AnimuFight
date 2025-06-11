@@ -97,6 +97,8 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			friction = ground_friction
 			stun_duration -= delta
+			if animation_player.current_animation == "down":
+				collision_layer = 0b00000000000010000000
 		else: # not on_floor
 			set_collision_no_hit_all()
 			friction = air_friction
