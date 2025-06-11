@@ -1373,7 +1373,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_572em"]
 resource_name = "wallsplat"
-length = 0.7
+length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
