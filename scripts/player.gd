@@ -232,7 +232,7 @@ func _physics_process(delta: float) -> void:
 	##################
 	## Input buffer
 	##################
-	if next_move and input_buffer_timer > 0 and state not in [States.ATTACK, States.DASH]:
+	if next_move and input_buffer_timer > 0 and state not in [States.ATTACK]:
 		next_move.call()
 		next_move = null
 		input_buffer_timer = 0
@@ -343,7 +343,7 @@ func _check_input_history() -> void:
 		input_history.append("block")
 	else:
 		input_history.append("n")
-	if len(input_history) > 20:
+	if len(input_history) > 15:
 		input_history.pop_front()
 		
 	var dash_right = Command.new(["right","n","right"])
@@ -370,11 +370,15 @@ func _add_block_buffer_time() -> void:
 ## Command list?
 #############################################################
 func _dash_left() -> void:
+	if state != States.IDLE:
+		return
 	sprite_2d.flip_h = true
 	animation_player.play("dash")
 
 
 func _dash_right() -> void:
+	if state != States.IDLE:
+		return
 	sprite_2d.flip_h = false
 	animation_player.play("dash")
 
@@ -395,7 +399,7 @@ func _lp() ->  void:
 		animation_player.play("lp2")
 	elif state == States.LP2:
 		animation_player.play("lp3")
-	elif state in [States.IDLE, States.PARRY_SUCCESS, States.DODGE_SUCCESS]: ## <<-- start with this one
+	elif state in [States.IDLE, States.DASH, States.PARRY_SUCCESS, States.DODGE_SUCCESS]: ## <<-- start with this one
 		animation_player.play("lp1")
 
 func lp1_info() -> void:
@@ -481,6 +485,7 @@ func _hp() ->  void:
 
 	if state in [
 		States.IDLE,
+		States.DASH,
 		States.PARRY_SUCCESS,
 		States.DODGE_SUCCESS,
 		States.LP1,
