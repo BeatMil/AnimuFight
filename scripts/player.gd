@@ -239,6 +239,9 @@ func _physics_process(delta: float) -> void:
 	elif input_buffer_timer > 0:
 		input_buffer_timer -= delta
 
+	if Input.is_action_pressed("lp") and Input.is_action_pressed("hp"):
+		_lp_hp()
+
 	if Input.is_action_just_pressed("lp"):
 		queue_move(_lp)
 
@@ -496,8 +499,6 @@ func _hp() ->  void:
 			animation_player.play("down_hp")
 		elif Input.is_action_pressed("up"):
 			animation_player.play("air_throw")
-		elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
-			animation_player.play("forward_hp")
 		else:
 			animation_player.play("hp")
 	# if state == States.TA:
@@ -621,15 +622,24 @@ func spd_burst_info() ->  void:
 	dict_to_spawn_hitbox(info)
 
 
-# func _down_hp() ->  void:
-# 	if state in [States.IDLE, States.PARRY_SUCCESS, States.LP1, States.LP2, States.LP3,]:
-# 		if Input.is_action_pressed("left"):
-# 			sprite_2d.flip_h = true
+func _lp_hp() ->  void:
+	if Input.is_action_pressed("left"):
+		sprite_2d.flip_h = true
 
-# 		if Input.is_action_pressed("right"):
-# 			sprite_2d.flip_h = false
+	if Input.is_action_pressed("right"):
+		sprite_2d.flip_h = false
 
-# 		animation_player.play("down_hp")
+	if state in [
+		States.IDLE,
+		States.DASH,
+		States.PARRY_SUCCESS,
+		States.DODGE_SUCCESS,
+		States.LP1,
+		States.LP2,
+		States.LP3,
+		States.ATTACK,
+		]: ## <<-- start with this one
+		animation_player.play("forward_hp")
 func down_hp_info() ->  void:
 	var info = {
 	"size": Hitbox_type.LARGE,
