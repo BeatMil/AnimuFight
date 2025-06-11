@@ -111,6 +111,20 @@ func _physics_process(delta: float) -> void:
 
 	_check_block_count()
 
+	if is_on_floor() and state == States.THROWN:
+		# state = States.ATTACK
+		self.hitted(
+			self,
+			is_face_right,
+			Vector2(20, -100),
+			Enums.Push_types.KNOCKDOWN,
+			0,
+			1,
+			Vector2(20, 0.2),
+			3,
+			Enums.Attack.P_PARRY
+		)
+
 	## debug
 	$DebugLabel.text = "%s, %s %s"%[States.keys()[state], animation_player.current_animation, block_count]
 	# $DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
@@ -168,7 +182,7 @@ func set_collision_no_hit_all() -> void:
 
 
 func set_collision_no_hit_enemy() -> void:
-	collision_layer = 0b00000000000000010000
+	collision_layer = 0b00000000000000000010
 	collision_mask = 0b00000000000000001101
 
 

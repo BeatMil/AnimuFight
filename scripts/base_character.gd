@@ -43,6 +43,7 @@ enum States {
 	PUNISHABLE,
 	AIR_SPD,
 	DASH,
+	WALL_THROW,
 	}
 
 
@@ -57,12 +58,14 @@ enum Hitbox_type {
 	METEO,
 	AIR_THROW,
 	BOUND,
+	WAILL_THROW,
 	}
 
 
 #############################################################
 ## Preloads
 #############################################################
+const HITBOX_LP_SMALL = preload("res://nodes/hitboxes/hitbox_small.tscn")
 const HITBOX_LP_MEDIUM = preload("res://nodes/hitboxes/hitbox_lp.tscn")
 const HITBOX_LP_LARGE = preload("res://nodes/hitboxes/hitbox_lp2.tscn")
 const HITBOX_HAMMER = preload("res://nodes/hitboxes/hitbox_hammer.tscn")
@@ -221,6 +224,8 @@ func _spawn_lp_hitbox(
 	var hitbox: Node2D
 
 	match _size:
+		Hitbox_type.SMALL:
+			hitbox = HITBOX_LP_SMALL.instantiate()
 		Hitbox_type.MEDIUM:
 			hitbox = HITBOX_LP_MEDIUM.instantiate()
 		Hitbox_type.LARGE:
@@ -438,11 +443,23 @@ func hitted(
 		state = States.GRABBED
 		animation_player.play("throw_stunned")
 		self.air_throw_follow_pos = _attacker.give_air_throw_pos()
-		# set_physics_process(false)
 		_attacker.animation_player.play("air_spd")
-
 	elif _type == Enums.Attack.P_AIR_THROW and is_on_floor():
 		## make air throw whiff
+		pass
+
+	## Player Wall throw hits
+	elif _type == Enums.Attack.P_WALL_THROW and animation_player.current_animation == "wallsplat":
+		# if self.has_meta('air_throw_follow_pos'):
+		state = States.GRABBED
+		animation_player.play("thrown")
+		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
+		_attacker.animation_player.play("wall_throw")
+		await get_tree().create_timer(0.2).timeout
+		self.air_throw_follow_pos = null
+		_push(Vector2(600, -200))
+	## make wall throw whiff
+	elif _type == Enums.Attack.P_WALL_THROW and  not (is_touching_wall_left or is_touching_wall_right):
 		pass
 
 	## Spawn blockspark on IFRAME

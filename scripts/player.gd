@@ -9,6 +9,8 @@ extends "res://scripts/base_character.gd"
 @onready var hit_noise = preload("res://media/sfxs/gc_punch_whiff.wav")
 @onready var air_throw_pos_r: Marker2D = $HitBoxPos/AirThrowPosR
 @onready var air_throw_pos_l: Marker2D = $HitBoxPos/AirThrowPosL
+@onready var grab_pos_r: Marker2D = $HitBoxPos/GrabPosR
+@onready var grab_pos_l: Marker2D = $HitBoxPos/GrabPosL
 
 
 #############################################################
@@ -185,10 +187,8 @@ func _physics_process(delta: float) -> void:
 	if state in [States.BOUNCE_STUNNED, States.WALL_BOUNCED]:
 		if is_on_floor():
 			tech_roll_timer -= delta
-			print("bob on floor")
 		else:
 			tech_roll_timer = tech_roll_time
-			print("bob not floor")
 	
 	if Input.is_action_just_pressed("down") and state in [States.BOUNCE_STUNNED, States.WALL_BOUNCED] and is_on_floor() and tech_roll_timer > 0:
 		animation_player.play("burst")
@@ -233,7 +233,6 @@ func _physics_process(delta: float) -> void:
 	## Input buffer
 	##################
 	if next_move and input_buffer_timer > 0 and state not in [States.ATTACK, States.DASH]:
-		print("call:", next_move)
 		next_move.call()
 		next_move = null
 		input_buffer_timer = 0
@@ -295,6 +294,13 @@ func give_air_throw_pos() -> Marker2D:
 		return air_throw_pos_l
 	else:
 		return air_throw_pos_r
+
+
+func give_wall_throw_pos() -> Marker2D:
+	if sprite_2d.flip_h:
+		return grab_pos_l
+	else:
+		return grab_pos_r
 
 
 #############################################################
@@ -377,7 +383,6 @@ func _dash_right() -> void:
 ## Attack info
 #############################################################
 func _lp() ->  void:
-	print("lp!")
 	if Input.is_action_pressed("left"):
 		sprite_2d.flip_h = true
 
@@ -486,6 +491,8 @@ func _hp() ->  void:
 			animation_player.play("down_hp")
 		elif Input.is_action_pressed("up"):
 			animation_player.play("air_throw")
+		elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+			animation_player.play("forward_hp")
 		else:
 			animation_player.play("hp")
 	# if state == States.TA:
@@ -637,6 +644,41 @@ func down_hp_info() ->  void:
 	# "zoom": Vector2(1, 1),
 	}
 	dict_to_spawn_hitbox(info)
+func forward_hp_info() ->  void:
+	var info = {
+	"size": Hitbox_type.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(1200, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(1200, 0),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.3,
+	"hitstun_amount_ground": 1,
+	"hitlag_amount_air": 0.2,
+	"hitstun_amount_air": 1,
+	"screenshake_amount": Vector2(10, 0.2),
+	"damage": 3,
+	"type": Enums.Attack.NORMAL,
+	# "zoom": Vector2(1, 1),
+	}
+	dict_to_spawn_hitbox(info)
+func wall_throw_info() ->  void:
+	var info = {
+	"size": Hitbox_type.SMALL,
+	"time": 0.1,
+	"push_power_ground": Vector2(100, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(100, 0),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.3,
+	"hitstun_amount_ground": 1,
+	"hitlag_amount_air": 0.2,
+	"hitstun_amount_air": 1,
+	"screenshake_amount": Vector2(10, 0.2),
+	"damage": 0,
+	"type": Enums.Attack.P_WALL_THROW,
+	}
+	dict_to_spawn_hitbox(info)
 
 
 func _grab() ->  void:
@@ -699,7 +741,6 @@ func throw_info() -> void:
 	"zoom": Vector2(0.2, 0.2),
 	"pos": $HitBoxPos/GrabAttackPos.position,
 	}
-	print("throw_info()")
 	dict_to_spawn_hitbox(info)
 
 
@@ -814,6 +855,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"throw_enemy",
 		"air_throw",
 		"air_spd_burst",
+		"forward_hp",
+		"wall_throw",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:
