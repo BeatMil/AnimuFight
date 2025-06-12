@@ -426,7 +426,7 @@ func hitted(
 	elif _type == Enums.Attack.P_THROW:
 		pass
 		_attacker.state = States.HIT_STUNNED
-		_attacker.animation_player.play("wall_throw")
+		_attacker.animation_player.play("wall_abel_combo2")
 		state = States.GRABBED
 		animation_player.play("thrown")
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
