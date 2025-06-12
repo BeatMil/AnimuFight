@@ -422,24 +422,21 @@ func hitted(
 		else:
 			animation_player.play("dodge_success")
 
-	## Player grab hits
+	## Player command grab (super)
 	elif _type == Enums.Attack.P_THROW:
-		# Player enter grab stance
-		if _attacker.has_method("enter_grab_stance"):
-			_attacker.enter_grab_stance()
-			_attacker.set_grabbed_enemy(self)
-		# Enemy got grabbed into position
-		animation_player.play("throw_stunned")
-		self.can_move = false
-		var grab_pos :Vector2
+		pass
+		_attacker.state = States.HIT_STUNNED
+		_attacker.animation_player.play("wall_throw")
+		state = States.GRABBED
+		animation_player.play("thrown")
+		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
+		await get_tree().create_timer(0.25).timeout
+		_attacker.sprite_2d.flip_h = !_attacker.sprite_2d.flip_h
 		if _attacker.sprite_2d.flip_h:
-			grab_pos = _attacker.get_node_or_null("HitBoxPos/GrabPosL").global_position
+			_push_direct(Vector2(-900, -200))
 		else:
-			grab_pos = _attacker.get_node_or_null("HitBoxPos/GrabPosR").global_position
-		var tween = get_tree().create_tween()
-		tween.tween_property(self, "position", grab_pos, 0.1).set_trans(Tween.TRANS_CUBIC)
-		await get_tree().create_timer(0.1).timeout
-		set_physics_process(false)
+			_push_direct(Vector2(900, -200))
+		self.air_throw_follow_pos = null
 
 	## Player air grab hits
 	elif _type == Enums.Attack.P_AIR_THROW and not is_on_floor():
@@ -452,17 +449,13 @@ func hitted(
 		pass
 
 	## Player Wall throw hits
-	elif _type == Enums.Attack.P_WALL_THROW and \
-		(animation_player.current_animation == "wallsplat" or is_wall_bounced):
+	elif _type == Enums.Attack.P_WALL_THROW and animation_player.current_animation == "wallsplat":
 		state = States.GRABBED
 		animation_player.play("thrown")
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
-		_attacker.animation_player.play("wall_throw")
-		await get_tree().create_timer(0.3).timeout
-		self.air_throw_follow_pos = null
-		_push(Vector2(600, -200))
+		_attacker.animation_player.play("wall_abel_combo")
 	## make wall throw whiff
-	elif _type == Enums.Attack.P_WALL_THROW and  not (is_touching_wall_left or is_touching_wall_right):
+	elif _type == Enums.Attack.P_WALL_THROW:
 		pass
 
 	elif _type == Enums.Attack.P_GROUND_THROW:

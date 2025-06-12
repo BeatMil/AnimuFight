@@ -20,7 +20,7 @@ extends "res://scripts/base_character.gd"
 var jump_buffer_time := 0.15
 var jump_buffer_timer := 0.0
 
-var tech_roll_time := 0.1
+var tech_roll_time := 0.2
 var tech_roll_timer := 0.0
 
 var input_buffer_time := 0.1
@@ -553,14 +553,14 @@ func ta_info() -> void:
 	var info = {
 	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
-	"push_power_ground": Vector2(200, 0),
+	"push_power_ground": Vector2(0, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
-	"push_power_air": Vector2(100, 0),
-	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(0, 0),
+	"push_type_air": Enums.Push_types.NORMAL,
 	"hitlag_amount_ground": 0.1,
-	"hitstun_amount_ground": 0.4,
+	"hitstun_amount_ground": 1.5,
 	"hitlag_amount_air": 0.1,
-	"hitstun_amount_air": 0.1,
+	"hitstun_amount_air": 1.5,
 	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 3,
 	"type": Enums.Attack.NORMAL,
@@ -581,6 +581,24 @@ func tan_info() -> void:
 	"screenshake_amount": Vector2(10, 0.2),
 	"damage": 5,
 	"type": Enums.Attack.NORMAL,
+	"zoom": Vector2(0.2, 0.2),
+	}
+	dict_to_spawn_hitbox(info)
+func abel_throw_info() -> void:
+	var info = {
+	"size": Hitbox_type.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(100, -100),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(100, -100),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.5,
+	"hitstun_amount_ground": 2,
+	"hitlag_amount_air": 0.5,
+	"hitstun_amount_air": 2,
+	"screenshake_amount": Vector2(10, 0.2),
+	"damage": 0,
+	"type": Enums.Attack.P_THROW,
 	"zoom": Vector2(0.2, 0.2),
 	}
 	dict_to_spawn_hitbox(info)

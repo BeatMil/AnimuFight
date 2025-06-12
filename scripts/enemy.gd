@@ -56,8 +56,6 @@ func _physics_process(delta: float) -> void:
 
 	_check_wall_bounce()
 
-	if state in [States.GRABBED]:
-		_follow_pos()
 
 	# collision_layer
 	if state in [States.IDLE]:
@@ -88,6 +86,9 @@ func _physics_process(delta: float) -> void:
 
 	_gravity(delta)
 	move_and_slide()
+
+	if state in [States.GRABBED, States.THROWN]:
+		_follow_pos()
 
 	## Hitstun
 	## Keep the stun duration while in air
@@ -128,7 +129,7 @@ func _physics_process(delta: float) -> void:
 		)
 
 	## debug
-	$DebugLabel.text = "%s, %s %s"%[States.keys()[state], animation_player.current_animation, block_count]
+	$DebugLabel.text = "%s, %s %0.3f"%[States.keys()[state], animation_player.current_animation, stun_duration]
 	# $DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
 
 

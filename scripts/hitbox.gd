@@ -43,6 +43,8 @@ func _ready() -> void:
 	if is_hit_enemy:
 		_set_collision_hit_enemy()
 
+	if type == Enums.Attack.P_THROW:
+		_set_collision_hit_enemy_all()
 
 #############################################################
 ## Private Function
@@ -57,6 +59,10 @@ func _set_collision_hit_player() -> void:
 
 func _set_collision_no_hit() -> void:
 	area_2d.collision_mask = 0b00000000000000000000
+
+
+func _set_collision_hit_enemy_all() -> void:
+	area_2d.collision_mask = 0b00000000000010010010
 
 
 func _play_hit_random_pitch():
@@ -104,6 +110,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			body.States.ARMOR,
 			] and type not in [
 			Enums.Attack.THROW,
+			Enums.Attack.P_THROW,
 			Enums.Attack.P_AIR_THROW,
 			Enums.Attack.P_WALL_THROW,
 			Enums.Attack.P_GROUND_THROW,
