@@ -150,7 +150,7 @@ func _gravity(delta) -> void:
 
 
 func _check_wall_bounce() -> void:
-	if state not in [States.BOUNCE_STUNNED]:
+	if state not in [States.BOUNCE_STUNNED, States.THROWN]:
 		return
 
 	if is_touching_wall_left or is_touching_wall_right:
@@ -458,7 +458,7 @@ func hitted(
 		animation_player.play("thrown")
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
 		_attacker.animation_player.play("wall_throw")
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.3).timeout
 		self.air_throw_follow_pos = null
 		_push(Vector2(600, -200))
 	## make wall throw whiff
@@ -471,9 +471,28 @@ func hitted(
 		state = States.GRABBED
 		animation_player.play("thrown")
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.3).timeout
 		self.air_throw_follow_pos = null
-		_push(Vector2(600, -100))
+		match _attacker.is_pressing_right():
+			0: #neutral
+				self.hitted(
+					self,
+					_attacker.is_face_right,
+					Vector2(200, 0),
+					0,
+					0,
+					0.1,
+					Vector2(10, 0.1),
+					1,
+					Enums.Attack.NORMAL
+				)
+				_attacker.animation_player.play("place_enemy")
+			1: # Left
+				_push_direct(Vector2(-900, -100))
+				_attacker.sprite_2d.flip_h = true
+			2: # Right
+				_push_direct(Vector2(900, -100))
+				_attacker.sprite_2d.flip_h = false
 
 	## Spawn blockspark on IFRAME
 	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD]:

@@ -102,7 +102,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			body.States.BLOCK,
 			body.States.PARRY,
 			body.States.ARMOR,
-			] and type not in [Enums.Attack.P_AIR_THROW, Enums.Attack.THROW]:
+			] and type not in [
+			Enums.Attack.THROW,
+			Enums.Attack.P_AIR_THROW,
+			Enums.Attack.P_WALL_THROW,
+			Enums.Attack.P_GROUND_THROW,
+			]:
 			_play_hit_random_pitch()
 
 

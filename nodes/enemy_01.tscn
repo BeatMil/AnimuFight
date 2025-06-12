@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b2vaqeiw3q18o"]
+[gd_scene load_steps=38 format=3 uid="uid://b2vaqeiw3q18o"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_mphwr"]
 [ext_resource type="Script" uid="uid://hyjgv4558hu" path="res://scripts/enemy_01.gd" id="2_ufcbe"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dxod1gcjs71jv" path="res://media/sprites/char2/SecondChar_fireball.png" id="14_6bbgc"]
 [ext_resource type="AudioStream" uid="uid://b7u0sh3hrcfqr" path="res://media/sfxs/gc_punch_whiff.wav" id="15_2g3du"]
 [ext_resource type="Texture2D" uid="uid://c64p5v4qa002l" path="res://media/sprites/char2/enemy01_walk.png" id="16_2g3du"]
+[ext_resource type="AudioStream" uid="uid://chnn83cu2f3jx" path="res://media/sfxs/grabbed.wav" id="16_w6o0s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(64, 304)
@@ -1148,8 +1149,8 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
-"start_offset": 0.255825,
-"stream": ExtResource("11_6xq7h")
+"start_offset": 0.0,
+"stream": ExtResource("16_w6o0s")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -1279,8 +1280,8 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
-"start_offset": 0.255825,
-"stream": ExtResource("11_6xq7h")
+"start_offset": 0.0,
+"stream": ExtResource("16_w6o0s")
 }],
 "times": PackedFloat32Array(0)
 }

@@ -683,7 +683,7 @@ func forward_hp_info() ->  void:
 	dict_to_spawn_hitbox(info)
 func wall_throw_info() ->  void:
 	var info = {
-	"size": Hitbox_type.SMALL,
+	"size": Hitbox_type.LARGE,
 	"time": 0.1,
 	"push_power_ground": Vector2(100, 0),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -870,6 +870,15 @@ func set_collision_normal() -> void:
 func set_collision_noclip() -> void:
 	collision_layer = 0b00000000000000000000
 	collision_mask = 0b00000000000000000000
+
+
+func is_pressing_right() -> int:
+	if Input.is_action_pressed("right"):
+		return 2
+	elif Input.is_action_pressed("left"):
+		return 1
+	else:
+		return 0
 #############################################################
 ## Signals
 #############################################################
@@ -894,6 +903,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"forward_hp",
 		"wall_throw",
 		"ground_grab",
+		"place_enemy",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:

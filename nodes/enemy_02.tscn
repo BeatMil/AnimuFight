@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://by4mdvdte0wet"]
+[gd_scene load_steps=35 format=3 uid="uid://by4mdvdte0wet"]
 
 [ext_resource type="Texture2D" uid="uid://02np5p02m64c" path="res://media/sprites/enemy02/enemy02_idle.png" id="1_3e6vd"]
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_3ialr"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cahavby2a224l" path="res://media/sprites/enemy02/enemy02_hitted.png" id="11_2d5ht"]
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="11_humr2"]
 [ext_resource type="Texture2D" uid="uid://jcwaglsmga6f" path="res://media/sprites/enemy02/enemy02_walk.png" id="12_6yiwp"]
+[ext_resource type="AudioStream" uid="uid://chnn83cu2f3jx" path="res://media/sfxs/grabbed.wav" id="13_ksa7r"]
 [ext_resource type="AudioStream" uid="uid://byhjsp00vvyku" path="res://media/sfxs/attack_indicator01.wav" id="13_l7sfr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
@@ -1174,8 +1175,8 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
-"start_offset": 0.255825,
-"stream": ExtResource("3_yfbxy")
+"start_offset": 0.0,
+"stream": ExtResource("13_ksa7r")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -1305,8 +1306,8 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
-"start_offset": 0.255825,
-"stream": ExtResource("3_yfbxy")
+"start_offset": 0.0,
+"stream": ExtResource("13_ksa7r")
 }],
 "times": PackedFloat32Array(0)
 }
