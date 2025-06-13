@@ -70,6 +70,7 @@ func _ready() -> void:
 	hp_bar.set_hp(hp)
 	print_rich("[img]res://media/sprites/char1/FirstChar_block.png[/img]")
 	print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
+	$ExecuteShow.queue_free()
 	pass # Replace with function body.
 
 	# _check_input_history()

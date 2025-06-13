@@ -42,6 +42,7 @@ func _ready() -> void:
 	randomize()
 	gravity_power = 5000
 	hp_bar.set_hp(hp)
+	$ExecuteShow.text = "%s"%InputMap.action_get_events("execute")[0].as_text()
 	pass
 	# $Timer.start()
 	# _lp()
@@ -240,6 +241,11 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 func _on_current_anim_start(anim_name: String) -> void:
 	if anim_name in ["idle", "walk"]:
 		is_bound = false
+	
+	if anim_name == "execute":
+		$ExecuteShow.visible = true
+	else:
+		$ExecuteShow.visible = false
 
 
 #############################################################
