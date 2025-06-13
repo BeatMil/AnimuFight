@@ -119,13 +119,13 @@ func _physics_process(delta: float) -> void:
 		# state = States.ATTACK
 		self.hitted(
 			self,
-			is_face_right,
-			Vector2(20, -100),
+			not is_face_right,
+			Vector2(200, -100),
 			Enums.Push_types.KNOCKDOWN,
 			0,
-			1,
+			0.1,
 			Vector2(20, 0.2),
-			3,
+			1,
 			Enums.Attack.P_PARRY
 		)
 
