@@ -476,7 +476,7 @@ func hitted(
 					0,
 					0.1,
 					Vector2(10, 0.1),
-					1,
+					0.1,
 					Enums.Attack.NORMAL
 				)
 				_attacker.animation_player.play("place_enemy")
