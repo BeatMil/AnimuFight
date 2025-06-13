@@ -14,7 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="11_humr2"]
 [ext_resource type="Texture2D" uid="uid://jcwaglsmga6f" path="res://media/sprites/enemy02/enemy02_walk.png" id="12_6yiwp"]
 [ext_resource type="AudioStream" uid="uid://bg8cifedlb5iu" path="res://media/sfxs/attack_warning_01.wav" id="12_572em"]
-[ext_resource type="Texture2D" uid="uid://dnf5ubq1tfqg5" path="res://media/sprites/enemy02/enemy02_punch_telegraph.png" id="12_mwmt2"]
+[ext_resource type="Texture2D" uid="uid://0kolngkiedme" path="res://media/sprites/enemy02/enemy02_punchlp_telegraph.png" id="12_mwmt2"]
 [ext_resource type="AudioStream" uid="uid://chnn83cu2f3jx" path="res://media/sfxs/grabbed.wav" id="13_ksa7r"]
 [ext_resource type="AudioStream" uid="uid://byhjsp00vvyku" path="res://media/sfxs/attack_indicator01.wav" id="13_l7sfr"]
 [ext_resource type="AudioStream" uid="uid://2jdlbktiersx" path="res://media/sfxs/PunchAttack4.wav" id="13_uedu7"]
@@ -884,6 +884,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_uesu2"]
 resource_name = "lp1"
+step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -980,7 +981,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [3]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -992,7 +993,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [3]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -1001,10 +1002,10 @@ tracks/8/path = NodePath("Sprite2D:frame")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.633333, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 3, 6, 7]
 }
 
 [sub_resource type="Animation" id="Animation_r1yoq"]
