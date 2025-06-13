@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://by4mdvdte0wet"]
+[gd_scene load_steps=39 format=3 uid="uid://by4mdvdte0wet"]
 
 [ext_resource type="Texture2D" uid="uid://02np5p02m64c" path="res://media/sprites/enemy02/enemy02_idle.png" id="1_3e6vd"]
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_3ialr"]
@@ -13,8 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://cahavby2a224l" path="res://media/sprites/enemy02/enemy02_hitted.png" id="11_2d5ht"]
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="11_humr2"]
 [ext_resource type="Texture2D" uid="uid://jcwaglsmga6f" path="res://media/sprites/enemy02/enemy02_walk.png" id="12_6yiwp"]
+[ext_resource type="AudioStream" uid="uid://bg8cifedlb5iu" path="res://media/sfxs/attack_warning_01.wav" id="12_572em"]
+[ext_resource type="Texture2D" uid="uid://dnf5ubq1tfqg5" path="res://media/sprites/enemy02/enemy02_punch_telegraph.png" id="12_mwmt2"]
 [ext_resource type="AudioStream" uid="uid://chnn83cu2f3jx" path="res://media/sfxs/grabbed.wav" id="13_ksa7r"]
 [ext_resource type="AudioStream" uid="uid://byhjsp00vvyku" path="res://media/sfxs/attack_indicator01.wav" id="13_l7sfr"]
+[ext_resource type="AudioStream" uid="uid://2jdlbktiersx" path="res://media/sfxs/PunchAttack4.wav" id="13_uedu7"]
+[ext_resource type="AudioStream" uid="uid://u73y4q7hfepr" path="res://media/sfxs/PunchAttack6.wav" id="14_4foab"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(64, 336)
@@ -880,7 +884,6 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_uesu2"]
 resource_name = "lp1"
-length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -891,7 +894,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_vxmgf")]
+"values": [ExtResource("12_mwmt2")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -903,13 +906,13 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("6_ydh6e")
+"stream": ExtResource("12_572em")
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("7_4nw2b")
+"stream": ExtResource("13_uedu7")
 }],
-"times": PackedFloat32Array(0, 0.5)
+"times": PackedFloat32Array(0, 0.7)
 }
 tracks/1/use_blend = true
 tracks/2/type = "value"
@@ -919,10 +922,10 @@ tracks/2/path = NodePath("Sprite2D:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.9375, 0.920477, 0.501709, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -931,7 +934,7 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.5),
+"times": PackedFloat32Array(0.7),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -945,7 +948,7 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.466667),
+"times": PackedFloat32Array(0, 0.666667),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [21],
@@ -998,10 +1001,10 @@ tracks/8/path = NodePath("Sprite2D:frame")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [1, 2]
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_r1yoq"]
@@ -1030,11 +1033,11 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("6_ydh6e")
+"stream": ExtResource("12_572em")
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("7_4nw2b")
+"stream": ExtResource("14_4foab")
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -1044,7 +1047,7 @@ tracks/1/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("7_4nw2b")
 }],
-"times": PackedFloat32Array(0, 0.5, 0.866667, 1.63333)
+"times": PackedFloat32Array(0.0166667, 0.45, 0.866667, 1.63333)
 }
 tracks/1/use_blend = true
 tracks/2/type = "value"
@@ -1054,10 +1057,10 @@ tracks/2/path = NodePath("Sprite2D:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.216667, 0.5, 0.883333, 1.1, 1.63333),
-"transitions": PackedFloat32Array(1, 0, 1, 1, 0, 1),
+"times": PackedFloat32Array(0, 0.5, 0.883333, 1.1, 1.63333),
+"transitions": PackedFloat32Array(1, 1, 1, 0, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.9375, 0.920477, 0.501709, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0.9375, 0.426609, 0.328224, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0.9375, 0.426609, 0.328224, 1), Color(1, 1, 1, 1)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -1651,7 +1654,7 @@ collision_layer = 2
 collision_mask = 15
 script = ExtResource("2_tp74s")
 is_notarget = false
-hp = 10
+hp = 30
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_3e6vd")

@@ -138,12 +138,12 @@ func _on_attack_timer_timeout() -> void:
 
 
 func do_attack() -> void:
-	if is_player_in_range_attack01:
+	# if is_player_in_range_attack01:
+	# 	state = States.ATTACK
+	# 	_attack01()
+	if is_player_in_range_lp:
 		state = States.ATTACK
-		_attack01()
-	elif is_player_in_range_lp:
-		state = States.ATTACK
-		match randi_range(0, 1):
+		match randi_range(0, 0):
 			0:
 				_lp()
 			1:
