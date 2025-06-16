@@ -147,4 +147,5 @@ func do_attack() -> void:
 			0:
 				_lp()
 			1:
-				_lp_chain()
+				_lp()
+				# _lp_chain()
