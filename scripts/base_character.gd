@@ -156,17 +156,22 @@ func _check_wall_bounce() -> void:
 	if is_touching_wall_left or is_touching_wall_right:
 		animation_player.stop(true)
 		if is_wall_bounced:
+			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(30, 0.3)
+			hitlag(0.5)
 			animation_player.play("wallsplat")
+			var tween = get_tree().create_tween()
+			tween.tween_property(self, "position", position, 0.9)
+			tween.tween_property(self, "velocity", Vector2.ZERO, 0)
 		else:
 			is_wall_bounced = true
 			var push_power = Vector2(400, -100) if is_touching_wall_left else Vector2(-400, -100)
 			_push_direct(push_power)
+			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
+			hitlag()
 			animation_player.play("down")
 	
 		hp_bar.hp_down(1)
 		state = States.WALL_BOUNCED
-		hitlag()
-		get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
 		is_touching_wall_left = false
 		is_touching_wall_right = false
 		play_bounce_sfx()

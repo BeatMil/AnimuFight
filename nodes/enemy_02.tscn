@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://by4mdvdte0wet"]
+[gd_scene load_steps=40 format=3 uid="uid://by4mdvdte0wet"]
 
 [ext_resource type="Texture2D" uid="uid://02np5p02m64c" path="res://media/sprites/enemy02/enemy02_idle.png" id="1_3e6vd"]
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_3ialr"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://byhjsp00vvyku" path="res://media/sfxs/attack_indicator01.wav" id="13_l7sfr"]
 [ext_resource type="AudioStream" uid="uid://2jdlbktiersx" path="res://media/sfxs/PunchAttack4.wav" id="13_uedu7"]
 [ext_resource type="AudioStream" uid="uid://u73y4q7hfepr" path="res://media/sfxs/PunchAttack6.wav" id="14_4foab"]
+[ext_resource type="AudioStream" uid="uid://dkr1i78r37hsb" path="res://media/sfxs/missileBlock01.wav" id="19_x031p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(64, 336)
@@ -1529,8 +1530,12 @@ tracks/1/path = NodePath("AudioStreamPlayer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"clips": [],
-"times": PackedFloat32Array()
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("19_x031p")
+}],
+"times": PackedFloat32Array(0)
 }
 tracks/1/use_blend = true
 tracks/2/type = "method"
