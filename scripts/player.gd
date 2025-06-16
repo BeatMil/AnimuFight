@@ -122,7 +122,8 @@ func _input(event: InputEvent) -> void:
 
 	## BLOCK
 	## DODGE
-	if state in can_block_states:
+	# if state in can_block_states:
+	if state not in [States.BOUNCE_STUNNED, States.WALL_BOUNCED]:
 		if Input.is_action_just_pressed("block", true):
 			state = States.PARRY
 			animation_player.play("block")
