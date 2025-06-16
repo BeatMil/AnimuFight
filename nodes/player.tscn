@@ -4062,7 +4062,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8u5p4"]
-size = Vector2(634, 1104)
+size = Vector2(770, 1104)
 
 [node name="Player" groups=["character", "player"] instance=ExtResource("1_gva5u")]
 z_index = 10
@@ -4127,7 +4127,6 @@ collision_mask = 18
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExecuteAreaL" index="0"]
-visible = false
 position = Vector2(-392, 0)
 shape = SubResource("RectangleShape2D_8u5p4")
 
@@ -4137,7 +4136,6 @@ collision_mask = 18
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExecuteAreaR" index="0"]
-visible = false
 position = Vector2(387, 0)
 shape = SubResource("RectangleShape2D_8u5p4")
 
