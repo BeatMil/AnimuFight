@@ -156,7 +156,7 @@ func _check_wall_bounce() -> void:
 	if is_touching_wall_left or is_touching_wall_right:
 		animation_player.stop(true)
 		if is_wall_bounced:
-			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(30, 0.3)
+			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(40, 0.3)
 			hitlag(0.5)
 			animation_player.play("wallsplat")
 			var tween = get_tree().create_tween()
@@ -629,6 +629,12 @@ func _slow_moion(level, length) -> void:
 	Engine.time_scale = 1.0
 	GlobalSoundPlayer.stream = SLOW_MO_END
 	GlobalSoundPlayer.play()
+
+
+func _slow_moion_no_sfx(level, length) -> void:
+	Engine.time_scale = level
+	await get_tree().create_timer(length/level).timeout
+	Engine.time_scale = 1.0
 
 
 func play_bounce_sfx() -> void:

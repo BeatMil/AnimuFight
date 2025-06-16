@@ -18,7 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://b7u0sh3hrcfqr" path="res://media/sfxs/gc_punch_whiff.wav" id="15_2g3du"]
 [ext_resource type="Texture2D" uid="uid://c64p5v4qa002l" path="res://media/sprites/char2/enemy01_walk.png" id="16_2g3du"]
 [ext_resource type="AudioStream" uid="uid://chnn83cu2f3jx" path="res://media/sfxs/grabbed.wav" id="16_w6o0s"]
-[ext_resource type="AudioStream" uid="uid://dkr1i78r37hsb" path="res://media/sfxs/missileBlock01.wav" id="18_yccbm"]
+[ext_resource type="AudioStream" uid="uid://dapk1wm47d6cw" path="res://media/sfxs/HitStone.wav" id="18_yccbm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(64, 304)

@@ -19,7 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://byhjsp00vvyku" path="res://media/sfxs/attack_indicator01.wav" id="13_l7sfr"]
 [ext_resource type="AudioStream" uid="uid://2jdlbktiersx" path="res://media/sfxs/PunchAttack4.wav" id="13_uedu7"]
 [ext_resource type="AudioStream" uid="uid://u73y4q7hfepr" path="res://media/sfxs/PunchAttack6.wav" id="14_4foab"]
-[ext_resource type="AudioStream" uid="uid://dkr1i78r37hsb" path="res://media/sfxs/missileBlock01.wav" id="19_x031p"]
+[ext_resource type="AudioStream" uid="uid://dapk1wm47d6cw" path="res://media/sfxs/HitStone.wav" id="19_x031p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(64, 336)
