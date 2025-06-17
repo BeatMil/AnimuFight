@@ -899,6 +899,12 @@ func is_pressing_right() -> int:
 		return 1
 	else:
 		return 0
+
+
+func toggle_flip_h() -> void:
+	sprite_2d.flip_h = !sprite_2d.flip_h
+
+
 #############################################################
 ## Signals
 #############################################################

@@ -435,8 +435,7 @@ func hitted(
 		state = States.GRABBED
 		animation_player.play("thrown")
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
-		await get_tree().create_timer(0.25).timeout
-		_attacker.sprite_2d.flip_h = !_attacker.sprite_2d.flip_h
+		await get_tree().create_timer(0.32).timeout
 		if _attacker.sprite_2d.flip_h:
 			_push_direct(Vector2(-900, -200))
 		else:
