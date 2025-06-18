@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://eigpd3xpsx88"]
+
+[ext_resource type="Texture2D" uid="uid://cvctqio1skqef" path="res://media/sprites/char1/vanilla_dash_grab.png" id="1_i4d4a"]
+[ext_resource type="Texture2D" uid="uid://bswk48xnujm50" path="res://media/sprites/boss01/boss01_tatsu.png" id="2_poaxq"]
+
+[sub_resource type="Environment" id="Environment_poaxq"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Boss01Tatsu" type="Sprite2D" parent="."]
+self_modulate = Color(1.8, 1, 1, 1)
+position = Vector2(924, 504)
+texture = ExtResource("2_poaxq")
+
+[node name="VanillaDashGrab" type="Sprite2D" parent="."]
+position = Vector2(502, 523)
+texture = ExtResource("1_i4d4a")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_poaxq")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=85 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
@@ -4070,6 +4070,11 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8u5p4"]
 size = Vector2(770, 1104)
 
+[sub_resource type="Environment" id="Environment_3pser"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+
 [node name="Player" groups=["character", "player"] instance=ExtResource("1_gva5u")]
 z_index = 10
 collision_mask = 14
@@ -4133,6 +4138,7 @@ collision_mask = 18
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExecuteAreaL" index="0"]
+visible = false
 position = Vector2(-392, 0)
 shape = SubResource("RectangleShape2D_8u5p4")
 
@@ -4142,8 +4148,12 @@ collision_mask = 18
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExecuteAreaR" index="0"]
+visible = false
 position = Vector2(387, 0)
 shape = SubResource("RectangleShape2D_8u5p4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="12"]
+environment = SubResource("Environment_3pser")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="ExecuteAreaL" to="." method="_on_execute_area_r_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2pkeuiucvewf"]
+[gd_scene load_steps=12 format=3 uid="uid://d2pkeuiucvewf"]
 
 [ext_resource type="Script" uid="uid://cxlm7u372ve4g" path="res://scripts/hit_spark2.gd" id="1_pl656"]
 [ext_resource type="Texture2D" uid="uid://bxnxfqaknnul6" path="res://media/sprites/particle_fx/particle_material01.png" id="1_t5307"]
@@ -24,9 +24,9 @@ initial_velocity_max = 290.32
 gravity = Vector3(0, 98, 0)
 scale_min = 3.0
 scale_max = 3.0
-color = Color(1, 0.933987, 0.566846, 1)
-hue_variation_min = -0.3
-hue_variation_max = 0.18
+color = Color(2, 0.731, 0.351, 1)
+hue_variation_min = -0.1
+hue_variation_max = 0.1
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0aoln"]
 particle_flag_disable_z = true
@@ -76,12 +76,19 @@ _data = {
 &"crash": SubResource("Animation_e43ln")
 }
 
+[sub_resource type="Environment" id="Environment_0aoln"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.12
+glow_blend_mode = 1
+
 [node name="GroundParticle" type="Node2D"]
 script = ExtResource("1_pl656")
 
 [node name="Particles" type="Node2D" parent="."]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Particles"]
+modulate = Color(2, 2, 2, 1)
 amount = 24
 texture = ExtResource("1_t5307")
 lifetime = 12.0
@@ -110,3 +117,6 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0aoln")
