@@ -1,9 +1,13 @@
 extends Node2D
+@onready var groups: Node2D = $groups
 
 
 func _ready() -> void:
-	$GPUParticles2D.one_shot = true
-	$GPUParticles2D.emitting = true
+	for i in groups.get_children():
+		i.one_shot = true
+		i.emitting = true
+		
+	
 	await get_tree().create_timer(5).timeout
 	queue_free()
 

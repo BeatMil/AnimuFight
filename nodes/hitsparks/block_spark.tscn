@@ -1,45 +1,74 @@
-[gd_scene load_steps=7 format=3 uid="uid://daa3rqvtkctbr"]
+[gd_scene load_steps=11 format=3 uid="uid://daa3rqvtkctbr"]
 
 [ext_resource type="Script" uid="uid://bmc7j7j0ykd0g" path="res://scripts/hit_spark.gd" id="1_j0l2h"]
+[ext_resource type="Texture2D" uid="uid://bxnxfqaknnul6" path="res://media/sprites/particle_fx/particle_material01.png" id="2_jh0qo"]
 
-[sub_resource type="Gradient" id="Gradient_fopcf"]
-colors = PackedColorArray(0.322682, 0.536931, 0.910156, 1, 0.306198, 0.587176, 0.920897, 1)
+[sub_resource type="Curve" id="Curve_31vg1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0806452, 0), 0.288317, 0.288317, 0, 0, Vector2(0.16129, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7ibbc"]
-gradient = SubResource("Gradient_fopcf")
+[sub_resource type="CurveTexture" id="CurveTexture_rhvxf"]
+curve = SubResource("Curve_31vg1")
 
-[sub_resource type="Curve" id="Curve_i13q5"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="Curve" id="Curve_s868a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.487903, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_2btck"]
-curve = SubResource("Curve_i13q5")
+[sub_resource type="CurveTexture" id="CurveTexture_sb40v"]
+curve = SubResource("Curve_s868a")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_se36l"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x6flr"]
+particle_flag_align_y = true
 particle_flag_disable_z = true
 direction = Vector3(0, 0, 0)
 spread = 180.0
-initial_velocity_max = 60.0
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+orbit_velocity_min = -0.495
+orbit_velocity_max = -0.495
 gravity = Vector3(0, 0, 0)
-radial_accel_min = -42.1
-radial_accel_max = -1.4
-tangential_accel_min = 2.81
-tangential_accel_max = 2.81
-scale_min = 5.0
-scale_max = 10.0
-scale_curve = SubResource("CurveTexture_2btck")
-color_ramp = SubResource("GradientTexture1D_7ibbc")
+scale_min = 2.5
+scale_max = 3.5
+scale_curve = SubResource("CurveTexture_sb40v")
+color = Color(0.723601, 0.96613, 1, 1)
+alpha_curve = SubResource("CurveTexture_rhvxf")
+hue_variation_min = 0.00999998
+hue_variation_max = 0.12
+
+[sub_resource type="Curve" id="Curve_jh0qo"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.254032, 0), 0.0, 0.0, 0, 0, Vector2(0.294355, 1), 0.0, 0.0, 0, 0, Vector2(0.733871, 0.542882), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_x6flr"]
+curve = SubResource("Curve_jh0qo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jh0qo"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+alpha_curve = SubResource("CurveTexture_x6flr")
 
 [node name="HitSpark" type="Node2D"]
 z_index = 5
 script = ExtResource("1_j0l2h")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 16
-lifetime = 6.0
-speed_scale = 15.0
+[node name="groups" type="Node2D" parent="."]
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="groups"]
+visible = false
+texture = ExtResource("2_jh0qo")
+speed_scale = 5.0
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_x6flr")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="groups"]
+texture = ExtResource("2_jh0qo")
+speed_scale = 3.0
 explosiveness = 1.0
 fixed_fps = 120
-process_material = SubResource("ParticleProcessMaterial_se36l")
+process_material = SubResource("ParticleProcessMaterial_jh0qo")
 
-[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]
+[connection signal="finished" from="groups/GPUParticles2D2" to="." method="_on_gpu_particles_2d_finished"]

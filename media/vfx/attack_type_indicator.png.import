@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkv2s7ayov3aa"
-path="res://.godot/imported/attack_type_indicator.png-c1414aa7a6395aa24bf7eaaceb7be3da.ctex"
+path="res://.godot/imported/attack_type_indicator.png-5b8df7359d333e60aa8b0329597a1f26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://media/sprites/vfx/attack_type_indicator.png"
-dest_files=["res://.godot/imported/attack_type_indicator.png-c1414aa7a6395aa24bf7eaaceb7be3da.ctex"]
+source_file="res://media/vfx/attack_type_indicator.png"
+dest_files=["res://.godot/imported/attack_type_indicator.png-5b8df7359d333e60aa8b0329597a1f26.ctex"]
 
 [params]
 

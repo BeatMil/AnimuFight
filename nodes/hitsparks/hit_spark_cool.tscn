@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://bmc7j7j0ykd0g" path="res://scripts/hit_spark.gd" id="1_fofp2"]
 [ext_resource type="Texture2D" uid="uid://bxnxfqaknnul6" path="res://media/sprites/particle_fx/particle_material01.png" id="2_jijre"]
 
+[sub_resource type="Environment" id="Environment_pw8aq"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+
 [sub_resource type="Curve" id="Curve_nqpni"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -31,15 +36,15 @@ color = Color(0.656139, 0.215286, 0.194301, 1)
 alpha_curve = SubResource("CurveTexture_pnihu")
 emission_curve = SubResource("CurveTexture_nqpni")
 
-[sub_resource type="Environment" id="Environment_pw8aq"]
-background_mode = 3
-glow_enabled = true
-glow_blend_mode = 1
-
 [node name="HitSpark" type="Node2D"]
 script = ExtResource("1_fofp2")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pw8aq")
+
+[node name="groups" type="Node2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="groups"]
 z_index = 11
 amount = 16
 texture = ExtResource("2_jijre")
@@ -49,7 +54,4 @@ explosiveness = 1.0
 fixed_fps = 120
 process_material = SubResource("ParticleProcessMaterial_se36l")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_pw8aq")
-
-[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]
+[connection signal="finished" from="groups/GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

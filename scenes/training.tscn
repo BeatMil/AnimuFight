@@ -62,6 +62,7 @@ horizontal_alignment = 0
 [node name="TrainingMenu" parent="CanvasLayer" instance=ExtResource("3_8ihin")]
 
 [node name="SfivTrainingStage" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(982.5, 310)
 scale = Vector2(2.33359, 2)
 texture = ExtResource("1_nitho")

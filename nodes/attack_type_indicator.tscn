@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bve7bot5aqykv"]
 
-[ext_resource type="Texture2D" uid="uid://bkv2s7ayov3aa" path="res://media/sprites/vfx/attack_type_indicator.png" id="1_rw5cv"]
+[ext_resource type="Texture2D" uid="uid://bkv2s7ayov3aa" path="res://media/vfx/attack_type_indicator.png" id="1_rw5cv"]
 [ext_resource type="Script" uid="uid://cnd6dhnufgsk7" path="res://scripts/attack_type_indicator.gd" id="1_y41th"]
 [ext_resource type="AudioStream" uid="uid://byhjsp00vvyku" path="res://media/sfxs/attack_indicator01.wav" id="2_jksnv"]
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="4_cmr4q"]

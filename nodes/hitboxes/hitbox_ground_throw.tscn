@@ -4,11 +4,10 @@
 [ext_resource type="Script" uid="uid://c8hbyfmkkjvhn" path="res://scripts/hitbox_ground_throw.gd" id="2_u0qtn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5ms"]
-size = Vector2(384, 384)
+size = Vector2(448, 384)
 
 [node name="HitboxGroundThrow" instance=ExtResource("1_07umf")]
 script = ExtResource("2_u0qtn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2(-64, 0)
 shape = SubResource("RectangleShape2D_ow5ms")

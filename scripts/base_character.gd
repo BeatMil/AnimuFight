@@ -672,4 +672,4 @@ func block_effect_helper(
 		if get_tree().current_scene.get_node_or_null("Player/Camera"):
 			get_tree().current_scene.get_node_or_null("Player/Camera"). \
 			start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
-	ObjectPooling.spawn_blockSpark_1(position)
+	ObjectPooling.spawn_blockSpark_1(position + Vector2(0, randi_range(-30, -80)))
