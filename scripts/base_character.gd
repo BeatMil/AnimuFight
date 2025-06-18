@@ -576,7 +576,7 @@ func hitted(
 				"Player/Camera").zoom(_zoom, _zoom_duration)
 			else:
 				print_debug("_zoom can't find player/camera")
-		ObjectPooling.spawn_hitSpark_1(position)
+		ObjectPooling.spawn_hitSpark_1(position + Vector2(0, randi_range(-30, -80)))
 		# Player Parries
 		if _type == Enums.Attack.P_PARRY:
 			$AudioStreamPlayer2.stream = HIT_2
