@@ -3636,7 +3636,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [8],
+"args": [1],
 "method": &"_set_state"
 }]
 }
@@ -3650,7 +3650,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [-200],
+"args": [-400],
 "method": &"_push_x"
 }]
 }

@@ -359,6 +359,7 @@ func _check_input_history() -> void:
 		dash_left.calculate(input_history[i])
 	if dash_right.get_command_complete(): 
 		queue_move(_dash_right)
+		print("_dash_right")
 		input_history.clear()
 	if dash_left.get_command_complete():
 		queue_move(_dash_left)
@@ -375,15 +376,17 @@ func _add_block_buffer_time() -> void:
 #############################################################
 ## Command list?
 #############################################################
+var cant_dash_state = [States.HIT_STUNNED, States.BOUNCE_STUNNED, States.WALL_BOUNCED, States.GRABBED]
+
 func _dash_left() -> void:
-	if state != States.IDLE:
+	if state in cant_dash_state:
 		return
 	sprite_2d.flip_h = true
 	animation_player.play("dash")
 
 
 func _dash_right() -> void:
-	if state != States.IDLE:
+	if state in cant_dash_state:
 		return
 	sprite_2d.flip_h = false
 	animation_player.play("dash")
@@ -658,7 +661,6 @@ func _lp_hp() ->  void:
 		States.LP1,
 		States.LP2,
 		States.LP3,
-		States.ATTACK,
 		]: ## <<-- start with this one
 		if Input.is_action_pressed("down"):
 			animation_player.play("ground_grab")
