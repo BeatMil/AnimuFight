@@ -454,9 +454,9 @@ func hitted(
 
 	## Player Wall throw hits
 	elif _type == Enums.Attack.P_WALL_THROW and animation_player.current_animation == "wallsplat":
+		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
 		state = States.GRABBED
 		animation_player.play("thrown")
-		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
 		_attacker.animation_player.play("wall_abel_combo")
 	## make wall throw whiff
 	elif _type == Enums.Attack.P_WALL_THROW:
