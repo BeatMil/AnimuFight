@@ -433,7 +433,7 @@ func hitted(
 		_attacker.state = States.HIT_STUNNED
 		_attacker.animation_player.play("wall_abel_combo2")
 		state = States.GRABBED
-		animation_player.play("thrown")
+		animation_player.play("throw_stunned")
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
 		await get_tree().create_timer(0.32).timeout
 		if _attacker.sprite_2d.flip_h:
@@ -456,18 +456,18 @@ func hitted(
 	elif _type == Enums.Attack.P_WALL_THROW and animation_player.current_animation == "wallsplat":
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
 		state = States.GRABBED
-		animation_player.play("thrown")
+		animation_player.play("throw_stunned")
 		_attacker.animation_player.play("wall_abel_combo")
 	## make wall throw whiff
 	elif _type == Enums.Attack.P_WALL_THROW:
 		pass
 
 	elif _type == Enums.Attack.P_GROUND_THROW:
+		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
 		_attacker.state = States.HIT_STUNNED
 		_attacker.animation_player.play("wall_throw")
 		state = States.GRABBED
 		animation_player.play("thrown")
-		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
 		await get_tree().create_timer(0.3).timeout
 		self.air_throw_follow_pos = null
 		match _attacker.is_pressing_right():

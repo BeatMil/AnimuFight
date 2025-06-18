@@ -548,7 +548,7 @@ func burst_info() ->  void:
 	"hitstun_amount_air": 1,
 	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 2,
-	"type": Enums.Attack.NORMAL,
+	"type": Enums.Attack.P_PARRY,
 	"pos": $HitBoxPos/BurstPos.position,
 	"zoom": Vector2(0.1, 0.1),
 	"zoom_duration": 0.05,

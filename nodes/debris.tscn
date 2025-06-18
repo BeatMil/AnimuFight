@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://xcraqili7lb3"]
+[gd_scene load_steps=7 format=3 uid="uid://xcraqili7lb3"]
 
 [ext_resource type="Script" uid="uid://bmc7j7j0ykd0g" path="res://scripts/hit_spark.gd" id="1_i1c3q"]
 [ext_resource type="Texture2D" uid="uid://dbrgujfjdctli" path="res://media/sprites/stage01/debris.png" id="2_gdhmu"]
+[ext_resource type="PackedScene" uid="uid://b33gvgvchhbv1" path="res://nodes/debris_upward.tscn" id="3_jg2i2"]
 
 [sub_resource type="Gradient" id="Gradient_8s3yv"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -23,7 +24,9 @@ color_ramp = SubResource("GradientTexture1D_b3aqj")
 [node name="Debris" type="Node2D"]
 script = ExtResource("1_i1c3q")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="groups" type="Node2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="groups"]
 amount = 14
 texture = ExtResource("2_gdhmu")
 lifetime = 6.0
@@ -32,4 +35,6 @@ explosiveness = 1.0
 fixed_fps = 0
 process_material = SubResource("ParticleProcessMaterial_og31b")
 
-[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]
+[node name="Debris" parent="." instance=ExtResource("3_jg2i2")]
+
+[connection signal="finished" from="groups/GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

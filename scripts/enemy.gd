@@ -88,9 +88,6 @@ func _physics_process(delta: float) -> void:
 	_gravity(delta)
 	move_and_slide()
 
-	if state in [States.GRABBED, States.THROWN]:
-		_follow_pos()
-
 	## Hitstun
 	## Keep the stun duration while in air
 	## start stun duration when on floor
@@ -129,6 +126,9 @@ func _physics_process(delta: float) -> void:
 			Enums.Attack.P_PARRY
 		)
 
+	if state in [States.GRABBED, States.THROWN]:
+		_follow_pos()
+
 	## debug
 	$DebugLabel.text = "%s, %s %0.3f"%[States.keys()[state], animation_player.current_animation, stun_duration]
 	# $DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
@@ -152,6 +152,7 @@ func _move( delta) -> void:
 func _follow_pos() -> void:
 	if is_instance_valid(air_throw_follow_pos):
 		position = air_throw_follow_pos.global_position
+		print("==Follow the throw pos==")
 
 
 func _facing() -> void:
