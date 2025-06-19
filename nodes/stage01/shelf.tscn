@@ -265,4 +265,10 @@ position = Vector2(82, -109)
 texture = ExtResource("6_4jvbx")
 flip_h = true
 
+[node name="Shadow" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(-8, 0)
+color = Color(0, 0, 0, 0.204)
+polygon = PackedVector2Array(-184, -240, 208, -240, 208, 240, -184, 240)
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

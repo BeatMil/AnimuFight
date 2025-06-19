@@ -2006,6 +2006,12 @@ shape = SubResource("RectangleShape2D_8qvtx")
 wait_time = 0.5
 autostart = true
 
+[node name="HpBar" parent="." index="12"]
+offset_left = -128.0
+offset_top = -184.0
+offset_right = 128.0
+offset_bottom = -168.0
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="LpRange" to="." method="_on_lp_range_body_entered"]

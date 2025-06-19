@@ -11,6 +11,7 @@ extends "res://scripts/base_character.gd"
 @onready var air_throw_pos_l: Marker2D = $HitBoxPos/AirThrowPosL
 @onready var grab_pos_r: Marker2D = $HitBoxPos/GrabPosR
 @onready var grab_pos_l: Marker2D = $HitBoxPos/GrabPosL
+@onready var hp_bar_2: TextureProgressBar = $CanvasLayer/HpBar2
 
 
 #############################################################
@@ -67,6 +68,7 @@ var input_history := []
 #############################################################
 func _ready() -> void:
 	move_speed = 50000
+	hp_bar = hp_bar_2
 	hp_bar.set_hp(hp)
 	print_rich("[img]res://media/sprites/char1/FirstChar_block.png[/img]")
 	print_rich("[color=green][b]Nyaaa > w <[/b][/color]")

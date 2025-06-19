@@ -1660,7 +1660,7 @@ collision_layer = 2
 collision_mask = 15
 script = ExtResource("2_tp74s")
 is_notarget = false
-hp = 30
+hp = 15
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_3e6vd")
@@ -1726,6 +1726,12 @@ shape = SubResource("RectangleShape2D_8qvtx")
 
 [node name="AttackTimer" type="Timer" parent="." index="13"]
 wait_time = 0.5
+
+[node name="HpBar" parent="." index="14"]
+offset_left = -128.0
+offset_top = -184.0
+offset_right = 128.0
+offset_bottom = -168.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

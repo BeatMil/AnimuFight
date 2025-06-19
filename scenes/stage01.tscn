@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=57 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
@@ -601,6 +601,17 @@ _data = {
 &"stage01_track_copyright": SubResource("Animation_apweq")
 }
 
+[sub_resource type="Gradient" id="Gradient_gfirb"]
+offsets = PackedFloat32Array(0, 0.25, 0.759399)
+colors = PackedColorArray(1, 1, 1, 1, 0.432584, 0.432584, 0.432584, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r2yrr"]
+gradient = SubResource("Gradient_gfirb")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Stage01" type="Node2D"]
 script = ExtResource("1_peto1")
 
@@ -1039,6 +1050,17 @@ libraries = {
 [node name="DeathZone" parent="." instance=ExtResource("20_k6ebi")]
 position = Vector2(-92, 3938)
 scale = Vector2(2966.4, 27.747)
+
+[node name="Lights" type="Node2D" parent="."]
+visible = false
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+position = Vector2(800, 624)
+texture = SubResource("GradientTexture2D_r2yrr")
+texture_scale = 16.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Lights"]
+color = Color(0.345776, 0.364926, 0.547521, 1)
 
 [connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]
 [connection signal="body_entered" from="BounceToLeft" to="." method="_on_bounce_to_left_body_entered"]

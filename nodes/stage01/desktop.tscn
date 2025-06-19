@@ -406,10 +406,19 @@ _data = {
 [sub_resource type="Environment" id="Environment_c5wp5"]
 background_mode = 3
 glow_enabled = true
+glow_intensity = 1.91
+glow_strength = 0.74
 glow_blend_mode = 1
+glow_hdr_threshold = 0.76
+glow_hdr_scale = 1.07
 
 [node name="Desktop" type="Node2D"]
 script = ExtResource("1_yk18u")
+
+[node name="Shadow" type="Polygon2D" parent="."]
+visible = false
+color = Color(0, 0, 0, 0.286)
+polygon = PackedVector2Array(-104, -184, 104, -184, 104, -40, 144, -32, 144, 152, -144, 152, -144, -24, -104, -32)
 
 [node name="Area2D" type="Area2D" parent="." groups=["background_object"]]
 collision_layer = 64
@@ -430,7 +439,7 @@ position = Vector2(-1, 61)
 texture = ExtResource("3_232ke")
 
 [node name="ComputerScreen" type="Sprite2D" parent="."]
-self_modulate = Color(1.5, 1.8, 1.5, 1)
+self_modulate = Color(1, 1.5, 1, 1)
 position = Vector2(-4, -126)
 scale = Vector2(0.0944445, 0.0944445)
 texture = ExtResource("4_qi5p6")
