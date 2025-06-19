@@ -116,6 +116,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			Enums.Attack.P_GROUND_THROW,
 			]:
 			_play_hit_random_pitch()
+		_on_timer_timeout()
 
 
 func _on_timer_timeout() -> void:
