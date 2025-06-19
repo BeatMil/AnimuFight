@@ -26,14 +26,15 @@ signal shoot_up_house
 func _ready() -> void:
 	connect("shoot_up_house", _shoot_up_house)
 	# Set camera lock
-	get_node_or_null("Player/Camera").set_screen_lock(0, 1920, 135, 1129)
+	# get_node_or_null("Player/Camera").set_screen_lock(0, 1920, 135, 1129)
+	get_node_or_null("Player/Camera").set_screen_lock(0, 1920, 0, 1000)
 	get_node_or_null("Player/Camera").set_zoom(Vector2(1,1))
 
 	Settings.current_stage = "res://scenes/stage01.tscn"
 
 	# Player ost
-	# music_player.play("stage01_track_copyrigh")
-	music_player.play("stage01_track")
+	music_player.play("stage01_track_copyright")
+	# music_player.play("stage01_track")
 
 	# Attack!
 	AttackQueue.start_queue_timer()

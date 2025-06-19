@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c0bp186y0vvc"]
+[gd_scene load_steps=16 format=3 uid="uid://c0bp186y0vvc"]
 
 [ext_resource type="Script" uid="uid://cnqadldjogfkq" path="res://scripts/bed.gd" id="1_yk18u"]
 [ext_resource type="AudioStream" uid="uid://cd0pyf1nhyep6" path="res://media/sfxs/unequip01.wav" id="2_c5wp5"]
@@ -403,6 +403,11 @@ _data = {
 &"shake": SubResource("Animation_f5xf4")
 }
 
+[sub_resource type="Environment" id="Environment_c5wp5"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+
 [node name="Desktop" type="Node2D"]
 script = ExtResource("1_yk18u")
 
@@ -425,6 +430,7 @@ position = Vector2(-1, 61)
 texture = ExtResource("3_232ke")
 
 [node name="ComputerScreen" type="Sprite2D" parent="."]
+self_modulate = Color(1.5, 1.8, 1.5, 1)
 position = Vector2(-4, -126)
 scale = Vector2(0.0944445, 0.0944445)
 texture = ExtResource("4_qi5p6")
@@ -452,5 +458,8 @@ texture = ExtResource("8_sneg3")
 [node name="Cpu" type="Sprite2D" parent="."]
 position = Vector2(89, 89)
 texture = ExtResource("9_bxfpd")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c5wp5")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

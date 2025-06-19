@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=55 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
@@ -16,10 +16,12 @@
 [ext_resource type="PackedScene" uid="uid://c0bp186y0vvc" path="res://nodes/stage01/desktop.tscn" id="7_aodgi"]
 [ext_resource type="AudioStream" uid="uid://cytm062ygh22j" path="res://media/sfxs/wind-artificial-18750.mp3" id="7_k6ebi"]
 [ext_resource type="PackedScene" uid="uid://b5q177ldu87bs" path="res://nodes/stage01/bed.tscn" id="9_aodgi"]
+[ext_resource type="Texture2D" uid="uid://cwjyveicsm2v5" path="res://media/sprites/stage01/kaisouko_point2_bg.png" id="10_4g6yn"]
 [ext_resource type="AudioStream" uid="uid://empmuouv5f00" path="res://media/sfxs/small-rock-break-194553.mp3" id="10_xveav"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="11_g2h18"]
 [ext_resource type="Script" uid="uid://ckudchaksw6pd" path="res://scripts/enemy_spawner_stage01.gd" id="11_lcbfr"]
 [ext_resource type="Script" uid="uid://duxhld58ww51q" path="res://scripts/enemy_spawn_helper.gd" id="13_4slru"]
+[ext_resource type="Texture2D" uid="uid://tswrrdgbqrqv" path="res://media/sprites/environment/ground.jpg" id="15_gfirb"]
 [ext_resource type="AudioStream" uid="uid://cns33kc20b478" path="res://media/ost/RCG_Detention.mp3" id="17_n5wlp"]
 [ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_04.tscn" id="19_ymxnp"]
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="20_k6ebi"]
@@ -290,6 +292,18 @@ tracks/11/keys = {
 "update": 0,
 "values": [Vector2(1325, 635)]
 }
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Polygon2D:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(984, 280)]
+}
 
 [sub_resource type="Animation" id="Animation_xgmne"]
 resource_name = "shoot_up"
@@ -452,6 +466,18 @@ tracks/12/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1325, 635), Vector2(1325, 2097)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Polygon2D:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(984, 280), Vector2(984, 1744)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k6ebi"]
@@ -679,7 +705,7 @@ libraries = {
 autoplay = "go_fast_vertical"
 
 [node name="Background" type="Sprite2D" parent="."]
-self_modulate = Color(0.90625, 0.90625, 0.90625, 1)
+self_modulate = Color(0.859799, 0.859799, 0.859799, 1)
 texture = ExtResource("6_nmevm")
 centered = false
 
@@ -696,6 +722,16 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Background/WindSoundPlayer"]
+
+[node name="Polygon2D" type="Polygon2D" parent="Background"]
+position = Vector2(984, 280)
+color = Color(0.26095, 0.37694, 0.445691, 1)
+polygon = PackedVector2Array(-136, -136, 136, -136, 136, 128, -136, 128)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Background/Polygon2D"]
+texture = ExtResource("10_4g6yn")
+texture_offset = Vector2(121, 137)
+polygon = PackedVector2Array(-128, -128, 128, -128, 128, 120, -128, 120)
 
 [node name="Desktop" parent="." instance=ExtResource("7_aodgi")]
 position = Vector2(982, 730)
@@ -739,7 +775,7 @@ shape = SubResource("RectangleShape2D_jd0co")
 [node name="Ground" type="Sprite2D" parent="Floor"]
 position = Vector2(4.99989, -108)
 scale = Vector2(0.866667, 1)
-texture = ExtResource("1_spkcn")
+texture = ExtResource("15_gfirb")
 
 [node name="FloorFloat" type="StaticBody2D" parent="." groups=["ground"]]
 position = Vector2(944, 1824)
@@ -795,6 +831,12 @@ position = NodePath("../../../SpawnPos/pos1")
 hp = 10
 object = ExtResource("4_ts7c8")
 
+[node name="boss02" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos3")
+hp = 50
+object = ExtResource("20_nmevm")
+
 [node name="Phase2" type="Node" parent="EnemySpawnHelper"]
 
 [node name="e3" type="Node" parent="EnemySpawnHelper/Phase2" node_paths=PackedStringArray("position")]
@@ -808,13 +850,13 @@ object = ExtResource("5_guyb5")
 [node name="e2" type="Node" parent="EnemySpawnHelper/Phase3" node_paths=PackedStringArray("position")]
 script = ExtResource("13_4slru")
 position = NodePath("../../../SpawnPos/pos2")
-hp = 10
+hp = 30
 object = ExtResource("5_guyb5")
 
 [node name="e1" type="Node" parent="EnemySpawnHelper/Phase3" node_paths=PackedStringArray("position")]
 script = ExtResource("13_4slru")
 position = NodePath("../../../SpawnPos/pos1")
-hp = 10
+hp = 30
 object = ExtResource("4_ts7c8")
 
 [node name="Phase4" type="Node" parent="EnemySpawnHelper"]
@@ -822,19 +864,19 @@ object = ExtResource("4_ts7c8")
 [node name="e2" type="Node" parent="EnemySpawnHelper/Phase4" node_paths=PackedStringArray("position")]
 script = ExtResource("13_4slru")
 position = NodePath("../../../SpawnPos/pos1")
-hp = 10
+hp = 30
 object = ExtResource("4_ts7c8")
 
 [node name="e3" type="Node" parent="EnemySpawnHelper/Phase4" node_paths=PackedStringArray("position")]
 script = ExtResource("13_4slru")
 position = NodePath("../../../SpawnPos/pos1")
-hp = 10
+hp = 30
 object = ExtResource("4_ts7c8")
 
 [node name="e4" type="Node" parent="EnemySpawnHelper/Phase4" node_paths=PackedStringArray("position")]
 script = ExtResource("13_4slru")
 position = NodePath("../../../SpawnPos/pos2")
-hp = 10
+hp = 30
 object = ExtResource("5_guyb5")
 
 [node name="Phase5" type="Node" parent="EnemySpawnHelper"]
@@ -842,25 +884,25 @@ object = ExtResource("5_guyb5")
 [node name="e2" type="Node" parent="EnemySpawnHelper/Phase5" node_paths=PackedStringArray("position")]
 script = ExtResource("13_4slru")
 position = NodePath("../../../SpawnPos/pos3")
-hp = 10
+hp = 30
 object = ExtResource("4_ts7c8")
 
 [node name="e3" type="Node" parent="EnemySpawnHelper/Phase5" node_paths=PackedStringArray("position")]
 script = ExtResource("13_4slru")
 position = NodePath("../../../SpawnPos/pos3")
-hp = 10
+hp = 30
 object = ExtResource("4_ts7c8")
 
 [node name="e4" type="Node" parent="EnemySpawnHelper/Phase5" node_paths=PackedStringArray("position")]
 script = ExtResource("13_4slru")
 position = NodePath("../../../SpawnPos/pos2")
-hp = 10
+hp = 30
 object = ExtResource("5_guyb5")
 
 [node name="e5" type="Node" parent="EnemySpawnHelper/Phase5" node_paths=PackedStringArray("position")]
 script = ExtResource("13_4slru")
 position = NodePath("../../../SpawnPos/pos2")
-hp = 10
+hp = 30
 object = ExtResource("5_guyb5")
 
 [node name="Phase6" type="Node" parent="EnemySpawnHelper"]

@@ -1,23 +1,68 @@
-[gd_scene load_steps=4 format=3 uid="uid://eigpd3xpsx88"]
+[gd_scene load_steps=8 format=3 uid="uid://eigpd3xpsx88"]
 
+[ext_resource type="Texture2D" uid="uid://u3a7t54kbtb8" path="res://media/sprites/stage01/stage01_home.png" id="1_aowbe"]
 [ext_resource type="Texture2D" uid="uid://cvctqio1skqef" path="res://media/sprites/char1/vanilla_dash_grab.png" id="1_i4d4a"]
 [ext_resource type="Texture2D" uid="uid://bswk48xnujm50" path="res://media/sprites/boss01/boss01_tatsu.png" id="2_poaxq"]
 
-[sub_resource type="Environment" id="Environment_poaxq"]
-background_mode = 3
-glow_enabled = true
-glow_blend_mode = 1
+[sub_resource type="Gradient" id="Gradient_pk563"]
+offsets = PackedFloat32Array(0, 0.680451)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aowbe"]
+gradient = SubResource("Gradient_pk563")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pk563"]
+polygon = PackedVector2Array(-30, -4, -77, 27, -196, 166, -182.2, 197, -163.5, 197, -105.5, 131.4, -16.3, 77, -12.8, 77, 40.3, 97.2, 18, 164.4, 18, 179, 47, 209, 90, 203, 72.4, 163.1, 109, 63, 55.5, 24.1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_aowbe"]
+polygon = PackedVector2Array(45, -225.3, 45, -221.4, 41, -209.3, 25, -216.3, 25, -217.8, 7, -219.8, 7, -221.4, -11.4, -218, -15.5, -218, -44.9, -202.8, -60.5, -212, -64.9, -212, -88.9, -184, -90.4, -184, -92, -179.3, -92, -177.7, -126, -131.7, -126, -129.9, -152.9, -101, -155, -101, -155, -94.7, -166, -79, -169, -79, -165.4, -70, -159.4, -70, -124.6, -94.7, -122.2, -94, -119.8, -94, -116, -101.5, -81.6, -127.6, -79.2, -127, -76.9, -127, -74.9, -130, -73.7, -130, -72.6, -132.5, -74.7, -134.5, -58.7, -149.6, -57, -135.8, -57, -134.4, -53, -128.4, -53, -122.9, -42.6, -116, -41.3, -116, -33.4, -98.5, -43.5, -93, -45.8, -93, -54.8, -84, -56.4, -84, -64.4, -61, -65.8, -61, -67.8, -46, -69, -46, -69, -33.2, -61, -24.3, -61, -22, -29.9, -22, -44.4, 17, -45.9, 17, -48, 48.9, -48, 54.5, -44, 62.5, -44, 64.8, -36, 72.8, -36, 74.7, 2.79999, 81, 21.7, 81, 18.2, 112, 17, 112, 17, 155.2, 21, 173.4, 21, 176.6, 9.70001, 204, 8.10001, 204, 7, 222.9, 7, 237, 12, 240.9, 12, 243.1, 38.1, 242, 42.4, 242, 44.4, 237, 46, 237, 46, 213.4, 51.6, 188, 52.2, 188, 53.3, 185.8, 50, 181.3, 56.3, 166, 57.7, 166, 60.8, 144, 61.8, 144, 66, 93.1, 66, 78.3, 69.8, 79, 72.2, 79, 101.4, 73, 102.9, 73, 115, 76.4, 115, 77.8, 148.9, 81, 151.2, 81, 197.4, 72, 204.3, 72, 213.2, 80, 223, 80, 227, 75, 228.8, 75, 232.8, 29, 234.1, 29, 233, 10.9, 233, 4.29999, 225, -5.7, 225, -8, 221, -8, 218.8, -9.3, 214.3, -6, 212.4, -6, 205, 27.8, 205, 31.3, 201.5, 35.6, 49.2, 8, 46.5, 8, 36, -30, 36, -30.6, 48, -28.3, 48, -27, 58.8, -27, 61.8, -30, 64.5, -30, 61, -45, 61, -49.5, 44.1, -81.3, 50.7, -87, 52.2, -87, 58.3, -98, 59.6, -98, 69, -140.8, 69, -144.9, 138, -111.8, 138, -108.8, 142.5, -111, 144.6, -111, 162.6, -104, 166.2, -104, 169, -101.2, 169, -97.8, 175.5, -101, 177.2, -101, 178.3, -103.2, 165, -120.7, 165, -122.9, 132.7, -151, 130.9, -151, 105, -178.9, 105, -179.9, 64, -214, 64, -215.2)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Boss01Tatsu" type="Sprite2D" parent="."]
-self_modulate = Color(1.8, 1, 1, 1)
-position = Vector2(924, 504)
-texture = ExtResource("2_poaxq")
+[node name="Stage01Home" type="Sprite2D" parent="."]
+position = Vector2(960, 539)
+texture = ExtResource("1_aowbe")
 
-[node name="VanillaDashGrab" type="Sprite2D" parent="."]
-position = Vector2(502, 523)
+[node name="Stage01Home2" type="Sprite2D" parent="."]
+light_mask = 2
+position = Vector2(960, 972)
+texture = ExtResource("1_aowbe")
+region_enabled = true
+region_rect = Rect2(0, 872.579, 1920, 207.421)
+
+[node name="lights" type="Node2D" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="lights"]
+color = Color(0.595041, 0.595041, 0.595041, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="lights"]
+position = Vector2(1006, 25)
+scale = Vector2(50, 50)
+energy = 0.7
+shadow_enabled = true
+shadow_filter = 1
+texture = SubResource("GradientTexture2D_aowbe")
+
+[node name="vanilla" type="Node2D" parent="."]
+position = Vector2(367, 641)
+metadata/_edit_group_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="vanilla"]
+occluder = SubResource("OccluderPolygon2D_pk563")
+
+[node name="VanillaDashGrab" type="Sprite2D" parent="vanilla"]
 texture = ExtResource("1_i4d4a")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_poaxq")
+[node name="lightOcc" type="Node2D" parent="."]
+position = Vector2(1554, 627)
+metadata/_edit_group_ = true
+
+[node name="Boss01Tatsu" type="Sprite2D" parent="lightOcc"]
+texture_repeat = 2
+texture = ExtResource("2_poaxq")
+region_rect = Rect2(512.718, 0, 758.923, 512)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="lightOcc"]
+occluder = SubResource("OccluderPolygon2D_aowbe")
