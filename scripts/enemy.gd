@@ -224,7 +224,7 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 	if velocity.length() < 5000:
 		return
 	## Hit other enemy
-	if self.state in [States.BOUNCE_STUNNED, States.EXECUTETABLE] \
+	if self.state in [States.BOUNCE_STUNNED, States.EXECUTETABLE, States.THROWN] \
 	and body.state != States.BOUNCE_STUNNED:
 		play_bounce_sfx()
 		body.hitted(
