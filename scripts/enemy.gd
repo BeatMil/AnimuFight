@@ -103,7 +103,7 @@ func _physics_process(delta: float) -> void:
 			friction = air_friction
 	elif state == States.EXECUTETABLE:
 		set_collision_no_hit_all()
-	elif stun_duration < 0:
+	elif stun_duration < 0 and animation_player.current_animation != "wallsplat":
 		if hp_bar.get_hp() <= 0:
 			queue_free()
 		stun_duration = 0

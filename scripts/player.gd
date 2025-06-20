@@ -123,9 +123,8 @@ func _input(event: InputEvent) -> void:
 
 
 	## BLOCK
-	## DODGE
 	# if state in can_block_states:
-	if state not in [States.BOUNCE_STUNNED, States.WALL_BOUNCED]:
+	if state not in [States.BOUNCE_STUNNED, States.WALL_BOUNCED, States.IFRAME, States.AIR_SPD]:
 		if Input.is_action_just_pressed("block", true):
 			state = States.PARRY
 			animation_player.play("block")
@@ -134,6 +133,7 @@ func _input(event: InputEvent) -> void:
 			state = States.DODGE
 			animation_player.play("dodge")
 	
+	## DODGE
 	if state in [States.PARRY, States.BLOCK]:
 		if Input.is_action_pressed("block"):
 			if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right") or\
@@ -378,7 +378,14 @@ func _add_block_buffer_time() -> void:
 #############################################################
 ## Command list?
 #############################################################
-var cant_dash_state = [States.HIT_STUNNED, States.BOUNCE_STUNNED, States.WALL_BOUNCED, States.GRABBED]
+var cant_dash_state = [
+	States.HIT_STUNNED,
+	States.BOUNCE_STUNNED,
+	States.WALL_BOUNCED,
+	States.GRABBED,
+	States.IFRAME,
+	States.AIR_SPD,
+	]
 
 func _dash_left() -> void:
 	if state in cant_dash_state:
@@ -398,6 +405,17 @@ func _dash_right() -> void:
 ## Attack info
 #############################################################
 func _lp() ->  void:
+	if state not in [
+		States.IDLE,
+		States.DASH,
+		States.PARRY_SUCCESS,
+		States.DODGE_SUCCESS,
+		States.LP1,
+		States.LP2,
+		States.JF_SHOULDER,
+	]:
+		return
+
 	if Input.is_action_pressed("left"):
 		sprite_2d.flip_h = true
 
@@ -410,7 +428,7 @@ func _lp() ->  void:
 		animation_player.play("lp2")
 	elif state == States.LP2:
 		animation_player.play("lp3")
-	elif state in [States.IDLE, States.DASH, States.PARRY_SUCCESS, States.DODGE_SUCCESS]: ## <<-- start with this one
+	else: ## <<-- start with this one
 		animation_player.play("lp1")
 
 func lp1_info() -> void:
@@ -488,13 +506,7 @@ func lp4_info() -> void:
 
 
 func _hp() ->  void:
-	if Input.is_action_pressed("left"):
-		sprite_2d.flip_h = true
-
-	if Input.is_action_pressed("right"):
-		sprite_2d.flip_h = false
-
-	if state in [
+	if state not in [
 		States.IDLE,
 		States.DASH,
 		States.PARRY_SUCCESS,
@@ -503,12 +515,20 @@ func _hp() ->  void:
 		States.LP2,
 		States.LP3,
 		]: ## <<-- start with this one
-		if Input.is_action_pressed("down"):
-			animation_player.play("down_hp")
-		elif Input.is_action_pressed("up"):
-			animation_player.play("air_throw")
-		else:
-			animation_player.play("hp")
+		return
+
+	if Input.is_action_pressed("left"):
+		sprite_2d.flip_h = true
+
+	if Input.is_action_pressed("right"):
+		sprite_2d.flip_h = false
+
+	if Input.is_action_pressed("down"):
+		animation_player.play("down_hp")
+	elif Input.is_action_pressed("up"):
+		animation_player.play("air_throw")
+	else:
+		animation_player.play("hp")
 	# if state == States.TA:
 	# 	animation_player.play("spell")
 	# elif state == States.SPELL:
@@ -649,14 +669,9 @@ func spd_burst_info() ->  void:
 
 
 func _lp_hp() ->  void:
-	if Input.is_action_pressed("left"):
-		sprite_2d.flip_h = true
-
-	if Input.is_action_pressed("right"):
-		sprite_2d.flip_h = false
-
-	if state in [
+	if state not in [
 		States.IDLE,
+		States.ATTACK,
 		States.DASH,
 		States.PARRY_SUCCESS,
 		States.DODGE_SUCCESS,
@@ -664,10 +679,20 @@ func _lp_hp() ->  void:
 		States.LP2,
 		States.LP3,
 		]: ## <<-- start with this one
-		if Input.is_action_pressed("down"):
-			animation_player.play("ground_grab")
-		else:
-			animation_player.play("forward_hp")
+		return
+
+	if Input.is_action_pressed("left"):
+		sprite_2d.flip_h = true
+
+	if Input.is_action_pressed("right"):
+		sprite_2d.flip_h = false
+
+	if Input.is_action_pressed("down"):
+		animation_player.play("ground_grab")
+	else:
+		animation_player.play("forward_hp")
+
+
 func down_hp_info() ->  void:
 	var info = {
 	"size": Hitbox_type.LARGE,
@@ -934,6 +959,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"wall_throw",
 		"ground_grab",
 		"place_enemy",
+		"wall_abel_combo2",
+		"wall_abel_combo",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:

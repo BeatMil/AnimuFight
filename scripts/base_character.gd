@@ -431,7 +431,7 @@ func hitted(
 	## Player command grab (super)
 	elif _type == Enums.Attack.P_THROW:
 		pass
-		_attacker.state = States.HIT_STUNNED
+		_attacker.state = States.IFRAME
 		_attacker.animation_player.play("wall_abel_combo2")
 		state = States.GRABBED
 		animation_player.play("throw_stunned")
