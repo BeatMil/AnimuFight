@@ -40,7 +40,7 @@ func _attack01() -> void:
 		animation_player.play("attack01_1")
 func attack01_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_type.MEDIUM,
+	"size": Hitbox_type.SMALL,
 	"time": 0.3,
 	"push_power_ground": Vector2(800, -300),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -53,6 +53,7 @@ func attack01_info() -> void: # for animation_player
 	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 3,
 	"type": Enums.Attack.NORMAL,
+	"pos": Vector2(50, 0),
 	}
 	dict_to_spawn_hitbox(info)
 
