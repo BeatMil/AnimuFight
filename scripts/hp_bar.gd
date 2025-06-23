@@ -13,17 +13,19 @@ signal hp_down_sig
 #############################################################
 func hp_down(_amount: int) -> void:
 	# value -= _amount
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "value", value - _amount, 0.1)
-	tween.tween_property(back_bar, "value", value - _amount, 0.5)
+	if get_tree():
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "value", value - _amount, 0.1)
+		tween.tween_property(back_bar, "value", value - _amount, 0.5)
 	emit_signal("hp_down_sig")
 
 
 func hp_up(_amount: int) -> void:
 	# value += _amount
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "value", value + _amount, 0.1)
-	tween.tween_property(back_bar, "value", value + _amount, 0.5)
+	if get_tree():
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "value", value + _amount, 0.1)
+		tween.tween_property(back_bar, "value", value + _amount, 0.5)
 	emit_signal("hp_up_sig")
 
 

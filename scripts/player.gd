@@ -12,6 +12,7 @@ extends "res://scripts/base_character.gd"
 @onready var grab_pos_r: Marker2D = $HitBoxPos/GrabPosR
 @onready var grab_pos_l: Marker2D = $HitBoxPos/GrabPosL
 @onready var hp_bar_2: TextureProgressBar = $CanvasLayer/HpBar2
+@onready var profile_player: AnimationPlayer = $CanvasLayer/Profile/AnimationPlayer
 
 
 #############################################################
@@ -70,6 +71,7 @@ func _ready() -> void:
 	move_speed = 50000
 	hp_bar = hp_bar_2
 	hp_bar.set_hp(hp)
+	hp_bar_2.hp_down_sig.connect(_play_profile_hitted)
 	print_rich("[img]res://media/sprites/char1/FirstChar_block.png[/img]")
 	print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	$ExecuteShow.queue_free()
@@ -366,6 +368,10 @@ func _check_input_history() -> void:
 	if dash_left.get_command_complete():
 		queue_move(_dash_left)
 		input_history.clear()
+
+
+func _play_profile_hitted() -> void:
+	profile_player.play("hitted")
 
 
 #############################################################
