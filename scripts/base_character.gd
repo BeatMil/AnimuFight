@@ -376,7 +376,12 @@ func hitted(
 	slow_mo_on_block: Vector2 = Vector2(0, 0)
 	) -> void:
 	## TANK
-	if is_in_group("enemy") and _type != Enums.Attack.UNBLOCK and state in [States.IDLE]:
+	if is_in_group("enemy") and _type not in [
+		Enums.Attack.UNBLOCK,
+		Enums.Attack.P_AIR_THROW,
+		Enums.Attack.P_WALL_THROW,
+		] and state in [States.IDLE]:
+	# if is_in_group("enemy") and _type not in [Enums.Attack.UNBLOCK, ] and state in [States.IDLE]:
 		if randi_range(1, 10) <= block_rate:
 			state = States.BLOCK
 

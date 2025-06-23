@@ -108,6 +108,7 @@ func _physics_process(delta: float) -> void:
 			queue_free()
 		stun_duration = 0
 		animation_player.play("idle")
+		state = States.IDLE
 		set_collision_normal()
 
 	_check_block_count()
