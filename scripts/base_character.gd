@@ -443,9 +443,9 @@ func hitted(
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
 		await get_tree().create_timer(0.32).timeout
 		if _attacker.sprite_2d.flip_h:
-			_push_direct(Vector2(-900, -200))
+			_push_direct(Vector2(-600, -150))
 		else:
-			_push_direct(Vector2(900, -200))
+			_push_direct(Vector2(600, -150))
 		self.air_throw_follow_pos = null
 
 	## Player air grab hits
