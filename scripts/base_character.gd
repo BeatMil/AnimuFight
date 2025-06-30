@@ -406,6 +406,10 @@ func hitted(
 	## Parry & Parry Success
 	elif state in [States.PARRY] and _type == Enums.Attack.NORMAL:
 		animation_player.play("parry_success")
+		if _attacker.position.x < self.position.x:
+			sprite_2d.flip_h = true
+		else:
+			sprite_2d.flip_h = false
 		_attacker.hitted(
 			self,
 			is_face_right,
