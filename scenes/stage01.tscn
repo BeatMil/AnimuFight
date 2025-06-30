@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=63 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://bdvm6x1ynbejn" path="res://nodes/stage01/shelf.tscn" id="25_qfycc"]
 [ext_resource type="AudioStream" uid="uid://ipghqhrcfviu" path="res://media/ost/beat_RCG_Detention_louder.wav" id="25_up7wt"]
 [ext_resource type="AudioStream" uid="uid://b1ca2dun1uldc" path="res://media/sfxs/GlassClash.wav" id="30_r2yrr"]
+[ext_resource type="PackedScene" uid="uid://da7neonxxw6v0" path="res://nodes/stage01/shelf_float.tscn" id="31_siln8"]
 
 [sub_resource type="Animation" id="Animation_4g6yn"]
 length = 0.001
@@ -931,6 +932,7 @@ texture = ExtResource("1_spkcn")
 
 [node name="Player" parent="." instance=ExtResource("2_i8ayn")]
 position = Vector2(800, 704)
+hp = 2
 
 [node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_65q8b")]
 position = Vector2(1912, -112)
@@ -1211,6 +1213,9 @@ libraries = {
 position = Vector2(1000, 32)
 attenuation = 0.5
 bus = &"LouderBus"
+
+[node name="Shelf2" parent="." instance=ExtResource("31_siln8")]
+position = Vector2(465.064, 295.78)
 
 [connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]
 [connection signal="body_entered" from="BounceToLeft" to="." method="_on_bounce_to_left_body_entered"]
