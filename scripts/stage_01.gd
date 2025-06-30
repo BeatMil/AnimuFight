@@ -1,8 +1,9 @@
 extends Node2D
 
 
-var DEBRIS = preload("res://nodes/debris.tscn")
-var DEBRIS_UP = preload("res://nodes/debris_upward.tscn")
+const DEBRIS = preload("res://nodes/debris.tscn")
+const DEBRIS_UP = preload("res://nodes/debris_upward.tscn")
+const LIGHT_PARTICLE = preload("res://nodes/hitsparks/light_particle.tscn")
 const BOSS_BOUNCE_SFX = preload("res://media/sfxs/unequip01.wav")
 
 @onready var debris_animation_player: AnimationPlayer = $DebrisArea2D/AnimationPlayer
@@ -18,6 +19,8 @@ const BOSS_BOUNCE_SFX = preload("res://media/sfxs/unequip01.wav")
 @onready var boss_bounce_player: AudioStreamPlayer = $BounceBossBack/BossBouncePlayer
 @onready var sky_animation_player: AnimationPlayer = $ParallaxBackground/SkyBackground/AnimationPlayer
 @onready var enemy_spawner_new: Node2D = $EnemySpawnerNew
+@onready var light_player: AnimationPlayer = $Lights/AnimationPlayer
+@onready var topLight_area_2d: Area2D = $Lights/topLight/Area2D
 
 
 signal shoot_up_house
@@ -109,4 +112,12 @@ func _on_bounce_boss_back_body_entered(body: Node2D) -> void:
 			body._push_direct(Vector2(-200, -200))
 		else:
 			body._push_direct(Vector2(200, -200))
-			
+
+
+func _on_area_2d_body_entered(_body: Node2D) -> void:
+	var part = LIGHT_PARTICLE.instantiate()
+	part.position = light_player.get_parent().position
+	add_child(part)
+	light_player.play("light_breaks")
+	topLight_area_2d.queue_free()
+	# topLight_area_2d.monitoring = false

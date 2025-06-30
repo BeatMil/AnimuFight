@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=62 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/stage_01.gd" id="1_peto1"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_spkcn"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://np2no54r3gdy" path="res://media/vfx/animu_fast_fx_3f.png" id="20_xgmne"]
 [ext_resource type="PackedScene" uid="uid://bdvm6x1ynbejn" path="res://nodes/stage01/shelf.tscn" id="25_qfycc"]
 [ext_resource type="AudioStream" uid="uid://ipghqhrcfviu" path="res://media/ost/beat_RCG_Detention_louder.wav" id="25_up7wt"]
+[ext_resource type="AudioStream" uid="uid://b1ca2dun1uldc" path="res://media/sfxs/GlassClash.wav" id="30_r2yrr"]
 
 [sub_resource type="Animation" id="Animation_4g6yn"]
 length = 0.001
@@ -304,6 +305,30 @@ tracks/12/keys = {
 "update": 0,
 "values": [Vector2(984, 280)]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("../Lights:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1016, 40)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("../Lights/topLight:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_xgmne"]
 resource_name = "shoot_up"
@@ -479,6 +504,30 @@ tracks/13/keys = {
 "update": 0,
 "values": [Vector2(984, 280), Vector2(984, 1744)]
 }
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("../Lights:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1016, 40), Vector2(1016, 40)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("../Lights/topLight:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k6ebi"]
 _data = {
@@ -601,6 +650,9 @@ _data = {
 &"stage01_track_copyright": SubResource("Animation_apweq")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfirb"]
+size = Vector2(160, 32)
+
 [sub_resource type="Gradient" id="Gradient_gfirb"]
 offsets = PackedFloat32Array(0, 0.25, 0.759399)
 colors = PackedColorArray(1, 1, 1, 1, 0.432584, 0.432584, 0.432584, 1, 0, 0, 0, 1)
@@ -611,6 +663,81 @@ metadata/_snap_count = 12
 gradient = SubResource("Gradient_gfirb")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_siln8"]
+resource_name = "light_breaks"
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("30_r2yrr")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("topLight:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.628985, 0.628985, 0.628985, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_r2yrr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("topLight:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.873376, 0.846046, 0.609001, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hw0fy"]
+_data = {
+&"RESET": SubResource("Animation_r2yrr"),
+&"light_breaks": SubResource("Animation_siln8")
+}
 
 [node name="Stage01" type="Node2D"]
 script = ExtResource("1_peto1")
@@ -818,6 +945,7 @@ scale = Vector2(1.64324, 1)
 [node name="WallInvi" parent="." instance=ExtResource("11_g2h18")]
 position = Vector2(2146, 352)
 scale = Vector2(1.64324, 1)
+collision_layer = 0
 
 [node name="CameraPos" type="Marker2D" parent="."]
 position = Vector2(942, 683)
@@ -1052,18 +1180,41 @@ position = Vector2(-92, 3938)
 scale = Vector2(2966.4, 27.747)
 
 [node name="Lights" type="Node2D" parent="."]
-visible = false
+position = Vector2(1016, 40)
+
+[node name="topLight" type="Polygon2D" parent="Lights"]
+position = Vector2(-16, -8)
+color = Color(0.873376, 0.846046, 0.609001, 1)
+polygon = PackedVector2Array(-64, -8, -64, 8, 64, 8, 64, -8)
+
+[node name="Area2D" type="Area2D" parent="Lights/topLight"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/topLight/Area2D"]
+position = Vector2(0, 120)
+shape = SubResource("RectangleShape2D_gfirb")
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights"]
-position = Vector2(800, 624)
+color = Color(0.819067, 0.645039, 0.420307, 1)
 texture = SubResource("GradientTexture2D_r2yrr")
 texture_scale = 16.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Lights"]
+visible = false
 color = Color(0.345776, 0.364926, 0.547521, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Lights"]
+libraries = {
+&"": SubResource("AnimationLibrary_hw0fy")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lights/AnimationPlayer"]
+position = Vector2(1000, 32)
+attenuation = 0.5
+bus = &"LouderBus"
 
 [connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]
 [connection signal="body_entered" from="BounceToLeft" to="." method="_on_bounce_to_left_body_entered"]
 [connection signal="body_entered" from="BounceToRight" to="." method="_on_bounce_to_right_body_entered"]
 [connection signal="body_entered" from="HelicopSpawn" to="." method="_on_helicop_spawn_body_entered"]
 [connection signal="body_entered" from="BounceBossBack" to="." method="_on_bounce_boss_back_body_entered"]
+[connection signal="body_entered" from="Lights/topLight/Area2D" to="." method="_on_area_2d_body_entered"]
