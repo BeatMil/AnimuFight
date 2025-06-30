@@ -71,7 +71,8 @@ func _ready() -> void:
 	move_speed = 50000
 	hp_bar = hp_bar_2
 	hp_bar.set_hp(hp)
-	hp_bar_2.hp_down_sig.connect(_play_profile_hitted)
+	hp_bar.hp_down_sig.connect(_play_profile_hitted)
+	hp_bar.hp_out.connect(_on_hp_out)
 	print_rich("[img]res://media/sprites/char1/FirstChar_block.png[/img]")
 	print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	$ExecuteShow.queue_free()
@@ -97,6 +98,9 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if is_ded:
+		return
+
 	if event.is_action_pressed("execute") and \
 		state not in [States.EXECUTE, States.HIT_STUNNED, States.BOUNCE_STUNNED]:
 		"""
@@ -149,6 +153,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if is_ded:
+		return
 	_check_wall_bounce()
 
 	if is_on_floor():
@@ -927,6 +933,10 @@ func set_collision_noclip() -> void:
 	collision_mask = 0b00000000000000000000
 
 
+func set_collision_ded() -> void:
+	collision_layer = 0b00000000000000000000
+	collision_mask = 0b00000000000000001000
+
 func is_pressing_right() -> int:
 	if Input.is_action_pressed("right"):
 		return 2
@@ -970,12 +980,23 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:
-		set_collision_noclip()
+		# set_collision_noclip()
 		if get_tree().current_scene.name == "training":
 			SceneTransition.change_scene("res://scenes/training.tscn")
 		else:
 			get_parent().get_node("CanvasLayer/RestartMenu").open_menu()
 		# queue_free()
+
+
+func _on_hp_out() -> void:
+	print("ARE YOU READY?")
+	is_ded = true
+	set_collision_noclip()
+	animation_player.play("ded")
+	# set_collision_ded()
+	# _slow_moion_no_sfx(0.5, 0.5)
+
+	# get_parent().get_node("CanvasLayer/RestartMenu").open_menu()
 
 
 func _on_execute_area_r_body_entered(body: Node2D) -> void:

@@ -31,11 +31,10 @@ func toggle_menu() -> void:
 
 ## used when player dies XD
 func open_menu() -> void:
-	_on_restart_button_pressed()
-	# self.visible = true
-	# get_tree().paused = true
-	# restart_button.grab_focus()
-	# %MenuCursor.move_to(Vector2(778, 530))
+	self.visible = true
+	get_tree().paused = true
+	restart_button.grab_focus()
+	%MenuCursor.move_to(Vector2(778, 530))
 
 
 func _on_restart_button_pressed() -> void:

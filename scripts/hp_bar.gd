@@ -7,6 +7,9 @@ extends TextureProgressBar
 #############################################################
 signal hp_up_sig
 signal hp_down_sig
+signal hp_out
+
+var cant_heal = false
 
 #############################################################
 ## Public Functions
@@ -18,9 +21,15 @@ func hp_down(_amount: int) -> void:
 		tween.tween_property(self, "value", value - _amount, 0.1)
 		tween.tween_property(back_bar, "value", value - _amount, 0.5)
 	emit_signal("hp_down_sig")
+	await get_tree().create_timer(0.2).timeout
+	if value <= 0:
+		emit_signal("hp_out")
+		cant_heal = true
 
 
 func hp_up(_amount: int) -> void:
+	if cant_heal:
+		return
 	# value += _amount
 	if get_tree():
 		var tween = get_tree().create_tween()
