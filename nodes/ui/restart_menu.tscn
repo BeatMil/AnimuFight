@@ -39,9 +39,13 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="RestartButton" parent="VBoxContainer" instance=ExtResource("2_241t5")]
+[node name="ResumeButton" parent="VBoxContainer" instance=ExtResource("2_241t5")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../MainMenuButton")
+text = "Resume"
+
+[node name="RestartButton" parent="VBoxContainer" instance=ExtResource("2_241t5")]
+layout_mode = 2
 text = "Restart"
 
 [node name="KeyBindButton" parent="VBoxContainer" instance=ExtResource("2_241t5")]
@@ -62,6 +66,7 @@ scale = Vector2(0.7, 0.7)
 visible = false
 layout_mode = 1
 
+[connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/KeyBindButton" to="." method="_on_key_bind_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

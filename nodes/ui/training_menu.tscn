@@ -41,9 +41,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Enemy1Button" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
+[node name="ResumeButton" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../MainMenuButton")
+text = "Resume"
+
+[node name="Enemy1Button" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
+layout_mode = 2
 text = "Enemy1"
 
 [node name="Enemy2Button" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
@@ -74,7 +78,7 @@ text = "Change Key Bind"
 
 [node name="MainMenuButton" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../Enemy1Button")
+focus_neighbor_bottom = NodePath("../ResumeButton")
 text = "Main Menu"
 
 [node name="KeyBindMenu" parent="." instance=ExtResource("3_x861g")]
@@ -85,6 +89,7 @@ layout_mode = 1
 unique_name_in_owner = true
 position = Vector2(557, 452)
 
+[connection signal="pressed" from="VBoxContainer/VBoxContainerL/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy1Button" to="." method="_on_enemy_1_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy2Button" to="." method="_on_enemy_2_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy3Button" to="." method="_on_enemy_3_button_pressed"]

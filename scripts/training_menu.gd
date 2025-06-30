@@ -1,6 +1,6 @@
 extends Control
 
-
+@onready var resume_button: Button = $VBoxContainer/VBoxContainerL/ResumeButton
 @onready var enemy_1_button: Button = $VBoxContainer/VBoxContainerL/Enemy1Button
 @onready var death_zone_button: Button = $VBoxContainer/VBoxContainerL/DeathZoneButton
 @onready var key_bind_menu: Control = $KeyBindMenu
@@ -28,8 +28,8 @@ func _input(event: InputEvent) -> void:
 		if get_tree().paused:
 			key_bind_menu.visible = false
 			v_box_container_l.visible = true
-			enemy_1_button.grab_focus()
-			%MenuCursor.move_to(Vector2(576, 472))
+			resume_button.grab_focus()
+			%MenuCursor.move_to(Vector2(575, 422))
 	elif event.is_action_pressed("ui_cancel"):
 		self.visible = false
 		get_tree().paused = false
@@ -78,3 +78,8 @@ func _on_key_bind_menu_close() -> void:
 	key_bind_menu.visible = false
 	key_bind_button.grab_focus()
 	set_process_input(true)
+
+
+func _on_resume_button_pressed() -> void:
+	self.visible = false
+	get_tree().paused = false

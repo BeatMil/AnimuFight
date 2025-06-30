@@ -1,6 +1,6 @@
 extends Control
 
-
+@onready var resume_button: Button = $VBoxContainer/ResumeButton
 @onready var restart_button: Button = $VBoxContainer/RestartButton
 @onready var key_bind_menu: Control = $KeyBindMenu
 @onready var v_box_container: VBoxContainer = $VBoxContainer
@@ -23,18 +23,19 @@ func toggle_menu() -> void:
 	self.visible = !self.visible
 	get_tree().paused = !get_tree().paused
 	if get_tree().paused:
-		restart_button.grab_focus()
-		%MenuCursor.move_to(Vector2(778, 530))
+		resume_button.grab_focus()
+		%MenuCursor.move_to(Vector2(778, 500))
 		key_bind_menu.visible = false
 		v_box_container.visible = true
 
 
 ## used when player dies XD
 func open_menu() -> void:
-	self.visible = true
-	get_tree().paused = true
-	restart_button.grab_focus()
-	%MenuCursor.move_to(Vector2(778, 530))
+	_on_restart_button_pressed()
+	# self.visible = true
+	# get_tree().paused = true
+	# restart_button.grab_focus()
+	# %MenuCursor.move_to(Vector2(778, 530))
 
 
 func _on_restart_button_pressed() -> void:
@@ -59,3 +60,10 @@ func _on_key_bind_menu_close() -> void:
 	restart_button.grab_focus()
 	%MenuCursor.move_to(Vector2(778, 530))
 	set_process_input(true)
+
+
+func _on_resume_button_pressed() -> void:
+	self.visible = false
+	get_tree().paused = false
+	key_bind_menu.visible = false
+	v_box_container.visible = false
