@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdvm6x1ynbejn"]
+[gd_scene load_steps=17 format=3 uid="uid://bdvm6x1ynbejn"]
 
 [ext_resource type="Script" uid="uid://cnqadldjogfkq" path="res://scripts/bed.gd" id="1_1r3fp"]
 [ext_resource type="AudioStream" uid="uid://cd0pyf1nhyep6" path="res://media/sfxs/unequip01.wav" id="2_1r3fp"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bdxqtv13qoq87" path="res://media/sprites/stage01/shelf/green_fig.png" id="4_xnaqd"]
 [ext_resource type="Texture2D" uid="uid://duonsc8gmd8d1" path="res://media/sprites/stage01/shelf/pink_fig.png" id="5_sh34x"]
 [ext_resource type="Texture2D" uid="uid://b266gj534am2c" path="res://media/sprites/stage01/shelf/yellow_fig.png" id="6_4jvbx"]
+[ext_resource type="Texture2D" uid="uid://bope7i5r2y0l8" path="res://media/sprites/stage01/fan/fan_base.png" id="7_4jvbx"]
+[ext_resource type="Texture2D" uid="uid://bkxd4qyre2bnv" path="res://media/sprites/stage01/fan/fan_fan.png" id="8_uxcbt"]
+[ext_resource type="Texture2D" uid="uid://cttgcytsyefrt" path="res://media/sprites/stage01/fan/fan_front.png" id="9_t5o54"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjwa2"]
 size = Vector2(342, 454)
@@ -103,6 +106,30 @@ tracks/7/path = NodePath("GreenFig:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Fan:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Fan:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -224,11 +251,73 @@ tracks/8/keys = {
 "update": 0,
 "values": [0.0, 0.488496, 0.0]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Fan:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-12, -9), Vector2(0, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Fan:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0610865, 0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_075hf"]
 _data = {
 &"RESET": SubResource("Animation_qjusy"),
 &"shake": SubResource("Animation_f5xf4")
+}
+
+[sub_resource type="Animation" id="Animation_4jvbx"]
+resource_name = "fan_moving"
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FanFan:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_uxcbt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FanFan:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t5o54"]
+_data = {
+&"RESET": SubResource("Animation_uxcbt"),
+&"fan_moving": SubResource("Animation_4jvbx")
 }
 
 [node name="Shelf" type="Node2D"]
@@ -270,5 +359,25 @@ visible = false
 position = Vector2(-8, 0)
 color = Color(0, 0, 0, 0.204)
 polygon = PackedVector2Array(-184, -240, 208, -240, 208, 240, -184, 240)
+
+[node name="Fan" type="Node2D" parent="."]
+
+[node name="FanBase" type="Sprite2D" parent="Fan"]
+position = Vector2(8, -336)
+texture = ExtResource("7_4jvbx")
+
+[node name="FanFan" type="Sprite2D" parent="Fan"]
+position = Vector2(11, -381)
+texture = ExtResource("8_uxcbt")
+
+[node name="FanFront" type="Sprite2D" parent="Fan"]
+position = Vector2(8, -336)
+texture = ExtResource("9_t5o54")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fan"]
+libraries = {
+&"": SubResource("AnimationLibrary_t5o54")
+}
+autoplay = "fan_moving"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
