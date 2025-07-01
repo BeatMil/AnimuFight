@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="11_g2h18"]
 [ext_resource type="Script" uid="uid://ckudchaksw6pd" path="res://scripts/enemy_spawner_stage01.gd" id="11_lcbfr"]
 [ext_resource type="Script" uid="uid://duxhld58ww51q" path="res://scripts/enemy_spawn_helper.gd" id="13_4slru"]
-[ext_resource type="Texture2D" uid="uid://tswrrdgbqrqv" path="res://media/sprites/environment/ground.jpg" id="15_gfirb"]
+[ext_resource type="Texture2D" uid="uid://cwyrh2o0eyugc" path="res://media/sprites/environment/ground_better.png" id="16_siln8"]
 [ext_resource type="AudioStream" uid="uid://cns33kc20b478" path="res://media/ost/RCG_Detention.mp3" id="17_n5wlp"]
 [ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_04.tscn" id="19_ymxnp"]
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="20_k6ebi"]
@@ -196,7 +196,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1192, 1448)]
+"values": [Vector2(1178, 1106)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -395,7 +395,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1192, 1448), Vector2(1192, 2432), Vector2(-6000, 2432)]
+"values": [Vector2(1178, 1106), Vector2(1192, 2432), Vector2(-6000, 2432)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -905,8 +905,7 @@ libraries = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DebrisArea2D"]
 
 [node name="Floor" type="StaticBody2D" parent="." groups=["ground"]]
-position = Vector2(1192, 1448)
-scale = Vector2(1, 2.44)
+position = Vector2(1178, 1106)
 collision_layer = 8
 collision_mask = 0
 metadata/_edit_group_ = true
@@ -916,8 +915,7 @@ shape = SubResource("RectangleShape2D_jd0co")
 
 [node name="Ground" type="Sprite2D" parent="Floor"]
 position = Vector2(4.99989, -108)
-scale = Vector2(0.866667, 1)
-texture = ExtResource("15_gfirb")
+texture = ExtResource("16_siln8")
 
 [node name="FloorFloat" type="StaticBody2D" parent="." groups=["ground"]]
 position = Vector2(944, 1824)
