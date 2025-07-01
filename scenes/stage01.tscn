@@ -665,6 +665,33 @@ gradient = SubResource("Gradient_gfirb")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="Animation" id="Animation_r2yrr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("topLight:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.873376, 0.846046, 0.609001, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_siln8"]
 resource_name = "light_breaks"
 tracks/0/type = "audio"
@@ -705,33 +732,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0.628985, 0.628985, 0.628985, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_r2yrr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("topLight:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.873376, 0.846046, 0.609001, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hw0fy"]
@@ -881,6 +881,9 @@ position = Vector2(441, 710)
 [node name="Shelf" parent="." instance=ExtResource("25_qfycc")]
 position = Vector2(1325, 635)
 
+[node name="Shelf2" parent="Shelf" instance=ExtResource("31_siln8")]
+position = Vector2(-859.936, -339.22)
+
 [node name="DebrisArea2D" type="Area2D" parent="."]
 position = Vector2(2403, 609)
 collision_layer = 0
@@ -947,7 +950,6 @@ scale = Vector2(1.64324, 1)
 [node name="WallInvi" parent="." instance=ExtResource("11_g2h18")]
 position = Vector2(2146, 352)
 scale = Vector2(1.64324, 1)
-collision_layer = 0
 
 [node name="CameraPos" type="Marker2D" parent="."]
 position = Vector2(942, 683)
@@ -1213,9 +1215,6 @@ libraries = {
 position = Vector2(1000, 32)
 attenuation = 0.5
 bus = &"LouderBus"
-
-[node name="Shelf2" parent="." instance=ExtResource("31_siln8")]
-position = Vector2(465.064, 295.78)
 
 [connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]
 [connection signal="body_entered" from="BounceToLeft" to="." method="_on_bounce_to_left_body_entered"]
