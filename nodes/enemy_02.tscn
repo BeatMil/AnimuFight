@@ -882,6 +882,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:flip_v")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_uesu2"]
 resource_name = "lp1"
@@ -1507,6 +1519,18 @@ tracks/6/keys = {
 "method": &"set_collision_normal"
 }]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:flip_v")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_572em"]
 resource_name = "wallsplat"
@@ -1660,7 +1684,7 @@ collision_layer = 2
 collision_mask = 15
 script = ExtResource("2_tp74s")
 is_notarget = false
-hp = 15
+hp = 100
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_3e6vd")

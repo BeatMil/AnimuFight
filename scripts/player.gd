@@ -950,6 +950,13 @@ func toggle_flip_h() -> void:
 	sprite_2d.flip_h = !sprite_2d.flip_h
 
 
+func spawn_sand_spark() -> void:
+	if sprite_2d.flip_h:
+		ObjectPooling.spawn_sand_sparkL(position + Vector2(-10, 50))
+	else:
+		ObjectPooling.spawn_sand_sparkR(position + Vector2(10, 50))
+
+
 #############################################################
 ## Signals
 #############################################################

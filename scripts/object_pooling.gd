@@ -8,6 +8,8 @@ const HITSPARK = preload("res://nodes/hitsparks/hit_spark.tscn")
 const BLOCKSPARK = preload("res://nodes/hitsparks/block_spark.tscn")
 const BLOCKSPARK2 = preload("res://nodes/hitsparks/block_spark2.tscn")
 const GROUNDSPARK = preload("res://nodes/hitsparks/ground_particle.tscn")
+const SANDSPARK_R = preload("res://nodes/hitsparks/sand_particleR.tscn")
+const SANDSPARK_L = preload("res://nodes/hitsparks/sand_particleL.tscn")
 const ATTACK_TYPE_INDICATOR = preload("res://nodes/attack_type_indicator.tscn")
 
 
@@ -53,3 +55,15 @@ func spawn_attack_type_indicator(_type: int = 0, pos: Vector2 = pooling_pos) -> 
 	bob.type = _type
 	bob.position = pos
 	get_tree().current_scene.add_child(bob)
+
+
+func spawn_sand_sparkR(_position: Vector2 = pooling_pos) -> void:
+	var hitspark = SANDSPARK_R.instantiate()
+	hitspark.position = _position
+	get_tree().current_scene.add_child(hitspark)
+
+
+func spawn_sand_sparkL(_position: Vector2 = pooling_pos) -> void:
+	var hitspark = SANDSPARK_L.instantiate()
+	hitspark.position = _position
+	get_tree().current_scene.add_child(hitspark)

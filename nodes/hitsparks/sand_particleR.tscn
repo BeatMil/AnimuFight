@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://daww46vm0nvvd"]
+
+[ext_resource type="Script" uid="uid://cxlm7u372ve4g" path="res://scripts/hit_spark2.gd" id="1_x22d5"]
+[ext_resource type="AudioStream" uid="uid://cj88rrwq4fria" path="res://media/sfxs/bomb.wav" id="2_rs4kq"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k72xe"]
+particle_flag_disable_z = true
+direction = Vector3(1, -0.4, 0)
+spread = 24.0
+initial_velocity_min = 300.0
+initial_velocity_max = 400.0
+scale_min = 8.0
+scale_max = 15.0
+color = Color(0.975206, 0.759914, 0.359334, 1)
+hue_variation_min = -0.22
+hue_variation_max = -2.23517e-08
+
+[sub_resource type="Animation" id="Animation_e43ln"]
+resource_name = "crash"
+length = 1.5
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_rs4kq")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47ax6"]
+_data = {
+&"crash": SubResource("Animation_e43ln")
+}
+
+[node name="SandParticleR" type="Node2D"]
+script = ExtResource("1_x22d5")
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Particles"]
+lifetime = 6.0
+speed_scale = 5.0
+explosiveness = 0.9
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_k72xe")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_47ax6")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
