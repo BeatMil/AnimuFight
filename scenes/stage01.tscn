@@ -845,6 +845,8 @@ autoplay = "go_fast_vertical"
 
 [node name="Background" type="Sprite2D" parent="."]
 self_modulate = Color(0.859799, 0.859799, 0.859799, 1)
+position = Vector2(-96, -54)
+scale = Vector2(1.1, 1.1)
 texture = ExtResource("6_nmevm")
 centered = false
 
@@ -890,8 +892,9 @@ collision_layer = 0
 collision_mask = 18
 
 [node name="NoDoor" type="Sprite2D" parent="DebrisArea2D"]
-self_modulate = Color(0.90625, 0.90625, 0.90625, 1)
-position = Vector2(-659, 31)
+self_modulate = Color(0.859799, 0.859799, 0.859799, 1)
+position = Vector2(-610.5, 31)
+scale = Vector2(1.33219, 1)
 texture = ExtResource("3_d2a2l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DebrisArea2D"]
