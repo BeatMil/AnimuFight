@@ -458,6 +458,7 @@ func hitted(
 		animation_player.play("throw_stunned")
 		self.air_throw_follow_pos = _attacker.give_air_throw_pos()
 		_attacker.animation_player.play("air_spd")
+		stun_duration = hitstun_amount
 	elif _type == Enums.Attack.P_AIR_THROW and is_on_floor():
 		## make air throw whiff
 		pass
