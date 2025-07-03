@@ -108,6 +108,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			body.States.BLOCK,
 			body.States.PARRY,
 			body.States.ARMOR,
+			body.States.IFRAME,
 			] and type not in [
 			Enums.Attack.THROW,
 			Enums.Attack.P_THROW,
