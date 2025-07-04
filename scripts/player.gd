@@ -131,7 +131,10 @@ func _input(event: InputEvent) -> void:
 	## BLOCK
 	# if state in can_block_states:
 	if state not in [States.BOUNCE_STUNNED, States.WALL_BOUNCED, States.IFRAME, States.AIR_SPD]:
-		if Input.is_action_just_pressed("block", true):
+		if Input.is_action_just_pressed("block", true) and state == States.HIT_STUNNED:
+			animation_player.play("late_parry")
+			hp_bar.hp_up_late_parry()
+		elif Input.is_action_just_pressed("block", true):
 			state = States.PARRY
 			animation_player.play("block")
 
@@ -205,6 +208,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("down") and state in [States.BOUNCE_STUNNED, States.WALL_BOUNCED] and is_on_floor() and tech_roll_timer > 0:
 		animation_player.play("burst")
+		hp_bar.hp_up_late_parry()
 	
 	
 	## Animation Section
@@ -984,6 +988,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"place_enemy",
 		"wall_abel_combo2",
 		"wall_abel_combo",
+		"late_parry",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:
