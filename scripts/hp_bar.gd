@@ -1,6 +1,7 @@
 extends TextureProgressBar
 @onready var back_bar: TextureProgressBar = $BackBar
-
+const HP_BAR_GREEN = preload("res://media/sprites/hp_bar/hp_bar_green.png")
+const HP_BAR_RED = preload("res://media/sprites/hp_bar/hp_bar_red.png")
 
 #############################################################
 ## Signals
@@ -18,6 +19,7 @@ var last_took_damage := 0
 func hp_down(_amount: int) -> void:
 	# value -= _amount
 	if get_tree():
+		back_bar.texture_progress = HP_BAR_RED
 		var tween = get_tree().create_tween()
 		tween.tween_property(self, "value", value - _amount, 0.1)
 		tween.tween_property(back_bar, "value", value - _amount, 0.5)
@@ -35,23 +37,21 @@ func hp_up(_amount: int) -> void:
 		return
 	# value += _amount
 	if get_tree():
+		back_bar.texture_progress = HP_BAR_GREEN
 		var tween = get_tree().create_tween()
-		tween.tween_property(self, "value", value + _amount, 0.1)
-		tween.tween_property(back_bar, "value", value + _amount, 0.5)
+		tween.tween_property(back_bar, "value", value + _amount, 0.1)
+		tween.tween_property(self, "value", value + _amount, 0.5)
 	emit_signal("hp_up_sig")
 
 
 func hp_up_late_parry() -> void:
-	print("value_before:", value)
 	if get_tree():
+		back_bar.texture_progress = HP_BAR_GREEN
 		var tween = get_tree().create_tween()
 		var heal_amount = max(last_took_damage/2, 1)
-		tween.tween_property(self, "value", value + heal_amount, 0.1)
-		tween.tween_property(back_bar, "value", value + heal_amount, 0.5)
-		print("last_took_damage:", last_took_damage)
-		print("last_took_damage/2:", last_took_damage/2)
+		tween.tween_property(back_bar, "value", value + heal_amount, 0.1)
+		tween.tween_property(self, "value", value + heal_amount, 0.5)
 	await get_tree().create_timer(0.2).timeout
-	print("value_after:", value)
 	emit_signal("hp_up_sig")
 
 
