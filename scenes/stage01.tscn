@@ -975,12 +975,6 @@ position = NodePath("../../../SpawnPos/pos1")
 hp = 10
 object = ExtResource("4_ts7c8")
 
-[node name="boss02" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
-script = ExtResource("13_4slru")
-position = NodePath("../../../SpawnPos/pos3")
-hp = 50
-object = ExtResource("20_nmevm")
-
 [node name="Phase2" type="Node" parent="EnemySpawnHelper"]
 
 [node name="e3" type="Node" parent="EnemySpawnHelper/Phase2" node_paths=PackedStringArray("position")]
@@ -1002,6 +996,12 @@ script = ExtResource("13_4slru")
 position = NodePath("../../../SpawnPos/pos1")
 hp = 30
 object = ExtResource("4_ts7c8")
+
+[node name="boss02" type="Node" parent="EnemySpawnHelper/Phase3" node_paths=PackedStringArray("position")]
+script = ExtResource("13_4slru")
+position = NodePath("../../../SpawnPos/pos3")
+hp = 50
+object = ExtResource("20_nmevm")
 
 [node name="Phase4" type="Node" parent="EnemySpawnHelper"]
 

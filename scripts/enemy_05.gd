@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 			stun_duration -= delta
 			set_collision_normal()
 		else:
-			set_collision_no_hit_player()
+			set_collision_no_hit_all()
 	elif stun_duration < 0:
 		# state = States.IDLE
 		if hp_bar.get_hp() <= 0:
