@@ -206,7 +206,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			tech_roll_timer = tech_roll_time
 	
-	if Input.is_action_just_pressed("down") or Input.is_action_just_pressed("block") \
+	if (Input.is_action_just_pressed("down") or Input.is_action_just_pressed("block")) \
 		and state in [States.BOUNCE_STUNNED, States.WALL_BOUNCED] and is_on_floor() and tech_roll_timer > 0:
 		animation_player.play("techroll")
 		hp_bar.hp_up_late_parry()
