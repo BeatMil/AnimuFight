@@ -64,7 +64,7 @@ func lp_info() -> void: # for animation_player
 	"hitlag_amount_air": 0,
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(0, 0),
-	"damage": 1,
+	"damage": 2,
 	"type": Enums.Attack.NORMAL,
 	"zoom": Vector2(0.5, 0.5),
 	"zoom_duration": 0.7,
@@ -86,7 +86,7 @@ func tatsu_2nd_info() -> void: # for animation_player
 	"hitlag_amount_air": 0,
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(0, 0),
-	"damage": 1,
+	"damage": 2,
 	"type": Enums.Attack.NORMAL,
 	"zoom": Vector2(0.5, 0.5),
 	# "zoom_duration": 1,
@@ -108,7 +108,7 @@ func tatsu_end_info() -> void: # for animation_player
 	"hitlag_amount_air": 0.2,
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(50, 0.1),
-	"damage": 1,
+	"damage": 3,
 	"type": Enums.Attack.NORMAL,
 	}
 	dict_to_spawn_hitbox(info)
@@ -131,7 +131,7 @@ func burn_knuckle_info() -> void: # for animation_player
 	"hitlag_amount_air": 0,
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(0, 0),
-	"damage": 1,
+	"damage": 2,
 	"type": Enums.Attack.NORMAL,
 	}
 	dict_to_spawn_hitbox(info)
@@ -154,7 +154,7 @@ func meteo_crash_info() -> void: # for animation_player
 	"hitlag_amount_air": 0.3,
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(0, 0),
-	"damage": 4,
+	"damage": 6,
 	"type": Enums.Attack.UNBLOCK,
 	"pos": meteo_pos.position,
 	}

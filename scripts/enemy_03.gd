@@ -19,7 +19,7 @@ func lp_info() -> void: # for animation_player
 	"hitlag_amount_air": 0,
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(0, 0),
-	"damage": 1,
+	"damage": 2,
 	"type": Enums.Attack.THROW,
 	}
 	dict_to_spawn_hitbox(info)
@@ -42,7 +42,7 @@ func attack01_info() -> void: # for animation_player
 	"hitlag_amount_air": 0,
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(100, 0.1),
-	"damage": 3,
+	"damage": 4,
 	"type": Enums.Attack.THROW,
 	"pos": $HitBoxPos/TowlPos.position,
 	}

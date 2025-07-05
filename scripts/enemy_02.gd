@@ -3,7 +3,7 @@ extends "res://scripts/enemy.gd"
 
 func _ready() -> void:
 	super._ready()
-	block_rate = 5
+	block_rate = 10
 
 
 #############################################################
@@ -29,7 +29,7 @@ func lp_info() -> void: # for animation_player
 	"hitlag_amount_air": 0,
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(0, 0),
-	"damage": 1,
+	"damage": 2,
 	"type": Enums.Attack.NORMAL,
 	}
 	dict_to_spawn_hitbox(info)
@@ -51,7 +51,7 @@ func attack01_info() -> void: # for animation_player
 	"hitlag_amount_air": 0,
 	"hitstun_amount_air": 0.1,
 	"screenshake_amount": Vector2(20, 0.3),
-	"damage": 3,
+	"damage": 4,
 	"type": Enums.Attack.UNBLOCK,
 	}
 	dict_to_spawn_hitbox(info)
