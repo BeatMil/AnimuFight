@@ -464,7 +464,8 @@ func hitted(
 		pass
 
 	## Player Wall throw hits
-	elif _type == Enums.Attack.P_WALL_THROW and animation_player.current_animation == "wallsplat":
+	elif _type == Enums.Attack.P_WALL_THROW and \
+		animation_player.current_animation in ["wallsplat", "wall_crumble"]:
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
 		state = States.GRABBED
 		animation_player.play("throw_stunned")

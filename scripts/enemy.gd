@@ -130,6 +130,11 @@ func _physics_process(delta: float) -> void:
 	if state in [States.GRABBED, States.THROWN]:
 		_follow_pos()
 
+
+	if animation_player.current_animation == "wallsplat":
+		if is_on_floor():
+			animation_player.play("wall_crumble")
+
 	## debug
 	$DebugLabel.text = "%s, %s %0.3f"%[States.keys()[state], animation_player.current_animation, stun_duration]
 	# $DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
