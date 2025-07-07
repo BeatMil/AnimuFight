@@ -279,7 +279,7 @@ func _physics_process(delta: float) -> void:
 	if state in [States.THROW_BREAKABLE]:
 		if Input.is_action_just_pressed("hp"):
 			# Throw break
-			animation_player.play("burst")
+			animation_player.play("air_spd_burst")
 			next_move = null
 
 
