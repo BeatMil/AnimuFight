@@ -14,7 +14,7 @@ size = Vector2(152, 2208)
 
 [node name="Wall" type="StaticBody2D" groups=["wall"]]
 collision_layer = 4
-collision_mask = 0
+collision_mask = 4
 script = ExtResource("1_abvhr")
 
 [node name="Ground" type="Sprite2D" parent="."]

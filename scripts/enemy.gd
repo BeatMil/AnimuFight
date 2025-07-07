@@ -73,6 +73,7 @@ func _physics_process(delta: float) -> void:
 	if state in [States.IDLE]:
 		_facing()
 		is_wall_bounced = false
+		is_wall_splat =  false
 		if not is_player_in_range_lp and not is_enemy_in_range_lp:
 			_move(delta)
 		else:
@@ -134,6 +135,7 @@ func _physics_process(delta: float) -> void:
 	if animation_player.current_animation == "wallsplat":
 		if is_on_floor():
 			animation_player.play("wall_crumble")
+			stun_duration = 2
 
 	## debug
 	$DebugLabel.text = "%s, %s %0.3f"%[States.keys()[state], animation_player.current_animation, stun_duration]

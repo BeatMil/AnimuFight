@@ -114,6 +114,7 @@ var stun_duration: float = 0
 
 var is_ded := false
 var is_wall_bounced := false
+var is_wall_splat := false
 
 
 #############################################################
@@ -155,11 +156,19 @@ func _check_wall_bounce() -> void:
 
 	if is_touching_wall_left or is_touching_wall_right:
 		animation_player.stop(true)
-		if is_wall_bounced:
+		if is_wall_splat:
+			animation_player.play("down")
+			set_collision_no_hit_all()
+			var push_power = Vector2(1000, -100) if is_touching_wall_left else Vector2(-1000, -100)
+			_push_direct(push_power)
+			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
+			hitlag()
+		elif is_wall_bounced:
 			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(40, 0.3)
 			hitlag(0.5)
 			animation_player.play("wallsplat")
 			velocity = Vector2.ZERO
+			is_wall_splat = true
 			# var tween = get_tree().create_tween()
 			# tween.tween_property(self, "position", position, 0.9)
 			# tween.tween_property(self, "velocity", Vector2.ZERO, 0)
@@ -170,11 +179,12 @@ func _check_wall_bounce() -> void:
 			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
 			hitlag()
 			animation_player.play("down")
+			set_collision_no_hit_all()
 	
 		hp_bar.hp_down(1)
 		state = States.WALL_BOUNCED
-		is_touching_wall_left = false
-		is_touching_wall_right = false
+		# is_touching_wall_left = false
+		# is_touching_wall_right = false
 		play_bounce_sfx()
 
 
@@ -502,6 +512,9 @@ func hitted(
 			2: # Right
 				_push_direct(Vector2(900, -100))
 				_attacker.sprite_2d.flip_h = false
+		if is_touching_wall_left or is_touching_wall_right:
+			print("==NANI==")
+			_attacker._push_x(-400)
 
 	## Spawn blockspark on IFRAME
 	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD]:
@@ -659,6 +672,8 @@ func play_bounce_sfx() -> void:
 # 	collision_layer = 0b00000000000000010000
 # 	collision_mask = 0b00000000000000001100
 
+func	set_collision_no_hit_all():
+	pass
 
 func _add_block_count(amount: int):
 	pass
