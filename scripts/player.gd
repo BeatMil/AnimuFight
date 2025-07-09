@@ -130,7 +130,7 @@ func _input(event: InputEvent) -> void:
 
 	## BLOCK
 	# if state in can_block_states:
-	if state not in [States.BOUNCE_STUNNED, States.WALL_BOUNCED, States.IFRAME, States.AIR_SPD]:
+	if state not in [States.BOUNCE_STUNNED, States.WALL_BOUNCED, States.IFRAME, States.AIR_SPD, States.THROW_BREAKABLE]:
 		if Input.is_action_just_pressed("block", true) and state == States.HIT_STUNNED:
 			animation_player.play("late_parry")
 			hp_bar.hp_up_late_parry()
@@ -558,7 +558,7 @@ func hp_info() ->  void:
 	var info = {
 	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
-	"push_power_ground": Vector2(1200, -100),
+	"push_power_ground": Vector2(800, -100),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
 	"push_power_air": Vector2(1200, -100),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,

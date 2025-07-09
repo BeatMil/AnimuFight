@@ -159,7 +159,7 @@ func _check_wall_bounce() -> void:
 		if is_wall_splat:
 			animation_player.play("down")
 			set_collision_no_hit_all()
-			var push_power = Vector2(1000, -100) if is_touching_wall_left else Vector2(-1000, -100)
+			var push_power = Vector2(1000, 100) if is_touching_wall_left else Vector2(-1000, 100)
 			_push_direct(push_power)
 			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
 			hitlag()
