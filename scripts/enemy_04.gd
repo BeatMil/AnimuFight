@@ -38,7 +38,7 @@ func lp_info() -> void: # for animation_player
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(0, 0),
 	"damage": 1,
-	"type": Enums.Attack.THROW,
+	"type": Enums.Attack.THROW_GROUND,
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -214,7 +214,7 @@ func hitted(
 			ObjectPooling.spawn_blockSpark_1(position)
 
 	## DODGE & DODGE_SUCCESS
-	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW:
+	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW_GROUND:
 		if _type == Enums.Attack.UNBLOCK:
 			animation_player.play("dodge_success_zoom")
 		else:
@@ -223,7 +223,7 @@ func hitted(
 	## Spawn blockspark on IFRAME
 	elif state in [States.IFRAME, States.EXECUTE]:
 		ObjectPooling.spawn_blockSpark_1(position)
-	elif _type == Enums.Attack.THROW:
+	elif _type == Enums.Attack.THROW_GROUND:
 		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
 		animation_player.play("throw_stunned")
 

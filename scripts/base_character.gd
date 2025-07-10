@@ -236,7 +236,8 @@ func _spawn_lp_hitbox(
 	_pos: Vector2 = Vector2(168, 0),
 	_zoom: Vector2 = Vector2(0.8, 0.8),
 	_zoom_duration: float = 0.1,
-	_slow_mo_on_block: Vector2 = Vector2.ZERO
+	_slow_mo_on_block: Vector2 = Vector2.ZERO,
+	_pos_direct: Vector2 = Vector2.ZERO
 	) -> void:
 
 	var hitbox: Node2D
@@ -275,6 +276,8 @@ func _spawn_lp_hitbox(
 		hitbox.position = Vector2(-_pos.x, _pos.y)
 	else: ## facing right
 		hitbox.position = Vector2(_pos.x, _pos.y)
+	if _pos_direct:
+		hitbox.position = _pos_direct
 	
 	## Set hitbox collision target
 	if self.is_in_group("player"):
@@ -441,7 +444,7 @@ func hitted(
 				print_debug("_zoom can't find player/camera")
 
 	## DODGE & DODGE_SUCCESS
-	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type != Enums.Attack.THROW:
+	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type not in [Enums.Attack.THROW_GROUND, Enums.Attack.THROW_FLOAT]:
 		if _type == Enums.Attack.UNBLOCK:
 			animation_player.play("dodge_success_zoom")
 		else:
@@ -520,9 +523,14 @@ func hitted(
 	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD]:
 		ObjectPooling.spawn_blockSpark_1(position)
 
-	elif _type == Enums.Attack.THROW:
+	elif _type in [Enums.Attack.THROW_GROUND, Enums.Attack.THROW_FLOAT]:
 		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
-		animation_player.play("throw_stunned")
+		set_throwee(_attacker)
+
+		if _type == Enums.Attack.THROW_GROUND:
+			animation_player.play("throw_stunned_ground")
+		else:
+			animation_player.play("throw_stunned_float")
 
 	##################
 	# - Do damage
@@ -628,7 +636,8 @@ func dict_to_spawn_hitbox(info: Dictionary) -> void:
 	info.get("pos", Vector2(168, 0)),
 	info.get("zoom", Vector2(0, 0)),
 	info.get("zoom_duration", 0.1),
-	info.get("slow_mo_on_block", Vector2.ZERO)
+	info.get("slow_mo_on_block", Vector2.ZERO),
+	info.get("pos_direct", Vector2.ZERO)
 	)
 
 
@@ -678,6 +687,8 @@ func	set_collision_no_hit_all():
 func _add_block_count(amount: int):
 	pass
 
+func set_throwee(the_guy: CharacterBody2D) -> void:
+	pass
 
 func block_effect_helper(
 	hitstun_amount,

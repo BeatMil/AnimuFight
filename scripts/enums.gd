@@ -14,7 +14,8 @@ enum Push_types{
 enum Attack{
 	NORMAL,
 	UNBLOCK,
-	THROW,
+	THROW_GROUND,
+	THROW_FLOAT,
 	P_THROW,
 	P_PARRY,
 	P_AIR_THROW,

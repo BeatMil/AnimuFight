@@ -64,6 +64,9 @@ var can_block_states_hold = [
 # var input_history := ["n","right","n","n","n","n","right","right","right","right","right"]
 var input_history := []
 
+var throwee: CharacterBody2D
+
+
 #############################################################
 ## Built-in
 #############################################################
@@ -247,6 +250,7 @@ func _physics_process(delta: float) -> void:
 		animation_player.play("idle")
 		stun_duration = 0
 
+
 	##################
 	## Input buffer
 	##################
@@ -259,6 +263,8 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_pressed("lp") and Input.is_action_pressed("hp"):
 		_lp_hp()
+	# if Input.is_action_just_pressed("lp") and Input.is_action_just_pressed("hp"):
+	# 	_lp_hp()
 
 	if Input.is_action_just_pressed("lp"):
 		queue_move(_lp)
@@ -276,11 +282,30 @@ func _physics_process(delta: float) -> void:
 	##################
 	_check_block_buffer(delta)
 
-	if state in [States.THROW_BREAKABLE]:
-		if Input.is_action_just_pressed("hp"):
-			# Throw break
-			animation_player.play("burst")
-			next_move = null
+	# if state in [States.THROW_BREAKABLE]:
+	match animation_player.current_animation:
+		"throw_stunned_ground":
+			if Input.is_action_just_pressed("lp") and Input.is_action_just_pressed("hp"):
+				animation_player.play("hitted")
+				next_move = null
+			elif Input.is_action_just_pressed("hp"):
+				# Throw break
+				animation_player.play("throw_break")
+				next_move = null
+			elif Input.is_action_just_pressed("lp"):
+				animation_player.play("hitted")
+				next_move = null
+		"throw_stunned_float":
+			if Input.is_action_just_pressed("lp") and Input.is_action_just_pressed("hp"):
+				animation_player.play("hitted")
+				next_move = null
+			elif Input.is_action_just_pressed("lp"):
+				# Throw break
+				animation_player.play("throw_break")
+				next_move = null
+			elif Input.is_action_just_pressed("hp"):
+				animation_player.play("hitted")
+				next_move = null
 
 	## BLOCK
 	## Must check every frame, can't put in _input cause it only check when press and release
@@ -321,6 +346,10 @@ func give_wall_throw_pos() -> Marker2D:
 		return grab_pos_l
 	else:
 		return grab_pos_r
+
+
+func set_throwee(the_guy: CharacterBody2D) -> void:
+	throwee = the_guy
 
 
 #############################################################
@@ -589,6 +618,26 @@ func burst_info() ->  void:
 	"damage": 2,
 	"type": Enums.Attack.UNBLOCK,
 	"pos": $HitBoxPos/BurstPos.position,
+	"zoom": Vector2(0.1, 0.1),
+	"zoom_duration": 0.05,
+	}
+	dict_to_spawn_hitbox(info)
+func throw_break_info() ->  void:
+	var info = {
+	"size": Hitbox_type.SMALL,
+	"time": 0.1,
+	"push_power_ground": Vector2(200, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(200, 0),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 1,
+	"hitlag_amount_air": 0.0,
+	"hitstun_amount_air": 1,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 2,
+	"type": Enums.Attack.UNBLOCK,
+	"pos_direct": throwee.global_position - global_position,
 	"zoom": Vector2(0.1, 0.1),
 	"zoom_duration": 0.05,
 	}
@@ -990,6 +1039,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"wall_abel_combo2",
 		"wall_abel_combo",
 		"late_parry",
+		"throw_break",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:
