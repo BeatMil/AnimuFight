@@ -401,6 +401,7 @@ var cant_dash_state = [
 	States.GRABBED,
 	States.IFRAME,
 	States.AIR_SPD,
+	States.THROW_BREAKABLE,
 	]
 
 func _dash_left() -> void:
