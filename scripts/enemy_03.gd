@@ -1,5 +1,11 @@
 extends "res://scripts/enemy.gd"
 
+
+func _ready() -> void:
+	super._ready()
+	block_rate = 10
+
+
 #############################################################
 ## Attack Info
 #############################################################
@@ -45,6 +51,25 @@ func attack01_info() -> void: # for animation_player
 	"damage": 4,
 	"type": Enums.Attack.THROW,
 	"pos": $HitBoxPos/TowlPos.position,
+	}
+	dict_to_spawn_hitbox(info)
+
+
+func hit_info() -> void: # for animation_player
+	var info = {
+	"size": Hitbox_type.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(500, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(100, -150),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.5,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 2,
+	"type": Enums.Attack.NORMAL,
 	}
 	dict_to_spawn_hitbox(info)
 
