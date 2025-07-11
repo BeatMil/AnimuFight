@@ -62,6 +62,10 @@ text = "Enemy3"
 layout_mode = 2
 text = "Enemy4"
 
+[node name="Enemy6Button" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
+layout_mode = 2
+text = "Enemy6"
+
 [node name="ClearButton" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
 layout_mode = 2
 text = "Clear"
@@ -94,6 +98,7 @@ position = Vector2(557, 452)
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy2Button" to="." method="_on_enemy_2_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy3Button" to="." method="_on_enemy_3_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy4Button" to="." method="_on_enemy_4_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy6Button" to="." method="_on_enemy_6_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/ClearButton" to="." method="_on_clear_button_pressed"]
 [connection signal="toggled" from="VBoxContainer/VBoxContainerL/DeathZoneButton" to="." method="_on_death_zone_button_toggled"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/KeyBindButton" to="." method="_on_key_bind_button_pressed"]

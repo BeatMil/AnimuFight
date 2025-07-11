@@ -12,6 +12,7 @@ signal enemy1
 signal enemy2
 signal enemy3
 signal enemy4
+signal enemy6
 signal death_zone
 signal clear
 
@@ -54,6 +55,9 @@ func _on_enemy_3_button_pressed() -> void:
 func _on_enemy_4_button_pressed() -> void:
 	emit_signal("enemy4")
 
+
+func _on_enemy_6_button_pressed() -> void:
+	emit_signal("enemy6")
 
 func _on_death_zone_button_toggled(toggled_on: bool) -> void:
 	emit_signal("death_zone", toggled_on)
