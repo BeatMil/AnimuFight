@@ -87,3 +87,4 @@ func _on_key_bind_menu_close() -> void:
 func _on_resume_button_pressed() -> void:
 	self.visible = false
 	get_tree().paused = false
+ 
