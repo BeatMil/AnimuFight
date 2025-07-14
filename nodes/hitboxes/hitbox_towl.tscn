@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwwdkn8v7v6b6"]
+[gd_scene load_steps=5 format=3 uid="uid://bwwdkn8v7v6b6"]
 
 [ext_resource type="PackedScene" uid="uid://jgmjqpnytm3v" path="res://nodes/hitboxes/hitbox_base.tscn" id="1_17tod"]
 [ext_resource type="Texture2D" uid="uid://b0mifjly3kf78" path="res://media/sprites/enemy03/enemy03_towl_only.png" id="2_8jj1v"]
+[ext_resource type="Script" uid="uid://dsn05ivlyy2cn" path="res://scripts/hitbox_towl.gd" id="2_hnasr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hnasr"]
 size = Vector2(400, 112)
 
 [node name="HitboxTowl" instance=ExtResource("1_17tod")]
+script = ExtResource("2_hnasr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource("RectangleShape2D_hnasr")

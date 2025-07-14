@@ -3822,7 +3822,6 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_gp8k4"]
 resource_name = "throw_stunned_float"
-length = 0.5
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -3870,7 +3869,7 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.783333),
+"times": PackedFloat32Array(0, 1.16667),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [17],
@@ -3919,7 +3918,6 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_t838g"]
 resource_name = "throw_stunned_ground"
-length = 0.5
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -3967,7 +3965,7 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.783333),
+"times": PackedFloat32Array(0, 1.18333),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [17],

@@ -135,14 +135,11 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.8, 1.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"attack01_info"
-}, {
-"args": [],
-"method": &"hit_info"
 }]
 }
 tracks/4/type = "method"
@@ -274,14 +271,11 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.8, 1.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"attack02_info"
-}, {
-"args": [],
-"method": &"hit_info"
 }]
 }
 tracks/4/type = "method"
@@ -1697,6 +1691,7 @@ is_notarget = false
 hp = 100
 
 [node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(0.9375, 0.439652, 0.334152, 1)
 texture = ExtResource("10_4ttuv")
 offset = Vector2(0, 30)
 
