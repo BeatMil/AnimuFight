@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d227r7s4cvfck" path="res://media/sprites/char2/enemy01_jump_punch_telegraph.png" id="4_4uugd"]
 [ext_resource type="AudioStream" uid="uid://bg8cifedlb5iu" path="res://media/sfxs/attack_warning_01.wav" id="5_kiu8o"]
 [ext_resource type="AudioStream" uid="uid://dy3bxvokjiup5" path="res://media/sfxs/big_fireball.wav" id="6_rrksh"]
-[ext_resource type="Texture2D" uid="uid://crek0vunmpec" path="res://media/sprites/char2/SecondChar_block.png" id="7_t73sd"]
+[ext_resource type="Texture2D" uid="uid://de0tyercbnt5k" path="res://media/sprites/enemy06/enemy06_block.png" id="7_4uugd"]
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="8_b5mdy"]
 [ext_resource type="Texture2D" uid="uid://b22ob737caxc1" path="res://media/sprites/char2/enemy01_down.png" id="9_c1npc"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="10_yihki"]
@@ -273,7 +273,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_t73sd")]
+"values": [ExtResource("7_4uugd")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
