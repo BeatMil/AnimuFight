@@ -186,6 +186,7 @@ func _check_wall_bounce() -> void:
 		# is_touching_wall_left = false
 		# is_touching_wall_right = false
 		play_bounce_sfx()
+		ObjectPooling.spawn_hitSpark_1(position + Vector2(0, randi_range(-30, -80)))
 
 
 func _move_left(delta) ->  void:
