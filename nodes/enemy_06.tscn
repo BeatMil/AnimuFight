@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://d0ufo617puti8"]
+[gd_scene load_steps=44 format=3 uid="uid://d0ufo617puti8"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_fyn6y"]
 [ext_resource type="Script" uid="uid://hyjgv4558hu" path="res://scripts/enemy_01.gd" id="2_fg2e7"]
@@ -8,10 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://dy3bxvokjiup5" path="res://media/sfxs/big_fireball.wav" id="6_rrksh"]
 [ext_resource type="Texture2D" uid="uid://de0tyercbnt5k" path="res://media/sprites/enemy06/enemy06_block.png" id="7_4uugd"]
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="8_b5mdy"]
-[ext_resource type="Texture2D" uid="uid://b22ob737caxc1" path="res://media/sprites/char2/enemy01_down.png" id="9_c1npc"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="10_yihki"]
 [ext_resource type="Texture2D" uid="uid://rnf3ab4df3f8" path="res://media/sprites/enemy06/enemy06_down.png" id="11_kiu8o"]
-[ext_resource type="Texture2D" uid="uid://b6syt0rhv2dwx" path="res://media/sprites/char2/SecondChar_hitted.png" id="11_qda5w"]
 [ext_resource type="Texture2D" uid="uid://lc3lpg6kaaof" path="res://media/sprites/enemy06/enemy06_hurt.png" id="12_4uugd"]
 [ext_resource type="Texture2D" uid="uid://c2rueat6dpvpl" path="res://media/sprites/enemy06/enemy06_idle.png" id="12_8x0vn"]
 [ext_resource type="Texture2D" uid="uid://c3rxvaupgws3u" path="res://media/sprites/char2/enemy01_lp_start_anim.png" id="12_miyac"]
@@ -20,11 +18,11 @@
 [ext_resource type="AudioStream" uid="uid://3eyk8460sfvf" path="res://media/sfxs/charge01.wav" id="15_2ej7d"]
 [ext_resource type="AudioStream" uid="uid://chnn83cu2f3jx" path="res://media/sfxs/grabbed.wav" id="16_upv7j"]
 [ext_resource type="Texture2D" uid="uid://2fw6lvtjsfis" path="res://media/sprites/enemy06/enemy06_walk.png" id="17_fyn6y"]
-[ext_resource type="Texture2D" uid="uid://ctjdryuvcd750" path="res://media/sprites/char2/enemy01_wall_splat.png" id="18_wrxr3"]
 [ext_resource type="AudioStream" uid="uid://cd0pyf1nhyep6" path="res://media/sfxs/unequip01.wav" id="19_5ln3q"]
 [ext_resource type="AudioStream" uid="uid://dapk1wm47d6cw" path="res://media/sfxs/HitStone.wav" id="20_mhqvq"]
 [ext_resource type="Texture2D" uid="uid://dt7dbbmww4t3a" path="res://media/sprites/enemy06/enemy06_wall_splat.png" id="21_4uugd"]
 [ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="21_36vr4"]
+[ext_resource type="Texture2D" uid="uid://wy8oi4pcc212" path="res://media/sprites/enemy06/enemy06_wall_crumble.png" id="21_kiu8o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(64, 304)
@@ -381,7 +379,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_c1npc")]
+"values": [ExtResource("11_kiu8o")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -576,7 +574,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_qda5w")]
+"values": [ExtResource("12_4uugd")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -1510,7 +1508,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("18_wrxr3")]
+"values": [ExtResource("21_kiu8o")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -1575,7 +1573,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [1]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
