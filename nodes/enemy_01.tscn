@@ -1,7 +1,7 @@
 [gd_scene load_steps=42 format=3 uid="uid://b2vaqeiw3q18o"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_mphwr"]
-[ext_resource type="Script" uid="uid://hyjgv4558hu" path="res://scripts/enemy_01.gd" id="2_ufcbe"]
+[ext_resource type="Script" uid="uid://khnhg6mq5umm" path="res://scripts/enemy_06.gd" id="2_uqe8x"]
 [ext_resource type="Texture2D" uid="uid://bytgy7otax0fb" path="res://media/sprites/char2/SecondChar_idle.png" id="3_0yexx"]
 [ext_resource type="Texture2D" uid="uid://d227r7s4cvfck" path="res://media/sprites/char2/enemy01_jump_punch_telegraph.png" id="4_w6o0s"]
 [ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="6_kh784"]
@@ -1762,7 +1762,7 @@ size = Vector2(144, 304)
 [node name="Enemy" groups=["character", "enemy"] instance=ExtResource("1_mphwr")]
 collision_layer = 2
 collision_mask = 15
-script = ExtResource("2_ufcbe")
+script = ExtResource("2_uqe8x")
 is_notarget = false
 hp = 20
 

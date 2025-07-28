@@ -1,9 +1,9 @@
 [gd_scene load_steps=44 format=3 uid="uid://d0ufo617puti8"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_fyn6y"]
-[ext_resource type="Script" uid="uid://hyjgv4558hu" path="res://scripts/enemy_01.gd" id="2_fg2e7"]
+[ext_resource type="Script" uid="uid://khnhg6mq5umm" path="res://scripts/enemy_06.gd" id="2_8x0vn"]
 [ext_resource type="Texture2D" uid="uid://bytgy7otax0fb" path="res://media/sprites/char2/SecondChar_idle.png" id="3_8x0vn"]
-[ext_resource type="Texture2D" uid="uid://d227r7s4cvfck" path="res://media/sprites/char2/enemy01_jump_punch_telegraph.png" id="4_4uugd"]
+[ext_resource type="Texture2D" uid="uid://cvi03lu60vnuo" path="res://media/sprites/enemy06/enemy06_attack01.png" id="4_8x0vn"]
 [ext_resource type="AudioStream" uid="uid://bg8cifedlb5iu" path="res://media/sfxs/attack_warning_01.wav" id="5_kiu8o"]
 [ext_resource type="AudioStream" uid="uid://dy3bxvokjiup5" path="res://media/sfxs/big_fireball.wav" id="6_rrksh"]
 [ext_resource type="Texture2D" uid="uid://de0tyercbnt5k" path="res://media/sprites/enemy06/enemy06_block.png" id="7_4uugd"]
@@ -129,7 +129,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_4uugd")]
+"values": [ExtResource("4_8x0vn")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -200,10 +200,10 @@ tracks/5/path = NodePath("Sprite2D:offset")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 1),
-"transitions": PackedFloat32Array(0.5, 1, 0.5, 2),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -200), Vector2(0, -200), Vector2(0, 0)]
+"values": []
 }
 tracks/6/type = "method"
 tracks/6/imported = false
@@ -1764,7 +1764,7 @@ size = Vector2(144, 304)
 [node name="Enemy" groups=["character", "enemy"] instance=ExtResource("1_fyn6y")]
 collision_layer = 2
 collision_mask = 15
-script = ExtResource("2_fg2e7")
+script = ExtResource("2_8x0vn")
 is_notarget = false
 hp = 20
 
