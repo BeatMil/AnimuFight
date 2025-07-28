@@ -544,6 +544,15 @@ func hitted(
 	##################
 	else: # Do damage and push type
 		hp_bar.hp_down(_damage)
+		# Play glass break vfx
+		if state in [
+			States.BLOCK,
+			States.PARRY,
+			States.PARRY_SUCCESS,
+		] and _type == Enums.Attack.UNBLOCK:
+			ObjectPooling.spawn_glass_spark(position + Vector2(0, randi_range(-30, -80)))
+		else:
+			ObjectPooling.spawn_hitSpark_1(position + Vector2(0, randi_range(-30, -80)))
 		# Death Zone
 		if _attacker.is_in_group("death_zone"):
 			animation_player.stop(true)
@@ -610,7 +619,6 @@ func hitted(
 				"Player/Camera").zoom(_zoom, _zoom_duration)
 			else:
 				print_debug("_zoom can't find player/camera")
-		ObjectPooling.spawn_hitSpark_1(position + Vector2(0, randi_range(-30, -80)))
 		# Player Parries
 		if _type == Enums.Attack.P_PARRY:
 			$AudioStreamPlayer2.stream = HIT_2

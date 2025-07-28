@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1lat4kavmnt0"]
+[gd_scene load_steps=9 format=3 uid="uid://b7kngcprro1et"]
 
-[ext_resource type="Script" uid="uid://bmc7j7j0ykd0g" path="res://scripts/hit_spark.gd" id="1_rv1cv"]
-[ext_resource type="Texture2D" uid="uid://bxnxfqaknnul6" path="res://media/sprites/particle_fx/particle_material01.png" id="2_jcnss"]
+[ext_resource type="Script" uid="uid://bmc7j7j0ykd0g" path="res://scripts/hit_spark.gd" id="1_htre6"]
+[ext_resource type="Texture2D" uid="uid://bxnxfqaknnul6" path="res://media/sprites/particle_fx/particle_material01.png" id="2_vxpko"]
 
 [sub_resource type="Environment" id="Environment_pw8aq"]
 background_mode = 3
@@ -12,29 +12,32 @@ glow_blend_mode = 1
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.197115, 0), 0.0, 0.0, 0, 0, Vector2(0.245192, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_nqpni"]
+[sub_resource type="CurveTexture" id="CurveTexture_htre6"]
 curve = SubResource("Curve_jcnss")
 
-[sub_resource type="Gradient" id="Gradient_jcnss"]
-offsets = PackedFloat32Array(0, 0.68018)
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.803589, 0.144868, 1)
+[sub_resource type="Curve" id="Curve_vxpko"]
+_limits = [0.0, 30.0, 0.0, 2.0]
+_data = [Vector2(0, 22.9214), 0.0, 0.0, 0, 0]
+point_count = 1
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_nqpni"]
-gradient = SubResource("Gradient_jcnss")
+[sub_resource type="CurveTexture" id="CurveTexture_nqpni"]
+curve = SubResource("Curve_vxpko")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_se36l"]
 particle_flag_align_y = true
 particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
 spread = 180.0
-initial_velocity_min = 90.0
-initial_velocity_max = 110.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
 scale_min = 2.0
 scale_max = 2.0
-color_ramp = SubResource("GradientTexture1D_nqpni")
-alpha_curve = SubResource("CurveTexture_nqpni")
+color = Color(0.546792, 0.857691, 0.893742, 1)
+alpha_curve = SubResource("CurveTexture_htre6")
+emission_curve = SubResource("CurveTexture_nqpni")
 
 [node name="HitSpark" type="Node2D"]
-script = ExtResource("1_rv1cv")
+script = ExtResource("1_htre6")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pw8aq")
@@ -43,7 +46,7 @@ environment = SubResource("Environment_pw8aq")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="groups"]
 z_index = 11
-texture = ExtResource("2_jcnss")
+texture = ExtResource("2_vxpko")
 lifetime = 3.0
 speed_scale = 9.0
 explosiveness = 1.0
