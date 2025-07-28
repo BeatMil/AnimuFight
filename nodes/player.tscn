@@ -3550,7 +3550,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_gvos3"]
 resource_name = "techroll"
-length = 0.7
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

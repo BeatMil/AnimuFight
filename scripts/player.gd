@@ -1040,6 +1040,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"wall_abel_combo",
 		"late_parry",
 		"throw_break",
+		"techroll",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:
