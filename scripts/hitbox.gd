@@ -1,5 +1,4 @@
 extends Node2D
-
 #############################################################
 ## Node Ref
 #############################################################
@@ -7,6 +6,7 @@ extends Node2D
 @onready var area_2d: Area2D = $Area2D
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var hit_noise = preload("res://media/sfxs/gc_punch.wav")
+@onready var glass_break = preload("res://media/sfxs/HitIce.wav")
 
 
 #############################################################
@@ -71,10 +71,29 @@ func _play_hit_random_pitch():
 	audio_stream_player.play()
 
 
+func _play_glass_break_random_pitch():
+	audio_stream_player.stream = glass_break
+	audio_stream_player.pitch_scale = randf_range(0.8, 1.2)
+	audio_stream_player.play()
+
+
 #############################################################
 ## Signals
 #############################################################
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	var is_blocking = false
+
+	# Play sfx based on state
+	if body.state in [
+		body.States.BLOCK,
+		body.States.PARRY,
+		body.States.PARRY_SUCCESS,
+	] and type == Enums.Attack.UNBLOCK:
+		pass
+		_play_glass_break_random_pitch()
+		is_blocking = true
+		print("guard break!")
+
 	if body.has_method("hitted"):
 		if body.is_on_floor():
 			body.hitted(get_parent(),
@@ -104,20 +123,27 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			zoom_duration,
 			slow_mo_on_block
 			)
-		if body.state not in [
-			body.States.BLOCK,
-			body.States.PARRY,
-			body.States.ARMOR,
-			body.States.IFRAME,
-			] and type not in [
-			Enums.Attack.THROW_GROUND,
-			Enums.Attack.THROW_FLOAT,
-			Enums.Attack.P_THROW,
-			Enums.Attack.P_AIR_THROW,
-			Enums.Attack.P_WALL_THROW,
-			Enums.Attack.P_GROUND_THROW,
-			]:
-			_play_hit_random_pitch()
+
+	if body.state not in [
+		body.States.BLOCK,
+		body.States.PARRY,
+		body.States.ARMOR,
+		body.States.IFRAME,
+		body.States.DODGE,
+		body.States.DODGE_SUCCESS,
+		] and type not in [
+		Enums.Attack.THROW_GROUND,
+		Enums.Attack.THROW_FLOAT ,
+		Enums.Attack.P_THROW,
+		Enums.Attack.P_AIR_THROW,
+		Enums.Attack.P_WALL_THROW,
+		Enums.Attack.P_GROUND_THROW,
+		] and not is_blocking:
+		pass
+		_play_hit_random_pitch()
+		print(body.state," ",type)
+		print("normal attack pitch")
+
 		_on_timer_timeout()
 
 
