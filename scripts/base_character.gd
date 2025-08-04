@@ -53,6 +53,7 @@ enum Hitbox_type {
 	LARGE,
 	HAMMER,
 	TOWL,
+	THROW,
 	BURST,
 	EXECUTE,
 	METEO,
@@ -72,6 +73,7 @@ const HITBOX_LP_LARGE = preload("res://nodes/hitboxes/hitbox_lp2.tscn")
 const HITBOX_HAMMER = preload("res://nodes/hitboxes/hitbox_hammer.tscn")
 const HITBOX_BURST = preload("res://nodes/hitboxes/hitbox_burst.tscn")
 const HITBOX_TOWL = preload("res://nodes/hitboxes/hitbox_towl.tscn")
+const HITBOX_THROW = preload("res://nodes/hitboxes/hitbox_throw.tscn")
 const HITBOX_EXE = preload("res://nodes/hitboxes/hitbox_execute.tscn")
 const HITBOX_METEO = preload("res://nodes/hitboxes/hitbox_meteo_crash.tscn")
 const HITBOX_AIR_THROW = preload("res://nodes/hitboxes/hitbox_air_throw.tscn")
@@ -258,6 +260,8 @@ func _spawn_lp_hitbox(
 			## it doesn't interfere with others
 			if sprite_2d.flip_h: 
 				hitbox.scale.x = -1
+		Hitbox_type.THROW:
+			hitbox = HITBOX_THROW.instantiate()
 		Hitbox_type.BURST:
 			hitbox = HITBOX_BURST.instantiate()
 		Hitbox_type.EXECUTE:

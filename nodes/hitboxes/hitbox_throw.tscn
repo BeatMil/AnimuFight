@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://0ai4b4qrmaci"]
+
+[ext_resource type="PackedScene" uid="uid://jgmjqpnytm3v" path="res://nodes/hitboxes/hitbox_base.tscn" id="1_mha86"]
+[ext_resource type="Script" uid="uid://dsn05ivlyy2cn" path="res://scripts/hitbox_towl.gd" id="2_la1uw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hnasr"]
+size = Vector2(128, 256)
+
+[node name="HitboxThrow" instance=ExtResource("1_mha86")]
+editor_description = "Hitbox for enemy throw without towl"
+script = ExtResource("2_la1uw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_hnasr")

@@ -58,6 +58,54 @@ func attack01_info() -> void: # for animation_player
 	dict_to_spawn_hitbox(info)
 
 
+func _throw_ground() -> void:
+	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
+		state = States.BLOCK
+		animation_player.play("throw_ground")
+func throw_ground_info() -> void: # for animation_player
+	var info = {
+	"size": Hitbox_type.THROW,
+	"time": 0.3,
+	"push_power_ground": Vector2(500, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(100, -150),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.5,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 2,
+	"type": Enums.Attack.THROW_GROUND,
+	# "pos": $HitBoxPos/TowlPos.position,
+	}
+	dict_to_spawn_hitbox(info)
+
+
+func _throw_float() -> void:
+	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
+		state = States.BLOCK
+		animation_player.play("throw_float")
+func throw_float_info() -> void: # for animation_player
+	var info = {
+	"size": Hitbox_type.THROW,
+	"time": 0.3,
+	"push_power_ground": Vector2(500, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(100, -150),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.5,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 2,
+	"type": Enums.Attack.THROW_FLOAT,
+	# "pos": $HitBoxPos/TowlPos.position,
+	}
+	dict_to_spawn_hitbox(info)
+
+
 #############################################################
 ## Signals
 #############################################################
@@ -121,7 +169,13 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "execute":
 		animation_player.play("idle")
 		hp_bar.hp_up(5)
-	if anim_name in ["lp1", "attack01_1", "lp1_chain"]:
+	if anim_name in [
+		"lp1",
+		"attack01_1",
+		"lp1_chain",
+		"throw_float",
+		"throw_ground"
+		]:
 		animation_player.play("idle")
 		state = States.IDLE
 	if anim_name in ["ded"]:
@@ -146,8 +200,10 @@ func do_attack() -> void:
 		match randi_range(0, 1):
 			0:
 				# _lp()
-				_attack01()
+				# _attack01()
+				_throw_ground()
 			1:
+				_throw_float()
 				# _lp()
-				_attack01()
+				# _attack01()
 				# _lp_chain()

@@ -26,7 +26,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		slow_mo_on_block
 		)
 		_on_timer_timeout()
-	print(body.name)
 	await get_tree().create_timer(0.5).timeout
 	if body.state not in [17, 5]: #THROW_BREAKABLE:
 		return
