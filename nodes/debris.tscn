@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://xcraqili7lb3"]
 
 [ext_resource type="Script" uid="uid://bmc7j7j0ykd0g" path="res://scripts/hit_spark.gd" id="1_i1c3q"]
-[ext_resource type="Texture2D" uid="uid://dbrgujfjdctli" path="res://media/sprites/stage01/debris.png" id="2_gdhmu"]
+[ext_resource type="Texture2D" uid="uid://dbrgujfjdctli" path="res://media/sprites/pre_stage01/debris.png" id="2_gdhmu"]
 [ext_resource type="PackedScene" uid="uid://b33gvgvchhbv1" path="res://nodes/debris_upward.tscn" id="3_jg2i2"]
 
 [sub_resource type="Gradient" id="Gradient_8s3yv"]

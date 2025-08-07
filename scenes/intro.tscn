@@ -513,6 +513,7 @@ script = ExtResource("1_g0bkf")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="SkipBar" parent="CanvasLayer" instance=ExtResource("2_xwriy")]
+next_scene = "res://scenes/pre_stage01.tscn"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

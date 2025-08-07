@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b33gvgvchhbv1"]
 
 [ext_resource type="Script" uid="uid://bmc7j7j0ykd0g" path="res://scripts/hit_spark.gd" id="1_0efag"]
-[ext_resource type="Texture2D" uid="uid://dbrgujfjdctli" path="res://media/sprites/stage01/debris.png" id="2_564et"]
+[ext_resource type="Texture2D" uid="uid://dbrgujfjdctli" path="res://media/sprites/pre_stage01/debris.png" id="2_564et"]
 
 [sub_resource type="Gradient" id="Gradient_8s3yv"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://eigpd3xpsx88"]
 
-[ext_resource type="Texture2D" uid="uid://u3a7t54kbtb8" path="res://media/sprites/stage01/stage01_home.png" id="1_aowbe"]
+[ext_resource type="Texture2D" uid="uid://u3a7t54kbtb8" path="res://media/sprites/pre_stage01/stage01_home.png" id="1_aowbe"]
 [ext_resource type="Texture2D" uid="uid://cvctqio1skqef" path="res://media/sprites/char1/vanilla_dash_grab.png" id="1_i4d4a"]
 [ext_resource type="Texture2D" uid="uid://bswk48xnujm50" path="res://media/sprites/boss01/boss01_tatsu.png" id="2_poaxq"]
 
