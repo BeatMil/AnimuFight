@@ -626,9 +626,9 @@ func throw_break_info() ->  void:
 	var info = {
 	"size": Hitbox_type.SMALL,
 	"time": 0.1,
-	"push_power_ground": Vector2(200, 0),
+	"push_power_ground": Vector2(200, -100),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
-	"push_power_air": Vector2(200, 0),
+	"push_power_air": Vector2(200, -100),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
 	"hitlag_amount_ground": 0.1,
 	"hitstun_amount_ground": 1,
