@@ -141,8 +141,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		] and not is_blocking:
 		pass
 		_play_hit_random_pitch()
-		print(body.state," ",type)
-		print("normal attack pitch")
 
 		_on_timer_timeout()
 

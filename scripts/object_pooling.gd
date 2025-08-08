@@ -12,6 +12,7 @@ const SANDSPARK_R = preload("res://nodes/hitsparks/sand_particleR.tscn")
 const SANDSPARK_L = preload("res://nodes/hitsparks/sand_particleL.tscn")
 const ATTACK_TYPE_INDICATOR = preload("res://nodes/attack_type_indicator.tscn")
 const GLASS_SPARK = preload("res://nodes/hitsparks/glass_spark_cool.tscn")
+const JUCTION_SPARK = preload("res://nodes/hitsparks/juction_particle.tscn")
 
 
 #############################################################
@@ -72,5 +73,11 @@ func spawn_sand_sparkL(_position: Vector2 = pooling_pos) -> void:
 
 func spawn_glass_spark(_position: Vector2 = pooling_pos) -> void:
 	var hitspark = GLASS_SPARK.instantiate()
+	hitspark.position = _position
+	get_tree().current_scene.add_child(hitspark)
+
+
+func spawn_juction_glass(_position: Vector2 = pooling_pos) -> void:
+	var hitspark = JUCTION_SPARK.instantiate()
 	hitspark.position = _position
 	get_tree().current_scene.add_child(hitspark)

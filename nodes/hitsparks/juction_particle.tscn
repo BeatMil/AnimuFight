@@ -1,18 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6bmg4oltbwwi"]
+[gd_scene load_steps=6 format=3 uid="uid://dnwokja37ly8f"]
 
-[ext_resource type="Script" uid="uid://cxlm7u372ve4g" path="res://scripts/hit_spark2.gd" id="1_ap6fr"]
-[ext_resource type="AudioStream" uid="uid://cj88rrwq4fria" path="res://media/sfxs/bomb.wav" id="3_bybs6"]
+[ext_resource type="Script" uid="uid://cxlm7u372ve4g" path="res://scripts/hit_spark2.gd" id="1_jj3qr"]
+[ext_resource type="AudioStream" uid="uid://cjtoirqs2uufb" path="res://media/sfxs/Lightning_PiercingAttack.wav" id="2_jj3qr"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k72xe"]
 particle_flag_disable_z = true
-direction = Vector3(0, 1, 0)
-initial_velocity_min = 300.0
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 100.0
 initial_velocity_max = 400.0
-gravity = Vector3(0, 0, 0)
+gravity = Vector3(0, 200, 0)
 scale_min = 8.0
 scale_max = 15.0
-color = Color(0.981995, 0.981995, 0.600785, 1)
-hue_variation_min = -0.22
+color = Color(0.387345, 0.934474, 0.774662, 1)
+hue_variation_min = -0.17
 hue_variation_max = -2.23517e-08
 
 [sub_resource type="Animation" id="Animation_e43ln"]
@@ -28,7 +28,7 @@ tracks/0/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_bybs6")
+"stream": ExtResource("2_jj3qr")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -40,7 +40,7 @@ _data = {
 }
 
 [node name="LightParticle" type="Node2D"]
-script = ExtResource("1_ap6fr")
+script = ExtResource("1_jj3qr")
 
 [node name="Particles" type="Node2D" parent="."]
 
