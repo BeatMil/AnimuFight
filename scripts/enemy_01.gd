@@ -3,7 +3,7 @@ extends "res://scripts/enemy.gd"
 
 func _ready() -> void:
 	super._ready()
-	block_rate = 10
+	block_rate = 0
 
 
 #############################################################
@@ -52,7 +52,7 @@ func attack01_info() -> void: # for animation_player
 	"hitstun_amount_air": 0.05,
 	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 4,
-	"type": Enums.Attack.NORMAL,
+	"type": Enums.Attack.UNBLOCK,
 	"pos": Vector2(50, 0),
 	}
 	dict_to_spawn_hitbox(info)
@@ -94,6 +94,7 @@ func _on_attack_01_range_r_body_entered(body: Node2D) -> void:
 		is_player_in_range_attack01 = true
 		_on_attack_timer_timeout()
 		attack_timer.start()
+
 
 func _on_attack_01_range_l_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
@@ -148,6 +149,6 @@ func do_attack() -> void:
 				# _lp()
 				_attack01()
 			1:
-				# _lp()
-				_attack01()
+				_lp()
+				# _attack01()
 				# _lp_chain()

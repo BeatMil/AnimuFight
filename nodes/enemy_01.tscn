@@ -145,7 +145,7 @@ tracks/1/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("7_yccbm")
 }],
-"times": PackedFloat32Array(0, 0.6)
+"times": PackedFloat32Array(0, 0.833333)
 }
 tracks/1/use_blend = true
 tracks/2/type = "value"
@@ -167,9 +167,12 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.6),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.833333),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [1],
+"method": &"_show_attack_indicator"
+}, {
 "args": [],
 "method": &"attack01_info"
 }]
@@ -181,7 +184,7 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.533333),
+"times": PackedFloat32Array(0, 0.75),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [21],
@@ -198,7 +201,7 @@ tracks/5/path = NodePath("Sprite2D:offset")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 1),
+"times": PackedFloat32Array(0, 0.416667, 0.833333, 1.23333),
 "transitions": PackedFloat32Array(0.5, 1, 0.5, 2),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -200), Vector2(0, -200), Vector2(0, 0)]
@@ -210,7 +213,7 @@ tracks/6/path = NodePath(".")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 0.833333),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -251,7 +254,7 @@ tracks/9/path = NodePath("Sprite2D:frame")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.333333, 0.458333, 0.583333, 0.833333),
+"times": PackedFloat32Array(0, 0.566666, 0.691666, 0.816666, 1.06667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
