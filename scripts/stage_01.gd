@@ -7,7 +7,7 @@ func _ready() -> void:
 	get_node_or_null("Player/Camera").set_screen_lock(-10000000, 10000000, -10000000, 1000)
 	get_node_or_null("Player/Camera").set_zoom(Vector2(1,1))
 
-	Settings.current_stage = "res://scenes/stage01.tscn"
+	Settings.current_stage = "res://scenes/stage_01.tscn"
 
 	# Player ost
 	# music_player.play("stage01_track_copyright")

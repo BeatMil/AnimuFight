@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=14 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
 [ext_resource type="Texture2D" uid="uid://cei5iglc0dohc" path="res://media/sprites/stage01/home.png" id="2_4caca"]
 [ext_resource type="Texture2D" uid="uid://c2anqn8y5dr50" path="res://media/sprites/stage01/floor.png" id="2_fnmkw"]
+[ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/ui/restart_menu.tscn" id="2_nh3b5"]
 [ext_resource type="Script" uid="uid://ckudchaksw6pd" path="res://scripts/enemy_spawner_stage01.gd" id="5_70ndm"]
 [ext_resource type="Script" uid="uid://duxhld58ww51q" path="res://scripts/enemy_spawn_helper.gd" id="6_l457t"]
 [ext_resource type="PackedScene" uid="uid://c4m5deiee8q8w" path="res://nodes/boss01.tscn" id="7_nh3b5"]
@@ -17,6 +18,11 @@ size = Vector2(1920, 326)
 
 [node name="Stage01" type="Node2D"]
 script = ExtResource("1_4caca")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_nh3b5")]
+visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
 position = Vector2(803.417, 411.32)
@@ -69,14 +75,15 @@ shape = SubResource("RectangleShape2D_i6ddm")
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("5_70ndm")
 target = NodePath("../Player")
-enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpawnHelper/Phase2"), NodePath("../EnemySpawnHelper/Phase3"), null, null, null, null, null, null]
+enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpawnHelper/Phase2"), NodePath("../EnemySpawnHelper/Phase3"), NodePath("../EnemySpawnHelper/Phase4"), null, null, null, null, null]
 
 [node name="enemyCount" type="Node" parent="EnemySpawnerNew"]
 
 [node name="EnemySpawnHelper" type="Node" parent="."]
 
-[node name="boss02" type="Node" parent="EnemySpawnHelper"]
+[node name="boss02" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
+position = NodePath("../../SpawnPos/pos3")
 hp = 50
 object = ExtResource("7_nh3b5")
 
@@ -85,7 +92,13 @@ object = ExtResource("7_nh3b5")
 [node name="e2" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
 position = NodePath("../../../SpawnPos/pos1")
-hp = 10
+hp = 50
+object = ExtResource("8_nasqd")
+
+[node name="e3" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../SpawnPos/pos1")
+hp = 50
 object = ExtResource("8_nasqd")
 
 [node name="Phase2" type="Node" parent="EnemySpawnHelper"]
