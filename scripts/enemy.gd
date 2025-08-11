@@ -229,7 +229,7 @@ func set_is_bound(value: bool) -> void:
 
 
 func _on_bounce_together_body_entered(body: Node2D) -> void:
-	if velocity.length() < 5000:
+	if velocity.length() < 2000:
 		return
 	## Hit other enemy
 	if self.state in [States.BOUNCE_STUNNED, States.EXECUTETABLE, States.THROWN] \
