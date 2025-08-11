@@ -493,8 +493,13 @@ func hitted(
 		pass
 
 	elif _type == Enums.Attack.P_GROUND_THROW:
+		if _attacker.throwee:
+			return
+		else:
+			_attacker.throwee = self
+
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
-		_attacker.state = States.HIT_STUNNED
+		_attacker.state = States.HIT_STUNNED ## whyy? but it works!
 		_attacker.animation_player.play("wall_throw")
 		state = States.GRABBED
 		animation_player.play("thrown")
@@ -530,7 +535,7 @@ func hitted(
 
 	elif _type in [Enums.Attack.THROW_GROUND, Enums.Attack.THROW_FLOAT]:
 		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
-		set_throwee(_attacker)
+		set_thrower(_attacker)
 
 		if _type == Enums.Attack.THROW_GROUND:
 			animation_player.play("throw_stunned_ground")
@@ -700,7 +705,7 @@ func	set_collision_no_hit_all():
 func _add_block_count(amount: int):
 	pass
 
-func set_throwee(the_guy: CharacterBody2D) -> void:
+func set_thrower(the_guy: CharacterBody2D) -> void:
 	pass
 
 func block_effect_helper(

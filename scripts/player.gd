@@ -64,6 +64,7 @@ var can_block_states_hold = [
 # var input_history := ["n","right","n","n","n","n","right","right","right","right","right"]
 var input_history := []
 
+var thrower: CharacterBody2D
 var throwee: CharacterBody2D
 
 
@@ -197,6 +198,8 @@ func _physics_process(delta: float) -> void:
 
 		if jump_buffer_timer > 0:
 			_jump(delta)
+
+		throwee = null
 	else:
 		## Adding friction like this is not gonna go well (っ˘̩╭╮˘̩)っ 
 		friction = 0.1
@@ -348,9 +351,12 @@ func give_wall_throw_pos() -> Marker2D:
 		return grab_pos_r
 
 
+func set_thrower(the_guy: CharacterBody2D) -> void:
+	thrower = the_guy
+
+
 func set_throwee(the_guy: CharacterBody2D) -> void:
 	throwee = the_guy
-
 
 #############################################################
 ## Private function
@@ -636,7 +642,7 @@ func throw_break_info() ->  void:
 	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 2,
 	"type": Enums.Attack.UNBLOCK,
-	"pos_direct": throwee.global_position - global_position,
+	"pos_direct": thrower.global_position - global_position,
 	"zoom": Vector2(0.1, 0.1),
 	"zoom_duration": 0.05,
 	}
