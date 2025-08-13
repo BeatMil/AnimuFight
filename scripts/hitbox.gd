@@ -26,9 +26,10 @@ var hitstun_amount_air: float = 0
 var screenshake_amount: Vector2 = Vector2(0, 0)
 var damage: int = 0
 var type = Enums.Attack.NORMAL
-var zoom = Vector2(0.8, 0.8)
+var zoom = Vector2(1, 1)
 var zoom_duration = 0.1
 var slow_mo_on_block = Vector2(0, 0)
+var is_stay: bool = false
 
 
 #############################################################
@@ -146,6 +147,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_timer_timeout() -> void:
+	if is_stay:
+		return
+
 	_set_collision_no_hit() # background_object shake twice if I use monitoring
 	area_2d.visible = false
 

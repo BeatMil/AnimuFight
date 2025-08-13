@@ -1,0 +1,265 @@
+[gd_scene load_steps=12 format=3 uid="uid://dxf7beg6mlrhw"]
+
+[ext_resource type="Texture2D" uid="uid://ditu0aat88u2h" path="res://media/sprites/stage01/flower_pot.png" id="1_3wib4"]
+[ext_resource type="Script" uid="uid://bjibtq3eqqtkf" path="res://scripts/falling_flower_pot.gd" id="1_unojl"]
+[ext_resource type="AudioStream" uid="uid://bv7jrbudlmh4j" path="res://media/sfxs/HitStone2.wav" id="2_8twfc"]
+[ext_resource type="AudioStream" uid="uid://c1040hkvodf57" path="res://media/sfxs/danger01.wav" id="2_ddf60"]
+[ext_resource type="Script" uid="uid://bowxavl5xene" path="res://scripts/flower_area_2d.gd" id="3_blakw"]
+
+[sub_resource type="Animation" id="Animation_unojl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlowerPot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -1903)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Warning:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.921, 0.46, 0.46, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlowerPot:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BreakFlowerPot:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_3wib4"]
+resource_name = "fall"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlowerPot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.433333, 1.33333, 1.5, 1.8),
+"transitions": PackedFloat32Array(2, 2, 0.5, 2, 1),
+"update": 0,
+"values": [Vector2(0, -1903), Vector2(0, -1903), Vector2(0, 0), Vector2(0, -200), Vector2(0, 800)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_ddf60")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_8twfc")
+}],
+"times": PackedFloat32Array(0, 1.33333)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Warning:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.633333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.921, 0.46, 0.46, 0), Color(0.921, 0.46, 0.46, 0.742), Color(0.921, 0.46, 0.46, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlowerPot:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.33333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BreakFlowerPot:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.33333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.33333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"pot_break"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_blakw"]
+_data = {
+&"RESET": SubResource("Animation_unojl"),
+&"fall": SubResource("Animation_3wib4")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_unojl"]
+size = Vector2(178.161, 384.237)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3wib4"]
+size = Vector2(356, 394)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddf60"]
+size = Vector2(48, 96)
+
+[node name="FallingFlowerPot" type="Node2D"]
+script = ExtResource("1_unojl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_blakw")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+
+[node name="FlowerPot" type="Sprite2D" parent="."]
+position = Vector2(0, -1903)
+rotation = 0.349066
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_3wib4")
+script = ExtResource("3_blakw")
+
+[node name="Area2D" type="Area2D" parent="FlowerPot"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlowerPot/Area2D"]
+shape = SubResource("RectangleShape2D_unojl")
+
+[node name="ActiveFrameTimer" type="Timer" parent="FlowerPot"]
+wait_time = 2.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FlowerPot"]
+
+[node name="Warning" type="Polygon2D" parent="."]
+position = Vector2(0, -14.7692)
+scale = Vector2(1, 1.07692)
+color = Color(0.921, 0.46, 0.46, 0)
+polygon = PackedVector2Array(-128, 192, -128, -640, 128, -640, 128, 192)
+
+[node name="TriggerArea2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea2D"]
+shape = SubResource("RectangleShape2D_3wib4")
+
+[node name="BreakFlowerPot" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, -152)
+
+[node name="TL" type="RigidBody2D" parent="BreakFlowerPot"]
+position = Vector2(-32, -56)
+collision_layer = 0
+collision_mask = 15
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakFlowerPot/TL"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_ddf60")
+
+[node name="FlowerPot" type="Sprite2D" parent="BreakFlowerPot/TL"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_3wib4")
+region_enabled = true
+region_rect = Rect2(144, 56, 112, 216)
+
+[node name="TR" type="RigidBody2D" parent="BreakFlowerPot"]
+position = Vector2(16, -56)
+collision_layer = 0
+collision_mask = 15
+
+[node name="FlowerPot2" type="Sprite2D" parent="BreakFlowerPot/TR"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_3wib4")
+region_enabled = true
+region_rect = Rect2(256, 56, 88, 216)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakFlowerPot/TR"]
+position = Vector2(-8, 8)
+shape = SubResource("RectangleShape2D_ddf60")
+
+[node name="BR" type="RigidBody2D" parent="BreakFlowerPot"]
+position = Vector2(16, 40)
+collision_layer = 0
+collision_mask = 15
+
+[node name="FlowerPot3" type="Sprite2D" parent="BreakFlowerPot/BR"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_3wib4")
+region_enabled = true
+region_rect = Rect2(256, 272, 88, 184)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakFlowerPot/BR"]
+shape = SubResource("RectangleShape2D_ddf60")
+
+[node name="BL" type="RigidBody2D" parent="BreakFlowerPot"]
+position = Vector2(-24, 40)
+collision_layer = 0
+collision_mask = 15
+
+[node name="FlowerPot4" type="Sprite2D" parent="BreakFlowerPot/BL"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_3wib4")
+region_enabled = true
+region_rect = Rect2(176, 272, 80, 184)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakFlowerPot/BL"]
+shape = SubResource("RectangleShape2D_ddf60")
+
+[connection signal="body_entered" from="FlowerPot/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="FlowerPot/Area2D" to="FlowerPot" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="TriggerArea2D" to="." method="_on_trigger_area_2d_body_entered"]
