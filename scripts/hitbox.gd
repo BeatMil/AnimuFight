@@ -124,6 +124,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			zoom_duration,
 			slow_mo_on_block
 			)
+		_on_timer_timeout()
 
 	if body.state not in [
 		body.States.BLOCK,
@@ -142,8 +143,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		] and not is_blocking:
 		pass
 		_play_hit_random_pitch()
-
-		_on_timer_timeout()
 
 
 func _on_timer_timeout() -> void:

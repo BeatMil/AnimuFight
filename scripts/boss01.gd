@@ -1,6 +1,7 @@
 extends "res://scripts/enemy.gd"
 
 @onready var meteo_pos: Marker2D = $HitBoxPos/MeteoPos
+@onready var detect_ground: Area2D = $DetectGround
 
 var is_player_in_range_burn_knuckle = false
 
@@ -12,8 +13,6 @@ func _ready() -> void:
 #############################################################
 ## Attack Info
 #############################################################
-
-
 func _attack01() -> void:
 	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
 		state = States.BLOCK
@@ -144,7 +143,7 @@ func meteo_crash() -> void:
 func meteo_crash_info() -> void: # for animation_player
 	var info = {
 	"size": Hitbox_type.METEO,
-	"time": 5,
+	"time": 10,
 	"push_power_ground": Vector2(1000, -200),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
 	"push_power_air": Vector2(1000, -200),
@@ -231,3 +230,9 @@ func do_attack() -> void:
 				_lp()
 			1:
 				meteo_crash()
+
+
+func _on_detect_ground_body_entered(_body: Node2D) -> void:
+	if animation_player.current_animation == "meteo_crash":
+		set_collision_normal()
+		ObjectPooling.spawn_ground_spark(global_position, false)

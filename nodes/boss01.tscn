@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://c4m5deiee8q8w"]
+[gd_scene load_steps=48 format=3 uid="uid://c4m5deiee8q8w"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_uha72"]
 [ext_resource type="Texture2D" uid="uid://hfw58i0oa1gv" path="res://media/sprites/boss01/boss01_idle.png" id="2_410lf"]
@@ -1322,15 +1322,11 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("5_xbwuq")
-}, {
 "end_offset": 0.144746,
 "start_offset": 0.0,
 "stream": ExtResource("16_uhi2f")
 }],
-"times": PackedFloat32Array(0, 1.1)
+"times": PackedFloat32Array(1.1)
 }
 tracks/1/use_blend = true
 tracks/2/type = "value"
@@ -1935,6 +1931,9 @@ size = Vector2(304, 256)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8qvtx"]
 size = Vector2(144, 304)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umypt"]
+size = Vector2(176, 20)
+
 [node name="Boss01" groups=["boss", "character", "enemy"] instance=ExtResource("1_uha72")]
 collision_layer = 2
 collision_mask = 15
@@ -2012,6 +2011,16 @@ offset_top = -184.0
 offset_right = 128.0
 offset_bottom = -168.0
 
+[node name="DetectGround" type="Area2D" parent="." index="14"]
+editor_description = "Detect ground to spawn meteo crash spark"
+position = Vector2(0, 144)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectGround" index="0"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_umypt")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="LpRange" to="." method="_on_lp_range_body_entered"]
@@ -2020,3 +2029,4 @@ offset_bottom = -168.0
 [connection signal="body_exited" from="BurnKnuckleRange" to="." method="_on_burn_knuckle_range_body_exited"]
 [connection signal="body_entered" from="BounceTogether" to="." method="_on_bounce_together_body_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="DetectGround" to="." method="_on_detect_ground_body_entered"]

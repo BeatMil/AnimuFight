@@ -44,7 +44,7 @@ texture = ExtResource("2_4caca")
 position = Vector2(961, 637)
 texture = ExtResource("5_nasqd")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor" groups=["ground"]]
 position = Vector2(35, 304)
 collision_layer = 8
 collision_mask = 0
@@ -53,11 +53,11 @@ collision_mask = 0
 position = Vector2(-35, 8)
 shape = SubResource("RectangleShape2D_i6ddm")
 
-[node name="Floor2" type="Sprite2D" parent="Map"]
+[node name="Floor2" type="Sprite2D" parent="Map" groups=["ground"]]
 position = Vector2(2881, 637)
 texture = ExtResource("2_fnmkw")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor2"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor2" groups=["ground"]]
 position = Vector2(35, 304)
 collision_layer = 8
 collision_mask = 0
@@ -66,11 +66,11 @@ collision_mask = 0
 position = Vector2(-35, 8)
 shape = SubResource("RectangleShape2D_i6ddm")
 
-[node name="Floor3" type="Sprite2D" parent="Map"]
+[node name="Floor3" type="Sprite2D" parent="Map" groups=["ground"]]
 position = Vector2(-958, 637)
 texture = ExtResource("2_fnmkw")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor3"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor3" groups=["ground"]]
 position = Vector2(35, 304)
 collision_layer = 8
 collision_mask = 0
@@ -83,31 +83,24 @@ shape = SubResource("RectangleShape2D_i6ddm")
 script = ExtResource("5_70ndm")
 target = NodePath("../Player")
 enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpawnHelper/Phase2"), NodePath("../EnemySpawnHelper/Phase3"), NodePath("../EnemySpawnHelper/Phase4"), null, null, null, null, null]
-is_active = false
 
 [node name="enemyCount" type="Node" parent="EnemySpawnerNew"]
 
 [node name="EnemySpawnHelper" type="Node" parent="."]
 
-[node name="boss02" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
+[node name="e2" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
-position = NodePath("../../SpawnPos/pos3")
+position = NodePath("../../SpawnPos/pos1")
 hp = 50
-object = ExtResource("7_nh3b5")
+object = ExtResource("8_nasqd")
 
 [node name="Phase1" type="Node" parent="EnemySpawnHelper"]
 
-[node name="e2" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
+[node name="boss02" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos1")
+position = NodePath("../../../SpawnPos/pos3")
 hp = 50
-object = ExtResource("8_nasqd")
-
-[node name="e3" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos1")
-hp = 50
-object = ExtResource("8_nasqd")
+object = ExtResource("7_nh3b5")
 
 [node name="Phase2" type="Node" parent="EnemySpawnHelper"]
 
