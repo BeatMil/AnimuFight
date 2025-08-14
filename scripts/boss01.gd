@@ -233,6 +233,7 @@ func do_attack() -> void:
 
 
 func _on_detect_ground_body_entered(_body: Node2D) -> void:
-	if animation_player.current_animation == "meteo_crash":
+	if animation_player.current_animation == "meteo_crash" \
+		and state == States.PUNISHABLE:
 		set_collision_normal()
 		ObjectPooling.spawn_ground_spark(global_position, false)

@@ -1932,7 +1932,7 @@ size = Vector2(304, 256)
 size = Vector2(144, 304)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umypt"]
-size = Vector2(176, 20)
+size = Vector2(176, 48)
 
 [node name="Boss01" groups=["boss", "character", "enemy"] instance=ExtResource("1_uha72")]
 collision_layer = 2
