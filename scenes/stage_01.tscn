@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=18 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="9_dimc6"]
 [ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_04.tscn" id="10_bc8xj"]
 [ext_resource type="PackedScene" uid="uid://bfomnvauggr4o" path="res://nodes/junction_box.tscn" id="11_l457t"]
+[ext_resource type="PackedScene" uid="uid://d0ufo617puti8" path="res://nodes/enemy_06.tscn" id="12_gsglw"]
 [ext_resource type="PackedScene" uid="uid://dxf7beg6mlrhw" path="res://nodes/falling_flower_pot.tscn" id="15_bc8xj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6ddm"]
@@ -106,7 +107,7 @@ object = ExtResource("8_nasqd")
 script = ExtResource("6_l457t")
 position = NodePath("../../../SpawnPos/pos1")
 hp = 50
-object = ExtResource("8_nasqd")
+object = ExtResource("12_gsglw")
 
 [node name="Phase2" type="Node" parent="EnemySpawnHelper"]
 
