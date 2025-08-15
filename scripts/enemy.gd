@@ -5,6 +5,9 @@ extends "res://scripts/base_character.gd"
 @export var is_notarget: bool
 
 
+var DED_SPRITE = null
+
+
 #############################################################
 ## Node Ref
 #############################################################
@@ -106,6 +109,7 @@ func _physics_process(delta: float) -> void:
 		set_collision_no_hit_all()
 	elif stun_duration < 0 and animation_player.current_animation != "wallsplat":
 		if hp_bar.get_hp() <= 0:
+			spawn_ded_copy()
 			queue_free()
 		stun_duration = 0
 		animation_player.play("idle")
@@ -226,6 +230,15 @@ func get_is_bound() -> bool:
 
 func set_is_bound(value: bool) -> void:
 	is_bound = value
+
+
+func spawn_ded_copy() -> void:
+	var ded_copy = Sprite2D.new()
+	ded_copy.texture = DED_SPRITE
+	ded_copy.position = position
+	ded_copy.flip_h = sprite_2d.flip_h
+	ded_copy.scale = sprite_2d.scale
+	get_tree().current_scene.add_child(ded_copy)
 
 
 func _on_bounce_together_body_entered(body: Node2D) -> void:

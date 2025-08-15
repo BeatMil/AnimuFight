@@ -4,6 +4,7 @@ extends "res://scripts/enemy.gd"
 func _ready() -> void:
 	super._ready()
 	block_rate = 10
+	DED_SPRITE = preload("res://media/sprites/enemy06/enemy06_down.png")
 
 
 #############################################################

@@ -1,9 +1,14 @@
 extends "res://scripts/enemy.gd"
 
 
+# const DED_SPRITE = preload("res://media/sprites/char2/enemy01_down.png")
+
+
 func _ready() -> void:
 	super._ready()
 	block_rate = 0
+	DED_SPRITE = preload("res://media/sprites/char2/enemy01_down.png")
+
 
 
 #############################################################
@@ -126,6 +131,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		animation_player.play("idle")
 		state = States.IDLE
 	if anim_name in ["ded"]:
+		spawn_ded_copy()
 		queue_free()
 
 
