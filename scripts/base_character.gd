@@ -457,7 +457,10 @@ func hitted(
 
 	## Player command grab (super)
 	elif _type == Enums.Attack.P_THROW:
-		pass
+		if _attacker.throwee:
+			return
+		else:
+			_attacker.throwee = self
 		_attacker.state = States.IFRAME
 		_attacker.animation_player.play("wall_abel_combo2")
 		state = States.GRABBED
