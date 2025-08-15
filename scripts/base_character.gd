@@ -472,6 +472,10 @@ func hitted(
 
 	## Player air grab hits
 	elif _type == Enums.Attack.P_AIR_THROW and not is_on_floor():
+		if _attacker.throwee:
+			return
+		else:
+			_attacker.throwee = self
 		state = States.GRABBED
 		animation_player.play("throw_stunned")
 		self.air_throw_follow_pos = _attacker.give_air_throw_pos()

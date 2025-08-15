@@ -973,6 +973,7 @@ func execute_carnaging(pos: Vector2) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", pos+offset, 0.2).set_trans(Tween.TRANS_CUBIC)
 
+
 func enter_grab_stance() -> void:
 	animation_player.play("grab_stance")
 
@@ -995,6 +996,7 @@ func set_collision_noclip() -> void:
 func set_collision_ded() -> void:
 	collision_layer = 0b00000000000000000000
 	collision_mask = 0b00000000000000001000
+
 
 func is_pressing_right() -> int:
 	if Input.is_action_pressed("right"):
@@ -1074,3 +1076,8 @@ func _on_execute_area_r_body_entered(body: Node2D) -> void:
 
 func _on_execute_area_r_body_exited(body: Node2D) -> void:
 	body_in_execution_ranges.erase(body)
+
+
+func _on_animation_player_animation_started(anim_name: StringName) -> void:
+	if anim_name == "air_spd_burst":
+		set_throwee(null)
