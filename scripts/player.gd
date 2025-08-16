@@ -156,6 +156,7 @@ func _input(event: InputEvent) -> void:
 		elif Input.is_action_just_released("block"):
 			_add_block_buffer_time()
 
+	# _check_input_history()
 	# debug_input_event = event
 
 
@@ -198,6 +199,7 @@ func _physics_process(delta: float) -> void:
 
 		if jump_buffer_timer > 0:
 			_jump(delta)
+			jump_buffer_timer = 0
 
 		throwee = null
 	else:
@@ -270,7 +272,10 @@ func _physics_process(delta: float) -> void:
 	# 	_lp_hp()
 
 	if Input.is_action_just_pressed("lp"):
-		queue_move(_lp)
+		if is_on_floor():
+			queue_move(_lp)
+		else:
+			_air_lp()
 
 	if Input.is_action_just_pressed("hp"):
 		queue_move(_hp)
@@ -555,6 +560,20 @@ func lp4_info() -> void:
 	}
 	dict_to_spawn_hitbox(info)
 
+
+func _air_lp() ->  void:
+	if state not in [
+		States.AIR,
+	]:
+		return
+
+	if Input.is_action_pressed("left"):
+		sprite_2d.flip_h = true
+
+	if Input.is_action_pressed("right"):
+		sprite_2d.flip_h = false
+
+	animation_player.play("jump_attack")
 
 func _hp() ->  void:
 	if state not in [
@@ -1048,6 +1067,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"late_parry",
 		"throw_break",
 		"techroll",
+		"jump_attack",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:

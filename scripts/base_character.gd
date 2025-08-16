@@ -696,9 +696,9 @@ func _slow_moion_no_sfx(level, length) -> void:
 
 
 func play_bounce_sfx() -> void:
-		$AudioStreamPlayer2.stream = HIT_BOUNCE
-		$AudioStreamPlayer2.pitch_scale = randf_range(0.8, 1.2)
-		$AudioStreamPlayer2.play()
+	$AudioStreamPlayer2.stream = HIT_BOUNCE
+	$AudioStreamPlayer2.pitch_scale = randf_range(0.8, 1.2)
+	$AudioStreamPlayer2.play()
 
 
 # func set_collision_no_hit_player() -> void: # suppress error

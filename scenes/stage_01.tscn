@@ -95,6 +95,12 @@ position = NodePath("../../SpawnPos/pos3")
 hp = 50
 object = ExtResource("7_nh3b5")
 
+[node name="e3" type="Node" parent="EnemySpawnHelper" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../SpawnPos/pos1")
+hp = 50
+object = ExtResource("12_gsglw")
+
 [node name="Phase1" type="Node" parent="EnemySpawnHelper"]
 
 [node name="e2" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
@@ -102,12 +108,6 @@ script = ExtResource("6_l457t")
 position = NodePath("../../../SpawnPos/pos1")
 hp = 50
 object = ExtResource("8_nasqd")
-
-[node name="e3" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos1")
-hp = 50
-object = ExtResource("12_gsglw")
 
 [node name="Phase2" type="Node" parent="EnemySpawnHelper"]
 
