@@ -44,6 +44,7 @@ enum States {
 	AIR_SPD,
 	DASH,
 	WALL_THROW,
+	DOWN_HP,
 	}
 
 

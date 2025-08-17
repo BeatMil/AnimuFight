@@ -170,7 +170,7 @@ func _physics_process(delta: float) -> void:
 			animation_player.play("idle")
 			state = States.IDLE
 	else:
-		if state == States.IDLE:
+		if state in [States.IDLE, States.DOWN_HP]:
 			state = States.AIR
 	
 	if state == States.AIR:
@@ -191,22 +191,21 @@ func _physics_process(delta: float) -> void:
 			friction = 0.5
 			_lerp_velocity_x()
 
-		# Jump buffer
-		if Input.is_action_just_pressed("jump"):
-			jump_buffer_timer = jump_buffer_time
-		elif jump_buffer_timer > 0:
-			jump_buffer_timer -= delta
-
-		if jump_buffer_timer > 0:
-			_jump(delta)
-			jump_buffer_timer = 0
-
 		throwee = null
 	else:
 		## Adding friction like this is not gonna go well (っ˘̩╭╮˘̩)っ 
 		friction = 0.1
 		_lerp_velocity_x()
 	
+	# Jump
+	if state in [States.IDLE, States.DOWN_HP]:
+		handle_jump_buffer(delta)
+
+	# Jump buffer
+	if jump_buffer_timer > 0:
+		_jump(delta)
+		jump_buffer_timer = 0
+
 	# Tech roll
 	if state in [States.BOUNCE_STUNNED, States.WALL_BOUNCED]:
 		if is_on_floor():
