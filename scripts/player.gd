@@ -274,7 +274,7 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			queue_move(_lp)
 		else:
-			_air_lp()
+			queue_move(_air_lp)
 
 	if Input.is_action_just_pressed("hp"):
 		queue_move(_hp)
@@ -563,6 +563,7 @@ func lp4_info() -> void:
 func _air_lp() ->  void:
 	if state not in [
 		States.AIR,
+		States.AIR_LP1,
 	]:
 		return
 
@@ -572,7 +573,46 @@ func _air_lp() ->  void:
 	if Input.is_action_pressed("right"):
 		sprite_2d.flip_h = false
 
-	animation_player.play("jump_attack")
+	if state == States.AIR_LP1:
+		animation_player.play("jump_attack_2")
+	else: ## <<-- start with this one
+		animation_player.play("jump_attack")
+func air_lp_info() -> void:
+	var info = {
+	"size": Hitbox_type.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(50, 0),
+	"push_type_ground": Enums.Push_types.NORMAL,
+	"push_power_air": Vector2(200, -50),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.0,
+	"hitstun_amount_ground": 0.1,
+	"hitlag_amount_air": 0.0,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 1,
+	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/LpPos.position,
+	}
+	dict_to_spawn_hitbox(info)
+func air_lp_info2() -> void:
+	var info = {
+	"size": Hitbox_type.AIR_THROW,
+	"time": 0.1,
+	"push_power_ground": Vector2(50, 0),
+	"push_type_ground": Enums.Push_types.NORMAL,
+	"push_power_air": Vector2(200, -50),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0.1,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 1,
+	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/LpPos.position,
+	}
+	dict_to_spawn_hitbox(info)
 
 func _hp() ->  void:
 	if state not in [
@@ -1067,6 +1107,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"throw_break",
 		"techroll",
 		"jump_attack",
+		"jump_attack_2",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:
