@@ -52,6 +52,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if hitlag_timer > 0:
+		hitlag_timer -= delta
+		return
+
 	if is_notarget:
 		is_player_in_range_lp = false
 		is_player_in_range_attack01 = false

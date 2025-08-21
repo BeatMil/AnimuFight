@@ -93,6 +93,7 @@ func _process(_delta: float) -> void:
 		debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
 		debug_label.text += "\n%0.3f"%tech_roll_timer
 		debug_label.text += "\n%s"%animation_player.current_animation
+		debug_label.text += "\n%s"%hitlag_timer
 		# debug_label.text += "\n%s"%[input_history]
 		# debug_label.text += "\nGoh"
 		# debug_label.text += "\n%s"%Input.is_action_pressed("block")
@@ -131,7 +132,6 @@ func _input(event: InputEvent) -> void:
 			state = States.ATTACK # order of operation and stuff
 			animation_player.play("exe_hadoken")
 
-
 	## BLOCK
 	# if state in can_block_states:
 	if state not in [States.BOUNCE_STUNNED, States.WALL_BOUNCED, States.IFRAME, States.AIR_SPD, States.THROW_BREAKABLE]:
@@ -163,6 +163,13 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if is_ded:
 		return
+
+	if hitlag_timer > 0:
+		physic_input(delta)
+		hitlag_timer -= delta
+		return
+
+	physic_input(delta)
 	_check_wall_bounce()
 
 	if is_on_floor():
@@ -213,12 +220,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			tech_roll_timer = tech_roll_time
 	
-	if (Input.is_action_just_pressed("down") or Input.is_action_just_pressed("block")) \
-		and state in [States.BOUNCE_STUNNED, States.WALL_BOUNCED] and is_on_floor() and tech_roll_timer > 0:
-		animation_player.play("techroll")
-		hp_bar.hp_up_late_parry()
-	
-	
 	## Animation Section
 	# Walking animation
 	if state in [States.IDLE]:
@@ -254,7 +255,6 @@ func _physics_process(delta: float) -> void:
 		animation_player.play("idle")
 		stun_duration = 0
 
-
 	##################
 	## Input buffer
 	##################
@@ -265,29 +265,43 @@ func _physics_process(delta: float) -> void:
 	elif input_buffer_timer > 0:
 		input_buffer_timer -= delta
 
-	if Input.is_action_pressed("lp") and Input.is_action_pressed("hp"):
-		_lp_hp()
-	# if Input.is_action_just_pressed("lp") and Input.is_action_just_pressed("hp"):
-	# 	_lp_hp()
+	##################
+	## Block buffer
+	##################
+	if block_buffer_timer > 0 and state in [States.BLOCK, States.PARRY]:
+		block_buffer_timer -= delta
+	elif block_buffer_timer < 0 and state in [States.BLOCK, States.PARRY]:
+		animation_player.play("idle")
+		block_buffer_timer = 0
 
-	if Input.is_action_just_pressed("lp"):
+	## BLOCK
+	## Must check every frame, can't put in _input cause it only check when press and release
+	if state in can_block_states_hold:
+		if Input.is_action_pressed("block"):
+			state = States.PARRY
+			animation_player.play("block")
+	
+	## Air SPD burst
+	if is_on_floor() and state == States.AIR_SPD:
+		# state = States.ATTACK
+		animation_player.play("air_spd_burst")
+
+
+func physic_input(delta):
+	_check_input_history()
+
+	if Input.is_action_pressed("lp") and Input.is_action_pressed("hp"):
+		# _lp_hp()
+		queue_move(_lp_hp)
+	elif Input.is_action_just_pressed("lp"):
 		if is_on_floor():
 			queue_move(_lp)
 		else:
 			queue_move(_air_lp)
-
-	if Input.is_action_just_pressed("hp"):
+	elif Input.is_action_just_pressed("hp"):
 		queue_move(_hp)
-
-	if Input.is_action_just_pressed("grab"):
+	elif Input.is_action_just_pressed("grab"):
 		queue_move(_grab)
-
-	_check_input_history()
-
-	##################
-	## Block buffer
-	##################
-	_check_block_buffer(delta)
 
 	# if state in [States.THROW_BREAKABLE]:
 	match animation_player.current_animation:
@@ -314,20 +328,12 @@ func _physics_process(delta: float) -> void:
 				animation_player.play("hitted")
 				next_move = null
 
-	## BLOCK
-	## Must check every frame, can't put in _input cause it only check when press and release
-	if state in can_block_states_hold:
-		if Input.is_action_pressed("block"):
-			state = States.PARRY
-			animation_player.play("block")
-	
-	## Air SPD burst
-	if is_on_floor() and state == States.AIR_SPD:
-		# state = States.ATTACK
-		animation_player.play("air_spd_burst")
-
-		# spawn hitbox
-
+	if (Input.is_action_just_pressed("down")\
+	or Input.is_action_just_pressed("block")) \
+	and state in [States.BOUNCE_STUNNED, States.WALL_BOUNCED]\
+	and is_on_floor() and tech_roll_timer > 0:
+		animation_player.play("techroll")
+		hp_bar.hp_up_late_parry()
 
 
 #############################################################
@@ -376,14 +382,6 @@ func queue_move(the_move) -> void:
 	next_move = the_move
 	input_buffer_timer = input_buffer_time
 
-
-func _check_block_buffer(delta) -> void:
-	if block_buffer_timer > 0 and state in [States.BLOCK, States.PARRY] :
-		block_buffer_timer -= delta
-	elif block_buffer_timer < 0 and state in [States.BLOCK, States.PARRY] :
-		animation_player.play("idle")
-		block_buffer_timer = 0
-	
 
 func play_hit_random_pitch():
 	audio_stream_player.stream = hit_noise

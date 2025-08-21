@@ -116,6 +116,8 @@ var is_touching_wall_right: bool = false
 ## hitstun helper
 var stun_duration: float = 0
 
+var hitlag_timer: float = 0
+
 var is_ded := false
 var is_wall_bounced := false
 var is_wall_splat := false
@@ -166,7 +168,7 @@ func _check_wall_bounce() -> void:
 			var push_power = Vector2(1000, 100) if is_touching_wall_left else Vector2(-1000, 100)
 			_push_direct(push_power)
 			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
-			hitlag()
+			hitlag(0.3)
 		elif is_wall_bounced:
 			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(40, 0.3)
 			hitlag(0.5)
@@ -181,7 +183,7 @@ func _check_wall_bounce() -> void:
 			var push_power = Vector2(400, -100) if is_touching_wall_left else Vector2(-400, -100)
 			_push_direct(push_power)
 			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
-			hitlag()
+			hitlag(0.3)
 			animation_player.play("down")
 			set_collision_no_hit_all()
 	
@@ -367,11 +369,8 @@ func _push_direct(power: Vector2) -> void:
 	velocity = power * multiplier
 
 
-func hitlag(_amount: float = 0.3) -> void:
-	if _amount:
-		set_physics_process(false)
-		await get_tree().create_timer(_amount).timeout
-		set_physics_process(true)
+func hitlag(_amount: float = 0.0) -> void:
+	hitlag_timer = _amount
 
 
 #############################################################
