@@ -13,7 +13,8 @@ extends "res://scripts/base_character.gd"
 @onready var grab_pos_l: Marker2D = $HitBoxPos/GrabPosL
 @onready var hp_bar_2: TextureProgressBar = $CanvasLayer/HpBar2
 @onready var profile_player: AnimationPlayer = $CanvasLayer/Profile/AnimationPlayer
-
+@onready var command_history: VBoxContainer = $CanvasLayer/CommandHistory
+const COMMAND_BOX = preload("res://nodes/command_box.tscn")
 
 #############################################################
 ## Config
@@ -35,6 +36,8 @@ var block_buffer_timer := 0.0
 
 var body_in_execution_ranges = []
 var grabbed_enemy: Object
+
+var current_input := ""
 
 var debug_input_event = null
 
@@ -156,7 +159,6 @@ func _input(event: InputEvent) -> void:
 		elif Input.is_action_just_released("block"):
 			_add_block_buffer_time()
 
-	# _check_input_history()
 	# debug_input_event = event
 
 
@@ -390,24 +392,45 @@ func play_hit_random_pitch():
 
 
 func _check_input_history() -> void:
+	var new_input = ""
 	if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
-		input_history.append("n")
+		new_input += "5"
 	elif Input.is_action_pressed("left"):
-		input_history.append("left")
+		new_input += "4"
 	elif Input.is_action_pressed("right"):
-		input_history.append("right")
-	elif Input.is_action_pressed("block"):
-		input_history.append("block")
+		new_input += "6"
 	else:
-		input_history.append("n")
-	if len(input_history) > 15:
-		input_history.pop_front()
-		
-	var dash_right = Command.new(["right","n","right"])
-	var dash_left = Command.new(["left","n","left"])
+		new_input += "5"
+
+	if Input.is_action_pressed("lp"):
+		new_input += "l"
+	if Input.is_action_pressed("hp"):
+		new_input += "h"
+	
+	if current_input == new_input:
+		if input_history:
+			input_history[-1]["frame"] += 1
+		command_history.get_child(0).increament_frame()
+	else:
+		var map_input = {"command": new_input, "frame": 1}
+		input_history.append(map_input)
+		current_input = new_input
+
+		if len(input_history) > 15:
+			input_history.pop_front()
+
+		# spawn command box
+		var command_box = COMMAND_BOX.instantiate()
+		command_box.command = map_input["command"]
+		command_box.frame = map_input["frame"]
+		command_history.add_child(command_box)
+		command_history.move_child(command_box, 0)
+
+	var dash_right = Command.new(["6","5","6"])
+	var dash_left = Command.new(["4","5","4"])
 	for i in range(len(input_history)-1, -1, -1):
-		dash_right.calculate(input_history[i])
-		dash_left.calculate(input_history[i])
+		dash_right.calculate(input_history[i]["command"])
+		dash_left.calculate(input_history[i]["command"])
 	if dash_right.get_command_complete(): 
 		queue_move(_dash_right)
 		input_history.clear()

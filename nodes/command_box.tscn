@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://6p62rstibpcg"]
+
+[ext_resource type="Script" uid="uid://br1vfcp74vsfj" path="res://scripts/command_box.gd" id="1_qiaf4"]
+
+[node name="CommandBox" type="Control"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 3
+anchor_right = 0.0666667
+anchor_bottom = 0.037037
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 12.94
+script = ExtResource("1_qiaf4")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DirectionLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 32
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FrameLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 32
+text = "L"
+horizontal_alignment = 1
+vertical_alignment = 1
