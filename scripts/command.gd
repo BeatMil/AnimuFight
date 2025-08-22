@@ -24,6 +24,7 @@ func calculate(_input: String) -> void:
 	if abs(pointer) > len(command_input):
 		is_command_complete = true
 
+
 func get_command_complete() -> bool:
 	if is_not_doable:
 		return false

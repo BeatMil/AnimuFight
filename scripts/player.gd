@@ -38,6 +38,7 @@ var body_in_execution_ranges = []
 var grabbed_enemy: Object
 
 var current_input := ""
+var command_buffer_count := 0
 
 var debug_input_event = null
 
@@ -96,7 +97,7 @@ func _process(_delta: float) -> void:
 		debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
 		debug_label.text += "\n%0.3f"%tech_roll_timer
 		debug_label.text += "\n%s"%animation_player.current_animation
-		debug_label.text += "\n%s"%hitlag_timer
+		# debug_label.text += "\n%s"%command_buffer_count
 		# debug_label.text += "\n%s"%[input_history]
 		# debug_label.text += "\nGoh"
 		# debug_label.text += "\n%s"%Input.is_action_pressed("block")
@@ -421,24 +422,32 @@ func _check_input_history() -> void:
 	if Input.is_action_pressed("hp"):
 		new_input += "h"
 	
+	var input_size = 15
 	if current_input == new_input:
 		if input_history:
 			input_history[-1]["frame"] += 1
 		command_history.get_child(0).increament_frame()
+		command_buffer_count += 1
 	else:
 		var map_input = {"command": new_input, "frame": 1}
 		input_history.append(map_input)
 		current_input = new_input
 
-		if len(input_history) > 15:
+		command_buffer_count = 0
+	
+		if len(input_history) > input_size:
 			input_history.pop_front()
 
-		# spawn command box
+		# fill command history with command_box
 		var command_box = COMMAND_BOX.instantiate()
 		command_box.command = map_input["command"]
 		command_box.frame = map_input["frame"]
 		command_history.add_child(command_box)
 		command_history.move_child(command_box, 0)
+
+	if command_buffer_count >= input_size:
+		input_history.clear()
+		command_buffer_count = 0
 
 	var dash_right = Command.new(["6","5","6"])
 	var dash_left = Command.new(["4","5","4"])
@@ -447,6 +456,7 @@ func _check_input_history() -> void:
 		dash_left.calculate(input_history[i]["command"])
 	if dash_right.get_command_complete(): 
 		queue_move(_dash_right)
+		print(input_history)
 		input_history.clear()
 	if dash_left.get_command_complete():
 		queue_move(_dash_left)
