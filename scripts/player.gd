@@ -102,7 +102,7 @@ func _process(_delta: float) -> void:
 		# debug_label.text += "\nGoh"
 		# debug_label.text += "\n%s"%Input.is_action_pressed("block")
 		# debug_label.text += "\n%s"%debug_input_event
-		# debug_label.text += "\n%s"%next_move
+		debug_label.text += "\n%s"%next_move
 		# debug_label.text += "\nCameraPos: %s"%$Camera.global_position
 
 
@@ -291,10 +291,14 @@ func _physics_process(delta: float) -> void:
 
 
 func physic_input(delta):
-	_check_input_history()
-
 	if Input.is_action_pressed("lp") and Input.is_action_pressed("hp"):
-		# _lp_hp()
+		if input_history.size() > 1:
+			if input_history[-2]["frame"] < 7 and (\
+				input_history[-2]["command"].find("h") > -1 or \
+
+				input_history[-2]["command"].find("l") > -1):
+				print("last command: ", input_history[-2]["command"])
+				_lp_hp()
 		queue_move(_lp_hp)
 	elif Input.is_action_just_pressed("lp"):
 		if is_on_floor():
@@ -302,9 +306,14 @@ func physic_input(delta):
 		else:
 			queue_move(_air_lp)
 	elif Input.is_action_just_pressed("hp"):
-		queue_move(_hp)
+		if Input.is_action_pressed("down"):
+			queue_move(_down_hp)
+		else:
+			queue_move(_hp)
 	elif Input.is_action_just_pressed("grab"):
 		queue_move(_grab)
+
+	_check_input_history()
 
 	# if state in [States.THROW_BREAKABLE]:
 	match animation_player.current_animation:
@@ -679,7 +688,7 @@ func _hp() ->  void:
 
 	if Input.is_action_pressed("down"):
 		animation_player.play("down_hp")
-	elif Input.is_action_pressed("up"):
+	elif Input.is_action_pressed("jump"):
 		animation_player.play("air_throw")
 	else:
 		animation_player.play("hp")
@@ -691,6 +700,26 @@ func _hp() ->  void:
 	# 	animation_player.play("down_hp")
 	# elif state in [States.IDLE, States.PARRY_SUCCESS, States.DODGE_SUCCESS]: ## <<-- start with this one
 	# 	animation_player.play("ta")
+
+func _down_hp() ->  void:
+	if state not in [
+		States.IDLE,
+		States.DASH,
+		States.PARRY_SUCCESS,
+		States.DODGE_SUCCESS,
+		States.LP1,
+		States.LP2,
+		States.LP3,
+		]: ## <<-- start with this one
+		return
+
+	if Input.is_action_pressed("left"):
+		sprite_2d.flip_h = true
+
+	if Input.is_action_pressed("right"):
+		sprite_2d.flip_h = false
+
+	animation_player.play("down_hp")
 
 func hp_info() ->  void:
 	var info = {
