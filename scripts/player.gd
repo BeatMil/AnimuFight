@@ -395,10 +395,24 @@ func _check_input_history() -> void:
 	var new_input = ""
 	if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 		new_input += "5"
+	elif Input.is_action_pressed("jump") and Input.is_action_pressed("down"):
+		new_input += "5"
+	elif Input.is_action_pressed("down") and Input.is_action_pressed("right"):
+		new_input += "3"
+	elif Input.is_action_pressed("down") and Input.is_action_pressed("left"):
+		new_input += "1"
+	elif Input.is_action_pressed("jump") and Input.is_action_pressed("left"):
+		new_input += "7"
+	elif Input.is_action_pressed("jump") and Input.is_action_pressed("right"):
+		new_input += "9"
 	elif Input.is_action_pressed("left"):
 		new_input += "4"
 	elif Input.is_action_pressed("right"):
 		new_input += "6"
+	elif Input.is_action_pressed("jump"):
+		new_input += "8"
+	elif Input.is_action_pressed("down"):
+		new_input += "2"
 	else:
 		new_input += "5"
 

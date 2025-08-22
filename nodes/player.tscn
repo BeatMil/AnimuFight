@@ -4912,7 +4912,7 @@ libraries = {
 [node name="CommandHistory" type="VBoxContainer" parent="CanvasLayer" index="5"]
 offset_left = 8.0
 offset_top = 192.0
-offset_right = 136.0
+offset_right = 192.0
 offset_bottom = 1272.0
 
 [node name="Sprite2D" parent="." index="1"]

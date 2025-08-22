@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://6p62rstibpcg"]
+[gd_scene load_steps=5 format=3 uid="uid://6p62rstibpcg"]
 
 [ext_resource type="Script" uid="uid://br1vfcp74vsfj" path="res://scripts/command_box.gd" id="1_qiaf4"]
+[ext_resource type="Texture2D" uid="uid://dq8davv3k8bmk" path="res://media/arrows_command_history/arrow_right.png" id="2_gc2u7"]
+[ext_resource type="Texture2D" uid="uid://jvl5weto27rg" path="res://media/arrows_command_history/h_button.png" id="3_qsjnd"]
+[ext_resource type="Texture2D" uid="uid://fog6o0hl3dni" path="res://media/arrows_command_history/l_button.png" id="4_k8e3d"]
 
 [node name="CommandBox" type="Control"]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 3
-anchor_right = 0.0666667
-anchor_bottom = 0.037037
+anchor_right = 0.1
+anchor_bottom = 0.0444444
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_stretch_ratio = 12.94
@@ -21,20 +24,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="CommandImage" type="BoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+
+[node name="ArrowRight" type="Sprite2D" parent="HBoxContainer/CommandImage"]
+position = Vector2(16, 24)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_gc2u7")
+
+[node name="HButton" type="Sprite2D" parent="HBoxContainer/CommandImage"]
+position = Vector2(80, 24)
+texture = ExtResource("3_qsjnd")
+
+[node name="LButton" type="Sprite2D" parent="HBoxContainer/CommandImage"]
+position = Vector2(48, 24)
+texture = ExtResource("4_k8e3d")
+
 [node name="DirectionLabel" type="Label" parent="HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="FrameLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "L"
 horizontal_alignment = 1
 vertical_alignment = 1
