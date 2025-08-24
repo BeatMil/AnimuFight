@@ -654,14 +654,14 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfirb"]
 size = Vector2(160, 32)
 
-[sub_resource type="Gradient" id="Gradient_gfirb"]
+[sub_resource type="Gradient" id="Gradient_pekkb"]
 offsets = PackedFloat32Array(0, 0.25, 0.759399)
 colors = PackedColorArray(1, 1, 1, 1, 0.432584, 0.432584, 0.432584, 1, 0, 0, 0, 1)
 metadata/_snap_enabled = true
 metadata/_snap_count = 12
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_r2yrr"]
-gradient = SubResource("Gradient_gfirb")
+gradient = SubResource("Gradient_pekkb")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 

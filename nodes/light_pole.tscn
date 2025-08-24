@@ -1,0 +1,227 @@
+[gd_scene load_steps=13 format=3 uid="uid://dhqwhd8echl8w"]
+
+[ext_resource type="Texture2D" uid="uid://dcbe5j51txbdj" path="res://media/sprites/stage01/light_pole.png" id="1_itvx6"]
+[ext_resource type="Script" uid="uid://bc6kwcj3mlfbn" path="res://scripts/light_pole.gd" id="1_m5qi8"]
+[ext_resource type="AudioStream" uid="uid://b1ca2dun1uldc" path="res://media/sfxs/GlassClash.wav" id="2_0xq5i"]
+[ext_resource type="Texture2D" uid="uid://bn652ou60agif" path="res://media/sprites/stage01/light_pole_break.png" id="3_0xq5i"]
+
+[sub_resource type="Gradient" id="Gradient_gfirb"]
+offsets = PackedFloat32Array(0, 0.25, 0.759399)
+colors = PackedColorArray(1, 1, 1, 1, 0.432584, 0.432584, 0.432584, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dhovc"]
+gradient = SubResource("Gradient_gfirb")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_itvx6"]
+resource_name = "off"
+length = 0.400003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Polygon2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.466057, 0.466057, 0.466057, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PointLight2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_itvx6")]
+}
+
+[sub_resource type="Animation" id="Animation_m5qi8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Polygon2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.466057, 0.466057, 0.466057, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PointLight2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_itvx6")]
+}
+
+[sub_resource type="Animation" id="Animation_0xq5i"]
+resource_name = "on"
+length = 0.400003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Polygon2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.941263, 0.91794, 0.513963, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PointLight2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_itvx6")]
+}
+
+[sub_resource type="Animation" id="Animation_al7ct"]
+resource_name = "break"
+length = 0.400003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Polygon2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.466057, 0.466057, 0.466057, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PointLight2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_0xq5i")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0xq5i"]
+_data = {
+&"RESET": SubResource("Animation_m5qi8"),
+&"break": SubResource("Animation_al7ct"),
+&"off": SubResource("Animation_itvx6"),
+&"on": SubResource("Animation_0xq5i")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itvx6"]
+size = Vector2(128, 112)
+
+[node name="LightPole" type="Node2D"]
+script = ExtResource("1_m5qi8")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(0, -327)
+color = Color(0.819067, 0.645039, 0.420307, 1)
+texture = SubResource("GradientTexture2D_dhovc")
+texture_scale = 16.0
+
+[node name="Particle_pos" type="Marker2D" parent="."]
+position = Vector2(0, -328)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_0xq5i")
+volume_db = 7.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../LightPole")
+libraries = {
+&"": SubResource("AnimationLibrary_0xq5i")
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.466057, 0.466057, 0.466057, 1)
+polygon = PackedVector2Array(-20, -333, 10, -332, 11, -327, 6, -320, 1, -317, -10, -317, -15, -321, -19, -326)
+
+[node name="LightPole" type="Sprite2D" parent="."]
+texture = ExtResource("1_itvx6")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 51
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -328)
+shape = SubResource("RectangleShape2D_itvx6")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
