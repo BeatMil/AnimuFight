@@ -1,0 +1,217 @@
+[gd_scene load_steps=14 format=3 uid="uid://brp5ha3kowlpa"]
+
+[ext_resource type="Script" uid="uid://ccawnqwthh2e3" path="res://scripts/market_green.gd" id="1_bm7ql"]
+[ext_resource type="Texture2D" uid="uid://ccc284uukakht" path="res://media/sprites/stage01/smol_stool_chair.png" id="1_wpcoj"]
+[ext_resource type="Texture2D" uid="uid://dy43jnss4bh4r" path="res://media/sprites/stage01/mango_on_stand.png" id="2_jrvmp"]
+[ext_resource type="Texture2D" uid="uid://cu6su1t48bymp" path="res://media/sprites/stage01/unbrella_market_green.png" id="3_1cnsy"]
+[ext_resource type="AudioStream" uid="uid://cd0pyf1nhyep6" path="res://media/sfxs/unequip01.wav" id="5_1cnsy"]
+[ext_resource type="Texture2D" uid="uid://xrri8dvk5ehs" path="res://media/sprites/stage01/mango.png" id="6_bm7ql"]
+[ext_resource type="AudioStream" uid="uid://dmjg7bqnvd1dk" path="res://media/sfxs/banana_fly.wav" id="6_uetfq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cnsy"]
+size = Vector2(208, 319)
+
+[sub_resource type="Animation" id="Animation_jrvmp"]
+resource_name = "shake"
+length = 0.133337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MangoOnStand:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(20, -30), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MangoOnStand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.171042, 0.0]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_1cnsy")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="Animation" id="Animation_1cnsy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MangoOnStand:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MangoOnStand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bm7ql"]
+_data = {
+&"RESET": SubResource("Animation_1cnsy"),
+&"shake": SubResource("Animation_jrvmp")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uetfq"]
+size = Vector2(48, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bm7ql"]
+size = Vector2(128, 20)
+
+[node name="MarketGreen" type="Node2D"]
+script = ExtResource("1_bm7ql")
+
+[node name="SmolStoolChair" type="Sprite2D" parent="."]
+position = Vector2(191, 234)
+texture = ExtResource("1_wpcoj")
+
+[node name="MangoOnStand" type="Sprite2D" parent="."]
+position = Vector2(-208, 124)
+texture = ExtResource("2_jrvmp")
+
+[node name="UnbrellaMarketGreen" type="Sprite2D" parent="."]
+texture = ExtResource("3_1cnsy")
+
+[node name="Area2D" type="Area2D" parent="." groups=["background_object"]]
+collision_layer = 64
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-216, 159.5)
+shape = SubResource("RectangleShape2D_1cnsy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bm7ql")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+
+[node name="BananaAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_uetfq")
+
+[node name="Mangos" type="Node2D" parent="."]
+visible = false
+
+[node name="Mango1" type="RigidBody2D" parent="Mangos"]
+position = Vector2(-256, -8)
+collision_layer = 64
+collision_mask = 95
+metadata/_edit_group_ = true
+
+[node name="Mango" type="Sprite2D" parent="Mangos/Mango1"]
+rotation = -0.610865
+texture = ExtResource("6_bm7ql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mangos/Mango1"]
+shape = SubResource("RectangleShape2D_uetfq")
+
+[node name="Mango2" type="RigidBody2D" parent="Mangos"]
+position = Vector2(-192, -8)
+collision_layer = 64
+collision_mask = 95
+metadata/_edit_group_ = true
+
+[node name="Mango" type="Sprite2D" parent="Mangos/Mango2"]
+rotation = -0.610865
+texture = ExtResource("6_bm7ql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mangos/Mango2"]
+shape = SubResource("RectangleShape2D_uetfq")
+
+[node name="Mango3" type="RigidBody2D" parent="Mangos"]
+position = Vector2(-224, -40)
+collision_layer = 64
+collision_mask = 95
+metadata/_edit_group_ = true
+
+[node name="Mango" type="Sprite2D" parent="Mangos/Mango3"]
+rotation = -0.610865
+texture = ExtResource("6_bm7ql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mangos/Mango3"]
+shape = SubResource("RectangleShape2D_uetfq")
+
+[node name="Mango4" type="RigidBody2D" parent="Mangos"]
+position = Vector2(-168, -40)
+collision_layer = 64
+collision_mask = 95
+metadata/_edit_group_ = true
+
+[node name="Mango" type="Sprite2D" parent="Mangos/Mango4"]
+rotation = -0.610865
+texture = ExtResource("6_bm7ql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mangos/Mango4"]
+shape = SubResource("RectangleShape2D_uetfq")
+
+[node name="Mango5" type="RigidBody2D" parent="Mangos"]
+position = Vector2(-224, -80)
+collision_layer = 64
+collision_mask = 95
+metadata/_edit_group_ = true
+
+[node name="Mango" type="Sprite2D" parent="Mangos/Mango5"]
+rotation = -0.610865
+texture = ExtResource("6_bm7ql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mangos/Mango5"]
+shape = SubResource("RectangleShape2D_uetfq")
+
+[node name="Mango6" type="RigidBody2D" parent="Mangos"]
+position = Vector2(-280, -40)
+collision_layer = 64
+collision_mask = 95
+metadata/_edit_group_ = true
+
+[node name="Mango" type="Sprite2D" parent="Mangos/Mango6"]
+rotation = -0.610865
+texture = ExtResource("6_bm7ql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mangos/Mango6"]
+shape = SubResource("RectangleShape2D_uetfq")
+
+[node name="TableMangos" type="StaticBody2D" parent="."]
+position = Vector2(-224, 96)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TableMangos"]
+shape = SubResource("RectangleShape2D_bm7ql")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

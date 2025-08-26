@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=20 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://d0ufo617puti8" path="res://nodes/enemy_06.tscn" id="12_gsglw"]
 [ext_resource type="PackedScene" uid="uid://dxf7beg6mlrhw" path="res://nodes/falling_flower_pot.tscn" id="15_bc8xj"]
 [ext_resource type="PackedScene" uid="uid://dhqwhd8echl8w" path="res://nodes/light_pole.tscn" id="17_c2i1s"]
+[ext_resource type="PackedScene" uid="uid://brp5ha3kowlpa" path="res://nodes/market_green.tscn" id="18_dhovc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6ddm"]
 size = Vector2(1920, 326)
@@ -30,7 +31,7 @@ script = ExtResource("1_4caca")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(803.417, 411.32)
+position = Vector2(2917, 571)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -242,3 +243,7 @@ position = Vector2(317, 576)
 
 [node name="LightPole" parent="." instance=ExtResource("17_c2i1s")]
 position = Vector2(2470, 323)
+
+[node name="MarketGreen" parent="." instance=ExtResource("18_dhovc")]
+position = Vector2(3526, 516)
+scale = Vector2(0.8, 0.8)

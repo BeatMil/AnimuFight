@@ -1,0 +1,31 @@
+extends "res://scripts/bed.gd"
+
+
+const STAND = preload("res://media/sprites/stage01/stand.png")
+@onready var mangos: Node2D = $Mangos
+@onready var mango_on_stand: Sprite2D = $MangoOnStand
+@onready var banana_audio_player: AudioStreamPlayer = $BananaAudioPlayer
+var is_activated = false
+
+
+func _ready() -> void:
+	for m in mangos.get_children():
+		m.collision_mask = 0b00000000000001000000
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	super._on_area_2d_area_entered(area)
+	mangos.set_deferred("visible", true)
+	if not is_activated:
+		for m in mangos.get_children():
+			# m.set_deferred("freeze", false)
+			# await get_tree().create_timer(0.1).timeout
+			m.collision_mask = 0b00000000000001111111
+			m.gravity_scale = 1.5
+			var power = 1000
+			m.apply_impulse(
+				Vector2(randi_range(-power, power), -power
+				))
+		is_activated = true
+		mango_on_stand.texture = STAND
+		banana_audio_player.play()
