@@ -184,13 +184,11 @@ func _physics_process(delta: float) -> void:
 			state = States.AIR
 	
 	if state == States.AIR:
-		# if not animation_player.is_playing():
-		# 	animation_player.play("air")
 		animation_player.play("jump")
-		pass
 
 	# Left/Right movement
 	if state in [States.IDLE, States.AIR]:
+	# if state in [States.IDLE]:
 		if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 			_lerp_velocity_x()
 		elif Input.is_action_pressed("left"):
@@ -198,8 +196,8 @@ func _physics_process(delta: float) -> void:
 		elif Input.is_action_pressed("right"):
 			_move_right(delta)
 		else:
-			friction = 0.5
 			_lerp_velocity_x()
+			# friction = 0.5
 
 		throwee = null
 	else:
@@ -208,12 +206,17 @@ func _physics_process(delta: float) -> void:
 		_lerp_velocity_x()
 	
 	# Jump
-	if state in [States.IDLE, States.DOWN_HP]:
+	if state in [States.IDLE, States.DOWN_HP, States.DASH]:
 		handle_jump_buffer(delta)
 
 	# Jump buffer
 	if jump_buffer_timer > 0:
 		_jump(delta)
+		if state == States.DASH:
+			_push_x(300)
+			print("bob")
+			state = States.AIR
+			# await get_tree().physics_frame
 		jump_buffer_timer = 0
 
 	# Tech roll
@@ -671,6 +674,7 @@ func air_lp_info2() -> void:
 func _hp() ->  void:
 	if state not in [
 		States.IDLE,
+		States.AIR,
 		States.DASH,
 		States.PARRY_SUCCESS,
 		States.DODGE_SUCCESS,

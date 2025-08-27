@@ -2510,6 +2510,7 @@ tracks/7/keys = {
 [sub_resource type="Animation" id="Animation_v2fns"]
 resource_name = "jump"
 length = 1.00001
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
