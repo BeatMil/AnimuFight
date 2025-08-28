@@ -7,6 +7,7 @@ const STAND = preload("res://media/sprites/stage01/stand.png")
 @onready var banana_audio_player: AudioStreamPlayer = $BananaAudioPlayer
 var is_activated = false
 
+signal banana_fly
 
 func _ready() -> void:
 	for m in mangos.get_children():
@@ -14,6 +15,8 @@ func _ready() -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	if not area.visible:
+		return
 	super._on_area_2d_area_entered(area)
 	mangos.set_deferred("visible", true)
 	if not is_activated:
@@ -26,6 +29,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			m.apply_impulse(
 				Vector2(randi_range(-power, power), -power
 				))
+			emit_signal("banana_fly")
 		is_activated = true
 		mango_on_stand.texture = STAND
 		banana_audio_player.play()
