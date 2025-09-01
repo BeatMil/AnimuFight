@@ -488,7 +488,6 @@ func hitted(
 	elif _type == Enums.Attack.P_AIR_THROW and is_on_floor():
 		## make air throw whiff
 		pass
-
 	## Player Wall throw hits
 	elif _type == Enums.Attack.P_WALL_THROW and \
 		animation_player.current_animation in ["wallsplat", "wall_crumble"]:
@@ -496,11 +495,9 @@ func hitted(
 		state = States.GRABBED
 		animation_player.play("throw_stunned")
 		_attacker.animation_player.play("wall_abel_combo")
-	## make wall throw whiff
-	elif _type == Enums.Attack.P_WALL_THROW:
-		pass
-
-	elif _type == Enums.Attack.P_GROUND_THROW:
+	elif _type == Enums.Attack.P_GROUND_THROW or \
+		(_type == Enums.Attack.P_WALL_THROW and \
+		state in [States.HIT_STUNNED, States.BOUNCE_STUNNED, States.WALL_BOUNCED]):
 		if _attacker.throwee:
 			return
 		else:
@@ -536,7 +533,9 @@ func hitted(
 		if is_touching_wall_left or is_touching_wall_right:
 			print("==NANI==")
 			_attacker._push_x(-400)
-
+	## make wall throw whiff
+	elif _type == Enums.Attack.P_WALL_THROW:
+		pass
 	## Spawn blockspark on IFRAME
 	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD]:
 		ObjectPooling.spawn_blockSpark_1(position)
