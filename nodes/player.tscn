@@ -4192,10 +4192,10 @@ tracks/1/path = NodePath("Sprite2D:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5),
+"times": PackedFloat32Array(0, 0.216667, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 0.756305, 0.278792, 1), Color(1, 0.756305, 0.278792, 1), Color(1, 1, 1, 1)]
+"values": [Color(0.886954, 0.600969, 0.883618, 1), Color(0.886954, 0.600969, 0.883618, 1), Color(1, 1, 1, 1)]
 }
 tracks/2/type = "audio"
 tracks/2/imported = false

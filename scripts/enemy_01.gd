@@ -6,7 +6,7 @@ extends "res://scripts/enemy.gd"
 
 func _ready() -> void:
 	super._ready()
-	block_rate = 0
+	block_rate = 10
 	DED_SPRITE = preload("res://media/sprites/char2/enemy01_down.png")
 
 
@@ -67,6 +67,7 @@ func _throw_float() -> void:
 	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
 		state = States.BLOCK
 		animation_player.play("throw_float")
+		ObjectPooling.spawn_throw_spark_float(position)
 func throw_float_info() -> void: # for animation_player
 	var info = {
 	"size": Hitbox_type.THROW,
@@ -91,6 +92,7 @@ func _throw_ground() -> void:
 	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
 		state = States.BLOCK
 		animation_player.play("throw_ground")
+		ObjectPooling.spawn_throw_spark_ground(position)
 func throw_ground_info() -> void: # for animation_player
 	var info = {
 	"size": Hitbox_type.THROW,
