@@ -250,7 +250,8 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 		return
 	## Hit other enemy
 	if self.state in [States.BOUNCE_STUNNED, States.EXECUTETABLE, States.THROWN] \
-	and body.state != States.BOUNCE_STUNNED:
+		and body.state != States.BOUNCE_STUNNED and \
+		body.animation_player.current_animation not in ["wall_crumble", "wallsplat"]:
 		play_bounce_sfx()
 		body.hitted(
 			self,
