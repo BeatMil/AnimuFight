@@ -971,6 +971,23 @@ func ground_throw_info() ->  void:
 	"type": Enums.Attack.P_GROUND_THROW,
 	}
 	dict_to_spawn_hitbox(info)
+func ground_punch_info() ->  void:
+	var info = {
+	"size": Hitbox_type.GROUND_THROW,
+	"time": 0.1,
+	"push_power_ground": Vector2(100, -100),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(100, 0),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0,
+	"hitstun_amount_ground": 0,
+	"hitlag_amount_air": 0.2,
+	"hitstun_amount_air": 0.2,
+	"screenshake_amount": Vector2(20, 0.2),
+	"damage": 6,
+	"type": Enums.Attack.UNBLOCK,
+	}
+	dict_to_spawn_hitbox(info)
 
 
 func _grab() ->  void:

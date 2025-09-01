@@ -515,12 +515,12 @@ func hitted(
 				self.hitted(
 					self,
 					_attacker.is_face_right,
-					Vector2(200, 0),
+					Vector2(0, 200),
+					1,
 					0,
-					0,
-					0.1,
-					Vector2(10, 0.1),
-					0.1,
+					1,
+					Vector2(0, 0.1),
+					2,
 					Enums.Attack.NORMAL
 				)
 				_attacker.animation_player.play("place_enemy")
