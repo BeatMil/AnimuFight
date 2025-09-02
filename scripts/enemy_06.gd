@@ -108,6 +108,45 @@ func throw_float_info() -> void: # for animation_player
 	dict_to_spawn_hitbox(info)
 
 
+func _df1_combo() -> void:
+	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
+		state = States.BLOCK
+		animation_player.play("df1_combo")
+func df1_info() -> void: # for animation_player
+	var info = {
+	"size": Hitbox_type.SMALL,
+	"time": 0.1,
+	"push_power_ground": Vector2(500, 0),
+	"push_type_ground": Enums.Push_types.NORMAL,
+	"push_power_air": Vector2(100, -150),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.5,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 2,
+	"type": Enums.Attack.NORMAL,
+	}
+	dict_to_spawn_hitbox(info)
+func df1_2nd_info() -> void: # for animation_player
+	var info = {
+	"size": Hitbox_type.SMALL,
+	"time": 0.1,
+	"push_power_ground": Vector2(500, -100),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(100, -150),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.5,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 4,
+	"type": Enums.Attack.NORMAL,
+	}
+	dict_to_spawn_hitbox(info)
+
 #############################################################
 ## Signals
 #############################################################
@@ -176,7 +215,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"attack01_1",
 		"lp1_chain",
 		"throw_float",
-		"throw_ground"
+		"throw_ground",
+		"df1_combo"
 		]:
 		animation_player.play("idle")
 		state = States.IDLE
@@ -199,13 +239,12 @@ func do_attack() -> void:
 		_attack01()
 	elif is_player_in_range_lp:
 		state = States.ATTACK
-		match randi_range(0, 1):
+		match randi_range(0, 3):
 			0:
-				# _lp()
-				# _attack01()
-				_throw_ground()
+				_df1_combo()
 			1:
+				_df1_combo()
+			2:
+				_throw_ground()
+			3:
 				_throw_float()
-				# _lp()
-				# _attack01()
-				# _lp_chain()
