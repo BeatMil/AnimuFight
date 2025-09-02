@@ -328,6 +328,10 @@ func physic_input(delta):
 				# Throw break
 				animation_player.play("throw_break")
 				next_move = null
+				if thrower.position.x > position.x:
+					sprite_2d.flip_h = false
+				else:
+					sprite_2d.flip_h = true
 			elif Input.is_action_just_pressed("lp"):
 				animation_player.play("hitted")
 				next_move = null
@@ -339,6 +343,10 @@ func physic_input(delta):
 				# Throw break
 				animation_player.play("throw_break")
 				next_move = null
+				if thrower.position.x > position.x:
+					sprite_2d.flip_h = false
+				else:
+					sprite_2d.flip_h = true
 			elif Input.is_action_just_pressed("hp"):
 				animation_player.play("hitted")
 				next_move = null
