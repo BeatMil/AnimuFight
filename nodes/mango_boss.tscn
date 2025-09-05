@@ -8,10 +8,10 @@
 [ext_resource type="AudioStream" uid="uid://dwc8oylpgeeuj" path="res://media/sfxs/PunchAttack5.wav" id="6_e4v7v"]
 [ext_resource type="Texture2D" uid="uid://crek0vunmpec" path="res://media/sprites/char2/SecondChar_block.png" id="7_he7jq"]
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="8_kbgke"]
-[ext_resource type="Texture2D" uid="uid://b22ob737caxc1" path="res://media/sprites/char2/enemy01_down.png" id="9_yp0hm"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="10_dmcbc"]
-[ext_resource type="Texture2D" uid="uid://b6syt0rhv2dwx" path="res://media/sprites/char2/SecondChar_hitted.png" id="11_kkrm2"]
+[ext_resource type="Texture2D" uid="uid://86sjmowpjhlb" path="res://media/sprites/mango_boss/mango_boss_down.png" id="11_3kb0t"]
 [ext_resource type="Texture2D" uid="uid://c3rxvaupgws3u" path="res://media/sprites/char2/enemy01_lp_start_anim.png" id="12_6s5jp"]
+[ext_resource type="Texture2D" uid="uid://dlaiwqwfpj4n1" path="res://media/sprites/mango_boss/mango_boss_hitted.png" id="13_d66qs"]
 [ext_resource type="Texture2D" uid="uid://dxod1gcjs71jv" path="res://media/sprites/char2/SecondChar_fireball.png" id="13_pglqq"]
 [ext_resource type="AudioStream" uid="uid://b7u0sh3hrcfqr" path="res://media/sfxs/gc_punch_whiff.wav" id="14_46ss6"]
 [ext_resource type="AudioStream" uid="uid://3eyk8460sfvf" path="res://media/sfxs/charge01.wav" id="15_b4o0n"]
@@ -379,7 +379,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_yp0hm")]
+"values": [ExtResource("11_3kb0t")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -472,7 +472,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_yp0hm")]
+"values": [ExtResource("11_3kb0t")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -574,7 +574,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_kkrm2")]
+"values": [ExtResource("13_d66qs")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -675,7 +675,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_kkrm2")]
+"values": [ExtResource("13_d66qs")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -1428,7 +1428,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_kkrm2")]
+"values": [ExtResource("13_d66qs")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -1559,7 +1559,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_kkrm2")]
+"values": [ExtResource("13_d66qs")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
