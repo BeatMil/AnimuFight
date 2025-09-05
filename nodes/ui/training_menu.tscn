@@ -46,6 +46,10 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../MainMenuButton")
 text = "Resume"
 
+[node name="MangoBossButton" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
+layout_mode = 2
+text = "MangoBoss"
+
 [node name="Enemy1Button" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
 layout_mode = 2
 text = "Enemy1"
@@ -94,6 +98,7 @@ unique_name_in_owner = true
 position = Vector2(557, 452)
 
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainerL/MangoBossButton" to="." method="_on_mango_boss_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy1Button" to="." method="_on_enemy_1_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy2Button" to="." method="_on_enemy_2_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy3Button" to="." method="_on_enemy_3_button_pressed"]

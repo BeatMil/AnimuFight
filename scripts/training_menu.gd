@@ -1,5 +1,4 @@
 extends Control
-
 @onready var resume_button: Button = $VBoxContainer/VBoxContainerL/ResumeButton
 @onready var enemy_1_button: Button = $VBoxContainer/VBoxContainerL/Enemy1Button
 @onready var death_zone_button: Button = $VBoxContainer/VBoxContainerL/DeathZoneButton
@@ -8,6 +7,7 @@ extends Control
 @onready var key_bind_button: Button = $VBoxContainer/VBoxContainerL/KeyBindButton
 
 
+signal mangoBoss
 signal enemy1
 signal enemy2
 signal enemy3
@@ -34,6 +34,10 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_cancel"):
 		self.visible = false
 		get_tree().paused = false
+
+
+func _on_mango_boss_button_pressed() -> void:
+	emit_signal("mangoBoss")
 
 
 func _on_enemy_1_button_pressed() -> void:
@@ -87,4 +91,3 @@ func _on_key_bind_menu_close() -> void:
 func _on_resume_button_pressed() -> void:
 	self.visible = false
 	get_tree().paused = false
- 

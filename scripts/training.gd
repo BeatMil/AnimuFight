@@ -8,6 +8,7 @@ extends Node2D
 @onready var dodge_label: Label = $CanvasLayer/DodgeLabel
 @onready var training_menu: Control = $CanvasLayer/TrainingMenu
 @onready var enemy_spawner_8: Node2D = $EnemySpawner8
+@onready var mango_boss: Object = preload("res://nodes/mango_boss.tscn")
 @onready var enemy1: Object = preload("res://nodes/enemy_01.tscn")
 @onready var enemy2: Object = preload("res://nodes/enemy_02.tscn")
 @onready var enemy3: Object = preload("res://nodes/enemy_03.tscn")
@@ -17,6 +18,7 @@ extends Node2D
 
 func _ready() -> void:
 	training_menu.visible = false
+	training_menu.mangoBoss.connect(_on_mango_boss_button_down)
 	training_menu.enemy1.connect(_on_enemy_1_button_down)
 	training_menu.enemy2.connect(_on_enemy_2_button_down)
 	training_menu.enemy3.connect(_on_enemy_3_button_down)
@@ -46,6 +48,12 @@ func clear_enemy() -> void:
 
 func _on_clear_button_down() -> void:
 	clear_enemy()
+
+
+func _on_mango_boss_button_down() -> void:
+	clear_enemy()
+	enemy_spawner_8.enemy_to_spawn.append(mango_boss)
+	print("MANGOBOSS")
 
 
 func _on_enemy_1_button_down() -> void:
