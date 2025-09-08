@@ -85,6 +85,7 @@ const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 const SLOW_MO_START = preload("res://media/sfxs/slow_mo_start.wav")
 const SLOW_MO_END = preload("res://media/sfxs/slow_mo_end.wav")
 const HIT_BOUNCE = preload("res://media/sfxs/Landing_RawMeat02.wav")
+const IFRAME_HIT = preload("res://media/sfxs/Landing_Meat03.wav")
 
 #############################################################
 ## Node Ref
@@ -541,8 +542,8 @@ func hitted(
 		pass
 	## Spawn blockspark on IFRAME
 	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD]:
-		ObjectPooling.spawn_blockSpark_1(position)
-
+		ObjectPooling.spawn_iframe_spark(position + Vector2(0, randi_range(-30, -80)))
+		play_iframe_hit_sfx()
 	elif _type in [Enums.Attack.THROW_GROUND, Enums.Attack.THROW_FLOAT]:
 		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
 		set_thrower(_attacker)
@@ -700,6 +701,12 @@ func _slow_moion_no_sfx(level, length) -> void:
 
 func play_bounce_sfx() -> void:
 	$AudioStreamPlayer2.stream = HIT_BOUNCE
+	$AudioStreamPlayer2.pitch_scale = randf_range(0.8, 1.2)
+	$AudioStreamPlayer2.play()
+
+
+func play_iframe_hit_sfx() -> void:
+	$AudioStreamPlayer2.stream = IFRAME_HIT
 	$AudioStreamPlayer2.pitch_scale = randf_range(0.8, 1.2)
 	$AudioStreamPlayer2.play()
 

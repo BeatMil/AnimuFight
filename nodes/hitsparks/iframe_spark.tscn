@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://0uvg3nm8smqu"]
+
+[ext_resource type="Script" uid="uid://bmc7j7j0ykd0g" path="res://scripts/hit_spark.gd" id="1_uab4i"]
+[ext_resource type="Texture2D" uid="uid://bxnxfqaknnul6" path="res://media/sprites/particle_fx/particle_material01.png" id="2_uab4i"]
+
+[sub_resource type="Curve" id="Curve_uab4i"]
+_data = [Vector2(0.193396, 0), 0.0, 0.0, 0, 0, Vector2(0.207547, 1), 0.0, 0.0, 0, 0, Vector2(0.353774, 1), 0.0, 0.0, 0, 0, Vector2(0.839623, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_46ya3"]
+curve = SubResource("Curve_uab4i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x6flr"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+color = Color(0.981995, 0.863712, 0.691199, 1)
+alpha_curve = SubResource("CurveTexture_46ya3")
+
+[sub_resource type="Curve" id="Curve_i13q5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2btck"]
+curve = SubResource("Curve_i13q5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_se36l"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -42.1
+radial_accel_max = -1.4
+tangential_accel_min = 2.81
+tangential_accel_max = 2.81
+scale_min = 9.0
+scale_max = 11.0
+scale_curve = SubResource("CurveTexture_2btck")
+color = Color(0.981995, 0.924122, 0.820361, 1)
+
+[node name="HitSpark" type="Node2D"]
+z_index = 5
+script = ExtResource("1_uab4i")
+
+[node name="groups" type="Node2D" parent="."]
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="groups"]
+texture = ExtResource("2_uab4i")
+lifetime = 2.0
+speed_scale = 6.0
+explosiveness = 1.0
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_x6flr")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="groups"]
+amount = 16
+lifetime = 3.0
+speed_scale = 15.0
+explosiveness = 1.0
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_se36l")
+
+[connection signal="finished" from="groups/GPUParticles2D2" to="." method="_on_gpu_particles_2d_finished"]
+[connection signal="finished" from="groups/GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

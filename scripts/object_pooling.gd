@@ -15,6 +15,7 @@ const GLASS_SPARK = preload("res://nodes/hitsparks/glass_spark_cool.tscn")
 const JUCTION_SPARK = preload("res://nodes/hitsparks/juction_particle.tscn")
 const THROW_SPARK_GROUND = preload("res://nodes/hitsparks/throw_spark_ground.tscn")
 const THROW_SPARK_FLOAT = preload("res://nodes/hitsparks/throw_spark_float.tscn")
+const IFRAMESPARK = preload("res://nodes/hitsparks/iframe_spark.tscn")
 
 #############################################################
 ## Config
@@ -92,5 +93,11 @@ func spawn_throw_spark_ground(_position: Vector2 = pooling_pos) -> void:
 
 func spawn_throw_spark_float(_position: Vector2 = pooling_pos) -> void:
 	var hitspark = THROW_SPARK_FLOAT.instantiate()
+	hitspark.position = _position
+	get_tree().current_scene.add_child(hitspark)
+
+
+func spawn_iframe_spark(_position: Vector2 = pooling_pos) -> void:
+	var hitspark = IFRAMESPARK.instantiate()
 	hitspark.position = _position
 	get_tree().current_scene.add_child(hitspark)
