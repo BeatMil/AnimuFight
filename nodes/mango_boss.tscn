@@ -19,7 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://dqxgbqjmhqr35" path="res://media/sfxs/Body_Spin.wav" id="17_1cge2"]
 [ext_resource type="AudioStream" uid="uid://chnn83cu2f3jx" path="res://media/sfxs/grabbed.wav" id="18_3t3v1"]
 [ext_resource type="Texture2D" uid="uid://uyp026ml75v5" path="res://media/sprites/mango_boss/mango_boss_walk.png" id="19_2mpdw"]
-[ext_resource type="Texture2D" uid="uid://ctjdryuvcd750" path="res://media/sprites/char2/enemy01_wall_splat.png" id="20_rj141"]
+[ext_resource type="Texture2D" uid="uid://dea3r1x8q2vlb" path="res://media/sprites/mango_boss/mango_boss_wall_both.png" id="20_2mpdw"]
 [ext_resource type="AudioStream" uid="uid://cd0pyf1nhyep6" path="res://media/sfxs/unequip01.wav" id="21_l275e"]
 [ext_resource type="AudioStream" uid="uid://dapk1wm47d6cw" path="res://media/sfxs/HitStone.wav" id="22_5gwgr"]
 [ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="23_c14pf"]
@@ -1804,7 +1804,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("20_rj141")]
+"values": [ExtResource("20_2mpdw")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -1857,7 +1857,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, 105)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1921,7 +1921,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("20_rj141")]
+"values": [ExtResource("20_2mpdw")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
