@@ -187,7 +187,7 @@ down={
 2d_physics/layer_6="hitbox"
 2d_physics/layer_7="background_object"
 2d_physics/layer_8="enemy_down"
-2d_physics/layer_9="Layer 9"
+2d_physics/layer_9="KeepPlayerAway"
 
 [physics]
 

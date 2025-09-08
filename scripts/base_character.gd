@@ -411,8 +411,11 @@ func hitted(
 		# 	hp_bar.hp_down(_damage)
 		if has_method("_add_block_count"):
 			self._add_block_count(1)
-		animation_player.stop()
-		animation_player.play("blockstunned")
+		if self.name == "MangoBoss":
+			play_blockstunned()
+		else:
+			animation_player.stop()
+			animation_player.play("blockstunned")
 		# hp_bar.hp_down(_damage/2)
 		block_effect_helper(
 			hitstun_amount,
@@ -714,6 +717,11 @@ func _add_block_count(amount: int):
 
 func set_thrower(the_guy: CharacterBody2D) -> void:
 	pass
+
+
+func play_blockstunned():
+	pass
+
 
 func block_effect_helper(
 	hitstun_amount,
