@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dxf7beg6mlrhw" path="res://nodes/falling_flower_pot.tscn" id="15_bc8xj"]
 [ext_resource type="PackedScene" uid="uid://dhqwhd8echl8w" path="res://nodes/light_pole.tscn" id="17_c2i1s"]
 [ext_resource type="PackedScene" uid="uid://brp5ha3kowlpa" path="res://nodes/market_green.tscn" id="18_dhovc"]
-[ext_resource type="Texture2D" uid="uid://bhh1f3i4nkgqv" path="res://media/sprites/char2/enemy01_sit_banana.png" id="19_0vtio"]
+[ext_resource type="Texture2D" uid="uid://n7xbpwiq1n77" path="res://media/sprites/mango_boss/mango_boss_sit.png" id="19_yxbv0"]
 [ext_resource type="AudioStream" uid="uid://cxkb2rpnoq1wv" path="res://media/sfxs/phone-typing-333292.mp3" id="20_yxbv0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6ddm"]
@@ -358,18 +358,18 @@ position = Vector2(2470, 323)
 position = Vector2(3526, 516)
 scale = Vector2(0.8, 0.8)
 
-[node name="Enemy01SitBanana" type="Sprite2D" parent="."]
+[node name="MangoBossSitBanana" type="Sprite2D" parent="."]
 position = Vector2(3656, 597)
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("19_0vtio")
+texture = ExtResource("19_yxbv0")
 hframes = 3
 frame = 1
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Enemy01SitBanana"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="MangoBossSitBanana"]
 scale = Vector2(1.25, 1.25)
 volume_db = 10.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy01SitBanana"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MangoBossSitBanana"]
 libraries = {
 &"": SubResource("AnimationLibrary_pxpxr")
 }

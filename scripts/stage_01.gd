@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var animation_player: AnimationPlayer = $Enemy01SitBanana/AnimationPlayer
+@onready var animation_player: AnimationPlayer = $MangoBossSitBanana/AnimationPlayer
 
 
 func _ready() -> void:
