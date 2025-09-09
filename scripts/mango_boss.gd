@@ -29,7 +29,11 @@ func _lp() -> void:
 func _lp_chain() -> void:
 	if state in [States.IDLE, States.ATTACK]:
 		state = States.ATTACK
-		animation_player.play("lp1_chain")
+		animation_player.play("lp_chain")
+func _lp_chain_2() -> void:
+	if state in [States.IDLE, States.ATTACK]:
+		state = States.ATTACK
+		animation_player.play("lp_chain_2")
 func lp_info() -> void: # for animation_player
 	var info = {
 	"size": Hitbox_type.SMALL,
@@ -195,6 +199,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		hp_bar.hp_up(5)
 	if anim_name in [
 		"lp1",
+		"lp_chain",
+		"lp_chain_2",
 		"attack01_1",
 		"lp1_chain",
 		"throw_float",
@@ -223,11 +229,25 @@ func do_attack() -> void:
 	elif is_player_in_range_lp:
 		state = States.ATTACK
 		var chance = randf()
-		if chance < 0.15:
+		#phase1
+		# if chance < 0.15:
+		# 	_throw_ground()
+		# elif chance < 0.30:
+		# 	_throw_float()
+		# elif chance < 0.65:
+		# 	_lp()
+		# elif chance < 1:
+		# 	_attack01()
+		#phase2
+		if chance < 0.5:
 			_throw_ground()
-		elif chance < 0.30:
+		elif chance < 0.10:
 			_throw_float()
-		elif chance < 0.65:
+		elif chance < 0.40:
+			_lp_chain()
+		elif chance < 0.70:
+			_lp_chain_2()
+		elif chance < 0.85:
 			_lp()
 		elif chance < 1:
 			_attack01()
