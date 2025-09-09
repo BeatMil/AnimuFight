@@ -32,19 +32,19 @@ func _lp_chain() -> void:
 		animation_player.play("lp1_chain")
 func lp_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_type.MEDIUM,
+	"size": Hitbox_type.SMALL,
 	"time": 0.1,
-	"push_power_ground": Vector2(500, 0),
-	"push_type_ground": Enums.Push_types.NORMAL,
-	"push_power_air": Vector2(100, -150),
+	"push_power_ground": Vector2(800, -300),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(500, -100),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
-	"hitlag_amount_ground": 0,
+	"hitlag_amount_ground": 0.3,
 	"hitstun_amount_ground": 0.5,
 	"hitlag_amount_air": 0,
 	"hitstun_amount_air": 0.5,
-	"screenshake_amount": Vector2(0, 0),
-	"damage": 2,
-	"type": Enums.Attack.NORMAL,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 6,
+	"type": Enums.Attack.UNBLOCK,
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -222,12 +222,12 @@ func do_attack() -> void:
 		_attack01()
 	elif is_player_in_range_lp:
 		state = States.ATTACK
-		match randi_range(1, 1):
-			0:
-				_lp()
-			1:
-				_attack01()
-			2:
-				_throw_ground()
-			3:
-				_throw_float()
+		var chance = randf()
+		if chance < 0.15:
+			_throw_ground()
+		elif chance < 0.30:
+			_throw_float()
+		elif chance < 0.65:
+			_lp()
+		elif chance < 1:
+			_attack01()
