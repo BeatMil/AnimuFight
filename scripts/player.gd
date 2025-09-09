@@ -498,6 +498,7 @@ func _add_block_buffer_time() -> void:
 ## Command list?
 #############################################################
 var cant_dash_state = [
+	States.DODGE,
 	States.HIT_STUNNED,
 	States.BOUNCE_STUNNED,
 	States.WALL_BOUNCED,
