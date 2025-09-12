@@ -4,7 +4,8 @@ extends Node2D
 enum {
 	PARRYABLE,
 	DODGABLE,
-	JF
+	JF,
+	MOVE
 }
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -19,6 +20,8 @@ func _ready() -> void:
 			animation_player.play("alert_dodgable")
 		JF:
 			animation_player.play("jf")
+		MOVE:
+			animation_player.play("alert_move")
 		_:
 			animation_player.play("alert_parryable")
 
