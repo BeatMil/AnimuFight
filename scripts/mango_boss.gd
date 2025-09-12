@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 #############################################################
 func _lp() -> void:
 	if state in [States.IDLE, States.ATTACK]:
-		animation_player.play("lp1")
+		animation_player.play("lp")
 func _lp_chain() -> void:
 	if state in [States.IDLE, States.ATTACK]:
 		state = States.ATTACK
@@ -35,28 +35,6 @@ func _lp_chain_2() -> void:
 		state = States.ATTACK
 		animation_player.play("lp_chain_2")
 func lp_info() -> void: # for animation_player
-	var info = {
-	"size": Hitbox_type.SMALL,
-	"time": 0.1,
-	"push_power_ground": Vector2(800, -300),
-	"push_type_ground": Enums.Push_types.KNOCKDOWN,
-	"push_power_air": Vector2(500, -100),
-	"push_type_air": Enums.Push_types.KNOCKDOWN,
-	"hitlag_amount_ground": 0.3,
-	"hitstun_amount_ground": 0.5,
-	"hitlag_amount_air": 0,
-	"hitstun_amount_air": 0.5,
-	"screenshake_amount": Vector2(10, 0.1),
-	"damage": 6,
-	"type": Enums.Attack.UNBLOCK,
-	}
-	dict_to_spawn_hitbox(info)
-
-
-func _attack01() -> void:
-	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
-		animation_player.play("attack01_1")
-func attack01_info() -> void: # for animation_player
 	var info = {
 	"size": Hitbox_type.SMALL,
 	"time": 0.1,
@@ -72,6 +50,28 @@ func attack01_info() -> void: # for animation_player
 	"damage": 2,
 	"type": Enums.Attack.NORMAL,
 	"pos": Vector2(50, 0),
+	}
+	dict_to_spawn_hitbox(info)
+
+
+func unblock() -> void:
+	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
+		animation_player.play("unblock")
+func unblock_info() -> void: # for animation_player
+	var info = {
+	"size": Hitbox_type.SMALL,
+	"time": 0.1,
+	"push_power_ground": Vector2(800, -300),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(500, -100),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.3,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.5,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 6,
+	"type": Enums.Attack.UNBLOCK,
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -198,10 +198,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		animation_player.play("idle")
 		hp_bar.hp_up(5)
 	if anim_name in [
-		"lp1",
+		"lp",
 		"lp_chain",
 		"lp_chain_2",
-		"attack01_1",
+		"unblock",
 		"lp1_chain",
 		"throw_float",
 		"throw_ground",
@@ -225,7 +225,7 @@ func _on_attack_timer_timeout() -> void:
 func do_attack() -> void:
 	if is_player_in_range_attack01:
 		state = States.ATTACK
-		_attack01()
+		unblock()
 	elif is_player_in_range_lp:
 		state = States.ATTACK
 		var chance = randf()
@@ -237,17 +237,18 @@ func do_attack() -> void:
 		# elif chance < 0.65:
 		# 	_lp()
 		# elif chance < 1:
-		# 	_attack01()
+		# 	unblock()
 		#phase2
-		if chance < 0.5:
+		if chance < 0.05:
 			_throw_ground()
 		elif chance < 0.10:
 			_throw_float()
-		elif chance < 0.40:
+		elif chance < 0.25:
 			_lp_chain()
-		elif chance < 0.70:
+		elif chance < 0.40:
 			_lp_chain_2()
-		elif chance < 0.85:
+		elif chance < 0.70:
 			_lp()
 		elif chance < 1:
-			_attack01()
+			unblock()
+		print(chance)
