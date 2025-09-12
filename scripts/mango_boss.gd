@@ -126,6 +126,31 @@ func throw_ground_info() -> void: # for animation_player
 	dict_to_spawn_hitbox(info)
 
 
+func _slide() -> void:
+	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
+		state = States.BLOCK
+		animation_player.play("slide")
+		# Put cool sfx and something here
+func slide_info() -> void: # for animation_player
+	var info = {
+	"size": Hitbox_type.SLIDE,
+	"time": 0.3,
+	"push_power_ground": Vector2(500, -100),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(100, -150),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.2,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 2,
+	"type": Enums.Attack.MOVE,
+	"pos": Vector2(0, 120),
+	}
+	dict_to_spawn_hitbox(info)
+
+
 func play_blockstunned() -> void:
 	if animation_player.current_animation == "blockstunned":
 		animation_player.play("blockstunned_2")
@@ -143,7 +168,7 @@ func _on_timer_timeout() -> void:
 
 func _on_lp_range_r_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		sprite_2d.flip_h = false
+		# sprite_2d.flip_h = false
 		is_player_in_range_lp = true
 		_on_attack_timer_timeout()
 		attack_timer.start()
@@ -154,7 +179,7 @@ func _on_lp_range_r_body_entered(body: Node2D) -> void:
 
 func _on_lp_range_l_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		sprite_2d.flip_h = true
+		# sprite_2d.flip_h = true
 		is_player_in_range_lp = true
 		_on_attack_timer_timeout()
 		attack_timer.start()
@@ -165,7 +190,7 @@ func _on_lp_range_l_body_entered(body: Node2D) -> void:
 
 func _on_attack_01_range_r_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		sprite_2d.flip_h = false
+		# sprite_2d.flip_h = false
 		is_player_in_range_attack01 = true
 		_on_attack_timer_timeout()
 		attack_timer.start()
@@ -173,7 +198,7 @@ func _on_attack_01_range_r_body_entered(body: Node2D) -> void:
 
 func _on_attack_01_range_l_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		sprite_2d.flip_h = true
+		# sprite_2d.flip_h = true
 		is_player_in_range_attack01 = true
 		_on_attack_timer_timeout()
 		attack_timer.start()
@@ -205,6 +230,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"lp1_chain",
 		"throw_float",
 		"throw_ground",
+		"slide",
 		]:
 		animation_player.play("idle")
 		state = States.IDLE
@@ -225,7 +251,8 @@ func _on_attack_timer_timeout() -> void:
 func do_attack() -> void:
 	if is_player_in_range_attack01:
 		state = States.ATTACK
-		unblock()
+		# unblock()
+		_slide()
 	elif is_player_in_range_lp:
 		state = States.ATTACK
 		var chance = randf()
@@ -239,16 +266,17 @@ func do_attack() -> void:
 		# elif chance < 1:
 		# 	unblock()
 		#phase2
-		if chance < 0.05:
-			_throw_ground()
-		elif chance < 0.10:
-			_throw_float()
-		elif chance < 0.25:
-			_lp_chain()
-		elif chance < 0.40:
-			_lp_chain_2()
-		elif chance < 0.70:
-			_lp()
-		elif chance < 1:
-			unblock()
+		# if chance < 0.05:
+		# 	_throw_ground()
+		# elif chance < 0.10:
+		# 	_throw_float()
+		# elif chance < 0.25:
+		# 	_lp_chain()
+		# elif chance < 0.40:
+		# 	_lp_chain_2()
+		# elif chance < 0.70:
+		# 	_lp()
+		# elif chance < 1:
+		# 	unblock()
+		_slide()
 		print(chance)

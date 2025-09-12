@@ -63,6 +63,7 @@ enum Hitbox_type {
 	BOUND,
 	WAILL_THROW,
 	GROUND_THROW,
+	SLIDE,
 	}
 
 
@@ -81,6 +82,7 @@ const HITBOX_METEO = preload("res://nodes/hitboxes/hitbox_meteo_crash.tscn")
 const HITBOX_AIR_THROW = preload("res://nodes/hitboxes/hitbox_air_throw.tscn")
 const HITBOX_GROUND_THROW = preload("res://nodes/hitboxes/hitbox_ground_throw.tscn")
 const HITBOX_BOUND = preload("res://nodes/hitboxes/hitbox_bound.tscn")
+const HITBOX_SLIDE = preload("res://nodes/hitboxes/hitbox_slide.tscn")
 const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 const SLOW_MO_START = preload("res://media/sfxs/slow_mo_start.wav")
 const SLOW_MO_END = preload("res://media/sfxs/slow_mo_end.wav")
@@ -279,6 +281,8 @@ func _spawn_lp_hitbox(
 			hitbox = HITBOX_GROUND_THROW.instantiate()
 		Hitbox_type.BOUND:
 			hitbox = HITBOX_BOUND.instantiate()
+		Hitbox_type.SLIDE:
+			hitbox = HITBOX_SLIDE.instantiate()
 		_:
 			hitbox = HITBOX_LP_MEDIUM.instantiate()
 
@@ -454,7 +458,12 @@ func hitted(
 				print_debug("_zoom can't find player/camera")
 
 	## DODGE & DODGE_SUCCESS
-	elif state in [States.DODGE, States.DODGE_SUCCESS] and _type not in [Enums.Attack.THROW_GROUND, Enums.Attack.THROW_FLOAT]:
+	elif state in [States.DODGE, States.DODGE_SUCCESS] and \
+		_type not in [
+		Enums.Attack.THROW_GROUND,
+		Enums.Attack.THROW_FLOAT,
+		Enums.Attack.MOVE
+		]:
 		if _type == Enums.Attack.UNBLOCK:
 			animation_player.play("dodge_success_zoom")
 		else:
@@ -570,6 +579,14 @@ func hitted(
 			States.PARRY,
 			States.PARRY_SUCCESS,
 		] and _type == Enums.Attack.UNBLOCK:
+			ObjectPooling.spawn_glass_spark(position + Vector2(0, randi_range(-30, -80)))
+		if state in [
+			States.BLOCK,
+			States.PARRY,
+			States.PARRY_SUCCESS,
+			States.DODGE,
+			States.DODGE_SUCCESS,
+		] and _type == Enums.Attack.MOVE:
 			ObjectPooling.spawn_glass_spark(position + Vector2(0, randi_range(-30, -80)))
 		else:
 			ObjectPooling.spawn_hitSpark_1(position + Vector2(0, randi_range(-30, -80)))

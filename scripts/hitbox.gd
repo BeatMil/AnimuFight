@@ -94,6 +94,16 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		_play_glass_break_random_pitch()
 		is_blocking = true
 		print("guard break!")
+	elif body.state in [
+		body.States.BLOCK,
+		body.States.PARRY,
+		body.States.PARRY_SUCCESS,
+		body.States.DODGE,
+		body.States.DODGE_SUCCESS,
+	] and type == Enums.Attack.MOVE:
+		_play_glass_break_random_pitch()
+		is_blocking = true
+		print("guard break!")
 
 	if body.has_method("hitted"):
 		if body.is_on_floor():
