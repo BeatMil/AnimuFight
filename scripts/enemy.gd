@@ -168,7 +168,6 @@ func _move( delta) -> void:
 func _follow_pos() -> void:
 	if is_instance_valid(air_throw_follow_pos):
 		position = air_throw_follow_pos.global_position
-		print("==Follow the throw pos==")
 
 
 func _facing() -> void:

@@ -300,7 +300,6 @@ func physic_input(delta):
 				input_history[-2]["command"].find("h") > -1 or \
 
 				input_history[-2]["command"].find("l") > -1):
-				print("last command: ", input_history[-2]["command"])
 				_lp_hp()
 		queue_move(_lp_hp)
 	elif Input.is_action_just_pressed("lp"):
