@@ -34,5 +34,10 @@ func _process(_delta: float) -> void:
 			Settings.checkpoint = 8
 		elif phase == 5:
 			Settings.checkpoint = 5
+
+		if phase >= 5:
+			if not is_shoot_up_house:
+				is_shoot_up_house = true
+				get_parent()._shoot_up_house()
 		phase += 1
 		_spawn_enemy()
