@@ -249,11 +249,7 @@ func _on_attack_timer_timeout() -> void:
 
 
 func do_attack() -> void:
-	if is_player_in_range_attack01:
-		state = States.ATTACK
-		# unblock()
-		_slide()
-	elif is_player_in_range_lp:
+	if is_player_in_range_attack01 or is_player_in_range_lp:
 		state = States.ATTACK
 		var chance = randf()
 		#phase1
@@ -265,18 +261,20 @@ func do_attack() -> void:
 		# 	_lp()
 		# elif chance < 1:
 		# 	unblock()
+
 		#phase2
-		# if chance < 0.05:
-		# 	_throw_ground()
-		# elif chance < 0.10:
-		# 	_throw_float()
-		# elif chance < 0.25:
-		# 	_lp_chain()
-		# elif chance < 0.40:
-		# 	_lp_chain_2()
-		# elif chance < 0.70:
-		# 	_lp()
-		# elif chance < 1:
-		# 	unblock()
-		_slide()
+		if chance < 0.05:
+			_throw_ground()
+		elif chance < 0.10:
+			_throw_float()
+		elif chance < 0.25:
+			_lp_chain()
+		elif chance < 0.40:
+			_lp_chain_2()
+		elif chance < 0.55:
+			_lp()
+		elif chance < 0.70:
+			unblock()
+		elif chance < 1:
+			_slide()
 		print(chance)
