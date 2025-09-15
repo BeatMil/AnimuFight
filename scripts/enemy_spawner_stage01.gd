@@ -4,8 +4,9 @@ extends Node2D
 @export var target: CharacterBody2D
 @export var enemy_to_spawn: Array[Node]
 @export var is_active: bool = true
-var is_shoot_up_house: bool = false
 var phase: int = 0
+
+signal area1_done
 
 
 func _ready() -> void:
@@ -34,5 +35,10 @@ func _process(_delta: float) -> void:
 			Settings.checkpoint = 8
 		elif phase == 5:
 			Settings.checkpoint = 5
+		elif phase == 1:
+			is_active = false
+			print("stop spawning!")
+			emit_signal("area1_done")
+			return
 		phase += 1
 		_spawn_enemy()

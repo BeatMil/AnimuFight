@@ -122,8 +122,9 @@ tracks/0/keys = {
 "values": [Vector2(0, 72)]
 }
 
-[sub_resource type="Animation" id="Animation_f33yp"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_wntu7"]
+resource_name = "1_out"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -137,9 +138,8 @@ tracks/0/keys = {
 "values": [Vector2(0, -2240)]
 }
 
-[sub_resource type="Animation" id="Animation_wntu7"]
-resource_name = "1_out"
-length = 0.1
+[sub_resource type="Animation" id="Animation_f33yp"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

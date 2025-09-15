@@ -17,6 +17,8 @@ func _ready() -> void:
 
 	Settings.current_stage = "res://scenes/stage_01.tscn"
 
+	enemy_spawner_new.area1_done.connect(_lift_wall_area1)
+
 	# Player ost
 	# music_player.play("stage01_track_copyright")
 	# music_player.play("stage01_track")
@@ -37,3 +39,9 @@ func _on_area_1_lock_trigger_body_entered(_body: Node2D) -> void:
 	area_lock_player.play("1_in")
 	get_node_or_null("Player/Camera").set_screen_lock(-1920, 1920, -10000000, 1000)
 	enemy_spawner_new.is_active = true
+
+
+func _lift_wall_area1() -> void:
+	area_lock_player.play("RESET")
+	get_node_or_null("Player/Camera").set_screen_lock(-10000000, 10000000, -10000000, 1000)
+	
