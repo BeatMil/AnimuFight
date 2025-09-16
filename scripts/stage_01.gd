@@ -4,6 +4,9 @@ extends Node2D
 @onready var animation_player: AnimationPlayer = $MangoBossSitBanana/AnimationPlayer
 @onready var area_lock_player: AnimationPlayer = $AreaLockPlayer
 @onready var enemy_spawner_new: Node2D = $EnemySpawnerNew
+@onready var transition_camera: Camera2D = $Cameras/TransitionCamera
+@onready var player: CharacterBody2D = $Player
+@onready var area_1_lock_trigger: Area2D = $Area1LockTrigger
 
 
 func _ready() -> void:
@@ -39,9 +42,18 @@ func _on_area_1_lock_trigger_body_entered(_body: Node2D) -> void:
 	area_lock_player.play("1_in")
 	get_node_or_null("Player/Camera").set_screen_lock(-1920, 1920, -10000000, 1000)
 	enemy_spawner_new.is_active = true
+	area_1_lock_trigger.queue_free()
 
 
 func _lift_wall_area1() -> void:
 	area_lock_player.play("RESET")
+	transition_camera.position = player.get_camera().get_screen_center_position()
+	transition_camera.limit_bottom = 1000
+	transition_camera.make_current()
 	get_node_or_null("Player/Camera").set_screen_lock(-10000000, 10000000, -10000000, 1000)
-	
+	# print(transition_camera.position)
+	# print(new_pos)
+	var tween = get_tree().create_tween()
+	tween.tween_property(transition_camera, "position", player.position, 0.2).set_trans(Tween.TRANS_SINE)
+	tween.tween_interval(0.2)
+	tween.tween_callback(player.get_camera().make_current)

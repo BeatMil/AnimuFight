@@ -365,6 +365,9 @@ func set_camera(value: bool):
 	$Camera.get_node("Camera2D").enabled = value
 
 
+func get_camera() -> Camera2D:
+	return $Camera.get_node("Camera2D")
+
 func set_grabbed_enemy(enemy: Object) -> void:
 	grabbed_enemy = enemy
 
