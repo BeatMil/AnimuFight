@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=37 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://cppqygp1b42a1" path="res://media/sprites/stage01/building.png" id="4_dimc6"]
 [ext_resource type="Texture2D" uid="uid://nv6dkesnffpt" path="res://media/sprites/stage01/floor_dark.png" id="5_nasqd"]
 [ext_resource type="Script" uid="uid://duxhld58ww51q" path="res://scripts/enemy_spawn_helper.gd" id="6_l457t"]
+[ext_resource type="Texture2D" uid="uid://m74we0184cjq" path="res://media/sprites/stage01/seven_eleven.png" id="6_sgik7"]
 [ext_resource type="PackedScene" uid="uid://c4m5deiee8q8w" path="res://nodes/boss01.tscn" id="7_nh3b5"]
+[ext_resource type="Texture2D" uid="uid://ccuevl8yvbirg" path="res://media/sprites/stage01/8-12_girl.png" id="7_pxpxr"]
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="8_nasqd"]
 [ext_resource type="Script" uid="uid://cat1ebbeoo01d" path="res://scripts/enemy_spawner_stage01.gd" id="8_yxbv0"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="9_dimc6"]
@@ -21,6 +23,43 @@
 [ext_resource type="Texture2D" uid="uid://n7xbpwiq1n77" path="res://media/sprites/mango_boss/mango_boss_sit.png" id="19_yxbv0"]
 [ext_resource type="AudioStream" uid="uid://cxkb2rpnoq1wv" path="res://media/sfxs/phone-typing-333292.mp3" id="20_yxbv0"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="21_v7t3f"]
+
+[sub_resource type="Animation" id="Animation_mqdkf"]
+resource_name = "run"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_lrdte"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1fbf0"]
+_data = {
+&"RESET": SubResource("Animation_lrdte"),
+&"run": SubResource("Animation_mqdkf")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6ddm"]
 size = Vector2(1920, 326)
@@ -181,8 +220,23 @@ position = Vector2(2893, 341)
 texture = ExtResource("4_dimc6")
 
 [node name="Home" type="Sprite2D" parent="Map"]
-position = Vector2(16, 328)
+position = Vector2(-896, 328)
 texture = ExtResource("2_4caca")
+
+[node name="8-12" type="Sprite2D" parent="Map"]
+position = Vector2(1008, 472)
+texture = ExtResource("6_sgik7")
+
+[node name="8-12Girl" type="Sprite2D" parent="Map/8-12"]
+position = Vector2(472, -96)
+texture = ExtResource("7_pxpxr")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Map/8-12/8-12Girl"]
+libraries = {
+&"": SubResource("AnimationLibrary_1fbf0")
+}
+autoplay = "run"
 
 [node name="Floor" type="Sprite2D" parent="Map" groups=["ground"]]
 position = Vector2(961, 637)
@@ -417,10 +471,10 @@ position = Vector2(2648, 727)
 position = Vector2(3520, 368)
 
 [node name="FallingFlowerPot" parent="." instance=ExtResource("15_bc8xj")]
-position = Vector2(-424, 576)
+position = Vector2(-656, 576)
 
 [node name="JunctionBox" parent="." instance=ExtResource("11_l457t")]
-position = Vector2(240, 558)
+position = Vector2(72, 560)
 
 [node name="LightPole" parent="." instance=ExtResource("17_c2i1s")]
 position = Vector2(781, 320)
@@ -453,7 +507,7 @@ libraries = {
 }
 
 [node name="Area1LockTrigger" type="Area2D" parent="."]
-position = Vector2(-64, 520)
+position = Vector2(-136, 520)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area1LockTrigger"]
