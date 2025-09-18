@@ -131,7 +131,7 @@ visible = false
 [node name="Mango1" type="RigidBody2D" parent="Mangos"]
 position = Vector2(-256, -8)
 collision_layer = 64
-collision_mask = 95
+collision_mask = 91
 metadata/_edit_group_ = true
 
 [node name="Mango" type="Sprite2D" parent="Mangos/Mango1"]
@@ -144,7 +144,7 @@ shape = SubResource("RectangleShape2D_uetfq")
 [node name="Mango2" type="RigidBody2D" parent="Mangos"]
 position = Vector2(-192, -8)
 collision_layer = 64
-collision_mask = 95
+collision_mask = 91
 metadata/_edit_group_ = true
 
 [node name="Mango" type="Sprite2D" parent="Mangos/Mango2"]
@@ -157,7 +157,7 @@ shape = SubResource("RectangleShape2D_uetfq")
 [node name="Mango3" type="RigidBody2D" parent="Mangos"]
 position = Vector2(-224, -40)
 collision_layer = 64
-collision_mask = 95
+collision_mask = 91
 metadata/_edit_group_ = true
 
 [node name="Mango" type="Sprite2D" parent="Mangos/Mango3"]
@@ -170,7 +170,7 @@ shape = SubResource("RectangleShape2D_uetfq")
 [node name="Mango4" type="RigidBody2D" parent="Mangos"]
 position = Vector2(-168, -40)
 collision_layer = 64
-collision_mask = 95
+collision_mask = 91
 metadata/_edit_group_ = true
 
 [node name="Mango" type="Sprite2D" parent="Mangos/Mango4"]
@@ -183,7 +183,7 @@ shape = SubResource("RectangleShape2D_uetfq")
 [node name="Mango5" type="RigidBody2D" parent="Mangos"]
 position = Vector2(-224, -80)
 collision_layer = 64
-collision_mask = 95
+collision_mask = 91
 metadata/_edit_group_ = true
 
 [node name="Mango" type="Sprite2D" parent="Mangos/Mango5"]
@@ -196,7 +196,7 @@ shape = SubResource("RectangleShape2D_uetfq")
 [node name="Mango6" type="RigidBody2D" parent="Mangos"]
 position = Vector2(-280, -40)
 collision_layer = 64
-collision_mask = 95
+collision_mask = 91
 metadata/_edit_group_ = true
 
 [node name="Mango" type="Sprite2D" parent="Mangos/Mango6"]

@@ -30,6 +30,7 @@ EnemySpawnHelper="*res://scripts/enemy_spawn_helper.gd"
 SceneTransition="*res://nodes/scene_transition.tscn"
 AttackQueue="*res://nodes/attack_queue.tscn"
 GlobalSoundPlayer="*res://nodes/global_sound_player.tscn"
+CameraManager="*res://nodes/camera_manager.tscn"
 
 [display]
 

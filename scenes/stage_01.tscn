@@ -24,6 +24,21 @@
 [ext_resource type="AudioStream" uid="uid://cxkb2rpnoq1wv" path="res://media/sfxs/phone-typing-333292.mp3" id="20_yxbv0"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="21_v7t3f"]
 
+[sub_resource type="Animation" id="Animation_lrdte"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_mqdkf"]
 resource_name = "run"
 loop_mode = 1
@@ -38,21 +53,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
-}
-
-[sub_resource type="Animation" id="Animation_lrdte"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1fbf0"]
@@ -162,19 +162,19 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_wntu7"]
-resource_name = "1_out"
+resource_name = "2_in"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("../2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -2240)]
+"values": [Vector2(0, -312)]
 }
 
 [sub_resource type="Animation" id="Animation_f33yp"]
@@ -191,11 +191,23 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, -2240)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2240)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mqdkf"]
 _data = {
 &"1_in": SubResource("Animation_pxpxr"),
-&"1_out": SubResource("Animation_wntu7"),
+&"2_in": SubResource("Animation_wntu7"),
 &"RESET": SubResource("Animation_f33yp")
 }
 
@@ -211,7 +223,7 @@ script = ExtResource("1_4caca")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(-2576, 568)
+position = Vector2(-320, 568)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -522,12 +534,16 @@ position = Vector2(0, -2240)
 position = Vector2(-2024, 0)
 
 [node name="WallR" parent="AreaLock/1" instance=ExtResource("21_v7t3f")]
-position = Vector2(2032, 0)
+position = Vector2(1808, 0)
 
-[node name="Cameras" type="Node2D" parent="."]
+[node name="2" type="Node2D" parent="AreaLock"]
+position = Vector2(0, -2240)
 
-[node name="TransitionCamera" type="Camera2D" parent="Cameras"]
-position = Vector2(-192, -16)
+[node name="WallL" parent="AreaLock/2" instance=ExtResource("21_v7t3f")]
+position = Vector2(1808, 0)
+
+[node name="WallR" parent="AreaLock/2" instance=ExtResource("21_v7t3f")]
+position = Vector2(3976, 0)
 
 [connection signal="banana_fly" from="MarketGreen" to="." method="_on_market_green_banana_fly"]
 [connection signal="body_entered" from="Area1LockTrigger" to="." method="_on_area_1_lock_trigger_body_entered"]

@@ -4,17 +4,19 @@ extends Node2D
 @onready var animation_player: AnimationPlayer = $MangoBossSitBanana/AnimationPlayer
 @onready var area_lock_player: AnimationPlayer = $AreaLockPlayer
 @onready var enemy_spawner_new: Node2D = $EnemySpawnerNew
-@onready var transition_camera: Camera2D = $Cameras/TransitionCamera
+# @onready var transition_camera: Camera2D = $Cameras/TransitionCamera
 @onready var player: CharacterBody2D = $Player
 @onready var area_1_lock_trigger: Area2D = $Area1LockTrigger
+const MANGO_BOSS = preload("res://nodes/mango_boss.tscn")
 
 
 func _ready() -> void:
 	# Set camera lock
 	# get_node_or_null("Player/Camera").set_screen_lock(0, 1920, 135, 1129)
-	get_node_or_null("Player/Camera").set_screen_lock(-10000000, 10000000, -10000000, 1000)
+	# get_node_or_null("Player/Camera").set_screen_lock(-10000000, 10000000, -10000000, 1000)
+	CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
 	# get_node_or_null("Player/Camera").set_screen_lock(-1920, 1920, -10000000, 1000)
-	get_node_or_null("Player/Camera").set_zoom(Vector2(1,1))
+	# get_node_or_null("Player/Camera").set_zoom(Vector2(1,1))
 	area_lock_player.play("RESET")
 	enemy_spawner_new.is_active = false
 
@@ -34,26 +36,43 @@ func _ready() -> void:
 	# 	_shoot_up_house()
 
 
-func _on_market_green_banana_fly() -> void:
-	animation_player.play("shock")
-
-
 func _on_area_1_lock_trigger_body_entered(_body: Node2D) -> void:
 	area_lock_player.play("1_in")
-	get_node_or_null("Player/Camera").set_screen_lock(-1920, 1920, -10000000, 1000)
+	CameraManager.set_screen_lock(-1920, 1750, -10000000, 1000)
 	enemy_spawner_new.is_active = true
 	area_1_lock_trigger.queue_free()
 
 
 func _lift_wall_area1() -> void:
 	area_lock_player.play("RESET")
-	transition_camera.position = player.get_camera().get_screen_center_position()
-	transition_camera.limit_bottom = 1000
-	transition_camera.make_current()
-	get_node_or_null("Player/Camera").set_screen_lock(-10000000, 10000000, -10000000, 1000)
+	CameraManager.transition_to_player(-10000000, 10000000, -10000000, 1000)
+	# CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
+	# CameraManager.make_current(1)
+	# CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
+	# transition_camera.position = player.get_camera().get_screen_center_position()
+	# transition_camera.limit_bottom = 1000
+	# transition_camera.make_current()
+	# get_node_or_null("Player/Camera").set_screen_lock(-10000000, 10000000, -10000000, 1000)
 	# print(transition_camera.position)
 	# print(new_pos)
-	var tween = get_tree().create_tween()
-	tween.tween_property(transition_camera, "position", player.position, 0.2).set_trans(Tween.TRANS_SINE)
-	tween.tween_interval(0.2)
-	tween.tween_callback(player.get_camera().make_current)
+	# var tween = get_tree().create_tween()
+	# tween.tween_property(transition_camera, "position", player.position, 0.2).set_trans(Tween.TRANS_SINE)
+	# tween.tween_interval(0.2)
+	# tween.tween_callback(player.get_camera().make_current)
+
+
+func _on_market_green_banana_fly() -> void:
+	animation_player.play("shock")
+	area_lock_player.play("2_in")
+	# transition_camera.position = player.get_camera().get_screen_center_position()
+	# transition_camera.limit_bottom = 1000
+	# transition_camera.make_current()
+	# var tween = get_tree().create_tween()
+	# tween.tween_property(transition_camera, "position", Vector2(2888, 320), 0.2).set_trans(Tween.TRANS_SINE)
+	var mango_boss = MANGO_BOSS.instantiate()
+	mango_boss.position = Vector2(2888, 320)
+	mango_boss.target = player
+	add_child(mango_boss)
+	# await get_tree().create_timer(0.5).timeout
+	# get_node_or_null("Player/Camera").set_screen_lock(1960, 3832, -10000000, 1000)
+	# player.get_camera().make_current()

@@ -29,7 +29,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			m.apply_impulse(
 				Vector2(randi_range(-power, power), -power
 				))
-			emit_signal("banana_fly")
+		emit_signal("banana_fly")
 		is_activated = true
 		mango_on_stand.texture = STAND
 		banana_audio_player.play()

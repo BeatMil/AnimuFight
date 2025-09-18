@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=104 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
@@ -7,7 +7,6 @@
 [ext_resource type="FontFile" uid="uid://di6hlk3rdui6r" path="res://media/fonts/NotoNaskhArabicUI-Regular.ttf" id="3_q6yga"]
 [ext_resource type="Texture2D" uid="uid://lo6pn004mau8" path="res://media/sprites/char1/FirstChar_idle.png" id="3_uo2uk"]
 [ext_resource type="PackedScene" uid="uid://cwih0xhe7lqho" path="res://nodes/hp_bar.tscn" id="4_0a5oy"]
-[ext_resource type="PackedScene" uid="uid://bebekibsp4il2" path="res://nodes/camera_2d.tscn" id="4_uqopg"]
 [ext_resource type="Texture2D" uid="uid://d2vdd4fbwjquv" path="res://media/sprites/char1/vanilla_air_slam.png" id="6_2anje"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="8_g2x0t"]
 [ext_resource type="Texture2D" uid="uid://b8oot3yuu2abo" path="res://media/sprites/char1/FirstChar_block.png" id="11_xlakb"]
@@ -4983,9 +4982,7 @@ position = Vector2(-112, -120)
 [node name="BurstPos" type="Marker2D" parent="HitBoxPos" index="7"]
 position = Vector2(0, 8)
 
-[node name="Camera" parent="." index="7" instance=ExtResource("4_uqopg")]
-
-[node name="ExecuteAreaL" type="Area2D" parent="." index="8"]
+[node name="ExecuteAreaL" type="Area2D" parent="." index="7"]
 collision_layer = 0
 collision_mask = 18
 monitorable = false
@@ -4995,7 +4992,7 @@ visible = false
 position = Vector2(-392, 0)
 shape = SubResource("RectangleShape2D_8u5p4")
 
-[node name="ExecuteAreaR" type="Area2D" parent="." index="9"]
+[node name="ExecuteAreaR" type="Area2D" parent="." index="8"]
 collision_layer = 0
 collision_mask = 18
 monitorable = false
@@ -5005,10 +5002,10 @@ visible = false
 position = Vector2(387, 0)
 shape = SubResource("RectangleShape2D_8u5p4")
 
-[node name="HpBar" parent="." index="10"]
+[node name="HpBar" parent="." index="9"]
 visible = false
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="12"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="11"]
 environment = SubResource("Environment_3pser")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

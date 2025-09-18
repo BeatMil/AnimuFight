@@ -170,10 +170,10 @@ func _check_wall_bounce() -> void:
 			set_collision_no_hit_all()
 			var push_power = Vector2(1000, 100) if is_touching_wall_left else Vector2(-1000, 100)
 			_push_direct(push_power)
-			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
+			CameraManager.start_screen_shake(10, 0.1)
 			hitlag(0.3)
 		elif is_wall_bounced:
-			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(40, 0.3)
+			CameraManager.start_screen_shake(40, 0.3)
 			hitlag(0.5)
 			animation_player.play("wallsplat")
 			velocity = Vector2.ZERO
@@ -185,7 +185,7 @@ func _check_wall_bounce() -> void:
 			is_wall_bounced = true
 			var push_power = Vector2(400, -100) if is_touching_wall_left else Vector2(-400, -100)
 			_push_direct(push_power)
-			get_tree().current_scene.get_node_or_null("Player/Camera").start_screen_shake(10, 0.1)
+			CameraManager.start_screen_shake(10, 0.1)
 			hitlag(0.3)
 			animation_player.play("down")
 			set_collision_no_hit_all()
@@ -451,11 +451,7 @@ func hitted(
 		# print_rich("[color=pink][b]COOL SLOW MO!![/b][/color]", slow_mo_on_block)
 		if slow_mo_on_block:
 			_slow_moion(slow_mo_on_block.x, slow_mo_on_block.y)
-			if get_tree().current_scene.get_node_or_null("Player/Camera"):
-				get_tree().current_scene.get_node_or_null(
-				"Player/Camera").zoom_zoom(_zoom, _zoom_duration)
-			else:
-				print_debug("_zoom can't find player/camera")
+			CameraManager.zoom_zoom(_zoom, _zoom_duration)
 
 	## DODGE & DODGE_SUCCESS
 	elif state in [States.DODGE, States.DODGE_SUCCESS] and \
@@ -644,18 +640,10 @@ func hitted(
 			_attacker.hitlag(hitlag_amount)
 		# Screenshake
 		if _screenshake_amount:
-			if get_tree().current_scene.get_node_or_null("Player/Camera"):
-				get_tree().current_scene.get_node_or_null("Player/Camera"). \
-				start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
-			else:
-				print_debug("screenshake can't find player/camera")
+				CameraManager.start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
 		# Zoom
 		if _zoom:
-			if get_tree().current_scene.get_node_or_null("Player/Camera"):
-				get_tree().current_scene.get_node_or_null(
-				"Player/Camera").zoom(_zoom, _zoom_duration)
-			else:
-				print_debug("_zoom can't find player/camera")
+			CameraManager.zoom(_zoom, _zoom_duration)
 		# Player Parries
 		if _type == Enums.Attack.P_PARRY:
 			$AudioStreamPlayer2.stream = HIT_2
@@ -764,7 +752,5 @@ func block_effect_helper(
 		hitlag(hitlag_amount)
 		_attacker.hitlag(hitlag_amount)
 	if _screenshake_amount:
-		if get_tree().current_scene.get_node_or_null("Player/Camera"):
-			get_tree().current_scene.get_node_or_null("Player/Camera"). \
-			start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
+			CameraManager.start_screen_shake(_screenshake_amount.x, _screenshake_amount.y)
 	ObjectPooling.spawn_blockSpark_1(position + Vector2(0, randi_range(-30, -80)))

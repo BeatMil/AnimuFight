@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctbfsptg7yje7"]
+
+[ext_resource type="Script" uid="uid://drvy3bng06pmk" path="res://scripts/camera_manager.gd" id="1_pi36e"]
+
+[node name="CameraManager" type="Node2D" node_paths=PackedStringArray("player_cam", "transition_cam", "other_cam")]
+script = ExtResource("1_pi36e")
+player_cam = NodePath("PlayerCamera")
+transition_cam = NodePath("TransitionCamera")
+other_cam = NodePath("OtherCamera")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="TransitionCamera" type="Camera2D" parent="."]
+
+[node name="OtherCamera" type="Camera2D" parent="."]
