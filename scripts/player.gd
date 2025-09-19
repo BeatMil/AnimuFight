@@ -214,7 +214,6 @@ func _physics_process(delta: float) -> void:
 		_jump(delta)
 		if state == States.DASH:
 			_push_x(300)
-			print("bob")
 			state = States.AIR
 			# await get_tree().physics_frame
 		jump_buffer_timer = 0
@@ -478,7 +477,7 @@ func _check_input_history() -> void:
 		dash_left.calculate(input_history[i]["command"])
 	if dash_right.get_command_complete(): 
 		queue_move(_dash_right)
-		print(input_history)
+		# print(input_history)
 		input_history.clear()
 	if dash_left.get_command_complete():
 		queue_move(_dash_left)
