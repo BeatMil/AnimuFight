@@ -15,6 +15,8 @@ func _ready() -> void:
 	# get_node_or_null("Player/Camera").set_screen_lock(0, 1920, 135, 1129)
 	# get_node_or_null("Player/Camera").set_screen_lock(-10000000, 10000000, -10000000, 1000)
 	CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
+	CameraManager.player = player
+	CameraManager.make_current(0)
 	# get_node_or_null("Player/Camera").set_screen_lock(-1920, 1920, -10000000, 1000)
 	# get_node_or_null("Player/Camera").set_zoom(Vector2(1,1))
 	area_lock_player.play("RESET")
@@ -45,16 +47,7 @@ func _on_area_1_lock_trigger_body_entered(_body: Node2D) -> void:
 
 func _lift_wall_area1() -> void:
 	area_lock_player.play("RESET")
-	CameraManager.transition_to_player(-10000000, 10000000, -10000000, 1000)
-	# CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
-	# CameraManager.make_current(1)
-	# CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
-	# transition_camera.position = player.get_camera().get_screen_center_position()
-	# transition_camera.limit_bottom = 1000
-	# transition_camera.make_current()
-	# get_node_or_null("Player/Camera").set_screen_lock(-10000000, 10000000, -10000000, 1000)
-	# print(transition_camera.position)
-	# print(new_pos)
+	CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
 	# var tween = get_tree().create_tween()
 	# tween.tween_property(transition_camera, "position", player.position, 0.2).set_trans(Tween.TRANS_SINE)
 	# tween.tween_interval(0.2)
@@ -64,15 +57,15 @@ func _lift_wall_area1() -> void:
 func _on_market_green_banana_fly() -> void:
 	animation_player.play("shock")
 	area_lock_player.play("2_in")
-	# transition_camera.position = player.get_camera().get_screen_center_position()
-	# transition_camera.limit_bottom = 1000
-	# transition_camera.make_current()
-	# var tween = get_tree().create_tween()
-	# tween.tween_property(transition_camera, "position", Vector2(2888, 320), 0.2).set_trans(Tween.TRANS_SINE)
+	CameraManager.pos_lock($MarketCamPos.position)
+
 	var mango_boss = MANGO_BOSS.instantiate()
 	mango_boss.position = Vector2(2888, 320)
 	mango_boss.target = player
+	mango_boss.hp = 2
+	mango_boss.mango_boss_down.connect(_mango_boss_down)
 	add_child(mango_boss)
-	# await get_tree().create_timer(0.5).timeout
-	# get_node_or_null("Player/Camera").set_screen_lock(1960, 3832, -10000000, 1000)
-	# player.get_camera().make_current()
+
+func _mango_boss_down() -> void:
+	area_lock_player.play("RESET")
+	CameraManager.pos_lock_to_player()

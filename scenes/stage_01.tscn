@@ -223,7 +223,7 @@ script = ExtResource("1_4caca")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(-320, 568)
+position = Vector2(-392, 584)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -329,7 +329,7 @@ enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpaw
 [node name="e4" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
 position = NodePath("../../../SpawnPos/pos1")
-hp = 10
+hp = 1
 object = ExtResource("9_dimc6")
 
 [node name="Phase2" type="Node" parent="EnemySpawnHelper"]
@@ -544,6 +544,11 @@ position = Vector2(1808, 0)
 
 [node name="WallR" parent="AreaLock/2" instance=ExtResource("21_v7t3f")]
 position = Vector2(3976, 0)
+
+[node name="MarketCamPos" type="Camera2D" parent="."]
+visible = false
+position = Vector2(2872, 472)
+limit_bottom = 1000
 
 [connection signal="banana_fly" from="MarketGreen" to="." method="_on_market_green_banana_fly"]
 [connection signal="body_entered" from="Area1LockTrigger" to="." method="_on_area_1_lock_trigger_body_entered"]
