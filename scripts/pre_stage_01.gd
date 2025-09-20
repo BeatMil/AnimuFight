@@ -29,8 +29,9 @@ signal shoot_up_house
 func _ready() -> void:
 	connect("shoot_up_house", _shoot_up_house)
 	# Set camera lock
-	# get_node_or_null("Player/Camera").set_screen_lock(0, 1920, 135, 1129)
-	# get_node_or_null("Player/Camera").set_screen_lock(0, 1920, 0, 1000)
+	CameraManager.zoom_permanent(Vector2(0.1, 0.1))
+	CameraManager.set_screen_lock(0, 1920, 135, 1029)
+	# CameraManager.set_screen_lock(0, 1920, 0, 1000)
 	# get_node_or_null("Player/Camera").set_zoom(Vector2(1,1))
 
 	Settings.current_stage = "res://scenes/pre_stage01.tscn"
