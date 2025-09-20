@@ -223,7 +223,7 @@ script = ExtResource("1_4caca")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(-392, 584)
+position = Vector2(2832, 584)
 
 [node name="Map" type="Node2D" parent="."]
 

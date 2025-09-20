@@ -806,7 +806,7 @@ func ta_info() -> void:
 	"hitlag_amount_air": 0.1,
 	"hitstun_amount_air": 1.5,
 	"screenshake_amount": Vector2(10, 0.1),
-	"damage": 3,
+	"damage": 1,
 	"type": Enums.Attack.NORMAL,
 	}
 	dict_to_spawn_hitbox(info)
@@ -942,7 +942,7 @@ func forward_hp_info() ->  void:
 	"hitlag_amount_air": 0.2,
 	"hitstun_amount_air": 1,
 	"screenshake_amount": Vector2(10, 0.2),
-	"damage": 3,
+	"damage": 0,
 	"type": Enums.Attack.NORMAL,
 	# "zoom": Vector2(1, 1),
 	}
@@ -994,7 +994,7 @@ func ground_punch_info() ->  void:
 	"hitlag_amount_air": 0.2,
 	"hitstun_amount_air": 0.2,
 	"screenshake_amount": Vector2(20, 0.2),
-	"damage": 6,
+	"damage": 5,
 	"type": Enums.Attack.UNBLOCK,
 	}
 	dict_to_spawn_hitbox(info)

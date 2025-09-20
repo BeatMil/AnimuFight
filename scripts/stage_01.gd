@@ -62,9 +62,10 @@ func _on_market_green_banana_fly() -> void:
 	var mango_boss = MANGO_BOSS.instantiate()
 	mango_boss.position = Vector2(2888, 320)
 	mango_boss.target = player
-	mango_boss.hp = 2
+	mango_boss.hp = 80
 	mango_boss.mango_boss_down.connect(_mango_boss_down)
 	add_child(mango_boss)
+
 
 func _mango_boss_down() -> void:
 	area_lock_player.play("RESET")
