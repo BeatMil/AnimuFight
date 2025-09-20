@@ -237,3 +237,4 @@ func _on_detect_ground_body_entered(_body: Node2D) -> void:
 		and state == States.PUNISHABLE:
 		set_collision_normal()
 		ObjectPooling.spawn_ground_spark(global_position, false)
+		CameraManager.start_screen_shake(50, 0.3)

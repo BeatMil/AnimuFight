@@ -52,8 +52,8 @@ func _shoot_up_house() -> void:
 	animation_player.play("shoot_up")
 	wind_sound_player.play("wind_sound")
 	sky_animation_player.play("sky_down")
-	get_node_or_null("Player/Camera").set_screen_lock(-200, 2200, 0, 1400)
-	get_node_or_null("Player/Camera").zoom_permanent(Vector2(-0.2, -0.2))
+	CameraManager.set_screen_lock(-200, 2200, 0, 1400)
+	CameraManager.zoom_permanent(Vector2(-0.2, -0.2))
 	for pos in spawn_debris_fx.get_children():
 		var debris = DEBRIS_UP.instantiate()
 		debris.position = pos.position
