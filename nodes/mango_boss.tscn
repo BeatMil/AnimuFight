@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://b1p1m5xm4rnrm"]
+[gd_scene load_steps=51 format=3 uid="uid://b1p1m5xm4rnrm"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_2mpdw"]
 [ext_resource type="Script" uid="uid://behtp0q8hjff3" path="res://scripts/mango_boss.gd" id="2_2mpdw"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://dqxgbqjmhqr35" path="res://media/sfxs/Body_Spin.wav" id="17_1cge2"]
 [ext_resource type="AudioStream" uid="uid://chnn83cu2f3jx" path="res://media/sfxs/grabbed.wav" id="18_3t3v1"]
 [ext_resource type="Texture2D" uid="uid://uyp026ml75v5" path="res://media/sprites/mango_boss/mango_boss_walk.png" id="19_2mpdw"]
+[ext_resource type="Texture2D" uid="uid://dwc5fkf8o7qpc" path="res://media/sprites/mango_boss/mango_boss_cd1_2.png" id="19_e4v7v"]
 [ext_resource type="Texture2D" uid="uid://dea3r1x8q2vlb" path="res://media/sprites/mango_boss/mango_boss_wall_both.png" id="20_2mpdw"]
 [ext_resource type="AudioStream" uid="uid://b6w8h4ewoy3of" path="res://media/sfxs/PunchAttack3.wav" id="21_jp1j0"]
 [ext_resource type="AudioStream" uid="uid://cd0pyf1nhyep6" path="res://media/sfxs/unequip01.wav" id="21_l275e"]
@@ -1290,8 +1291,8 @@ tracks/7/keys = {
 "args": [300],
 "method": &"_push_x"
 }, {
-"args": [300],
-"method": &"_push_x"
+"args": [Vector2(400, -100)],
+"method": &"_push"
 }]
 }
 tracks/8/type = "audio"
@@ -2044,7 +2045,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("12_e4v7v")]
+"values": [ExtResource("19_e4v7v")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -2088,8 +2089,8 @@ tracks/4/keys = {
 "args": [1],
 "method": &"_show_attack_indicator"
 }, {
-"args": [400],
-"method": &"_push_x"
+"args": [Vector2(400, -100)],
+"method": &"_push"
 }]
 }
 tracks/5/type = "method"
@@ -2119,7 +2120,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -30)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
