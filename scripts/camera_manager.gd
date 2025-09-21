@@ -134,7 +134,8 @@ func disable_screen_lock(camera: Camera2D = current_cam) -> void:
 
 
 func set_zoom(zoom_level: Vector2):
-	current_cam.zoom = zoom_level
+	var tween = get_tree().create_tween()
+	tween.tween_property(current_cam, "zoom", zoom_level, 0.3)
 	current_zoom = zoom_level
 
 

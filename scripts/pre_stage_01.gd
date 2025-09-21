@@ -29,8 +29,11 @@ signal shoot_up_house
 func _ready() -> void:
 	connect("shoot_up_house", _shoot_up_house)
 	# Set camera lock
+	CameraManager.player = player
+	CameraManager.make_current(0)
 	CameraManager.zoom_permanent(Vector2(0.1, 0.1))
 	CameraManager.set_screen_lock(0, 1920, 135, 1029)
+	print("_ready: _pre_stage_01.gd")
 	# CameraManager.set_screen_lock(0, 1920, 0, 1000)
 	# get_node_or_null("Player/Camera").set_zoom(Vector2(1,1))
 
@@ -52,8 +55,9 @@ func _shoot_up_house() -> void:
 	animation_player.play("shoot_up")
 	wind_sound_player.play("wind_sound")
 	sky_animation_player.play("sky_down")
+	CameraManager.make_current(0)
 	CameraManager.set_screen_lock(-200, 2200, 0, 1400)
-	CameraManager.zoom_permanent(Vector2(-0.2, -0.2))
+	CameraManager.set_zoom(Vector2(0.8, 0.8))
 	for pos in spawn_debris_fx.get_children():
 		var debris = DEBRIS_UP.instantiate()
 		debris.position = pos.position
