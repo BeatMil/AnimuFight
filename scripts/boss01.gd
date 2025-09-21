@@ -6,9 +6,12 @@ extends "res://scripts/enemy.gd"
 var is_player_in_range_burn_knuckle = false
 
 
+
 func _ready() -> void:
 	super._ready()
 	block_rate = 10
+	DED_SPRITE = preload("res://media/sprites/boss01/boss01_down.png")
+
 
 #############################################################
 ## Attack Info
@@ -206,8 +209,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		]:
 		animation_player.play("idle")
 		state = States.IDLE
-	if anim_name in ["ded"]:
-		queue_free()
 
 
 func _on_attack_timer_timeout() -> void:
