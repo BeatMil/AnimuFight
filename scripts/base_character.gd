@@ -452,6 +452,8 @@ func hitted(
 		if slow_mo_on_block:
 			_slow_moion(slow_mo_on_block.x, slow_mo_on_block.y)
 			CameraManager.zoom_zoom(_zoom, _zoom_duration)
+		else:
+			_slow_moion_no_sfx(0.9, 0.1)
 
 	## DODGE & DODGE_SUCCESS
 	elif state in [States.DODGE, States.DODGE_SUCCESS] and \
@@ -462,6 +464,7 @@ func hitted(
 		]:
 		if _type == Enums.Attack.UNBLOCK:
 			animation_player.play("dodge_success_zoom")
+			_slow_moion_no_sfx(0.8, 0.2)
 		else:
 			animation_player.play("dodge_success")
 

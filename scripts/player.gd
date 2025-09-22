@@ -326,6 +326,7 @@ func physic_input(delta):
 				# Throw break
 				animation_player.play("throw_break")
 				next_move = null
+				_slow_moion_no_sfx(0.8, 0.1)
 				if thrower.position.x > position.x:
 					sprite_2d.flip_h = false
 				else:
@@ -341,6 +342,7 @@ func physic_input(delta):
 				# Throw break
 				animation_player.play("throw_break")
 				next_move = null
+				_slow_moion_no_sfx(0.8, 0.1)
 				if thrower.position.x > position.x:
 					sprite_2d.flip_h = false
 				else:
