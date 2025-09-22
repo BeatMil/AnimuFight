@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=39 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -23,6 +23,8 @@
 [ext_resource type="Texture2D" uid="uid://n7xbpwiq1n77" path="res://media/sprites/mango_boss/mango_boss_sit.png" id="19_yxbv0"]
 [ext_resource type="AudioStream" uid="uid://cxkb2rpnoq1wv" path="res://media/sfxs/phone-typing-333292.mp3" id="20_yxbv0"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="21_v7t3f"]
+[ext_resource type="Texture2D" uid="uid://c6wyrrcq2dweo" path="res://media/sprites/mango_boss/mango_boss_intro1.png" id="23_f33yp"]
+[ext_resource type="AudioStream" uid="uid://de8ttnjmqlfy4" path="res://media/sfxs/Alarm_Fever.wav" id="24_wntu7"]
 
 [sub_resource type="Animation" id="Animation_lrdte"]
 length = 0.001
@@ -78,6 +80,42 @@ tracks/0/keys = {
 "update": 1,
 "values": [1]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("19_yxbv0")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -29)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_v7t3f"]
 resource_name = "play_phone"
@@ -113,7 +151,7 @@ tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_yxbv0"]
 resource_name = "shock"
-length = 0.400003
+length = 2.5666702
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -121,22 +159,62 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1, 1.3666667, 1.4666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [2]
+"values": [2, 0, 1, 2]
 }
-tracks/1/type = "audio"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/path = NodePath(".:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"clips": [],
-"times": PackedFloat32Array()
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("19_yxbv0"), ExtResource("23_f33yp")]
 }
-tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-10, -22)]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.23487459,
+"start_offset": 0.0,
+"stream": ExtResource("24_wntu7")
+}],
+"times": PackedFloat32Array(1.3333334)
+}
+tracks/3/use_blend = true
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.4, 1.5333333, 1.6666666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.9752062, 0.73772794, 0.93911916, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pxpxr"]
 _data = {
@@ -499,6 +577,7 @@ scale = Vector2(0.8, 0.8)
 position = Vector2(3656, 597)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("19_yxbv0")
+offset = Vector2(0, -29)
 hframes = 3
 frame = 1
 

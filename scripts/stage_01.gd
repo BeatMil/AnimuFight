@@ -8,6 +8,7 @@ extends Node2D
 @onready var player: CharacterBody2D = $Player
 @onready var area_1_lock_trigger: Area2D = $Area1LockTrigger
 const MANGO_BOSS = preload("res://nodes/mango_boss.tscn")
+@onready var mango_boss_sit_banana: Sprite2D = $MangoBossSitBanana
 
 
 func _ready() -> void:
@@ -57,16 +58,19 @@ func _lift_wall_area1() -> void:
 
 
 func _on_market_green_banana_fly() -> void:
-	animation_player.play("shock")
 	area_lock_player.play("2_in")
 	CameraManager.pos_lock($MarketCamPos.position)
 
+	animation_player.play("shock")
+	await animation_player.animation_finished
+
 	var mango_boss = MANGO_BOSS.instantiate()
-	mango_boss.position = Vector2(2888, 320)
+	mango_boss.position = mango_boss_sit_banana.position
 	mango_boss.target = player
 	mango_boss.hp = 80
 	mango_boss.mango_boss_down.connect(_mango_boss_down)
 	add_child(mango_boss)
+	mango_boss_sit_banana.queue_free()
 
 
 func _mango_boss_down() -> void:
