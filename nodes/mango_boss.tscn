@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://b1p1m5xm4rnrm"]
+[gd_scene load_steps=50 format=3 uid="uid://b1p1m5xm4rnrm"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_2mpdw"]
 [ext_resource type="Script" uid="uid://behtp0q8hjff3" path="res://scripts/mango_boss.gd" id="2_2mpdw"]
@@ -10,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="8_kbgke"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="10_dmcbc"]
 [ext_resource type="Texture2D" uid="uid://86sjmowpjhlb" path="res://media/sprites/mango_boss/mango_boss_down.png" id="11_3kb0t"]
-[ext_resource type="Texture2D" uid="uid://byix3kw2iym6d" path="res://media/sprites/mango_boss/mango_boss_cd1.png" id="12_e4v7v"]
 [ext_resource type="Texture2D" uid="uid://dlaiwqwfpj4n1" path="res://media/sprites/mango_boss/mango_boss_hitted.png" id="13_d66qs"]
 [ext_resource type="AudioStream" uid="uid://b7u0sh3hrcfqr" path="res://media/sfxs/gc_punch_whiff.wav" id="14_46ss6"]
 [ext_resource type="Texture2D" uid="uid://cc3jmuv1qs8ly" path="res://media/sprites/mango_boss/mango_boss_throw.png" id="16_2mpdw"]
@@ -1179,7 +1178,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.26667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("4_2mpdw"), ExtResource("12_e4v7v")]
+"values": [ExtResource("4_2mpdw"), ExtResource("19_e4v7v")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false

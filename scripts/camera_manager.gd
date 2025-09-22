@@ -157,3 +157,15 @@ func pos_lock(_pos: Vector2):
 
 func pos_lock_to_player():
 	is_following_player = true
+
+
+func disable_all_camera() -> void:
+	player_cam.enabled = false
+	transition_cam.enabled = false
+	other_cam.enabled = false
+
+
+func enable_all_camera() -> void:
+	player_cam.enabled = true
+	transition_cam.enabled = true
+	other_cam.enabled = true

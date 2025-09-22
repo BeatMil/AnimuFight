@@ -27,6 +27,7 @@ func _ready() -> void:
 	key_bind_menu.close.connect(_on_key_bind_menu_close)
 	AttackQueue.start_queue_timer()
 	Settings.checkpoint = 0
+	CameraManager.disable_all_camera()
 
 
 func _input(event: InputEvent) -> void:

@@ -77,7 +77,7 @@ func lp_info() -> void: # for animation_player
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(0, 0),
 	"damage": 1,
-	"type": Enums.Attack.THROW,
+	"type": Enums.Attack.THROW_FLOAT,
 	}
 	dict_to_spawn_hitbox(info)
 
