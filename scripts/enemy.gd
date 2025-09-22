@@ -50,6 +50,11 @@ func _ready() -> void:
 	# $Timer.start()
 	# _lp()
 
+func _process(_delta: float) -> void:
+	if state in [States.GRABBED, States.THROWN]:
+		_follow_pos()
+		hitlag_timer = 0
+
 
 func _physics_process(delta: float) -> void:
 	if hitlag_timer > 0:
@@ -139,6 +144,7 @@ func _physics_process(delta: float) -> void:
 
 	if state in [States.GRABBED, States.THROWN]:
 		_follow_pos()
+		hitlag_timer = 0
 
 
 	if animation_player.current_animation == "wallsplat":
