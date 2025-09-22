@@ -17,6 +17,12 @@ extends Node2D
 @onready var death_zone: Node2D = $DeathZone
 
 func _ready() -> void:
+	CameraManager.enable_all_camera()
+	# CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
+	CameraManager.player = player
+	CameraManager.is_following_player = true
+	CameraManager.make_current(0)
+
 	training_menu.visible = false
 	training_menu.mangoBoss.connect(_on_mango_boss_button_down)
 	training_menu.enemy1.connect(_on_enemy_1_button_down)
