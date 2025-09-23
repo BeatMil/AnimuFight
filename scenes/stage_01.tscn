@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=40 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://m74we0184cjq" path="res://media/sprites/stage01/seven_eleven.png" id="6_sgik7"]
 [ext_resource type="PackedScene" uid="uid://c4m5deiee8q8w" path="res://nodes/boss01.tscn" id="7_nh3b5"]
 [ext_resource type="Texture2D" uid="uid://ccuevl8yvbirg" path="res://media/sprites/stage01/8-12_girl.png" id="7_pxpxr"]
+[ext_resource type="Texture2D" uid="uid://df1fn36btchsn" path="res://media/sprites/stage01/under_high_way.png" id="8_mqdkf"]
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="8_nasqd"]
 [ext_resource type="Script" uid="uid://cat1ebbeoo01d" path="res://scripts/enemy_spawner_stage01.gd" id="8_yxbv0"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="9_dimc6"]
@@ -328,8 +329,12 @@ libraries = {
 }
 autoplay = "run"
 
+[node name="UnderHighWay" type="Sprite2D" parent="Map"]
+position = Vector2(5416, 472)
+texture = ExtResource("8_mqdkf")
+
 [node name="Floor" type="Sprite2D" parent="Map" groups=["ground"]]
-position = Vector2(961, 637)
+position = Vector2(960, 640)
 texture = ExtResource("5_nasqd")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor" groups=["ground"]]
@@ -342,7 +347,7 @@ position = Vector2(-35, 8)
 shape = SubResource("RectangleShape2D_i6ddm")
 
 [node name="Floor2" type="Sprite2D" parent="Map" groups=["ground"]]
-position = Vector2(2881, 637)
+position = Vector2(2880, 640)
 texture = ExtResource("2_fnmkw")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor2" groups=["ground"]]
@@ -355,7 +360,7 @@ position = Vector2(-35, 8)
 shape = SubResource("RectangleShape2D_i6ddm")
 
 [node name="Floor4" type="Sprite2D" parent="Map" groups=["ground"]]
-position = Vector2(4800, 637)
+position = Vector2(4800, 640)
 texture = ExtResource("2_fnmkw")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor4" groups=["ground"]]
@@ -367,8 +372,21 @@ collision_mask = 0
 position = Vector2(-35, 8)
 shape = SubResource("RectangleShape2D_i6ddm")
 
+[node name="Floor6" type="Sprite2D" parent="Map" groups=["ground"]]
+position = Vector2(6712, 640)
+texture = ExtResource("2_fnmkw")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor6" groups=["ground"]]
+position = Vector2(35, 304)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor6/StaticBody2D"]
+position = Vector2(-35, 8)
+shape = SubResource("RectangleShape2D_i6ddm")
+
 [node name="Floor5" type="Sprite2D" parent="Map" groups=["ground"]]
-position = Vector2(-2877, 637)
+position = Vector2(-2880, 640)
 texture = ExtResource("2_fnmkw")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor5" groups=["ground"]]
@@ -381,7 +399,7 @@ position = Vector2(-35, 8)
 shape = SubResource("RectangleShape2D_i6ddm")
 
 [node name="Floor3" type="Sprite2D" parent="Map" groups=["ground"]]
-position = Vector2(-958, 637)
+position = Vector2(-960, 640)
 texture = ExtResource("2_fnmkw")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor3" groups=["ground"]]
@@ -564,7 +582,7 @@ position = Vector2(3520, 368)
 position = Vector2(-656, 576)
 
 [node name="JunctionBox" parent="." instance=ExtResource("11_l457t")]
-position = Vector2(72, 560)
+position = Vector2(5624, 600)
 
 [node name="LightPole" parent="." instance=ExtResource("17_c2i1s")]
 position = Vector2(781, 320)
@@ -622,6 +640,15 @@ position = Vector2(1808, 0)
 
 [node name="WallR" parent="AreaLock/2" instance=ExtResource("21_v7t3f")]
 position = Vector2(3976, 0)
+
+[node name="3" type="Node2D" parent="AreaLock"]
+position = Vector2(6112, -2240)
+
+[node name="WallL" parent="AreaLock/3" instance=ExtResource("21_v7t3f")]
+position = Vector2(-1256, 0)
+
+[node name="WallR" parent="AreaLock/3" instance=ExtResource("21_v7t3f")]
+position = Vector2(856, 0)
 
 [node name="MarketCamPos" type="Camera2D" parent="."]
 visible = false

@@ -197,3 +197,4 @@ common/physics_ticks_per_second=120
 [rendering]
 
 viewport/hdr_2d=true
+environment/defaults/default_clear_color=Color(0.21825667, 0.29776892, 0.42532474, 1)
