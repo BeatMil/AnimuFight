@@ -6,7 +6,7 @@ extends Node2D
 @export var is_active: bool = true
 var phase: int = 0
 
-signal area1_done
+signal area_done
 
 
 func _ready() -> void:
@@ -31,14 +31,10 @@ func _spawn_enemy() -> void:
 	
 func _process(_delta: float) -> void:
 	if len(enemy_count.get_children()) <= 0 and is_active:
-		if phase == 8:
-			Settings.checkpoint = 8
-		elif phase == 5:
-			Settings.checkpoint = 5
-		elif phase == 1:
+		if phase == len(enemy_to_spawn):
 			is_active = false
 			print("stop spawning!")
-			emit_signal("area1_done")
+			emit_signal("area_done")
 			return
 		phase += 1
 		_spawn_enemy()

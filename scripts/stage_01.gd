@@ -3,12 +3,14 @@ extends Node2D
 
 @onready var animation_player: AnimationPlayer = $MangoBossSitBanana/AnimationPlayer
 @onready var area_lock_player: AnimationPlayer = $AreaLockPlayer
-@onready var enemy_spawner_new: Node2D = $EnemySpawnerNew
 # @onready var transition_camera: Camera2D = $Cameras/TransitionCamera
 @onready var player: CharacterBody2D = $Player
 @onready var area_1_lock_trigger: Area2D = $Area1LockTrigger
+@onready var area_3_lock_trigger: Area2D = $Area3LockTrigger
 const MANGO_BOSS = preload("res://nodes/mango_boss.tscn")
 @onready var mango_boss_sit_banana: Sprite2D = $MangoBossSitBanana
+@onready var enemy_spawner_new: Node2D = $EnemySpawnerNew
+@onready var area_3_spawner: Node2D = $Area3Spawner
 
 
 func _ready() -> void:
@@ -24,10 +26,12 @@ func _ready() -> void:
 	# get_node_or_null("Player/Camera").set_zoom(Vector2(1,1))
 	area_lock_player.play("RESET")
 	enemy_spawner_new.is_active = false
+	area_3_spawner.is_active = false
 
 	Settings.current_stage = "res://scenes/stage_01.tscn"
 
-	enemy_spawner_new.area1_done.connect(_lift_wall_area1)
+	enemy_spawner_new.area_done.connect(_lift_wall_area1)
+	area_3_spawner.area_done.connect(_lift_wall_area1)
 
 	# Player ost
 	# music_player.play("stage01_track_copyright")
@@ -76,3 +80,10 @@ func _on_market_green_banana_fly() -> void:
 func _mango_boss_down() -> void:
 	area_lock_player.play("RESET")
 	CameraManager.pos_lock_to_player()
+
+
+func _on_area_3_lock_trigger_body_entered(_body: Node2D) -> void:
+	area_lock_player.play("3_in")
+	CameraManager.set_screen_lock(3824, 6380, -10000000, 1000)
+	area_3_spawner.is_active = true
+	area_3_lock_trigger.queue_free()
