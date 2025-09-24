@@ -185,6 +185,7 @@ func _physics_process(delta: float) -> void:
 	
 	if state == States.AIR:
 		animation_player.play("jump")
+		friction = 0.07
 
 	# Left/Right movement
 	if state in [States.IDLE, States.AIR]:
