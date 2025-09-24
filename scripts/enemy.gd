@@ -180,7 +180,12 @@ func _follow_pos() -> void:
 func _facing() -> void:
 	if not target:
 		return
-	if state not in [States.IDLE, States.WALL_BOUNCED]:
+	if state not in [
+	States.IDLE,
+	States.WALL_BOUNCED,
+	States.GRABBED,
+	States.THROWN,
+	]:
 		return
 	if target.position.x > position.x:
 		sprite_2d.flip_h = false
