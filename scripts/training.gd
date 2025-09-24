@@ -18,7 +18,7 @@ extends Node2D
 
 func _ready() -> void:
 	CameraManager.enable_all_camera()
-	# CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
+	CameraManager.disable_screen_lock()
 	CameraManager.player = player
 	CameraManager.is_following_player = true
 	CameraManager.make_current(0)
