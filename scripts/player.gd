@@ -198,8 +198,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			_lerp_velocity_x()
 			# friction = 0.5
-
-		throwee = null
 	else:
 		## Adding friction like this is not gonna go well (っ˘̩╭╮˘̩)っ 
 		friction = 0.1
@@ -236,6 +234,10 @@ func _physics_process(delta: float) -> void:
 			animation_player.play("walk")
 		else:
 			animation_player.play("idle")
+
+	# Reset throwee
+	if state in [States.IDLE, States.AIR, States.DASH]:
+		throwee = null
 
 	_gravity(delta)
 	move_and_slide()
