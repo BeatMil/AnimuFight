@@ -9,6 +9,7 @@ extends Node2D
 @onready var training_menu: Control = $CanvasLayer/TrainingMenu
 @onready var enemy_spawner_8: Node2D = $EnemySpawner8
 @onready var mango_boss: Object = preload("res://nodes/mango_boss.tscn")
+@onready var boss01: Object = preload("res://nodes/boss01.tscn")
 @onready var enemy1: Object = preload("res://nodes/enemy_01.tscn")
 @onready var enemy2: Object = preload("res://nodes/enemy_02.tscn")
 @onready var enemy3: Object = preload("res://nodes/enemy_03.tscn")
@@ -24,6 +25,7 @@ func _ready() -> void:
 	CameraManager.make_current(0)
 
 	training_menu.visible = false
+	training_menu.boss01.connect(_on_boss01_button_down)
 	training_menu.mangoBoss.connect(_on_mango_boss_button_down)
 	training_menu.enemy1.connect(_on_enemy_1_button_down)
 	training_menu.enemy2.connect(_on_enemy_2_button_down)
@@ -56,10 +58,14 @@ func _on_clear_button_down() -> void:
 	clear_enemy()
 
 
+func _on_boss01_button_down() -> void:
+	clear_enemy()
+	enemy_spawner_8.enemy_to_spawn.append(boss01)
+
+
 func _on_mango_boss_button_down() -> void:
 	clear_enemy()
 	enemy_spawner_8.enemy_to_spawn.append(mango_boss)
-	print("MANGOBOSS")
 
 
 func _on_enemy_1_button_down() -> void:

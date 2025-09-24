@@ -7,6 +7,7 @@ extends Control
 @onready var key_bind_button: Button = $VBoxContainer/VBoxContainerL/KeyBindButton
 
 
+signal boss01
 signal mangoBoss
 signal enemy1
 signal enemy2
@@ -34,6 +35,10 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_cancel"):
 		self.visible = false
 		get_tree().paused = false
+
+
+func _on_boss_01_button_pressed() -> void:
+	emit_signal("boss01")
 
 
 func _on_mango_boss_button_pressed() -> void:
