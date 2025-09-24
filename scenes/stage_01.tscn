@@ -256,6 +256,22 @@ tracks/0/keys = {
 "values": [Vector2(0, -312)]
 }
 
+[sub_resource type="Animation" id="Animation_1fbf0"]
+resource_name = "3_in"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6112, -304)]
+}
+
 [sub_resource type="Animation" id="Animation_f33yp"]
 length = 0.001
 tracks/0/type = "value"
@@ -295,22 +311,6 @@ tracks/2/keys = {
 "values": [Vector2(6112, -2240)]
 }
 
-[sub_resource type="Animation" id="Animation_1fbf0"]
-resource_name = "3_in"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(6112, -304)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mqdkf"]
 _data = {
 &"1_in": SubResource("Animation_pxpxr"),
@@ -331,7 +331,7 @@ script = ExtResource("1_4caca")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(4208, 584)
+position = Vector2(-2768, 592)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -450,7 +450,7 @@ enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpaw
 [node name="Area3Spawner" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
 target = NodePath("../Player")
-enemy_to_spawn = [NodePath("../Area3EnemyList/Phase1"), NodePath("../Area3EnemyList/Phase2"), NodePath("../Area3EnemyList/Phase3"), NodePath("../Area3EnemyList/Phase4")]
+enemy_to_spawn = [NodePath("../Area3EnemyList/Phase3"), NodePath("../Area3EnemyList/Phase2"), NodePath("../Area3EnemyList/Phase3"), NodePath("../Area3EnemyList/Phase4")]
 
 [node name="enemyCount" type="Node" parent="Area3Spawner"]
 
@@ -815,28 +815,30 @@ shape = SubResource("RectangleShape2D_v7t3f")
 position = Vector2(0, -2240)
 
 [node name="WallL" parent="AreaLock/1" instance=ExtResource("21_v7t3f")]
-position = Vector2(-2024, 0)
+position = Vector2(-2080, 0)
 
 [node name="WallR" parent="AreaLock/1" instance=ExtResource("21_v7t3f")]
-position = Vector2(1808, 0)
+position = Vector2(2024, 0)
 
 [node name="2" type="Node2D" parent="AreaLock"]
+visible = false
 position = Vector2(0, -2240)
 
 [node name="WallL" parent="AreaLock/2" instance=ExtResource("21_v7t3f")]
-position = Vector2(1808, 0)
+position = Vector2(1664, 0)
 
 [node name="WallR" parent="AreaLock/2" instance=ExtResource("21_v7t3f")]
-position = Vector2(3976, 0)
+position = Vector2(4120, 0)
 
 [node name="3" type="Node2D" parent="AreaLock"]
+visible = false
 position = Vector2(6112, -2240)
 
 [node name="WallL" parent="AreaLock/3" instance=ExtResource("21_v7t3f")]
-position = Vector2(-2400, 0)
+position = Vector2(-2544, 0)
 
 [node name="WallR" parent="AreaLock/3" instance=ExtResource("21_v7t3f")]
-position = Vector2(400, 0)
+position = Vector2(456, 0)
 
 [node name="MarketCamPos" type="Camera2D" parent="."]
 visible = false
