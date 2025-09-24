@@ -172,7 +172,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2403, 609)]
+"values": [Vector2(2512, 608)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -220,7 +220,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-104, 352)]
+"values": [Vector2(-410, 352)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -256,7 +256,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0.001),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2146, 352)]
+"values": [Vector2(2220, 352)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -887,15 +887,9 @@ position = Vector2(1325, 635)
 position = Vector2(-859.936, -339.22)
 
 [node name="DebrisArea2D" type="Area2D" parent="."]
-position = Vector2(2403, 609)
+position = Vector2(2512, 608)
 collision_layer = 0
 collision_mask = 18
-
-[node name="NoDoor" type="Sprite2D" parent="DebrisArea2D"]
-self_modulate = Color(0.859799, 0.859799, 0.859799, 1)
-position = Vector2(-610.5, 31)
-scale = Vector2(1.33219, 1)
-texture = ExtResource("15_5ugr6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DebrisArea2D"]
 shape = SubResource("RectangleShape2D_trh1p")
@@ -906,6 +900,12 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DebrisArea2D"]
+
+[node name="NoDoor" type="Sprite2D" parent="DebrisArea2D"]
+self_modulate = Color(0.859799, 0.859799, 0.859799, 1)
+position = Vector2(-719.5, 32)
+scale = Vector2(1.33219, 1)
+texture = ExtResource("15_5ugr6")
 
 [node name="Floor" type="StaticBody2D" parent="." groups=["ground"]]
 position = Vector2(1178, 1106)
@@ -945,12 +945,11 @@ enemy_to_spawn = [ExtResource("20_ojfvp"), ExtResource("21_4n4co"), ExtResource(
 is_active = false
 
 [node name="WallInvi2" parent="." instance=ExtResource("23_u83if")]
-position = Vector2(-104, 352)
+position = Vector2(-410, 352)
 scale = Vector2(1.64324, 1)
 
 [node name="WallInvi" parent="." instance=ExtResource("23_u83if")]
-position = Vector2(2146, 352)
-scale = Vector2(1.64324, 1)
+position = Vector2(2220, 352)
 
 [node name="CameraPos" type="Marker2D" parent="."]
 position = Vector2(942, 683)

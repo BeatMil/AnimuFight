@@ -70,7 +70,7 @@ func _shoot_up_house() -> void:
 func _on_debris_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		if get_node_or_null("DebrisArea2D/NoDoor"):
-			body._push_x_direct_old(-600)
+			body._push_x_direct_old(-700)
 			var debris = DEBRIS.instantiate()
 			debris.position = $DebrisMarker2D.position
 			add_child(debris)
