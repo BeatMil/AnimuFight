@@ -90,7 +90,7 @@ func tatsu_2nd_info() -> void: # for animation_player
 	"screenshake_amount": Vector2(0, 0),
 	"damage": 2,
 	"type": Enums.Attack.NORMAL,
-	"zoom": Vector2(0.5, 0.5),
+	# "zoom": Vector2(0.5, 0.5),
 	# "zoom_duration": 1,
 	# "slow_mo_on_block": Vector2(0.5, 0.2),
 	}
@@ -221,16 +221,9 @@ func _on_attack_timer_timeout() -> void:
 
 
 func do_attack() -> void:
-	if is_player_in_range_burn_knuckle:
+	if is_player_in_range_burn_knuckle or is_player_in_range_lp:
 		state = States.ATTACK
 		_attack01()
-	elif is_player_in_range_lp:
-		state = States.ATTACK
-		match randi_range(0, 1):
-			0:
-				_lp()
-			1:
-				meteo_crash()
 
 
 func _on_detect_ground_body_entered(_body: Node2D) -> void:
