@@ -295,7 +295,7 @@ func _physics_process(delta: float) -> void:
 		animation_player.play("air_spd_burst")
 
 
-func physic_input(delta):
+func physic_input(_delta):
 	if Input.is_action_pressed("lp") and Input.is_action_pressed("hp"):
 		if input_history.size() > 1:
 			if input_history[-2]["frame"] < 7 and (\
@@ -306,7 +306,10 @@ func physic_input(delta):
 		queue_move(_lp_hp)
 	elif Input.is_action_just_pressed("lp"):
 		if is_on_floor():
-			queue_move(_lp)
+			if Input.is_action_pressed("down"):
+				queue_move(_down_lp)
+			else:
+				queue_move(_lp)
 		else:
 			queue_move(_air_lp)
 	elif Input.is_action_just_pressed("hp"):
@@ -630,6 +633,42 @@ func lp4_info() -> void:
 	# "zoom": Vector2(1, 1),
 	}
 	dict_to_spawn_hitbox(info)
+func jin1plus2_info() -> void:
+	var info = {
+	"size": Hitbox_type.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(50, 0),
+	"push_type_ground": Enums.Push_types.NORMAL,
+	"push_power_air": Vector2(50, -50),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0,
+	"hitstun_amount_ground": 0.5,
+	"hitlag_amount_air": 0,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 2,
+	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/LpPos.position,
+	}
+	dict_to_spawn_hitbox(info)
+func jin1plus2_end_info() -> void:
+	var info = {
+	"size": Hitbox_type.MEDIUM,
+	"time": 0.1,
+	"push_power_ground": Vector2(300, -50),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(300, -50),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.2,
+	"hitlag_amount_air": 0.1,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(0, 0),
+	"damage": 4,
+	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/LpPos.position,
+	}
+	dict_to_spawn_hitbox(info)
 
 
 func _air_lp() ->  void:
@@ -913,6 +952,27 @@ func _lp_hp() ->  void:
 		animation_player.play("ground_grab")
 	else:
 		animation_player.play("forward_hp")
+
+
+func _down_lp() ->  void:
+	if state not in [
+		States.IDLE,
+		States.DASH,
+		States.PARRY_SUCCESS,
+		States.DODGE_SUCCESS,
+		States.LP1,
+		States.LP2,
+		States.LP3,
+		]: ## <<-- start with this one
+		return
+
+	if Input.is_action_pressed("left"):
+		sprite_2d.flip_h = true
+
+	if Input.is_action_pressed("right"):
+		sprite_2d.flip_h = false
+
+	animation_player.play("jin1+2")
 
 
 func down_hp_info() ->  void:
@@ -1218,6 +1278,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"techroll",
 		"jump_attack",
 		"jump_attack_2",
+		"jin1+2",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:

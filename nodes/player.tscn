@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=106 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
@@ -50,6 +50,7 @@
 [ext_resource type="AudioStream" uid="uid://bnldfs23skhwr" path="res://media/sfxs/HitArrow.wav" id="46_0xvo4"]
 [ext_resource type="Texture2D" uid="uid://c7wwixnmqjcyg" path="res://media/sprites/char1/vanilla_jump_attack.png" id="47_gp8k4"]
 [ext_resource type="Texture2D" uid="uid://fkjiotm6q7sk" path="res://media/sprites/char1/vanilla_jump_attack2.png" id="48_hik2j"]
+[ext_resource type="Texture2D" uid="uid://b2n6x7s8lig0p" path="res://media/sprites/char1/vanilla_jin1+2.png" id="51_rkgkm"]
 
 [sub_resource type="Animation" id="Animation_df04m"]
 length = 0.001
@@ -4874,6 +4875,151 @@ tracks/8/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_p0yti"]
+resource_name = "jin1+2"
+length = 0.83333504
+step = 0.016666668
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.11666667, 0.31666666, 0.51666665),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"jin1plus2_info"
+}, {
+"args": [],
+"method": &"jin1plus2_info"
+}, {
+"args": [],
+"method": &"jin1plus2_end_info"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.53333336),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [1],
+"method": &"_set_state"
+}, {
+"args": [11],
+"method": &"_set_state"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [50],
+"method": &"_push_x"
+}, {
+"args": [100],
+"method": &"_push_x"
+}, {
+"args": [100],
+"method": &"_push_x"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("51_rkgkm")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:hframes")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:vframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.51666665, 0.6166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/8/type = "audio"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("38_3pser")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("38_3pser")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("38_3pser")
+}],
+"times": PackedFloat32Array(0.049999997, 0.25, 0.45)
+}
+tracks/8/use_blend = true
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1o8ps"]
 _data = {
 &"RESET": SubResource("Animation_0olpk"),
@@ -4900,6 +5046,7 @@ _data = {
 &"hitted": SubResource("Animation_jqf8x"),
 &"hp": SubResource("Animation_v1xnu"),
 &"idle": SubResource("Animation_epwwg"),
+&"jin1+2": SubResource("Animation_p0yti"),
 &"jump": SubResource("Animation_v2fns"),
 &"jump_attack": SubResource("Animation_7bxpj"),
 &"jump_attack_2": SubResource("Animation_rkgkm"),
