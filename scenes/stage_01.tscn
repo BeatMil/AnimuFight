@@ -443,7 +443,7 @@ shape = SubResource("RectangleShape2D_i6ddm")
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
 target = NodePath("../Player")
-enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpawnHelper/Phase2"), NodePath("../EnemySpawnHelper/Phase3"), NodePath("../EnemySpawnHelper/Phase4"), NodePath("../EnemySpawnHelper/Phase5"), NodePath("../EnemySpawnHelper/Phase6"), NodePath("../EnemySpawnHelper/Phase7"), NodePath("../EnemySpawnHelper/Phase8"), NodePath("../EnemySpawnHelper/Phase9")]
+enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpawnHelper/Phase2")]
 
 [node name="enemyCount" type="Node" parent="EnemySpawnerNew"]
 
@@ -472,6 +472,12 @@ position = NodePath("../../../SpawnPos/pos1")
 hp = 50
 object = ExtResource("12_gsglw")
 
+[node name="e1" type="Node" parent="EnemySpawnHelper/Phase2" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../SpawnPos/pos3")
+hp = 30
+object = ExtResource("8_nasqd")
+
 [node name="Phase3" type="Node" parent="EnemySpawnHelper"]
 
 [node name="e2" type="Node" parent="EnemySpawnHelper/Phase3" node_paths=PackedStringArray("position")]
@@ -479,12 +485,6 @@ script = ExtResource("6_l457t")
 position = NodePath("../../../SpawnPos/pos1")
 hp = 30
 object = ExtResource("9_dimc6")
-
-[node name="e1" type="Node" parent="EnemySpawnHelper/Phase3" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos3")
-hp = 30
-object = ExtResource("8_nasqd")
 
 [node name="Phase4" type="Node" parent="EnemySpawnHelper"]
 
@@ -731,13 +731,13 @@ object = ExtResource("8_nasqd")
 [node name="SpawnPos" type="Node" parent="."]
 
 [node name="pos1" type="Marker2D" parent="SpawnPos"]
-position = Vector2(1497, -340)
+position = Vector2(1384, -408)
 
 [node name="pos2" type="Marker2D" parent="SpawnPos"]
-position = Vector2(2842, 585)
+position = Vector2(64, -400)
 
 [node name="pos3" type="Marker2D" parent="SpawnPos"]
-position = Vector2(186, -351)
+position = Vector2(-704, -408)
 
 [node name="pos4" type="Marker2D" parent="SpawnPos"]
 position = Vector2(-552, 716)
