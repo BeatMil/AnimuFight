@@ -88,6 +88,8 @@ const SLOW_MO_START = preload("res://media/sfxs/slow_mo_start.wav")
 const SLOW_MO_END = preload("res://media/sfxs/slow_mo_end.wav")
 const HIT_BOUNCE = preload("res://media/sfxs/Landing_RawMeat02.wav")
 const IFRAME_HIT = preload("res://media/sfxs/Landing_Meat03.wav")
+const DAMAGE_NUMBER = preload("res://nodes/damage_number.tscn")
+
 
 #############################################################
 ## Node Ref
@@ -572,6 +574,8 @@ func hitted(
 	##################
 	else: # Do damage and push type
 		hp_bar.hp_down(_damage)
+		# Display damage number
+		_display_damage_number(_damage, position + Vector2(0, randi_range(-30, -80)))
 		# Play glass break vfx
 		if state in [
 			States.BLOCK,
@@ -736,6 +740,14 @@ func set_thrower(the_guy: CharacterBody2D) -> void:
 
 func play_blockstunned():
 	pass
+
+
+func _display_damage_number(_damage, _pos) -> void:
+	var damage_number = DAMAGE_NUMBER.instantiate()
+	damage_number.position = _pos
+	damage_number.damage = _damage
+	get_tree().current_scene.add_child(damage_number)
+	print("display damage")
 
 
 func block_effect_helper(
