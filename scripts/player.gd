@@ -62,6 +62,15 @@ var can_block_states_hold = [
 		States.HP,
 		]
 
+
+enum P_States {
+	IDLE,
+	CHARGE_LV1,
+	CHARGE_LV2,
+	}
+
+var p_state = P_States.IDLE
+
 # var input_history := ["right","left","n","right","right","n","n","n","n","right"]
 # var input_history := ["right","left","n","right","right","n","n","n","n","right","left"]
 # var input_history := ["n","n","n","n","right","right","right","right","right"]
@@ -314,9 +323,11 @@ func physic_input(_delta):
 			queue_move(_air_lp)
 	elif Input.is_action_just_pressed("hp"):
 		if Input.is_action_pressed("down"):
-			queue_move(_down_hp)
+			queue_move(_charge_attack)
 		else:
 			queue_move(_hp)
+	elif Input.is_action_just_released("hp"):
+		queue_move(_charge_attack_release)
 	elif Input.is_action_just_pressed("grab"):
 		queue_move(_grab)
 
@@ -779,6 +790,50 @@ func _down_hp() ->  void:
 
 	animation_player.play("down_hp")
 
+
+func _charge_attack() ->  void:
+	if state not in [
+		States.IDLE,
+		States.DASH,
+		States.PARRY_SUCCESS,
+		States.DODGE_SUCCESS,
+		States.LP1,
+		States.LP2,
+		States.LP3,
+		]: ## <<-- start with this one
+		return
+
+	if Input.is_action_pressed("left"):
+		sprite_2d.flip_h = true
+
+	if Input.is_action_pressed("right"):
+		sprite_2d.flip_h = false
+
+	animation_player.play("charge_attack")
+
+
+func _charge_attack_release() ->  void:
+	if state not in [
+		# States.PARRY_SUCCESS,
+		# States.DODGE_SUCCESS,
+		States.DOWN_HP
+		]: ## <<-- start with this one
+		return
+
+	if Input.is_action_pressed("left"):
+		sprite_2d.flip_h = true
+
+	if Input.is_action_pressed("right"):
+		sprite_2d.flip_h = false
+
+	if p_state == P_States.CHARGE_LV1:
+		animation_player.play("charge_attack_release_lv1")
+	elif p_state == P_States.CHARGE_LV2:
+		animation_player.play("charge_attack_release_lv2")
+	else:
+		animation_player.play("down_hp")
+
+
 func hp_info() ->  void:
 	var info = {
 	"size": Hitbox_type.MEDIUM,
@@ -792,7 +847,7 @@ func hp_info() ->  void:
 	"hitlag_amount_air": 0.2,
 	"hitstun_amount_air": 1,
 	"screenshake_amount": Vector2(10, 0.2),
-	"damage": 3,
+	"damage": 4,
 	"type": Enums.Attack.NORMAL,
 	# "zoom": Vector2(1, 1),
 	}
@@ -939,6 +994,7 @@ func _lp_hp() ->  void:
 		States.LP1,
 		States.LP2,
 		States.LP3,
+		States.DOWN_HP,
 		]: ## <<-- start with this one
 		return
 
@@ -1126,6 +1182,44 @@ func throw_info() -> void:
 	"pos": $HitBoxPos/GrabAttackPos.position,
 	}
 	dict_to_spawn_hitbox(info)
+func charge_lv1_info() ->  void:
+	var info = {
+	"size": Hitbox_type.LARGE,
+	"time": 0.1,
+	"push_power_ground": Vector2(100, -300),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(100, -100),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.1,
+	"hitlag_amount_air": 0.0,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 4,
+	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/DownHpPos.position,
+	# "zoom": Vector2(1, 1),
+	}
+	dict_to_spawn_hitbox(info)
+func charge_lv2_info() ->  void:
+	var info = {
+	"size": Hitbox_type.LARGE,
+	"time": 0.1,
+	"push_power_ground": Vector2(100, -600),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(100, -200),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.1,
+	"hitlag_amount_air": 0.0,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 10,
+	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/DownHpPos.position,
+	# "zoom": Vector2(1, 1),
+	}
+	dict_to_spawn_hitbox(info)
 
 
 #############################################################
@@ -1246,6 +1340,10 @@ func spawn_sand_spark() -> void:
 		ObjectPooling.spawn_sand_sparkR(position + Vector2(10, 50))
 
 
+func _set_p_state(new_state: int) -> void:
+	p_state = new_state as P_States
+
+
 #############################################################
 ## Signals
 #############################################################
@@ -1279,6 +1377,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"jump_attack",
 		"jump_attack_2",
 		"jin1+2",
+		"charge_attack_release_lv1",
+		"charge_attack_release_lv2",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:
