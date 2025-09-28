@@ -1,11 +1,14 @@
 extends Node2D
 
+@export var amount_to_explode = 100
 
-const JUCTION_PARTICLE = preload("res://nodes/hitsparks/juction_particle.tscn")
+@onready var area_2d: Area2D = $Area2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var object_in_box = []
+var total_shock = 0
 
+signal explode
 
 func hitlag(_amount: float = 0.3) -> void:
 	if _amount:
@@ -35,9 +38,17 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			2,
 			Enums.Attack.UNBLOCK
 		)
-		ObjectPooling.spawn_juction_glass(body.position)
-		animation_player.stop()
-		animation_player.play("spark")
+		total_shock += 1
+		if total_shock >= amount_to_explode:
+			ObjectPooling.spawn_hit_spark_cool(position)
+			animation_player.play("explode")
+			area_2d.queue_free()
+			await get_tree().create_timer(1).timeout
+			emit_signal("explode")
+		else:
+			ObjectPooling.spawn_juction_glass(body.position)
+			animation_player.stop()
+			animation_player.play("spark")
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:

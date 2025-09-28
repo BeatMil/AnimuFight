@@ -747,7 +747,6 @@ func _display_damage_number(_damage, _pos) -> void:
 	damage_number.position = _pos
 	damage_number.damage = _damage
 	get_tree().current_scene.add_child(damage_number)
-	print("display damage")
 
 
 func block_effect_helper(

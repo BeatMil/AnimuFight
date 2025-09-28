@@ -11,6 +11,8 @@ const MANGO_BOSS = preload("res://nodes/mango_boss.tscn")
 @onready var mango_boss_sit_banana: Sprite2D = $MangoBossSitBanana
 @onready var enemy_spawner_new: Node2D = $EnemySpawnerNew
 @onready var area_3_spawner: Node2D = $Area3Spawner
+@onready var event_player: AnimationPlayer = $EventPlayer
+@onready var high_way: Node2D = $HighWay
 
 
 func _ready() -> void:
@@ -87,3 +89,12 @@ func _on_area_3_lock_trigger_body_entered(_body: Node2D) -> void:
 	CameraManager.set_screen_lock(3824, 6380, -10000000, 1000)
 	area_3_spawner.is_active = true
 	area_3_lock_trigger.queue_free()
+
+
+func _on_junction_box_explode() -> void:
+	event_player.play("high_way_explosion")
+
+
+func _on_event_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "high_way_explosion":
+		high_way.disable_area2d()

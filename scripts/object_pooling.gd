@@ -16,6 +16,7 @@ const JUCTION_SPARK = preload("res://nodes/hitsparks/juction_particle.tscn")
 const THROW_SPARK_GROUND = preload("res://nodes/hitsparks/throw_spark_ground.tscn")
 const THROW_SPARK_FLOAT = preload("res://nodes/hitsparks/throw_spark_float.tscn")
 const IFRAMESPARK = preload("res://nodes/hitsparks/iframe_spark.tscn")
+const HIT_SPARK_COOL = preload("res://nodes/hitsparks/hit_spark_cool.tscn")
 
 #############################################################
 ## Config
@@ -28,6 +29,7 @@ func _ready() -> void:
 	spawn_blockSpark_1()
 	spawn_attack_type_indicator()
 	spawn_ground_spark(pooling_pos, true)
+
 
 func spawn_hitSpark_1(_position: Vector2 = pooling_pos) -> void:
 	var hitspark = HITSPARK.instantiate()
@@ -99,5 +101,11 @@ func spawn_throw_spark_float(_position: Vector2 = pooling_pos) -> void:
 
 func spawn_iframe_spark(_position: Vector2 = pooling_pos) -> void:
 	var hitspark = IFRAMESPARK.instantiate()
+	hitspark.position = _position
+	get_tree().current_scene.add_child(hitspark)
+
+
+func spawn_hit_spark_cool(_position: Vector2 = pooling_pos) -> void:
+	var hitspark = HIT_SPARK_COOL.instantiate()
 	hitspark.position = _position
 	get_tree().current_scene.add_child(hitspark)

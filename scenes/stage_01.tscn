@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=46 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c2anqn8y5dr50" path="res://media/sprites/stage01/floor.png" id="2_fnmkw"]
 [ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/ui/restart_menu.tscn" id="2_nh3b5"]
 [ext_resource type="Texture2D" uid="uid://cppqygp1b42a1" path="res://media/sprites/stage01/building.png" id="4_dimc6"]
+[ext_resource type="PackedScene" uid="uid://blr5gifobciq8" path="res://nodes/high_way.tscn" id="4_lrdte"]
 [ext_resource type="Texture2D" uid="uid://nv6dkesnffpt" path="res://media/sprites/stage01/floor_dark.png" id="5_nasqd"]
 [ext_resource type="Script" uid="uid://duxhld58ww51q" path="res://scripts/enemy_spawn_helper.gd" id="6_l457t"]
 [ext_resource type="Texture2D" uid="uid://m74we0184cjq" path="res://media/sprites/stage01/seven_eleven.png" id="6_sgik7"]
@@ -26,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="21_v7t3f"]
 [ext_resource type="Texture2D" uid="uid://c6wyrrcq2dweo" path="res://media/sprites/mango_boss/mango_boss_intro1.png" id="23_f33yp"]
 [ext_resource type="AudioStream" uid="uid://de8ttnjmqlfy4" path="res://media/sfxs/Alarm_Fever.wav" id="24_wntu7"]
+[ext_resource type="AudioStream" uid="uid://d1rmtijm23hh0" path="res://media/sfxs/anime-cat-girl-6731.mp3" id="28_1fbf0"]
 
 [sub_resource type="Animation" id="Animation_lrdte"]
 length = 0.001
@@ -322,6 +324,81 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7t3f"]
 size = Vector2(128, 512)
 
+[sub_resource type="Animation" id="Animation_rkgfh"]
+resource_name = "high_way_explosion"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HighWay:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(6538, -482), Vector2(6557, -49)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HighWay:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.5550147]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HighWay/AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 14.457807,
+"start_offset": 0.95374656,
+"stream": ExtResource("28_1fbf0")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="Animation" id="Animation_ei3og"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HighWay:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6538, -482)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HighWay:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ei3og"]
+_data = {
+&"RESET": SubResource("Animation_ei3og"),
+&"high_way_explosion": SubResource("Animation_rkgfh")
+}
+
 [node name="Stage01" type="Node2D"]
 script = ExtResource("1_4caca")
 
@@ -331,7 +408,7 @@ script = ExtResource("1_4caca")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(-2768, 592)
+position = Vector2(4376, 552)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -461,7 +538,7 @@ enemy_to_spawn = [NodePath("../Area3EnemyList/Phase3"), NodePath("../Area3EnemyL
 [node name="e4" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
 position = NodePath("../../../SpawnPos/pos1")
-hp = 1
+hp = 40
 object = ExtResource("9_dimc6")
 
 [node name="Phase2" type="Node" parent="EnemySpawnHelper"]
@@ -760,10 +837,11 @@ position = Vector2(5184, -344)
 position = Vector2(6280, -336)
 
 [node name="FallingFlowerPot" parent="." instance=ExtResource("15_bc8xj")]
-position = Vector2(-656, 576)
+position = Vector2(-656, -1520)
 
 [node name="JunctionBox" parent="." instance=ExtResource("11_l457t")]
 position = Vector2(5624, 600)
+amount_to_explode = 2
 
 [node name="LightPole" parent="." instance=ExtResource("17_c2i1s")]
 position = Vector2(781, 320)
@@ -794,6 +872,11 @@ root_node = NodePath("../AreaLock/1")
 libraries = {
 &"": SubResource("AnimationLibrary_mqdkf")
 }
+
+[node name="HighWay" parent="." instance=ExtResource("4_lrdte")]
+position = Vector2(6538, -482)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="HighWay"]
 
 [node name="Area1LockTrigger" type="Area2D" parent="."]
 position = Vector2(-136, 520)
@@ -845,6 +928,13 @@ visible = false
 position = Vector2(2872, 472)
 limit_bottom = 1000
 
+[node name="EventPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ei3og")
+}
+
+[connection signal="explode" from="JunctionBox" to="." method="_on_junction_box_explode"]
 [connection signal="banana_fly" from="MarketGreen" to="." method="_on_market_green_banana_fly"]
 [connection signal="body_entered" from="Area1LockTrigger" to="." method="_on_area_1_lock_trigger_body_entered"]
 [connection signal="body_entered" from="Area3LockTrigger" to="." method="_on_area_3_lock_trigger_body_entered"]
+[connection signal="animation_finished" from="EventPlayer" to="." method="_on_event_player_animation_finished"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://blr5gifobciq8"]
+
+[ext_resource type="Script" uid="uid://bhvxjj77pfva0" path="res://scripts/high_way.gd" id="1_wi5hg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tc5aw"]
+size = Vector2(1944, 648)
+
+[node name="HighWay" type="Node2D"]
+script = ExtResource("1_wi5hg")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-484.00003, 0)
+scale = Vector2(1.6875, 1)
+color = Color(0.5339433, 0.5339433, 0.5339433, 1)
+polygon = PackedVector2Array(-448, -328, -448, -2.6143188, -448, 320, 704, 320, 704, -328)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 19
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-268, -4)
+shape = SubResource("RectangleShape2D_tc5aw")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
