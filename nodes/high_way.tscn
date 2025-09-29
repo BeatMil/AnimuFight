@@ -1,25 +1,138 @@
-[gd_scene load_steps=3 format=3 uid="uid://blr5gifobciq8"]
+[gd_scene load_steps=7 format=3 uid="uid://blr5gifobciq8"]
 
 [ext_resource type="Script" uid="uid://bhvxjj77pfva0" path="res://scripts/high_way.gd" id="1_wi5hg"]
+[ext_resource type="AudioStream" uid="uid://bfb5ndftxngyg" path="res://media/sfxs/exploding-building-1-185114.mp3" id="2_1g7qu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tc5aw"]
 size = Vector2(1944, 648)
 
+[sub_resource type="Animation" id="Animation_wi5hg"]
+resource_name = "explosion"
+length = 4.0000033
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BigRectangle:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-150, 350)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BigRectangle:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.5550147]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"disable_area2d"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_1g7qu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BigRectangle:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BigRectangle:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8h55m"]
+_data = {
+&"RESET": SubResource("Animation_1g7qu"),
+&"explosion": SubResource("Animation_wi5hg")
+}
+
 [node name="HighWay" type="Node2D"]
 script = ExtResource("1_wi5hg")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="BigRectangle" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="BigRectangle"]
 position = Vector2(-484.00003, 0)
 scale = Vector2(1.6875, 1)
 color = Color(0.5339433, 0.5339433, 0.5339433, 1)
 polygon = PackedVector2Array(-448, -328, -448, -2.6143188, -448, 320, 704, 320, 704, -328)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="BigRectangle"]
 collision_layer = 0
 collision_mask = 19
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigRectangle/Area2D"]
 position = Vector2(-268, -4)
 shape = SubResource("RectangleShape2D_tc5aw")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8h55m")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1g7qu")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1g7qu")
+
+[connection signal="body_entered" from="BigRectangle/Area2D" to="." method="_on_area_2d_body_entered"]

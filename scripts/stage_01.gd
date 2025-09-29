@@ -92,9 +92,4 @@ func _on_area_3_lock_trigger_body_entered(_body: Node2D) -> void:
 
 
 func _on_junction_box_explode() -> void:
-	event_player.play("high_way_explosion")
-
-
-func _on_event_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "high_way_explosion":
-		high_way.disable_area2d()
+	high_way.play_explosion()

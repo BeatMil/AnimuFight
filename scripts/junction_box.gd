@@ -43,6 +43,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			ObjectPooling.spawn_hit_spark_cool(position)
 			animation_player.play("explode")
 			area_2d.queue_free()
+			CameraManager.start_screen_shake(20, 1.0)
 			await get_tree().create_timer(1).timeout
 			emit_signal("explode")
 		else:
