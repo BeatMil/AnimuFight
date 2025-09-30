@@ -469,6 +469,10 @@ func hitted(
 			_slow_moion_no_sfx(0.8, 0.2)
 		else:
 			animation_player.play("dodge_success")
+		if _attacker.position.x < self.position.x:
+			sprite_2d.flip_h = true
+		else:
+			sprite_2d.flip_h = false
 
 	## Player command grab (super)
 	elif _type == Enums.Attack.P_THROW:
