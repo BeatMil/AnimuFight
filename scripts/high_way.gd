@@ -2,8 +2,11 @@ extends Node2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var area_2d: Area2D = $BigRectangle/Area2D
-const GROUND_HIT = preload("uid://cpl7fyrbe36bv")
 @onready var audio_stream_player_2: AudioStreamPlayer = $AudioStreamPlayer2
+@onready var audio_stream_player_3: AudioStreamPlayer = $AudioStreamPlayer3
+const GROUND_HIT = preload("uid://cpl7fyrbe36bv")
+const BREAK_GROUND = preload("uid://b6qbt2hlbjsml")
+@onready var spark_pos: Marker2D = $SparkPos
 
 
 func hitlag(_amount: float = 0.3) -> void:
@@ -24,6 +27,13 @@ func disable_area2d() -> void:
 func play_ground_hit2() -> void:
 	audio_stream_player_2.stream = GROUND_HIT
 	audio_stream_player_2.play()
+
+
+func hit_ground() -> void:
+	audio_stream_player_3.stream = BREAK_GROUND
+	audio_stream_player_3.play()
+	CameraManager.start_screen_shake(20, 0.3)
+	ObjectPooling.spawn_ground_spark_2(spark_pos.global_position)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
