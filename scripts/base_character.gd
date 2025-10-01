@@ -46,6 +46,7 @@ enum States {
 	WALL_THROW,
 	DOWN_HP,
 	AIR_LP1,
+	WAVEDASH,
 	}
 
 

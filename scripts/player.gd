@@ -214,13 +214,13 @@ func _physics_process(delta: float) -> void:
 		_lerp_velocity_x()
 	
 	# Jump
-	if state in [States.IDLE, States.DOWN_HP, States.DASH]:
+	if state in [States.IDLE, States.DOWN_HP, States.DASH, States.WAVEDASH]:
 		handle_jump_buffer(delta)
 
 	# Jump buffer
 	if jump_buffer_timer > 0:
 		_jump(delta)
-		if state == States.DASH:
+		if state in [States.DASH, States.WAVEDASH]:
 			_push_x(300)
 			state = States.AIR
 			# await get_tree().physics_frame
@@ -462,7 +462,7 @@ func _check_input_history() -> void:
 	if Input.is_action_pressed("hp"):
 		new_input += "h"
 	
-	var input_size = 15
+	var input_size = 26
 	if current_input == new_input:
 		if input_history:
 			input_history[-1]["frame"] += 1
@@ -491,15 +491,34 @@ func _check_input_history() -> void:
 
 	var dash_right = Command.new(["6","5","6"])
 	var dash_left = Command.new(["4","5","4"])
+	var wave_dash_right = Command.new(["6","5","2","3"])
+	var wave_dash_left = Command.new(["4","5","2","1"])
+	var fake_wave_dash_right = Command.new(["5","2","3"])
+	var fake_wave_dash_left = Command.new(["5","2","1"])
 	for i in range(len(input_history)-1, -1, -1):
 		dash_right.calculate(input_history[i]["command"])
 		dash_left.calculate(input_history[i]["command"])
+		wave_dash_right.calculate(input_history[i]["command"])
+		wave_dash_left.calculate(input_history[i]["command"])
+		fake_wave_dash_right.calculate(input_history[i]["command"])
+		fake_wave_dash_left.calculate(input_history[i]["command"])
+	if fake_wave_dash_right.get_command_complete():
+		queue_move(_wave_dash_right)
+		input_history.clear()
+	if fake_wave_dash_left.get_command_complete():
+		queue_move(_wave_dash_left)
+		input_history.clear()
 	if dash_right.get_command_complete(): 
 		queue_move(_dash_right)
-		# print(input_history)
 		input_history.clear()
 	if dash_left.get_command_complete():
 		queue_move(_dash_left)
+		input_history.clear()
+	if wave_dash_left.get_command_complete():
+		queue_move(_wave_dash_left)
+		input_history.clear()
+	if wave_dash_right.get_command_complete():
+		queue_move(_wave_dash_right)
 		input_history.clear()
 
 
@@ -526,7 +545,17 @@ var cant_dash_state = [
 	States.IFRAME,
 	States.AIR_SPD,
 	States.THROW_BREAKABLE,
-	States.LP1,
+	]
+
+var cant_wave_dash_state = [
+	States.DODGE,
+	States.HIT_STUNNED,
+	States.BOUNCE_STUNNED,
+	States.WALL_BOUNCED,
+	States.GRABBED,
+	States.IFRAME,
+	States.AIR_SPD,
+	States.THROW_BREAKABLE,
 	]
 
 func _dash_left() -> void:
@@ -541,6 +570,20 @@ func _dash_right() -> void:
 		return
 	sprite_2d.flip_h = false
 	animation_player.play("dash")
+
+
+func _wave_dash_left() -> void:
+	if state in cant_wave_dash_state:
+		return
+	sprite_2d.flip_h = true
+	animation_player.play("wave_dash")
+
+
+func _wave_dash_right() -> void:
+	if state in cant_dash_state:
+		return
+	sprite_2d.flip_h = false
+	animation_player.play("wave_dash")
 
 
 #############################################################
@@ -1392,7 +1435,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_hp_out() -> void:
-	print("ARE YOU READY?")
 	is_ded = true
 	set_collision_noclip()
 	animation_player.play("ded")
