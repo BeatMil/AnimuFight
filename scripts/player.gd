@@ -499,6 +499,7 @@ func _check_input_history() -> void:
 	var fake_wave_dash_right = Command.new(["5","2","3"])
 	var fake_wave_dash_left = Command.new(["5","2","1"])
 	var EWGF_right = Command.new(["6","5","2","3l"])
+	var fake_EWGF_right = Command.new(["5","2","3l"])
 	for i in range(len(input_history)-1, -1, -1):
 		dash_right.calculate(input_history[i]["command"])
 		dash_left.calculate(input_history[i]["command"])
@@ -507,6 +508,7 @@ func _check_input_history() -> void:
 		fake_wave_dash_right.calculate(input_history[i]["command"])
 		fake_wave_dash_left.calculate(input_history[i]["command"])
 		EWGF_right.calculate(input_history[i]["command"])
+		fake_EWGF_right.calculate(input_history[i]["command"])
 	if fake_wave_dash_right.get_command_complete():
 		queue_move(_wave_dash_right)
 		input_history.clear()
@@ -527,6 +529,9 @@ func _check_input_history() -> void:
 		input_history.clear()
 		print("wave dash right!")
 	if EWGF_right.get_command_complete():
+		queue_move(_EWGF)
+		input_history.clear()
+	if fake_EWGF_right.get_command_complete():
 		queue_move(_EWGF)
 		input_history.clear()
 
@@ -1090,7 +1095,7 @@ func _down_lp() ->  void:
 		sprite_2d.flip_h = false
 
 	if p_state == P_States.CAN_EWGF:
-		animation_player.play("charge_attack_release_lv2")
+		animation_player.play("charge_attack_release_lv1")
 	else:
 		animation_player.play("jin1+2")
 
