@@ -171,7 +171,7 @@ func _input(event: InputEvent) -> void:
 			_add_block_buffer_time()
 
 	# debug_input_event = event
-	print(input_history)
+	# print(input_history)
 
 
 func _physics_process(delta: float) -> void:
@@ -499,7 +499,9 @@ func _check_input_history() -> void:
 	var fake_wave_dash_right = Command.new(["5","2","3"])
 	var fake_wave_dash_left = Command.new(["5","2","1"])
 	var EWGF_right = Command.new(["6","5","2","3l"])
+	var EWGF_left = Command.new(["4","5","2","1l"])
 	var fake_EWGF_right = Command.new(["5","2","3l"])
+	var fake_EWGF_left = Command.new(["5","2","1l"])
 	for i in range(len(input_history)-1, -1, -1):
 		dash_right.calculate(input_history[i]["command"])
 		dash_left.calculate(input_history[i]["command"])
@@ -509,6 +511,8 @@ func _check_input_history() -> void:
 		fake_wave_dash_left.calculate(input_history[i]["command"])
 		EWGF_right.calculate(input_history[i]["command"])
 		fake_EWGF_right.calculate(input_history[i]["command"])
+		EWGF_left.calculate(input_history[i]["command"])
+		fake_EWGF_left.calculate(input_history[i]["command"])
 	if fake_wave_dash_right.get_command_complete():
 		queue_move(_wave_dash_right)
 		input_history.clear()
@@ -532,6 +536,12 @@ func _check_input_history() -> void:
 		queue_move(_EWGF)
 		input_history.clear()
 	if fake_EWGF_right.get_command_complete():
+		queue_move(_EWGF)
+		input_history.clear()
+	if EWGF_left.get_command_complete():
+		queue_move(_EWGF)
+		input_history.clear()
+	if fake_EWGF_left.get_command_complete():
 		queue_move(_EWGF)
 		input_history.clear()
 
@@ -601,6 +611,10 @@ func _wave_dash_right() -> void:
 
 
 func _EWGF() -> void:
+	# if current_input == "3l"
+	# 	sprite_2d.flip_h = false
+	# else:
+	# 	sprite_2d.flip_h = true
 	animation_player.play("charge_attack_release_lv2")
 
 
@@ -1094,7 +1108,10 @@ func _down_lp() ->  void:
 	if Input.is_action_pressed("right"):
 		sprite_2d.flip_h = false
 
-	if p_state == P_States.CAN_EWGF:
+	if p_state == P_States.CAN_EWGF and not Input.is_action_pressed("right")\
+		and not Input.is_action_pressed("left"):
+		animation_player.play("jin1+2")
+	elif p_state == P_States.CAN_EWGF:
 		animation_player.play("charge_attack_release_lv1")
 	else:
 		animation_player.play("jin1+2")
