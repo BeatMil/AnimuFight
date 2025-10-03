@@ -15,6 +15,8 @@ extends "res://scripts/base_character.gd"
 @onready var profile_player: AnimationPlayer = $CanvasLayer/Profile/AnimationPlayer
 @onready var command_history: VBoxContainer = $CanvasLayer/CommandHistory
 const COMMAND_BOX = preload("res://nodes/command_box.tscn")
+@onready var god_fist_player: AudioStreamPlayer = $GodFistPlayer
+const STRONG_PUNCH = preload("uid://b6dtaoivlmcyf")
 
 #############################################################
 ## Config
@@ -531,7 +533,6 @@ func _check_input_history() -> void:
 	if wave_dash_right.get_command_complete():
 		queue_move(_wave_dash_right)
 		input_history.clear()
-		print("wave dash right!")
 	if EWGF_right.get_command_complete():
 		queue_move(_EWGF)
 		input_history.clear()
@@ -548,6 +549,11 @@ func _check_input_history() -> void:
 
 func _play_profile_hitted() -> void:
 	profile_player.play("hitted")
+
+
+func play_EWGF_sfx() -> void:
+	god_fist_player.stream = STRONG_PUNCH
+	god_fist_player.play()
 
 
 #############################################################
@@ -615,7 +621,8 @@ func _EWGF() -> void:
 	# 	sprite_2d.flip_h = false
 	# else:
 	# 	sprite_2d.flip_h = true
-	animation_player.play("charge_attack_release_lv2")
+	# animation_player.play("charge_attack_release_lv2")
+	animation_player.play("EWGF")
 
 
 #############################################################
@@ -1112,7 +1119,7 @@ func _down_lp() ->  void:
 		and not Input.is_action_pressed("left"):
 		animation_player.play("jin1+2")
 	elif p_state == P_States.CAN_EWGF:
-		animation_player.play("charge_attack_release_lv1")
+		animation_player.play("WGF")
 	else:
 		animation_player.play("jin1+2")
 
@@ -1306,6 +1313,44 @@ func charge_lv2_info() ->  void:
 	# "zoom": Vector2(1, 1),
 	}
 	dict_to_spawn_hitbox(info)
+func EWGF_info() -> void:
+	var info = {
+	"size": Hitbox_type.LARGE,
+	"time": 0.1,
+	"push_power_ground": Vector2(100, -200),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(200, -120),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.2,
+	"hitstun_amount_ground": 0.1,
+	"hitlag_amount_air": 0.0,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 5,
+	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/DownHpPos.position,
+	"zoom": Vector2(0.2, 0.2),
+	}
+	dict_to_spawn_hitbox(info)
+func WGF_info() -> void:
+	var info = {
+	"size": Hitbox_type.LARGE,
+	"time": 0.1,
+	"push_power_ground": Vector2(200, -50),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(200, -120),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.1,
+	"hitlag_amount_air": 0.0,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 3,
+	"type": Enums.Attack.NORMAL,
+	"pos": $HitBoxPos/DownHpPos.position,
+	# "zoom": Vector2(1, 1),
+	}
+	dict_to_spawn_hitbox(info)
 
 
 #############################################################
@@ -1465,6 +1510,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"jin1+2",
 		"charge_attack_release_lv1",
 		"charge_attack_release_lv2",
+		"WGF",
+		"EWGF",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:
