@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bp0ebyfyyeccx"]
 
 [ext_resource type="PackedScene" uid="uid://jgmjqpnytm3v" path="res://nodes/hitboxes/hitbox_base.tscn" id="1_lbga3"]
-[ext_resource type="Script" uid="uid://dxypex16tw8sv" path="res://scripts/hitbox_air_throw.gd" id="2_22ooo"]
+[ext_resource type="Script" uid="uid://dxypex16tw8sv" path="res://scripts/hitbox_bound.gd" id="2_22ooo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jpqck"]
 size = Vector2(626, 392)
