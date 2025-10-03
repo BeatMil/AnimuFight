@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=47 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://c6wyrrcq2dweo" path="res://media/sprites/mango_boss/mango_boss_intro1.png" id="23_f33yp"]
 [ext_resource type="AudioStream" uid="uid://de8ttnjmqlfy4" path="res://media/sfxs/Alarm_Fever.wav" id="24_wntu7"]
 [ext_resource type="AudioStream" uid="uid://d1rmtijm23hh0" path="res://media/sfxs/anime-cat-girl-6731.mp3" id="28_1fbf0"]
+[ext_resource type="PackedScene" uid="uid://c5b77m0nmmb5l" path="res://nodes/enemy_05.tscn" id="28_rkgfh"]
 
 [sub_resource type="Animation" id="Animation_lrdte"]
 length = 0.001
@@ -324,6 +325,33 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7t3f"]
 size = Vector2(128, 512)
 
+[sub_resource type="Animation" id="Animation_ei3og"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HighWay:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6538, -482)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HighWay:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_rkgfh"]
 resource_name = "high_way_explosion"
 tracks/0/type = "value"
@@ -365,33 +393,6 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/2/use_blend = true
-
-[sub_resource type="Animation" id="Animation_ei3og"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HighWay:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(6538, -482)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HighWay:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ei3og"]
 _data = {
@@ -527,7 +528,7 @@ enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpaw
 [node name="Area3Spawner" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
 target = NodePath("../Player")
-enemy_to_spawn = [NodePath("../Area3EnemyList/Phase3"), NodePath("../Area3EnemyList/Phase2"), NodePath("../Area3EnemyList/Phase3"), NodePath("../Area3EnemyList/Phase4")]
+enemy_to_spawn = [NodePath("../Area3EnemyList/Phase1"), NodePath("../Area3EnemyList/Phase2"), NodePath("../Area3EnemyList/Phase3"), NodePath("../Area3EnemyList/Phase4")]
 
 [node name="enemyCount" type="Node" parent="Area3Spawner"]
 
@@ -677,7 +678,7 @@ object = ExtResource("8_nasqd")
 
 [node name="e1_1" type="Node" parent="Area3EnemyList/Phase1" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
-position = NodePath("../../../Area3SpawnPos/pos3")
+position = NodePath("../../../Area3SpawnPos/pos1")
 hp = 30
 object = ExtResource("8_nasqd")
 
@@ -702,6 +703,12 @@ script = ExtResource("6_l457t")
 position = NodePath("../../../Area3SpawnPos/pos1")
 hp = 50
 object = ExtResource("7_nh3b5")
+
+[node name="Sniper" type="Node" parent="Area3EnemyList/Phase3" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area3SpawnPos/pos4")
+hp = 1
+object = ExtResource("28_rkgfh")
 
 [node name="Phase4" type="Node" parent="Area3EnemyList"]
 
@@ -836,6 +843,9 @@ position = Vector2(5184, -344)
 [node name="pos3" type="Marker2D" parent="Area3SpawnPos"]
 position = Vector2(6280, -336)
 
+[node name="pos4" type="Marker2D" parent="Area3SpawnPos"]
+position = Vector2(4702, 80)
+
 [node name="FallingFlowerPot" parent="." instance=ExtResource("15_bc8xj")]
 position = Vector2(-656, -1520)
 
@@ -904,7 +914,6 @@ position = Vector2(-2080, 0)
 position = Vector2(2024, 0)
 
 [node name="2" type="Node2D" parent="AreaLock"]
-visible = false
 position = Vector2(0, -2240)
 
 [node name="WallL" parent="AreaLock/2" instance=ExtResource("21_v7t3f")]
@@ -914,7 +923,6 @@ position = Vector2(1664, 0)
 position = Vector2(4120, 0)
 
 [node name="3" type="Node2D" parent="AreaLock"]
-visible = false
 position = Vector2(6112, -2240)
 
 [node name="WallL" parent="AreaLock/3" instance=ExtResource("21_v7t3f")]

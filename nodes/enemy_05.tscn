@@ -1130,11 +1130,12 @@ size = Vector2(144, 304)
 collision_layer = 0
 collision_mask = 15
 script = ExtResource("2_wp7b3")
-hp = 10
 is_notarget = false
+hp = 10
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("11_wp7b3")
+flip_h = true
 hframes = 2
 frame = 1
 

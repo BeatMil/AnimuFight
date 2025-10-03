@@ -20,6 +20,7 @@ func queueing_to_attack(node: Object) -> void:
 func queueing_priority(node: Object) -> void:
 	enemies_priority_attack.append(node)
 
+
 func start_queue_timer():
 	attack_queue_timer.start()
 

@@ -198,11 +198,11 @@ func _on_attack_timer_timeout() -> void:
 		return
 	if randi_range(0, 1) == 0:
 		return
-	if not AttackQueue.can_attack:
-		return
-	# Reset attack queue
-	AttackQueue.start_queue_timer()
 
+	AttackQueue.queueing_to_attack(self)
+
+
+func do_attack() -> void:
 	if is_player_in_range_attack01:
 		_attack01()
 	if is_player_in_range_lp:
