@@ -18,6 +18,7 @@ const THROW_SPARK_FLOAT = preload("res://nodes/hitsparks/throw_spark_float.tscn"
 const IFRAMESPARK = preload("res://nodes/hitsparks/iframe_spark.tscn")
 const HIT_SPARK_COOL = preload("res://nodes/hitsparks/hit_spark_cool.tscn")
 const GROUND_PARTICLE_2 = preload("uid://bb5sw8ogwptbc")
+const EWGF_SPARK = preload("uid://cj5pmswumq8oa")
 
 
 #############################################################
@@ -117,3 +118,23 @@ func spawn_ground_spark_2(_position: Vector2 = pooling_pos) -> void:
 	var hitspark = GROUND_PARTICLE_2.instantiate()
 	hitspark.position = _position
 	get_tree().current_scene.add_child(hitspark)
+
+
+func spawn_EWGF_spark(_position: Vector2 = pooling_pos, _flip_h = false) -> void:
+	var hitspark = EWGF_SPARK.instantiate()
+	var pos_pos: Vector2
+	if _flip_h:
+		pos_pos = _position + Vector2(-100, 0)
+	else:
+		pos_pos = _position + Vector2(100, 0)
+	hitspark.position = pos_pos
+	hitspark.z_index = 20
+	get_tree().current_scene.add_child(hitspark)
+	var tween = get_tree().create_tween()
+	var new_pos: Vector2
+	if _flip_h:
+		new_pos = hitspark.position + Vector2(-100, -200)
+	else:
+		new_pos = hitspark.position + Vector2(100, -200)
+
+	tween.tween_property(hitspark, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)

@@ -554,6 +554,7 @@ func _play_profile_hitted() -> void:
 func play_EWGF_sfx() -> void:
 	god_fist_player.stream = STRONG_PUNCH
 	god_fist_player.play()
+	ObjectPooling.spawn_EWGF_spark(position, sprite_2d.flip_h)
 
 
 #############################################################
