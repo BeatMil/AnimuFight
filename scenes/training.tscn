@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://q1ydmwguookf"]
+[gd_scene load_steps=18 format=3 uid="uid://q1ydmwguookf"]
 
 [ext_resource type="Script" uid="uid://cgmpx4iqj73rb" path="res://scripts/training.gd" id="1_5jbvl"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_ee4pl"]
@@ -15,6 +15,96 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
 size = Vector2(4478, 470)
+
+[sub_resource type="Animation" id="Animation_ndv2e"]
+resource_name = "no_wall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1160, -1328)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Wall2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2392, -1216)]
+}
+
+[sub_resource type="Animation" id="Animation_8ihin"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1160, -1328)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Wall2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2392, -1216)]
+}
+
+[sub_resource type="Animation" id="Animation_4njoh"]
+resource_name = "wall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1200, -200)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Wall2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2392, -120)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jhlec"]
+_data = {
+&"RESET": SubResource("Animation_8ihin"),
+&"no_wall": SubResource("Animation_ndv2e"),
+&"wall": SubResource("Animation_4njoh")
+}
 
 [node name="training" type="Node2D"]
 script = ExtResource("1_5jbvl")
@@ -204,6 +294,12 @@ position = Vector2(40, -168)
 target = NodePath("../Player")
 enemy_to_spawn = [ExtResource("5_4aqt5")]
 is_active = false
+
+[node name="WallPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Wall")
+libraries = {
+&"": SubResource("AnimationLibrary_jhlec")
+}
 
 [node name="Wall" parent="." instance=ExtResource("7_8vboe")]
 position = Vector2(-1160, -1328)

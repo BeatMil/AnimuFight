@@ -16,6 +16,8 @@ extends Node2D
 @onready var enemy4: Object = preload("res://nodes/enemy_04.tscn")
 @onready var enemy6: Object = preload("res://nodes/enemy_06.tscn")
 @onready var death_zone: Node2D = $DeathZone
+@onready var wall_player: AnimationPlayer = $WallPlayer
+
 
 func _ready() -> void:
 	CameraManager.enable_all_camera()
@@ -34,6 +36,7 @@ func _ready() -> void:
 	training_menu.enemy6.connect(_on_enemy_6_button_down)
 	training_menu.clear.connect(_on_clear_button_down)
 	training_menu.death_zone.connect(_on_death_zone_toggled)
+	training_menu.wall.connect(_on_wall_toggled)
 	death_zone.turn_off()
 	AttackQueue.stop_queue_timer()
 
@@ -98,3 +101,10 @@ func _on_death_zone_toggled(toggled_on: bool) -> void:
 		death_zone.turn_on()
 	else:
 		death_zone.turn_off()
+
+
+func _on_wall_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		wall_player.play("wall")
+	else:
+		wall_player.play("no_wall")

@@ -74,15 +74,20 @@ text = "Enemy4"
 layout_mode = 2
 text = "Enemy6"
 
-[node name="ClearButton" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
-layout_mode = 2
-text = "Clear"
-
 [node name="DeathZoneButton" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
 text = "Death Zone"
+
+[node name="ClearButton" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
+layout_mode = 2
+text = "Clear"
+
+[node name="ToggleWall" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
+layout_mode = 2
+toggle_mode = true
+text = "Wall: Off"
 
 [node name="KeyBindButton" parent="VBoxContainer/VBoxContainerL" instance=ExtResource("2_lieai")]
 layout_mode = 2
@@ -109,7 +114,8 @@ position = Vector2(557, 452)
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy3Button" to="." method="_on_enemy_3_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy4Button" to="." method="_on_enemy_4_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/Enemy6Button" to="." method="_on_enemy_6_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainerL/ClearButton" to="." method="_on_clear_button_pressed"]
 [connection signal="toggled" from="VBoxContainer/VBoxContainerL/DeathZoneButton" to="." method="_on_death_zone_button_toggled"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainerL/ClearButton" to="." method="_on_clear_button_pressed"]
+[connection signal="toggled" from="VBoxContainer/VBoxContainerL/ToggleWall" to="." method="_on_toggle_wall_toggled"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/KeyBindButton" to="." method="_on_key_bind_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainerL/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

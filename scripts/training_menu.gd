@@ -5,6 +5,7 @@ extends Control
 @onready var key_bind_menu: Control = $KeyBindMenu
 @onready var v_box_container_l: VBoxContainer = $VBoxContainer/VBoxContainerL
 @onready var key_bind_button: Button = $VBoxContainer/VBoxContainerL/KeyBindButton
+@onready var toggle_wall: Button = $VBoxContainer/VBoxContainerL/ToggleWall
 
 
 signal boss01
@@ -16,6 +17,7 @@ signal enemy4
 signal enemy6
 signal death_zone
 signal clear
+signal wall
 
 
 func _ready() -> void:
@@ -70,6 +72,14 @@ func _on_enemy_6_button_pressed() -> void:
 
 func _on_death_zone_button_toggled(toggled_on: bool) -> void:
 	emit_signal("death_zone", toggled_on)
+
+
+func _on_toggle_wall_toggled(toggled_on: bool) -> void:
+	emit_signal("wall", toggled_on)
+	if toggled_on:
+		toggle_wall.text = "Wall: On"
+	else:
+		toggle_wall.text = "Wall: Off"
 
 
 func _on_main_menu_button_pressed() -> void:
