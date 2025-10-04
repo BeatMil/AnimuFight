@@ -15,8 +15,11 @@ extends Node2D
 @onready var enemy3: Object = preload("res://nodes/enemy_03.tscn")
 @onready var enemy4: Object = preload("res://nodes/enemy_04.tscn")
 @onready var enemy6: Object = preload("res://nodes/enemy_06.tscn")
+
 @onready var death_zone: Node2D = $DeathZone
 @onready var wall_player: AnimationPlayer = $WallPlayer
+
+const ENEMY_ZONER_01 = preload("uid://chyv0gcd42b0i")
 
 
 func _ready() -> void:
@@ -34,6 +37,7 @@ func _ready() -> void:
 	training_menu.enemy3.connect(_on_enemy_3_button_down)
 	training_menu.enemy4.connect(_on_enemy_4_button_down)
 	training_menu.enemy6.connect(_on_enemy_6_button_down)
+	training_menu.enemy_zoner_1.connect(_on_enemy_zoner_1_button_down)
 	training_menu.clear.connect(_on_clear_button_down)
 	training_menu.death_zone.connect(_on_death_zone_toggled)
 	training_menu.wall.connect(_on_wall_toggled)
@@ -94,6 +98,11 @@ func _on_enemy_4_button_down() -> void:
 func _on_enemy_6_button_down() -> void:
 	clear_enemy()
 	enemy_spawner_8.enemy_to_spawn.append(enemy6)
+
+
+func _on_enemy_zoner_1_button_down() -> void:
+	clear_enemy()
+	enemy_spawner_8.enemy_to_spawn.append(ENEMY_ZONER_01)
 
 
 func _on_death_zone_toggled(toggled_on: bool) -> void:

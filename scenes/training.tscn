@@ -16,9 +16,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd0co"]
 size = Vector2(4478, 470)
 
-[sub_resource type="Animation" id="Animation_ndv2e"]
-resource_name = "no_wall"
-length = 0.1
+[sub_resource type="Animation" id="Animation_8ihin"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,8 +43,9 @@ tracks/1/keys = {
 "values": [Vector2(2392, -1216)]
 }
 
-[sub_resource type="Animation" id="Animation_8ihin"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_ndv2e"]
+resource_name = "no_wall"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
