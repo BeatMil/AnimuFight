@@ -690,9 +690,15 @@ object = ExtResource("9_dimc6")
 
 [node name="Phase2" type="Node" parent="Area3EnemyList"]
 
-[node name="e3" type="Node" parent="Area3EnemyList/Phase2" node_paths=PackedStringArray("position")]
+[node name="e3_1" type="Node" parent="Area3EnemyList/Phase2" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
 position = NodePath("../../../Area3SpawnPos/pos1")
+hp = 50
+object = ExtResource("12_gsglw")
+
+[node name="e3_2" type="Node" parent="Area3EnemyList/Phase2" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area3SpawnPos/pos2")
 hp = 50
 object = ExtResource("12_gsglw")
 
@@ -704,25 +710,19 @@ position = NodePath("../../../Area3SpawnPos/pos1")
 hp = 50
 object = ExtResource("7_nh3b5")
 
-[node name="Sniper" type="Node" parent="Area3EnemyList/Phase3" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../Area3SpawnPos/pos4")
-hp = 1
-object = ExtResource("28_rkgfh")
-
-[node name="Phase4" type="Node" parent="Area3EnemyList"]
-
-[node name="boss03" type="Node" parent="Area3EnemyList/Phase4" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../Area3SpawnPos/pos1")
-hp = 50
-object = ExtResource("7_nh3b5")
-
-[node name="boss02" type="Node" parent="Area3EnemyList/Phase4" node_paths=PackedStringArray("position")]
+[node name="boss03" type="Node" parent="Area3EnemyList/Phase3" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
 position = NodePath("../../../Area3SpawnPos/pos3")
 hp = 50
 object = ExtResource("7_nh3b5")
+
+[node name="Phase4" type="Node" parent="Area3EnemyList"]
+
+[node name="Sniper" type="Node" parent="Area3EnemyList/Phase4" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area3SpawnPos/pos4")
+hp = 1
+object = ExtResource("28_rkgfh")
 
 [node name="Phase5" type="Node" parent="Area3EnemyList"]
 
