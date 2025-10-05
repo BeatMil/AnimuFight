@@ -65,6 +65,7 @@ enum Hitbox_type {
 	WAILL_THROW,
 	GROUND_THROW,
 	SLIDE,
+	BOOM,
 	}
 
 
@@ -90,6 +91,7 @@ const SLOW_MO_END = preload("res://media/sfxs/slow_mo_end.wav")
 const HIT_BOUNCE = preload("res://media/sfxs/Landing_RawMeat02.wav")
 const IFRAME_HIT = preload("res://media/sfxs/Landing_Meat03.wav")
 const DAMAGE_NUMBER = preload("res://nodes/damage_number.tscn")
+const HITBOX_BOOM = preload("uid://dttmum3j6yxlw")
 
 
 #############################################################
@@ -286,6 +288,10 @@ func _spawn_lp_hitbox(
 			hitbox = HITBOX_BOUND.instantiate()
 		Hitbox_type.SLIDE:
 			hitbox = HITBOX_SLIDE.instantiate()
+		Hitbox_type.BOOM:
+			hitbox = HITBOX_BOOM.instantiate()
+			if sprite_2d.flip_h:
+				hitbox.boom_speed *= -1
 		_:
 			hitbox = HITBOX_LP_MEDIUM.instantiate()
 
@@ -414,7 +420,7 @@ func hitted(
 
 	## BLOCK & ARMOR
 	if state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR, States.PARRY_SUCCESS] and \
-		_type in [Enums.Attack.NORMAL, Enums.Attack.P_PARRY]:
+		_type in [Enums.Attack.NORMAL, Enums.Attack.P_PARRY, Enums.Attack.PROJECTILE]:
 		# if state == States.ARMOR:
 		# 	hp_bar.hp_down(_damage)
 		if has_method("_add_block_count"):
@@ -434,30 +440,32 @@ func hitted(
 			_attacker)
 
 	## Parry & Parry Success
-	elif state in [States.PARRY] and _type == Enums.Attack.NORMAL:
+	elif state in [States.PARRY] and _type in [Enums.Attack.NORMAL, Enums.Attack.PROJECTILE]:
 		animation_player.play("parry_success")
 		if _attacker.position.x < self.position.x:
 			sprite_2d.flip_h = true
 		else:
 			sprite_2d.flip_h = false
-		_attacker.hitted(
-			self,
-			is_face_right,
-			Vector2(20, 0),
-			0,
-			0,
-			1,
-			Vector2(10, 0.1),
-			1,
-			Enums.Attack.P_PARRY
-		)
 		# print_rich("[color=pink][b]COOL SLOW MO!![/b][/color]", slow_mo_on_block)
 		if slow_mo_on_block:
 			_slow_moion(slow_mo_on_block.x, slow_mo_on_block.y)
 			CameraManager.zoom_zoom(_zoom, _zoom_duration)
 		else:
 			_slow_moion_no_sfx(0.9, 0.1)
-
+		if _type == Enums.Attack.PROJECTILE:
+			pass
+		else:
+			_attacker.hitted(
+				self,
+				is_face_right,
+				Vector2(20, 0),
+				0,
+				0,
+				1,
+				Vector2(10, 0.1),
+				1,
+				Enums.Attack.P_PARRY
+			)
 	## DODGE & DODGE_SUCCESS
 	elif state in [States.DODGE, States.DODGE_SUCCESS] and \
 		_type not in [

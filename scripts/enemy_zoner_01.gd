@@ -40,8 +40,8 @@ func _boom() -> void:
 		animation_player.play("boom")
 func boom_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_type.SMALL,
-	"time": 0.3,
+	"size": Hitbox_type.BOOM,
+	"time": 100,
 	"push_power_ground": Vector2(800, -300),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
 	"push_power_air": Vector2(800, -300),
@@ -52,7 +52,7 @@ func boom_info() -> void: # for animation_player
 	"hitstun_amount_air": 0.05,
 	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 4,
-	"type": Enums.Attack.UNBLOCK,
+	"type": Enums.Attack.PROJECTILE,
 	"pos": Vector2(50, 0),
 	}
 	dict_to_spawn_hitbox(info)

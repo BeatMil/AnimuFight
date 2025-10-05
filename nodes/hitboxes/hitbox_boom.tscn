@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dttmum3j6yxlw"]
+
+[ext_resource type="PackedScene" uid="uid://jgmjqpnytm3v" path="res://nodes/hitboxes/hitbox_base.tscn" id="1_mqk3k"]
+[ext_resource type="PackedScene" uid="uid://nf1iaj3ndswq" path="res://nodes/hitsparks/boom_spark.tscn" id="2_3mm64"]
+[ext_resource type="Script" uid="uid://ddcfesi3dsh7o" path="res://scripts/hitbox_boom.gd" id="2_unsj4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5ms"]
+size = Vector2(64, 64)
+
+[node name="HtiboxBoom" instance=ExtResource("1_mqk3k")]
+script = ExtResource("2_unsj4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_ow5ms")
+
+[node name="QueueFreeTimer" parent="." index="3"]
+one_shot = false
+autostart = false
+
+[node name="HitSpark" parent="." index="4" instance=ExtResource("2_3mm64")]

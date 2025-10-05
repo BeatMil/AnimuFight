@@ -1,0 +1,113 @@
+[gd_scene load_steps=15 format=3 uid="uid://nf1iaj3ndswq"]
+
+[ext_resource type="Script" uid="uid://d2gp7rek5g7ku" path="res://scripts/boom_spark.gd" id="1_jmxta"]
+[ext_resource type="Texture2D" uid="uid://bnbgrww4q6p8d" path="res://media/sprites/particle_fx/floaty_128.png" id="3_215sj"]
+
+[sub_resource type="Environment" id="Environment_pw8aq"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vyqdo"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 8
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_jmxta"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.47807017, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_215sj"]
+curve = SubResource("Curve_jmxta")
+
+[sub_resource type="Gradient" id="Gradient_jcnss"]
+offsets = PackedFloat32Array(0, 0.68018)
+colors = PackedColorArray(0.6972954, 1, 0.8117125, 1, 0.28286964, 0.93447423, 0.51797557, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vyqdo"]
+gradient = SubResource("Gradient_jcnss")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c0v8h"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+radial_velocity_min = -37.590023
+radial_velocity_max = -37.590023
+scale_min = 2.0
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_vyqdo")
+alpha_curve = SubResource("CurveTexture_215sj")
+
+[sub_resource type="Curve" id="Curve_dlyql"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.47807017, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_io0eq"]
+curve = SubResource("Curve_dlyql")
+
+[sub_resource type="Gradient" id="Gradient_oaww6"]
+offsets = PackedFloat32Array(0, 0.68018)
+colors = PackedColorArray(0.6972954, 0.7971381, 1, 1, 0.28286964, 0.391328, 0.93447423, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nb54v"]
+gradient = SubResource("Gradient_oaww6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ltgmi"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(8, 8, 8)
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector3(0, -1, 0)
+spread = 1.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+radial_velocity_min = -37.590023
+radial_velocity_max = -37.590023
+scale_min = 2.0
+scale_max = 2.0
+color = Color(0.23996517, 0.38261348, 0.58825254, 1)
+color_ramp = SubResource("GradientTexture1D_nb54v")
+alpha_curve = SubResource("CurveTexture_io0eq")
+
+[node name="HitSpark" type="Node2D"]
+script = ExtResource("1_jmxta")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pw8aq")
+
+[node name="groups" type="Node2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="groups"]
+z_index = 11
+material = SubResource("CanvasItemMaterial_vyqdo")
+amount = 24
+texture = ExtResource("3_215sj")
+lifetime = 3.0
+speed_scale = 6.0
+fixed_fps = 120
+visibility_rect = Rect2(-1021.3712, -1071.3397, 2070.739, 2077.9294)
+process_material = SubResource("ParticleProcessMaterial_c0v8h")
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="groups"]
+z_index = 11
+material = SubResource("CanvasItemMaterial_vyqdo")
+position = Vector2(-1, 1)
+amount = 200
+texture = ExtResource("3_215sj")
+lifetime = 4.0
+speed_scale = 6.0
+fixed_fps = 120
+visibility_rect = Rect2(-968.4523, -1300.6946, 1940.9089, 2271.5237)
+process_material = SubResource("ParticleProcessMaterial_ltgmi")
+
+[connection signal="finished" from="groups/GPUParticles2D2" to="." method="_on_gpu_particles_2d_finished"]
+[connection signal="finished" from="groups/GPUParticles2D3" to="." method="_on_gpu_particles_2d_finished"]

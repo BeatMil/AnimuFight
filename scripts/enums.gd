@@ -22,6 +22,7 @@ enum Attack{
 	P_WALL_THROW,
 	P_GROUND_THROW,
 	MOVE,
+	PROJECTILE,
 }
 
 
