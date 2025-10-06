@@ -425,7 +425,7 @@ func hitted(
 		# 	hp_bar.hp_down(_damage)
 		if has_method("_add_block_count"):
 			self._add_block_count(1)
-		if self.name == "MangoBoss":
+		if self.name in ["MangoBoss", "EnemyZoner"] :
 			play_blockstunned()
 		else:
 			animation_player.stop()

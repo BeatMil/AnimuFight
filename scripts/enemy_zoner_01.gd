@@ -1,9 +1,21 @@
 extends "res://scripts/enemy.gd"
 
+
+@onready var keep_player_away_box: StaticBody2D = $KeepPlayerAwayBox
+
+
 func _ready() -> void:
 	super._ready()
 	block_rate = 10
-	DED_SPRITE = preload("res://media/sprites/enemy06/enemy06_down.png")
+	DED_SPRITE = preload("uid://73v1gc7dgtjt")
+
+
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+	if state in [States.IDLE, States.BLOCK]:
+		keep_player_away_box.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		keep_player_away_box.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 #############################################################
@@ -146,6 +158,14 @@ func df1_2nd_info() -> void: # for animation_player
 	"type": Enums.Attack.NORMAL,
 	}
 	dict_to_spawn_hitbox(info)
+
+
+func play_blockstunned() -> void:
+	if animation_player.current_animation == "blockstunned":
+		animation_player.play("blockstunned_2")
+	else:
+		animation_player.play("blockstunned")
+
 
 #############################################################
 ## Signals
