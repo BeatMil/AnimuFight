@@ -6,7 +6,7 @@ extends "res://scripts/enemy.gd"
 
 func _ready() -> void:
 	super._ready()
-	block_rate = 10
+	block_rate = 5
 	DED_SPRITE = preload("uid://73v1gc7dgtjt")
 
 
@@ -167,6 +167,19 @@ func play_blockstunned() -> void:
 		animation_player.play("blockstunned")
 
 
+func _move_range(delta) -> void:
+	if state in [States.IDLE]:
+		is_wall_bounced = false
+		is_wall_splat =  false
+		if not is_player_in_range_attack01 and not is_enemy_in_range_lp:
+			_move(delta)
+		else:
+			# lerp when finding player
+			_lerp_velocity_x()
+			animation_player.play("idle")
+			# block_count = 0
+
+
 #############################################################
 ## Signals
 #############################################################
@@ -255,16 +268,11 @@ func _on_attack_timer_timeout() -> void:
 
 func do_attack() -> void:
 	# state = States.ATTACK
-	_boom()
-	# if is_player_in_range_attack01:
-	# elif is_player_in_range_lp:
-	# 	state = States.ATTACK
-	# 	match randi_range(0, 3):
-	# 		0:
-	# 			_df1_combo()
-	# 		1:
-	# 			_df1_combo()
-	# 		2:
-	# 			_throw_ground()
-	# 		3:
-	# 			_throw_float()
+	if is_player_in_range_lp:
+		match randi_range(0, 1):
+			0:
+				_throw_ground()
+			1:
+				_throw_float()
+	elif is_player_in_range_attack01:
+		_boom()

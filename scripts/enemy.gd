@@ -82,16 +82,7 @@ func _physics_process(delta: float) -> void:
 			collision_mask = 0b00000000000000001100
 
 	# Move and Facing
-	if state in [States.IDLE]:
-		is_wall_bounced = false
-		is_wall_splat =  false
-		if not is_player_in_range_lp and not is_enemy_in_range_lp:
-			_move(delta)
-		else:
-			# lerp when finding player
-			_lerp_velocity_x()
-			animation_player.play("idle")
-			# block_count = 0
+	_move_range(delta)
 
 	_facing()
 
@@ -160,7 +151,7 @@ func _physics_process(delta: float) -> void:
 #############################################################
 ## Private Function
 #############################################################
-func _move( delta) -> void:
+func _move(delta) -> void:
 	if not can_move:
 		return
 	if animation_player.has_animation("walk"):
@@ -170,6 +161,19 @@ func _move( delta) -> void:
 		var desired_velocity =  direction * speed
 		var steering = (desired_velocity - velocity) * delta * 2.5
 		velocity += steering
+
+
+func _move_range(delta) -> void:
+	if state in [States.IDLE]:
+		is_wall_bounced = false
+		is_wall_splat =  false
+		if not is_player_in_range_lp and not is_enemy_in_range_lp:
+			_move(delta)
+		else:
+			# lerp when finding player
+			_lerp_velocity_x()
+			animation_player.play("idle")
+			# block_count = 0
 
 
 func _follow_pos() -> void:
