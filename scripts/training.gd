@@ -13,8 +13,8 @@ extends Node2D
 @onready var enemy1: Object = preload("res://nodes/enemy_01.tscn")
 @onready var enemy2: Object = preload("res://nodes/enemy_02.tscn")
 @onready var enemy3: Object = preload("res://nodes/enemy_03.tscn")
-@onready var enemy4: Object = preload("res://nodes/enemy_04.tscn")
 @onready var enemy6: Object = preload("res://nodes/enemy_06.tscn")
+const enemy4 = preload("uid://bhw2h1n6yqhk8")
 
 @onready var death_zone: Node2D = $DeathZone
 @onready var wall_player: AnimationPlayer = $WallPlayer

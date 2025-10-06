@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://ckudchaksw6pd" path="res://scripts/enemy_spawner_pre_stage01.gd" id="24_34xu6"]
 [ext_resource type="Script" uid="uid://duxhld58ww51q" path="res://scripts/enemy_spawn_helper.gd" id="25_e4twh"]
 [ext_resource type="PackedScene" uid="uid://c4m5deiee8q8w" path="res://nodes/boss01.tscn" id="26_m7cni"]
-[ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_04.tscn" id="27_hkneb"]
+[ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_heavy_01.tscn" id="27_hkneb"]
 [ext_resource type="AudioStream" uid="uid://ipghqhrcfviu" path="res://media/ost/beat_RCG_Detention_louder.wav" id="28_gcmmw"]
 [ext_resource type="AudioStream" uid="uid://cns33kc20b478" path="res://media/ost/RCG_Detention.mp3" id="29_10fts"]
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="30_qiine"]

@@ -427,9 +427,11 @@ func hitted(
 			self._add_block_count(1)
 		if self.name in ["MangoBoss", "EnemyZoner"] :
 			play_blockstunned()
-		else:
-			animation_player.stop()
-			animation_player.play("blockstunned")
+		elif self.is_in_group("tank"):
+			play_metal_clank_random_pitch()
+
+		animation_player.play("blockstunned")
+
 		# hp_bar.hp_down(_damage/2)
 		block_effect_helper(
 			hitstun_amount,
@@ -558,7 +560,6 @@ func hitted(
 				_push_direct(Vector2(900, -100))
 				_attacker.sprite_2d.flip_h = false
 		if is_touching_wall_left or is_touching_wall_right:
-			print("==NANI==")
 			_attacker._push_x(-400)
 	## make wall throw whiff
 	elif _type == Enums.Attack.P_WALL_THROW:
@@ -566,7 +567,10 @@ func hitted(
 	## Spawn blockspark on IFRAME
 	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD]:
 		ObjectPooling.spawn_iframe_spark(position + Vector2(0, randi_range(-30, -80)))
-		play_iframe_hit_sfx()
+		if self.is_in_group("tank"):
+			play_metal_clank_random_pitch()
+		else:
+			play_iframe_hit_sfx()
 	elif _type in [Enums.Attack.THROW_GROUND, Enums.Attack.THROW_FLOAT]:
 		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
 		set_thrower(_attacker)
@@ -741,13 +745,21 @@ func play_iframe_hit_sfx() -> void:
 # 	collision_layer = 0b00000000000000010000
 # 	collision_mask = 0b00000000000000001100
 
+
 func	set_collision_no_hit_all():
 	pass
+
 
 func _add_block_count(amount: int):
 	pass
 
+
 func set_thrower(the_guy: CharacterBody2D) -> void:
+	pass
+
+
+func play_metal_clank_random_pitch():
+	print("play_metal_clank_random_pitch ERROR: base_character.gd")
 	pass
 
 

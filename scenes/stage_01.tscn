@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="8_nasqd"]
 [ext_resource type="Script" uid="uid://cat1ebbeoo01d" path="res://scripts/enemy_spawner_stage01.gd" id="8_yxbv0"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="9_dimc6"]
-[ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_04.tscn" id="10_bc8xj"]
+[ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_heavy_01.tscn" id="10_bc8xj"]
 [ext_resource type="PackedScene" uid="uid://bfomnvauggr4o" path="res://nodes/junction_box.tscn" id="11_l457t"]
 [ext_resource type="PackedScene" uid="uid://d0ufo617puti8" path="res://nodes/enemy_06.tscn" id="12_gsglw"]
 [ext_resource type="PackedScene" uid="uid://dxf7beg6mlrhw" path="res://nodes/falling_flower_pot.tscn" id="15_bc8xj"]

@@ -13,9 +13,11 @@ signal hp_out
 var cant_heal = false
 var last_took_damage := 0
 var tween
+var immediate_value = 0
 
 
 func _ready() -> void:
+	immediate_value = value
 	pass
 	# tween = get_tree().create_tween()
 # 	back_bar_tween = back_bar.create_tween()
@@ -26,6 +28,7 @@ func _ready() -> void:
 #############################################################
 func hp_down(_amount: int) -> void:
 	# value -= _amount
+	immediate_value -= _amount
 	if get_tree():
 		back_bar.texture_progress = HP_BAR_RED
 		if tween:
@@ -46,6 +49,7 @@ func hp_up(_amount: int) -> void:
 	if cant_heal:
 		return
 	# value += _amount
+	immediate_value += _amount
 	if get_tree():
 		back_bar.texture_progress = HP_BAR_GREEN
 		if tween:
@@ -63,6 +67,7 @@ func hp_up_late_parry() -> void:
 			tween.kill()
 		tween = create_tween()
 		var heal_amount = max(last_took_damage/2, 1)
+		immediate_value += heal_amount
 		tween.tween_property(back_bar, "value", value + heal_amount, 0.1)
 		tween.tween_property(self, "value", value + heal_amount, 0.5)
 	emit_signal("hp_up_sig")
@@ -70,7 +75,7 @@ func hp_up_late_parry() -> void:
 
 
 func get_hp() -> int:
-	return int(value)
+	return immediate_value
 
 
 func set_hp(_amount: int) -> void:
@@ -78,3 +83,4 @@ func set_hp(_amount: int) -> void:
 	value = max_value
 	back_bar.max_value = _amount
 	back_bar.value = max_value
+	immediate_value = _amount
