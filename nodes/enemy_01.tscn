@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://b2vaqeiw3q18o"]
+[gd_scene load_steps=47 format=3 uid="uid://b2vaqeiw3q18o"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_mphwr"]
 [ext_resource type="Script" uid="uid://hyjgv4558hu" path="res://scripts/enemy_01.gd" id="2_uqe8x"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="9_uqe8x"]
 [ext_resource type="Texture2D" uid="uid://b22ob737caxc1" path="res://media/sprites/char2/enemy01_down.png" id="10_jfali"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="11_6xq7h"]
+[ext_resource type="Texture2D" uid="uid://cqjhc3ef44edb" path="res://media/sprites/char2/enemy_01_hitted.png" id="12_bo3hr"]
 [ext_resource type="Texture2D" uid="uid://b6syt0rhv2dwx" path="res://media/sprites/char2/SecondChar_hitted.png" id="12_ydaat"]
 [ext_resource type="Texture2D" uid="uid://c3rxvaupgws3u" path="res://media/sprites/char2/enemy01_lp_start_anim.png" id="13_yccbm"]
 [ext_resource type="Texture2D" uid="uid://dxod1gcjs71jv" path="res://media/sprites/char2/SecondChar_fireball.png" id="14_6bbgc"]
@@ -682,7 +683,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("12_ydaat")]
+"values": [ExtResource("12_bo3hr")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -743,7 +744,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [2]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -782,6 +783,18 @@ tracks/8/keys = {
 "args": [],
 "method": &"set_collision_no_hit_enemy"
 }]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sprite2D:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
 }
 
 [sub_resource type="Animation" id="Animation_2ad64"]
