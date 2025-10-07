@@ -6,13 +6,14 @@ extends Node2D
 # @onready var transition_camera: Camera2D = $Cameras/TransitionCamera
 @onready var player: CharacterBody2D = $Player
 @onready var area_1_lock_trigger: Area2D = $Area1LockTrigger
-@onready var area_3_lock_trigger: Area2D = $Area3LockTrigger
+@onready var area_3_lock_trigger: Area2D = $Area3/Area3LockTrigger
 const MANGO_BOSS = preload("res://nodes/mango_boss.tscn")
 @onready var mango_boss_sit_banana: Sprite2D = $MangoBossSitBanana
 @onready var enemy_spawner_new: Node2D = $EnemySpawnerNew
-@onready var area_3_spawner: Node2D = $Area3Spawner
+@onready var area_3_spawner: Node2D = $Area3/Area3Spawner
 @onready var event_player: AnimationPlayer = $EventPlayer
-@onready var high_way: Node2D = $HighWay
+@onready var high_way: Node2D = $Area3/HighWay
+@onready var area_4_lock_trigger: Area2D = $Area4LockTrigger
 
 
 func _ready() -> void:
@@ -45,6 +46,10 @@ func _ready() -> void:
 
 	# if enemy_spawner_new.phase >= 5:
 	# 	_shoot_up_house()
+
+
+func _on_junction_box_explode() -> void:
+	high_way.play_explosion()
 
 
 func _on_area_1_lock_trigger_body_entered(_body: Node2D) -> void:
@@ -91,5 +96,8 @@ func _on_area_3_lock_trigger_body_entered(_body: Node2D) -> void:
 	area_3_lock_trigger.queue_free()
 
 
-func _on_junction_box_explode() -> void:
-	high_way.play_explosion()
+func _on_area_4_lock_trigger_body_entered(_body: Node2D) -> void:
+	area_lock_player.play("4_in")
+	# CameraManager.set_screen_lock(3824, 6380, -10000000, 1000)
+	area_3_spawner.is_active = true
+	area_4_lock_trigger.queue_free()

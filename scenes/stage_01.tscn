@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=50 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -17,7 +17,9 @@
 [ext_resource type="Script" uid="uid://cat1ebbeoo01d" path="res://scripts/enemy_spawner_stage01.gd" id="8_yxbv0"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="9_dimc6"]
 [ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_heavy_01.tscn" id="10_bc8xj"]
+[ext_resource type="Texture2D" uid="uid://d2qbogpbwtdr" path="res://media/sprites/stage01/pit_hole.png" id="11_ei3og"]
 [ext_resource type="PackedScene" uid="uid://bfomnvauggr4o" path="res://nodes/junction_box.tscn" id="11_l457t"]
+[ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="11_tby30"]
 [ext_resource type="PackedScene" uid="uid://d0ufo617puti8" path="res://nodes/enemy_06.tscn" id="12_gsglw"]
 [ext_resource type="PackedScene" uid="uid://dxf7beg6mlrhw" path="res://nodes/falling_flower_pot.tscn" id="15_bc8xj"]
 [ext_resource type="PackedScene" uid="uid://dhqwhd8echl8w" path="res://nodes/light_pole.tscn" id="17_c2i1s"]
@@ -69,6 +71,9 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6ddm"]
 size = Vector2(1920, 326)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7t3f"]
+size = Vector2(128, 512)
 
 [sub_resource type="Animation" id="Animation_sgik7"]
 length = 0.001
@@ -313,24 +318,50 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(6112, -2240)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8600, -2248)]
+}
+
+[sub_resource type="Animation" id="Animation_tby30"]
+resource_name = "4_in"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../4:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8600, -328)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mqdkf"]
 _data = {
 &"1_in": SubResource("Animation_pxpxr"),
 &"2_in": SubResource("Animation_wntu7"),
 &"3_in": SubResource("Animation_1fbf0"),
+&"4_in": SubResource("Animation_tby30"),
 &"RESET": SubResource("Animation_f33yp")
 }
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7t3f"]
-size = Vector2(128, 512)
 
 [sub_resource type="Animation" id="Animation_ei3og"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HighWay:position")
+tracks/0/path = NodePath("Area3/HighWay:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -342,7 +373,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HighWay:rotation")
+tracks/1/path = NodePath("Area3/HighWay:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -357,7 +388,7 @@ resource_name = "high_way_explosion"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HighWay:position")
+tracks/0/path = NodePath("Area3/HighWay:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -369,7 +400,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HighWay:rotation")
+tracks/1/path = NodePath("Area3/HighWay:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -381,7 +412,7 @@ tracks/1/keys = {
 tracks/2/type = "audio"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HighWay/AudioStreamPlayer2D")
+tracks/2/path = NodePath("Area3/HighWay/AudioStreamPlayer2D")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -409,7 +440,7 @@ script = ExtResource("1_4caca")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(4376, 552)
+position = Vector2(5016, 544)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -482,6 +513,7 @@ shape = SubResource("RectangleShape2D_i6ddm")
 [node name="Floor6" type="Sprite2D" parent="Map" groups=["ground"]]
 position = Vector2(6712, 640)
 texture = ExtResource("2_fnmkw")
+metadata/_edit_group_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor6" groups=["ground"]]
 position = Vector2(35, 304)
@@ -491,6 +523,40 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor6/StaticBody2D"]
 position = Vector2(-35, 8)
 shape = SubResource("RectangleShape2D_i6ddm")
+
+[node name="Floor7" type="Sprite2D" parent="Map" groups=["ground"]]
+position = Vector2(8056, 640)
+scale = Vector2(0.4, 1)
+texture = ExtResource("2_fnmkw")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor7" groups=["ground"]]
+position = Vector2(35, 304)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor7/StaticBody2D"]
+position = Vector2(-35, 8)
+shape = SubResource("RectangleShape2D_i6ddm")
+
+[node name="Floor8" type="Sprite2D" parent="Map" groups=["ground"]]
+position = Vector2(9192, 640)
+scale = Vector2(0.4, 1)
+texture = ExtResource("2_fnmkw")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor8" groups=["ground"]]
+position = Vector2(35, 304)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor8/StaticBody2D"]
+position = Vector2(-35, 8)
+shape = SubResource("RectangleShape2D_i6ddm")
+
+[node name="DeathZone" parent="Map/Floor8" instance=ExtResource("11_tby30")]
+position = Vector2(-1360, 792)
+scale = Vector2(27.99995, 2.4)
 
 [node name="Floor5" type="Sprite2D" parent="Map" groups=["ground"]]
 position = Vector2(-2880, 640)
@@ -518,19 +584,195 @@ collision_mask = 0
 position = Vector2(-35, 8)
 shape = SubResource("RectangleShape2D_i6ddm")
 
+[node name="PitHole" type="Sprite2D" parent="Map"]
+position = Vector2(8632, 432)
+texture = ExtResource("11_ei3og")
+
+[node name="Area3" type="Node" parent="."]
+
+[node name="JunctionBox" parent="Area3" instance=ExtResource("11_l457t")]
+position = Vector2(5624, 600)
+amount_to_explode = 2
+
+[node name="HighWay" parent="Area3" instance=ExtResource("4_lrdte")]
+position = Vector2(6538, -482)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="Area3/HighWay"]
+
+[node name="Area3Spawner" type="Node2D" parent="Area3" node_paths=PackedStringArray("target", "enemy_to_spawn")]
+script = ExtResource("8_yxbv0")
+target = NodePath("../../Player")
+enemy_to_spawn = [NodePath("../Area3EnemyList/Phase1"), NodePath("../Area3EnemyList/Phase2"), NodePath("../Area3EnemyList/Phase3"), NodePath("../Area3EnemyList/Phase4")]
+
+[node name="enemyCount" type="Node" parent="Area3/Area3Spawner"]
+
+[node name="Area3EnemyList" type="Node" parent="Area3"]
+
+[node name="Phase1" type="Node" parent="Area3/Area3EnemyList"]
+
+[node name="e1_1" type="Node" parent="Area3/Area3EnemyList/Phase1" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area3SpawnPos/pos1")
+hp = 30
+object = ExtResource("8_nasqd")
+
+[node name="e2_1" type="Node" parent="Area3/Area3EnemyList/Phase1" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area3SpawnPos/pos2")
+hp = 30
+object = ExtResource("9_dimc6")
+
+[node name="Phase2" type="Node" parent="Area3/Area3EnemyList"]
+
+[node name="e3_1" type="Node" parent="Area3/Area3EnemyList/Phase2" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area3SpawnPos/pos1")
+hp = 20
+object = ExtResource("12_gsglw")
+
+[node name="e3_2" type="Node" parent="Area3/Area3EnemyList/Phase2" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area3SpawnPos/pos2")
+hp = 20
+object = ExtResource("12_gsglw")
+
+[node name="Phase3" type="Node" parent="Area3/Area3EnemyList"]
+
+[node name="boss02" type="Node" parent="Area3/Area3EnemyList/Phase3" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area3SpawnPos/pos1")
+hp = 50
+object = ExtResource("7_nh3b5")
+
+[node name="boss03" type="Node" parent="Area3/Area3EnemyList/Phase3" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area3SpawnPos/pos3")
+hp = 50
+object = ExtResource("7_nh3b5")
+
+[node name="Phase4" type="Node" parent="Area3/Area3EnemyList"]
+
+[node name="Sniper" type="Node" parent="Area3/Area3EnemyList/Phase4" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area3SpawnPos/pos4")
+hp = 1
+object = ExtResource("28_rkgfh")
+
+[node name="Phase5" type="Node" parent="Area3/Area3EnemyList"]
+
+[node name="e2" type="Node" parent="Area3/Area3EnemyList/Phase5" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos6")
+hp = 30
+object = ExtResource("8_nasqd")
+
+[node name="e3" type="Node" parent="Area3/Area3EnemyList/Phase5" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos4")
+hp = 30
+object = ExtResource("8_nasqd")
+
+[node name="e4" type="Node" parent="Area3/Area3EnemyList/Phase5" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos5")
+hp = 30
+object = ExtResource("9_dimc6")
+
+[node name="e5" type="Node" parent="Area3/Area3EnemyList/Phase5" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos6")
+hp = 30
+object = ExtResource("9_dimc6")
+
+[node name="Phase6" type="Node" parent="Area3/Area3EnemyList"]
+
+[node name="e2" type="Node" parent="Area3/Area3EnemyList/Phase6" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos4")
+hp = 10
+object = ExtResource("8_nasqd")
+
+[node name="e4" type="Node" parent="Area3/Area3EnemyList/Phase6" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos5")
+hp = 10
+object = ExtResource("9_dimc6")
+
+[node name="Phase7" type="Node" parent="Area3/Area3EnemyList"]
+
+[node name="e4" type="Node" parent="Area3/Area3EnemyList/Phase7" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos5")
+hp = 200
+object = ExtResource("10_bc8xj")
+
+[node name="Phase8" type="Node" parent="Area3/Area3EnemyList"]
+
+[node name="e4" type="Node" parent="Area3/Area3EnemyList/Phase8" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos1")
+hp = 200
+object = ExtResource("10_bc8xj")
+
+[node name="e3" type="Node" parent="Area3/Area3EnemyList/Phase8" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos5")
+hp = 10
+object = ExtResource("8_nasqd")
+
+[node name="e5" type="Node" parent="Area3/Area3EnemyList/Phase8" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos6")
+hp = 10
+object = ExtResource("8_nasqd")
+
+[node name="Phase9" type="Node" parent="Area3/Area3EnemyList"]
+
+[node name="boss01" type="Node" parent="Area3/Area3EnemyList/Phase9" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos2")
+hp = 50
+object = ExtResource("7_nh3b5")
+
+[node name="boss02" type="Node" parent="Area3/Area3EnemyList" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../SpawnPos/pos3")
+hp = 50
+object = ExtResource("7_nh3b5")
+
+[node name="e2" type="Node" parent="Area3/Area3EnemyList" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../SpawnPos/pos1")
+hp = 50
+object = ExtResource("8_nasqd")
+
+[node name="Area3SpawnPos" type="Node" parent="Area3"]
+
+[node name="pos1" type="Marker2D" parent="Area3/Area3SpawnPos"]
+position = Vector2(4016, -344)
+
+[node name="pos2" type="Marker2D" parent="Area3/Area3SpawnPos"]
+position = Vector2(4856, -344)
+
+[node name="pos3" type="Marker2D" parent="Area3/Area3SpawnPos"]
+position = Vector2(4456, -608)
+
+[node name="pos4" type="Marker2D" parent="Area3/Area3SpawnPos"]
+position = Vector2(4704, 80)
+
+[node name="Area3LockTrigger" type="Area2D" parent="Area3"]
+position = Vector2(5248, 520)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area3/Area3LockTrigger"]
+shape = SubResource("RectangleShape2D_v7t3f")
+
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
 target = NodePath("../Player")
 enemy_to_spawn = [NodePath("../EnemySpawnHelper/Phase1"), NodePath("../EnemySpawnHelper/Phase2")]
 
 [node name="enemyCount" type="Node" parent="EnemySpawnerNew"]
-
-[node name="Area3Spawner" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
-script = ExtResource("8_yxbv0")
-target = NodePath("../Player")
-enemy_to_spawn = [NodePath("../Area3EnemyList/Phase1"), NodePath("../Area3EnemyList/Phase2"), NodePath("../Area3EnemyList/Phase3"), NodePath("../Area3EnemyList/Phase4")]
-
-[node name="enemyCount" type="Node" parent="Area3Spawner"]
 
 [node name="EnemySpawnHelper" type="Node" parent="."]
 
@@ -672,146 +914,6 @@ position = NodePath("../../SpawnPos/pos1")
 hp = 50
 object = ExtResource("8_nasqd")
 
-[node name="Area3EnemyList" type="Node" parent="."]
-
-[node name="Phase1" type="Node" parent="Area3EnemyList"]
-
-[node name="e1_1" type="Node" parent="Area3EnemyList/Phase1" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../Area3SpawnPos/pos1")
-hp = 30
-object = ExtResource("8_nasqd")
-
-[node name="e2_1" type="Node" parent="Area3EnemyList/Phase1" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../Area3SpawnPos/pos2")
-hp = 30
-object = ExtResource("9_dimc6")
-
-[node name="Phase2" type="Node" parent="Area3EnemyList"]
-
-[node name="e3_1" type="Node" parent="Area3EnemyList/Phase2" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../Area3SpawnPos/pos1")
-hp = 50
-object = ExtResource("12_gsglw")
-
-[node name="e3_2" type="Node" parent="Area3EnemyList/Phase2" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../Area3SpawnPos/pos2")
-hp = 50
-object = ExtResource("12_gsglw")
-
-[node name="Phase3" type="Node" parent="Area3EnemyList"]
-
-[node name="boss02" type="Node" parent="Area3EnemyList/Phase3" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../Area3SpawnPos/pos1")
-hp = 50
-object = ExtResource("7_nh3b5")
-
-[node name="boss03" type="Node" parent="Area3EnemyList/Phase3" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../Area3SpawnPos/pos3")
-hp = 50
-object = ExtResource("7_nh3b5")
-
-[node name="Phase4" type="Node" parent="Area3EnemyList"]
-
-[node name="Sniper" type="Node" parent="Area3EnemyList/Phase4" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../Area3SpawnPos/pos4")
-hp = 1
-object = ExtResource("28_rkgfh")
-
-[node name="Phase5" type="Node" parent="Area3EnemyList"]
-
-[node name="e2" type="Node" parent="Area3EnemyList/Phase5" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos6")
-hp = 30
-object = ExtResource("8_nasqd")
-
-[node name="e3" type="Node" parent="Area3EnemyList/Phase5" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos4")
-hp = 30
-object = ExtResource("8_nasqd")
-
-[node name="e4" type="Node" parent="Area3EnemyList/Phase5" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos5")
-hp = 30
-object = ExtResource("9_dimc6")
-
-[node name="e5" type="Node" parent="Area3EnemyList/Phase5" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos6")
-hp = 30
-object = ExtResource("9_dimc6")
-
-[node name="Phase6" type="Node" parent="Area3EnemyList"]
-
-[node name="e2" type="Node" parent="Area3EnemyList/Phase6" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos4")
-hp = 10
-object = ExtResource("8_nasqd")
-
-[node name="e4" type="Node" parent="Area3EnemyList/Phase6" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos5")
-hp = 10
-object = ExtResource("9_dimc6")
-
-[node name="Phase7" type="Node" parent="Area3EnemyList"]
-
-[node name="e4" type="Node" parent="Area3EnemyList/Phase7" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos5")
-hp = 200
-object = ExtResource("10_bc8xj")
-
-[node name="Phase8" type="Node" parent="Area3EnemyList"]
-
-[node name="e4" type="Node" parent="Area3EnemyList/Phase8" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos1")
-hp = 200
-object = ExtResource("10_bc8xj")
-
-[node name="e3" type="Node" parent="Area3EnemyList/Phase8" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos5")
-hp = 10
-object = ExtResource("8_nasqd")
-
-[node name="e5" type="Node" parent="Area3EnemyList/Phase8" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos6")
-hp = 10
-object = ExtResource("8_nasqd")
-
-[node name="Phase9" type="Node" parent="Area3EnemyList"]
-
-[node name="boss01" type="Node" parent="Area3EnemyList/Phase9" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../../SpawnPos/pos2")
-hp = 50
-object = ExtResource("7_nh3b5")
-
-[node name="boss02" type="Node" parent="Area3EnemyList" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../SpawnPos/pos3")
-hp = 50
-object = ExtResource("7_nh3b5")
-
-[node name="e2" type="Node" parent="Area3EnemyList" node_paths=PackedStringArray("position")]
-script = ExtResource("6_l457t")
-position = NodePath("../../SpawnPos/pos1")
-hp = 50
-object = ExtResource("8_nasqd")
-
 [node name="SpawnPos" type="Node" parent="."]
 
 [node name="pos1" type="Marker2D" parent="SpawnPos"]
@@ -832,26 +934,8 @@ position = Vector2(2648, 727)
 [node name="pos6" type="Marker2D" parent="SpawnPos"]
 position = Vector2(3520, 368)
 
-[node name="Area3SpawnPos" type="Node" parent="."]
-
-[node name="pos1" type="Marker2D" parent="Area3SpawnPos"]
-position = Vector2(4016, -344)
-
-[node name="pos2" type="Marker2D" parent="Area3SpawnPos"]
-position = Vector2(5184, -344)
-
-[node name="pos3" type="Marker2D" parent="Area3SpawnPos"]
-position = Vector2(6280, -336)
-
-[node name="pos4" type="Marker2D" parent="Area3SpawnPos"]
-position = Vector2(4702, 80)
-
 [node name="FallingFlowerPot" parent="." instance=ExtResource("15_bc8xj")]
 position = Vector2(-656, -1520)
-
-[node name="JunctionBox" parent="." instance=ExtResource("11_l457t")]
-position = Vector2(5624, 600)
-amount_to_explode = 2
 
 [node name="LightPole" parent="." instance=ExtResource("17_c2i1s")]
 position = Vector2(781, 320)
@@ -883,11 +967,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_mqdkf")
 }
 
-[node name="HighWay" parent="." instance=ExtResource("4_lrdte")]
-position = Vector2(6538, -482)
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="HighWay"]
-
 [node name="Area1LockTrigger" type="Area2D" parent="."]
 position = Vector2(-136, 520)
 collision_layer = 0
@@ -895,11 +974,11 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area1LockTrigger"]
 shape = SubResource("RectangleShape2D_v7t3f")
 
-[node name="Area3LockTrigger" type="Area2D" parent="."]
-position = Vector2(5248, 520)
+[node name="Area4LockTrigger" type="Area2D" parent="."]
+position = Vector2(7632, 520)
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area3LockTrigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4LockTrigger"]
 shape = SubResource("RectangleShape2D_v7t3f")
 
 [node name="AreaLock" type="Node2D" parent="."]
@@ -931,6 +1010,15 @@ position = Vector2(-2544, 0)
 [node name="WallR" parent="AreaLock/3" instance=ExtResource("21_v7t3f")]
 position = Vector2(456, 0)
 
+[node name="4" type="Node2D" parent="AreaLock"]
+position = Vector2(8600, -2248)
+
+[node name="WallL" parent="AreaLock/4" instance=ExtResource("21_v7t3f")]
+position = Vector2(-2376, 0)
+
+[node name="WallR" parent="AreaLock/4" instance=ExtResource("21_v7t3f")]
+position = Vector2(480, 0)
+
 [node name="MarketCamPos" type="Camera2D" parent="."]
 visible = false
 position = Vector2(2872, 472)
@@ -941,8 +1029,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_ei3og")
 }
 
-[connection signal="explode" from="JunctionBox" to="." method="_on_junction_box_explode"]
+[connection signal="explode" from="Area3/JunctionBox" to="." method="_on_junction_box_explode"]
+[connection signal="body_entered" from="Area3/Area3LockTrigger" to="." method="_on_area_3_lock_trigger_body_entered"]
 [connection signal="banana_fly" from="MarketGreen" to="." method="_on_market_green_banana_fly"]
 [connection signal="body_entered" from="Area1LockTrigger" to="." method="_on_area_1_lock_trigger_body_entered"]
-[connection signal="body_entered" from="Area3LockTrigger" to="." method="_on_area_3_lock_trigger_body_entered"]
+[connection signal="body_entered" from="Area4LockTrigger" to="." method="_on_area_4_lock_trigger_body_entered"]
 [connection signal="animation_finished" from="EventPlayer" to="." method="_on_event_player_animation_finished"]
