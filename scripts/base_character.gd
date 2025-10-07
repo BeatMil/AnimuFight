@@ -418,10 +418,9 @@ func hitted(
 		if randi_range(1, 10) <= block_rate:
 			state = States.BLOCK
 
-	## BLOCK & ARMOR
-	if state in [States.BLOCK, States.BLOCK_STUNNED, States.ARMOR, States.PARRY_SUCCESS] and \
+	## BLOCK
+	if state in [States.BLOCK, States.BLOCK_STUNNED, States.PARRY_SUCCESS] and \
 		_type in [Enums.Attack.NORMAL, Enums.Attack.P_PARRY, Enums.Attack.PROJECTILE]:
-		# if state == States.ARMOR:
 		# 	hp_bar.hp_down(_damage)
 		if has_method("_add_block_count"):
 			self._add_block_count(1)
@@ -564,8 +563,10 @@ func hitted(
 	## make wall throw whiff
 	elif _type == Enums.Attack.P_WALL_THROW:
 		pass
+
+	## ARMOR is for going through player while attacking such as boss01 burn_knuckle
 	## Spawn blockspark on IFRAME
-	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD]:
+	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD, States.ARMOR]:
 		ObjectPooling.spawn_iframe_spark(position + Vector2(0, randi_range(-30, -80)))
 		if self.is_in_group("tank"):
 			play_metal_clank_random_pitch()

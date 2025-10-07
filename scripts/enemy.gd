@@ -71,15 +71,13 @@ func _physics_process(delta: float) -> void:
 
 
 	# collision_layer
-	if state in [States.IDLE]:
+	if state in [States.IDLE, States.IFRAME]:
 		if is_on_floor():
 			# touch everything
-			collision_layer = 0b00000000000000000010
-			collision_mask = 0b00000000000000001111
+			set_collision_normal()
 		else:
 			# no touch both player & enemy
-			collision_layer = 0b00000000000000010000
-			collision_mask = 0b00000000000000001100
+			set_collision_no_hit_all()
 
 	# Move and Facing
 	_move_range(delta)
