@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=52 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://n7xbpwiq1n77" path="res://media/sprites/mango_boss/mango_boss_sit.png" id="19_yxbv0"]
 [ext_resource type="AudioStream" uid="uid://cxkb2rpnoq1wv" path="res://media/sfxs/phone-typing-333292.mp3" id="20_yxbv0"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="21_v7t3f"]
+[ext_resource type="PackedScene" uid="uid://cat0ep1t8mpbn" path="res://nodes/traffic_cone.tscn" id="23_0lkdc"]
 [ext_resource type="Texture2D" uid="uid://c6wyrrcq2dweo" path="res://media/sprites/mango_boss/mango_boss_intro1.png" id="23_f33yp"]
 [ext_resource type="AudioStream" uid="uid://de8ttnjmqlfy4" path="res://media/sfxs/Alarm_Fever.wav" id="24_wntu7"]
 [ext_resource type="AudioStream" uid="uid://d1rmtijm23hh0" path="res://media/sfxs/anime-cat-girl-6731.mp3" id="28_1fbf0"]
@@ -959,6 +960,12 @@ position = Vector2(8, -48)
 shape = SubResource("RectangleShape2D_tby30")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area4/PushPlayerBackUpArea2d"]
+
+[node name="TrafficCone" parent="Area4" instance=ExtResource("23_0lkdc")]
+position = Vector2(8379, 715)
+
+[node name="TrafficCone2" parent="Area4" instance=ExtResource("23_0lkdc")]
+position = Vector2(8872, 712)
 
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
