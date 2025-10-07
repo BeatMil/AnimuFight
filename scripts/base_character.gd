@@ -47,6 +47,7 @@ enum States {
 	DOWN_HP,
 	AIR_LP1,
 	WAVEDASH,
+	ARMOR2
 	}
 
 
@@ -566,7 +567,7 @@ func hitted(
 
 	## ARMOR is for going through player while attacking such as boss01 burn_knuckle
 	## Spawn blockspark on IFRAME
-	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD, States.ARMOR]:
+	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD, States.ARMOR, States.ARMOR2]:
 		ObjectPooling.spawn_iframe_spark(position + Vector2(0, randi_range(-30, -80)))
 		if self.is_in_group("tank"):
 			play_metal_clank_random_pitch()

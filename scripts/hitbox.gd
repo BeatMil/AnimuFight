@@ -142,6 +142,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.States.PARRY,
 		body.States.ARMOR,
 		body.States.IFRAME,
+		body.States.ARMOR2,
 		body.States.DODGE,
 		body.States.DODGE_SUCCESS,
 		] and type not in [
