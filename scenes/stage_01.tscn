@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=51 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -74,6 +74,9 @@ size = Vector2(1920, 326)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7t3f"]
 size = Vector2(128, 512)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tby30"]
+size = Vector2(304, 128)
 
 [sub_resource type="Animation" id="Animation_sgik7"]
 length = 0.001
@@ -440,7 +443,7 @@ script = ExtResource("1_4caca")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(5016, 544)
+position = Vector2(7720, 568)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -524,40 +527,6 @@ collision_mask = 0
 position = Vector2(-35, 8)
 shape = SubResource("RectangleShape2D_i6ddm")
 
-[node name="Floor7" type="Sprite2D" parent="Map" groups=["ground"]]
-position = Vector2(8056, 640)
-scale = Vector2(0.4, 1)
-texture = ExtResource("2_fnmkw")
-metadata/_edit_group_ = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor7" groups=["ground"]]
-position = Vector2(35, 304)
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor7/StaticBody2D"]
-position = Vector2(-35, 8)
-shape = SubResource("RectangleShape2D_i6ddm")
-
-[node name="Floor8" type="Sprite2D" parent="Map" groups=["ground"]]
-position = Vector2(9192, 640)
-scale = Vector2(0.4, 1)
-texture = ExtResource("2_fnmkw")
-metadata/_edit_group_ = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Map/Floor8" groups=["ground"]]
-position = Vector2(35, 304)
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor8/StaticBody2D"]
-position = Vector2(-35, 8)
-shape = SubResource("RectangleShape2D_i6ddm")
-
-[node name="DeathZone" parent="Map/Floor8" instance=ExtResource("11_tby30")]
-position = Vector2(-1360, 792)
-scale = Vector2(27.99995, 2.4)
-
 [node name="Floor5" type="Sprite2D" parent="Map" groups=["ground"]]
 position = Vector2(-2880, 640)
 texture = ExtResource("2_fnmkw")
@@ -583,10 +552,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor3/StaticBody2D"]
 position = Vector2(-35, 8)
 shape = SubResource("RectangleShape2D_i6ddm")
-
-[node name="PitHole" type="Sprite2D" parent="Map"]
-position = Vector2(8632, 432)
-texture = ExtResource("11_ei3og")
 
 [node name="Area3" type="Node" parent="."]
 
@@ -766,6 +731,234 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area3/Area3LockTrigger"]
 shape = SubResource("RectangleShape2D_v7t3f")
+
+[node name="Area4" type="Node" parent="."]
+
+[node name="Floor7" type="Sprite2D" parent="Area4" groups=["ground"]]
+position = Vector2(8056, 640)
+scale = Vector2(0.4, 1)
+texture = ExtResource("2_fnmkw")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Area4/Floor7" groups=["ground"]]
+position = Vector2(35, 304)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4/Floor7/StaticBody2D"]
+position = Vector2(-35, 8)
+shape = SubResource("RectangleShape2D_i6ddm")
+
+[node name="DeathZone" parent="Area4" instance=ExtResource("11_tby30")]
+position = Vector2(8592, 1472)
+scale = Vector2(11.199981, 2.4)
+
+[node name="Floor8" type="Sprite2D" parent="Area4" groups=["ground"]]
+position = Vector2(9192, 640)
+scale = Vector2(0.4, 1)
+texture = ExtResource("2_fnmkw")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Area4/Floor8" groups=["ground"]]
+position = Vector2(35, 304)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4/Floor8/StaticBody2D"]
+position = Vector2(-35, 8)
+shape = SubResource("RectangleShape2D_i6ddm")
+
+[node name="PitHole" type="Sprite2D" parent="Area4"]
+position = Vector2(8632, 432)
+texture = ExtResource("11_ei3og")
+
+[node name="Area4LockTrigger" type="Area2D" parent="Area4"]
+position = Vector2(7632, 520)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4/Area4LockTrigger"]
+shape = SubResource("RectangleShape2D_v7t3f")
+
+[node name="Area4Spawner" type="Node2D" parent="Area4" node_paths=PackedStringArray("target", "enemy_to_spawn")]
+script = ExtResource("8_yxbv0")
+target = NodePath("../../Player")
+enemy_to_spawn = [NodePath("../Area4EnemyList/Phase1"), NodePath("../Area4EnemyList/Phase2"), NodePath("../Area4EnemyList/Phase3")]
+
+[node name="enemyCount" type="Node" parent="Area4/Area4Spawner"]
+
+[node name="Area4EnemyList" type="Node" parent="Area4"]
+
+[node name="Phase1" type="Node" parent="Area4/Area4EnemyList"]
+
+[node name="e2_1" type="Node" parent="Area4/Area4EnemyList/Phase1" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area4SpawnPos/pos1")
+hp = 30
+object = ExtResource("9_dimc6")
+
+[node name="e2_2" type="Node" parent="Area4/Area4EnemyList/Phase1" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area4SpawnPos/pos2")
+hp = 30
+object = ExtResource("9_dimc6")
+
+[node name="Phase2" type="Node" parent="Area4/Area4EnemyList"]
+
+[node name="e1_1" type="Node" parent="Area4/Area4EnemyList/Phase2" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area4SpawnPos/pos1")
+hp = 30
+object = ExtResource("8_nasqd")
+
+[node name="e3_1" type="Node" parent="Area4/Area4EnemyList/Phase2" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area4SpawnPos/pos2")
+hp = 20
+object = ExtResource("12_gsglw")
+
+[node name="e3_2" type="Node" parent="Area4/Area4EnemyList/Phase2" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area4SpawnPos/pos2")
+hp = 20
+object = ExtResource("12_gsglw")
+
+[node name="Phase3" type="Node" parent="Area4/Area4EnemyList"]
+
+[node name="boss02" type="Node" parent="Area4/Area4EnemyList/Phase3" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area4SpawnPos/pos1")
+hp = 50
+object = ExtResource("7_nh3b5")
+
+[node name="Phase4" type="Node" parent="Area4/Area4EnemyList"]
+
+[node name="Sniper" type="Node" parent="Area4/Area4EnemyList/Phase4" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../Area3/Area3SpawnPos/pos4")
+hp = 1
+object = ExtResource("28_rkgfh")
+
+[node name="Phase5" type="Node" parent="Area4/Area4EnemyList"]
+
+[node name="e2" type="Node" parent="Area4/Area4EnemyList/Phase5" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos6")
+hp = 30
+object = ExtResource("8_nasqd")
+
+[node name="e3" type="Node" parent="Area4/Area4EnemyList/Phase5" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos4")
+hp = 30
+object = ExtResource("8_nasqd")
+
+[node name="e4" type="Node" parent="Area4/Area4EnemyList/Phase5" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos5")
+hp = 30
+object = ExtResource("9_dimc6")
+
+[node name="e5" type="Node" parent="Area4/Area4EnemyList/Phase5" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos6")
+hp = 30
+object = ExtResource("9_dimc6")
+
+[node name="Phase6" type="Node" parent="Area4/Area4EnemyList"]
+
+[node name="e2" type="Node" parent="Area4/Area4EnemyList/Phase6" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos4")
+hp = 10
+object = ExtResource("8_nasqd")
+
+[node name="e4" type="Node" parent="Area4/Area4EnemyList/Phase6" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos5")
+hp = 10
+object = ExtResource("9_dimc6")
+
+[node name="Phase7" type="Node" parent="Area4/Area4EnemyList"]
+
+[node name="e4" type="Node" parent="Area4/Area4EnemyList/Phase7" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos5")
+hp = 200
+object = ExtResource("10_bc8xj")
+
+[node name="Phase8" type="Node" parent="Area4/Area4EnemyList"]
+
+[node name="e4" type="Node" parent="Area4/Area4EnemyList/Phase8" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos1")
+hp = 200
+object = ExtResource("10_bc8xj")
+
+[node name="e3" type="Node" parent="Area4/Area4EnemyList/Phase8" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos5")
+hp = 10
+object = ExtResource("8_nasqd")
+
+[node name="e5" type="Node" parent="Area4/Area4EnemyList/Phase8" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos6")
+hp = 10
+object = ExtResource("8_nasqd")
+
+[node name="Phase9" type="Node" parent="Area4/Area4EnemyList"]
+
+[node name="boss01" type="Node" parent="Area4/Area4EnemyList/Phase9" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../../SpawnPos/pos2")
+hp = 50
+object = ExtResource("7_nh3b5")
+
+[node name="boss02" type="Node" parent="Area4/Area4EnemyList" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../SpawnPos/pos3")
+hp = 50
+object = ExtResource("7_nh3b5")
+
+[node name="e2" type="Node" parent="Area4/Area4EnemyList" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../SpawnPos/pos1")
+hp = 50
+object = ExtResource("8_nasqd")
+
+[node name="Area4SpawnPos" type="Node" parent="Area4"]
+
+[node name="pos1" type="Marker2D" parent="Area4/Area4SpawnPos"]
+position = Vector2(7576, -544)
+
+[node name="pos2" type="Marker2D" parent="Area4/Area4SpawnPos"]
+position = Vector2(7928, -552)
+
+[node name="Floor6" type="Sprite2D" parent="Area4" groups=["ground"]]
+position = Vector2(8632, 4312)
+scale = Vector2(3.639995, 4.759999)
+texture = ExtResource("2_fnmkw")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Area4/Floor6" groups=["ground"]]
+position = Vector2(35, 304)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4/Floor6/StaticBody2D"]
+position = Vector2(-35, 8)
+shape = SubResource("RectangleShape2D_i6ddm")
+
+[node name="PushPlayerBackUpArea2d" type="Area2D" parent="Area4"]
+position = Vector2(8608, 1096)
+collision_layer = 0
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4/PushPlayerBackUpArea2d"]
+position = Vector2(8, -48)
+shape = SubResource("RectangleShape2D_tby30")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area4/PushPlayerBackUpArea2d"]
 
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
@@ -974,13 +1167,6 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area1LockTrigger"]
 shape = SubResource("RectangleShape2D_v7t3f")
 
-[node name="Area4LockTrigger" type="Area2D" parent="."]
-position = Vector2(7632, 520)
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4LockTrigger"]
-shape = SubResource("RectangleShape2D_v7t3f")
-
 [node name="AreaLock" type="Node2D" parent="."]
 
 [node name="1" type="Node2D" parent="AreaLock"]
@@ -1017,7 +1203,7 @@ position = Vector2(8600, -2248)
 position = Vector2(-2376, 0)
 
 [node name="WallR" parent="AreaLock/4" instance=ExtResource("21_v7t3f")]
-position = Vector2(480, 0)
+position = Vector2(456, 0)
 
 [node name="MarketCamPos" type="Camera2D" parent="."]
 visible = false
@@ -1031,7 +1217,8 @@ libraries = {
 
 [connection signal="explode" from="Area3/JunctionBox" to="." method="_on_junction_box_explode"]
 [connection signal="body_entered" from="Area3/Area3LockTrigger" to="." method="_on_area_3_lock_trigger_body_entered"]
+[connection signal="body_entered" from="Area4/Area4LockTrigger" to="." method="_on_area_4_lock_trigger_body_entered"]
+[connection signal="body_entered" from="Area4/PushPlayerBackUpArea2d" to="." method="_on_push_player_back_up_area_2d_body_entered"]
 [connection signal="banana_fly" from="MarketGreen" to="." method="_on_market_green_banana_fly"]
 [connection signal="body_entered" from="Area1LockTrigger" to="." method="_on_area_1_lock_trigger_body_entered"]
-[connection signal="body_entered" from="Area4LockTrigger" to="." method="_on_area_4_lock_trigger_body_entered"]
 [connection signal="animation_finished" from="EventPlayer" to="." method="_on_event_player_animation_finished"]

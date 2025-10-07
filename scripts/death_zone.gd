@@ -30,14 +30,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		print_rich("[color=orange][b]===DeathZone===[/b][/color]")
 		body.hitted(
 		self,
-		true,
+		body.sprite_2d.flip_h,
 		Vector2.ZERO,
 		0,
 		0,
 		0,
-		Vector2(30, 0.5),
-		99999,
-		Enums.Attack.UNBLOCK,
-		Vector2(0, 0),
-		0
+		Vector2(10, 0.1),
+		10000,
+		Enums.Attack.UNBLOCK
 		)

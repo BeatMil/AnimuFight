@@ -1433,22 +1433,22 @@ func enter_grab_stance() -> void:
 
 
 func set_collision_no_hit_enemy() -> void:
-	collision_layer = 0b00000000000000000000
+	collision_layer = 0b00000000001000000000
 	collision_mask = 0b00000000000000001101
 
 
 func set_collision_normal() -> void:
-	collision_layer = 0b00000000000000000001
+	collision_layer = 0b00000000001000000001
 	collision_mask = 0b00000000000100001110
 
 
 func set_collision_noclip() -> void:
-	collision_layer = 0b00000000000000000000
+	collision_layer = 0b00000000001000000000
 	collision_mask = 0b00000000000000000000
 
 
 func set_collision_ded() -> void:
-	collision_layer = 0b00000000000000000000
+	collision_layer = 0b00000000001000000000
 	collision_mask = 0b00000000000000001000
 
 

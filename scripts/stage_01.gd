@@ -13,7 +13,19 @@ const MANGO_BOSS = preload("res://nodes/mango_boss.tscn")
 @onready var area_3_spawner: Node2D = $Area3/Area3Spawner
 @onready var event_player: AnimationPlayer = $EventPlayer
 @onready var high_way: Node2D = $Area3/HighWay
-@onready var area_4_lock_trigger: Area2D = $Area4LockTrigger
+
+@onready var area_4_lock_trigger: Area2D = $Area4/Area4LockTrigger
+@onready var area_4_spawner: Node2D = $Area4/Area4Spawner
+const BANANA_FLY = preload("uid://dmjg7bqnvd1dk")
+@onready var audio_stream_player: AudioStreamPlayer = $Area4/PushPlayerBackUpArea2d/AudioStreamPlayer
+
+
+func hitlag(_amount: float = 0.3) -> void:
+	pass
+	# if _amount:
+	# 	set_physics_process(false)
+	# 	await get_tree().create_timer(_amount).timeout
+	# 	set_physics_process(true)
 
 
 func _ready() -> void:
@@ -30,11 +42,13 @@ func _ready() -> void:
 	area_lock_player.play("RESET")
 	enemy_spawner_new.is_active = false
 	area_3_spawner.is_active = false
+	area_4_spawner.is_active = false
 
 	Settings.current_stage = "res://scenes/stage_01.tscn"
 
 	enemy_spawner_new.area_done.connect(_lift_wall_area1)
 	area_3_spawner.area_done.connect(_lift_wall_area1)
+	area_4_spawner.area_done.connect(_lift_wall_area1)
 
 	# Player ost
 	# music_player.play("stage01_track_copyright")
@@ -98,6 +112,27 @@ func _on_area_3_lock_trigger_body_entered(_body: Node2D) -> void:
 
 func _on_area_4_lock_trigger_body_entered(_body: Node2D) -> void:
 	area_lock_player.play("4_in")
-	# CameraManager.set_screen_lock(3824, 6380, -10000000, 1000)
-	area_3_spawner.is_active = true
+	CameraManager.set_screen_lock(6400, 8800, -10000000, 1000)
+	area_4_spawner.is_active = true
 	area_4_lock_trigger.queue_free()
+
+
+func _on_push_player_back_up_area_2d_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
+	audio_stream_player.stream = BANANA_FLY
+	audio_stream_player.play()
+	
+	var tween = get_tree().create_tween()
+	var new_pos = body.position + Vector2(-500, -500)
+	tween.tween_property(body, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
+	body.hitted(
+	self,
+	body.sprite_2d.flip_h,
+	Vector2(0, 0),
+	1,
+	0.5,
+	0.5,
+	Vector2(10, 0.1),
+	4,
+	Enums.Attack.UNBLOCK
+	)
