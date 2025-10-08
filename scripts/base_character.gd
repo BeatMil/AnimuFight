@@ -478,7 +478,7 @@ func hitted(
 		]:
 		if _type == Enums.Attack.UNBLOCK:
 			animation_player.play("dodge_success_zoom")
-			_slow_moion_no_sfx(0.8, 0.2)
+			_slow_moion_no_sfx(0.7, 0.2)
 		else:
 			animation_player.play("dodge_success")
 		if _attacker.position.x < self.position.x:
