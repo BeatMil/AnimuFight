@@ -1438,8 +1438,8 @@ func set_collision_no_hit_enemy() -> void:
 
 
 func set_collision_normal() -> void:
-	collision_layer = 0b00000000001000000001
-	collision_mask = 0b00000000000100001110
+	collision_layer= 0b00000000001000000001
+	collision_mask = 0b00000000010100001110
 
 
 func set_collision_noclip() -> void:

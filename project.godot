@@ -191,6 +191,7 @@ down={
 2d_physics/layer_8="enemy_down"
 2d_physics/layer_9="KeepPlayerAway"
 2d_physics/layer_10="HelpDeathZone"
+2d_physics/layer_11="Enemy_Attack"
 
 [physics]
 

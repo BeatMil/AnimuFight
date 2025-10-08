@@ -216,12 +216,12 @@ func _add_block_count(amount: int):
 
 
 func set_collision_no_hit_all() -> void:
-	collision_layer = 0b00000000000000010000
+	collision_layer= 0b00000000000000010000
 	collision_mask = 0b00000000000000001100
 
 
 func set_collision_no_hit_enemy() -> void:
-	collision_layer = 0b00000000000000000010
+	collision_layer= 0b00000000010000010000
 	collision_mask = 0b00000000000000001101
 
 
@@ -234,8 +234,8 @@ func push_to_target() -> void:
 
 
 func set_collision_normal() -> void:
-	collision_layer = 0b00000000000000000010
-	collision_mask = 0b00000000000000001100
+	collision_layer= 0b00000000000000000010
+	collision_mask = 0b00000000000000001110
 
 
 func set_flip_h(value: bool) -> void:
