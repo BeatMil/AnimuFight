@@ -163,7 +163,7 @@ func _input(event: InputEvent) -> void:
 			animation_player.play("dodge")
 	
 	## DODGE
-	if state in [States.PARRY, States.BLOCK]:
+	if state in [States.PARRY, States.BLOCK, States.DODGE_SUCCESS]:
 		if Input.is_action_pressed("block"):
 			if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right") or\
 				Input.is_action_just_pressed("dodge"):
@@ -172,8 +172,13 @@ func _input(event: InputEvent) -> void:
 		elif Input.is_action_just_released("block"):
 			_add_block_buffer_time()
 
-	# debug_input_event = event
-	# print(input_history)
+	if state in [States.DODGE_SUCCESS]:
+		if Input.is_action_pressed("block"):
+			if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right") or\
+				Input.is_action_just_pressed("dodge"):
+				state = States.DODGE
+				animation_player.stop()
+				animation_player.play("dodge")
 
 
 func _physics_process(delta: float) -> void:

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b6jefw8o8p6no"
+path="res://.godot/imported/DSGNMisc_HIT-Zappy Pitch_HY_PC-005.wav-c1880fbbb34dc46221a4229e794a5819.sample"
+
+[deps]
+
+source_file="res://media/sfxs/DSGNMisc_HIT-Zappy Pitch_HY_PC-005.wav"
+dest_files=["res://.godot/imported/DSGNMisc_HIT-Zappy Pitch_HY_PC-005.wav-c1880fbbb34dc46221a4229e794a5819.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

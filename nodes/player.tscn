@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=118 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://nyqrh0rlatpr" path="res://media/sprites/char1/vanilla_dodge.png" id="22_tqltk"]
 [ext_resource type="AudioStream" uid="uid://bgcop0cshwtdm" path="res://media/sfxs/wippy_noise.wav" id="23_iau4t"]
 [ext_resource type="Texture2D" uid="uid://bw7u3f67slw3r" path="res://media/sprites/char1/lp_combo_new.png" id="25_2anje"]
+[ext_resource type="AudioStream" uid="uid://b6jefw8o8p6no" path="res://media/sfxs/DSGNMisc_HIT-Zappy Pitch_HY_PC-005.wav" id="25_872cd"]
 [ext_resource type="Texture2D" uid="uid://qmkiulh3xujh" path="res://media/sprites/char1/vanilla_walk_sprite.png" id="25_pe3tb"]
 [ext_resource type="Texture2D" uid="uid://ut1cxi1dvfck" path="res://media/sprites/char1/vanilla_throw_whiff.png" id="26_n3uqo"]
 [ext_resource type="Texture2D" uid="uid://cicwhb3qtkp6g" path="res://media/sprites/char1/FirstChar_fireball.png" id="26_qgu4g"]
@@ -1696,7 +1697,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [2]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1753,7 +1754,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(0),
 "update": 0,
-"values": [Color(1, 1, 1, 0.270588)]
+"values": [Color(1, 1, 1, 0.6313726)]
 }
 tracks/3/type = "audio"
 tracks/3/imported = false
@@ -1770,6 +1771,30 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/3/use_blend = true
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:hframes")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_hb33t"]
 resource_name = "dodge_success_zoom"
@@ -1813,7 +1838,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(0),
 "update": 0,
-"values": [Color(1, 1, 1, 0.270588)]
+"values": [Color(1, 1, 1, 0.54901963)]
 }
 tracks/3/type = "audio"
 tracks/3/imported = false
@@ -1822,12 +1847,8 @@ tracks/3/path = NodePath("AudioStreamPlayer")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("23_iau4t")
-}],
-"times": PackedFloat32Array(0)
+"clips": [],
+"times": PackedFloat32Array()
 }
 tracks/3/use_blend = true
 tracks/4/type = "method"
@@ -1854,7 +1875,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [2]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1868,6 +1889,33 @@ tracks/6/keys = {
 "update": 1,
 "values": [1]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+tracks/8/type = "audio"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayerLoud")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"clips": [{
+"end_offset": 2.091449,
+"start_offset": 0.0,
+"stream": ExtResource("25_872cd")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/8/use_blend = true
 
 [sub_resource type="Animation" id="Animation_vvyp1"]
 resource_name = "down"
@@ -4954,7 +5002,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -50)]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_t838g"]
@@ -5039,6 +5087,18 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_rqcud"]
@@ -5847,9 +5907,13 @@ texture = ExtResource("3_uo2uk")
 position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_47ont")
 
-[node name="GodFistPlayer" type="AudioStreamPlayer" parent="." index="5"]
+[node name="AudioStreamPlayerLoud" type="AudioStreamPlayer" parent="." index="4"]
+volume_db = 8.0
+bus = &"LouderBus"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+[node name="GodFistPlayer" type="AudioStreamPlayer" parent="." index="6"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 libraries = {
 &"": SubResource("AnimationLibrary_1o8ps")
 }
@@ -5878,7 +5942,7 @@ position = Vector2(-112, -120)
 [node name="BurstPos" type="Marker2D" parent="HitBoxPos" index="7"]
 position = Vector2(0, 8)
 
-[node name="ExecuteAreaL" type="Area2D" parent="." index="8"]
+[node name="ExecuteAreaL" type="Area2D" parent="." index="9"]
 collision_layer = 0
 collision_mask = 18
 monitorable = false
@@ -5888,7 +5952,7 @@ visible = false
 position = Vector2(-392, 0)
 shape = SubResource("RectangleShape2D_8u5p4")
 
-[node name="ExecuteAreaR" type="Area2D" parent="." index="9"]
+[node name="ExecuteAreaR" type="Area2D" parent="." index="10"]
 collision_layer = 0
 collision_mask = 18
 monitorable = false
@@ -5898,10 +5962,10 @@ visible = false
 position = Vector2(387, 0)
 shape = SubResource("RectangleShape2D_8u5p4")
 
-[node name="HpBar" parent="." index="10"]
+[node name="HpBar" parent="." index="11"]
 visible = false
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="12"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="13"]
 environment = SubResource("Environment_3pser")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
