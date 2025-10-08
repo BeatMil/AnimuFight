@@ -430,8 +430,9 @@ func hitted(
 			play_blockstunned()
 		elif self.is_in_group("tank"):
 			play_metal_clank_random_pitch()
-
-		animation_player.play("blockstunned")
+			animation_player.play("blockstunned")
+		else:
+			animation_player.play("blockstunned")
 
 		# hp_bar.hp_down(_damage/2)
 		block_effect_helper(
@@ -569,6 +570,7 @@ func hitted(
 	## ARMOR is for going through player while attacking such as boss01 burn_knuckle
 	## ARMOR2  is something about sfx
 	## Spawn blockspark on IFRAME
+	## New trick set_state to ARMOR then set the set_collision since ARMOR is not in code it works
 	elif state in [
 	States.IFRAME,
 	States.EXECUTE,
