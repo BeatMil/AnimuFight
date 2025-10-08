@@ -69,15 +69,18 @@ func _physics_process(delta: float) -> void:
 
 	_check_wall_bounce()
 
-
 	# collision_layer
-	if state in [States.IDLE, States.IFRAME]:
+	if state in [States.IDLE]:
 		if is_on_floor():
 			# touch everything
 			set_collision_normal()
 		else:
 			# no touch both player & enemy
 			set_collision_no_hit_all()
+	elif state in [States.IFRAME]:
+		set_collision_no_hit_enemy()
+	elif state == States.IFRAME_NO_HIT_ALL:
+		set_collision_no_hit_all()
 
 	# Move and Facing
 	_move_range(delta)
@@ -232,7 +235,7 @@ func push_to_target() -> void:
 
 func set_collision_normal() -> void:
 	collision_layer = 0b00000000000000000010
-	collision_mask = 0b00000000000000001111
+	collision_mask = 0b00000000000000001100
 
 
 func set_flip_h(value: bool) -> void:
@@ -256,6 +259,7 @@ func spawn_ded_copy() -> void:
 	ded_copy.texture = DED_SPRITE
 	ded_copy.position = position
 	ded_copy.flip_h = sprite_2d.flip_h
+	ded_copy.z_index = 1
 	ded_copy.scale = sprite_2d.scale
 	get_tree().current_scene.add_child(ded_copy)
 

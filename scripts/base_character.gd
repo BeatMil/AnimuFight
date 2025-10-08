@@ -47,7 +47,8 @@ enum States {
 	DOWN_HP,
 	AIR_LP1,
 	WAVEDASH,
-	ARMOR2
+	ARMOR2,
+	IFRAME_NO_HIT_ALL
 	}
 
 
@@ -566,6 +567,7 @@ func hitted(
 		pass
 
 	## ARMOR is for going through player while attacking such as boss01 burn_knuckle
+	## ARMOR2  is something about sfx
 	## Spawn blockspark on IFRAME
 	elif state in [States.IFRAME, States.EXECUTE, States.AIR_SPD, States.ARMOR, States.ARMOR2]:
 		ObjectPooling.spawn_iframe_spark(position + Vector2(0, randi_range(-30, -80)))
