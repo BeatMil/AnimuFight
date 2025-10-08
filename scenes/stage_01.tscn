@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=54 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -29,7 +29,9 @@
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="21_v7t3f"]
 [ext_resource type="PackedScene" uid="uid://cat0ep1t8mpbn" path="res://nodes/traffic_cone.tscn" id="23_0lkdc"]
 [ext_resource type="Texture2D" uid="uid://c6wyrrcq2dweo" path="res://media/sprites/mango_boss/mango_boss_intro1.png" id="23_f33yp"]
+[ext_resource type="Texture2D" uid="uid://bi00bg3ydpbea" path="res://media/sprites/stage01/bench.png" id="24_kq78i"]
 [ext_resource type="AudioStream" uid="uid://de8ttnjmqlfy4" path="res://media/sfxs/Alarm_Fever.wav" id="24_wntu7"]
+[ext_resource type="Texture2D" uid="uid://cvtbg1icqcgjh" path="res://media/sprites/stage01/organized_bush.png" id="25_dfap7"]
 [ext_resource type="AudioStream" uid="uid://d1rmtijm23hh0" path="res://media/sfxs/anime-cat-girl-6731.mp3" id="28_1fbf0"]
 [ext_resource type="PackedScene" uid="uid://c5b77m0nmmb5l" path="res://nodes/enemy_05.tscn" id="28_rkgfh"]
 
@@ -284,6 +286,22 @@ tracks/0/keys = {
 "values": [Vector2(6112, -304)]
 }
 
+[sub_resource type="Animation" id="Animation_tby30"]
+resource_name = "4_in"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../4:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8600, -328)]
+}
+
 [sub_resource type="Animation" id="Animation_f33yp"]
 length = 0.001
 tracks/0/type = "value"
@@ -333,22 +351,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(8600, -2248)]
-}
-
-[sub_resource type="Animation" id="Animation_tby30"]
-resource_name = "4_in"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../4:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(8600, -328)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mqdkf"]
@@ -444,7 +446,7 @@ script = ExtResource("1_4caca")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(-464, 568)
+position = Vector2(8016, 568)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -773,6 +775,35 @@ shape = SubResource("RectangleShape2D_i6ddm")
 position = Vector2(8632, 432)
 texture = ExtResource("11_ei3og")
 
+[node name="Floor6" type="Sprite2D" parent="Area4" groups=["ground"]]
+position = Vector2(8632, 4312)
+scale = Vector2(3.639995, 4.759999)
+texture = ExtResource("2_fnmkw")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Area4/Floor6" groups=["ground"]]
+position = Vector2(35, 304)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4/Floor6/StaticBody2D"]
+position = Vector2(-35, 8)
+shape = SubResource("RectangleShape2D_i6ddm")
+
+[node name="TrafficCone" parent="Area4" instance=ExtResource("23_0lkdc")]
+position = Vector2(8379, 715)
+
+[node name="TrafficCone2" parent="Area4" instance=ExtResource("23_0lkdc")]
+position = Vector2(8872, 712)
+
+[node name="Bench" type="Sprite2D" parent="Area4"]
+position = Vector2(9185, 693)
+texture = ExtResource("24_kq78i")
+
+[node name="OrganizedBush" type="Sprite2D" parent="Area4"]
+position = Vector2(8002, 680)
+texture = ExtResource("25_dfap7")
+
 [node name="Area4LockTrigger" type="Area2D" parent="Area4"]
 position = Vector2(7632, 520)
 collision_layer = 0
@@ -935,21 +966,6 @@ position = Vector2(7576, -544)
 [node name="pos2" type="Marker2D" parent="Area4/Area4SpawnPos"]
 position = Vector2(7928, -552)
 
-[node name="Floor6" type="Sprite2D" parent="Area4" groups=["ground"]]
-position = Vector2(8632, 4312)
-scale = Vector2(3.639995, 4.759999)
-texture = ExtResource("2_fnmkw")
-metadata/_edit_group_ = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Area4/Floor6" groups=["ground"]]
-position = Vector2(35, 304)
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4/Floor6/StaticBody2D"]
-position = Vector2(-35, 8)
-shape = SubResource("RectangleShape2D_i6ddm")
-
 [node name="PushPlayerBackUpArea2d" type="Area2D" parent="Area4"]
 position = Vector2(8608, 1096)
 collision_layer = 0
@@ -960,12 +976,6 @@ position = Vector2(8, -48)
 shape = SubResource("RectangleShape2D_tby30")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area4/PushPlayerBackUpArea2d"]
-
-[node name="TrafficCone" parent="Area4" instance=ExtResource("23_0lkdc")]
-position = Vector2(8379, 715)
-
-[node name="TrafficCone2" parent="Area4" instance=ExtResource("23_0lkdc")]
-position = Vector2(8872, 712)
 
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
