@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=57 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -32,6 +32,8 @@
 [ext_resource type="Texture2D" uid="uid://bi00bg3ydpbea" path="res://media/sprites/stage01/bench.png" id="24_kq78i"]
 [ext_resource type="AudioStream" uid="uid://de8ttnjmqlfy4" path="res://media/sfxs/Alarm_Fever.wav" id="24_wntu7"]
 [ext_resource type="Texture2D" uid="uid://cvtbg1icqcgjh" path="res://media/sprites/stage01/organized_bush.png" id="25_dfap7"]
+[ext_resource type="PackedScene" uid="uid://0txl6bdjoqcb" path="res://nodes/fire_hydrant.tscn" id="26_0ugsm"]
+[ext_resource type="Texture2D" uid="uid://xj3kjcpg4f7y" path="res://media/sprites/stage01/park_ground.png" id="26_dfap7"]
 [ext_resource type="AudioStream" uid="uid://d1rmtijm23hh0" path="res://media/sfxs/anime-cat-girl-6731.mp3" id="28_1fbf0"]
 [ext_resource type="PackedScene" uid="uid://c5b77m0nmmb5l" path="res://nodes/enemy_05.tscn" id="28_rkgfh"]
 
@@ -73,13 +75,16 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6ddm"]
-size = Vector2(1920, 326)
+size = Vector2(1920, 334.75995)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7t3f"]
 size = Vector2(128, 512)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tby30"]
 size = Vector2(304, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ugsm"]
+size = Vector2(1936, 336)
 
 [sub_resource type="Animation" id="Animation_sgik7"]
 length = 0.001
@@ -756,24 +761,19 @@ shape = SubResource("RectangleShape2D_i6ddm")
 position = Vector2(8592, 1472)
 scale = Vector2(11.199981, 2.4)
 
-[node name="Floor8" type="Sprite2D" parent="Area4" groups=["ground"]]
-position = Vector2(9192, 640)
-scale = Vector2(0.4, 1)
-texture = ExtResource("2_fnmkw")
-metadata/_edit_group_ = true
+[node name="PitHole" type="Sprite2D" parent="Area4"]
+position = Vector2(8632, 496)
+texture = ExtResource("11_ei3og")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Area4/Floor8" groups=["ground"]]
-position = Vector2(35, 304)
+[node name="StaticBody2D" type="StaticBody2D" parent="Area4" groups=["ground"]]
+position = Vector2(9206, 943.1259)
+scale = Vector2(0.4, 1.0037037)
 collision_layer = 8
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4/Floor8/StaticBody2D"]
-position = Vector2(-35, 8)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4/StaticBody2D"]
+position = Vector2(-35, 0.8710327)
 shape = SubResource("RectangleShape2D_i6ddm")
-
-[node name="PitHole" type="Sprite2D" parent="Area4"]
-position = Vector2(8632, 432)
-texture = ExtResource("11_ei3og")
 
 [node name="Floor6" type="Sprite2D" parent="Area4" groups=["ground"]]
 position = Vector2(8632, 4312)
@@ -976,6 +976,23 @@ position = Vector2(8, -48)
 shape = SubResource("RectangleShape2D_tby30")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area4/PushPlayerBackUpArea2d"]
+
+[node name="FireHydrant" parent="Area4" instance=ExtResource("26_0ugsm")]
+position = Vector2(7464, 688)
+
+[node name="Area5" type="Node" parent="."]
+
+[node name="ParkGround" type="Sprite2D" parent="Area5"]
+position = Vector2(10552, 496)
+texture = ExtResource("26_dfap7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Area5/ParkGround" groups=["ground"]]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area5/ParkGround/StaticBody2D"]
+position = Vector2(-8, 448)
+shape = SubResource("RectangleShape2D_0ugsm")
 
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")

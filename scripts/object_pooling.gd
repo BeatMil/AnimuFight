@@ -138,3 +138,13 @@ func spawn_EWGF_spark(_position: Vector2 = pooling_pos, _flip_h = false) -> void
 		new_pos = hitspark.position + Vector2(100, -200)
 
 	tween.tween_property(hitspark, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
+
+
+func spawn_fire_hydrant_spark(_position: Vector2 = pooling_pos) -> void:
+	var hitspark = EWGF_SPARK.instantiate()
+	hitspark.position = _position
+	hitspark.z_index = 20
+	get_tree().current_scene.add_child(hitspark)
+	var tween = get_tree().create_tween()
+	var new_pos = hitspark.position + Vector2(0, -300)
+	tween.tween_property(hitspark, "position", new_pos, 0.2).set_trans(Tween.TRANS_CUBIC)
