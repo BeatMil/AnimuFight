@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=59 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -20,10 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://d2qbogpbwtdr" path="res://media/sprites/stage01/pit_hole.png" id="11_ei3og"]
 [ext_resource type="PackedScene" uid="uid://bfomnvauggr4o" path="res://nodes/junction_box.tscn" id="11_l457t"]
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="11_tby30"]
+[ext_resource type="Texture2D" uid="uid://dxe5f82lqc7kp" path="res://media/sprites/stage01/tree.png" id="11_thaiv"]
 [ext_resource type="PackedScene" uid="uid://d0ufo617puti8" path="res://nodes/enemy_06.tscn" id="12_gsglw"]
 [ext_resource type="PackedScene" uid="uid://dxf7beg6mlrhw" path="res://nodes/falling_flower_pot.tscn" id="15_bc8xj"]
 [ext_resource type="PackedScene" uid="uid://dhqwhd8echl8w" path="res://nodes/light_pole.tscn" id="17_c2i1s"]
 [ext_resource type="PackedScene" uid="uid://brp5ha3kowlpa" path="res://nodes/market_green.tscn" id="18_dhovc"]
+[ext_resource type="PackedScene" uid="uid://chyv0gcd42b0i" path="res://nodes/enemy_zoner01.tscn" id="19_e1vcx"]
 [ext_resource type="Texture2D" uid="uid://n7xbpwiq1n77" path="res://media/sprites/mango_boss/mango_boss_sit.png" id="19_yxbv0"]
 [ext_resource type="AudioStream" uid="uid://cxkb2rpnoq1wv" path="res://media/sfxs/phone-typing-333292.mp3" id="20_yxbv0"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="21_v7t3f"]
@@ -451,7 +453,7 @@ script = ExtResource("1_4caca")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(8016, 568)
+position = Vector2(5433, 546)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -561,6 +563,10 @@ collision_mask = 0
 position = Vector2(-35, 8)
 shape = SubResource("RectangleShape2D_i6ddm")
 
+[node name="Tree" type="Sprite2D" parent="Map"]
+position = Vector2(10472, 328)
+texture = ExtResource("11_thaiv")
+
 [node name="Area3" type="Node" parent="."]
 
 [node name="JunctionBox" parent="Area3" instance=ExtResource("11_l457t")]
@@ -611,17 +617,17 @@ object = ExtResource("12_gsglw")
 
 [node name="Phase3" type="Node" parent="Area3/Area3EnemyList"]
 
-[node name="boss02" type="Node" parent="Area3/Area3EnemyList/Phase3" node_paths=PackedStringArray("position")]
+[node name="Boom01" type="Node" parent="Area3/Area3EnemyList/Phase3" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
 position = NodePath("../../../Area3SpawnPos/pos1")
-hp = 50
-object = ExtResource("7_nh3b5")
+hp = 30
+object = ExtResource("19_e1vcx")
 
-[node name="boss03" type="Node" parent="Area3/Area3EnemyList/Phase3" node_paths=PackedStringArray("position")]
+[node name="Boom02" type="Node" parent="Area3/Area3EnemyList/Phase3" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
-position = NodePath("../../../Area3SpawnPos/pos3")
-hp = 50
-object = ExtResource("7_nh3b5")
+position = NodePath("../../../Area3SpawnPos/pos2")
+hp = 30
+object = ExtResource("19_e1vcx")
 
 [node name="Phase4" type="Node" parent="Area3/Area3EnemyList"]
 
@@ -977,22 +983,50 @@ shape = SubResource("RectangleShape2D_tby30")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area4/PushPlayerBackUpArea2d"]
 
-[node name="FireHydrant" parent="Area4" instance=ExtResource("26_0ugsm")]
-position = Vector2(7464, 688)
-
 [node name="Area5" type="Node" parent="."]
 
-[node name="ParkGround" type="Sprite2D" parent="Area5"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Area5" groups=["ground"]]
 position = Vector2(10552, 496)
-texture = ExtResource("26_dfap7")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Area5/ParkGround" groups=["ground"]]
 collision_layer = 8
 collision_mask = 0
+metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area5/ParkGround/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area5/StaticBody2D"]
 position = Vector2(-8, 448)
 shape = SubResource("RectangleShape2D_0ugsm")
+
+[node name="ParkGround" type="Sprite2D" parent="Area5/StaticBody2D"]
+texture = ExtResource("26_dfap7")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Area5" groups=["ground"]]
+position = Vector2(12472, 496)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area5/StaticBody2D2"]
+position = Vector2(-8, 448)
+shape = SubResource("RectangleShape2D_0ugsm")
+
+[node name="ParkGround" type="Sprite2D" parent="Area5/StaticBody2D2"]
+texture = ExtResource("26_dfap7")
+
+[node name="Bench" type="Sprite2D" parent="Area5"]
+position = Vector2(10877, 693)
+texture = ExtResource("24_kq78i")
+
+[node name="OrganizedBush" type="Sprite2D" parent="Area5"]
+position = Vector2(11541, 680)
+texture = ExtResource("25_dfap7")
+
+[node name="FireHydrant" parent="Area5" instance=ExtResource("26_0ugsm")]
+position = Vector2(10080, 688)
+
+[node name="FireHydrant2" parent="Area5" instance=ExtResource("26_0ugsm")]
+position = Vector2(11260, 688)
+
+[node name="FireHydrant3" parent="Area5" instance=ExtResource("26_0ugsm")]
+position = Vector2(11941, 688)
 
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
