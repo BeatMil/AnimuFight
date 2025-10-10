@@ -44,6 +44,8 @@ var command_buffer_count := 0
 
 var debug_input_event = null
 
+var is_controllable = true
+
 var can_block_states = [
 		States.IDLE,
 		States.PARRY_SUCCESS,
@@ -122,6 +124,9 @@ func _input(event: InputEvent) -> void:
 	if is_ded:
 		return
 
+	if not is_controllable:
+		return
+
 	if event.is_action_pressed("execute") and \
 		state not in [States.EXECUTE, States.HIT_STUNNED, States.BOUNCE_STUNNED]:
 		"""
@@ -190,7 +195,8 @@ func _physics_process(delta: float) -> void:
 		hitlag_timer -= delta
 		return
 
-	physic_input(delta)
+	if is_controllable:
+		physic_input(delta)
 	_check_wall_bounce()
 
 	if is_on_floor():
@@ -207,24 +213,28 @@ func _physics_process(delta: float) -> void:
 		friction = 0.07
 
 	# Left/Right movement
-	if state in [States.IDLE, States.AIR]:
-	# if state in [States.IDLE]:
-		if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
-			_lerp_velocity_x()
-		elif Input.is_action_pressed("left"):
-			_move_left(delta)
-		elif Input.is_action_pressed("right"):
-			_move_right(delta)
+	if is_controllable:
+		if state in [States.IDLE, States.AIR]:
+		# if state in [States.IDLE]:
+			if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
+				_lerp_velocity_x()
+			elif Input.is_action_pressed("left"):
+				_move_left(delta)
+			elif Input.is_action_pressed("right"):
+				_move_right(delta)
+			else:
+				_lerp_velocity_x()
 		else:
+			## Adding friction like this is not gonna go well (っ˘̩╭╮˘̩)っ 
+			friction = 0.1
 			_lerp_velocity_x()
-			# friction = 0.5
 	else:
-		## Adding friction like this is not gonna go well (っ˘̩╭╮˘̩)っ 
 		friction = 0.1
 		_lerp_velocity_x()
 	
 	# Jump
-	if state in [States.IDLE, States.DOWN_HP, States.DASH, States.WAVEDASH]:
+	if state in [States.IDLE, States.DOWN_HP, States.DASH, States.WAVEDASH] \
+		and is_controllable:
 		handle_jump_buffer(delta)
 
 	# Jump buffer
@@ -245,15 +255,16 @@ func _physics_process(delta: float) -> void:
 	
 	## Animation Section
 	# Walking animation
-	if state in [States.IDLE]:
-		if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
-			animation_player.play("idle")
-		elif Input.is_action_pressed("left"):
-			animation_player.play("walk")
-		elif Input.is_action_pressed("right"):
-			animation_player.play("walk")
-		else:
-			animation_player.play("idle")
+	if is_controllable:
+		if state in [States.IDLE]:
+			if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
+				animation_player.play("idle")
+			elif Input.is_action_pressed("left"):
+				animation_player.play("walk")
+			elif Input.is_action_pressed("right"):
+				animation_player.play("walk")
+			else:
+				animation_player.play("idle")
 
 	# Reset throwee
 	if state in [States.IDLE, States.AIR, States.DASH]:
@@ -303,7 +314,7 @@ func _physics_process(delta: float) -> void:
 
 	## BLOCK
 	## Must check every frame, can't put in _input cause it only check when press and release
-	if state in can_block_states_hold:
+	if state in can_block_states_hold and is_controllable:
 		if Input.is_action_pressed("block"):
 			state = States.PARRY
 			animation_player.play("block")
@@ -420,6 +431,15 @@ func set_thrower(the_guy: CharacterBody2D) -> void:
 
 func set_throwee(the_guy: CharacterBody2D) -> void:
 	throwee = the_guy
+
+
+func play_animation(animation: String) -> void:
+	animation_player.play(animation)
+
+
+func set_flip_h(value: bool) -> void:
+	sprite_2d.flip_h = value
+
 
 #############################################################
 ## Private function

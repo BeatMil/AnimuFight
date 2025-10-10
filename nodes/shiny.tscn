@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6kmen2v6b476"]
+
+[ext_resource type="Script" uid="uid://5remjarlsbst" path="res://scripts/shiny.gd" id="1_14qd6"]
+[ext_resource type="Texture2D" uid="uid://c2trxhjdplv1u" path="res://media/sprites/stage01/boss_fight_place/smol_circle.png" id="1_n7vc1"]
+
+[sub_resource type="Environment" id="Environment_14qd6"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.12
+glow_blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_14qd6"]
+resource_name = "rgb"
+length = 1.4000034
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.4627451, 0.4627451, 1), Color(0.85490197, 0.71818924, 0.3921569, 1), Color(1.3893794, 1.3893794, 0.6548173, 1), Color(0.45269752, 0.85490197, 0.3921569, 1), Color(0.6548173, 1.3893794, 1.0158733, 1), Color(0.3921569, 0.60112315, 0.85490197, 1), Color(1.0158733, 0.6548173, 1.3893794, 1), Color(0.8530103, 0.3928461, 0.3928461, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_22mus"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7dftb"]
+_data = {
+&"RESET": SubResource("Animation_22mus"),
+&"rgb": SubResource("Animation_14qd6")
+}
+
+[node name="Shiny" type="Node2D"]
+script = ExtResource("1_14qd6")
+
+[node name="SmolCircle" type="Sprite2D" parent="."]
+texture = ExtResource("1_n7vc1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_14qd6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../SmolCircle")
+libraries = {
+&"": SubResource("AnimationLibrary_7dftb")
+}

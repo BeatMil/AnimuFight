@@ -35,6 +35,8 @@ var air_friction: float = 0.07
 var block_count := 0
 var is_bound := false
 
+var is_controllable = true
+
 
 #############################################################
 ## Built-in
@@ -83,9 +85,9 @@ func _physics_process(delta: float) -> void:
 		set_collision_no_hit_all()
 
 	# Move and Facing
-	_move_range(delta)
-
-	_facing()
+	if is_controllable:
+		_move_range(delta)
+		_facing()
 
 	# lerp when attacking player
 	if state not in [States.IDLE]:

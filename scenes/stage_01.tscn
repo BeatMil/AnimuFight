@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=64 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -38,6 +38,8 @@
 [ext_resource type="Texture2D" uid="uid://xj3kjcpg4f7y" path="res://media/sprites/stage01/park_ground.png" id="26_dfap7"]
 [ext_resource type="AudioStream" uid="uid://d1rmtijm23hh0" path="res://media/sfxs/anime-cat-girl-6731.mp3" id="28_1fbf0"]
 [ext_resource type="PackedScene" uid="uid://c5b77m0nmmb5l" path="res://nodes/enemy_05.tscn" id="28_rkgfh"]
+[ext_resource type="PackedScene" uid="uid://b6kmen2v6b476" path="res://nodes/shiny.tscn" id="31_a8a3l"]
+[ext_resource type="Texture2D" uid="uid://kma2rfutfsxc" path="res://media/sprites/stage01/boss_fight_place/helicopter.png" id="39_83i0n"]
 
 [sub_resource type="Animation" id="Animation_lrdte"]
 length = 0.001
@@ -87,6 +89,12 @@ size = Vector2(304, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ugsm"]
 size = Vector2(1936, 336)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8a3l"]
+size = Vector2(64, 384)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gwik"]
+size = Vector2(432, 128)
 
 [sub_resource type="Animation" id="Animation_sgik7"]
 length = 0.001
@@ -482,7 +490,7 @@ script = ExtResource("1_4caca")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(10832, 544)
+position = Vector2(13816, 576)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -1222,6 +1230,66 @@ position = Vector2(11592, -352)
 [node name="pos3" type="Marker2D" parent="Area5/Area5SpawnPos"]
 position = Vector2(12440, -368)
 
+[node name="Area6" type="Node" parent="."]
+editor_description = "Boss intro area"
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Area6" groups=["ground"]]
+position = Vector2(14384, 496)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area6/StaticBody2D2"]
+position = Vector2(-8, 448)
+shape = SubResource("RectangleShape2D_0ugsm")
+
+[node name="ParkGround" type="Sprite2D" parent="Area6/StaticBody2D2"]
+texture = ExtResource("26_dfap7")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Area6" groups=["ground"]]
+position = Vector2(16304, 496)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area6/StaticBody2D3"]
+position = Vector2(-8, 448)
+shape = SubResource("RectangleShape2D_0ugsm")
+
+[node name="ParkGround" type="Sprite2D" parent="Area6/StaticBody2D3"]
+texture = ExtResource("26_dfap7")
+
+[node name="Helicopter" type="Sprite2D" parent="Area6"]
+position = Vector2(15824, 413)
+texture = ExtResource("39_83i0n")
+
+[node name="Shiny" parent="Area6" instance=ExtResource("31_a8a3l")]
+position = Vector2(14332, 745)
+
+[node name="BossIntroTrigger" type="Area2D" parent="Area6"]
+position = Vector2(13984, 584)
+collision_layer = 0
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area6/BossIntroTrigger"]
+shape = SubResource("RectangleShape2D_a8a3l")
+
+[node name="Boss01" parent="Area6" node_paths=PackedStringArray("target") instance=ExtResource("7_nh3b5")]
+position = Vector2(14328, -424)
+target = NodePath("../../Player")
+
+[node name="WaitBossPlatform" type="StaticBody2D" parent="Area6"]
+position = Vector2(14336, -176)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area6/WaitBossPlatform"]
+shape = SubResource("RectangleShape2D_4gwik")
+
+[node name="PreventZoom" type="Polygon2D" parent="Area6"]
+color = Color(0.05882353, 0.05882353, 0.05882353, 1)
+polygon = PackedVector2Array(11512, 1016, 11512, 2192, 17304, 2184, 17280, 976, 11504, 976)
+
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
 target = NodePath("../Player")
@@ -1491,6 +1559,7 @@ libraries = {
 [connection signal="body_entered" from="Area4/Area4LockTrigger" to="." method="_on_area_4_lock_trigger_body_entered"]
 [connection signal="body_entered" from="Area4/PushPlayerBackUpArea2d" to="." method="_on_push_player_back_up_area_2d_body_entered"]
 [connection signal="body_entered" from="Area5/Area5LockTrigger" to="." method="_on_area_5_lock_trigger_body_entered"]
+[connection signal="body_entered" from="Area6/BossIntroTrigger" to="." method="_on_boss_intro_trigger_body_entered"]
 [connection signal="banana_fly" from="MarketGreen" to="." method="_on_market_green_banana_fly"]
 [connection signal="body_entered" from="Area1LockTrigger" to="." method="_on_area_1_lock_trigger_body_entered"]
 [connection signal="animation_finished" from="EventPlayer" to="." method="_on_event_player_animation_finished"]

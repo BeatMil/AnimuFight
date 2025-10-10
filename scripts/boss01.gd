@@ -13,6 +13,14 @@ func _ready() -> void:
 	DED_SPRITE = preload("res://media/sprites/boss01/boss01_down.png")
 
 
+func attack_timer_start() -> void:
+	$AttackTimer.start()
+
+
+func attack_timer_stop() -> void:
+	$AttackTimer.stop()
+
+
 #############################################################
 ## Attack Info
 #############################################################
@@ -174,7 +182,7 @@ func _on_timer_timeout() -> void:
 func _on_lp_range_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		is_player_in_range_lp = true
-		_on_attack_timer_timeout()
+		# _on_attack_timer_timeout()
 	elif body.is_in_group("enemy") \
 		and target.position.x > position.x:
 		is_enemy_in_range_lp = true
@@ -190,7 +198,7 @@ func _on_lp_range_body_exited(body: Node2D) -> void:
 func _on_burn_knuckle_range_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		is_player_in_range_burn_knuckle = true
-		_on_attack_timer_timeout()
+		# _on_attack_timer_timeout()
 
 
 func _on_burn_knuckle_range_body_exited(body: Node2D) -> void:

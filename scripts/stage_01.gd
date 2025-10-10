@@ -22,6 +22,10 @@ const BANANA_FLY = preload("uid://dmjg7bqnvd1dk")
 @onready var area_5_lock_trigger: Area2D = $Area5/Area5LockTrigger
 @onready var area_5_spawner: Node2D = $Area5/Area5Spawner
 
+@onready var boss_01: CharacterBody2D = $Area6/Boss01
+@onready var wait_boss_platform: StaticBody2D = $Area6/WaitBossPlatform
+@onready var shiny: Node2D = $Area6/Shiny
+
 func hitlag(_amount: float = 0.3) -> void:
 	pass
 	# if _amount:
@@ -46,6 +50,9 @@ func _ready() -> void:
 	area_3_spawner.is_active = false
 	area_4_spawner.is_active = false
 	area_5_spawner.is_active = false
+	boss_01.is_controllable = false
+	boss_01.is_notarget = true
+	boss_01.attack_timer_stop()
 
 	Settings.current_stage = "res://scenes/stage_01.tscn"
 
@@ -147,3 +154,52 @@ func _on_area_5_lock_trigger_body_entered(_body: Node2D) -> void:
 	CameraManager.set_screen_lock(9610, 12644, -10000000, 1000)
 	area_5_spawner.is_active = true
 	area_5_lock_trigger.queue_free()
+
+
+func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
+	body.is_controllable = false
+	if body.state == 10: # AIR state
+		body.velocity = Vector2.ZERO
+		await get_tree().create_timer(0.3).timeout
+
+	var delta = get_physics_process_delta_time()
+	var tween = create_tween()
+	tween.tween_callback(body.play_animation.bind("walk"))
+	tween.tween_method(body._move_right, delta, delta, 0.8)
+	tween.tween_callback(body.play_animation.bind("idle"))
+	tween.tween_callback(wait_boss_platform.queue_free)
+	tween.tween_callback(boss_01.meteo_crash)
+	tween.tween_interval(1.2)
+	tween.tween_callback(body.play_animation.bind("dodge"))
+	tween.tween_interval(0.18)
+	tween.tween_callback(shiny.queue_free)
+	tween.tween_interval(0.8)
+	tween.tween_callback(body.play_animation.bind("EWGF"))
+	tween.tween_interval(0.5)
+	tween.tween_callback(body.play_animation.bind("EWGF"))
+	tween.tween_interval(0.5)
+	tween.tween_callback(body.play_animation.bind("EWGF"))
+	tween.tween_interval(0.5)
+	tween.tween_callback(body.play_animation.bind("wave_dash"))
+	tween.tween_interval(0.1)
+	tween.tween_callback(body.play_animation.bind("EWGF"))
+	tween.tween_interval(0.3)
+	tween.tween_callback(body.play_animation.bind("jin1+2"))
+	tween.tween_interval(0.8)
+	tween.tween_callback(body.play_animation.bind("air_throw"))
+	tween.tween_interval(1.0)
+	tween.tween_callback(body.play_animation.bind("dash"))
+	tween.tween_interval(0.3)
+	tween.tween_callback(body.set_flip_h.bind(true))
+	tween.tween_callback(body.play_animation.bind("lp1"))
+	tween.tween_interval(0.2)
+	tween.tween_callback(body.play_animation.bind("lp2"))
+	tween.tween_interval(0.3)
+	tween.tween_callback(body.play_animation.bind("lp3"))
+	tween.tween_interval(0.3)
+	tween.tween_callback(body.play_animation.bind("wave_dash"))
+	tween.tween_interval(0.3)
+	tween.tween_callback(body.play_animation.bind("ground_grab"))
+	tween.tween_callback(Input.action_press.bind("left"))
+	tween.tween_interval(0.5)
+	tween.tween_callback(Input.action_release.bind("left"))
