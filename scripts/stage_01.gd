@@ -19,6 +19,8 @@ const MANGO_BOSS = preload("res://nodes/mango_boss.tscn")
 const BANANA_FLY = preload("uid://dmjg7bqnvd1dk")
 @onready var audio_stream_player: AudioStreamPlayer = $Area4/PushPlayerBackUpArea2d/AudioStreamPlayer
 
+@onready var area_5_lock_trigger: Area2D = $Area5/Area5LockTrigger
+@onready var area_5_spawner: Node2D = $Area5/Area5Spawner
 
 func hitlag(_amount: float = 0.3) -> void:
 	pass
@@ -43,12 +45,14 @@ func _ready() -> void:
 	enemy_spawner_new.is_active = false
 	area_3_spawner.is_active = false
 	area_4_spawner.is_active = false
+	area_5_spawner.is_active = false
 
 	Settings.current_stage = "res://scenes/stage_01.tscn"
 
 	enemy_spawner_new.area_done.connect(_lift_wall_area1)
 	area_3_spawner.area_done.connect(_lift_wall_area1)
 	area_4_spawner.area_done.connect(_lift_wall_area1)
+	area_5_spawner.area_done.connect(_lift_wall_area1)
 
 	# Player ost
 	# music_player.play("stage01_track_copyright")
@@ -136,3 +140,10 @@ func _on_push_player_back_up_area_2d_body_entered(body: Node2D) -> void:
 	4,
 	Enums.Attack.UNBLOCK
 	)
+
+
+func _on_area_5_lock_trigger_body_entered(_body: Node2D) -> void:
+	area_lock_player.play("5_in")
+	CameraManager.set_screen_lock(9610, 12644, -10000000, 1000)
+	area_5_spawner.is_active = true
+	area_5_lock_trigger.queue_free()

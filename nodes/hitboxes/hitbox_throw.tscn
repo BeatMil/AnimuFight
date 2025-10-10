@@ -12,3 +12,8 @@ script = ExtResource("2_la1uw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource("RectangleShape2D_hnasr")
+
+[node name="ThrowBreakTimer" type="Timer" parent="." index="4"]
+wait_time = 0.5
+
+[connection signal="timeout" from="ThrowBreakTimer" to="." method="_on_throw_break_timer_timeout"]

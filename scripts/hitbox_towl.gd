@@ -1,5 +1,8 @@
 extends "res://scripts/hitbox.gd"
 
+@onready var throw_break_timer: Timer = $ThrowBreakTimer
+
+var target
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,7 +13,9 @@ func _ready() -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	# Put player in THROW_BREAKABLE state
 	if body.has_method("hitted"):
+		target = body
 		body.hitted(get_parent(),
 		get_parent().is_face_right,
 		push_power_ground,
@@ -25,10 +30,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		slow_mo_on_block
 		)
 		_on_timer_timeout()
-	await get_tree().create_timer(0.5).timeout
-	if body.state not in [17, 5]: #THROW_BREAKABLE:
+	throw_break_timer.start()
+
+
+func _on_throw_break_timer_timeout() -> void:
+	if target.state not in [17, 5]: #THROW_BREAKABLE:
 		return
-	body.hitted(get_parent(),
+	target.hitted(get_parent(),
 	get_parent().is_face_right,
 	push_power_ground,
 	push_type_ground,

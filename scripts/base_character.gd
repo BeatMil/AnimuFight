@@ -685,6 +685,9 @@ func hitted(
 		if _type == Enums.Attack.P_PARRY:
 			$AudioStreamPlayer2.stream = HIT_2
 			$AudioStreamPlayer2.play()
+		# clear hitboxes (fix double throw no time to throwbreak)
+		if get_node_or_null("HitboxThrow"):
+			$HitboxThrow.queue_free()
 
 
 ## This whole thing is to make it easire to adjust attack info ┐(￣～￣)┌ 
