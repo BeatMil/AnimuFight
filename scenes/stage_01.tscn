@@ -596,14 +596,6 @@ shape = SubResource("RectangleShape2D_i6ddm")
 position = Vector2(10472, 328)
 texture = ExtResource("11_thaiv")
 
-[node name="Enemy02" parent="Map" node_paths=PackedStringArray("target") instance=ExtResource("9_dimc6")]
-position = Vector2(10155.666, 389.1378)
-target = NodePath("../../Player")
-
-[node name="Enemy03" parent="Map" node_paths=PackedStringArray("target") instance=ExtResource("9_dimc6")]
-position = Vector2(9496, 392)
-target = NodePath("../../Player")
-
 [node name="Area3" type="Node" parent="."]
 
 [node name="JunctionBox" parent="Area3" instance=ExtResource("11_l457t")]

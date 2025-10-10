@@ -1,8 +1,7 @@
-[gd_scene load_steps=50 format=3 uid="uid://d0ufo617puti8"]
+[gd_scene load_steps=49 format=3 uid="uid://d0ufo617puti8"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_fyn6y"]
 [ext_resource type="Script" uid="uid://khnhg6mq5umm" path="res://scripts/enemy_06.gd" id="2_8x0vn"]
-[ext_resource type="Texture2D" uid="uid://bytgy7otax0fb" path="res://media/sprites/char2/SecondChar_idle.png" id="3_8x0vn"]
 [ext_resource type="Texture2D" uid="uid://kd31jmjo43pw" path="res://media/sprites/enemy06/enemy06_attack01.png" id="4_8x0vn"]
 [ext_resource type="AudioStream" uid="uid://bg8cifedlb5iu" path="res://media/sfxs/attack_warning_01.wav" id="5_kiu8o"]
 [ext_resource type="AudioStream" uid="uid://dy3bxvokjiup5" path="res://media/sfxs/big_fireball.wav" id="6_rrksh"]
@@ -43,7 +42,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_8x0vn")]
+"values": [ExtResource("12_8x0vn")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -79,7 +78,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [1]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -2198,8 +2197,7 @@ is_notarget = false
 hp = 20
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("3_8x0vn")
-hframes = 4
+texture = ExtResource("12_8x0vn")
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, 0)
@@ -2261,7 +2259,7 @@ collision_mask = 18
 shape = SubResource("RectangleShape2D_8qvtx")
 
 [node name="AttackTimer" type="Timer" parent="." index="13"]
-wait_time = 0.5
+wait_time = 0.1
 
 [node name="HpBar" parent="." index="14"]
 offset_left = -128.0

@@ -2121,7 +2121,7 @@ collision_mask = 18
 shape = SubResource("RectangleShape2D_8qvtx")
 
 [node name="AttackTimer" type="Timer" parent="." index="11"]
-wait_time = 0.5
+wait_time = 0.1
 autostart = true
 
 [node name="HpBar" parent="." index="12"]
