@@ -1548,5 +1548,5 @@ func _on_execute_area_r_body_exited(body: Node2D) -> void:
 
 
 func _on_animation_player_animation_started(anim_name: StringName) -> void:
-	if anim_name == "air_spd_burst":
+	if anim_name in ["air_spd_burst", "forward_hp"]:
 		set_throwee(null)
