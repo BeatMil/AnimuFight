@@ -66,7 +66,7 @@ func _throw_float() -> void:
 func throw_float_info() -> void: # for animation_player
 	var info = {
 	"size": Hitbox_type.THROW,
-	"time": 0.3,
+	"time": 0.1,
 	"push_power_ground": Vector2(500, 0),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
 	"push_power_air": Vector2(100, -150),
@@ -91,7 +91,7 @@ func _throw_ground() -> void:
 func throw_ground_info() -> void: # for animation_player
 	var info = {
 	"size": Hitbox_type.THROW,
-	"time": 0.3,
+	"time": 0.1,
 	"push_power_ground": Vector2(500, 0),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
 	"push_power_air": Vector2(100, -150),
@@ -111,11 +111,6 @@ func throw_ground_info() -> void: # for animation_player
 #############################################################
 ## Signals
 #############################################################
-func _on_timer_timeout() -> void:
-	if hp_bar.get_hp() > 0:
-		_lp()
-
-
 func _on_lp_range_r_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		sprite_2d.flip_h = false
