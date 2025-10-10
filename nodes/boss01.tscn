@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://c4m5deiee8q8w"]
+[gd_scene load_steps=59 format=3 uid="uid://c4m5deiee8q8w"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_uha72"]
 [ext_resource type="Texture2D" uid="uid://hfw58i0oa1gv" path="res://media/sprites/boss01/boss01_idle.png" id="2_410lf"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c3vbjp5ndcvay" path="res://media/sprites/boss01/boss01_tatsu2.png" id="15_5k0ii"]
 [ext_resource type="AudioStream" uid="uid://debrnx2edkqvf" path="res://media/sfxs/PunchAttack2.wav" id="16_uhi2f"]
 [ext_resource type="Texture2D" uid="uid://c1v0bb82c56rg" path="res://media/sprites/boss01/tatsukamki_startup2.png" id="16_umypt"]
+[ext_resource type="AudioStream" uid="uid://dwc8oylpgeeuj" path="res://media/sfxs/PunchAttack5.wav" id="18_jdqcn"]
 [ext_resource type="AudioStream" uid="uid://bg8cifedlb5iu" path="res://media/sfxs/attack_warning_01.wav" id="19_55le4"]
 [ext_resource type="Texture2D" uid="uid://c5ouq1o78dmir" path="res://media/sprites/boss01/boss01_burn_knuckle.png" id="21_884lv"]
 [ext_resource type="Texture2D" uid="uid://cp7aifoftt4c6" path="res://media/sprites/boss01/boss01_meteo_crash_start.png" id="22_kseif"]
@@ -29,6 +30,9 @@
 [ext_resource type="AudioStream" uid="uid://cd0pyf1nhyep6" path="res://media/sfxs/unequip01.wav" id="26_3a1vb"]
 [ext_resource type="Texture2D" uid="uid://br247yq64avdb" path="res://media/sprites/boss01/boss01_wallsplat.png" id="27_u8k4b"]
 [ext_resource type="AudioStream" uid="uid://dapk1wm47d6cw" path="res://media/sfxs/HitStone.wav" id="28_tf81e"]
+[ext_resource type="Texture2D" uid="uid://cm64d6816g8bi" path="res://media/sprites/boss01/boss01_jump_away.png" id="29_tf81e"]
+[ext_resource type="Texture2D" uid="uid://c7lw0uf45pnmk" path="res://media/sprites/boss01/boss01_whistle.png" id="30_fvuc1"]
+[ext_resource type="AudioStream" uid="uid://dneje0fbluobc" path="res://media/sfxs/MAGSpel_CAST-Birdsong_HY_PC-003.wav" id="31_6egxy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(64, 304)
@@ -1022,6 +1026,113 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+
+[sub_resource type="Animation" id="Animation_6egxy"]
+resource_name = "jump_away"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("29_tf81e")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector2(0, -600)],
+"method": &"_push"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:hframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:vframes")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [21],
+"method": &"_set_state"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "audio"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("18_jdqcn")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/7/use_blend = true
 
 [sub_resource type="Animation" id="Animation_12rkp"]
 resource_name = "lp1"
@@ -2020,6 +2131,99 @@ tracks/8/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_jdqcn"]
+resource_name = "whistle"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("30_fvuc1")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [21],
+"method": &"_set_state"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("31_6egxy")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/6/use_blend = true
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i6yam"]
 _data = {
 &"RESET": SubResource("Animation_u133i"),
@@ -2031,6 +2235,7 @@ _data = {
 &"execute": SubResource("Animation_gdspq"),
 &"hitted": SubResource("Animation_c3a60"),
 &"idle": SubResource("Animation_2ad64"),
+&"jump_away": SubResource("Animation_6egxy"),
 &"lp1": SubResource("Animation_12rkp"),
 &"lp1_chain": SubResource("Animation_r35ev"),
 &"meteo_crash": SubResource("Animation_55le4"),
@@ -2038,7 +2243,8 @@ _data = {
 &"thrown": SubResource("Animation_kvf3a"),
 &"walk": SubResource("Animation_w6o0s"),
 &"wall_crumble": SubResource("Animation_tf81e"),
-&"wallsplat": SubResource("Animation_fvuc1")
+&"wallsplat": SubResource("Animation_fvuc1"),
+&"whistle": SubResource("Animation_jdqcn")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1h3d5"]
@@ -2058,7 +2264,6 @@ collision_layer = 2
 collision_mask = 15
 script = ExtResource("2_n4s7b")
 is_notarget = false
-hp = 50
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_410lf")

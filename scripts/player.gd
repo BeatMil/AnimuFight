@@ -17,6 +17,7 @@ extends "res://scripts/base_character.gd"
 const COMMAND_BOX = preload("res://nodes/command_box.tscn")
 @onready var god_fist_player: AudioStreamPlayer = $GodFistPlayer
 const STRONG_PUNCH = preload("uid://b6dtaoivlmcyf")
+@onready var hud_player: AnimationPlayer = $CanvasLayer/AnimationPlayer
 
 #############################################################
 ## Config
@@ -439,6 +440,18 @@ func play_animation(animation: String) -> void:
 
 func set_flip_h(value: bool) -> void:
 	sprite_2d.flip_h = value
+
+
+func move_hud_away() -> void:
+	hud_player.play("move_away")
+
+
+func move_hud_back() -> void:
+	hud_player.play("move_back")
+
+
+func set_is_controllable(value: bool) -> void:
+	is_controllable = value
 
 
 #############################################################

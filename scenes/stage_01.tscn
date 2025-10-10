@@ -1,10 +1,11 @@
-[gd_scene load_steps=64 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=66 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
 [ext_resource type="Texture2D" uid="uid://cei5iglc0dohc" path="res://media/sprites/stage01/home.png" id="2_4caca"]
 [ext_resource type="Texture2D" uid="uid://c2anqn8y5dr50" path="res://media/sprites/stage01/floor.png" id="2_fnmkw"]
 [ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/ui/restart_menu.tscn" id="2_nh3b5"]
+[ext_resource type="PackedScene" uid="uid://bw5ja0ukb5vjq" path="res://nodes/black_bar_cutscene.tscn" id="3_4gwik"]
 [ext_resource type="Texture2D" uid="uid://cppqygp1b42a1" path="res://media/sprites/stage01/building.png" id="4_dimc6"]
 [ext_resource type="PackedScene" uid="uid://blr5gifobciq8" path="res://nodes/high_way.tscn" id="4_lrdte"]
 [ext_resource type="Texture2D" uid="uid://nv6dkesnffpt" path="res://media/sprites/stage01/floor_dark.png" id="5_nasqd"]
@@ -379,6 +380,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(12187, -2248)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../6:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(15459, -2248)]
+}
 
 [sub_resource type="Animation" id="Animation_e1vcx"]
 resource_name = "5_in"
@@ -396,6 +409,22 @@ tracks/0/keys = {
 "values": [Vector2(12184, -264)]
 }
 
+[sub_resource type="Animation" id="Animation_4gwik"]
+resource_name = "6_in"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../6:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(15459, -269)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mqdkf"]
 _data = {
 &"1_in": SubResource("Animation_pxpxr"),
@@ -403,6 +432,7 @@ _data = {
 &"3_in": SubResource("Animation_1fbf0"),
 &"4_in": SubResource("Animation_tby30"),
 &"5_in": SubResource("Animation_e1vcx"),
+&"6_in": SubResource("Animation_4gwik"),
 &"RESET": SubResource("Animation_f33yp")
 }
 
@@ -488,6 +518,8 @@ script = ExtResource("1_4caca")
 
 [node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_nh3b5")]
 visible = false
+
+[node name="BlackBarCutscene" parent="CanvasLayer" instance=ExtResource("3_4gwik")]
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
 position = Vector2(13816, 576)
@@ -1276,7 +1308,9 @@ shape = SubResource("RectangleShape2D_a8a3l")
 
 [node name="Boss01" parent="Area6" node_paths=PackedStringArray("target") instance=ExtResource("7_nh3b5")]
 position = Vector2(14328, -424)
+is_next_phase = true
 target = NodePath("../../Player")
+hp = 40
 
 [node name="WaitBossPlatform" type="StaticBody2D" parent="Area6"]
 position = Vector2(14336, -176)
@@ -1543,6 +1577,15 @@ position = Vector2(-2819, 0)
 
 [node name="WallR" parent="AreaLock/5" instance=ExtResource("21_v7t3f")]
 position = Vector2(725, 0)
+
+[node name="6" type="Node2D" parent="AreaLock"]
+position = Vector2(15459, -2248)
+
+[node name="WallL" parent="AreaLock/6" instance=ExtResource("21_v7t3f")]
+position = Vector2(-2397, 0)
+
+[node name="WallR" parent="AreaLock/6" instance=ExtResource("21_v7t3f")]
+position = Vector2(253, -3)
 
 [node name="MarketCamPos" type="Camera2D" parent="."]
 visible = false

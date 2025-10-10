@@ -113,8 +113,11 @@ func _physics_process(delta: float) -> void:
 		set_collision_no_hit_all()
 	elif stun_duration < 0 and animation_player.current_animation != "wallsplat":
 		if hp_bar.get_hp() <= 0:
-			spawn_ded_copy()
-			queue_free()
+			if is_in_group("boss"):
+				boss_next_phase()
+			else:
+				spawn_ded_copy()
+				queue_free()
 		stun_duration = 0
 		animation_player.play("idle")
 		state = States.IDLE
@@ -150,6 +153,23 @@ func _physics_process(delta: float) -> void:
 	$DebugLabel.text = "%s, %s %0.3f"%[States.keys()[state], animation_player.current_animation, stun_duration]
 	# $DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
 
+
+#############################################################
+## Public Function
+#############################################################
+func set_notarget(value: bool) -> void:
+	is_notarget = value
+
+
+func set_is_controllable(value: bool) -> void:
+	is_controllable = value
+
+
+func set_attack_timer_bool(value: bool) -> void:
+	if value:
+		attack_timer.start()
+	else:
+		attack_timer.stop()
 
 #############################################################
 ## Private Function
@@ -306,3 +326,7 @@ func _attack01() -> void: # suppress error
 func _on_tree_exited() -> void:
 	if target:
 		target.hp_bar.hp_up(2)
+
+
+func boss_next_phase() -> void:
+	pass

@@ -629,7 +629,6 @@ func hitted(
 			animation_player.play("ded")
 			stun_duration = hitstun_amount
 			state = States.BOUNCE_STUNNED
-			# set_collision_no_hit_player()
 		# Hp <= 0
 		elif hp_bar.get_hp() <= 0:
 			if push_type in [
@@ -639,12 +638,10 @@ func hitted(
 				animation_player.stop(true)
 				animation_player.play("ded")
 				stun_duration = hitstun_amount
-				# set_collision_no_hit_player()
 			elif is_ded and state != States.EXECUTETABLE:
 				animation_player.stop(true)
 				animation_player.play("down")
 				stun_duration = hitstun_amount
-				# set_collision_no_hit_player()
 			else:
 				state = States.HIT_STUNNED
 				animation_player.stop(true)
@@ -756,13 +753,7 @@ func play_iframe_hit_sfx() -> void:
 	$AudioStreamPlayer2.play()
 
 
-# func set_collision_no_hit_player() -> void: # suppress error
-# 	pass
-# 	collision_layer = 0b00000000000000010000
-# 	collision_mask = 0b00000000000000001100
-
-
-func	set_collision_no_hit_all():
+func set_collision_no_hit_all():
 	pass
 
 

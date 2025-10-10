@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=122 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
@@ -119,6 +119,168 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_df04m"),
 &"hitted": SubResource("Animation_g1v0p")
+}
+
+[sub_resource type="Animation" id="Animation_hj0f5"]
+resource_name = "move_away"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ProfileBorderOut:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, 0), Vector2(8, -184)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProfileBorderIn:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, 0), Vector2(8, -184)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Profile:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, 0), Vector2(8, -184)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HpBar2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(192, 80), Vector2(192, -104)]
+}
+
+[sub_resource type="Animation" id="Animation_ma164"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ProfileBorderOut:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProfileBorderIn:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Profile:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HpBar2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(192, 80)]
+}
+
+[sub_resource type="Animation" id="Animation_7sjys"]
+resource_name = "move_back"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ProfileBorderOut:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, -184), Vector2(8, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProfileBorderIn:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, -184), Vector2(8, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Profile:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, -184), Vector2(8, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HpBar2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(192, -104), Vector2(192, 80)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7sjys"]
+_data = {
+&"RESET": SubResource("Animation_ma164"),
+&"move_away": SubResource("Animation_hj0f5"),
+&"move_back": SubResource("Animation_7sjys")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47ont"]
@@ -5862,27 +6024,34 @@ grow_horizontal = 2
 theme_override_fonts/font = ExtResource("3_q6yga")
 theme_override_font_sizes/font_size = 64
 
-[node name="HpBar2" parent="CanvasLayer" index="1" instance=ExtResource("4_0a5oy")]
-offset_left = 190.0
-offset_top = 79.0
-offset_right = 446.0
-offset_bottom = 95.0
+[node name="CommandHistory" type="VBoxContainer" parent="CanvasLayer" index="1"]
+offset_left = 8.0
+offset_top = 192.0
+offset_right = 192.0
+offset_bottom = 1272.0
+
+[node name="HpBar2" parent="CanvasLayer" index="2" instance=ExtResource("4_0a5oy")]
+offset_left = 192.0
+offset_top = 80.0
+offset_right = 448.0
+offset_bottom = 96.0
 scale = Vector2(2, 2)
 size_flags_vertical = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="ProfileBorderOut" type="Polygon2D" parent="CanvasLayer" index="2"]
+[node name="ProfileBorderOut" type="Polygon2D" parent="CanvasLayer" index="3"]
 show_behind_parent = true
 position = Vector2(8, 0)
 color = Color(0.900531, 0.521334, 0.604143, 1)
 polygon = PackedVector2Array(8, 8, 168, 8, 168, 176, 8, 176)
 
-[node name="ProfileBorderIn" type="Polygon2D" parent="CanvasLayer" index="3"]
+[node name="ProfileBorderIn" type="Polygon2D" parent="CanvasLayer" index="4"]
 show_behind_parent = true
 position = Vector2(8, 0)
 color = Color(0.941176, 0.898039, 0.886275, 1)
 polygon = PackedVector2Array(16, 16, 160, 16, 160, 168, 16, 168)
 
-[node name="Profile" type="Sprite2D" parent="CanvasLayer" index="4"]
+[node name="Profile" type="Sprite2D" parent="CanvasLayer" index="5"]
 position = Vector2(8, 0)
 texture = ExtResource("11_xlakb")
 centered = false
@@ -5894,11 +6063,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_tiirf")
 }
 
-[node name="CommandHistory" type="VBoxContainer" parent="CanvasLayer" index="5"]
-offset_left = 8.0
-offset_top = 192.0
-offset_right = 192.0
-offset_bottom = 1272.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer" index="6"]
+libraries = {
+&"": SubResource("AnimationLibrary_7sjys")
+}
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("3_uo2uk")

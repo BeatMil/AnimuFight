@@ -3,6 +3,8 @@ extends "res://scripts/enemy.gd"
 @onready var meteo_pos: Marker2D = $HitBoxPos/MeteoPos
 @onready var detect_ground: Area2D = $DetectGround
 
+@export var is_next_phase = false
+
 var is_player_in_range_burn_knuckle = false
 
 
@@ -240,3 +242,20 @@ func _on_detect_ground_body_entered(_body: Node2D) -> void:
 		set_collision_normal()
 		ObjectPooling.spawn_ground_spark(global_position, false)
 		CameraManager.start_screen_shake(50, 0.3)
+
+
+func boss_next_phase() -> void:
+	if is_next_phase:
+		is_controllable = false
+		is_notarget = true
+		attack_timer_stop()
+		collision_layer= 0b00000000000000000000
+		await get_tree().create_timer(0.1).timeout
+		animation_player.play("whistle")
+		await get_tree().create_timer(2).timeout
+		animation_player.play("jump_away")
+		await get_tree().create_timer(1).timeout
+		queue_free()
+	else:
+		spawn_ded_copy()
+		queue_free()

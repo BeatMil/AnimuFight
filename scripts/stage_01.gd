@@ -25,6 +25,9 @@ const BANANA_FLY = preload("uid://dmjg7bqnvd1dk")
 @onready var boss_01: CharacterBody2D = $Area6/Boss01
 @onready var wait_boss_platform: StaticBody2D = $Area6/WaitBossPlatform
 @onready var shiny: Node2D = $Area6/Shiny
+@onready var black_bar_cutscene: Node2D = $CanvasLayer/BlackBarCutscene
+@onready var boss_intro_trigger: Area2D = $Area6/BossIntroTrigger
+
 
 func hitlag(_amount: float = 0.3) -> void:
 	pass
@@ -157,11 +160,15 @@ func _on_area_5_lock_trigger_body_entered(_body: Node2D) -> void:
 
 
 func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
+	boss_intro_trigger.queue_free()
 	body.is_controllable = false
 	if body.state == 10: # AIR state
 		body.velocity = Vector2.ZERO
 		await get_tree().create_timer(0.3).timeout
 
+	area_lock_player.play("6_in")
+	player.move_hud_away()
+	black_bar_cutscene.enable()
 	var delta = get_physics_process_delta_time()
 	var tween = create_tween()
 	tween.tween_callback(body.play_animation.bind("walk"))
@@ -203,3 +210,11 @@ func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
 	tween.tween_callback(Input.action_press.bind("left"))
 	tween.tween_interval(0.5)
 	tween.tween_callback(Input.action_release.bind("left"))
+	tween.tween_interval(0.5)
+	tween.tween_callback(black_bar_cutscene.disable)
+	tween.tween_callback(player.move_hud_back)
+	tween.tween_callback(CameraManager.set_screen_lock.bind(13317, 15458, -10000000, 1000))
+	tween.tween_callback(player.set_is_controllable.bind(true))
+	tween.tween_callback(boss_01.set_notarget.bind(false))
+	tween.tween_callback(boss_01.set_is_controllable.bind(true))
+	tween.tween_callback(boss_01.set_attack_timer_bool.bind(true))
