@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://c4m5deiee8q8w"]
+[gd_scene load_steps=62 format=3 uid="uid://c4m5deiee8q8w"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_uha72"]
 [ext_resource type="Texture2D" uid="uid://hfw58i0oa1gv" path="res://media/sprites/boss01/boss01_idle.png" id="2_410lf"]
@@ -33,6 +33,8 @@
 [ext_resource type="Texture2D" uid="uid://cm64d6816g8bi" path="res://media/sprites/boss01/boss01_jump_away.png" id="29_tf81e"]
 [ext_resource type="Texture2D" uid="uid://c7lw0uf45pnmk" path="res://media/sprites/boss01/boss01_whistle.png" id="30_fvuc1"]
 [ext_resource type="AudioStream" uid="uid://dneje0fbluobc" path="res://media/sfxs/MAGSpel_CAST-Birdsong_HY_PC-003.wav" id="31_6egxy"]
+[ext_resource type="Texture2D" uid="uid://bj8rlpi72w7b7" path="res://media/sprites/boss01/boss01_call_heli.png" id="33_bygyi"]
+[ext_resource type="AudioStream" uid="uid://b5lsguycrmhpj" path="res://media/sfxs/DSGNTonl_USABLE-Scifi Select_HY_PC-001.wav" id="34_kwc6h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jfq2"]
 size = Vector2(64, 304)
@@ -523,6 +525,123 @@ tracks/9/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 0, 1, 2, 3]
 }
+
+[sub_resource type="Animation" id="Animation_kwc6h"]
+resource_name = "call_heli"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("33_bygyi")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [22],
+"method": &"_set_state"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/6/use_blend = true
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_collision_no_hit_all"
+}]
+}
+tracks/8/type = "audio"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer3")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"clips": [{
+"end_offset": 1.89,
+"start_offset": 0.0,
+"stream": ExtResource("34_kwc6h")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/8/use_blend = true
 
 [sub_resource type="Animation" id="Animation_17bum"]
 resource_name = "ded"
@@ -2230,6 +2349,7 @@ _data = {
 &"attack01_1": SubResource("Animation_lyryn"),
 &"blockstunned": SubResource("Animation_20i1x"),
 &"burn_knuckle": SubResource("Animation_kseif"),
+&"call_heli": SubResource("Animation_kwc6h"),
 &"ded": SubResource("Animation_17bum"),
 &"down": SubResource("Animation_dc3jf"),
 &"execute": SubResource("Animation_gdspq"),
@@ -2264,7 +2384,9 @@ collision_layer = 2
 collision_mask = 15
 script = ExtResource("2_n4s7b")
 is_next_phase = false
+is_heli_phase = false
 is_notarget = false
+block_rate = 0
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_410lf")
@@ -2273,12 +2395,16 @@ texture = ExtResource("2_410lf")
 position = Vector2(0, 0)
 shape = SubResource("RectangleShape2D_8jfq2")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="." index="4"]
+volume_db = 4.0
+bus = &"LouderBus"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 libraries = {
 &"": SubResource("AnimationLibrary_i6yam")
 }
 
-[node name="Timer" type="Timer" parent="." index="5"]
+[node name="Timer" type="Timer" parent="." index="6"]
 editor_description = "Prevent lp() when ded"
 
 [node name="LpPos" parent="HitBoxPos" index="0"]
@@ -2287,7 +2413,7 @@ position = Vector2(168, 0)
 [node name="MeteoPos" type="Marker2D" parent="HitBoxPos" index="1"]
 position = Vector2(0, 168)
 
-[node name="LpRange" type="Area2D" parent="." index="7"]
+[node name="LpRange" type="Area2D" parent="." index="8"]
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LpRange" index="0"]
@@ -2298,7 +2424,7 @@ shape = SubResource("RectangleShape2D_1h3d5")
 position = Vector2(-192, 0)
 shape = SubResource("RectangleShape2D_1h3d5")
 
-[node name="BurnKnuckleRange" type="Area2D" parent="." index="8"]
+[node name="BurnKnuckleRange" type="Area2D" parent="." index="9"]
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BurnKnuckleRange" index="0"]
@@ -2309,7 +2435,7 @@ shape = SubResource("RectangleShape2D_kseif")
 position = Vector2(440, 0)
 shape = SubResource("RectangleShape2D_kseif")
 
-[node name="DebugLabel" type="Label" parent="." index="9"]
+[node name="DebugLabel" type="Label" parent="." index="10"]
 offset_left = -128.0
 offset_top = -264.0
 offset_right = 144.0
@@ -2318,23 +2444,23 @@ theme_override_fonts/font = ExtResource("6_prwho")
 theme_override_font_sizes/font_size = 39
 text = "bob"
 
-[node name="BounceTogether" type="Area2D" parent="." index="10"]
+[node name="BounceTogether" type="Area2D" parent="." index="11"]
 collision_layer = 0
 collision_mask = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceTogether" index="0"]
 shape = SubResource("RectangleShape2D_8qvtx")
 
-[node name="AttackTimer" type="Timer" parent="." index="11"]
+[node name="AttackTimer" type="Timer" parent="." index="12"]
 wait_time = 0.1
 
-[node name="HpBar" parent="." index="12"]
+[node name="HpBar" parent="." index="13"]
 offset_left = -128.0
 offset_top = -184.0
 offset_right = 128.0
 offset_bottom = -168.0
 
-[node name="DetectGround" type="Area2D" parent="." index="14"]
+[node name="DetectGround" type="Area2D" parent="." index="15"]
 editor_description = "Detect ground to spawn meteo crash spark"
 position = Vector2(0, 144)
 collision_layer = 0

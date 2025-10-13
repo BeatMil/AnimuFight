@@ -30,6 +30,11 @@ const BANANA_FLY = preload("uid://dmjg7bqnvd1dk")
 @onready var black_bar_cutscene: Node2D = $CanvasLayer/BlackBarCutscene
 @onready var boss_intro_trigger: Area2D = $Area6/BossIntroTrigger
 @onready var area_6_spawner: Node2D = $Area6/Area6Spawner
+@onready var player_skip_pos: Marker2D = $Area6/PlayerSkipPos
+@onready var boss_skip_pos: Marker2D = $Area6/BossSkipPos
+var boss_intro_tween: Tween
+var is_in_boss_intro = false
+@onready var area_6_player: AnimationPlayer = $Area6/Area6Player
 
 
 func hitlag(_amount: float = 0.3) -> void:
@@ -38,6 +43,13 @@ func hitlag(_amount: float = 0.3) -> void:
 	# 	set_physics_process(false)
 	# 	await get_tree().create_timer(_amount).timeout
 	# 	set_physics_process(true)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") or \
+		event.is_action_pressed("ui_accept") or event.is_action_pressed("pause"):
+		if is_in_boss_intro:
+			_skip_boss_intro()
 
 
 func _ready() -> void:
@@ -61,6 +73,8 @@ func _ready() -> void:
 	boss_01.attack_timer_stop()
 	area_6_spawner.is_active = false
 	boss_01.next_phase.connect(_boss01_next_phase_emitted)
+
+	boss_02.call_heli.connect(boss_call_heli)
 	boss_02.set_physics_process(false)
 	boss_02.visible = false
 
@@ -98,10 +112,6 @@ func _on_area_1_lock_trigger_body_entered(_body: Node2D) -> void:
 func _lift_wall_area1() -> void:
 	area_lock_player.play("RESET")
 	CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
-	# var tween = get_tree().create_tween()
-	# tween.tween_property(transition_camera, "position", player.position, 0.2).set_trans(Tween.TRANS_SINE)
-	# tween.tween_interval(0.2)
-	# tween.tween_callback(player.get_camera().make_current)
 
 
 func _on_market_green_banana_fly() -> void:
@@ -169,6 +179,7 @@ func _on_area_5_lock_trigger_body_entered(_body: Node2D) -> void:
 
 func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
 	boss_intro_trigger.queue_free()
+	is_in_boss_intro = true
 	body.is_controllable = false
 	if body.state == 10: # AIR state
 		body.velocity = Vector2.ZERO
@@ -178,58 +189,91 @@ func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
 	player.move_hud_away()
 	black_bar_cutscene.enable()
 	var delta = get_physics_process_delta_time()
-	var tween = create_tween()
-	tween.tween_callback(body.play_animation.bind("walk"))
-	tween.tween_method(body._move_right, delta, delta, 0.8)
-	tween.tween_callback(body.play_animation.bind("idle"))
-	tween.tween_callback(wait_boss_platform.queue_free)
-	tween.tween_callback(boss_01.meteo_crash)
-	tween.tween_interval(1.2)
-	tween.tween_callback(body.play_animation.bind("dodge"))
-	tween.tween_interval(0.18)
-	tween.tween_callback(shiny.queue_free)
-	tween.tween_interval(0.8)
-	tween.tween_callback(body.play_animation.bind("EWGF"))
-	tween.tween_interval(0.5)
-	tween.tween_callback(body.play_animation.bind("EWGF"))
-	tween.tween_interval(0.5)
-	tween.tween_callback(body.play_animation.bind("EWGF"))
-	tween.tween_interval(0.5)
-	tween.tween_callback(body.play_animation.bind("wave_dash"))
-	tween.tween_interval(0.1)
-	tween.tween_callback(body.play_animation.bind("EWGF"))
-	tween.tween_interval(0.3)
-	tween.tween_callback(body.play_animation.bind("jin1+2"))
-	tween.tween_interval(0.8)
-	tween.tween_callback(body.play_animation.bind("air_throw"))
-	tween.tween_interval(1.0)
-	tween.tween_callback(body.play_animation.bind("dash"))
-	tween.tween_interval(0.3)
-	tween.tween_callback(body.set_flip_h.bind(true))
-	tween.tween_callback(body.play_animation.bind("lp1"))
-	tween.tween_interval(0.2)
-	tween.tween_callback(body.play_animation.bind("lp2"))
-	tween.tween_interval(0.3)
-	tween.tween_callback(body.play_animation.bind("lp3"))
-	tween.tween_interval(0.3)
-	tween.tween_callback(body.play_animation.bind("wave_dash"))
-	tween.tween_interval(0.3)
-	tween.tween_callback(body.play_animation.bind("ground_grab"))
-	tween.tween_callback(Input.action_press.bind("left"))
-	tween.tween_interval(0.5)
-	tween.tween_callback(Input.action_release.bind("left"))
-	tween.tween_interval(0.5)
-	tween.tween_callback(black_bar_cutscene.disable)
-	tween.tween_callback(player.move_hud_back)
-	tween.tween_callback(CameraManager.set_screen_lock.bind(13317, 15458, -10000000, 1000))
-	tween.tween_callback(player.set_is_controllable.bind(true))
-	tween.tween_callback(boss_01.set_notarget.bind(false))
-	tween.tween_callback(boss_01.set_is_controllable.bind(true))
-	tween.tween_callback(boss_01.set_attack_timer_bool.bind(true))
+	boss_intro_tween = create_tween()
+	boss_intro_tween.tween_callback(body.play_animation.bind("walk"))
+	boss_intro_tween.tween_method(body._move_right, delta, delta, 0.8)
+	boss_intro_tween.tween_callback(body.play_animation.bind("idle"))
+	boss_intro_tween.tween_callback(wait_boss_platform.queue_free)
+	boss_intro_tween.tween_callback(boss_01.meteo_crash)
+	boss_intro_tween.tween_interval(1.2)
+	boss_intro_tween.tween_callback(body.play_animation.bind("dodge"))
+	boss_intro_tween.tween_interval(0.18)
+	boss_intro_tween.tween_callback(shiny.queue_free)
+	boss_intro_tween.tween_interval(0.8)
+	boss_intro_tween.tween_callback(body.play_animation.bind("EWGF"))
+	boss_intro_tween.tween_interval(0.5)
+	boss_intro_tween.tween_callback(body.play_animation.bind("EWGF"))
+	boss_intro_tween.tween_interval(0.5)
+	boss_intro_tween.tween_callback(body.play_animation.bind("EWGF"))
+	boss_intro_tween.tween_interval(0.5)
+	boss_intro_tween.tween_callback(body.play_animation.bind("wave_dash"))
+	boss_intro_tween.tween_interval(0.1)
+	boss_intro_tween.tween_callback(body.play_animation.bind("EWGF"))
+	boss_intro_tween.tween_interval(0.3)
+	boss_intro_tween.tween_callback(body.play_animation.bind("jin1+2"))
+	boss_intro_tween.tween_interval(0.8)
+	boss_intro_tween.tween_callback(body.play_animation.bind("air_throw"))
+	boss_intro_tween.tween_interval(1.0)
+	boss_intro_tween.tween_callback(body.play_animation.bind("dash"))
+	boss_intro_tween.tween_interval(0.3)
+	boss_intro_tween.tween_callback(body.set_flip_h.bind(true))
+	boss_intro_tween.tween_callback(body.play_animation.bind("lp1"))
+	boss_intro_tween.tween_interval(0.2)
+	boss_intro_tween.tween_callback(body.play_animation.bind("lp2"))
+	boss_intro_tween.tween_interval(0.3)
+	boss_intro_tween.tween_callback(body.play_animation.bind("lp3"))
+	boss_intro_tween.tween_interval(0.3)
+	boss_intro_tween.tween_callback(body.play_animation.bind("wave_dash"))
+	boss_intro_tween.tween_interval(0.3)
+	boss_intro_tween.tween_callback(body.play_animation.bind("ground_grab"))
+	boss_intro_tween.tween_callback(Input.action_press.bind("left"))
+	boss_intro_tween.tween_interval(0.5)
+	boss_intro_tween.tween_callback(Input.action_release.bind("left"))
+	boss_intro_tween.tween_interval(0.5)
+	boss_intro_tween.tween_callback(black_bar_cutscene.disable)
+	boss_intro_tween.tween_callback(player.move_hud_back)
+	boss_intro_tween.tween_callback(CameraManager.set_screen_lock.bind(13317, 15458, -10000000, 1000))
+	boss_intro_tween.tween_callback(player.set_is_controllable.bind(true))
+	boss_intro_tween.tween_callback(boss_01.set_notarget.bind(false))
+	boss_intro_tween.tween_callback(boss_01.set_is_controllable.bind(true))
+	boss_intro_tween.tween_callback(boss_01.set_attack_timer_bool.bind(true))
+	boss_intro_tween.tween_callback(boss_01.set_attack_timer_bool.bind(true))
+	boss_intro_tween.tween_callback(set_is_boss_intro.bind(false))
 
 
 func _boss01_next_phase_emitted() -> void:
 	area_6_spawner.is_active = true
+
+
+func set_is_boss_intro(value: bool) -> void:
+	is_in_boss_intro = value
+
+
+func _skip_boss_intro() -> void: ## T^T
+	is_in_boss_intro = false
+	if boss_intro_tween:
+		boss_intro_tween.kill()
+	black_bar_cutscene.disable()
+	player.move_hud_back()
+	if shiny:
+		shiny.queue_free()
+	if wait_boss_platform:
+		wait_boss_platform.queue_free()
+	boss_01.position = boss_skip_pos.position
+	player.position = player_skip_pos.position
+	player.set_is_controllable(true)
+	boss_01.set_notarget(false)
+	boss_01.set_is_controllable(true)
+	boss_01.set_attack_timer_bool(true)
+	boss_01.animation_player.play("idle")
+	boss_01.hp_bar.set_hp(3)
+	CameraManager.set_screen_lock(13317, 15458, -10000000, 1000)
+
+
+func boss_call_heli() -> void:
+	area_6_player.play("heli_attack")
+	CameraManager.zoom(Vector2(-0.2, -0.2), 5)
+
 
 
 func _boss_second_time() -> void:
@@ -239,3 +283,4 @@ func _boss_second_time() -> void:
 	ObjectPooling.spawn_attack_type_indicator(1, player.position-Vector2(-100, 0))
 	ObjectPooling.spawn_attack_type_indicator(1, player.position-Vector2(100, 0))
 	boss_02.meteo_crash()
+	boss_02.set_attack_timer_bool(true)

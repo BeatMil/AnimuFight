@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=70 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -40,6 +40,7 @@
 [ext_resource type="AudioStream" uid="uid://d1rmtijm23hh0" path="res://media/sfxs/anime-cat-girl-6731.mp3" id="28_1fbf0"]
 [ext_resource type="PackedScene" uid="uid://c5b77m0nmmb5l" path="res://nodes/enemy_05.tscn" id="28_rkgfh"]
 [ext_resource type="PackedScene" uid="uid://b6kmen2v6b476" path="res://nodes/shiny.tscn" id="31_a8a3l"]
+[ext_resource type="AudioStream" uid="uid://c6gyoji58l4b1" path="res://media/sfxs/helicopter-sound-8d-372463.mp3" id="31_mi4ny"]
 [ext_resource type="Texture2D" uid="uid://kma2rfutfsxc" path="res://media/sprites/stage01/boss_fight_place/helicopter.png" id="39_83i0n"]
 
 [sub_resource type="Animation" id="Animation_lrdte"]
@@ -90,6 +91,58 @@ size = Vector2(304, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ugsm"]
 size = Vector2(1936, 336)
+
+[sub_resource type="Animation" id="Animation_mi4ny"]
+resource_name = "heli_attack"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Helicopter:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(9024, -468), Vector2(20024, -468)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Helicopter/AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.074779615,
+"stream": ExtResource("31_mi4ny")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_phlmp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Helicopter:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(12024, -1168.0002)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t6tfn"]
+_data = {
+&"RESET": SubResource("Animation_phlmp"),
+&"heli_attack": SubResource("Animation_mi4ny")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8a3l"]
 size = Vector2(64, 384)
@@ -1265,6 +1318,23 @@ position = Vector2(12440, -368)
 [node name="Area6" type="Node" parent="."]
 editor_description = "Boss intro area"
 
+[node name="Area6Player" type="AnimationPlayer" parent="Area6"]
+libraries = {
+&"": SubResource("AnimationLibrary_t6tfn")
+}
+
+[node name="Helicopter" type="Sprite2D" parent="Area6"]
+position = Vector2(12024, -1168.0002)
+rotation = 0.31507713
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("39_83i0n")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Area6/Helicopter"]
+position = Vector2(661.3469, 221.9833)
+volume_db = 12.0
+max_distance = 5000.0
+bus = &"LouderBus"
+
 [node name="StaticBody2D2" type="StaticBody2D" parent="Area6" groups=["ground"]]
 position = Vector2(14384, 496)
 collision_layer = 8
@@ -1291,10 +1361,6 @@ shape = SubResource("RectangleShape2D_0ugsm")
 [node name="ParkGround" type="Sprite2D" parent="Area6/StaticBody2D3"]
 texture = ExtResource("26_dfap7")
 
-[node name="Helicopter" type="Sprite2D" parent="Area6"]
-position = Vector2(15824, 413)
-texture = ExtResource("39_83i0n")
-
 [node name="Shiny" parent="Area6" instance=ExtResource("31_a8a3l")]
 position = Vector2(14332, 745)
 
@@ -1314,7 +1380,7 @@ hp = 40
 
 [node name="Boss02" parent="Area6" node_paths=PackedStringArray("target") instance=ExtResource("7_nh3b5")]
 position = Vector2(14520, -424)
-is_next_phase = true
+is_heli_phase = true
 target = NodePath("../../Player")
 hp = 60
 
@@ -1490,6 +1556,12 @@ position = Vector2(13880, -800)
 
 [node name="pos2" type="Marker2D" parent="Area6/Area6SpawnPos"]
 position = Vector2(15200, -800)
+
+[node name="PlayerSkipPos" type="Marker2D" parent="Area6"]
+position = Vector2(14816, 512)
+
+[node name="BossSkipPos" type="Marker2D" parent="Area6"]
+position = Vector2(13656, 496)
 
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")

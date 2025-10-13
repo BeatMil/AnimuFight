@@ -8,7 +8,7 @@ var is_skipping: bool = false
 @onready var skip_bar: ProgressBar = $"."
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if is_skipping:
 		skip_bar.value += skip_bar.step
 	else:
@@ -30,6 +30,6 @@ func _input(event: InputEvent) -> void:
 # 		is_fully_visible = true
 
 
-func _on_value_changed(value: float) -> void:
+func _on_value_changed(_value: float) -> void:
 	if skip_bar.value == skip_bar.max_value:
 		SceneTransition.change_scene(next_scene)

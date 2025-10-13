@@ -1,13 +1,16 @@
 extends "res://scripts/enemy.gd"
 
 signal next_phase
+signal call_heli
 
 @onready var meteo_pos: Marker2D = $HitBoxPos/MeteoPos
 @onready var detect_ground: Area2D = $DetectGround
 
 @export var is_next_phase = false
+@export var is_heli_phase = false
 
 var is_player_in_range_burn_knuckle = false
+var is_call_heli_once = false
 
 
 func _ready() -> void:
@@ -232,8 +235,26 @@ func _on_attack_timer_timeout() -> void:
 
 func do_attack() -> void:
 	if is_player_in_range_burn_knuckle or is_player_in_range_lp:
-		state = States.ATTACK
-		_attack01()
+		if is_heli_phase:
+			if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
+				if not is_call_heli_once: # call heli one time
+					animation_player.play("call_heli")
+					emit_signal("call_heli")
+					is_call_heli_once = true
+					return
+				match randi_range(0, 3):
+					0:
+						animation_player.play("meteo_crash")
+					1:
+						animation_player.play("burn_knuckle")
+					2:
+						animation_player.play("lp1")
+					3:
+						animation_player.play("call_heli")
+						emit_signal("call_heli")
+		else:
+			state = States.ATTACK
+			_attack01()
 
 
 func _on_detect_ground_body_entered(_body: Node2D) -> void:
