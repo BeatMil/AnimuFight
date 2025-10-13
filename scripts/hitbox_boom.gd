@@ -13,3 +13,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	move_local_x(boom_speed * delta)
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	await get_tree().create_timer(1).timeout
+	queue_free()

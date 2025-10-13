@@ -22,11 +22,14 @@ const BANANA_FLY = preload("uid://dmjg7bqnvd1dk")
 @onready var area_5_lock_trigger: Area2D = $Area5/Area5LockTrigger
 @onready var area_5_spawner: Node2D = $Area5/Area5Spawner
 
+
 @onready var boss_01: CharacterBody2D = $Area6/Boss01
+@onready var boss_02: CharacterBody2D = $Area6/Boss02
 @onready var wait_boss_platform: StaticBody2D = $Area6/WaitBossPlatform
 @onready var shiny: Node2D = $Area6/Shiny
 @onready var black_bar_cutscene: Node2D = $CanvasLayer/BlackBarCutscene
 @onready var boss_intro_trigger: Area2D = $Area6/BossIntroTrigger
+@onready var area_6_spawner: Node2D = $Area6/Area6Spawner
 
 
 func hitlag(_amount: float = 0.3) -> void:
@@ -56,6 +59,10 @@ func _ready() -> void:
 	boss_01.is_controllable = false
 	boss_01.is_notarget = true
 	boss_01.attack_timer_stop()
+	area_6_spawner.is_active = false
+	boss_01.next_phase.connect(_boss01_next_phase_emitted)
+	boss_02.set_physics_process(false)
+	boss_02.visible = false
 
 	Settings.current_stage = "res://scenes/stage_01.tscn"
 
@@ -63,6 +70,7 @@ func _ready() -> void:
 	area_3_spawner.area_done.connect(_lift_wall_area1)
 	area_4_spawner.area_done.connect(_lift_wall_area1)
 	area_5_spawner.area_done.connect(_lift_wall_area1)
+	area_6_spawner.area_done.connect(_boss_second_time)
 
 	# Player ost
 	# music_player.play("stage01_track_copyright")
@@ -218,3 +226,16 @@ func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
 	tween.tween_callback(boss_01.set_notarget.bind(false))
 	tween.tween_callback(boss_01.set_is_controllable.bind(true))
 	tween.tween_callback(boss_01.set_attack_timer_bool.bind(true))
+
+
+func _boss01_next_phase_emitted() -> void:
+	area_6_spawner.is_active = true
+
+
+func _boss_second_time() -> void:
+	boss_02.set_physics_process(true)
+	boss_02.visible = true
+	ObjectPooling.spawn_attack_type_indicator(1, player.position)
+	ObjectPooling.spawn_attack_type_indicator(1, player.position-Vector2(-100, 0))
+	ObjectPooling.spawn_attack_type_indicator(1, player.position-Vector2(100, 0))
+	boss_02.meteo_crash()

@@ -1,5 +1,7 @@
 extends "res://scripts/enemy.gd"
 
+signal next_phase
+
 @onready var meteo_pos: Marker2D = $HitBoxPos/MeteoPos
 @onready var detect_ground: Area2D = $DetectGround
 
@@ -8,10 +10,8 @@ extends "res://scripts/enemy.gd"
 var is_player_in_range_burn_knuckle = false
 
 
-
 func _ready() -> void:
 	super._ready()
-	block_rate = 10
 	DED_SPRITE = preload("res://media/sprites/boss01/boss01_down.png")
 
 
@@ -255,6 +255,7 @@ func boss_next_phase() -> void:
 		await get_tree().create_timer(2).timeout
 		animation_player.play("jump_away")
 		await get_tree().create_timer(1).timeout
+		emit_signal("next_phase")
 		queue_free()
 	else:
 		spawn_ded_copy()

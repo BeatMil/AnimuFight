@@ -24,6 +24,7 @@ func _spawn_enemy() -> void:
 		e.position = enemy.position.position
 		e.target = target
 		e.hp = enemy.hp
+		e.block_rate = enemy.block_rate
 		enemy_count.add_child(e)
 		enemy_to_spawn.erase(enemy)
 		await get_tree().create_timer(0.1).timeout

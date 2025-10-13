@@ -4,6 +4,7 @@
 
 [node name="AttackQueue" type="Node"]
 script = ExtResource("1_f8t4c")
+secs_between_attack = 1.0
 
 [node name="AttackQueueTimer" type="Timer" parent="."]
 autostart = true

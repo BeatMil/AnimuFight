@@ -2263,6 +2263,7 @@ size = Vector2(176, 48)
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("2_n4s7b")
+is_next_phase = false
 is_notarget = false
 
 [node name="Sprite2D" parent="." index="0"]

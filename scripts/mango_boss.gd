@@ -8,7 +8,6 @@ signal mango_boss_down
 
 func _ready() -> void:
 	super._ready()
-	block_rate = 10
 	DED_SPRITE = preload("res://media/sprites/mango_boss/mango_boss_down.png")
 
 

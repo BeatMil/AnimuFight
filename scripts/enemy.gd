@@ -48,7 +48,6 @@ func _ready() -> void:
 	gravity_power = 5000
 	hp_bar.set_hp(hp)
 	$ExecuteShow.text = "%s"%InputMap.action_get_events("execute")[0].as_text()
-	pass
 	# $Timer.start()
 	# _lp()
 

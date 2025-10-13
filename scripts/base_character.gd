@@ -116,8 +116,8 @@ var is_face_right:bool = true
 var gravity_power = 10000
 var jump_power = 250000
 @export var hp: int = 5
+@export_range(0, 10) var block_rate: int = 5
 var friction: float = 0.1
-var block_rate = 5
 
 ## wall bounce helper
 var is_touching_wall_left: bool = false
