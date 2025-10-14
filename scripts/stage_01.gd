@@ -35,6 +35,9 @@ const BANANA_FLY = preload("uid://dmjg7bqnvd1dk")
 var boss_intro_tween: Tween
 var is_in_boss_intro = false
 @onready var area_6_player: AnimationPlayer = $Area6/Area6Player
+@onready var heli_shot_pos: Node2D = $Area6/HeliShotPos
+const HELI_SPEAR = preload("uid://4hm7nxb8bsll")
+@onready var helicopter: Sprite2D = $Area6/Helicopter
 
 
 func hitlag(_amount: float = 0.3) -> void:
@@ -179,13 +182,16 @@ func _on_area_5_lock_trigger_body_entered(_body: Node2D) -> void:
 
 func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
 	boss_intro_trigger.queue_free()
+	area_lock_player.play("6_in")
+	boss_01.queue_free()
+	_boss_second_time()
+	return
 	is_in_boss_intro = true
 	body.is_controllable = false
 	if body.state == 10: # AIR state
 		body.velocity = Vector2.ZERO
 		await get_tree().create_timer(0.3).timeout
 
-	area_lock_player.play("6_in")
 	player.move_hud_away()
 	black_bar_cutscene.enable()
 	var delta = get_physics_process_delta_time()
@@ -271,12 +277,28 @@ func _skip_boss_intro() -> void: ## T^T
 
 
 func boss_call_heli() -> void:
+	area_6_player.stop()
 	area_6_player.play("heli_attack")
-	CameraManager.zoom(Vector2(-0.2, -0.2), 5)
-
+	CameraManager.zoom(Vector2(-0.15, -0.15), 5)
+	var pitch = 1
+	for child in heli_shot_pos.get_children():
+		ObjectPooling.spawn_heli_bomb_warning(child.global_position, pitch)
+		pitch += 0.1
+		await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(1).timeout
+	pitch = 1
+	for child in heli_shot_pos.get_children():
+		spawn_heli_spear(child.global_position+Vector2(0,-1000), pitch)
+		pitch += 0.1
+		await get_tree().create_timer(0.18).timeout
 
 
 func _boss_second_time() -> void:
+	if shiny:
+		shiny.queue_free()
+	if wait_boss_platform:
+		wait_boss_platform.queue_free()
+	CameraManager.set_screen_lock(13317, 15458, -10000000, 1000)
 	boss_02.set_physics_process(true)
 	boss_02.visible = true
 	ObjectPooling.spawn_attack_type_indicator(1, player.position)
@@ -284,3 +306,10 @@ func _boss_second_time() -> void:
 	ObjectPooling.spawn_attack_type_indicator(1, player.position-Vector2(100, 0))
 	boss_02.meteo_crash()
 	boss_02.set_attack_timer_bool(true)
+
+
+func spawn_heli_spear(pos, pitch) -> void:
+	var hitspark = HELI_SPEAR.instantiate()
+	hitspark.position = pos
+	hitspark.pitch_scale = pitch
+	get_tree().current_scene.add_child(hitspark)

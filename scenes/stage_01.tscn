@@ -1382,7 +1382,7 @@ hp = 40
 position = Vector2(14520, -424)
 is_heli_phase = true
 target = NodePath("../../Player")
-hp = 60
+hp = 100
 
 [node name="WaitBossPlatform" type="StaticBody2D" parent="Area6"]
 position = Vector2(14336, -176)
@@ -1562,6 +1562,30 @@ position = Vector2(14816, 512)
 
 [node name="BossSkipPos" type="Marker2D" parent="Area6"]
 position = Vector2(13656, 496)
+
+[node name="HeliShotPos" type="Node2D" parent="Area6"]
+position = Vector2(14400, -64)
+
+[node name="Pos01" type="Marker2D" parent="Area6/HeliShotPos"]
+position = Vector2(-960, 768)
+
+[node name="Pos02" type="Marker2D" parent="Area6/HeliShotPos"]
+position = Vector2(-640, 768)
+
+[node name="Pos03" type="Marker2D" parent="Area6/HeliShotPos"]
+position = Vector2(-320, 768)
+
+[node name="Pos04" type="Marker2D" parent="Area6/HeliShotPos"]
+position = Vector2(0, 768)
+
+[node name="Pos05" type="Marker2D" parent="Area6/HeliShotPos"]
+position = Vector2(320, 768)
+
+[node name="Pos06" type="Marker2D" parent="Area6/HeliShotPos"]
+position = Vector2(640, 768)
+
+[node name="Pos07" type="Marker2D" parent="Area6/HeliShotPos"]
+position = Vector2(960, 768)
 
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")

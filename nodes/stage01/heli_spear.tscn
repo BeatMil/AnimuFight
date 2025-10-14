@@ -1,0 +1,114 @@
+[gd_scene load_steps=9 format=3 uid="uid://4hm7nxb8bsll"]
+
+[ext_resource type="Script" uid="uid://5qpmf3ypr0cx" path="res://scripts/heli_spear.gd" id="1_7fup2"]
+[ext_resource type="Texture2D" uid="uid://da4a5ovcwgd7r" path="res://media/sprites/stage01/boss_fight_place/boss01_heli_spear.png" id="1_l0uc7"]
+[ext_resource type="AudioStream" uid="uid://dxu6irasnn0yv" path="res://media/sfxs/WHSH_MOVEMENT-Noise Zap_HY_PC-004.wav" id="3_p8v33"]
+[ext_resource type="PackedScene" uid="uid://bvbeytgwsabyw" path="res://nodes/hitsparks/spear_spark.tscn" id="4_gnqu7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l0uc7"]
+size = Vector2(32, 320)
+
+[sub_resource type="Animation" id="Animation_7fup2"]
+resource_name = "move_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Group:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1040)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Group/Hitbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.43333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hit_ground"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_p8v33"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Group:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Group/Hitbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gnqu7"]
+_data = {
+&"RESET": SubResource("Animation_p8v33"),
+&"move_down": SubResource("Animation_7fup2")
+}
+
+[node name="HeliSpear" type="Node2D"]
+script = ExtResource("1_7fup2")
+
+[node name="Group" type="Node2D" parent="."]
+
+[node name="Boss01HeliSpear" type="Sprite2D" parent="Group"]
+texture = ExtResource("1_l0uc7")
+
+[node name="Hitbox" type="Area2D" parent="Group"]
+collision_layer = 0
+collision_mask = 275
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Group/Hitbox"]
+shape = SubResource("RectangleShape2D_l0uc7")
+
+[node name="SpearSpark" parent="Group" instance=ExtResource("4_gnqu7")]
+position = Vector2(0, 160)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gnqu7")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_p8v33")
+volume_db = 8.0
+attenuation = 0.8
+bus = &"LouderBus"
+
+[connection signal="body_entered" from="Group/Hitbox" to="." method="_on_hitbox_body_entered"]

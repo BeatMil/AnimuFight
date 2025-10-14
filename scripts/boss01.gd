@@ -219,6 +219,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"lp1_chain",
 		"burn_knuckle",
 		"meteo_crash",
+		"call_heli",
 		]:
 		animation_player.play("idle")
 		state = States.IDLE

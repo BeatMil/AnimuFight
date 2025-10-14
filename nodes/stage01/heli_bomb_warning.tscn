@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://cffmpmpmvl5pw"]
+
+[ext_resource type="AudioStream" uid="uid://jj6teq7wku0n" path="res://media/sfxs/DSGNSynth_BUFF-Mecha Generic Short_HY_PC-002.wav" id="1_0qao8"]
+[ext_resource type="Script" uid="uid://dusydjphmgf1w" path="res://scripts/heli_bomb_warning.gd" id="1_a5kdh"]
+[ext_resource type="Texture2D" uid="uid://cymrfsywc5ul1" path="res://media/sprites/stage01/boss_fight_place/heli_bomb_warning.png" id="1_iufrs"]
+
+[sub_resource type="Animation" id="Animation_iufrs"]
+resource_name = "activate"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Clip/HeliBombWarning:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 3, 3.2333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 600), Vector2(0, 0), Vector2(0, 0), Vector2(0, 600)]
+}
+
+[sub_resource type="Animation" id="Animation_0qao8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Clip/HeliBombWarning:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 600)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0qao8"]
+_data = {
+&"RESET": SubResource("Animation_0qao8"),
+&"activate": SubResource("Animation_iufrs")
+}
+
+[node name="HeliBombWarning" type="Node2D"]
+script = ExtResource("1_a5kdh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0qao8")
+}
+
+[node name="Clip" type="Sprite2D" parent="."]
+clip_children = 1
+texture_filter = 1
+texture = ExtResource("1_iufrs")
+region_enabled = true
+region_rect = Rect2(0, 0, 129, 384)
+
+[node name="HeliBombWarning" type="Sprite2D" parent="Clip"]
+self_modulate = Color(0.927686, 0.37843, 0.883521, 1)
+texture_filter = 1
+position = Vector2(0, 600)
+texture = ExtResource("1_iufrs")
+region_enabled = true
+region_rect = Rect2(0, 0, 129, 384)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_0qao8")
+volume_db = 6.0
+bus = &"LouderBus"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
