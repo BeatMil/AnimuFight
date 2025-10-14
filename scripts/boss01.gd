@@ -18,6 +18,7 @@ var backup_count = 0
 func _ready() -> void:
 	super._ready()
 	DED_SPRITE = preload("res://media/sprites/boss01/boss01_down.png")
+	hp_bar.hp_out.connect(_on_hp_out)
 
 
 func attack_timer_start() -> void:
@@ -85,7 +86,7 @@ func lp_info() -> void: # for animation_player
 	"type": Enums.Attack.NORMAL,
 	"zoom": Vector2(0.5, 0.5),
 	"zoom_duration": 0.7,
-	"slow_mo_on_block": Vector2(0.5, 0.2),
+	"slow_mo_on_block": Vector2(0.5, 1),
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -291,3 +292,8 @@ func boss_next_phase() -> void:
 	else:
 		spawn_ded_copy()
 		queue_free()
+
+
+func _on_hp_out() -> void:
+	_slow_moion_no_sfx_2(0.5, 2)
+	hp_bar.hp_out.disconnect(_on_hp_out)

@@ -729,7 +729,7 @@ func _slow_moion(level, length) -> void:
 	GlobalSoundPlayer.stream = SLOW_MO_START
 	GlobalSoundPlayer.play()
 	Engine.time_scale = level
-	await get_tree().create_timer(length/level).timeout
+	await get_tree().create_timer(length*Engine.time_scale).timeout
 	Engine.time_scale = 1.0
 	GlobalSoundPlayer.stream = SLOW_MO_END
 	GlobalSoundPlayer.play()
@@ -737,7 +737,13 @@ func _slow_moion(level, length) -> void:
 
 func _slow_moion_no_sfx(level, length) -> void:
 	Engine.time_scale = level
-	await get_tree().create_timer(length/level).timeout
+	await get_tree().create_timer(length*Engine.time_scale).timeout
+	Engine.time_scale = 1.0
+
+
+func _slow_moion_no_sfx_2(level, length) -> void:
+	Engine.time_scale = level
+	await get_tree().create_timer(length*Engine.time_scale).timeout
 	Engine.time_scale = 1.0
 
 
