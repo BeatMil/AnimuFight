@@ -3,6 +3,7 @@ extends "res://scripts/enemy.gd"
 signal next_phase
 signal call_heli
 signal call_backup
+signal boss_defeated
 
 @onready var meteo_pos: Marker2D = $HitBoxPos/MeteoPos
 @onready var detect_ground: Area2D = $DetectGround
@@ -295,5 +296,8 @@ func boss_next_phase() -> void:
 
 
 func _on_hp_out() -> void:
-	_slow_moion_no_sfx_2(0.5, 2)
-	hp_bar.hp_out.disconnect(_on_hp_out)
+	if is_heli_phase:
+		hp_bar.hp_out.disconnect(_on_hp_out)
+		animation_player.play("ded")
+		emit_signal("boss_defeated")
+		_slow_moion_no_sfx_2(0.5, 2)

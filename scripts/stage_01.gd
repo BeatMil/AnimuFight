@@ -82,6 +82,7 @@ func _ready() -> void:
 
 	boss_02.call_heli.connect(boss_call_heli)
 	boss_02.call_backup.connect(boss_call_backup)
+	boss_02.boss_defeated.connect(boss_defeated)
 	boss_02.set_physics_process(false)
 	boss_02.visible = false
 
@@ -93,12 +94,15 @@ func _ready() -> void:
 	area_5_spawner.area_done.connect(_lift_wall_area1)
 	area_6_spawner.area_done.connect(_boss_second_time)
 
+	Engine.time_scale = 1
+
 	# Player ost
 	music_player.play("PoundThePavement")
 	# music_player.play("stage01_track")
 
 	# Attack!
 	AttackQueue.start_queue_timer()
+
 	# AttackQueue.stop_queue_timer()
 
 	# if enemy_spawner_new.phase >= 5:
@@ -187,9 +191,9 @@ func _on_area_5_lock_trigger_body_entered(_body: Node2D) -> void:
 func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
 	boss_intro_trigger.queue_free()
 	area_lock_player.play("6_in")
-	# boss_01.queue_free()
-	# _boss_second_time()
-	# return
+	boss_01.queue_free()
+	_boss_second_time()
+	return
 	is_in_boss_intro = true
 	body.is_controllable = false
 	if body.state == 10: # AIR state
@@ -320,7 +324,8 @@ func spawn_random_enemy() -> void:
 	var e1 = enemy_to_spawn[1].instantiate()
 	e1.position = heli_shot_pos.get_children()[5].global_position + offset
 	e1.target = player
-	e.block_rate = 1
+	e1.hp = 10
+	e1.block_rate = 1
 	await get_tree().create_timer(0.5).timeout
 	enemy_backup.add_child(e1)
 
@@ -345,3 +350,36 @@ func spawn_heli_spear(pos, pitch) -> void:
 	hitspark.position = pos
 	hitspark.pitch_scale = pitch
 	get_tree().current_scene.add_child(hitspark)
+
+
+func boss_defeated() -> void:
+	for child in enemy_backup.get_children():
+		child._set_state(0)
+		child.hitted(
+		self,
+		true,
+		Vector2(0, -500),
+		1,
+		0.5,
+		2,
+		Vector2(10, 0.1),
+		10000,
+		Enums.Attack.UNBLOCK
+		)
+
+		await get_tree().create_timer(0.1).timeout
+
+		child.hitted(
+		self,
+		true,
+		Vector2(0, -500),
+		1,
+		0.5,
+		2,
+		Vector2(10, 0.1),
+		10000,
+		Enums.Attack.UNBLOCK
+		)
+	
+	await get_tree().create_timer(2*Engine.time_scale).timeout
+	Engine.time_scale = 1

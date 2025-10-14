@@ -93,6 +93,21 @@ size = Vector2(304, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ugsm"]
 size = Vector2(1936, 336)
 
+[sub_resource type="Animation" id="Animation_phlmp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Helicopter:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(12024, -1168.0002)]
+}
+
 [sub_resource type="Animation" id="Animation_mi4ny"]
 resource_name = "heli_attack"
 length = 5.0
@@ -123,21 +138,6 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/1/use_blend = true
-
-[sub_resource type="Animation" id="Animation_phlmp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Helicopter:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(12024, -1168.0002)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t6tfn"]
 _data = {
@@ -602,7 +602,7 @@ visible = false
 [node name="BlackBarCutscene" parent="CanvasLayer" instance=ExtResource("3_4gwik")]
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(4697.8433, 478.02008)
+position = Vector2(13809.324, 499.57306)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -1411,7 +1411,6 @@ z_index = 2
 position = Vector2(14520, -424)
 is_heli_phase = true
 target = NodePath("../../Player")
-hp = 100
 
 [node name="WaitBossPlatform" type="StaticBody2D" parent="Area6"]
 position = Vector2(14336, -176)
