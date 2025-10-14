@@ -41,6 +41,7 @@ const HELI_SPEAR = preload("uid://4hm7nxb8bsll")
 @export var enemy_to_spawn: Array[Resource]
 @onready var enemy_backup: Node = $Area6/EnemyBackup
 
+@onready var music_player: AnimationPlayer = $MusicPlayer
 
 func hitlag(_amount: float = 0.3) -> void:
 	pass
@@ -93,7 +94,7 @@ func _ready() -> void:
 	area_6_spawner.area_done.connect(_boss_second_time)
 
 	# Player ost
-	# music_player.play("stage01_track_copyright")
+	music_player.play("PoundThePavement")
 	# music_player.play("stage01_track")
 
 	# Attack!
@@ -310,6 +311,7 @@ func spawn_random_enemy() -> void:
 	var e = enemy_to_spawn[0].instantiate()
 	e.position = heli_shot_pos.get_children()[1].global_position + offset
 	e.hp = 10
+	e.block_rate = 1
 	e.target = player
 
 	await get_tree().create_timer(2).timeout
@@ -318,6 +320,7 @@ func spawn_random_enemy() -> void:
 	var e1 = enemy_to_spawn[1].instantiate()
 	e1.position = heli_shot_pos.get_children()[5].global_position + offset
 	e1.target = player
+	e.block_rate = 1
 	await get_tree().create_timer(0.5).timeout
 	enemy_backup.add_child(e1)
 

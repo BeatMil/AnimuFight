@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=73 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -42,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://b6kmen2v6b476" path="res://nodes/shiny.tscn" id="31_a8a3l"]
 [ext_resource type="AudioStream" uid="uid://c6gyoji58l4b1" path="res://media/sfxs/helicopter-sound-8d-372463.mp3" id="31_mi4ny"]
 [ext_resource type="Texture2D" uid="uid://kma2rfutfsxc" path="res://media/sprites/stage01/boss_fight_place/helicopter.png" id="39_83i0n"]
+[ext_resource type="AudioStream" uid="uid://djrqhdxov73pw" path="res://media/ost/PoundThePavement.mp3" id="43_phlmp"]
 
 [sub_resource type="Animation" id="Animation_lrdte"]
 length = 0.001
@@ -564,6 +565,31 @@ _data = {
 &"high_way_explosion": SubResource("Animation_rkgfh")
 }
 
+[sub_resource type="Animation" id="Animation_t6tfn"]
+resource_name = "PoundThePavement"
+length = 139.0
+loop_mode = 1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MusicPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("43_phlmp")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gnqs4"]
+_data = {
+&"PoundThePavement": SubResource("Animation_t6tfn")
+}
+
 [node name="Stage01" type="Node2D"]
 script = ExtResource("1_4caca")
 enemy_to_spawn = Array[Resource]([ExtResource("8_nasqd"), ExtResource("9_dimc6"), ExtResource("12_gsglw"), ExtResource("19_e1vcx")])
@@ -576,7 +602,7 @@ visible = false
 [node name="BlackBarCutscene" parent="CanvasLayer" instance=ExtResource("3_4gwik")]
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(13816, 576)
+position = Vector2(4697.8433, 478.02008)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -1864,6 +1890,13 @@ limit_bottom = 1000
 libraries = {
 &"": SubResource("AnimationLibrary_ei3og")
 }
+
+[node name="MusicPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gnqs4")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MusicPlayer"]
 
 [connection signal="explode" from="Area3/JunctionBox" to="." method="_on_junction_box_explode"]
 [connection signal="body_entered" from="Area3/Area3LockTrigger" to="." method="_on_area_3_lock_trigger_body_entered"]
