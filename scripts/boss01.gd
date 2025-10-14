@@ -2,6 +2,7 @@ extends "res://scripts/enemy.gd"
 
 signal next_phase
 signal call_heli
+signal call_backup
 
 @onready var meteo_pos: Marker2D = $HitBoxPos/MeteoPos
 @onready var detect_ground: Area2D = $DetectGround
@@ -11,6 +12,7 @@ signal call_heli
 
 var is_player_in_range_burn_knuckle = false
 var is_call_heli_once = false
+var backup_count = 0
 
 
 func _ready() -> void:
@@ -220,6 +222,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"burn_knuckle",
 		"meteo_crash",
 		"call_heli",
+		"whistle",
 		]:
 		animation_player.play("idle")
 		state = States.IDLE
@@ -243,6 +246,12 @@ func do_attack() -> void:
 					emit_signal("call_heli")
 					is_call_heli_once = true
 					return
+				elif backup_count < 2:
+					animation_player.play("whistle")
+					emit_signal("call_backup")
+					backup_count += 1
+					return
+
 				match randi_range(0, 3):
 					0:
 						animation_player.play("meteo_crash")

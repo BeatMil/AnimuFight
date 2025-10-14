@@ -92,7 +92,7 @@ texture = ExtResource("1_l0uc7")
 
 [node name="Hitbox" type="Area2D" parent="Group"]
 collision_layer = 0
-collision_mask = 275
+collision_mask = 19
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Group/Hitbox"]
 shape = SubResource("RectangleShape2D_l0uc7")

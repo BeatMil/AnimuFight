@@ -566,6 +566,7 @@ _data = {
 
 [node name="Stage01" type="Node2D"]
 script = ExtResource("1_4caca")
+enemy_to_spawn = Array[Resource]([ExtResource("8_nasqd"), ExtResource("9_dimc6"), ExtResource("12_gsglw"), ExtResource("19_e1vcx")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1373,12 +1374,14 @@ collision_mask = 513
 shape = SubResource("RectangleShape2D_a8a3l")
 
 [node name="Boss01" parent="Area6" node_paths=PackedStringArray("target") instance=ExtResource("7_nh3b5")]
+z_index = 2
 position = Vector2(14328, -424)
 is_next_phase = true
 target = NodePath("../../Player")
 hp = 40
 
 [node name="Boss02" parent="Area6" node_paths=PackedStringArray("target") instance=ExtResource("7_nh3b5")]
+z_index = 2
 position = Vector2(14520, -424)
 is_heli_phase = true
 target = NodePath("../../Player")
@@ -1586,6 +1589,8 @@ position = Vector2(640, 768)
 
 [node name="Pos07" type="Marker2D" parent="Area6/HeliShotPos"]
 position = Vector2(960, 768)
+
+[node name="EnemyBackup" type="Node" parent="Area6"]
 
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")

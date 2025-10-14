@@ -38,6 +38,8 @@ var is_in_boss_intro = false
 @onready var heli_shot_pos: Node2D = $Area6/HeliShotPos
 const HELI_SPEAR = preload("uid://4hm7nxb8bsll")
 @onready var helicopter: Sprite2D = $Area6/Helicopter
+@export var enemy_to_spawn: Array[Resource]
+@onready var enemy_backup: Node = $Area6/EnemyBackup
 
 
 func hitlag(_amount: float = 0.3) -> void:
@@ -78,6 +80,7 @@ func _ready() -> void:
 	boss_01.next_phase.connect(_boss01_next_phase_emitted)
 
 	boss_02.call_heli.connect(boss_call_heli)
+	boss_02.call_backup.connect(boss_call_backup)
 	boss_02.set_physics_process(false)
 	boss_02.visible = false
 
@@ -183,9 +186,9 @@ func _on_area_5_lock_trigger_body_entered(_body: Node2D) -> void:
 func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
 	boss_intro_trigger.queue_free()
 	area_lock_player.play("6_in")
-	boss_01.queue_free()
-	_boss_second_time()
-	return
+	# boss_01.queue_free()
+	# _boss_second_time()
+	# return
 	is_in_boss_intro = true
 	body.is_controllable = false
 	if body.state == 10: # AIR state
@@ -291,6 +294,32 @@ func boss_call_heli() -> void:
 		spawn_heli_spear(child.global_position+Vector2(0,-1000), pitch)
 		pitch += 0.1
 		await get_tree().create_timer(0.18).timeout
+
+
+func boss_call_backup() -> void:
+	area_6_player.stop()
+	area_6_player.play("heli_attack")
+	CameraManager.zoom(Vector2(-0.15, -0.15), 5)
+	spawn_random_enemy()
+
+
+func spawn_random_enemy() -> void:
+	enemy_to_spawn.shuffle()
+
+	var offset = Vector2(0, -1000)
+	var e = enemy_to_spawn[0].instantiate()
+	e.position = heli_shot_pos.get_children()[1].global_position + offset
+	e.hp = 10
+	e.target = player
+
+	await get_tree().create_timer(2).timeout
+	enemy_backup.add_child(e)
+
+	var e1 = enemy_to_spawn[1].instantiate()
+	e1.position = heli_shot_pos.get_children()[5].global_position + offset
+	e1.target = player
+	await get_tree().create_timer(0.5).timeout
+	enemy_backup.add_child(e1)
 
 
 func _boss_second_time() -> void:
