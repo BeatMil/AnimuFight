@@ -77,7 +77,7 @@ color = Color(0.23996517, 0.38261348, 0.58825254, 1)
 color_ramp = SubResource("GradientTexture1D_nb54v")
 alpha_curve = SubResource("CurveTexture_io0eq")
 
-[node name="HitSpark" type="Node2D"]
+[node name="BoomSpark" type="Node2D"]
 script = ExtResource("1_jmxta")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

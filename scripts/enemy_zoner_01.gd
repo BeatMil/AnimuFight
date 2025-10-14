@@ -18,6 +18,10 @@ func _physics_process(delta: float) -> void:
 		keep_player_away_box.process_mode = Node.PROCESS_MODE_DISABLED
 
 
+func spawn_boom_spark() -> void:
+	ObjectPooling.spawn_boom_spark(global_position, true)
+
+
 #############################################################
 ## Attack Info
 #############################################################

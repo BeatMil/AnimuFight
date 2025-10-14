@@ -20,6 +20,7 @@ const HIT_SPARK_COOL = preload("res://nodes/hitsparks/hit_spark_cool.tscn")
 const GROUND_PARTICLE_2 = preload("uid://bb5sw8ogwptbc")
 const EWGF_SPARK = preload("uid://cj5pmswumq8oa")
 const HELI_BOMB_WARNING = preload("uid://cffmpmpmvl5pw")
+const BOOM_SPARK = preload("uid://nf1iaj3ndswq")
 
 
 #############################################################
@@ -155,4 +156,11 @@ func spawn_heli_bomb_warning(_position: Vector2 = pooling_pos, pitch_scale = 1.0
 	var hitspark = HELI_BOMB_WARNING.instantiate()
 	hitspark.position = _position
 	hitspark.pitch_scale = pitch_scale
+	get_tree().current_scene.add_child(hitspark)
+
+
+func spawn_boom_spark(_position: Vector2 = pooling_pos, is_stay = false) -> void:
+	var hitspark = BOOM_SPARK.instantiate()
+	hitspark.position = _position
+	hitspark.is_stay = is_stay
 	get_tree().current_scene.add_child(hitspark)
