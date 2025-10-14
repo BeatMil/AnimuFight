@@ -161,7 +161,7 @@ func meteo_crash() -> void:
 func meteo_crash_info() -> void: # for animation_player
 	var info = {
 	"size": Hitbox_type.METEO,
-	"time": 1,
+	"time": 0.2,
 	"push_power_ground": Vector2(1000, -200),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
 	"push_power_air": Vector2(1000, -200),
