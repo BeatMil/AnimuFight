@@ -300,4 +300,4 @@ func _on_hp_out() -> void:
 		hp_bar.hp_out.disconnect(_on_hp_out)
 		animation_player.play("ded")
 		emit_signal("boss_defeated")
-		_slow_moion_no_sfx_2(0.5, 2)
+		_slow_moion_no_sfx_2(0.5, 1)

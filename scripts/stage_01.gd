@@ -40,6 +40,8 @@ const HELI_SPEAR = preload("uid://4hm7nxb8bsll")
 @onready var helicopter: Sprite2D = $Area6/Helicopter
 @export var enemy_to_spawn: Array[Resource]
 @onready var enemy_backup: Node = $Area6/EnemyBackup
+@onready var animu_fast_fx_whole_screen: Node2D = $CanvasLayer/AnimuFastFxWholeScreen
+@onready var white_animation_player: AnimationPlayer = $Area6/WhiteEffect/AnimationPlayer
 
 @onready var music_player: AnimationPlayer = $MusicPlayer
 
@@ -97,8 +99,7 @@ func _ready() -> void:
 	Engine.time_scale = 1
 
 	# Player ost
-	music_player.play("PoundThePavement")
-	# music_player.play("stage01_track")
+	# music_player.play("PoundThePavement")
 
 	# Attack!
 	AttackQueue.start_queue_timer()
@@ -353,6 +354,9 @@ func spawn_heli_spear(pos, pitch) -> void:
 
 
 func boss_defeated() -> void:
+	white_animation_player.play("in")
+	animu_fast_fx_whole_screen.visible = true
+	ObjectPooling.spawn_ground_spark_2(player.position)
 	for child in enemy_backup.get_children():
 		child._set_state(0)
 		child.hitted(
@@ -382,4 +386,6 @@ func boss_defeated() -> void:
 		)
 	
 	await get_tree().create_timer(2*Engine.time_scale).timeout
+	white_animation_player.play("out")
+	animu_fast_fx_whole_screen.visible = false
 	Engine.time_scale = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=82 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://ccuevl8yvbirg" path="res://media/sprites/stage01/8-12_girl.png" id="7_pxpxr"]
 [ext_resource type="Texture2D" uid="uid://df1fn36btchsn" path="res://media/sprites/stage01/under_high_way.png" id="8_mqdkf"]
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="8_nasqd"]
+[ext_resource type="PackedScene" uid="uid://dsnisw7edse5d" path="res://nodes/vfx/animu_fast_fx_whole_screen.tscn" id="8_t6tfn"]
 [ext_resource type="Script" uid="uid://cat1ebbeoo01d" path="res://scripts/enemy_spawner_stage01.gd" id="8_yxbv0"]
 [ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="9_dimc6"]
 [ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_heavy_01.tscn" id="10_bc8xj"]
@@ -150,6 +151,115 @@ size = Vector2(64, 384)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gwik"]
 size = Vector2(432, 128)
+
+[sub_resource type="Animation" id="Animation_gnqs4"]
+resource_name = "in"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2xhn5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cwpgs"]
+resource_name = "out"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yt165"]
+resource_name = "in_2"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cwpgs"]
+_data = {
+&"RESET": SubResource("Animation_2xhn5"),
+&"in": SubResource("Animation_gnqs4"),
+&"in_2": SubResource("Animation_yt165"),
+&"out": SubResource("Animation_cwpgs")
+}
+
+[sub_resource type="Animation" id="Animation_52agy"]
+resource_name = "rgb"
+length = 1.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 0.99999994, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.4627451, 0.4627451, 1), Color(0.85490197, 0.71818924, 0.3921569, 1), Color(1.3893794, 1.3893794, 0.6548173, 1), Color(0.45269752, 0.85490197, 0.3921569, 1), Color(0.6548173, 1.3893794, 1.0158733, 1), Color(0.3921569, 0.60112315, 0.85490197, 1), Color(1.0158733, 0.6548173, 1.3893794, 1), Color(0.8530103, 0.3928461, 0.3928461, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1eqwa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yt165"]
+_data = {
+&"RESET": SubResource("Animation_1eqwa"),
+&"rgb": SubResource("Animation_52agy")
+}
 
 [sub_resource type="Animation" id="Animation_sgik7"]
 length = 0.001
@@ -600,6 +710,9 @@ enemy_to_spawn = Array[Resource]([ExtResource("8_nasqd"), ExtResource("9_dimc6")
 visible = false
 
 [node name="BlackBarCutscene" parent="CanvasLayer" instance=ExtResource("3_4gwik")]
+
+[node name="AnimuFastFxWholeScreen" parent="CanvasLayer" instance=ExtResource("8_t6tfn")]
+visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
 position = Vector2(13809.324, 499.57306)
@@ -1616,6 +1729,24 @@ position = Vector2(640, 768)
 position = Vector2(960, 768)
 
 [node name="EnemyBackup" type="Node" parent="Area6"]
+
+[node name="WhiteEffect" type="ColorRect" parent="Area6"]
+offset_left = 12224.0
+offset_top = -1680.0002
+offset_right = 16712.0
+offset_bottom = 1839.9998
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(2230.5469, 1815.3584)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area6/WhiteEffect"]
+libraries = {
+&"": SubResource("AnimationLibrary_cwpgs")
+}
+
+[node name="RGBPlayer" type="AnimationPlayer" parent="Area6/WhiteEffect"]
+libraries = {
+&"": SubResource("AnimationLibrary_yt165")
+}
 
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
