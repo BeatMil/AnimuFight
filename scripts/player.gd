@@ -1,23 +1,25 @@
 extends "res://scripts/base_character.gd"
 
+signal ded
+
 
 #############################################################
 ## Node Ref
 #############################################################
-@onready var debug_label: Label = $CanvasLayer/DebugLabel
+@onready var debug_label: Label = $PlayerCanvasLayer/DebugLabel
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var hit_noise = preload("res://media/sfxs/gc_punch_whiff.wav")
 @onready var air_throw_pos_r: Marker2D = $HitBoxPos/AirThrowPosR
 @onready var air_throw_pos_l: Marker2D = $HitBoxPos/AirThrowPosL
 @onready var grab_pos_r: Marker2D = $HitBoxPos/GrabPosR
 @onready var grab_pos_l: Marker2D = $HitBoxPos/GrabPosL
-@onready var hp_bar_2: TextureProgressBar = $CanvasLayer/HpBar2
-@onready var profile_player: AnimationPlayer = $CanvasLayer/Profile/AnimationPlayer
-@onready var command_history: VBoxContainer = $CanvasLayer/CommandHistory
+@onready var hp_bar_2: TextureProgressBar = $PlayerCanvasLayer/HpBar2
+@onready var profile_player: AnimationPlayer = $PlayerCanvasLayer/Profile/AnimationPlayer
+@onready var command_history: VBoxContainer = $PlayerCanvasLayer/CommandHistory
 const COMMAND_BOX = preload("res://nodes/command_box.tscn")
 @onready var god_fist_player: AudioStreamPlayer = $GodFistPlayer
 const STRONG_PUNCH = preload("uid://b6dtaoivlmcyf")
-@onready var hud_player: AnimationPlayer = $CanvasLayer/AnimationPlayer
+@onready var hud_player: AnimationPlayer = $PlayerCanvasLayer/AnimationPlayer
 
 #############################################################
 ## Config
@@ -1558,14 +1560,17 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		if get_tree().current_scene.name == "training":
 			SceneTransition.change_scene("res://scenes/training.tscn")
 		else:
-			get_parent().get_node("CanvasLayer/RestartMenu").open_menu()
+			emit_signal("ded")
 		# queue_free()
 
 
 func _on_hp_out() -> void:
-	is_ded = true
+	# is_ded = true
+	is_controllable = false
 	set_collision_noclip()
+	state = States.IDLE
 	animation_player.play("ded")
+	print("hp_out ded")
 	# set_collision_ded()
 	# _slow_moion_no_sfx(0.5, 0.5)
 

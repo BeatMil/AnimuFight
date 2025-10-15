@@ -29,6 +29,8 @@ func _ready() -> void:
 func hp_down(_amount: int) -> void:
 	# value -= _amount
 	immediate_value -= _amount
+	if get_parent().name == "PlayerCanvasLayer":
+		print("immHP: ", immediate_value," ", _amount)
 	if immediate_value <= 0:
 		emit_signal("hp_out")
 	if get_tree():
@@ -50,7 +52,10 @@ func hp_up(_amount: int) -> void:
 	if cant_heal:
 		return
 	# value += _amount
-	immediate_value += _amount
+	if immediate_value + _amount >= max_value:
+		immediate_value = max_value
+	else:
+		immediate_value += _amount
 	if get_tree():
 		back_bar.texture_progress = HP_BAR_GREEN
 		if tween:
@@ -81,7 +86,7 @@ func get_hp() -> int:
 
 func set_hp(_amount: int) -> void:
 	max_value = _amount
-	value = max_value
+	value = _amount
 	back_bar.max_value = _amount
-	back_bar.value = max_value
+	back_bar.value = _amount
 	immediate_value = _amount
