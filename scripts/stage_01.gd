@@ -78,6 +78,7 @@ func _ready() -> void:
 	# get_node_or_null("Player/Camera").set_screen_lock(0, 1920, 135, 1129)
 	# get_node_or_null("Player/Camera").set_screen_lock(-10000000, 10000000, -10000000, 1000)
 	CameraManager.enable_all_camera()
+	CameraManager.set_zoom(Vector2.ONE)
 	CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
 	CameraManager.player = player
 	CameraManager.is_following_player = true
