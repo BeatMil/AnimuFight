@@ -21,6 +21,8 @@ const BOSS_BOUNCE_SFX = preload("res://media/sfxs/unequip01.wav")
 @onready var enemy_spawner_new: Node2D = $EnemySpawnerNew
 @onready var light_player: AnimationPlayer = $Lights/AnimationPlayer
 @onready var topLight_area_2d: Area2D = $Lights/topLight/Area2D
+const STAGE_01 = preload("uid://cijpe5mfa2ffb")
+@onready var restart_menu: Control = $CanvasLayer/RestartMenu
 
 
 signal shoot_up_house
@@ -35,9 +37,12 @@ func _ready() -> void:
 	# CameraManager.zoom_permanent(Vector2(1.9, 0.9))
 	CameraManager.set_zoom(Vector2(1, 1))
 	CameraManager.set_screen_lock(0, 1940, 135, 1029)
+	CameraManager.set_zoom(Vector2.ONE)
 	print("_ready: _pre_stage_01.gd")
 	# CameraManager.set_screen_lock(0, 1920, 0, 1000)
 	# get_node_or_null("Player/Camera").set_zoom(Vector2(1,1))
+
+	player.ded.connect(_player_ded)
 
 	Settings.current_stage = "res://scenes/pre_stage01.tscn"
 
@@ -51,6 +56,14 @@ func _ready() -> void:
 
 	# if enemy_spawner_new.phase >= 5:
 	# 	_shoot_up_house()
+
+
+func _player_ded() -> void:
+	if Settings.checkpoint >= 8:
+		Settings.checkpoint = 0
+		get_tree().change_scene_to_packed(STAGE_01)
+	else:
+		restart_menu.open_menu()
 
 
 func _shoot_up_house() -> void:

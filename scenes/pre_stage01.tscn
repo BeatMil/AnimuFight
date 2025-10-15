@@ -936,7 +936,6 @@ texture = ExtResource("17_ac4hq")
 
 [node name="Player" parent="." instance=ExtResource("18_2qsap")]
 position = Vector2(800, 704)
-hp = 10
 
 [node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("19_kn51f")]
 position = Vector2(1912, -112)
