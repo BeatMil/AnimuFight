@@ -29,6 +29,8 @@ func _ready() -> void:
 func hp_down(_amount: int) -> void:
 	# value -= _amount
 	immediate_value -= _amount
+	if immediate_value <= 0:
+		emit_signal("hp_out")
 	if get_tree():
 		back_bar.texture_progress = HP_BAR_RED
 		if tween:
@@ -39,7 +41,6 @@ func hp_down(_amount: int) -> void:
 	emit_signal("hp_down_sig")
 	await get_tree().create_timer(0.2).timeout
 	if value <= 0:
-		emit_signal("hp_out")
 		cant_heal = true
 	last_took_damage = _amount
 	pass

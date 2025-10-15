@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=83 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -669,10 +669,26 @@ tracks/2/keys = {
 }
 tracks/2/use_blend = true
 
+[sub_resource type="Animation" id="Animation_apjmi"]
+resource_name = "intro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.43333334, 0.53333336),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-1456, -400), Vector2(-1456, 616), Vector2(-1456, 536), Vector2(-1456, 616)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ei3og"]
 _data = {
 &"RESET": SubResource("Animation_ei3og"),
-&"high_way_explosion": SubResource("Animation_rkgfh")
+&"high_way_explosion": SubResource("Animation_rkgfh"),
+&"intro": SubResource("Animation_apjmi")
 }
 
 [sub_resource type="Animation" id="Animation_t6tfn"]
@@ -715,9 +731,11 @@ visible = false
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(13809.324, 499.57306)
+position = Vector2(-1632, -304)
 
 [node name="Map" type="Node2D" parent="."]
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Building" type="Sprite2D" parent="Map"]
 position = Vector2(2893, 341)
@@ -1524,6 +1542,7 @@ z_index = 2
 position = Vector2(14520, -424)
 is_heli_phase = true
 target = NodePath("../../Player")
+hp = 100
 
 [node name="WaitBossPlatform" type="StaticBody2D" parent="Area6"]
 position = Vector2(14336, -176)

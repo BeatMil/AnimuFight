@@ -53,6 +53,19 @@ func hitlag(_amount: float = 0.3) -> void:
 	# 	set_physics_process(true)
 
 
+func intro() -> void:
+	player.is_controllable = false
+	player.set_physics_process(false)
+	player.play_animation("fall")
+	event_player.play("intro")
+	await get_tree().create_timer(2).timeout
+	# Player ost
+	music_player.play("PoundThePavement")
+	player.play_animation("idle")
+	player.is_controllable = true
+	player.set_physics_process(true)
+
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") or \
 		event.is_action_pressed("ui_accept") or event.is_action_pressed("pause"):
@@ -98,8 +111,8 @@ func _ready() -> void:
 
 	Engine.time_scale = 1
 
-	# Player ost
-	# music_player.play("PoundThePavement")
+	intro()
+
 
 	# Attack!
 	AttackQueue.start_queue_timer()
@@ -192,9 +205,9 @@ func _on_area_5_lock_trigger_body_entered(_body: Node2D) -> void:
 func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
 	boss_intro_trigger.queue_free()
 	area_lock_player.play("6_in")
-	boss_01.queue_free()
-	_boss_second_time()
-	return
+	# boss_01.queue_free()
+	# _boss_second_time()
+	# return
 	is_in_boss_intro = true
 	body.is_controllable = false
 	if body.state == 10: # AIR state
