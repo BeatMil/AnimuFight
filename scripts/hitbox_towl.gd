@@ -4,13 +4,6 @@ extends "res://scripts/hitbox.gd"
 
 var target
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-	# timer.wait_time = time_left_before_queue_free
-	# timer.start()
-	# _set_collision_hit_player()
-
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	# Put player in THROW_BREAKABLE state
