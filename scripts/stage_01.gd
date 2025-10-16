@@ -218,6 +218,7 @@ func _on_area_5_lock_trigger_body_entered(_body: Node2D) -> void:
 
 
 func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
+	music_player.stop()
 	Settings.checkpoint = 5
 	boss_intro_trigger.queue_free()
 	area_lock_player.play("6_in")
@@ -268,6 +269,7 @@ func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
 	boss_intro_tween.tween_callback(body.play_animation.bind("lp3"))
 	boss_intro_tween.tween_interval(0.3)
 	boss_intro_tween.tween_callback(body.play_animation.bind("wave_dash"))
+	boss_intro_tween.tween_callback(music_player.play.bind("HighTechDuel"))
 	boss_intro_tween.tween_interval(0.3)
 	boss_intro_tween.tween_callback(body.play_animation.bind("ground_grab"))
 	boss_intro_tween.tween_callback(Input.action_press.bind("left"))
@@ -294,6 +296,7 @@ func set_is_boss_intro(value: bool) -> void:
 
 
 func _skip_boss_intro() -> void: ## T^T
+	music_player.play("HighTechDuel")
 	is_in_boss_intro = false
 	if boss_intro_tween:
 		boss_intro_tween.kill()
