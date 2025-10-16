@@ -43,6 +43,7 @@ const HELI_SPEAR = preload("uid://4hm7nxb8bsll")
 @onready var enemy_backup: Node = $Area6/EnemyBackup
 @onready var animu_fast_fx_whole_screen: Node2D = $CanvasLayer/AnimuFastFxWholeScreen
 @onready var white_animation_player: AnimationPlayer = $Area6/WhiteEffect/AnimationPlayer
+@onready var final_hit_audio_player: AudioStreamPlayer = $Area6/FinalHitAudioPlayer
 
 @onready var music_player: AnimationPlayer = $MusicPlayer
 @onready var market_green: Node2D = $MarketGreen
@@ -386,7 +387,9 @@ func spawn_heli_spear(pos, pitch) -> void:
 
 
 func boss_defeated() -> void:
+	final_hit_audio_player.play()
 	white_animation_player.play("in")
+	CameraManager.zoom(Vector2(0.5, 0.5), 3)
 	animu_fast_fx_whole_screen.visible = true
 	ObjectPooling.spawn_ground_spark_2(player.position)
 	for child in enemy_backup.get_children():

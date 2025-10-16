@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=86 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -42,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://c5b77m0nmmb5l" path="res://nodes/enemy_05.tscn" id="28_rkgfh"]
 [ext_resource type="PackedScene" uid="uid://b6kmen2v6b476" path="res://nodes/shiny.tscn" id="31_a8a3l"]
 [ext_resource type="AudioStream" uid="uid://c6gyoji58l4b1" path="res://media/sfxs/helicopter-sound-8d-372463.mp3" id="31_mi4ny"]
+[ext_resource type="AudioStream" uid="uid://bcqelt7h6cmm3" path="res://media/sfxs/Hit2.wav" id="35_2xhn5"]
 [ext_resource type="Texture2D" uid="uid://kma2rfutfsxc" path="res://media/sprites/stage01/boss_fight_place/helicopter.png" id="39_83i0n"]
 [ext_resource type="AudioStream" uid="uid://djrqhdxov73pw" path="res://media/ost/PoundThePavement.mp3" id="43_phlmp"]
 [ext_resource type="AudioStream" uid="uid://b0sqnu8p3tkd1" path="res://media/ost/Hi-Tech Duel.mp3" id="45_gnqs4"]
@@ -1587,7 +1588,6 @@ z_index = 2
 position = Vector2(14520, -424)
 is_heli_phase = true
 target = NodePath("../../Player")
-hp = 100
 
 [node name="WaitBossPlatform" type="StaticBody2D" parent="Area6"]
 position = Vector2(14336, -176)
@@ -1811,6 +1811,11 @@ libraries = {
 libraries = {
 &"": SubResource("AnimationLibrary_yt165")
 }
+
+[node name="FinalHitAudioPlayer" type="AudioStreamPlayer" parent="Area6"]
+stream = ExtResource("35_2xhn5")
+pitch_scale = 0.5
+bus = &"FinalHit"
 
 [node name="EnemySpawnerNew" type="Node2D" parent="." node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
