@@ -750,7 +750,6 @@ func lp3_info() -> void:
 	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 2,
 	"type": Enums.Attack.NORMAL,
-	"zoom": Vector2(0.05, 0.05),
 	}
 	dict_to_spawn_hitbox(info)
 func lp4_info() -> void:
@@ -768,7 +767,6 @@ func lp4_info() -> void:
 	"screenshake_amount": Vector2(10, 0.2),
 	"damage": 3,
 	"type": Enums.Attack.NORMAL,
-	# "zoom": Vector2(1, 1),
 	}
 	dict_to_spawn_hitbox(info)
 func jin1plus2_info() -> void:
@@ -976,7 +974,6 @@ func hp_info() ->  void:
 	"screenshake_amount": Vector2(10, 0.2),
 	"damage": 4,
 	"type": Enums.Attack.NORMAL,
-	# "zoom": Vector2(1, 1),
 	}
 	dict_to_spawn_hitbox(info)
 func burst_info() ->  void:
@@ -1105,8 +1102,6 @@ func spd_burst_info() ->  void:
 	"damage": 5,
 	"type": Enums.Attack.NORMAL,
 	"pos": $HitBoxPos/BurstPos.position,
-	"zoom": Vector2(0.1, 0.1),
-	"zoom_duration": 0.05,
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -1561,7 +1556,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			SceneTransition.change_scene("res://scenes/training.tscn")
 		else:
 			emit_signal("ded")
-		# queue_free()
+			print("ded")
 
 
 func _on_hp_out() -> void:
@@ -1570,7 +1565,7 @@ func _on_hp_out() -> void:
 	set_collision_noclip()
 	state = States.IDLE
 	animation_player.play("ded")
-	print("hp_out ded")
+	print("hp out")
 	# set_collision_ded()
 	# _slow_moion_no_sfx(0.5, 0.5)
 
