@@ -1,6 +1,7 @@
 extends Node2D
 
-
+@onready var check_points: Node = $CheckPoints
+@onready var restart_menu: Control = $CanvasLayer/RestartMenu
 @onready var animation_player: AnimationPlayer = $MangoBossSitBanana/AnimationPlayer
 @onready var area_lock_player: AnimationPlayer = $AreaLockPlayer
 # @onready var transition_camera: Camera2D = $Cameras/TransitionCamera
@@ -44,6 +45,7 @@ const HELI_SPEAR = preload("uid://4hm7nxb8bsll")
 @onready var white_animation_player: AnimationPlayer = $Area6/WhiteEffect/AnimationPlayer
 
 @onready var music_player: AnimationPlayer = $MusicPlayer
+@onready var market_green: Node2D = $MarketGreen
 
 func hitlag(_amount: float = 0.3) -> void:
 	pass
@@ -77,6 +79,8 @@ func _ready() -> void:
 	# Set camera lock
 	# get_node_or_null("Player/Camera").set_screen_lock(0, 1920, 135, 1129)
 	# get_node_or_null("Player/Camera").set_screen_lock(-10000000, 10000000, -10000000, 1000)
+	player.ded.connect(_player_ded)
+
 	CameraManager.enable_all_camera()
 	CameraManager.set_zoom(Vector2.ONE)
 	CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
@@ -112,7 +116,11 @@ func _ready() -> void:
 
 	Engine.time_scale = 1
 
-	intro()
+	if Settings.checkpoint <= 0:
+		intro()
+	else:
+		player.position = check_points.get_children()[Settings.checkpoint].position
+		music_player.play("PoundThePavement")
 
 
 	# Attack!
@@ -138,6 +146,7 @@ func _on_area_1_lock_trigger_body_entered(_body: Node2D) -> void:
 func _lift_wall_area1() -> void:
 	area_lock_player.play("RESET")
 	CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
+	market_green.set_active(true)
 
 
 func _on_market_green_banana_fly() -> void:
@@ -154,6 +163,7 @@ func _on_market_green_banana_fly() -> void:
 	mango_boss.mango_boss_down.connect(_mango_boss_down)
 	add_child(mango_boss)
 	mango_boss_sit_banana.queue_free()
+	Settings.checkpoint = 1
 
 
 func _mango_boss_down() -> void:
@@ -166,6 +176,8 @@ func _on_area_3_lock_trigger_body_entered(_body: Node2D) -> void:
 	CameraManager.set_screen_lock(3824, 6380, -10000000, 1000)
 	area_3_spawner.is_active = true
 	area_3_lock_trigger.queue_free()
+	Settings.checkpoint = 2
+	market_green.set_active(false)
 
 
 func _on_area_4_lock_trigger_body_entered(_body: Node2D) -> void:
@@ -173,6 +185,7 @@ func _on_area_4_lock_trigger_body_entered(_body: Node2D) -> void:
 	CameraManager.set_screen_lock(6400, 8800, -10000000, 1000)
 	area_4_spawner.is_active = true
 	area_4_lock_trigger.queue_free()
+	Settings.checkpoint = 3
 
 
 func _on_push_player_back_up_area_2d_body_entered(body: Node2D) -> void:
@@ -201,9 +214,11 @@ func _on_area_5_lock_trigger_body_entered(_body: Node2D) -> void:
 	CameraManager.set_screen_lock(9610, 12644, -10000000, 1000)
 	area_5_spawner.is_active = true
 	area_5_lock_trigger.queue_free()
+	Settings.checkpoint = 4
 
 
 func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
+	Settings.checkpoint = 5
 	boss_intro_trigger.queue_free()
 	area_lock_player.play("6_in")
 	# boss_01.queue_free()
@@ -403,3 +418,7 @@ func boss_defeated() -> void:
 	white_animation_player.play("out")
 	animu_fast_fx_whole_screen.visible = false
 	Engine.time_scale = 1
+
+
+func _player_ded() -> void:
+	restart_menu.open_menu()

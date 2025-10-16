@@ -731,8 +731,29 @@ visible = false
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(-1632, -304)
+position = Vector2(-1456, -400)
 hp = 3
+
+[node name="CheckPoints" type="Node" parent="."]
+
+[node name="Pos0" type="Marker2D" parent="CheckPoints"]
+editor_description = "Here to change 0 base array to 1 base array"
+position = Vector2(-1744, 640)
+
+[node name="Pos1" type="Marker2D" parent="CheckPoints"]
+position = Vector2(2968, 640)
+
+[node name="Pos2" type="Marker2D" parent="CheckPoints"]
+position = Vector2(4808, 640)
+
+[node name="Pos3" type="Marker2D" parent="CheckPoints"]
+position = Vector2(7408, 640)
+
+[node name="Pos4" type="Marker2D" parent="CheckPoints"]
+position = Vector2(10776, 640)
+
+[node name="Pos5" type="Marker2D" parent="CheckPoints"]
+position = Vector2(13744, 640)
 
 [node name="Map" type="Node2D" parent="."]
 metadata/_edit_group_ = true
@@ -862,7 +883,7 @@ position = Vector2(6538, -482)
 [node name="Area3Spawner" type="Node2D" parent="Area3" node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
 target = NodePath("../../Player")
-enemy_to_spawn = [NodePath("../Area3EnemyList/Phase1"), NodePath("../Area3EnemyList/Phase2"), NodePath("../Area3EnemyList/Phase3"), NodePath("../Area3EnemyList/Phase4")]
+enemy_to_spawn = [NodePath("../Area3EnemyList/Phase1"), NodePath("../Area3EnemyList/Phase2"), NodePath("../Area3EnemyList/Phase3")]
 
 [node name="enemyCount" type="Node" parent="Area3/Area3Spawner"]
 

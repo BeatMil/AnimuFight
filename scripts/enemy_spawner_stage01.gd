@@ -9,9 +9,6 @@ var phase: int = 0
 signal area_done
 
 
-func _ready() -> void:
-	phase = Settings.checkpoint
-
 
 func _spawn_enemy() -> void:
 	# Parry array out of index error
