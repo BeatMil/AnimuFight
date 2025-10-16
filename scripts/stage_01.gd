@@ -314,7 +314,7 @@ func _skip_boss_intro() -> void: ## T^T
 	boss_01.set_is_controllable(true)
 	boss_01.set_attack_timer_bool(true)
 	boss_01.animation_player.play("idle")
-	boss_01.hp_bar.set_hp(3)
+	boss_01.hp_bar.set_hp(40)
 	CameraManager.set_screen_lock(13317, 15458, -10000000, 1000)
 
 
@@ -389,7 +389,7 @@ func spawn_heli_spear(pos, pitch) -> void:
 func boss_defeated() -> void:
 	final_hit_audio_player.play()
 	white_animation_player.play("in")
-	CameraManager.zoom(Vector2(0.5, 0.5), 3)
+	CameraManager.zoom(Vector2(0.5, 0.5), 2)
 	animu_fast_fx_whole_screen.visible = true
 	ObjectPooling.spawn_ground_spark_2(player.position)
 	for child in enemy_backup.get_children():
