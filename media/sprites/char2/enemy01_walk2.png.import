@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d227r7s4cvfck"
-path="res://.godot/imported/enemy01_jump_punch_telegraph.png-ef6e5ea4ff5323dc3eb6f7c11baa8b53.ctex"
+uid="uid://bd7ln06hbe1o0"
+path="res://.godot/imported/enemy01_walk2.png-44c79683c6e7c5a4b1640a1224487f81.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://media/sprites/char2/enemy01_jump_punch_telegraph.png"
-dest_files=["res://.godot/imported/enemy01_jump_punch_telegraph.png-ef6e5ea4ff5323dc3eb6f7c11baa8b53.ctex"]
+source_file="res://media/sprites/char2/enemy01_walk2.png"
+dest_files=["res://.godot/imported/enemy01_walk2.png-44c79683c6e7c5a4b1640a1224487f81.ctex"]
 
 [params]
 

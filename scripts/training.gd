@@ -10,11 +10,11 @@ extends Node2D
 @onready var enemy_spawner_8: Node2D = $EnemySpawner8
 @onready var mango_boss: Object = preload("res://nodes/mango_boss.tscn")
 @onready var boss01: Object = preload("res://nodes/boss01.tscn")
-@onready var enemy1: Object = preload("res://nodes/enemy_01.tscn")
 @onready var enemy2: Object = preload("res://nodes/enemy_02.tscn")
 @onready var enemy3: Object = preload("res://nodes/enemy_03.tscn")
-@onready var enemy6: Object = preload("res://nodes/enemy_06.tscn")
 const enemy4 = preload("uid://bhw2h1n6yqhk8")
+const enemy1 = preload("uid://b2vaqeiw3q18o")
+const enemy6 = preload("uid://d0ufo617puti8")
 
 @onready var death_zone: Node2D = $DeathZone
 @onready var wall_player: AnimationPlayer = $WallPlayer
