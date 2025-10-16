@@ -23,6 +23,9 @@ func _spawn_enemy() -> void:
 		e.position = enemy.position.position
 		e.target = target
 		e.hp = enemy.hp
+		if e.name == "Boss01":
+			e.boss_defeated.connect(get_parent().boss_defeated)
+			get_parent().boss = e
 		enemy_count.add_child(e)
 		enemy_to_spawn.erase(enemy)
 		await get_tree().create_timer(0.1).timeout

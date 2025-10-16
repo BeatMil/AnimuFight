@@ -1,8 +1,10 @@
-[gd_scene load_steps=63 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=70 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/pre_stage_01.gd" id="1_pekkb"]
 [ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/ui/restart_menu.tscn" id="2_i7cta"]
 [ext_resource type="Texture2D" uid="uid://dvbwvcpefu5qb" path="res://media/sprites/pre_stage01/sky_background.png" id="3_edvyi"]
+[ext_resource type="PackedScene" uid="uid://bw5ja0ukb5vjq" path="res://nodes/black_bar_cutscene.tscn" id="3_i7cta"]
+[ext_resource type="Texture2D" uid="uid://kma2rfutfsxc" path="res://media/sprites/stage01/boss_fight_place/helicopter.png" id="4_edvyi"]
 [ext_resource type="Script" uid="uid://pwpucxtlx40w" path="res://scripts/parallax_layer.gd" id="4_mfofa"]
 [ext_resource type="Texture2D" uid="uid://decg2r6h1bvnh" path="res://media/vfx/cloud_sprite.png" id="5_rtwsc"]
 [ext_resource type="Texture2D" uid="uid://np2no54r3gdy" path="res://media/vfx/animu_fast_fx_3f.png" id="6_mcw87"]
@@ -31,6 +33,7 @@
 [ext_resource type="AudioStream" uid="uid://cns33kc20b478" path="res://media/ost/RCG_Detention.mp3" id="29_10fts"]
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="30_qiine"]
 [ext_resource type="AudioStream" uid="uid://b1ca2dun1uldc" path="res://media/sfxs/GlassClash.wav" id="31_4w4lu"]
+[ext_resource type="AudioStream" uid="uid://ddoql0bljjk1f" path="res://media/sfxs/GroundHit2.wav" id="34_mfofa"]
 
 [sub_resource type="Animation" id="Animation_4g6yn"]
 length = 0.001
@@ -740,6 +743,46 @@ _data = {
 &"light_breaks": SubResource("Animation_siln8")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edvyi"]
+size = Vector2(1776, 736)
+
+[sub_resource type="Animation" id="Animation_mfofa"]
+resource_name = "kick_player"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Helicopter:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.53333336, 1.1333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1872, 400), Vector2(3392, 456)]
+}
+
+[sub_resource type="Animation" id="Animation_edvyi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Helicopter:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1872, 400)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rtwsc"]
+_data = {
+&"RESET": SubResource("Animation_edvyi"),
+&"kick_player": SubResource("Animation_mfofa")
+}
+
 [node name="PreStage01" type="Node2D"]
 script = ExtResource("1_pekkb")
 
@@ -747,6 +790,8 @@ script = ExtResource("1_pekkb")
 
 [node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_i7cta")]
 visible = false
+
+[node name="BlackBarCutscene" parent="CanvasLayer" instance=ExtResource("3_i7cta")]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -1100,7 +1145,7 @@ object = ExtResource("20_ojfvp")
 [node name="boss01" type="Node" parent="EnemySpawnHelper/Phase9" node_paths=PackedStringArray("position")]
 script = ExtResource("25_e4twh")
 position = NodePath("../../../SpawnPos/pos4")
-hp = 50
+hp = 100
 object = ExtResource("26_m7cni")
 
 [node name="SpawnPos" type="Node" parent="."]
@@ -1221,9 +1266,29 @@ position = Vector2(1000, 32)
 attenuation = 0.5
 bus = &"LouderBus"
 
+[node name="Helicopter" type="Sprite2D" parent="."]
+position = Vector2(-1872, 400)
+texture = ExtResource("4_edvyi")
+
+[node name="HeliArea2D" type="Area2D" parent="Helicopter"]
+collision_layer = 0
+collision_mask = 19
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Helicopter/HeliArea2D"]
+shape = SubResource("RectangleShape2D_edvyi")
+
+[node name="HeliPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rtwsc")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HeliPlayer"]
+stream = ExtResource("34_mfofa")
+
 [connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]
 [connection signal="body_entered" from="BounceToLeft" to="." method="_on_bounce_to_left_body_entered"]
 [connection signal="body_entered" from="BounceToRight" to="." method="_on_bounce_to_right_body_entered"]
 [connection signal="body_entered" from="HelicopSpawn" to="." method="_on_helicop_spawn_body_entered"]
 [connection signal="body_entered" from="BounceBossBack" to="." method="_on_bounce_boss_back_body_entered"]
 [connection signal="body_entered" from="Lights/topLight/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Helicopter/HeliArea2D" to="." method="_on_heli_area_2d_body_entered"]

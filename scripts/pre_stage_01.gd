@@ -6,6 +6,7 @@ const DEBRIS_UP = preload("res://nodes/debris_upward.tscn")
 const LIGHT_PARTICLE = preload("res://nodes/hitsparks/light_particle.tscn")
 const BOSS_BOUNCE_SFX = preload("res://media/sfxs/unequip01.wav")
 
+@onready var black_bar_cutscene: Node2D = $CanvasLayer/BlackBarCutscene
 @onready var debris_animation_player: AnimationPlayer = $DebrisArea2D/AnimationPlayer
 @onready var debris_area_2d: Area2D = $DebrisArea2D
 @onready var no_door: Sprite2D = $DebrisArea2D/NoDoor
@@ -23,7 +24,10 @@ const BOSS_BOUNCE_SFX = preload("res://media/sfxs/unequip01.wav")
 @onready var topLight_area_2d: Area2D = $Lights/topLight/Area2D
 const STAGE_01 = preload("uid://cijpe5mfa2ffb")
 @onready var restart_menu: Control = $CanvasLayer/RestartMenu
+@onready var heli_player: AnimationPlayer = $HeliPlayer
+@onready var audio_stream_player: AudioStreamPlayer = $HeliPlayer/AudioStreamPlayer
 
+var boss
 
 signal shoot_up_house
 
@@ -59,7 +63,7 @@ func _ready() -> void:
 
 
 func _player_ded() -> void:
-	if Settings.checkpoint >= 8:
+	if Settings.checkpoint >= 8 and player.hp_bar.immediate_value < -900:
 		Settings.checkpoint = 0
 		get_tree().change_scene_to_packed(STAGE_01)
 	else:
@@ -141,3 +145,33 @@ func _on_area_2d_body_entered(_body: Node2D) -> void:
 	light_player.play("light_breaks")
 	topLight_area_2d.queue_free()
 	# topLight_area_2d.monitoring = false
+
+
+func boss_defeated() -> void:
+	player.is_controllable = false
+	player.move_hud_away()
+	black_bar_cutscene.enable()
+	heli_player.play("kick_player")
+	print("play boss kick player")
+
+
+func _on_heli_area_2d_body_entered(body: Node2D) -> void:
+	body.hitted(
+	self,
+	body.sprite_2d.flip_h,
+	Vector2(2200, -200),
+	1,
+	0.5,
+	2,
+	Vector2(10, 0.1),
+	0,
+	Enums.Attack.UNBLOCK
+	)
+	audio_stream_player.play()
+
+
+func hitlag(_amount: float = 0.3) -> void:
+	if _amount:
+		set_physics_process(false)
+		await get_tree().create_timer(_amount).timeout
+		set_physics_process(true)

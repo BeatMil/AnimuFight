@@ -297,7 +297,7 @@ func boss_next_phase() -> void:
 
 func _on_hp_out() -> void:
 	if is_heli_phase:
-		hp_bar.hp_out.disconnect(_on_hp_out)
 		animation_player.play("ded")
-		emit_signal("boss_defeated")
 		_slow_moion_no_sfx_2(0.5, 1)
+	hp_bar.hp_out.disconnect(_on_hp_out)
+	emit_signal("boss_defeated")
