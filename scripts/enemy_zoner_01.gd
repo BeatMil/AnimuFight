@@ -6,7 +6,6 @@ extends "res://scripts/enemy.gd"
 
 func _ready() -> void:
 	super._ready()
-	block_rate = 5
 	DED_SPRITE = preload("uid://73v1gc7dgtjt")
 
 
