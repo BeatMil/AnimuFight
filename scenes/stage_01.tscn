@@ -756,7 +756,6 @@ visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
 position = Vector2(-1456, -400)
-hp = 3
 
 [node name="CheckPoints" type="Node" parent="."]
 
@@ -938,7 +937,7 @@ object = ExtResource("12_gsglw")
 [node name="e3_2" type="Node" parent="Area3/Area3EnemyList/Phase2" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
 position = NodePath("../../../Area3SpawnPos/pos2")
-hp = 20
+hp = 30
 object = ExtResource("12_gsglw")
 
 [node name="Phase3" type="Node" parent="Area3/Area3EnemyList"]
@@ -1364,7 +1363,7 @@ shape = SubResource("RectangleShape2D_v7t3f")
 [node name="Area5Spawner" type="Node2D" parent="Area5" node_paths=PackedStringArray("target", "enemy_to_spawn")]
 script = ExtResource("8_yxbv0")
 target = NodePath("../../Player")
-enemy_to_spawn = [NodePath("../Area5EnemyList/Phase1")]
+enemy_to_spawn = [NodePath("../Area5EnemyList/Phase1"), NodePath("../Area5EnemyList/Phase2"), NodePath("../Area5EnemyList/Phase3")]
 
 [node name="enemyCount" type="Node" parent="Area5/Area5Spawner"]
 
@@ -1392,25 +1391,51 @@ object = ExtResource("19_e1vcx")
 
 [node name="Phase2" type="Node" parent="Area5/Area5EnemyList"]
 
-[node name="e3_1" type="Node" parent="Area5/Area5EnemyList/Phase2" node_paths=PackedStringArray("position")]
+[node name="e3" type="Node" parent="Area5/Area5EnemyList/Phase2" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
-position = NodePath("../../../../Area4/Area4SpawnPos/pos2")
-hp = 20
+position = NodePath("../../../Area5SpawnPos/pos1")
+hp = 30
+object = ExtResource("19_e1vcx")
+
+[node name="e6_1" type="Node" parent="Area5/Area5EnemyList/Phase2" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area5SpawnPos/pos2")
+hp = 30
+block_rate = 6
 object = ExtResource("12_gsglw")
 
-[node name="e3_2" type="Node" parent="Area5/Area5EnemyList/Phase2" node_paths=PackedStringArray("position")]
+[node name="e6_2" type="Node" parent="Area5/Area5EnemyList/Phase2" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
-position = NodePath("../../../../Area4/Area4SpawnPos/pos2")
-hp = 20
+position = NodePath("../../../Area5SpawnPos/pos2")
+hp = 30
+block_rate = 6
 object = ExtResource("12_gsglw")
 
 [node name="Phase3" type="Node" parent="Area5/Area5EnemyList"]
 
-[node name="heavy01" type="Node" parent="Area5/Area5EnemyList/Phase3" node_paths=PackedStringArray("position")]
+[node name="e1_1" type="Node" parent="Area5/Area5EnemyList/Phase3" node_paths=PackedStringArray("position")]
 script = ExtResource("6_l457t")
-position = NodePath("../../../../Area4/Area4SpawnPos/pos1")
-hp = 3
-object = ExtResource("10_bc8xj")
+position = NodePath("../../../Area5SpawnPos/pos1")
+hp = 30
+object = ExtResource("8_nasqd")
+
+[node name="e2_2" type="Node" parent="Area5/Area5EnemyList/Phase3" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area5SpawnPos/pos2")
+hp = 30
+object = ExtResource("9_dimc6")
+
+[node name="e3" type="Node" parent="Area5/Area5EnemyList/Phase3" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area5SpawnPos/pos3")
+hp = 30
+object = ExtResource("19_e1vcx")
+
+[node name="e6_1" type="Node" parent="Area5/Area5EnemyList/Phase3" node_paths=PackedStringArray("position")]
+script = ExtResource("6_l457t")
+position = NodePath("../../../Area5SpawnPos/pos2")
+hp = 30
+object = ExtResource("12_gsglw")
 
 [node name="Phase4" type="Node" parent="Area5/Area5EnemyList"]
 
@@ -1581,13 +1606,14 @@ z_index = 2
 position = Vector2(14328, -424)
 is_next_phase = true
 target = NodePath("../../Player")
-hp = 40
+hp = 80
 
 [node name="Boss02" parent="Area6" node_paths=PackedStringArray("target") instance=ExtResource("7_nh3b5")]
 z_index = 2
 position = Vector2(14520, -424)
 is_heli_phase = true
 target = NodePath("../../Player")
+hp = 100
 
 [node name="WaitBossPlatform" type="StaticBody2D" parent="Area6"]
 position = Vector2(14336, -176)
