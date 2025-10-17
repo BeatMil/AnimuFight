@@ -108,18 +108,19 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if OS.is_debug_build():
-		debug_label.text = "PlayerState: %s"%States.keys()[state]
-		debug_label.text += "\n%0.3f"%input_buffer_timer
-		debug_label.text += "\n%0.3f"%block_buffer_timer
-		debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
-		debug_label.text += "\n%0.3f"%tech_roll_timer
-		debug_label.text += "\n%s"%animation_player.current_animation
+		pass
+		# debug_label.text = "PlayerState: %s"%States.keys()[state]
+		# debug_label.text += "\n%0.3f"%input_buffer_timer
+		# debug_label.text += "\n%0.3f"%block_buffer_timer
+		# debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
+		# debug_label.text += "\n%0.3f"%tech_roll_timer
+		# debug_label.text += "\n%s"%animation_player.current_animation
 		# debug_label.text += "\n%s"%command_buffer_count
 		# debug_label.text += "\n%s"%[input_history]
 		# debug_label.text += "\nGoh"
 		# debug_label.text += "\n%s"%Input.is_action_pressed("block")
 		# debug_label.text += "\n%s"%debug_input_event
-		debug_label.text += "\n%s"%next_move
+		# debug_label.text += "\n%s"%next_move
 		# debug_label.text += "\nCameraPos: %s"%$Camera.global_position
 
 
