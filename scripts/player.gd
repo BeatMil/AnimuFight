@@ -1324,7 +1324,7 @@ func charge_lv1_info() ->  void:
 	"hitlag_amount_air": 0.0,
 	"hitstun_amount_air": 0.1,
 	"screenshake_amount": Vector2(10, 0.1),
-	"damage": 4,
+	"damage": 5,
 	"type": Enums.Attack.NORMAL,
 	"pos": $HitBoxPos/DownHpPos.position,
 	# "zoom": Vector2(1, 1),
@@ -1334,7 +1334,7 @@ func charge_lv2_info() ->  void:
 	var info = {
 	"size": Hitbox_type.LARGE,
 	"time": 0.1,
-	"push_power_ground": Vector2(100, -600),
+	"push_power_ground": Vector2(100, -300),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
 	"push_power_air": Vector2(100, -200),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
@@ -1343,8 +1343,8 @@ func charge_lv2_info() ->  void:
 	"hitlag_amount_air": 0.0,
 	"hitstun_amount_air": 0.1,
 	"screenshake_amount": Vector2(10, 0.1),
-	"damage": 10,
-	"type": Enums.Attack.NORMAL,
+	"damage": 8,
+	"type": Enums.Attack.UNBLOCK,
 	"pos": $HitBoxPos/DownHpPos.position,
 	# "zoom": Vector2(1, 1),
 	}
