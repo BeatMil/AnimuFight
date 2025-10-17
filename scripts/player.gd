@@ -353,8 +353,11 @@ func physic_input(_delta):
 			queue_move(_hp)
 	elif Input.is_action_just_released("hp"):
 		queue_move(_charge_attack_release)
-	elif Input.is_action_just_pressed("grab"):
-		queue_move(_grab)
+	elif Input.is_action_just_pressed("dash"):
+		if sprite_2d.flip_h:
+			queue_move(_dash_left)
+		else:
+			queue_move(_dash_right)
 
 	_check_input_history()
 
