@@ -22,6 +22,7 @@ const BANANA_FLY = preload("uid://dmjg7bqnvd1dk")
 
 @onready var area_5_lock_trigger: Area2D = $Area5/Area5LockTrigger
 @onready var area_5_spawner: Node2D = $Area5/Area5Spawner
+@onready var bridge_player: AnimationPlayer = $Area4/BridgePlayer
 
 
 @onready var boss_01: CharacterBody2D = $Area6/Boss01
@@ -148,6 +149,7 @@ func _lift_wall_area1() -> void:
 	area_lock_player.play("RESET")
 	CameraManager.set_screen_lock(-10000000, 10000000, -10000000, 1000)
 	market_green.set_active(true)
+	bridge_player.play("bridge")
 
 
 func _on_market_green_banana_fly() -> void:
@@ -182,6 +184,7 @@ func _on_area_3_lock_trigger_body_entered(_body: Node2D) -> void:
 
 
 func _on_area_4_lock_trigger_body_entered(_body: Node2D) -> void:
+	bridge_player.play("RESET")
 	area_lock_player.play("4_in")
 	CameraManager.set_screen_lock(6400, 8800, -10000000, 1000)
 	area_4_spawner.is_active = true

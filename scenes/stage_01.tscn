@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=91 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -93,6 +93,66 @@ size = Vector2(128, 512)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tby30"]
 size = Vector2(304, 128)
+
+[sub_resource type="Animation" id="Animation_hq0et"]
+resource_name = "bridge"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Floor7:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.4, 1), Vector2(0.5942709, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Floor7:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8056, 640), Vector2(8242.5, 631)]
+}
+
+[sub_resource type="Animation" id="Animation_n2qxt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Floor7:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.4, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Floor7:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8056, 640)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h3xeb"]
+_data = {
+&"RESET": SubResource("Animation_n2qxt"),
+&"bridge": SubResource("Animation_hq0et")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ugsm"]
 size = Vector2(1936, 336)
@@ -919,7 +979,7 @@ texture = ExtResource("11_thaiv")
 
 [node name="JunctionBox" parent="Area3" instance=ExtResource("11_l457t")]
 position = Vector2(5624, 600)
-amount_to_explode = 2
+amount_to_explode = 5
 
 [node name="HighWay" parent="Area3" instance=ExtResource("4_lrdte")]
 position = Vector2(6538, -482)
@@ -1330,6 +1390,11 @@ position = Vector2(8, -48)
 shape = SubResource("RectangleShape2D_tby30")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area4/PushPlayerBackUpArea2d"]
+
+[node name="BridgePlayer" type="AnimationPlayer" parent="Area4"]
+libraries = {
+&"": SubResource("AnimationLibrary_h3xeb")
+}
 
 [node name="Area5" type="Node" parent="."]
 
