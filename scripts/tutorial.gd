@@ -1,6 +1,6 @@
 extends Node2D
 
-
+const MAIN_MENU = preload("uid://dystn5u444ihq")
 @onready var command_label: Label = $CanvasLayer/CommandLabel
 @onready var press_key_label: Label = $CanvasLayer/PressKeyLabel
 const ENEMY_01 = preload("res://nodes/enemy_01.tscn")
@@ -74,3 +74,6 @@ func _input(event: InputEvent) -> void:
 				tutorial_state = THE_END
 				command_label.text = "Yay! You are ready! (Hopefully)"
 				press_key_label.text = "Press " + InputMap.action_get_events("ui_cancel")[0].as_text()
+	
+	if event.is_action_pressed("ui_cancel"):
+		SceneTransition.change_scene("res://scenes/main_menu.tscn")
