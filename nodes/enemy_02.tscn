@@ -91,7 +91,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1h3d5"]
-size = Vector2(96, 256)
+size = Vector2(136, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oysbf"]
 size = Vector2(176, 256)
@@ -105,6 +105,7 @@ collision_mask = 15
 script = ExtResource("2_tp74s")
 is_notarget = false
 hp = 100
+block_rate = 10
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_3e6vd")
@@ -126,14 +127,14 @@ position = Vector2(168, 0)
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LpRangeR" index="0"]
-position = Vector2(136, 0)
+position = Vector2(168, 0)
 shape = SubResource("RectangleShape2D_1h3d5")
 
 [node name="LpRangeL" type="Area2D" parent="." index="7"]
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LpRangeL" index="0"]
-position = Vector2(-136, 0)
+position = Vector2(-168, 0)
 shape = SubResource("RectangleShape2D_1h3d5")
 
 [node name="Attack01RangeR" type="Area2D" parent="." index="8"]
