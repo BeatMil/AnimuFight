@@ -78,7 +78,6 @@ offset_right = 144.0
 offset_bottom = -208.0
 theme_override_fonts/font = ExtResource("12_031mq")
 theme_override_font_sizes/font_size = 39
-text = "bob"
 
 [node name="BounceTogether" type="Area2D" parent="." index="12"]
 collision_layer = 0
