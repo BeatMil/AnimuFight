@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=88 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -46,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://kma2rfutfsxc" path="res://media/sprites/stage01/boss_fight_place/helicopter.png" id="39_83i0n"]
 [ext_resource type="AudioStream" uid="uid://djrqhdxov73pw" path="res://media/ost/PoundThePavement.mp3" id="43_phlmp"]
 [ext_resource type="AudioStream" uid="uid://b0sqnu8p3tkd1" path="res://media/ost/Hi-Tech Duel.mp3" id="45_gnqs4"]
+[ext_resource type="AudioStream" uid="uid://dgpr1vwlxqggq" path="res://media/ost/Colonel_Chihuahua.mp3" id="47_cwpgs"]
 
 [sub_resource type="Animation" id="Animation_lrdte"]
 length = 0.001
@@ -734,10 +735,32 @@ tracks/0/keys = {
 }
 tracks/0/use_blend = true
 
+[sub_resource type="Animation" id="Animation_tnllu"]
+resource_name = "chihuahua"
+length = 45.0
+loop_mode = 1
+step = 0.05
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MusicPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.060915567,
+"stream": ExtResource("47_cwpgs")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gnqs4"]
 _data = {
 &"HighTechDuel": SubResource("Animation_t0c07"),
-&"PoundThePavement": SubResource("Animation_t6tfn")
+&"PoundThePavement": SubResource("Animation_t6tfn"),
+&"chihuahua": SubResource("Animation_tnllu")
 }
 
 [node name="Stage01" type="Node2D"]

@@ -422,8 +422,11 @@ func boss_defeated() -> void:
 	
 	await get_tree().create_timer(2*Engine.time_scale).timeout
 	white_animation_player.play("out")
+	music_player.play("chihuahua")
 	animu_fast_fx_whole_screen.visible = false
 	Engine.time_scale = 1
+	var tween = get_tree().create_tween().set_loops()
+	tween.tween_callback(ObjectPooling.spawn_ground_spark_2.bind(player.position)).set_delay(1.0)
 
 
 func _player_ded() -> void:
