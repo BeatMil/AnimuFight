@@ -23,6 +23,7 @@ func _spawn_enemy() -> void:
 		e.position = enemy.position.position
 		e.target = target
 		e.hp = enemy.hp
+		e.block_rate = enemy.block_rate
 		if e.name == "Boss01":
 			e.boss_defeated.connect(get_parent().boss_defeated)
 			get_parent().boss = e

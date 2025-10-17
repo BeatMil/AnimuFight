@@ -693,26 +693,6 @@ _data = {
 &"intro": SubResource("Animation_apjmi")
 }
 
-[sub_resource type="Animation" id="Animation_t6tfn"]
-resource_name = "PoundThePavement"
-length = 128.0
-loop_mode = 1
-tracks/0/type = "audio"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MusicPlayer/AudioStreamPlayer")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("43_phlmp")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/0/use_blend = true
-
 [sub_resource type="Animation" id="Animation_t0c07"]
 resource_name = "HighTechDuel"
 length = 66.98
@@ -729,6 +709,26 @@ tracks/0/keys = {
 "end_offset": 12.17424,
 "start_offset": 0.85104585,
 "stream": ExtResource("45_gnqs4")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="Animation" id="Animation_t6tfn"]
+resource_name = "PoundThePavement"
+length = 128.0
+loop_mode = 1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MusicPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("43_phlmp")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -2057,6 +2057,9 @@ position = Vector2(0, -2240)
 
 [node name="WallL" parent="AreaLock/1" instance=ExtResource("21_v7t3f")]
 position = Vector2(-2080, 0)
+
+[node name="WallL2" parent="AreaLock/1" instance=ExtResource("21_v7t3f")]
+position = Vector2(-2870, 1929)
 
 [node name="WallR" parent="AreaLock/1" instance=ExtResource("21_v7t3f")]
 position = Vector2(2024, 0)
