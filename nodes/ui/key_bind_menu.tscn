@@ -54,6 +54,11 @@ layout_mode = 2
 action = "down"
 action_label_show = "Down"
 
+[node name="DashButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
+layout_mode = 2
+action = "dash"
+action_label_show = "Dash"
+
 [node name="LightAttackButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
 layout_mode = 2
 action = "lp"
