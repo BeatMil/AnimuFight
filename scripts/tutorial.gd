@@ -74,6 +74,6 @@ func _input(event: InputEvent) -> void:
 				tutorial_state = THE_END
 				command_label.text = "Yay! You are ready! (Hopefully)"
 				press_key_label.text = "Press " + InputMap.action_get_events("ui_cancel")[0].as_text()
-	
-	if event.is_action_pressed("ui_cancel"):
-		SceneTransition.change_scene("res://scenes/main_menu.tscn")
+		THE_END:
+			if event.is_action_pressed("ui_cancel"):
+				SceneTransition.change_scene("res://scenes/intro.tscn")

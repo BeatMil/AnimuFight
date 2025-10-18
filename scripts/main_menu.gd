@@ -49,7 +49,7 @@ func change_resolution(id: int) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	SceneTransition.change_scene_packed(INTRO)
+	SceneTransition.change_scene_packed(TUTORIAL)
 
 
 func _on_option_button_pressed() -> void:
