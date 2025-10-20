@@ -16,10 +16,11 @@ func _ready():
 
 
 func _unhandled_input(event):
-	if event.pressed:
-		InputMap.action_erase_events(action)
-		InputMap.action_add_event(action, event)
-		button_pressed = false
+	if event is not InputEventJoypadMotion:
+		if event.is_pressed():
+			InputMap.action_erase_events(action)
+			InputMap.action_add_event(action, event)
+			button_pressed = false
 
 
 func update_key_text():

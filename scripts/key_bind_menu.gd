@@ -53,6 +53,7 @@ func _on_back_button_pressed() -> void:
 		"right",
 		"up",
 		"down",
+		"dash",
 		"lp",
 		"hp",
 		"block",
@@ -60,4 +61,4 @@ func _on_back_button_pressed() -> void:
 		"execute",
 	]
 	for a in actions:
-		print(InputMap.action_get_events(a), a)
+		print(InputMap.action_get_events(a)[0], a)
