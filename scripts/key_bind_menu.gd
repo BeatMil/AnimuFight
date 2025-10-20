@@ -43,7 +43,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if visible:
 		if event.is_action_pressed("ui_cancel"):
-			emit_signal("close")
+			_on_back_button_pressed()
 
 
 func _on_back_button_pressed() -> void:

@@ -15,12 +15,16 @@ func _ready():
 	update_key_text()
 
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is not InputEventJoypadMotion:
 		if event.is_pressed():
-			InputMap.action_erase_events(action)
-			InputMap.action_add_event(action, event)
+			if InputMap.event_is_action(event, action):
+				print("Duplicate keybind ABORT!")
+			else:
+				InputMap.action_erase_events(action)
+				InputMap.action_add_event(action, event)
 			button_pressed = false
+			get_parent().get_parent().set_process_input(true)
 
 
 func update_key_text():
@@ -28,12 +32,12 @@ func update_key_text():
 
 
 func _on_toggled(toggled_on: bool) -> void:
-	if button_pressed:
+	if toggled_on:
+		# InputMap.action_erase_events(action)
 		get_parent().get_parent().set_process_input(false)
 		key_label.text = "... Awaiting Input ..."
 		release_focus()
 	else:
-		get_parent().get_parent().set_process_input(true)
 		update_key_text()
 		grab_focus()
 	await get_tree().create_timer(0.01).timeout
