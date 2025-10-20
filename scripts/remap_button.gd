@@ -1,8 +1,9 @@
 extends Button
 @export var action: String
 @export var action_label_show: String
-@onready var action_label: Label = $ActionLabel
-@onready var key_label: Label = $KeyLabel
+@onready var key_label: Label = $HBoxContainer/KeyLabel
+@onready var controller_label: Label = $HBoxContainer/ControllerLabel
+@onready var action_label: Label = $HBoxContainer/ActionLabel
 
 
 func _init():
@@ -21,14 +22,31 @@ func _unhandled_input(event: InputEvent) -> void:
 			if InputMap.event_is_action(event, action):
 				print("Duplicate keybind ABORT!")
 			else:
-				InputMap.action_erase_events(action)
-				InputMap.action_add_event(action, event)
+				if event is InputEventJoypadButton:
+					for current in InputMap.action_get_events(action):
+						if current is InputEventJoypadButton:
+							InputMap.action_erase_event(action, current)
+							InputMap.action_add_event(action, event)
+				else:
+					for current in InputMap.action_get_events(action):
+						if current is not InputEventJoypadButton:
+							InputMap.action_erase_event(action, current)
+							InputMap.action_add_event(action, event)
 			button_pressed = false
 			get_parent().get_parent().set_process_input(true)
 
 
 func update_key_text():
-	key_label.text = "%s" % InputMap.action_get_events(action)[0].as_text()
+	for i in InputMap.action_get_events(action):
+		if i is InputEventJoypadButton:
+			var start_index = i.as_text().find("(")
+			var beatify_string = \
+			i.as_text().substr(start_index)
+			controller_label.text = "%s" % beatify_string
+		else:
+			var keyboard = i.as_text()[0]
+			key_label.text = "%s" % keyboard
+	
 
 
 func _on_toggled(toggled_on: bool) -> void:
