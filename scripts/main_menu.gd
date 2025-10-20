@@ -31,7 +31,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") and key_bind_menu.visible == false:
 		option.visible = false
 		key_bind_menu.visible = false
 		option_button.grab_focus()
