@@ -17,28 +17,35 @@ func _ready():
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is not InputEventJoypadMotion:
-		if event.is_pressed():
-			if InputMap.event_is_action(event, action):
-				print("Duplicate keybind ABORT!")
-			else:
-				if event is InputEventJoypadButton:
-					for current in InputMap.action_get_events(action):
-						if current is InputEventJoypadButton:
-							InputMap.action_erase_event(action, current)
-							InputMap.action_add_event(action, event)
-				else:
-					for current in InputMap.action_get_events(action):
-						if current is not InputEventJoypadButton:
-							InputMap.action_erase_event(action, current)
-							InputMap.action_add_event(action, event)
-			button_pressed = false
-			get_parent().get_parent().set_process_input(true)
+	if event is InputEventJoypadMotion:
+		for current in InputMap.action_get_events(action):
+			if (current is InputEventJoypadMotion) or (current is InputEventJoypadButton):
+				InputMap.action_erase_event(action, current)
+				InputMap.action_add_event(action, event)
+				button_pressed = false
+				get_parent().get_parent().set_process_input(true)
+	elif event.is_pressed():
+		if InputMap.event_is_action(event, action):
+			print("Duplicate keybind ABORT!")
+		else:
+			if event is InputEventJoypadButton:
+				for current in InputMap.action_get_events(action):
+					if (current is InputEventJoypadMotion) or \
+						(current is InputEventJoypadButton):
+						InputMap.action_erase_event(action, current)
+						InputMap.action_add_event(action, event)
+			if event is InputEventKey:
+				for current in InputMap.action_get_events(action):
+					if current is InputEventKey:
+						InputMap.action_erase_event(action, current)
+						InputMap.action_add_event(action, event)
+		button_pressed = false
+		get_parent().get_parent().set_process_input(true)
 
 
 func update_key_text():
 	for i in InputMap.action_get_events(action):
-		if i is InputEventJoypadButton:
+		if (i is InputEventJoypadButton) or (i is InputEventJoypadMotion):
 			var start_index = i.as_text().find("(")
 			var beatify_string = \
 			i.as_text().substr(start_index)

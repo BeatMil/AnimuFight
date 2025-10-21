@@ -36,6 +36,7 @@ func _input(event: InputEvent) -> void:
 		key_bind_menu.visible = false
 		option_button.grab_focus()
 
+
 func _on_menu_button_about_to_popup() -> void:
 	pass
 	# change_resolution()
