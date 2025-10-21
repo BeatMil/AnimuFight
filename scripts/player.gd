@@ -109,7 +109,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if OS.is_debug_build():
 		pass
-		# debug_label.text = "PlayerState: %s"%States.keys()[state]
+		debug_label.text = "PlayerState: %s"%States.keys()[state]
 		# debug_label.text += "\n%0.3f"%input_buffer_timer
 		# debug_label.text += "\n%0.3f"%block_buffer_timer
 		# debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
