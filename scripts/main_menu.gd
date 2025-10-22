@@ -50,7 +50,7 @@ func change_resolution(id: int) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	SceneTransition.change_scene_packed(TUTORIAL)
+	SceneTransition.change_scene("res://scenes/tutorial.tscn")
 
 
 func _on_option_button_pressed() -> void:
