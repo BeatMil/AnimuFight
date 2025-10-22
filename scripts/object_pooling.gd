@@ -21,6 +21,7 @@ const GROUND_PARTICLE_2 = preload("uid://bb5sw8ogwptbc")
 const EWGF_SPARK = preload("uid://cj5pmswumq8oa")
 const HELI_BOMB_WARNING = preload("uid://cffmpmpmvl5pw")
 const BOOM_SPARK = preload("uid://nf1iaj3ndswq")
+const GREEN_SPARK = preload("uid://dj75v1eu27yjx")
 
 
 #############################################################
@@ -163,4 +164,10 @@ func spawn_boom_spark(_position: Vector2 = pooling_pos, is_stay = false) -> void
 	var hitspark = BOOM_SPARK.instantiate()
 	hitspark.position = _position
 	hitspark.is_stay = is_stay
+	get_tree().current_scene.add_child(hitspark)
+
+
+func spawn_green_spark(_position: Vector2 = pooling_pos) -> void:
+	var hitspark = GREEN_SPARK.instantiate()
+	hitspark.position = _position
 	get_tree().current_scene.add_child(hitspark)

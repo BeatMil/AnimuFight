@@ -7,6 +7,16 @@ const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 @onready var player: CharacterBody2D = $Player
 @onready var enemy: CharacterBody2D = $Enemy
 @onready var command_label: RichTextLabel = $CanvasLayer/CommandLabel
+@onready var count_label: RichTextLabel = $CanvasLayer/CountLabel
+@onready var nice_label: Label = $CanvasLayer/NiceLabel
+@onready var nice_player: AnimationPlayer = $CanvasLayer/NiceLabel/AnimationPlayer
+@onready var nice_pos: Marker2D = $CanvasLayer/nice_pos
+
+
+var block_count = 0
+var dodge_count = 0
+var throw_break_count = 0
+
 
 enum {
 	LIGHT_ATTACK,
@@ -23,6 +33,7 @@ var enemy_tween
 
 
 var tutorial_state = LIGHT_ATTACK
+
 
 func spawn_executable_enemy() -> void:
 	enemy.hitted(
@@ -43,22 +54,61 @@ func spawn_executable_enemy() -> void:
 func enemy_throw_practice() -> void:
 	enemy_tween = create_tween().set_loops()
 	enemy_tween.tween_callback(enemy._throw_ground).set_delay(1.0)
+	print("throw_practice!")
 
 
 func kill_all_tween() -> void:
 	for tween in get_tree().get_processed_tweens():
 		tween.kill()
+	print("kill all tween")
 
 
 func enemy_throw_practice2() -> void:
-	for tween in get_tree().get_processed_tweens():
-		tween.kill()
 	enemy_tween = create_tween().set_loops()
 	enemy_tween.tween_callback(enemy._throw_float).set_delay(1.0)
 
 
+func enemy_block_practice() -> void:
+	enemy_tween = create_tween().set_loops()
+	enemy_tween.tween_callback(enemy._lp).set_delay(1.0)
+	print("block_practice!")
+
+
+func enemy_dodge_practice() -> void:
+	enemy_tween = create_tween().set_loops()
+	enemy_tween.tween_callback(enemy._attack01).set_delay(1.0)
+
+
+func player_block_count() -> void:
+	block_count += 1
+	count_label.text = "Block %s/2"%[block_count]
+
+
+func player_dodge_count() -> void:
+	dodge_count += 1
+	count_label.text = "Dodge %s/2"%[dodge_count]
+
+
+func spawn_green_spark() -> void:
+	ObjectPooling.spawn_green_spark(nice_pos.position)
+
+
+func player_throw_break_count() -> void:
+	print("throw break desu")
+	throw_break_count += 1
+	if tutorial_state == THROW_GROUND:
+		print("throw break purple")
+		count_label.text = "Throw break [color=purple]purple[/color] %s/2"%[throw_break_count]
+	elif tutorial_state == THROW_FLOAT:
+		print("throw break blue")
+		count_label.text = "Throw break [color=lightblue]purple[/color] %s/2"%[throw_break_count]
+
+
 func _ready() -> void:
 	player.move_hud_away()
+	player.block_success.connect(player_block_count)
+	player.dodge_success.connect(player_dodge_count)
+	player.throw_break_success.connect(player_throw_break_count)
 	Settings.current_stage = "res://scenes/tutorial.tscn"
 	CameraManager.set_screen_lock(0, 1940, 135, 1029)
 	command_label.text = "Light Attack"
@@ -66,48 +116,72 @@ func _ready() -> void:
 	AttackQueue.stop_queue_timer()
 
 
-func _input(event: InputEvent) -> void:
+func _physics_process(_delta: float) -> void:
 	match tutorial_state:
 		LIGHT_ATTACK:
-			if event.is_action_pressed("lp"):
+			if player.animation_player.current_animation == "lp1":
 				tutorial_state = HEAVY_ATTACK
 				command_label.text = "Heavy Attack / Throw break"
 				press_key_label.text = "Press " + InputMap.action_get_events("hp")[0].as_text()
+				spawn_green_spark()
+				nice_player.play("nice")
 		HEAVY_ATTACK:
-			if event.is_action_pressed("hp"):
+			if player.animation_player.current_animation == "hp":
 				tutorial_state = BLOCK
 				command_label.text = "Block"
 				press_key_label.text = "Press " + InputMap.action_get_events("block")[0].as_text()
+				count_label.text = "Block 0/2"
+				enemy_block_practice()
+				spawn_green_spark()
+				nice_player.play("nice")
 		BLOCK:
-			if event.is_action_pressed("block"):
+			if block_count >= 2:
+				kill_all_tween()
+				enemy_dodge_practice()
 				tutorial_state = DODGE
 				command_label.text = "Dodge"
+				count_label.text = "Dodge 0/2"
 				press_key_label.text = "Press " + InputMap.action_get_events("dodge")[0].as_text()
+				enemy_dodge_practice()
+				spawn_green_spark()
+				nice_player.play("nice")
 		DODGE:
-			if event.is_action_pressed("dodge"):
+			if dodge_count >= 2:
 				tutorial_state = THROW_GROUND
 				command_label.text = "Throw break [color=purple]purple[/color]"
 				press_key_label.text = "Press " + InputMap.action_get_events("hp")[0].as_text()
-		THROW_GROUND:
-			enemy_throw_practice()
-			if player.state == 8: # PARRY_SUCCESS
-				tutorial_state = THROW_FLOAT
-				command_label.text = "Throw break [color=blue]blue[/color]"
-				press_key_label.text = "Press " + InputMap.action_get_events("lp")[0].as_text()
+				count_label.text = "Throw break [color=purple]purple[/color] 0/2"
 				kill_all_tween()
+				enemy_throw_practice()
+				spawn_green_spark()
+				nice_player.play("nice")
+		THROW_GROUND:
+			if throw_break_count >= 2:
+				throw_break_count = 0
+				command_label.text = "Throw break [color=lightblue]blue[/color]"
+				press_key_label.text = "Press " + InputMap.action_get_events("lp")[0].as_text()
+				count_label.text = "Throw break [color=lightblue]blue[/color] 0/2"
+				kill_all_tween()
+				spawn_green_spark()
+				nice_player.play("nice")
+				await get_tree().create_timer(1).timeout
 				enemy_throw_practice2()
+				tutorial_state = THROW_FLOAT
 		THROW_FLOAT:
-			if player.state == 8: # PARRY_SUCCESS
+			if throw_break_count >= 2:
 				kill_all_tween()
 				tutorial_state = EXECUTE
 				command_label.text = "Execute"
 				press_key_label.text = "Press " + InputMap.action_get_events("execute")[0].as_text()
+				spawn_green_spark()
+				nice_player.play("nice")
+				await get_tree().create_timer(1).timeout
 				spawn_executable_enemy()
 		EXECUTE:
-			if event.is_action_pressed("execute"):
+			if player.animation_player.current_animation == "exe_hadoken":
 				tutorial_state = THE_END
 				command_label.text = "Yay! You are ready! (Hopefully)"
 				press_key_label.text = "Press " + InputMap.action_get_events("ui_cancel")[0].as_text()
 		THE_END:
-			if event.is_action_pressed("ui_cancel"):
+			if Input.is_action_pressed("ui_cancel"):
 				SceneTransition.change_scene("res://scenes/intro.tscn")

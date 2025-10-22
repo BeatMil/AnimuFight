@@ -15,6 +15,7 @@ func _ready() -> void:
 #############################################################
 func _lp() -> void:
 	if state in [States.IDLE, States.ATTACK]:
+		state = States.ATTACK
 		animation_player.play("lp1")
 func _lp_chain() -> void:
 	if state in [States.IDLE, States.ATTACK]:
@@ -41,6 +42,7 @@ func lp_info() -> void: # for animation_player
 
 func _attack01() -> void:
 	if state in [States.IDLE, States.BLOCK_STUNNED, States.BLOCK, States.ATTACK]:
+		state = States.ATTACK
 		animation_player.play("attack01_1")
 func attack01_info() -> void: # for animation_player
 	var info = {

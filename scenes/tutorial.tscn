@@ -1,11 +1,103 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckwt7te7yy1ld"]
+[gd_scene load_steps=14 format=3 uid="uid://ckwt7te7yy1ld"]
 
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_8ho6b"]
 [ext_resource type="Script" uid="uid://lqd56fdmu1nh" path="res://scripts/tutorial.gd" id="1_ph3nu"]
+[ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/ui/restart_menu.tscn" id="2_gbqnl"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="2_ph3nu"]
+[ext_resource type="AudioStream" uid="uid://bgo7csbocxmca" path="res://media/sfxs/UIMisc_INTERFACE-Lock_HY_PC-004.wav" id="3_nlqja"]
 [ext_resource type="PackedScene" uid="uid://bdvm6x1ynbejn" path="res://nodes/pre_stage01/shelf.tscn" id="4_4kmhl"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="5_cq4me"]
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="6_6yjpi"]
+[ext_resource type="Script" uid="uid://pqbpdkwv2fd1" path="res://scripts/player_tutorial.gd" id="6_ckvwl"]
+
+[sub_resource type="Animation" id="Animation_ckvwl"]
+resource_name = "nice"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1208, 96), Vector2(1208, 64), Vector2(1208, 64), Vector2(1208, 32)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_green_spark"
+}]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_nlqja")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
+
+[sub_resource type="Animation" id="Animation_nlqja"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1208, 64)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0epgs"]
+_data = {
+&"RESET": SubResource("Animation_nlqja"),
+&"nice": SubResource("Animation_ckvwl")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4kmhl"]
 size = Vector2(3334, 470)
@@ -40,6 +132,20 @@ text = "Light Attack"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="CountLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 344.0
+offset_top = 144.0
+offset_right = 904.0
+offset_bottom = 194.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="PressKeyLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 5
 anchor_left = 0.5
@@ -52,6 +158,34 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 36
 text = "Press 'key'"
 horizontal_alignment = 1
+
+[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_gbqnl")]
+visible = false
+
+[node name="NiceLabel" type="Label" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 1208.0
+offset_top = 64.0
+offset_right = 1300.0
+offset_bottom = 114.0
+rotation = 0.08498592
+theme_override_colors/font_color = Color(0.47241643, 0.83264434, 0.46560523, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 36
+text = "NICE!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/NiceLabel"]
+libraries = {
+&"": SubResource("AnimationLibrary_0epgs")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/NiceLabel/AnimationPlayer"]
+volume_db = 6.0
+bus = &"LouderBus"
+
+[node name="nice_pos" type="Marker2D" parent="CanvasLayer"]
+position = Vector2(1256, 88)
 
 [node name="Floor" type="StaticBody2D" parent="." groups=["ground"]]
 position = Vector2(1168, 1536)
@@ -72,7 +206,9 @@ texture = ExtResource("2_ph3nu")
 position = Vector2(1160, 728)
 
 [node name="Player" parent="." instance=ExtResource("1_8ho6b")]
-position = Vector2(888, 736)
+position = Vector2(888, 728)
+script = ExtResource("6_ckvwl")
+hp = 12000
 
 [node name="SpawnPos" type="Marker2D" parent="."]
 position = Vector2(1176, 120)
