@@ -194,13 +194,6 @@ func _physics_process(delta: float) -> void:
 	if is_ded:
 		return
 
-	if hitlag_timer > 0:
-		physic_input(delta)
-		hitlag_timer -= delta
-		return
-
-	if is_controllable:
-		physic_input(delta)
 	_check_wall_bounce()
 
 	if is_on_floor():
@@ -327,6 +320,14 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and state == States.AIR_SPD:
 		# state = States.ATTACK
 		animation_player.play("air_spd_burst")
+
+	# if hitlag_timer > 0:
+	# 	physic_input(delta)
+	# 	hitlag_timer -= delta
+	# 	return
+
+	if is_controllable:
+		physic_input(delta)
 
 
 func physic_input(_delta):
