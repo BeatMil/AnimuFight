@@ -1,8 +1,6 @@
 extends Node2D
 
-const MAIN_MENU = preload("uid://dystn5u444ihq")
 @onready var press_key_label: Label = $CanvasLayer/PressKeyLabel
-const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 @onready var player: CharacterBody2D = $Player
 @onready var enemy: CharacterBody2D = $Enemy
 @onready var command_label: RichTextLabel = $CanvasLayer/CommandLabel
@@ -10,13 +8,16 @@ const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 @onready var nice_label: Label = $CanvasLayer/NiceLabel
 @onready var nice_player: AnimationPlayer = $CanvasLayer/NiceLabel/AnimationPlayer
 @onready var nice_pos: Marker2D = $CanvasLayer/nice_pos
-const ENEMY_01 = preload("uid://b2vaqeiw3q18o")
 @onready var repos: Marker2D = $Repos
 
+const MAIN_MENU = preload("uid://dystn5u444ihq")
+const HIT_2 = preload("res://media/sfxs/Hit2.wav")
+const ENEMY_01 = preload("uid://b2vaqeiw3q18o")
 
 var block_count = 0
 var dodge_count = 0
 var throw_break_count = 0
+var current_action = "lp"
 
 
 enum {
@@ -119,6 +120,10 @@ func spawn_green_spark() -> void:
 	ObjectPooling.spawn_green_spark(nice_pos.position)
 
 
+func show_label_base_on_input(human_read) -> void:
+	press_key_label.text = "Press %s" % human_read
+
+
 func player_throw_break_count() -> void:
 	print("throw break desu")
 	throw_break_count += 1
@@ -131,6 +136,7 @@ func player_throw_break_count() -> void:
 
 
 func _ready() -> void:
+	InputDetector.input_recieved.connect(show_label_base_on_input)
 	player.move_hud_away()
 	player.block_success.connect(player_block_count)
 	player.dodge_success.connect(player_dodge_count)
@@ -139,6 +145,7 @@ func _ready() -> void:
 	CameraManager.set_screen_lock(0, 1940, 135, 1029)
 	command_label.text = "Light Attack"
 	press_key_label.text = "Press " + InputMap.action_get_events("lp")[0].as_text()
+	InputDetector.action = "lp"
 	AttackQueue.stop_queue_timer()
 
 
@@ -147,15 +154,15 @@ func _physics_process(_delta: float) -> void:
 		LIGHT_ATTACK:
 			if player.animation_player.current_animation == "lp1":
 				tutorial_state = HEAVY_ATTACK
-				command_label.text = "Heavy Attack / Throw break"
-				press_key_label.text = "Press " + InputMap.action_get_events("hp")[0].as_text()
+				command_label.text = "Heavy Attack"
+				InputDetector.action = "hp"
 				spawn_green_spark()
 				nice_player.play("nice")
 		HEAVY_ATTACK:
 			if player.animation_player.current_animation == "hp":
 				tutorial_state = BLOCK
 				command_label.text = "Block"
-				press_key_label.text = "Press " + InputMap.action_get_events("block")[0].as_text()
+				InputDetector.action = "block"
 				count_label.text = "Block 0/2"
 				enemy_block_practice()
 				spawn_green_spark()
@@ -167,7 +174,7 @@ func _physics_process(_delta: float) -> void:
 				tutorial_state = DODGE
 				command_label.text = "Dodge"
 				count_label.text = "Dodge 0/2"
-				press_key_label.text = "Press " + InputMap.action_get_events("dodge")[0].as_text()
+				InputDetector.action = "dodge"
 				enemy_dodge_practice()
 				spawn_green_spark()
 				nice_player.play("nice")
@@ -175,7 +182,7 @@ func _physics_process(_delta: float) -> void:
 			if dodge_count >= 2:
 				tutorial_state = THROW_GROUND
 				command_label.text = "Throw break [color=purple]purple[/color]"
-				press_key_label.text = "Press " + InputMap.action_get_events("hp")[0].as_text()
+				InputDetector.action = "hp"
 				count_label.text = "Throw break [color=purple]purple[/color] 0/2"
 				kill_all_tween()
 				enemy_throw_practice()
@@ -185,7 +192,7 @@ func _physics_process(_delta: float) -> void:
 			if throw_break_count >= 2:
 				throw_break_count = 0
 				command_label.text = "Throw break [color=lightblue]blue[/color]"
-				press_key_label.text = "Press " + InputMap.action_get_events("lp")[0].as_text()
+				InputDetector.action = "lp"
 				count_label.text = "Throw break [color=lightblue]blue[/color] 0/2"
 				kill_all_tween()
 				spawn_green_spark()
@@ -198,7 +205,7 @@ func _physics_process(_delta: float) -> void:
 				kill_all_tween()
 				tutorial_state = EXECUTE
 				command_label.text = "Execute"
-				press_key_label.text = "Press " + InputMap.action_get_events("execute")[0].as_text()
+				InputDetector.action = "execute"
 				spawn_green_spark()
 				nice_player.play("nice")
 				await get_tree().create_timer(1).timeout
@@ -207,6 +214,7 @@ func _physics_process(_delta: float) -> void:
 			if player.animation_player.current_animation == "exe_hadoken":
 				tutorial_state = THE_END
 				command_label.text = "Yay! You are ready! (Hopefully)"
+				InputDetector.input_recieved.disconnect(show_label_base_on_input)
 				press_key_label.text = "(♡˙︶˙♡)"
 		THE_END:
 			await get_tree().create_timer(5).timeout
