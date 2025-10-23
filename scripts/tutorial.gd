@@ -2,7 +2,6 @@ extends Node2D
 
 const MAIN_MENU = preload("uid://dystn5u444ihq")
 @onready var press_key_label: Label = $CanvasLayer/PressKeyLabel
-const ENEMY_01 = preload("res://nodes/enemy_01.tscn")
 const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 @onready var player: CharacterBody2D = $Player
 @onready var enemy: CharacterBody2D = $Enemy
@@ -11,6 +10,8 @@ const HIT_2 = preload("res://media/sfxs/Hit2.wav")
 @onready var nice_label: Label = $CanvasLayer/NiceLabel
 @onready var nice_player: AnimationPlayer = $CanvasLayer/NiceLabel/AnimationPlayer
 @onready var nice_pos: Marker2D = $CanvasLayer/nice_pos
+const ENEMY_01 = preload("uid://b2vaqeiw3q18o")
+@onready var repos: Marker2D = $Repos
 
 
 var block_count = 0
@@ -36,7 +37,30 @@ var tutorial_state = LIGHT_ATTACK
 
 
 func spawn_executable_enemy() -> void:
+	enemy._set_state(0)
+	enemy.animation_player.play("IDLE")
 	enemy.hitted(
+		self,
+		true,
+		Vector2(20, 0),
+		0,
+		0,
+		1,
+		Vector2(10, 0.1),
+		10000,
+		Enums.Attack.UNBLOCK
+	)
+	GlobalSoundPlayer.stream = HIT_2
+	GlobalSoundPlayer.play()
+
+
+func spawn_executable_enemy_again() -> void:
+	var e = ENEMY_01.instantiate()
+	e.position = repos.position
+	e.tree_exited.connect(_on_enemy_tree_exited)
+	add_child(e)
+	await get_tree().create_timer(1).timeout
+	e.hitted(
 		self,
 		true,
 		Vector2(20, 0),
@@ -183,7 +207,12 @@ func _physics_process(_delta: float) -> void:
 			if player.animation_player.current_animation == "exe_hadoken":
 				tutorial_state = THE_END
 				command_label.text = "Yay! You are ready! (Hopefully)"
-				press_key_label.text = "Press " + InputMap.action_get_events("ui_cancel")[0].as_text()
+				press_key_label.text = "(♡˙︶˙♡)"
 		THE_END:
-			if Input.is_action_pressed("ui_cancel"):
-				SceneTransition.change_scene("res://scenes/intro.tscn")
+			await get_tree().create_timer(5).timeout
+			SceneTransition.change_scene("res://scenes/intro.tscn")
+
+
+func _on_enemy_tree_exited() -> void:
+	if tutorial_state == EXECUTE:
+		spawn_executable_enemy_again()
