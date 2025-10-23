@@ -4,6 +4,18 @@ const XBOX_A = preload("uid://bw0qeoor72v84")
 const XBOX_B = preload("uid://c5ium03im68gh")
 const XBOX_X = preload("uid://blhaq35ymebhd")
 const XBOX_Y = preload("uid://bo7ct5287xbyl")
+const XBOX_D_DOWN = preload("uid://revgc854v4ye")
+const XBOX_D_LEFT = preload("uid://bm8vaskighqct")
+const XBOX_D_RIGHT = preload("uid://b3da0at7cebki")
+const XBOX_D_UP = preload("uid://dx32dwycd3qn8")
+const XBOX_L_3 = preload("uid://0isqcomeuicm")
+const XBOX_LB = preload("uid://u3b5wd0rmkg5")
+const XBOX_LT = preload("uid://bpshlcb1tb067")
+const XBOX_R_3 = preload("uid://s7ikecd41a8w")
+const XBOX_RB = preload("uid://ct1ikwqitscd7")
+const XBOX_RT = preload("uid://bjsltq3v2al7")
+const XBOX_SELECT = preload("uid://bdovv3ofoo5it")
+const XBOX_START = preload("uid://c02ak6paehblu")
 
 const PS_CIRCLE = preload("uid://c6fj2i3n1io2g")
 const PS_SQUARE = preload("uid://cf0jll63rq0ti")
@@ -81,6 +93,10 @@ const KB_Y = preload("uid://u8ysksuwenrn")
 const KB_Z = preload("uid://cevpgu7a2km8k")
 const KB_ESC = preload("uid://betolyhlb3qx0")
 const KB_INSERT = preload("uid://bfrarfcqqg6lj")
+const KB_DOWN = preload("uid://bulr3a0iduegh")
+const KB_LEFT = preload("uid://b70u6wjoqjkqx")
+const KB_RIGHT = preload("uid://dhnn432dn5mpj")
+const KB_UP = preload("uid://bhsr0g4ek57cd")
 
 signal input_recieved
 signal send_controller_icon
@@ -304,6 +320,14 @@ func get_keyboard_icon(keycode: int) -> Object:
 			the_object = KB_SEMI_COLON
 		KEY_QUOTELEFT:
 			the_object = KB_QUOTE
+		KEY_LEFT:
+			the_object = KB_LEFT
+		KEY_RIGHT:
+			the_object = KB_RIGHT
+		KEY_UP:
+			the_object = KB_UP
+		KEY_DOWN:
+			the_object = KB_DOWN
 		_:
 			pass
 	return the_object
@@ -322,6 +346,26 @@ func get_controller_icon(button_index: int) -> Object:
 				the_object = XBOX_X
 			JOY_BUTTON_Y:
 				the_object = XBOX_Y
+			JOY_BUTTON_BACK:
+				the_object = XBOX_SELECT
+			JOY_BUTTON_START:
+				the_object = XBOX_START
+			JOY_BUTTON_LEFT_STICK:
+				the_object = XBOX_L_3
+			JOY_BUTTON_RIGHT_STICK:
+				the_object = XBOX_R_3
+			JOY_BUTTON_LEFT_SHOULDER:
+				the_object = XBOX_LB
+			JOY_BUTTON_RIGHT_SHOULDER:
+				the_object = XBOX_RB
+			JOY_BUTTON_DPAD_UP:
+				the_object = XBOX_D_UP
+			JOY_BUTTON_DPAD_DOWN:
+				the_object = XBOX_D_DOWN
+			JOY_BUTTON_DPAD_LEFT:
+				the_object = XBOX_D_LEFT
+			JOY_BUTTON_DPAD_RIGHT:
+				the_object = XBOX_D_RIGHT
 			_:
 				pass
 	elif Settings.controller_type == Settings.ControllerType.PS:
