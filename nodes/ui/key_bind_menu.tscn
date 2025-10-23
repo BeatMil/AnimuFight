@@ -46,7 +46,7 @@ action_label_show = "Right"
 
 [node name="UpButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
 layout_mode = 2
-action = "up"
+action = "jump"
 action_label_show = "Up"
 
 [node name="DownButton" parent="HBoxContainer" instance=ExtResource("2_ybffu")]
