@@ -17,6 +17,7 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_cancel"):
 		self.visible = false
 		get_tree().paused = false
+		print("ui_cancel: restart_menu.gd")
 
 
 func toggle_menu() -> void:

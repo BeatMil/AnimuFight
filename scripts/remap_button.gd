@@ -53,7 +53,7 @@ func update_key_text():
 			i.as_text().substr(start_index)
 			controller_label.text = "%s" % beatify_string
 		else:
-			var keyboard = i.as_text()[0]
+			var keyboard = OS.get_keycode_string(i.keycode)
 			key_label.text = "%s" % keyboard
 	
 

@@ -28,9 +28,14 @@ func _ready() -> void:
 	AttackQueue.start_queue_timer()
 	Settings.checkpoint = 0
 	CameraManager.disable_all_camera()
+	print(Input.get_connected_joypads())
+	for joy in Input.get_connected_joypads():
+		print(Input.get_joy_info(joy))
 
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		print(event)
 	if event.is_action_pressed("ui_cancel") and key_bind_menu.visible == false:
 		option.visible = false
 		key_bind_menu.visible = false

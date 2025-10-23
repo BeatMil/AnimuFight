@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var press_key_label: Label = $CanvasLayer/PressKeyLabel
+@onready var press_key_label: RichTextLabel = $CanvasLayer/PressKeyLabel
 @onready var player: CharacterBody2D = $Player
 @onready var enemy: CharacterBody2D = $Enemy
 @onready var command_label: RichTextLabel = $CanvasLayer/CommandLabel
@@ -9,6 +9,7 @@ extends Node2D
 @onready var nice_player: AnimationPlayer = $CanvasLayer/NiceLabel/AnimationPlayer
 @onready var nice_pos: Marker2D = $CanvasLayer/nice_pos
 @onready var repos: Marker2D = $Repos
+@onready var controller_icon: Sprite2D = $CanvasLayer/ControllerIcon
 
 const MAIN_MENU = preload("uid://dystn5u444ihq")
 const HIT_2 = preload("res://media/sfxs/Hit2.wav")
@@ -124,6 +125,10 @@ func show_label_base_on_input(human_read) -> void:
 	press_key_label.text = "Press %s" % human_read
 
 
+func show_controller_icon(icon) -> void:
+	controller_icon.texture = icon
+
+
 func player_throw_break_count() -> void:
 	print("throw break desu")
 	throw_break_count += 1
@@ -136,7 +141,6 @@ func player_throw_break_count() -> void:
 
 
 func _ready() -> void:
-	InputDetector.input_recieved.connect(show_label_base_on_input)
 	player.move_hud_away()
 	player.block_success.connect(player_block_count)
 	player.dodge_success.connect(player_dodge_count)
@@ -144,7 +148,10 @@ func _ready() -> void:
 	Settings.current_stage = "res://scenes/tutorial.tscn"
 	CameraManager.set_screen_lock(0, 1940, 135, 1029)
 	command_label.text = "Light Attack"
-	press_key_label.text = "Press " + InputMap.action_get_events("lp")[0].as_text()
+	# press_key_label.text = "Press " + InputMap.action_get_events("lp")[0].as_text()
+	# press_key_label.text = "[img]res://media/sprites/char1/FirstChar_block.png[/img]"
+	# InputDetector.input_recieved.connect(show_label_base_on_input)
+	InputDetector.send_controller_icon.connect(show_controller_icon)
 	InputDetector.action = "lp"
 	AttackQueue.stop_queue_timer()
 

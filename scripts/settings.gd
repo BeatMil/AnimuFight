@@ -1,6 +1,13 @@
 extends Node
 
 
+enum ControllerType {
+	XBOX,
+	PS
+}
+
+
+var controller_type = ControllerType.PS
 var current_stage = Enums.Stage.STAGE01
 var checkpoint = 0
 
