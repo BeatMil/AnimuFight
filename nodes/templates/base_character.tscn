@@ -88,3 +88,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_ch1sl")
 }
 autoplay = "blink"
+
+[node name="ExecuteIcon" type="Sprite2D" parent="ExecuteShow"]
+position = Vector2(120, 40)

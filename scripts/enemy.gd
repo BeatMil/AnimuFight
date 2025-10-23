@@ -4,6 +4,8 @@ extends "res://scripts/base_character.gd"
 @export var air_throw_follow_pos: Marker2D
 @export var is_notarget: bool
 
+@onready var execute_icon: Sprite2D = $ExecuteShow/ExecuteIcon
+
 
 var DED_SPRITE = null
 
@@ -47,7 +49,7 @@ func _ready() -> void:
 	randomize()
 	gravity_power = 5000
 	hp_bar.set_hp(hp)
-	$ExecuteShow.text = "%s"%InputMap.action_get_events("execute")[0].as_text()
+	$ExecuteShow.text = ""
 	# $Timer.start()
 	# _lp()
 
@@ -313,6 +315,7 @@ func _on_current_anim_start(anim_name: String) -> void:
 	
 	if anim_name == "execute":
 		$ExecuteShow.visible = true
+		execute_icon.texture = InputDetector.get_icon_from_action("execute")
 	else:
 		$ExecuteShow.visible = false
 

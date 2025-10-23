@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://duhhbxeauuj02"]
+[gd_scene load_steps=3 format=3 uid="uid://duhhbxeauuj02"]
 
 [ext_resource type="Script" uid="uid://be106n6cs1maj" path="res://scripts/remap_button.gd" id="1_hd0om"]
+[ext_resource type="Texture2D" uid="uid://btpaw60s40ymb" path="res://media/sprites/controller_icon/kb/kb_1.png" id="2_jkuop"]
 
 [node name="RemapButton" type="Button"]
 custom_minimum_size = Vector2(0, 64)
@@ -36,6 +37,10 @@ text = "KB"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="KBIcon" type="Sprite2D" parent="HBoxContainer"]
+position = Vector2(480, 32)
+texture = ExtResource("2_jkuop")
 
 [node name="ControllerLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2

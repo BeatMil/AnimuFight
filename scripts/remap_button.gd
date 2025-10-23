@@ -4,6 +4,7 @@ extends Button
 @onready var key_label: Label = $HBoxContainer/KeyLabel
 @onready var controller_label: Label = $HBoxContainer/ControllerLabel
 @onready var action_label: Label = $HBoxContainer/ActionLabel
+@onready var kb_icon: Sprite2D = $HBoxContainer/KBIcon
 
 
 func _init():
@@ -53,8 +54,7 @@ func update_key_text():
 			i.as_text().substr(start_index)
 			controller_label.text = "%s" % beatify_string
 		else:
-			var keyboard = OS.get_keycode_string(i.keycode)
-			key_label.text = "%s" % keyboard
+			kb_icon.texture = InputDetector.get_keyboard_icon(i.keycode)
 	
 
 

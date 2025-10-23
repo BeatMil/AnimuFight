@@ -152,6 +152,7 @@ func _ready() -> void:
 	# press_key_label.text = "[img]res://media/sprites/char1/FirstChar_block.png[/img]"
 	# InputDetector.input_recieved.connect(show_label_base_on_input)
 	InputDetector.send_controller_icon.connect(show_controller_icon)
+	InputDetector.send_keyboard_icon.connect(show_controller_icon)
 	InputDetector.action = "lp"
 	AttackQueue.stop_queue_timer()
 
@@ -221,7 +222,9 @@ func _physics_process(_delta: float) -> void:
 			if player.animation_player.current_animation == "exe_hadoken":
 				tutorial_state = THE_END
 				command_label.text = "Yay! You are ready! (Hopefully)"
-				InputDetector.input_recieved.disconnect(show_label_base_on_input)
+				InputDetector.send_controller_icon.disconnect(show_controller_icon)
+				InputDetector.send_keyboard_icon.disconnect(show_controller_icon)
+				controller_icon.texture = null
 				press_key_label.text = "(♡˙︶˙♡)"
 		THE_END:
 			await get_tree().create_timer(5).timeout
