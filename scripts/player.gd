@@ -321,11 +321,6 @@ func _physics_process(delta: float) -> void:
 		# state = States.ATTACK
 		animation_player.play("air_spd_burst")
 
-	# if hitlag_timer > 0:
-	# 	physic_input(delta)
-	# 	hitlag_timer -= delta
-	# 	return
-
 	if is_controllable:
 		physic_input(delta)
 
