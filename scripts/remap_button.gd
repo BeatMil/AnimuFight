@@ -18,6 +18,8 @@ func _ready():
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventJoypadMotion:
+		if event.axis_value < 0.4: # prevent accident bind
+			return
 		for current in InputMap.action_get_events(action):
 			if (current is InputEventJoypadMotion) or (current is InputEventJoypadButton):
 				InputMap.action_erase_event(action, current)
