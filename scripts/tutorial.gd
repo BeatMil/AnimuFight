@@ -80,13 +80,15 @@ func enemy_dodge_practice() -> void:
 
 
 func player_block_count() -> void:
-	block_count += 1
-	count_label.text = "Block %s/2"%[block_count]
+	if tutorial_state == BLOCK:
+		block_count += 1
+		count_label.text = "Block %s/2"%[block_count]
 
 
 func player_dodge_count() -> void:
-	dodge_count += 1
-	count_label.text = "Dodge %s/2"%[dodge_count]
+	if tutorial_state == DODGE:
+		dodge_count += 1
+		count_label.text = "Dodge %s/2"%[dodge_count]
 
 
 func spawn_green_spark() -> void:
