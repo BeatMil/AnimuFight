@@ -21,7 +21,14 @@ const PS_CIRCLE = preload("uid://c6fj2i3n1io2g")
 const PS_SQUARE = preload("uid://cf0jll63rq0ti")
 const PS_TRIANGLE = preload("uid://clwfsefeaeb5y")
 const PS_X = preload("uid://wi6kjr7oshdd")
-
+const PS_L_1 = preload("uid://c8jpf38twofe3")
+const PS_L_2 = preload("uid://dw1f61qtr85qr")
+const PS_L_3 = preload("uid://bvu4e4tsw6jsh")
+const PS_R_1 = preload("uid://dbrrps3gju1yg")
+const PS_R_2 = preload("uid://cegntcyxpd872")
+const PS_R_3 = preload("uid://6fxhvl68jien")
+const PS_SELECT = preload("uid://c50ts218ty8xq")
+const PS_START = preload("uid://dcecty12kc4j3")
 
 const KB_0 = preload("uid://brxy16uuald0v")
 const KB_1 = preload("uid://btpaw60s40ymb")
@@ -378,8 +385,56 @@ func get_controller_icon(button_index: int) -> Object:
 				the_object = PS_SQUARE
 			JOY_BUTTON_Y:
 				the_object = PS_TRIANGLE
+			JOY_BUTTON_BACK:
+				the_object = PS_SELECT
+			JOY_BUTTON_START:
+				the_object = PS_START
+			JOY_BUTTON_LEFT_STICK:
+				the_object = PS_L_3
+			JOY_BUTTON_RIGHT_STICK:
+				the_object = PS_R_3
+			JOY_BUTTON_LEFT_SHOULDER:
+				the_object = PS_L_1
+			JOY_BUTTON_RIGHT_SHOULDER:
+				the_object = PS_R_1
+			JOY_BUTTON_DPAD_UP:
+				the_object = XBOX_D_UP
+			JOY_BUTTON_DPAD_DOWN:
+				the_object = XBOX_D_DOWN
+			JOY_BUTTON_DPAD_LEFT:
+				the_object = XBOX_D_LEFT
+			JOY_BUTTON_DPAD_RIGHT:
+				the_object = XBOX_D_RIGHT
 			_:
 				pass
+	return the_object
+
+func get_controller_axis_icon(axis: int, axis_value: float) -> Object:
+	var the_object
+
+	match axis:
+		JOY_AXIS_LEFT_X:
+			if axis_value > 0:
+				the_object = XBOX_D_RIGHT
+			else:
+				the_object = XBOX_D_LEFT
+		JOY_AXIS_LEFT_Y:
+			if axis_value > 0:
+				the_object = XBOX_D_DOWN
+			else:
+				the_object = XBOX_D_UP
+		JOY_AXIS_TRIGGER_LEFT:
+			if Settings.controller_type == Settings.ControllerType.XBOX:
+				the_object = XBOX_LT
+			elif Settings.controller_type == Settings.ControllerType.PS:
+				the_object = PS_L_2
+		JOY_AXIS_TRIGGER_RIGHT:
+			if Settings.controller_type == Settings.ControllerType.XBOX:
+				the_object = XBOX_RT
+			elif Settings.controller_type == Settings.ControllerType.PS:
+				the_object = PS_R_2
+		_:
+			pass
 
 	return the_object
 

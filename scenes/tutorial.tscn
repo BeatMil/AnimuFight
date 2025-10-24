@@ -159,9 +159,6 @@ theme_override_font_sizes/normal_font_size = 36
 text = "Press     "
 horizontal_alignment = 1
 
-[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_gbqnl")]
-visible = false
-
 [node name="NiceLabel" type="Label" parent="CanvasLayer"]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = 1208.0
@@ -184,11 +181,14 @@ libraries = {
 volume_db = 6.0
 bus = &"LouderBus"
 
+[node name="ControllerIcon" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(1032, 200)
+
 [node name="nice_pos" type="Marker2D" parent="CanvasLayer"]
 position = Vector2(1256, 88)
 
-[node name="ControllerIcon" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(1032, 200)
+[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_gbqnl")]
+visible = false
 
 [node name="Floor" type="StaticBody2D" parent="." groups=["ground"]]
 position = Vector2(1168, 1536)

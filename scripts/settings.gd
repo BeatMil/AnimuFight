@@ -7,7 +7,7 @@ enum ControllerType {
 }
 
 
-var controller_type = ControllerType.PS
+var controller_type = ControllerType.XBOX
 var current_stage = Enums.Stage.STAGE01
 var checkpoint = 0
 

@@ -5,6 +5,7 @@ extends Button
 @onready var controller_label: Label = $HBoxContainer/ControllerLabel
 @onready var action_label: Label = $HBoxContainer/ActionLabel
 @onready var kb_icon: Sprite2D = $HBoxContainer/KBIcon
+@onready var joy_icon: Sprite2D = $HBoxContainer/JoyIcon
 
 
 func _init():
@@ -19,7 +20,7 @@ func _ready():
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventJoypadMotion:
-		if event.axis_value < 0.4: # prevent accident bind
+		if event.axis_value < 0.4 and event.axis_value > -0.4: # prevent accident bind
 			return
 		for current in InputMap.action_get_events(action):
 			if (current is InputEventJoypadMotion) or (current is InputEventJoypadButton):
@@ -48,21 +49,19 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func update_key_text():
 	for i in InputMap.action_get_events(action):
-		if (i is InputEventJoypadButton) or (i is InputEventJoypadMotion):
-			var start_index = i.as_text().find("(")
-			var beatify_string = \
-			i.as_text().substr(start_index)
-			controller_label.text = "%s" % beatify_string
+		if i is InputEventJoypadButton:
+			joy_icon.texture = InputDetector.get_controller_icon(i.button_index)
+		elif i is InputEventJoypadMotion:
+			joy_icon.texture = InputDetector.get_controller_axis_icon(i.axis, i.axis_value)
 		else:
 			kb_icon.texture = InputDetector.get_keyboard_icon(i.keycode)
-	
 
 
 func _on_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		# InputMap.action_erase_events(action)
 		get_parent().get_parent().set_process_input(false)
-		key_label.text = "... Awaiting Input ..."
+		# key_label.text = "... Awaiting Input ..."
 		release_focus()
 	else:
 		update_key_text()
