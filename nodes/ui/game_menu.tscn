@@ -1,0 +1,110 @@
+[gd_scene load_steps=3 format=3 uid="uid://0uvtc7lrjmmy"]
+
+[ext_resource type="Script" uid="uid://bb1qyydjl2hqa" path="res://scripts/game_menu.gd" id="1_7l58h"]
+[ext_resource type="Texture2D" uid="uid://hirwibir5wuk" path="res://media/sprites/controller_icon/xbox/xbox_layout.png" id="2_7l58h"]
+
+[node name="GameMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7l58h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7529412)
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.166667
+anchor_top = 0.111111
+anchor_right = 0.833333
+anchor_bottom = 0.888889
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ControllerIcon" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+action_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/ControllerIcon"]
+layout_mode = 0
+offset_left = -0.00064086914
+offset_top = 4.000122
+offset_right = 671.9994
+offset_bottom = 68.00012
+theme_override_font_sizes/normal_font_size = 24
+text = "Controller Icon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JoyLayout" type="Sprite2D" parent="HBoxContainer/ControllerIcon"]
+position = Vector2(953.9994, 34.000122)
+texture = ExtResource("2_7l58h")
+
+[node name="BackButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+action_mode = 0
+text = "Back"
+
+[node name="PressAnyKeyScreen" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+color = Color(0, 0, 0, 0.67451)
+
+[node name="Label" type="Label" parent="PressAnyKeyScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 128
+text = "PRESS ANY KEY"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -584.0
+offset_top = -104.0
+offset_right = 590.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "(๑˃ᴗ˂)ﻭ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="HBoxContainer/ControllerIcon" to="." method="_on_controller_icon_pressed"]
+[connection signal="pressed" from="HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dystn5u444ihq"]
+[gd_scene load_steps=8 format=3 uid="uid://dystn5u444ihq"]
 
 [ext_resource type="Script" uid="uid://c4nvks00nrim2" path="res://scripts/main_menu.gd" id="1_wu84c"]
 [ext_resource type="PackedScene" uid="uid://nbspcwp0gb2l" path="res://nodes/menu/menu_button.tscn" id="2_8ln24"]
 [ext_resource type="PackedScene" uid="uid://bqen74k88vcic" path="res://nodes/menu_cursor.tscn" id="3_rtw2f"]
 [ext_resource type="PackedScene" uid="uid://bhyp02lurgb04" path="res://nodes/ui/key_bind_menu.tscn" id="4_8ln24"]
 [ext_resource type="Texture2D" uid="uid://be73s7hey0vwb" path="res://media/sprites/char1/FirstChar_hitted_color.png" id="4_oa1go"]
+[ext_resource type="PackedScene" uid="uid://0uvtc7lrjmmy" path="res://nodes/ui/game_menu.tscn" id="5_rtw2f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urejr"]
 bg_color = Color(0.414083, 0.863281, 0.553725, 1)
@@ -78,6 +79,11 @@ popup/item_0/id = 0
 popup/item_1/text = "800x600"
 popup/item_1/id = 1
 
+[node name="GameButton" type="Button" parent="CanvasLayer/Option"]
+layout_mode = 2
+action_mode = 0
+text = "Game"
+
 [node name="ChangeKeyBindButton" type="Button" parent="CanvasLayer/Option"]
 layout_mode = 2
 action_mode = 0
@@ -95,6 +101,9 @@ position = Vector2(160, 768)
 [node name="KeyBindMenu" parent="CanvasLayer" instance=ExtResource("4_8ln24")]
 visible = false
 
+[node name="GameMenu" parent="CanvasLayer" instance=ExtResource("5_rtw2f")]
+visible = false
+
 [node name="FirstCharHittedColor" type="Sprite2D" parent="."]
 position = Vector2(1410, 737)
 texture = ExtResource("4_oa1go")
@@ -105,5 +114,6 @@ texture = ExtResource("4_oa1go")
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="about_to_popup" from="CanvasLayer/Option/MenuButton" to="." method="_on_menu_button_about_to_popup"]
+[connection signal="pressed" from="CanvasLayer/Option/GameButton" to="." method="_on_gameplay_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Option/ChangeKeyBindButton" to="." method="_on_change_key_bind_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Option/BackButton" to="." method="_on_back_button_pressed"]

@@ -48,17 +48,17 @@ func _input(event: InputEvent) -> void:
 
 func _on_back_button_pressed() -> void:
 	emit_signal("close")
-	var actions = [
-		"left",
-		"right",
-		"up",
-		"down",
-		"dash",
-		"lp",
-		"hp",
-		"block",
-		"dodge",
-		"execute",
-	]
-	for a in actions:
-		print(InputMap.action_get_events(a)[0], a)
+	# var actions = [
+	# 	"left",
+	# 	"right",
+	# 	"up",
+	# 	"down",
+	# 	"dash",
+	# 	"lp",
+	# 	"hp",
+	# 	"block",
+	# 	"dodge",
+	# 	"execute",
+	# ]
+	# for a in actions:
+	# 	print(InputMap.action_get_events(a)[0], a)

@@ -7,9 +7,11 @@ extends Control
 const TRAINING_MODE = preload("res://scenes/training.tscn")
 const TUTORIAL = preload("res://scenes/tutorial.tscn")
 const INTRO = preload("res://scenes/intro.tscn")
+@onready var game_menu: Control = $CanvasLayer/GameMenu
 @onready var key_bind_menu: Control = $CanvasLayer/KeyBindMenu
 @onready var change_key_bind_button: Button = $CanvasLayer/Option/ChangeKeyBindButton
 @onready var option_button: Button = $CanvasLayer/VBoxContainer/OptionButton
+@onready var game_button: Button = $CanvasLayer/Option/GameButton
 
 
 var resolution = {
@@ -25,6 +27,7 @@ func _ready() -> void:
 	# id_pressed
 	menu_button.get_popup().id_pressed.connect(change_resolution)
 	key_bind_menu.close.connect(_on_key_bind_menu_close)
+	game_menu.close.connect(_on_game_menu_close)
 	AttackQueue.start_queue_timer()
 	Settings.checkpoint = 0
 	CameraManager.disable_all_camera()
@@ -36,10 +39,14 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		print(event)
-	if event.is_action_pressed("ui_cancel") and key_bind_menu.visible == false:
-		option.visible = false
-		key_bind_menu.visible = false
-		option_button.grab_focus()
+	if event.is_action_pressed("ui_cancel"):
+		for control in option.get_children():
+			if control.has_focus():
+				print(control)
+				option.visible = false
+				key_bind_menu.visible = false
+				game_menu.visible = false
+				option_button.grab_focus()
 
 
 func _on_menu_button_about_to_popup() -> void:
@@ -79,6 +86,7 @@ func _on_change_key_bind_button_pressed() -> void:
 
 func _on_key_bind_menu_close() -> void:
 	key_bind_menu.visible = false
+	await get_tree().create_timer(get_physics_process_delta_time()).timeout
 	change_key_bind_button.grab_focus()
 
 
@@ -89,3 +97,14 @@ func _on_back_button_pressed() -> void:
 
 func _on_tutorial_button_pressed() -> void:
 	SceneTransition.change_scene_packed(TUTORIAL)
+
+
+func _on_gameplay_button_pressed() -> void:
+	game_menu.visible = true
+	game_menu.grab_focus_top()
+
+
+func _on_game_menu_close() -> void:
+	game_menu.visible = false
+	await get_tree().create_timer(get_physics_process_delta_time()).timeout
+	game_button.grab_focus()

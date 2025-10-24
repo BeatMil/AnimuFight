@@ -6,6 +6,8 @@ extends Control
 @onready var v_box_container_l: VBoxContainer = $VBoxContainer/VBoxContainerL
 @onready var key_bind_button: Button = $VBoxContainer/VBoxContainerL/KeyBindButton
 @onready var toggle_wall: Button = $VBoxContainer/VBoxContainerL/ToggleWall
+@onready var game_menu: Control = $GameMenu
+@onready var game_button: Button = $VBoxContainer/VBoxContainerL/GameButton
 
 
 signal boss01
@@ -23,6 +25,7 @@ signal wall
 
 func _ready() -> void:
 	key_bind_menu.close.connect(_on_key_bind_menu_close)
+	game_menu.close.connect(__on_game_menu_close)
 	# enemy_1_button.grab_focus()
 
 
@@ -109,6 +112,23 @@ func _on_key_bind_menu_close() -> void:
 	set_process_input(true)
 
 
+func __on_game_menu_close() -> void:
+	v_box_container_l.visible = true
+	%MenuCursor.visible = true
+	key_bind_menu.visible = false
+	game_menu.visible = false
+	game_button.grab_focus()
+	set_process_input(true)
+
+
 func _on_resume_button_pressed() -> void:
 	self.visible = false
 	get_tree().paused = false
+
+
+func _on_game_button_pressed() -> void:
+	game_menu.visible = true
+	game_menu.grab_focus_top()
+	v_box_container_l.visible = false
+	%MenuCursor.visible = false
+	set_process_input(false)
