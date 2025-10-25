@@ -44,7 +44,7 @@ func _ready() -> void:
 	if is_hit_enemy:
 		_set_collision_hit_enemy()
 
-	if type == Enums.Attack.P_THROW:
+	if type in [Enums.Attack.P_THROW, Enums.Attack.P_WALL_THROW]:
 		_set_collision_hit_enemy_all()
 
 #############################################################
