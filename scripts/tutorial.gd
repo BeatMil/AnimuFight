@@ -137,7 +137,7 @@ func player_throw_break_count() -> void:
 		count_label.text = "Throw break [color=purple]purple[/color] %s/2"%[throw_break_count]
 	elif tutorial_state == THROW_FLOAT:
 		print("throw break blue")
-		count_label.text = "Throw break [color=lightblue]purple[/color] %s/2"%[throw_break_count]
+		count_label.text = "Throw break [color=lightblue]blue[/color] %s/2"%[throw_break_count]
 
 
 func _ready() -> void:
