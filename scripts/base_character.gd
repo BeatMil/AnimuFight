@@ -68,6 +68,8 @@ enum Hitbox_type {
 	GROUND_THROW,
 	SLIDE,
 	BOOM,
+	HITBOX_PLAYER_TATSU_L,
+	HITBOX_PLAYER_TATSU_R,
 	}
 
 
@@ -94,6 +96,8 @@ const HIT_BOUNCE = preload("res://media/sfxs/Landing_RawMeat02.wav")
 const IFRAME_HIT = preload("res://media/sfxs/Landing_Meat03.wav")
 const DAMAGE_NUMBER = preload("res://nodes/damage_number.tscn")
 const HITBOX_BOOM = preload("uid://dttmum3j6yxlw")
+const HITBOX_PLAYER_TATSU_L = preload("uid://buicstg8ilsj7")
+const HITBOX_PLAYER_TATSU_R = preload("uid://5o4w0smj1gr")
 
 
 #############################################################
@@ -294,6 +298,10 @@ func _spawn_lp_hitbox(
 			hitbox = HITBOX_BOOM.instantiate()
 			if sprite_2d.flip_h:
 				hitbox.boom_speed *= -1
+		Hitbox_type.HITBOX_PLAYER_TATSU_L:
+			hitbox = HITBOX_PLAYER_TATSU_L.instantiate()
+		Hitbox_type.HITBOX_PLAYER_TATSU_R:
+			hitbox = HITBOX_PLAYER_TATSU_R.instantiate()
 		_:
 			hitbox = HITBOX_LP_MEDIUM.instantiate()
 

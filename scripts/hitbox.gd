@@ -108,7 +108,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.has_method("hitted"):
 		if body.is_on_floor():
 			body.hitted(get_parent(),
-			get_parent().is_face_right,
+			facing_helper(),
 			push_power_ground,
 			push_type_ground,
 			hitlag_amount_ground,
@@ -122,7 +122,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			)
 		else:
 			body.hitted(get_parent(),
-			get_parent().is_face_right,
+			facing_helper(),
 			push_power_air,
 			push_type_air,
 			hitlag_amount_air,
@@ -155,6 +155,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		] and not is_blocking:
 		pass
 		_play_hit_random_pitch()
+
+
+func facing_helper() -> bool:
+	return get_parent().is_face_right
 
 
 func _on_timer_timeout() -> void:

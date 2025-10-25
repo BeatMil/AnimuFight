@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=133 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
@@ -62,6 +62,10 @@
 [ext_resource type="AudioStream" uid="uid://dcanfm3iytg1v" path="res://media/sfxs/Down.wav" id="60_ma164"]
 [ext_resource type="AudioStream" uid="uid://bsc0ab7rnia0u" path="res://media/sfxs/falling-whistle-cartoon-180579.mp3" id="61_7sjys"]
 [ext_resource type="AudioStream" uid="uid://dkr1i78r37hsb" path="res://media/sfxs/missileBlock01.wav" id="62_m63oj"]
+[ext_resource type="Texture2D" uid="uid://dhvd0b4f7w1m4" path="res://media/sprites/char1/vanilla_tatsu.png" id="63_13sty"]
+[ext_resource type="Texture2D" uid="uid://dhk2fsspv5uwq" path="res://media/sprites/char1/vanilla_tatsu2.png" id="64_1ytfj"]
+[ext_resource type="AudioStream" uid="uid://bg8cifedlb5iu" path="res://media/sfxs/attack_warning_01.wav" id="65_rog0e"]
+[ext_resource type="AudioStream" uid="uid://debrnx2edkqvf" path="res://media/sfxs/PunchAttack2.wav" id="66_0wbtn"]
 
 [sub_resource type="Animation" id="Animation_df04m"]
 length = 0.001
@@ -6202,6 +6206,157 @@ tracks/8/keys = {
 }
 tracks/8/use_blend = true
 
+[sub_resource type="Animation" id="Animation_fmasq"]
+resource_name = "tatsu"
+length = 1.4000034
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.5333333, 0.70000005, 0.8666667, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("12_qibk4"), ExtResource("63_13sty"), ExtResource("64_1ytfj"), ExtResource("63_13sty"), ExtResource("64_1ytfj"), ExtResource("63_13sty")]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("65_rog0e")
+}, {
+"end_offset": 0.144746,
+"start_offset": 0.0,
+"stream": ExtResource("66_0wbtn")
+}, {
+"end_offset": 0.144746,
+"start_offset": 0.0,
+"stream": ExtResource("66_0wbtn")
+}, {
+"end_offset": 0.144746,
+"start_offset": 0.0,
+"stream": ExtResource("66_0wbtn")
+}],
+"times": PackedFloat32Array(0, 0.3333333, 0.6666666, 1)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.70000005, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"set_collision_normal"
+}, {
+"args": [],
+"method": &"tatsu_L_info"
+}, {
+"args": [],
+"method": &"tatsu_L_info"
+}, {
+"args": [],
+"method": &"tatsu_end_L_info"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.36666667, 0.70000005, 1.0333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"tatsu_R_info"
+}, {
+"args": [],
+"method": &"tatsu_R_info"
+}, {
+"args": [],
+"method": &"tatsu_end_R_info"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [1],
+"method": &"_set_state"
+}, {
+"args": [11],
+"method": &"_set_state"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.36666667),
+"transitions": PackedFloat32Array(0, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:hframes")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sprite2D:vframes")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1o8ps"]
 _data = {
 &"EWGF": SubResource("Animation_8te3j"),
@@ -6247,6 +6402,7 @@ _data = {
 &"spell": SubResource("Animation_wq1x7"),
 &"ta": SubResource("Animation_me6mg"),
 &"tan": SubResource("Animation_2bfwe"),
+&"tatsu": SubResource("Animation_fmasq"),
 &"techroll": SubResource("Animation_gvos3"),
 &"throw_break": SubResource("Animation_hik2j"),
 &"throw_enemy": SubResource("Animation_2anje"),
@@ -6372,6 +6528,9 @@ position = Vector2(-112, -120)
 
 [node name="BurstPos" type="Marker2D" parent="HitBoxPos" index="7"]
 position = Vector2(0, 8)
+
+[node name="TatsuPos" type="Marker2D" parent="HitBoxPos" index="8"]
+position = Vector2(195, 0)
 
 [node name="ExecuteAreaL" type="Area2D" parent="." index="9"]
 collision_layer = 0

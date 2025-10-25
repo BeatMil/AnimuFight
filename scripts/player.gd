@@ -1127,7 +1127,8 @@ func _lp_hp() ->  void:
 		sprite_2d.flip_h = false
 
 	if Input.is_action_pressed("down"):
-		animation_player.play("ground_grab")
+		# animation_player.play("ground_grab")
+		animation_player.play("tatsu")
 	else:
 		animation_player.play("forward_hp")
 
@@ -1389,6 +1390,82 @@ func WGF_info() -> void:
 	dict_to_spawn_hitbox(info)
 
 
+func tatsu_L_info() -> void:
+	var info = {
+	"size": Hitbox_type.HITBOX_PLAYER_TATSU_L,
+	"time": 0.1,
+	"push_power_ground": Vector2(0, -120),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(0, -80),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.1,
+	"hitlag_amount_air": 0.0,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 1,
+	"type": Enums.Attack.NORMAL,
+	"pos_direct": $HitBoxPos/TatsuPos.position,
+	}
+	dict_to_spawn_hitbox(info)
+func tatsu_R_info() -> void:
+	var pos = $HitBoxPos/TatsuPos.position * Vector2(-1, 0)
+	var info = {
+	"size": Hitbox_type.HITBOX_PLAYER_TATSU_R,
+	"time": 0.1,
+	"push_power_ground": Vector2(0, -120),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(0, -80),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.1,
+	"hitlag_amount_air": 0.0,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 1,
+	"type": Enums.Attack.NORMAL,
+	"pos_direct": pos,
+	}
+	dict_to_spawn_hitbox(info)
+func tatsu_end_L_info() -> void:
+	var pos = $HitBoxPos/TatsuPos.position * Vector2(-1, 0)
+	var info = {
+	"size": Hitbox_type.HITBOX_PLAYER_TATSU_L,
+	"time": 0.1,
+	"push_power_ground": Vector2(400, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(400, 0),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.1,
+	"hitlag_amount_air": 0.1,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 3,
+	"type": Enums.Attack.NORMAL,
+	"pos_direct": pos,
+	}
+	dict_to_spawn_hitbox(info)
+func tatsu_end_R_info() -> void:
+	var info = {
+	"size": Hitbox_type.HITBOX_PLAYER_TATSU_R,
+	"time": 0.1,
+	"push_power_ground": Vector2(400, 0),
+	"push_type_ground": Enums.Push_types.KNOCKDOWN,
+	"push_power_air": Vector2(400, 0),
+	"push_type_air": Enums.Push_types.KNOCKDOWN,
+	"hitlag_amount_ground": 0.1,
+	"hitstun_amount_ground": 0.1,
+	"hitlag_amount_air": 0.1,
+	"hitstun_amount_air": 0.1,
+	"screenshake_amount": Vector2(10, 0.1),
+	"damage": 3,
+	"type": Enums.Attack.NORMAL,
+	"pos_direct": $HitBoxPos/TatsuPos.position,
+	}
+	dict_to_spawn_hitbox(info)
+
+
 #############################################################
 ## Defense
 #############################################################
@@ -1548,6 +1625,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"charge_attack_release_lv2",
 		"WGF",
 		"EWGF",
+		"tatsu",
 		]:
 		animation_player.play("idle")
 	if anim_name in ["ded", "execute"]:

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://buicstg8ilsj7"]
+
+[ext_resource type="PackedScene" uid="uid://jgmjqpnytm3v" path="res://nodes/hitboxes/hitbox_base.tscn" id="1_ha3l4"]
+[ext_resource type="Script" uid="uid://kw5thn4n1ty3" path="res://scripts/hitbox_player_tatsuL.gd" id="2_epwqg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5ms"]
+size = Vector2(320, 384)
+
+[node name="HitboxPlayerTatsuL" instance=ExtResource("1_ha3l4")]
+script = ExtResource("2_epwqg")
+is_push_left = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_ow5ms")
