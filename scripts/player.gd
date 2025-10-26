@@ -93,6 +93,7 @@ var throwee: CharacterBody2D
 ## Built-in
 #############################################################
 func _ready() -> void:
+	Cheats.player = self
 	move_speed = 50000
 	hp_bar = hp_bar_2
 	hp_bar.set_hp(hp)
@@ -1641,7 +1642,6 @@ func _on_hp_out() -> void:
 	# is_ded = true
 	is_controllable = false
 	set_collision_noclip()
-	state = States.IDLE
 	animation_player.play("ded")
 	print("hp out")
 	# set_collision_ded()

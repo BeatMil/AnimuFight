@@ -1,4 +1,5 @@
 extends TextureProgressBar
+
 @onready var back_bar: TextureProgressBar = $BackBar
 const HP_BAR_GREEN = preload("res://media/sprites/hp_bar/hp_bar_green.png")
 const HP_BAR_RED = preload("res://media/sprites/hp_bar/hp_bar_red.png")
@@ -27,42 +28,51 @@ func _ready() -> void:
 ## Public Functions
 #############################################################
 func hp_down(_amount: int) -> void:
-	# value -= _amount
-	immediate_value -= _amount
+	immediate_value = max(0, immediate_value - _amount)
+
 	if get_parent().name == "PlayerCanvasLayer":
 		print("immHP: ", immediate_value," ", _amount)
+
 	if immediate_value <= 0:
+		cant_heal = true
 		emit_signal("hp_out")
+
 	if get_tree():
 		back_bar.texture_progress = HP_BAR_RED
 		if tween:
 			tween.kill()
+
 		tween = create_tween()
-		tween.tween_property(self, "value", value - _amount, 0.1)
-		tween.tween_property(back_bar, "value", value - _amount, 0.5)
+		tween.tween_property(self, "value", immediate_value, 0.1)
+		tween.tween_property(back_bar, "value", immediate_value, 0.5)
+
 	emit_signal("hp_down_sig")
-	await get_tree().create_timer(0.2).timeout
-	if value <= 0:
-		cant_heal = true
 	last_took_damage = _amount
-	pass
 
 
 func hp_up(_amount: int) -> void:
 	if cant_heal:
 		return
-	# value += _amount
-	if immediate_value + _amount >= max_value:
-		immediate_value = max_value
-	else:
-		immediate_value += _amount
+	
+	immediate_value = min(immediate_value + _amount, max_value)
+	
 	if get_tree():
 		back_bar.texture_progress = HP_BAR_GREEN
 		if tween:
 			tween.kill()
+		
+		# Create new tween
 		tween = create_tween()
-		tween.tween_property(back_bar, "value", value + _amount, 0.1)
-		tween.tween_property(self, "value", value + _amount, 0.5)
+		
+		# Make sure bars start from their current values
+		back_bar.value = max(back_bar.value, value)
+		
+		# Animate the green bar quickly up to the healed value
+		tween.tween_property(back_bar, "value", immediate_value, 0.1)
+		
+		# Then animate the main bar to catch up more slowly
+		tween.tween_property(self, "value", immediate_value, 0.5)
+	
 	emit_signal("hp_up_sig")
 
 

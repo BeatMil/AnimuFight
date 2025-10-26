@@ -32,6 +32,7 @@ AttackQueue="*res://nodes/attack_queue.tscn"
 GlobalSoundPlayer="*res://nodes/global_sound_player.tscn"
 CameraManager="*res://nodes/camera_manager.tscn"
 InputDetector="*res://scripts/input_detector.gd"
+Cheats="*res://scripts/cheats.gd"
 
 [display]
 
