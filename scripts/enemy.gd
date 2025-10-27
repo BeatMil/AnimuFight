@@ -32,8 +32,8 @@ var is_enemy_in_range_lp: bool = false
 var is_player_in_range_attack01: bool = false
 var can_move: bool = true
 var is_jump_spawn: bool = false
-var ground_friction: float = 0.1
-var air_friction: float = 0.07
+var ground_friction: float = 0.15
+var air_friction: float = 0.15
 
 var block_count := 0
 var is_bound := false
@@ -81,7 +81,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			# no touch both player & enemy
 			set_collision_no_hit_all()
-	elif state in [States.IFRAME]:
+	elif state in [States.IFRAME, States.ARMOR]:
 		set_collision_no_hit_enemy()
 	elif state == States.IFRAME_NO_HIT_ALL:
 		set_collision_no_hit_all()

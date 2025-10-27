@@ -194,7 +194,7 @@ func do_attack() -> void:
 	# 	_attack01()
 	if is_player_in_range_lp:
 		state = States.ATTACK
-		match randi_range(1, 1):
+		match randi_range(0, 3):
 			0:
 				_lp()
 			1:

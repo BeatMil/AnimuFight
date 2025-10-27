@@ -118,7 +118,7 @@ var move_speed: int = 100000
 var move_speed_vert: int = 20000
 var is_face_right:bool = true
 var gravity_power = 10000
-var jump_power = 250000
+var jump_power = 100000
 @export var hp: int = 5
 @export_range(0, 10) var block_rate: int = 5
 var friction: float = 0.1
@@ -551,6 +551,7 @@ func hitted(
 		await get_tree().create_timer(0.3).timeout
 		self.air_throw_follow_pos = null
 		##### when fast and where is 1 damage from???
+		velocity = Vector2.ZERO
 		match _attacker.is_pressing_right():
 			0: #neutral
 				self.hitted(

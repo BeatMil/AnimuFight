@@ -963,7 +963,7 @@ tracks/4/keys = {
 "args": [30],
 "method": &"_set_state"
 }, {
-"args": [400],
+"args": [250],
 "method": &"_push_x"
 }]
 }
@@ -2069,7 +2069,8 @@ collision_layer = 2
 collision_mask = 15
 script = ExtResource("2_uqe8x")
 is_notarget = false
-hp = 20
+hp = 200
+block_rate = 10
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_0yexx")

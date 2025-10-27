@@ -96,7 +96,7 @@ var throwee: CharacterBody2D
 func _ready() -> void:
 	keep_player_away_box.queue_free()
 	Cheats.player = self
-	move_speed = 50000
+	move_speed = 30000
 	hp_bar = hp_bar_2
 	hp_bar.set_hp(hp)
 	hp_bar.hp_down_sig.connect(_play_profile_hitted)
@@ -211,7 +211,7 @@ func _physics_process(delta: float) -> void:
 	
 	if state == States.AIR:
 		animation_player.play("jump")
-		friction = 0.07
+		friction = 0.1
 
 	# Left/Right movement
 	if is_controllable:
@@ -227,10 +227,10 @@ func _physics_process(delta: float) -> void:
 				_lerp_velocity_x()
 		else:
 			## Adding friction like this is not gonna go well (っ˘̩╭╮˘̩)っ 
-			friction = 0.1
+			friction = 0.2
 			_lerp_velocity_x()
 	else:
-		friction = 0.1
+		friction = 0.2
 		_lerp_velocity_x()
 	
 	# Jump
@@ -743,7 +743,7 @@ func lp3_info() -> void:
 	var info = {
 	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
-	"push_power_ground": Vector2(200, -100),
+	"push_power_ground": Vector2(300, -100),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
 	"push_power_air": Vector2(300, -100),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
