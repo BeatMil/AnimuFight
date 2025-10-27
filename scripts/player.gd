@@ -1201,7 +1201,7 @@ func forward_hp_info() ->  void:
 	dict_to_spawn_hitbox(info)
 func wall_throw_info() ->  void:
 	var info = {
-	"size": Hitbox_type.LARGE,
+	"size": Hitbox_type.MEDIUM,
 	"time": 0.1,
 	"push_power_ground": Vector2(100, 0),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -1290,7 +1290,7 @@ func grab_info() -> void:
 	"hitlag_amount_air": 0,
 	"hitstun_amount_air": 0.5,
 	"screenshake_amount": Vector2(0, 0),
-	"damage": 1,
+	"damage": 0,
 	"type": Enums.Attack.P_THROW,
 	}
 	dict_to_spawn_hitbox(info)
@@ -1307,7 +1307,7 @@ func throw_info() -> void:
 	"hitlag_amount_air": 0.2,
 	"hitstun_amount_air": 2,
 	"screenshake_amount": Vector2(0, 0),
-	"damage": 1,
+	"damage": 0,
 	"type": Enums.Attack.NORMAL,
 	"zoom": Vector2(0.2, 0.2),
 	"pos": $HitBoxPos/GrabAttackPos.position,

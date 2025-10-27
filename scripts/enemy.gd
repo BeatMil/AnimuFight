@@ -152,8 +152,9 @@ func _physics_process(delta: float) -> void:
 
 	## debug
 	$DebugLabel.text = ""
-	# $DebugLabel.text = "%s, %s %0.3f %0.3f"%[States.keys()[state], animation_player.current_animation, stun_duration, attack_timer.time_left]
+	$DebugLabel.text = "%s, %s"%[States.keys()[state], animation_player.current_animation]
 	# $DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
+	# $DebugLabel.text = "%s, %s %0.3f %0.3f"%[States.keys()[state], animation_player.current_animation, stun_duration, attack_timer.time_left]
 
 
 #############################################################
@@ -248,6 +249,11 @@ func set_collision_no_hit_all() -> void:
 func set_collision_no_hit_enemy() -> void:
 	collision_layer= 0b00000000010000010000
 	collision_mask = 0b00000000000000001101
+
+
+func set_collision_down_ground() -> void:
+	collision_layer= 0b00000000000010000000
+	collision_mask = 0b00000000000000001100
 
 
 func push_to_target() -> void:

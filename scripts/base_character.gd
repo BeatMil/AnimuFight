@@ -512,7 +512,6 @@ func hitted(
 		else:
 			_push_direct(Vector2(600, -150))
 		self.air_throw_follow_pos = null
-
 	## Player air grab hits
 	elif _type == Enums.Attack.P_AIR_THROW and not is_on_floor():
 		if _attacker.throwee:
@@ -542,6 +541,8 @@ func hitted(
 		else:
 			_attacker.throwee = self
 
+		stun_duration += 0.5
+		velocity = Vector2.ZERO
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
 		_attacker.state = States.HIT_STUNNED ## whyy? but it works!
 		_attacker.animation_player.play("wall_throw")
@@ -549,6 +550,7 @@ func hitted(
 		animation_player.play("thrown")
 		await get_tree().create_timer(0.3).timeout
 		self.air_throw_follow_pos = null
+		##### when fast and where is 1 damage from???
 		match _attacker.is_pressing_right():
 			0: #neutral
 				self.hitted(
