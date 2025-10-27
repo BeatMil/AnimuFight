@@ -14,7 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="11_6xq7h"]
 [ext_resource type="Texture2D" uid="uid://cqjhc3ef44edb" path="res://media/sprites/char2/enemy_01_hitted.png" id="12_bo3hr"]
 [ext_resource type="Texture2D" uid="uid://b6syt0rhv2dwx" path="res://media/sprites/char2/SecondChar_hitted.png" id="12_ydaat"]
-[ext_resource type="Texture2D" path="res://media/sprites/char2/enemy01_lp_start_anim.png" id="13_yccbm"]
+[ext_resource type="Texture2D" uid="uid://b1hsn5kcy1thl" path="res://media/sprites/char2/enemy01_lp_start_anim.png" id="13_yccbm"]
 [ext_resource type="Texture2D" uid="uid://dxod1gcjs71jv" path="res://media/sprites/char2/SecondChar_fireball.png" id="14_6bbgc"]
 [ext_resource type="AudioStream" uid="uid://b7u0sh3hrcfqr" path="res://media/sfxs/gc_punch_whiff.wav" id="15_2g3du"]
 [ext_resource type="AudioStream" uid="uid://chnn83cu2f3jx" path="res://media/sfxs/grabbed.wav" id="16_w6o0s"]
@@ -916,10 +916,10 @@ tracks/2/path = NodePath("Sprite2D:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 0.100000024),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+"values": [Color(1.4807141, 1.4807141, 1.4807141, 1), Color(1, 1, 1, 1)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false

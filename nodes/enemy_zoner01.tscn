@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b3pbt1jhqvw2f" path="res://scripts/enemy_zoner_01.gd" id="2_eiaku"]
 [ext_resource type="Texture2D" uid="uid://ib0kefkogn18" path="res://media/sprites/enemy_zoner_01/enemy_zoner_idle.png" id="3_eiaku"]
 [ext_resource type="Texture2D" uid="uid://cy5ssv5564wdk" path="res://media/sprites/enemy_zoner_01/enemy_zoner_block.png" id="4_eiaku"]
-[ext_resource type="AudioStream" uid="uid://djedgbn1tamvf" path="res://media/sfxs/SWSH_MOVEMENT-Tiny Chime_HY_PC-003.wav" id="7_eiaku"]
+[ext_resource type="AudioStream" uid="uid://c1040hkvodf57" path="res://media/sfxs/danger01.wav" id="7_gtufi"]
 [ext_resource type="AudioStream" uid="uid://b582eqy0c4ive" path="res://media/sfxs/block.wav" id="8_7pgr1"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="10_cneof"]
 [ext_resource type="Texture2D" uid="uid://73v1gc7dgtjt" path="res://media/sprites/enemy_zoner_01/enemy_zoner_down.png" id="13_dhwqv"]
@@ -482,8 +482,12 @@ tracks/9/path = NodePath("AudioStreamPlayer")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"clips": [],
-"times": PackedFloat32Array()
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_gtufi")
+}],
+"times": PackedFloat32Array(0)
 }
 tracks/9/use_blend = true
 tracks/10/type = "audio"
@@ -494,15 +498,11 @@ tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "clips": [{
-"end_offset": 1.8388143,
-"start_offset": 0.0,
-"stream": ExtResource("7_eiaku")
-}, {
 "end_offset": 2.0739818,
 "start_offset": 0.0,
 "stream": ExtResource("24_eiaku")
 }],
-"times": PackedFloat32Array(0, 0.6666667)
+"times": PackedFloat32Array(0.6666667)
 }
 tracks/10/use_blend = true
 
