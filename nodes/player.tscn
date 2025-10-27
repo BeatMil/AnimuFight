@@ -6563,6 +6563,8 @@ shape = SubResource("RectangleShape2D_8u5p4")
 [node name="HpBar" parent="." index="11"]
 visible = false
 
+[node name="KeepPlayerAwayBox" parent="." index="13" groups=["player"]]
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
 [connection signal="body_entered" from="ExecuteAreaL" to="." method="_on_execute_area_r_body_entered"]

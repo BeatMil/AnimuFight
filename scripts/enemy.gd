@@ -154,6 +154,9 @@ func _physics_process(delta: float) -> void:
 		keep_player_away_box.process_mode = Node.PROCESS_MODE_INHERIT
 	else:
 		keep_player_away_box.process_mode = Node.PROCESS_MODE_DISABLED
+	# fix enemies push player to ground
+	if velocity.y > 50:
+		keep_player_away_box.process_mode = Node.PROCESS_MODE_DISABLED
 
 	## debug
 	$DebugLabel.text = ""
@@ -185,10 +188,19 @@ func set_attack_timer_bool(value: bool) -> void:
 func _move(delta) -> void:
 	if not can_move:
 		return
+
 	if animation_player.has_animation("walk"):
 		animation_player.play("walk")
+
 	if is_instance_valid(target) and not is_notarget:
-		var direction = (target.position - global_position).normalized() 
+		var direction = Vector2.ZERO
+		if target.position.distance_to(position) <= 220:
+			direction = (global_position - target.position).normalized()
+		elif target.position.distance_to(position) <= 280:
+			_lerp_velocity_x()
+			animation_player.play("idle")
+		else:
+			direction = (target.position - global_position).normalized()
 		var desired_velocity =  direction * speed
 		var steering = (desired_velocity - velocity) * delta * 2.5
 		velocity += steering
@@ -198,12 +210,14 @@ func _move_range(delta) -> void:
 	if state in [States.IDLE]:
 		is_wall_bounced = false
 		is_wall_splat =  false
-		if not is_player_in_range_lp and not is_enemy_in_range_lp:
+		# if not is_player_in_range_lp and not is_enemy_in_range_lp:
+		if not is_enemy_in_range_lp:
 			_move(delta)
 		else:
+			pass
 			# lerp when finding player
-			_lerp_velocity_x()
-			animation_player.play("idle")
+			# _lerp_velocity_x()
+			# animation_player.play("idle")
 			# block_count = 0
 
 

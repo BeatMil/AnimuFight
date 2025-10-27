@@ -113,6 +113,7 @@ func _process(_delta: float) -> void:
 	if OS.is_debug_build():
 		pass
 		debug_label.text = "PlayerState: %s"%States.keys()[state]
+		# debug_label.text += "\n%s"%velocity
 		# debug_label.text += "\n%0.3f"%input_buffer_timer
 		# debug_label.text += "\n%0.3f"%block_buffer_timer
 		# debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
@@ -1520,7 +1521,7 @@ func exe_hadoken_info() ->  void:
 	"hitstun_amount_air": 1,
 	"screenshake_amount": Vector2(20, 0.4),
 	"damage": 2,
-	"type": Enums.Attack.NORMAL,
+	"type": Enums.Attack.UNBLOCK,
 	"pos": $HitBoxPos/DownHpPos.position,
 	"zoom": Vector2(0.3, 0.3),
 	"zoom_duration": 0.5,
@@ -1548,22 +1549,22 @@ func enter_grab_stance() -> void:
 
 
 func set_collision_no_hit_enemy() -> void:
-	collision_layer = 0b00000000001000000000
+	collision_layer= 0b00000000000100000000
 	collision_mask = 0b00000000000000001101
 
 
 func set_collision_normal() -> void:
-	collision_layer= 0b00000000001000000001
+	collision_layer= 0b00000000000100000001
 	collision_mask = 0b00000000010100001110
 
 
 func set_collision_noclip() -> void:
-	collision_layer = 0b00000000001000000000
+	collision_layer= 0b00000000000100000000
 	collision_mask = 0b00000000000000000000
 
 
 func set_collision_ded() -> void:
-	collision_layer = 0b00000000001000000000
+	collision_layer= 0b00000000000100000000
 	collision_mask = 0b00000000000000001000
 
 

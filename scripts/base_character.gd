@@ -585,15 +585,21 @@ func hitted(
 	States.IFRAME,
 	States.EXECUTE,
 	States.AIR_SPD,
-	States.ARMOR,
-	States.ARMOR2,
 	States.IFRAME_NO_HIT_ALL
-	]:
+	] or state in [
+		States.ARMOR,
+		States.ARMOR2,
+	] and _type != Enums.Attack.UNBLOCK:
 		ObjectPooling.spawn_iframe_spark(position + Vector2(0, randi_range(-30, -80)))
 		if self.is_in_group("tank"):
 			play_metal_clank_random_pitch()
 		else:
 			play_iframe_hit_sfx()
+	# elif state in [
+	# States.ARMOR,
+	# States.ARMOR2,
+	# ] and _type != Enums.Attack.UNBLOCK:
+	# 	pass
 	elif _type in [Enums.Attack.THROW_GROUND, Enums.Attack.THROW_FLOAT]:
 		state = States.THROW_BREAKABLE # Keep this here otherwise throw not work
 		set_thrower(_attacker)
