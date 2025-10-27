@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://jgmjqpnytm3v" path="res://nodes/hitboxes/hitbox_base.tscn" id="1_caddq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5ms"]
-size = Vector2(128, 288)
+size = Vector2(80, 288)
 
 [node name="HitboxLP" instance=ExtResource("1_caddq")]
 

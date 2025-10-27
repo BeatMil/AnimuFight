@@ -18,7 +18,7 @@ func _lp_chain() -> void:
 		animation_player.play("lp1_chain")
 func lp_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_type.MEDIUM,
+	"size": Hitbox_type.SMALL,
 	"time": 0.1,
 	"push_power_ground": Vector2(500, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
@@ -40,8 +40,8 @@ func _attack01() -> void:
 		animation_player.play("attack01_1")
 func attack01_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_type.MEDIUM,
-	"time": 0.3,
+	"size": Hitbox_type.SMALL,
+	"time": 0.1,
 	"push_power_ground": Vector2(800, -300),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
 	"push_power_air": Vector2(300, 0),
@@ -194,7 +194,7 @@ func do_attack() -> void:
 	# 	_attack01()
 	if is_player_in_range_lp:
 		state = States.ATTACK
-		match randi_range(0, 3):
+		match randi_range(1, 1):
 			0:
 				_lp()
 			1:
