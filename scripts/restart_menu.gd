@@ -28,7 +28,7 @@ func toggle_menu() -> void:
 	self.visible = !self.visible
 	get_tree().paused = !get_tree().paused
 	if get_tree().paused:
-		resume_button.grab_focus()
+		restart_button.grab_focus()
 		%MenuCursor.move_to(Vector2(778, 500))
 		key_bind_menu.visible = false
 		v_box_container.visible = true
