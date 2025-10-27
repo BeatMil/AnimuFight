@@ -63,7 +63,8 @@ func _ready() -> void:
 
 
 func _player_ded() -> void:
-	if Settings.checkpoint >= 8 and player.hp_bar.immediate_value < -900:
+	if Settings.checkpoint >= 8 and player.global_position.y > 1600:
+		# player falls to deathzone
 		Settings.checkpoint = 0
 		get_tree().change_scene_to_packed(STAGE_01)
 	else:
