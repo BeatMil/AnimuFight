@@ -2,22 +2,12 @@ extends "res://scripts/enemy.gd"
 
 
 # const DED_SPRITE = preload("res://media/sprites/char2/enemy01_down.png")
-@onready var keep_player_away_box: StaticBody2D = $KeepPlayerAwayBox
 signal mango_boss_down
 
 
 func _ready() -> void:
 	super._ready()
 	DED_SPRITE = preload("res://media/sprites/mango_boss/mango_boss_down.png")
-
-
-func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
-	if state in [States.IDLE, States.BLOCK]:
-		keep_player_away_box.process_mode = Node.PROCESS_MODE_INHERIT
-	else:
-		keep_player_away_box.process_mode = Node.PROCESS_MODE_DISABLED
-
 
 
 #############################################################

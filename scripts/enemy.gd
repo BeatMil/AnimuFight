@@ -5,6 +5,7 @@ extends "res://scripts/base_character.gd"
 @export var is_notarget: bool
 
 @onready var execute_icon: Sprite2D = $ExecuteShow/ExecuteIcon
+@onready var keep_player_away_box: StaticBody2D = $KeepPlayerAwayBox
 
 
 var DED_SPRITE = null
@@ -144,11 +145,15 @@ func _physics_process(delta: float) -> void:
 		_follow_pos()
 		hitlag_timer = 0
 
-
 	if animation_player.current_animation == "wallsplat":
 		if is_on_floor():
 			animation_player.play("wall_crumble")
 			stun_duration = 2
+
+	if state in [States.IDLE, States.BLOCK]:
+		keep_player_away_box.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		keep_player_away_box.process_mode = Node.PROCESS_MODE_DISABLED
 
 	## debug
 	$DebugLabel.text = ""

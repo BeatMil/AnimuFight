@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://b1p1m5xm4rnrm"]
+[gd_scene load_steps=49 format=3 uid="uid://b1p1m5xm4rnrm"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_2mpdw"]
 [ext_resource type="Script" uid="uid://behtp0q8hjff3" path="res://scripts/mango_boss.gd" id="2_2mpdw"]
@@ -2552,9 +2552,6 @@ size = Vector2(128, 256)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8qvtx"]
 size = Vector2(144, 304)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mpdw"]
-size = Vector2(224, 304)
-
 [node name="MangoBoss" groups=["character", "enemy"] instance=ExtResource("1_2mpdw")]
 collision_layer = 2
 collision_mask = 15
@@ -2632,13 +2629,6 @@ offset_left = -128.0
 offset_top = -184.0
 offset_right = 128.0
 offset_bottom = -168.0
-
-[node name="KeepPlayerAwayBox" type="StaticBody2D" parent="." index="16"]
-collision_layer = 256
-collision_mask = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KeepPlayerAwayBox" index="0"]
-shape = SubResource("RectangleShape2D_2mpdw")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

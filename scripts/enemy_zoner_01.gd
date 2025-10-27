@@ -1,20 +1,9 @@
 extends "res://scripts/enemy.gd"
 
 
-@onready var keep_player_away_box: StaticBody2D = $KeepPlayerAwayBox
-
-
 func _ready() -> void:
 	super._ready()
 	DED_SPRITE = preload("uid://73v1gc7dgtjt")
-
-
-func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
-	if state in [States.IDLE, States.BLOCK]:
-		keep_player_away_box.process_mode = Node.PROCESS_MODE_INHERIT
-	else:
-		keep_player_away_box.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func spawn_boom_spark() -> void:

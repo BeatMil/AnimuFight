@@ -20,7 +20,8 @@ const COMMAND_BOX = preload("res://nodes/command_box.tscn")
 @onready var god_fist_player: AudioStreamPlayer = $GodFistPlayer
 const STRONG_PUNCH = preload("uid://b6dtaoivlmcyf")
 @onready var hud_player: AnimationPlayer = $PlayerCanvasLayer/AnimationPlayer
-
+@onready var keep_player_away_box: StaticBody2D = $KeepPlayerAwayBox
+ 
 #############################################################
 ## Config
 #############################################################
@@ -93,6 +94,7 @@ var throwee: CharacterBody2D
 ## Built-in
 #############################################################
 func _ready() -> void:
+	keep_player_away_box.queue_free()
 	Cheats.player = self
 	move_speed = 50000
 	hp_bar = hp_bar_2
