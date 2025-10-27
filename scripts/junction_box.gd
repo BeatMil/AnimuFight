@@ -15,6 +15,9 @@ func hitlag(_amount: float = 0.3) -> void:
 		set_physics_process(false)
 		await get_tree().create_timer(_amount).timeout
 		set_physics_process(true)
+		
+func _ready() -> void:
+	animation_player.play("IDLE")
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
