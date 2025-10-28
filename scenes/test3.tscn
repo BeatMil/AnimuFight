@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqaw43dsdi3ia"]
+[gd_scene load_steps=12 format=3 uid="uid://bqaw43dsdi3ia"]
 
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_pm5nb"]
+[ext_resource type="Script" uid="uid://css32tacy23hg" path="res://scripts/test_3.gd" id="1_qget2"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="2_6sixx"]
+[ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/ui/restart_menu.tscn" id="2_ki1l6"]
 [ext_resource type="PackedScene" uid="uid://dy6yy7k35k271" path="res://nodes/enemy_spawner.tscn" id="3_76owy"]
 [ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="4_adibb"]
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="4_j53nk"]
@@ -13,6 +15,12 @@
 size = Vector2(3334, 470)
 
 [node name="test3" type="Node2D"]
+script = ExtResource("1_qget2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_ki1l6")]
+visible = false
 
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(1195, 1117)
@@ -28,7 +36,7 @@ scale = Vector2(0.866667, 1)
 texture = ExtResource("1_pm5nb")
 
 [node name="Player" parent="." instance=ExtResource("2_6sixx")]
-position = Vector2(936, 704)
+position = Vector2(1456, 704)
 hp = 10
 
 [node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_76owy")]
@@ -47,6 +55,7 @@ is_active = false
 position = Vector2(392, -120)
 target = NodePath("../Player")
 enemy_to_spawn = [ExtResource("5_k8amv")]
+is_active = false
 
 [node name="Enemy03" parent="." instance=ExtResource("4_adibb")]
 position = Vector2(-912, 664)
@@ -64,3 +73,17 @@ position = Vector2(2392, 88)
 [node name="DeathZone" parent="." instance=ExtResource("8_kotue")]
 position = Vector2(13.2295, 462.343)
 scale = Vector2(1, 19.44)
+
+[node name="TestWallThrow" type="Node2D" parent="."]
+
+[node name="Enemy" parent="TestWallThrow" node_paths=PackedStringArray("target") instance=ExtResource("4_j53nk")]
+position = Vector2(2104, 712)
+target = NodePath("../../Player")
+is_notarget = true
+block_rate = 0
+
+[node name="Enemy2" parent="TestWallThrow" node_paths=PackedStringArray("target") instance=ExtResource("4_j53nk")]
+position = Vector2(1752, 712)
+target = NodePath("../../Player")
+is_notarget = true
+block_rate = 0

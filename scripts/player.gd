@@ -117,6 +117,7 @@ func _process(_delta: float) -> void:
 		pass
 		debug_label.text = "PlayerState: %s"%States.keys()[state]
 		debug_label.text += "\nthrowee: %s"%throwee_name
+		debug_label.text += "\nanim: %s"%animation_player.current_animation
 		# debug_label.text += "\n%s"%velocity
 		# debug_label.text += "\n%0.3f"%input_buffer_timer
 		# debug_label.text += "\n%0.3f"%block_buffer_timer
@@ -1208,7 +1209,7 @@ func forward_hp_info() ->  void:
 	dict_to_spawn_hitbox(info)
 func wall_throw_info() ->  void:
 	var info = {
-	"size": Hitbox_type.MEDIUM,
+	"size": Hitbox_type.PLAYER_THROW,
 	"time": 0.1,
 	"push_power_ground": Vector2(100, 0),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
@@ -1726,7 +1727,6 @@ func _on_animation_player_animation_started(anim_name: StringName) -> void:
 	"air_spd_burst",
 	"forward_hp",
 	"wall_throw",
-	"wall_abel_combo",
 	"wall_abel_combo2",
 	]:
 		if throwee:

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://7xrul4d66et8"]
+
+[ext_resource type="PackedScene" uid="uid://jgmjqpnytm3v" path="res://nodes/hitboxes/hitbox_base.tscn" id="1_asfnv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5ms"]
+size = Vector2(448, 384)
+
+[node name="HitboxPlayerThrow" instance=ExtResource("1_asfnv")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_ow5ms")
