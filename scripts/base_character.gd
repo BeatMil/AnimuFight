@@ -70,6 +70,7 @@ enum Hitbox_type {
 	BOOM,
 	HITBOX_PLAYER_TATSU_L,
 	HITBOX_PLAYER_TATSU_R,
+	PLAYER_THROW,
 	}
 
 
@@ -87,6 +88,7 @@ const HITBOX_EXE = preload("res://nodes/hitboxes/hitbox_execute.tscn")
 const HITBOX_METEO = preload("res://nodes/hitboxes/hitbox_meteo_crash.tscn")
 const HITBOX_AIR_THROW = preload("res://nodes/hitboxes/hitbox_air_throw.tscn")
 const HITBOX_GROUND_THROW = preload("res://nodes/hitboxes/hitbox_ground_throw.tscn")
+const HITBOX_PLAYER_THROW = preload("res://nodes/hitboxes/hitbox_player_throw.tscn")
 const HITBOX_BOUND = preload("res://nodes/hitboxes/hitbox_bound.tscn")
 const HITBOX_SLIDE = preload("res://nodes/hitboxes/hitbox_slide.tscn")
 const HIT_2 = preload("res://media/sfxs/Hit2.wav")
@@ -180,15 +182,18 @@ func _check_wall_bounce() -> void:
 	if is_touching_wall_left or is_touching_wall_right:
 		animation_player.stop(true)
 		if is_wall_splat:
+			# after wall splat only 1 hit is available then combo limit
+			# unless wait for wall wall_crumble then lp
 			animation_player.play("down")
-			set_collision_no_hit_all()
-			var push_power = Vector2(1000, 100) if is_touching_wall_left else Vector2(-1000, 100)
+			var push_power = Vector2(500, 100) if is_touching_wall_left else Vector2(-500, 100)
 			_push_direct(push_power)
 			CameraManager.start_screen_shake(10, 0.1)
-			hitlag(0.3)
+			hitlag(0.1)
+			is_touching_wall_left = false
+			is_touching_wall_right = false
 		elif is_wall_bounced:
 			CameraManager.start_screen_shake(40, 0.3)
-			hitlag(0.5)
+			hitlag(0.4)
 			animation_player.play("wallsplat")
 			velocity = Vector2.ZERO
 			is_wall_splat = true
@@ -197,7 +202,7 @@ func _check_wall_bounce() -> void:
 			var push_power = Vector2(400, -100) if is_touching_wall_left else Vector2(-400, -100)
 			_push_direct(push_power)
 			CameraManager.start_screen_shake(10, 0.1)
-			hitlag(0.3)
+			hitlag(0.2)
 			animation_player.play("down")
 			set_collision_no_hit_all()
 	
@@ -290,6 +295,8 @@ func _spawn_lp_hitbox(
 			hitbox = HITBOX_AIR_THROW.instantiate()
 		Hitbox_type.GROUND_THROW:
 			hitbox = HITBOX_GROUND_THROW.instantiate()
+		Hitbox_type.PLAYER_THROW:
+			hitbox = HITBOX_PLAYER_THROW.instantiate()
 		Hitbox_type.BOUND:
 			hitbox = HITBOX_BOUND.instantiate()
 		Hitbox_type.SLIDE:
@@ -462,8 +469,6 @@ func hitted(
 		if slow_mo_on_block:
 			_slow_moion(slow_mo_on_block.x, slow_mo_on_block.y)
 			CameraManager.zoom_zoom(_zoom, _zoom_duration)
-		else:
-			_slow_moion_no_sfx(0.9, 0.1)
 		if _type == Enums.Attack.PROJECTILE:
 			pass
 		else:
@@ -487,7 +492,6 @@ func hitted(
 		]:
 		if _type == Enums.Attack.UNBLOCK:
 			animation_player.play("dodge_success_zoom")
-			_slow_moion_no_sfx(0.7, 0.2)
 		else:
 			animation_player.play("dodge_success")
 		if _attacker.position.x < self.position.x:
@@ -777,6 +781,14 @@ func play_iframe_hit_sfx() -> void:
 
 
 func set_collision_no_hit_all():
+	pass
+
+
+func set_collision_down_ground() -> void:
+	pass
+
+
+func set_collision_ghost() -> void:
 	pass
 
 

@@ -110,8 +110,11 @@ func _physics_process(delta: float) -> void:
 			friction = ground_friction
 			stun_duration -= delta
 			if animation_player.current_animation == "down":
-				collision_layer = 0b00000000000010000000
-				# set_collision_down_ground()
+				if is_wall_splat:
+					# combo limit at wall
+					set_collision_ghost()
+				else:
+					collision_layer = 0b00000000000010000000
 		else: # not on_floor
 			set_collision_no_hit_all()
 			friction = air_friction
@@ -286,6 +289,11 @@ func set_collision_down_ground() -> void:
 	collision_mask = 0b00000000000000001100
 
 
+func set_collision_ghost() -> void:
+	collision_layer= 0b00000000000000000000
+	collision_mask = 0b00000000000000001100
+
+
 func push_to_target() -> void:
 	var tween = get_tree().create_tween()
 	var new_pos := Vector2.ZERO
@@ -345,7 +353,8 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 			0,
 			0.5,
 			Vector2.ZERO,
-			1
+			1,
+			0
 		)
 
 

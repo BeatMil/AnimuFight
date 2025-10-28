@@ -43,6 +43,7 @@ func _ready() -> void:
 	training_menu.wall.connect(_on_wall_toggled)
 	death_zone.turn_off()
 	AttackQueue.stop_queue_timer()
+	_on_wall_toggled(true)
 
 
 func _input(event: InputEvent) -> void:
