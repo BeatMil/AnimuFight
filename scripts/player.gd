@@ -14,7 +14,7 @@ signal ded
 @onready var grab_pos_r: Marker2D = $HitBoxPos/GrabPosR
 @onready var grab_pos_l: Marker2D = $HitBoxPos/GrabPosL
 @onready var hp_bar_2: TextureProgressBar = $PlayerCanvasLayer/HpBar2
-@onready var profile_player: AnimationPlayer = $PlayerCanvasLayer/Profile/AnimationPlayer
+@onready var profile_player: AnimationPlayer = $PlayerCanvasLayer/ProfilePlayer
 @onready var command_history: VBoxContainer = $PlayerCanvasLayer/CommandHistory
 const COMMAND_BOX = preload("res://nodes/command_box.tscn")
 @onready var god_fist_player: AudioStreamPlayer = $GodFistPlayer
@@ -99,7 +99,7 @@ func _ready() -> void:
 	move_speed = 30000
 	hp_bar = hp_bar_2
 	hp_bar.set_hp(hp)
-	hp_bar.hp_down_sig.connect(_play_profile_hitted)
+	# hp_bar.hp_down_sig.connect(_play_profile_hitted)
 	hp_bar.hp_out.connect(_on_hp_out)
 	print_rich("[img]res://media/sprites/char1/FirstChar_block.png[/img]")
 	print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
@@ -111,8 +111,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if OS.is_debug_build():
+		var throwee_name = "__"
+		if throwee:
+			throwee_name = throwee.name
 		pass
 		debug_label.text = "PlayerState: %s"%States.keys()[state]
+		debug_label.text += "\nthrowee: %s"%throwee_name
 		# debug_label.text += "\n%s"%velocity
 		# debug_label.text += "\n%0.3f"%input_buffer_timer
 		# debug_label.text += "\n%0.3f"%block_buffer_timer
@@ -591,8 +595,8 @@ func _check_input_history() -> void:
 		input_history.clear()
 
 
-func _play_profile_hitted() -> void:
-	profile_player.play("hitted")
+func profile_player_play(anim_name: String) -> void:
+	profile_player.play(anim_name)
 
 
 func play_EWGF_sfx() -> void:
@@ -1592,6 +1596,30 @@ func _set_p_state(new_state: int) -> void:
 	p_state = new_state as P_States
 
 
+func three_way_throw() -> void:
+	throwee.air_throw_follow_pos = null
+	match is_pressing_right():
+		0: #neutral
+			throwee.hitted(
+				self,
+				is_face_right,
+				Vector2(0, 200),
+				1,
+				0,
+				1,
+				Vector2(0, 0.1),
+				2,
+				Enums.Attack.NORMAL
+			)
+			animation_player.play("place_enemy")
+		1: # Left
+			throwee._push_direct(Vector2(-900, -100))
+			sprite_2d.flip_h = true
+			print("throwee:", throwee)
+		2: # Right
+			throwee._push_direct(Vector2(900, -100))
+			sprite_2d.flip_h = false
+
 #############################################################
 ## Signals
 #############################################################
@@ -1662,5 +1690,46 @@ func _on_execute_area_r_body_exited(body: Node2D) -> void:
 
 
 func _on_animation_player_animation_started(anim_name: StringName) -> void:
-	if anim_name in ["air_spd_burst", "forward_hp"]:
-		set_throwee(null)
+	match anim_name:
+		"idle":
+			profile_player_play(anim_name)
+		"walk":
+			profile_player_play(anim_name)
+		"dash":
+			profile_player_play(anim_name)
+		"wave_dash":
+			profile_player_play("dash")
+		"block":
+			profile_player_play(anim_name)
+		"dodge":
+			profile_player_play(anim_name)
+		"parry_success":
+			profile_player_play(anim_name)
+		"dodge_success":
+			profile_player_play(anim_name)
+		"dodge_success_zoom":
+			profile_player_play("dodge_success")
+		"hitted":
+			profile_player_play("hitted")
+		"down":
+			profile_player_play("hitted")
+		"throw_stunned_float":
+			profile_player_play(anim_name)
+		"throw_stunned_ground":
+			profile_player_play(anim_name)
+		_:
+			profile_player_play("attack")
+	
+	# prevent throwee stuck
+	if anim_name not in [
+	"air_spd",
+	"air_spd_burst",
+	"forward_hp",
+	"wall_throw",
+	"wall_abel_combo",
+	"wall_abel_combo2",
+	]:
+		if throwee:
+			throwee.air_throw_follow_pos = null
+			throwee.is_gravity = true
+			set_throwee(null)

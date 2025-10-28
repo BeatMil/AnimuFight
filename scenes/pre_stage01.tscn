@@ -980,7 +980,7 @@ scale = Vector2(0.423437, 1)
 texture = ExtResource("17_ac4hq")
 
 [node name="Player" parent="." instance=ExtResource("18_2qsap")]
-position = Vector2(800, 704)
+position = Vector2(1112, 704)
 
 [node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("19_kn51f")]
 position = Vector2(1912, -112)
@@ -1021,13 +1021,13 @@ object = ExtResource("26_m7cni")
 [node name="e2" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
 script = ExtResource("25_e4twh")
 position = NodePath("../../../SpawnPos/pos1")
-hp = 10
+hp = 12
 object = ExtResource("20_ojfvp")
 
 [node name="e3" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
 script = ExtResource("25_e4twh")
 position = NodePath("../../../SpawnPos/pos1")
-hp = 10
+hp = 12
 object = ExtResource("20_ojfvp")
 
 [node name="Phase2" type="Node" parent="EnemySpawnHelper"]
@@ -1285,6 +1285,22 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HeliPlayer"]
 stream = ExtResource("34_mfofa")
+
+[node name="TestWallThrow" type="Node2D" parent="."]
+
+[node name="Enemy" parent="TestWallThrow" node_paths=PackedStringArray("target") instance=ExtResource("20_ojfvp")]
+position = Vector2(1760, 712)
+target = NodePath("../../Player")
+is_notarget = true
+hp = 1
+block_rate = 0
+
+[node name="Enemy2" parent="TestWallThrow" node_paths=PackedStringArray("target") instance=ExtResource("20_ojfvp")]
+position = Vector2(1408, 712)
+target = NodePath("../../Player")
+is_notarget = true
+hp = 1
+block_rate = 0
 
 [connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]
 [connection signal="body_entered" from="BounceToLeft" to="." method="_on_bounce_to_left_body_entered"]

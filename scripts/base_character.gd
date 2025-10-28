@@ -127,6 +127,9 @@ var friction: float = 0.1
 var is_touching_wall_left: bool = false
 var is_touching_wall_right: bool = false
 
+## thrown follow pos helper
+var is_gravity: bool = true
+
 ## hitstun helper
 var stun_duration: float = 0
 
@@ -166,7 +169,7 @@ func _lerp_velocity_y() -> void:
 
 
 func _gravity(delta) -> void:
-	if not is_on_floor():
+	if not is_on_floor() and is_gravity:
 		velocity += Vector2(0, gravity_power*delta)
 
 
@@ -189,9 +192,6 @@ func _check_wall_bounce() -> void:
 			animation_player.play("wallsplat")
 			velocity = Vector2.ZERO
 			is_wall_splat = true
-			# var tween = get_tree().create_tween()
-			# tween.tween_property(self, "position", position, 0.9)
-			# tween.tween_property(self, "velocity", Vector2.ZERO, 0)
 		else:
 			is_wall_bounced = true
 			var push_power = Vector2(400, -100) if is_touching_wall_left else Vector2(-400, -100)
@@ -512,6 +512,7 @@ func hitted(
 		else:
 			_push_direct(Vector2(600, -150))
 		self.air_throw_follow_pos = null
+
 	## Player air grab hits
 	elif _type == Enums.Attack.P_AIR_THROW and not is_on_floor():
 		if _attacker.throwee:
@@ -523,59 +524,58 @@ func hitted(
 		self.air_throw_follow_pos = _attacker.give_air_throw_pos()
 		_attacker.animation_player.play("air_spd")
 		stun_duration = hitstun_amount
+
 	elif _type == Enums.Attack.P_AIR_THROW and is_on_floor():
 		## make air throw whiff
 		pass
+
 	## Player Wall throw hits
 	elif _type == Enums.Attack.P_WALL_THROW and \
 		animation_player.current_animation in ["wallsplat", "wall_crumble"]:
+		print_rich("[color=brown][b]wall_abel_comb[/b][/color]")
+		# if _attacker.throwee:
+		# 	return
+		# else:
+		# 	_attacker.throwee = self
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
 		state = States.GRABBED
 		animation_player.play("throw_stunned")
 		_attacker.animation_player.play("wall_abel_combo")
+		_attacker._set_state(21) # priorities wall throw helper
+
+	## Player Three way throw
 	elif _type == Enums.Attack.P_GROUND_THROW or \
 		(_type == Enums.Attack.P_WALL_THROW and \
 		state in [States.HIT_STUNNED, States.BOUNCE_STUNNED, States.WALL_BOUNCED]):
+		print_rich("[color=yellow][b]ground punch[/b][/color]")
+
+		# priorities wall throw helper
+		
+		if _attacker.state == States.IFRAME:
+			return
+
+		# only grab 1 enemy
 		if _attacker.throwee:
 			return
 		else:
 			_attacker.throwee = self
 
-		stun_duration += 0.5
-		velocity = Vector2.ZERO
+		# Set victim stuff
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
-		_attacker.state = States.HIT_STUNNED ## whyy? but it works!
-		_attacker.animation_player.play("wall_throw")
+		velocity = Vector2.ZERO
 		state = States.GRABBED
 		animation_player.play("thrown")
-		await get_tree().create_timer(0.3).timeout
-		self.air_throw_follow_pos = null
-		##### when fast and where is 1 damage from???
-		velocity = Vector2.ZERO
-		match _attacker.is_pressing_right():
-			0: #neutral
-				self.hitted(
-					self,
-					_attacker.is_face_right,
-					Vector2(0, 200),
-					1,
-					0,
-					1,
-					Vector2(0, 0.1),
-					2,
-					Enums.Attack.NORMAL
-				)
-				_attacker.animation_player.play("place_enemy")
-			1: # Left
-				_push_direct(Vector2(-900, -100))
-				_attacker.sprite_2d.flip_h = true
-			2: # Right
-				_push_direct(Vector2(900, -100))
-				_attacker.sprite_2d.flip_h = false
-		if is_touching_wall_left or is_touching_wall_right:
-			_attacker._push_x(-400)
+
+		# Set Attacker stuff
+		_attacker.state = States.HIT_STUNNED ## whyy? but it works!
+		_attacker.animation_player.play("wall_throw")
+
+		# if is_touching_wall_left or is_touching_wall_right:
+		# 	_attacker._push_x(-400)
+
 	## make wall throw whiff
 	elif _type == Enums.Attack.P_WALL_THROW:
+		print("throw whiff")
 		pass
 
 	## ARMOR is for going through player while attacking such as boss01 burn_knuckle

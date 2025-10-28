@@ -31,6 +31,48 @@ var boss
 
 signal shoot_up_house
 
+## test wall throw
+@onready var enemy: CharacterBody2D = $TestWallThrow/Enemy
+@onready var enemy_2: CharacterBody2D = $TestWallThrow/Enemy2
+
+
+func test_wall_throw() -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_callback(enemy.hitted.bind(
+					self,
+					true,
+					Vector2(300, -100),
+					1,
+					0,
+					1,
+					Vector2(0, 0.1),
+					2,
+					Enums.Attack.NORMAL
+	))
+	tween.tween_interval(0.6)
+	tween.tween_callback(enemy.hitted.bind(
+					self,
+					true,
+					Vector2(400, -100),
+					1,
+					0,
+					1,
+					Vector2(0, 0.1),
+					2,
+					Enums.Attack.NORMAL
+	))
+	tween.tween_callback(enemy_2.hitted.bind(
+					self,
+					true,
+					Vector2(400, -100),
+					1,
+					0,
+					1,
+					Vector2(0, 0.1),
+					2,
+					Enums.Attack.NORMAL
+	))
+
 
 func _ready() -> void:
 	connect("shoot_up_house", _shoot_up_house)
@@ -58,6 +100,7 @@ func _ready() -> void:
 	AttackQueue.start_queue_timer()
 	# AttackQueue.stop_queue_timer()
 
+	test_wall_throw()
 	# if enemy_spawner_new.phase >= 5:
 	# 	_shoot_up_house()
 
@@ -160,7 +203,7 @@ func _on_heli_area_2d_body_entered(body: Node2D) -> void:
 	body.hitted(
 	self,
 	body.sprite_2d.flip_h,
-	Vector2(2200, -200),
+	Vector2(4200, -200),
 	1,
 	0.5,
 	2,

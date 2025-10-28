@@ -54,9 +54,12 @@ func _ready() -> void:
 	# $Timer.start()
 	# _lp()
 
+
 func _process(_delta: float) -> void:
+	pass
 	if state in [States.GRABBED, States.THROWN]:
-		_follow_pos()
+		_follow_pos() # enemy touch ground and won't be lifted; so _process instead
+		stun_duration = 1
 		hitlag_timer = 0
 
 
@@ -108,6 +111,7 @@ func _physics_process(delta: float) -> void:
 			stun_duration -= delta
 			if animation_player.current_animation == "down":
 				collision_layer = 0b00000000000010000000
+				# set_collision_down_ground()
 		else: # not on_floor
 			set_collision_no_hit_all()
 			friction = air_friction
@@ -129,6 +133,7 @@ func _physics_process(delta: float) -> void:
 
 	if is_on_floor() and state == States.THROWN:
 		# state = States.ATTACK
+		print("throw hit ground")
 		self.hitted(
 			self,
 			not is_face_right,
@@ -141,9 +146,9 @@ func _physics_process(delta: float) -> void:
 			Enums.Attack.P_PARRY
 		)
 
-	if state in [States.GRABBED, States.THROWN]:
-		_follow_pos()
-		hitlag_timer = 0
+	# if state in [States.GRABBED, States.THROWN]:
+	# 	_follow_pos()
+	# 	hitlag_timer = 0
 
 	if animation_player.current_animation == "wallsplat":
 		if is_on_floor():
@@ -160,7 +165,10 @@ func _physics_process(delta: float) -> void:
 
 	## debug
 	$DebugLabel.text = ""
-	$DebugLabel.text = "%s, %s"%[States.keys()[state], animation_player.current_animation]
+	$DebugLabel.text = "%s, %s"%[
+	States.keys()[state],
+	animation_player.current_animation,
+	]
 	# $DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
 	# $DebugLabel.text = "%s, %s %0.3f %0.3f"%[States.keys()[state], animation_player.current_animation, stun_duration, attack_timer.time_left]
 
@@ -223,7 +231,10 @@ func _move_range(delta) -> void:
 
 func _follow_pos() -> void:
 	if is_instance_valid(air_throw_follow_pos):
+		is_gravity = false
 		position = air_throw_follow_pos.global_position
+	else:
+		is_gravity = true
 
 
 func _facing() -> void:
@@ -315,8 +326,12 @@ func spawn_ded_copy() -> void:
 
 
 func _on_bounce_together_body_entered(body: Node2D) -> void:
-	if velocity.length() < 2000:
+	if velocity.length() < 500:
 		return
+
+	if body == self:
+		return
+
 	## Hit other enemy
 	if self.state in [States.BOUNCE_STUNNED, States.EXECUTETABLE, States.THROWN] \
 		and body.state != States.BOUNCE_STUNNED and \
@@ -337,6 +352,11 @@ func _on_bounce_together_body_entered(body: Node2D) -> void:
 func _on_current_anim_start(anim_name: String) -> void:
 	if anim_name in ["idle", "walk"]:
 		is_bound = false
+
+	if anim_name in ["hitted", "down"]:
+		air_throw_follow_pos = null
+		is_gravity = true
+	
 	
 	if anim_name == "execute":
 		$ExecuteShow.visible = true
