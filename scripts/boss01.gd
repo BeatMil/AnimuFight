@@ -254,14 +254,18 @@ func do_attack() -> void:
 					backup_count += 1
 					return
 
-				match randi_range(0, 3):
+				match randi_range(0, 5):
 					0:
 						animation_player.play("meteo_crash")
 					1:
-						animation_player.play("burn_knuckle")
+						animation_player.play("meteo_crash")
 					2:
-						animation_player.play("lp1")
+						animation_player.play("burn_knuckle")
 					3:
+						animation_player.play("lp1")
+					4:
+						animation_player.play("lp1")
+					5:
 						animation_player.play("call_heli")
 						emit_signal("call_heli")
 		else:
