@@ -118,10 +118,10 @@ func _process(_delta: float) -> void:
 		debug_label.text = "PlayerState: %s"%States.keys()[state]
 		debug_label.text += "\nthrowee: %s"%throwee_name
 		debug_label.text += "\nanim: %s"%animation_player.current_animation
+		debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
 		# debug_label.text += "\n%s"%velocity
 		# debug_label.text += "\n%0.3f"%input_buffer_timer
 		# debug_label.text += "\n%0.3f"%block_buffer_timer
-		# debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
 		# debug_label.text += "\n%0.3f"%tech_roll_timer
 		# debug_label.text += "\n%s"%animation_player.current_animation
 		# debug_label.text += "\n%s"%command_buffer_count
