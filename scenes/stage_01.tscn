@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://cijpe5mfa2ffb"]
+[gd_scene load_steps=98 format=3 uid="uid://cijpe5mfa2ffb"]
 
 [ext_resource type="Script" uid="uid://clroey4coqt7x" path="res://scripts/stage_01.gd" id="1_4caca"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
@@ -85,11 +85,32 @@ _data = {
 &"run": SubResource("Animation_mqdkf")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwpgs"]
+size = Vector2(1920, 335.9612)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52agy"]
+size = Vector2(1920, 335.9225)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1eqwa"]
+size = Vector2(1910, 335.88376)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yt165"]
+size = Vector2(1920, 335.535)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_apjmi"]
+size = Vector2(1917, 335.98062)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6ddm"]
-size = Vector2(1920, 334.75995)
+size = Vector2(1920, 335.9612)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7t3f"]
 size = Vector2(128, 512)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0c07"]
+size = Vector2(1920, 335.68994)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnllu"]
+size = Vector2(1920, 335.36084)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tby30"]
 size = Vector2(304, 128)
@@ -120,6 +141,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(8056, 640)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bridge:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8632, 1632)]
+}
 
 [sub_resource type="Animation" id="Animation_hq0et"]
 resource_name = "bridge"
@@ -146,6 +179,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(8056, 640), Vector2(8242.5, 631)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bridge:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8632, 1632), Vector2(8632, 832)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h3xeb"]
@@ -838,7 +883,7 @@ visible = false
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_i6ddm")]
-position = Vector2(-1456, -400)
+position = Vector2(7958.0396, 470.5091)
 
 [node name="CheckPoints" type="Node" parent="."]
 
@@ -902,8 +947,8 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor/StaticBody2D"]
-position = Vector2(-35, 8)
-shape = SubResource("RectangleShape2D_i6ddm")
+position = Vector2(-35, 7.980591)
+shape = SubResource("RectangleShape2D_cwpgs")
 
 [node name="Floor2" type="Sprite2D" parent="Map" groups=["ground"]]
 position = Vector2(2880, 640)
@@ -915,8 +960,8 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor2/StaticBody2D"]
-position = Vector2(-35, 8)
-shape = SubResource("RectangleShape2D_i6ddm")
+position = Vector2(-35, 7.9612427)
+shape = SubResource("RectangleShape2D_52agy")
 
 [node name="Floor4" type="Sprite2D" parent="Map" groups=["ground"]]
 position = Vector2(4800, 640)
@@ -928,8 +973,8 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor4/StaticBody2D"]
-position = Vector2(-35, 8)
-shape = SubResource("RectangleShape2D_i6ddm")
+position = Vector2(-40, 7.9418945)
+shape = SubResource("RectangleShape2D_1eqwa")
 
 [node name="Floor6" type="Sprite2D" parent="Map" groups=["ground"]]
 position = Vector2(6712, 640)
@@ -942,8 +987,8 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor6/StaticBody2D"]
-position = Vector2(-35, 8)
-shape = SubResource("RectangleShape2D_i6ddm")
+position = Vector2(-35, 7.767517)
+shape = SubResource("RectangleShape2D_yt165")
 
 [node name="Floor5" type="Sprite2D" parent="Map" groups=["ground"]]
 position = Vector2(-2880, 640)
@@ -955,8 +1000,8 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor5/StaticBody2D"]
-position = Vector2(-35, 8)
-shape = SubResource("RectangleShape2D_i6ddm")
+position = Vector2(-33.5, 7.9902954)
+shape = SubResource("RectangleShape2D_apjmi")
 
 [node name="Floor3" type="Sprite2D" parent="Map" groups=["ground"]]
 position = Vector2(-960, 640)
@@ -968,7 +1013,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor3/StaticBody2D"]
-position = Vector2(-35, 8)
+position = Vector2(-35, 7.980591)
 shape = SubResource("RectangleShape2D_i6ddm")
 
 [node name="Tree" type="Sprite2D" parent="Map"]
@@ -1156,20 +1201,21 @@ shape = SubResource("RectangleShape2D_v7t3f")
 
 [node name="Area4" type="Node" parent="."]
 
+[node name="StaticBody2D2" type="StaticBody2D" parent="Area4" groups=["ground"]]
+position = Vector2(8070, 944)
+scale = Vector2(0.4, 1)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4/StaticBody2D2"]
+position = Vector2(-35, 7.8449707)
+shape = SubResource("RectangleShape2D_t0c07")
+
 [node name="Floor7" type="Sprite2D" parent="Area4" groups=["ground"]]
 position = Vector2(8056, 640)
 scale = Vector2(0.4, 1)
 texture = ExtResource("2_fnmkw")
 metadata/_edit_group_ = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Area4/Floor7" groups=["ground"]]
-position = Vector2(35, 304)
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4/Floor7/StaticBody2D"]
-position = Vector2(-35, 8)
-shape = SubResource("RectangleShape2D_i6ddm")
 
 [node name="DeathZone" parent="Area4" instance=ExtResource("11_tby30")]
 position = Vector2(8592, 1472)
@@ -1186,8 +1232,8 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area4/StaticBody2D"]
-position = Vector2(-35, 0.8710327)
-shape = SubResource("RectangleShape2D_i6ddm")
+position = Vector2(-35, 1.1712036)
+shape = SubResource("RectangleShape2D_tnllu")
 
 [node name="Floor6" type="Sprite2D" parent="Area4" groups=["ground"]]
 position = Vector2(8632, 4312)
@@ -1390,6 +1436,15 @@ position = Vector2(8, -48)
 shape = SubResource("RectangleShape2D_tby30")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area4/PushPlayerBackUpArea2d"]
+
+[node name="Bridge" type="StaticBody2D" parent="Area4"]
+position = Vector2(8632, 1632)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area4/Bridge"]
+polygon = PackedVector2Array(176, -56, -192, -48, -192, 64, 176, 64)
 
 [node name="BridgePlayer" type="AnimationPlayer" parent="Area4"]
 libraries = {
@@ -1701,7 +1756,6 @@ z_index = 2
 position = Vector2(14520, -424)
 is_heli_phase = true
 target = NodePath("../../Player")
-hp = 100
 
 [node name="WaitBossPlatform" type="StaticBody2D" parent="Area6"]
 position = Vector2(14336, -176)
