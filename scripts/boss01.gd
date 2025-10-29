@@ -20,6 +20,7 @@ func _ready() -> void:
 	super._ready()
 	DED_SPRITE = preload("res://media/sprites/boss01/boss01_down.png")
 	hp_bar.hp_out.connect(_on_hp_out)
+	attack_timer_start()
 
 
 func attack_timer_start() -> void:
@@ -139,7 +140,7 @@ func burn_knuckle() -> void:
 		animation_player.play("burn_knuckle")
 func burn_knuckle_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_type.MEDIUM,
+	"size": Hitbox_type.SMALL,
 	"time": 0.1,
 	"push_power_ground": Vector2(10, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
