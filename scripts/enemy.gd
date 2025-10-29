@@ -362,7 +362,7 @@ func _on_current_anim_start(anim_name: String) -> void:
 	if anim_name in ["idle", "walk"]:
 		is_bound = false
 
-	if anim_name in ["hitted", "down"]:
+	if anim_name in ["hitted", "down", "execute"]:
 		air_throw_follow_pos = null
 		is_gravity = true
 	
