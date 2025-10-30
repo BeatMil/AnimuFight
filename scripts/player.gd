@@ -1737,3 +1737,19 @@ func _on_animation_player_animation_started(anim_name: StringName) -> void:
 			throwee.air_throw_follow_pos = null
 			throwee.is_gravity = true
 			set_throwee(null)
+
+
+func _on_prevent_enemy_on_top_area_2d_body_entered(body: Node2D) -> void:
+	## only checks for enemy with collision_mask
+	if body.state == States.IDLE:
+		body.hitted(
+		self,
+		is_face_right,
+		Vector2(20, 0),
+		1,
+		0,
+		1,
+		Vector2(10, 0.1),
+		0,
+		Enums.Attack.UNBLOCK
+		)

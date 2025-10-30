@@ -1,4 +1,4 @@
-[gd_scene load_steps=144 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=145 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
@@ -6988,6 +6988,10 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8u5p4"]
 size = Vector2(770, 1104)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rog0e"]
+a = Vector2(-64, -160)
+b = Vector2(64, -160)
+
 [node name="Player" groups=["character", "player"] instance=ExtResource("1_gva5u")]
 z_index = 10
 collision_mask = 270
@@ -7121,9 +7125,17 @@ visible = false
 
 [node name="KeepPlayerAwayBox" parent="." index="13" groups=["player"]]
 
+[node name="PreventEnemyOnTopArea2D" type="Area2D" parent="." index="14"]
+collision_layer = 0
+collision_mask = 146
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PreventEnemyOnTopArea2D" index="0"]
+shape = SubResource("SegmentShape2D_rog0e")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
 [connection signal="body_entered" from="ExecuteAreaL" to="." method="_on_execute_area_r_body_entered"]
 [connection signal="body_exited" from="ExecuteAreaL" to="." method="_on_execute_area_r_body_exited"]
 [connection signal="body_entered" from="ExecuteAreaR" to="." method="_on_execute_area_r_body_entered"]
 [connection signal="body_exited" from="ExecuteAreaR" to="." method="_on_execute_area_r_body_exited"]
+[connection signal="body_entered" from="PreventEnemyOnTopArea2D" to="." method="_on_prevent_enemy_on_top_area_2d_body_entered"]
