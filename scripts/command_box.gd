@@ -3,11 +3,14 @@ extends Control
 var command: String
 var frame: int = 0
 
+
 @onready var direction_label: Label = $HBoxContainer/DirectionLabel
 @onready var frame_label: Label = $HBoxContainer/FrameLabel
 @onready var arrow_right: Sprite2D = $HBoxContainer/CommandImage/ArrowRight
 @onready var h_button: Sprite2D = $HBoxContainer/CommandImage/HButton
 @onready var l_button: Sprite2D = $HBoxContainer/CommandImage/LButton
+@onready var g_button: Sprite2D = $HBoxContainer/CommandImage/GButton
+@onready var d_button: Sprite2D = $HBoxContainer/CommandImage/DButton
 
 
 func _ready() -> void:
@@ -39,6 +42,10 @@ func _ready() -> void:
 		l_button.visible = false
 	if command.find("h") < 0:
 		h_button.visible = false
+	if command.find("g") < 0:
+		g_button.visible = false
+	if command.find("d") < 0:
+		d_button.visible = false
 
 	frame_label.text = str(frame)
 

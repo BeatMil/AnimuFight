@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://6p62rstibpcg"]
+[gd_scene load_steps=7 format=3 uid="uid://6p62rstibpcg"]
 
 [ext_resource type="Script" uid="uid://br1vfcp74vsfj" path="res://scripts/command_box.gd" id="1_qiaf4"]
 [ext_resource type="Texture2D" uid="uid://dq8davv3k8bmk" path="res://media/arrows_command_history/arrow_right.png" id="2_gc2u7"]
 [ext_resource type="Texture2D" uid="uid://jvl5weto27rg" path="res://media/arrows_command_history/h_button.png" id="3_qsjnd"]
 [ext_resource type="Texture2D" uid="uid://fog6o0hl3dni" path="res://media/arrows_command_history/l_button.png" id="4_k8e3d"]
+[ext_resource type="Texture2D" uid="uid://bqa3s065yrwoo" path="res://media/arrows_command_history/g_button.png" id="5_k8e3d"]
+[ext_resource type="Texture2D" uid="uid://h1tr3e6o6eka" path="res://media/arrows_command_history/d_button.png" id="6_xflt1"]
 
 [node name="CommandBox" type="Control"]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 3
-anchor_right = 0.1
+anchor_right = 0.13333334
 anchor_bottom = 0.0444444
 grow_horizontal = 2
 grow_vertical = 2
@@ -25,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CommandImage" type="BoxContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(96, 0)
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 
 [node name="ArrowRight" type="Sprite2D" parent="HBoxContainer/CommandImage"]
@@ -33,13 +35,21 @@ position = Vector2(16, 24)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_gc2u7")
 
+[node name="LButton" type="Sprite2D" parent="HBoxContainer/CommandImage"]
+position = Vector2(48, 24)
+texture = ExtResource("4_k8e3d")
+
 [node name="HButton" type="Sprite2D" parent="HBoxContainer/CommandImage"]
 position = Vector2(80, 24)
 texture = ExtResource("3_qsjnd")
 
-[node name="LButton" type="Sprite2D" parent="HBoxContainer/CommandImage"]
-position = Vector2(48, 24)
-texture = ExtResource("4_k8e3d")
+[node name="GButton" type="Sprite2D" parent="HBoxContainer/CommandImage"]
+position = Vector2(112, 24)
+texture = ExtResource("5_k8e3d")
+
+[node name="DButton" type="Sprite2D" parent="HBoxContainer/CommandImage"]
+position = Vector2(144, 24)
+texture = ExtResource("6_xflt1")
 
 [node name="DirectionLabel" type="Label" parent="HBoxContainer"]
 visible = false
@@ -52,6 +62,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="FrameLabel" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "L"

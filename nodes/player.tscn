@@ -7014,7 +7014,7 @@ theme_override_font_sizes/font_size = 64
 [node name="CommandHistory" type="VBoxContainer" parent="PlayerCanvasLayer" index="1"]
 offset_left = 8.0
 offset_top = 192.0
-offset_right = 192.0
+offset_right = 376.0
 offset_bottom = 1272.0
 
 [node name="HpBar2" parent="PlayerCanvasLayer" index="2" instance=ExtResource("4_0a5oy")]

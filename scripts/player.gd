@@ -515,6 +515,10 @@ func _check_input_history() -> void:
 		new_input += "l"
 	if Input.is_action_pressed("hp"):
 		new_input += "h"
+	if Input.is_action_pressed("block"):
+		new_input += "g"
+	if Input.is_action_pressed("dodge"):
+		new_input += "d"
 	
 	var input_size = 26
 	if current_input == new_input:
