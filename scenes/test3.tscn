@@ -77,7 +77,7 @@ scale = Vector2(1, 19.44)
 [node name="TestWallThrow" type="Node2D" parent="."]
 
 [node name="Enemy" parent="TestWallThrow" node_paths=PackedStringArray("target") instance=ExtResource("4_j53nk")]
-position = Vector2(2104, 712)
+position = Vector2(1008, 576)
 target = NodePath("../../Player")
 is_notarget = true
 block_rate = 0

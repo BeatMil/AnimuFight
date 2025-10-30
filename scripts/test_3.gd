@@ -43,6 +43,21 @@ func test_wall_throw() -> void:
 	))
 
 
+func test_normal_throw_at_wall() -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_callback(enemy_2.hitted.bind(
+					self,
+					true,
+					Vector2(400, -100),
+					1,
+					0,
+					1,
+					Vector2(0, 0.1),
+					2,
+					Enums.Attack.NORMAL
+	))
+
+
 func _ready() -> void:
 	Settings.current_stage = "res://scenes/test3.tscn"
 
@@ -50,4 +65,5 @@ func _ready() -> void:
 	CameraManager.set_zoom(Vector2.ONE)
 	CameraManager.player = player
 
-	test_wall_throw()
+	# test_wall_throw()
+	test_normal_throw_at_wall()

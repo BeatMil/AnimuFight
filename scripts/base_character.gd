@@ -568,7 +568,7 @@ func hitted(
 		self.air_throw_follow_pos = _attacker.give_wall_throw_pos()
 		velocity = Vector2.ZERO
 		state = States.GRABBED
-		animation_player.play("thrown")
+		animation_player.play("throw_stunned")
 
 		# Set Attacker stuff
 		_attacker.state = States.HIT_STUNNED ## whyy? but it works!

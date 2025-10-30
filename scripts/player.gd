@@ -1621,6 +1621,10 @@ func three_way_throw() -> void:
 			throwee._push_direct(Vector2(900, -100))
 			sprite_2d.flip_h = false
 
+	# fix normal throw at wall buggy
+	if throwee:
+		throwee.animation_player.play("thrown")
+
 #############################################################
 ## Signals
 #############################################################
