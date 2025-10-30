@@ -1,13 +1,29 @@
 extends "res://scripts/enemy.gd"
 
 
-# const DED_SPRITE = preload("res://media/sprites/char2/enemy01_down.png")
+@export var lp: int = 3
+@export var unblock: int = 2
+@export var throw_ground: int = 1
+@export var throw_float: int = 1
+
+
+var attacks = {
+	"_lp": 1,
+	"_attack01": 1,
+	"_throw_ground": 1,
+	"_throw_float": 1,
+}
 
 
 func _ready() -> void:
 	super._ready()
 	DED_SPRITE = preload("res://media/sprites/char2/enemy01_down.png")
+	randomize()
 
+	attacks["_lp"] = lp
+	attacks["_attack01"] = unblock
+	attacks["_throw_ground"] = throw_ground
+	attacks["_throw_float"] = throw_float
 
 
 #############################################################
@@ -202,18 +218,18 @@ func _on_attack_timer_timeout() -> void:
 
 
 func do_attack() -> void:
-	if is_player_in_range_attack01:
-		state = States.ATTACK
-		# _attack01()
-		_lp()
-	elif is_player_in_range_lp:
-		state = States.ATTACK
-		match randi_range(0, 3):
-			0:
-				_lp()
-			1:
-				_attack01()
-			2:
-				_throw_ground()
-			3:
-				_throw_float()
+	state = States.ATTACK
+
+	var total_weight = 0
+	for weight in attacks.values():
+		total_weight += weight
+
+	var rand_value = randi() % total_weight
+	var current = 0
+
+	for attack in attacks.keys():
+		current += attacks[attack]
+		if rand_value < current:
+			print("%s %s %s"%[attack, rand_value, current])
+			call(attack)
+			return

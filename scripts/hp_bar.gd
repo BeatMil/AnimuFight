@@ -31,7 +31,8 @@ func hp_down(_amount: int) -> void:
 	immediate_value = max(0, immediate_value - _amount)
 
 	if get_parent().name == "PlayerCanvasLayer":
-		print("immHP: ", immediate_value," ", _amount)
+		pass
+		# print("immHP: ", immediate_value," ", _amount)
 
 	if immediate_value <= 0:
 		cant_heal = true
