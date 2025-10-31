@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cnfg20gv8kp6s"]
 
-[ext_resource type="Script" path="res://scripts/test.gd" id="1_qjwej"]
+[ext_resource type="Script" uid="uid://ddd5rvsl70l7j" path="res://scripts/test.gd" id="1_qjwej"]
 [ext_resource type="Texture2D" uid="uid://dhg03s02r5p3n" path="res://media/backgrounds/rooftop_no_clouds.png" id="2_3yg43"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="4_6s7w5"]
 [ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="4_777cy"]

@@ -78,11 +78,19 @@ scale = Vector2(1, 19.44)
 
 [node name="Enemy" parent="TestWallThrow" node_paths=PackedStringArray("target") instance=ExtResource("4_j53nk")]
 position = Vector2(1456, 168)
+lp = 3
+unblock = 2
+throw_ground = 1
+throw_float = 1
 target = NodePath("../../Player")
 block_rate = 0
 
 [node name="Enemy2" parent="TestWallThrow" node_paths=PackedStringArray("target") instance=ExtResource("4_j53nk")]
 position = Vector2(1752, 712)
+lp = 3
+unblock = 2
+throw_ground = 1
+throw_float = 1
 target = NodePath("../../Player")
 is_notarget = true
 block_rate = 0
