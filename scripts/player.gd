@@ -118,7 +118,7 @@ func _process(_delta: float) -> void:
 		debug_label.text = "PlayerState: %s"%States.keys()[state]
 		debug_label.text += "\nthrowee: %s"%throwee_name
 		debug_label.text += "\nanim: %s"%animation_player.current_animation
-		debug_label.text += "\n%0.3f"%AttackQueue.attack_queue_timer.time_left
+		debug_label.text += "\n%0.3f"%block_buffer_timer
 		# debug_label.text += "\n%s"%velocity
 		# debug_label.text += "\n%0.3f"%input_buffer_timer
 		# debug_label.text += "\n%0.3f"%block_buffer_timer
@@ -172,8 +172,10 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("block", true) and state == States.HIT_STUNNED:
 			animation_player.play("late_parry")
 			hp_bar.hp_up_late_parry()
+
 		elif Input.is_action_just_pressed("block", true):
-			state = States.PARRY
+			if state not in [States.PARRY, States.BLOCK]:
+				state = States.PARRY
 			animation_player.play("block")
 
 		if Input.is_action_just_pressed("dodge"):
@@ -312,7 +314,8 @@ func _physics_process(delta: float) -> void:
 	##################
 	## Block buffer
 	##################
-	if block_buffer_timer > 0 and state in [States.BLOCK, States.PARRY]:
+	if block_buffer_timer > 0 and state in [States.BLOCK, States.PARRY] \
+		and not Input.is_action_pressed("block"):
 		block_buffer_timer -= delta
 	elif block_buffer_timer < 0 and state in [States.BLOCK, States.PARRY]:
 		animation_player.play("idle")
@@ -322,7 +325,7 @@ func _physics_process(delta: float) -> void:
 	## Must check every frame, can't put in _input cause it only check when press and release
 	if state in can_block_states_hold and is_controllable:
 		if Input.is_action_pressed("block"):
-			state = States.PARRY
+			# state = States.PARRY
 			animation_player.play("block")
 	
 	## Air SPD burst
