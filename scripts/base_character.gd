@@ -762,12 +762,6 @@ func _slow_moion_no_sfx(level, length) -> void:
 	Engine.time_scale = 1.0
 
 
-func _slow_moion_no_sfx_2(level, length) -> void:
-	Engine.time_scale = level
-	await get_tree().create_timer(length*Engine.time_scale).timeout
-	Engine.time_scale = 1.0
-
-
 func play_bounce_sfx() -> void:
 	$AudioStreamPlayer2.stream = HIT_BOUNCE
 	$AudioStreamPlayer2.pitch_scale = randf_range(0.8, 1.2)

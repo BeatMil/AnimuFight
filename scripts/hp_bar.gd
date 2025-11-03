@@ -90,6 +90,11 @@ func hp_up_late_parry() -> void:
 	emit_signal("hp_up_sig")
 
 
+func resurrect(_amount: int) -> void:
+	cant_heal = false
+	max_value = _amount
+	hp_up(_amount)
+
 
 func get_hp() -> int:
 	return immediate_value

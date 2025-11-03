@@ -21,7 +21,8 @@ const COMMAND_BOX = preload("res://nodes/command_box.tscn")
 const STRONG_PUNCH = preload("uid://b6dtaoivlmcyf")
 @onready var hud_player: AnimationPlayer = $PlayerCanvasLayer/AnimationPlayer
 @onready var keep_player_away_box: StaticBody2D = $KeepPlayerAwayBox
- 
+@onready var drive_gauge: Control = $PlayerCanvasLayer/DriveGauge
+
 #############################################################
 ## Config
 #############################################################
@@ -89,6 +90,8 @@ var input_history := []
 var thrower: CharacterBody2D
 var throwee: CharacterBody2D
 
+
+var guage_consume_dash: int = 1
 
 #############################################################
 ## Built-in
@@ -450,6 +453,7 @@ func set_throwee(the_guy: CharacterBody2D) -> void:
 
 func play_animation(animation: String) -> void:
 	animation_player.play(animation)
+	print(animation)
 
 
 func set_flip_h(value: bool) -> void:
@@ -648,6 +652,11 @@ var cant_wave_dash_state = [
 func _dash_left() -> void:
 	if state in cant_dash_state:
 		return
+
+	if state not in [States.IDLE, States.WAVEDASH]\
+		and not drive_gauge.guage_down(guage_consume_dash):
+		return
+
 	sprite_2d.flip_h = true
 	animation_player.play("dash")
 
@@ -655,6 +664,11 @@ func _dash_left() -> void:
 func _dash_right() -> void:
 	if state in cant_dash_state:
 		return
+
+	if state not in [States.IDLE, States.WAVEDASH]\
+		and not drive_gauge.guage_down(guage_consume_dash):
+		return
+
 	sprite_2d.flip_h = false
 	animation_player.play("dash")
 
@@ -1448,13 +1462,13 @@ func tatsu_end_L_info() -> void:
 	var info = {
 	"size": Hitbox_type.HITBOX_PLAYER_TATSU_L,
 	"time": 0.1,
-	"push_power_ground": Vector2(400, 0),
+	"push_power_ground": Vector2(600, 0),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
-	"push_power_air": Vector2(400, 0),
+	"push_power_air": Vector2(600, 0),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
-	"hitlag_amount_ground": 0.1,
+	"hitlag_amount_ground": 0.3,
 	"hitstun_amount_ground": 0.1,
-	"hitlag_amount_air": 0.1,
+	"hitlag_amount_air": 0.3,
 	"hitstun_amount_air": 0.1,
 	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 3,
@@ -1466,13 +1480,13 @@ func tatsu_end_R_info() -> void:
 	var info = {
 	"size": Hitbox_type.HITBOX_PLAYER_TATSU_R,
 	"time": 0.1,
-	"push_power_ground": Vector2(400, 0),
+	"push_power_ground": Vector2(600, 0),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
-	"push_power_air": Vector2(400, 0),
+	"push_power_air": Vector2(600, 0),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
-	"hitlag_amount_ground": 0.1,
+	"hitlag_amount_ground": 0.3,
 	"hitstun_amount_ground": 0.1,
-	"hitlag_amount_air": 0.1,
+	"hitlag_amount_air": 0.3,
 	"hitstun_amount_air": 0.1,
 	"screenshake_amount": Vector2(10, 0.1),
 	"damage": 3,
@@ -1702,6 +1716,7 @@ func _on_execute_area_r_body_exited(body: Node2D) -> void:
 
 
 func _on_animation_player_animation_started(anim_name: StringName) -> void:
+	# profile_player_play
 	match anim_name:
 		"idle":
 			profile_player_play(anim_name)
@@ -1729,6 +1744,23 @@ func _on_animation_player_animation_started(anim_name: StringName) -> void:
 			profile_player_play(anim_name)
 		"throw_stunned_ground":
 			profile_player_play(anim_name)
+		_:
+			profile_player_play("attack")
+
+	# drive guage up
+	match anim_name:
+		"parry_success":
+			drive_gauge.guage_up(3)
+		"dodge_success":
+			drive_gauge.guage_up(1)
+		"dodge_success_zoom":
+			drive_gauge.guage_up(3)
+		"air_spd":
+			drive_gauge.guage_up(3)
+		"throw_break":
+			drive_gauge.guage_up(3)
+		"wall_throw":
+			drive_gauge.guage_up(2)
 		_:
 			profile_player_play("attack")
 	

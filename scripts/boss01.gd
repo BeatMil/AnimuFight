@@ -140,7 +140,7 @@ func burn_knuckle() -> void:
 		animation_player.play("burn_knuckle")
 func burn_knuckle_info() -> void: # for animation_player
 	var info = {
-	"size": Hitbox_type.SMALL,
+	"size": Hitbox_type.METEO,
 	"time": 0.1,
 	"push_power_ground": Vector2(10, 0),
 	"push_type_ground": Enums.Push_types.NORMAL,
@@ -303,6 +303,6 @@ func boss_next_phase() -> void:
 func _on_hp_out() -> void:
 	if is_heli_phase:
 		animation_player.play("ded")
-		_slow_moion_no_sfx_2(0.5, 1)
+		_slow_moion_no_sfx(0.5, 1)
 	hp_bar.hp_out.disconnect(_on_hp_out)
 	emit_signal("boss_defeated")

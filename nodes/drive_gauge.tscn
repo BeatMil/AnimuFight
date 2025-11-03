@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkgbhswmuik12"]
+
+[ext_resource type="Script" uid="uid://c2kgkvuvkopsv" path="res://scripts/drive_gauge.gd" id="1_h2mbh"]
+[ext_resource type="Texture2D" uid="uid://ciga5ui4nesw0" path="res://media/sprites/drive_guage/drive_guage_white_part.png" id="1_nbwwk"]
+[ext_resource type="Texture2D" uid="uid://c2m2lq3abpwd6" path="res://media/sprites/drive_guage/drive_guage_black_part.png" id="2_h2mbh"]
+[ext_resource type="AudioStream" uid="uid://dmi6stp5bgp2u" path="res://media/sfxs/DSGNMisc_HIT-Hit Noise_HY_PC-002.wav" id="4_on3ui"]
+
+[sub_resource type="Animation" id="Animation_ytlw2"]
+resource_name = "guage_up"
+length = 2.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_on3ui")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="Animation" id="Animation_wlyui"]
+resource_name = "guage_down"
+length = 1.0000033
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_on3ui")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qgjju"]
+_data = {
+&"guage_down": SubResource("Animation_wlyui"),
+&"guage_up": SubResource("Animation_ytlw2")
+}
+
+[node name="DriveGauge" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1536.0
+offset_bottom = -1016.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h2mbh")
+
+[node name="DriveGuageWhitePart" type="Sprite2D" parent="."]
+clip_children = 1
+texture = ExtResource("1_nbwwk")
+centered = false
+
+[node name="ProgressBar" type="ProgressBar" parent="DriveGuageWhitePart"]
+modulate = Color(0.5770634, 1.3082253, 0.58750856, 1)
+offset_right = 384.0
+offset_bottom = 64.0
+max_value = 6.0
+step = 0.1
+value = 6.0
+show_percentage = false
+
+[node name="DriveGuageBlackPart" type="Sprite2D" parent="."]
+texture = ExtResource("2_h2mbh")
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qgjju")
+}

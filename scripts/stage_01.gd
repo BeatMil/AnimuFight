@@ -35,6 +35,7 @@ const BANANA_FLY = preload("uid://dmjg7bqnvd1dk")
 @onready var player_skip_pos: Marker2D = $Area6/PlayerSkipPos
 @onready var boss_skip_pos: Marker2D = $Area6/BossSkipPos
 var boss_intro_tween: Tween
+var boss_outro_tween: Tween
 var is_in_boss_intro = false
 @onready var area_6_player: AnimationPlayer = $Area6/Area6Player
 @onready var heli_shot_pos: Node2D = $Area6/HeliShotPos
@@ -45,6 +46,8 @@ const HELI_SPEAR = preload("uid://4hm7nxb8bsll")
 @onready var animu_fast_fx_whole_screen: Node2D = $CanvasLayer/AnimuFastFxWholeScreen
 @onready var white_animation_player: AnimationPlayer = $Area6/WhiteEffect/AnimationPlayer
 @onready var final_hit_audio_player: AudioStreamPlayer = $Area6/FinalHitAudioPlayer
+@onready var player_pos: Marker2D = $Area6/FinalSceneMarkers/PlayerPos
+@onready var teach_tatsu: Control = $CanvasLayer/TeachTatsu
 
 @onready var music_player: AnimationPlayer = $MusicPlayer
 @onready var market_green: Node2D = $MarketGreen
@@ -107,6 +110,8 @@ func _ready() -> void:
 	boss_02.boss_defeated.connect(boss_defeated)
 	boss_02.set_physics_process(false)
 	boss_02.visible = false
+
+	teach_tatsu.player_learn_tatsu.connect(_player_learn_tatsu)
 
 	Settings.current_stage = "res://scenes/stage_01.tscn"
 
@@ -226,9 +231,12 @@ func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
 	Settings.checkpoint = 5
 	boss_intro_trigger.queue_free()
 	area_lock_player.play("6_in")
-	# boss_01.queue_free()
-	# _boss_second_time()
-	# return
+
+	## Skip phase1 for debug
+	boss_01.queue_free()
+	_boss_second_time()
+	return
+
 	is_in_boss_intro = true
 	body.is_controllable = false
 	if body.state == 10: # AIR state
@@ -390,9 +398,129 @@ func spawn_heli_spear(pos, pitch) -> void:
 
 
 func boss_defeated() -> void:
+
+	# remove wall
+	area_lock_player.play("RESET")
+
+	# stop enemies attack
+	AttackQueue.stop_queue_timer()
+
+	# prevent player from moving
+	player.is_controllable = false
+
+	# Disable screen lock
+	CameraManager.disable_screen_lock()
+
+	# add blackbar and move player hud away
+	player.move_hud_away()
+	black_bar_cutscene.enable()
+
+	# calculate boss02 position
+	var boss_pos = Vector2.ZERO
+	if player.position.x > boss_02.position.x:
+		# boss_02 --- player
+		boss_pos = player.position + Vector2(-300, 0)
+		boss_02.sprite_2d.flip_h = false
+	else:
+		boss_pos = player.position + Vector2(300, 0)
+		boss_02.sprite_2d.flip_h = true
+	
+	# reset bound for cutscene combo
+	boss_02.is_bound = false
+
+	boss_outro_tween = create_tween()
+	boss_outro_tween.tween_interval(0.5)
+	boss_outro_tween.tween_callback(boss_02.hp_bar.resurrect.bind(27))
+	boss_outro_tween.tween_callback(player.animation_player.play.bind("idle"))
+	boss_outro_tween.tween_property(boss_02, "position", boss_pos, 0.2)
+	boss_outro_tween.tween_callback(boss_02.animation_player.play.bind("burn_knuckle"))
+	boss_outro_tween.tween_interval(0.5)
+	boss_outro_tween.tween_callback(player.animation_player.play.bind("block"))
+	boss_outro_tween.tween_interval(.2)
+	boss_outro_tween.tween_property(player.sprite_2d, "flip_h", !player.sprite_2d.flip_h, 0)
+	boss_outro_tween.tween_interval(.6)
+	boss_outro_tween.tween_callback(player.animation_player.play.bind("dash"))
+	boss_outro_tween.tween_interval(.2)
+	boss_outro_tween.tween_callback(player.animation_player.play.bind("block"))
+	boss_outro_tween.tween_interval(.2)
+	boss_outro_tween.tween_callback(player.animation_player.play.bind("jin1+2"))
+	boss_outro_tween.tween_interval(1.0)
+	boss_outro_tween.tween_callback(boss_02.animation_player.play.bind("meteo_crash"))
+	boss_outro_tween.tween_callback(player.animation_player.play.bind("dash"))
+	boss_outro_tween.tween_interval(.3)
+	boss_outro_tween.tween_callback(player.animation_player.play.bind("forward_hp"))
+	boss_outro_tween.tween_interval(.8)
+	boss_outro_tween.tween_callback(player.animation_player.play.bind("dodge"))
+	boss_outro_tween.tween_interval(.5)
+	boss_outro_tween.tween_callback(player.animation_player.play.bind("down_hp"))
+	boss_outro_tween.tween_interval(.2)
+	boss_outro_tween.tween_callback(player._jump.bind(get_physics_process_delta_time()))
+	boss_outro_tween.tween_interval(.1)
+
+	# gotta _set_state to ovrride "jump" animation
+	boss_outro_tween.tween_callback(player._set_state.bind(1))
+	boss_outro_tween.tween_callback(player.play_animation.bind("jump_attack"))
+
+	boss_outro_tween.tween_interval(.2)
+	boss_outro_tween.tween_callback(player.play_animation.bind("jump_attack_2"))
+	boss_outro_tween.tween_interval(.4)
+	boss_outro_tween.tween_callback(player.play_animation.bind("air_throw"))
+	boss_outro_tween.tween_interval(1.2)
+	boss_outro_tween.tween_callback(player.play_animation.bind("hp"))
+	boss_outro_tween.tween_interval(.5)
+	boss_outro_tween.tween_property(boss_02, "velocity", Vector2.ZERO, 0.1)
+	boss_outro_tween.tween_interval(.2)
+	boss_outro_tween.tween_callback(player.play_animation.bind("dash"))
+	boss_outro_tween.tween_interval(.2)
+	boss_outro_tween.tween_callback(boss_02.animation_player.play.bind("lp1"))
+	boss_outro_tween.tween_callback(player.play_animation.bind("wave_dash"))
+	boss_outro_tween.tween_interval(.2)
+	boss_outro_tween.tween_callback(player.play_animation.bind("dash"))
+	boss_outro_tween.tween_interval(.2)
+	boss_outro_tween.tween_callback(player.play_animation.bind("lp1"))
+	boss_outro_tween.tween_interval(.2)
+	boss_outro_tween.tween_callback(player.play_animation.bind("lp2"))
+	boss_outro_tween.tween_interval(.4)
+	boss_outro_tween.tween_property(player, "block_buffer_timer", 0, 0)
+	boss_outro_tween.tween_callback(player.play_animation.bind("block"))
+	boss_outro_tween.tween_interval(.3)
+	boss_outro_tween.tween_callback(player.play_animation.bind("block"))
+	boss_outro_tween.tween_interval(.3)
+	boss_outro_tween.tween_callback(player.play_animation.bind("block"))
+	boss_outro_tween.tween_callback(boss_02.set_physics_process.bind(false))
+	boss_outro_tween.tween_callback(player.set_physics_process.bind(false))
+	boss_outro_tween.tween_interval(.2)
+	boss_outro_tween.tween_property(teach_tatsu, "visible", true, 0)
+
+
+	# boss_outro_tween.tween_callback(player.play_animation.bind("tatsu"))
+	# boss_outro_tween.tween_interval(1.1)
+	# boss_outro_tween.tween_callback(CameraManager.start_screen_shake.bind(50, 0.2))
+	# boss_outro_tween.tween_callback(player._slow_moion_no_sfx.bind(0.5, 1))
+	# boss_outro_tween.tween_callback(boss_defeated_old)
+
+
+func _player_learn_tatsu() -> void:
+	# return physics_process to both
+	boss_02.set_physics_process(true)
+	player.set_physics_process(true)
+
+	# more tween yay
+	var tween = create_tween()
+	tween.tween_callback(player.play_animation.bind("tatsu"))
+	tween.tween_interval(1.1)
+	tween.tween_callback(CameraManager.start_screen_shake.bind(50, 0.2))
+	tween.tween_callback(player._slow_moion_no_sfx.bind(0.5, 1))
+	tween.tween_callback(boss_defeated_old)
+
+
+func boss_defeated_old() -> void:
+	# return control to player
+	player.is_controllable = true
+
 	final_hit_audio_player.play()
 	white_animation_player.play("in")
-	CameraManager.zoom(Vector2(0.5, 0.5), 2)
+	CameraManager.zoom(Vector2(0.5, 0.5), 1.2)
 	animu_fast_fx_whole_screen.visible = true
 	ObjectPooling.spawn_ground_spark_2(player.position)
 	for child in enemy_backup.get_children():
@@ -424,6 +552,8 @@ func boss_defeated() -> void:
 		)
 	
 	await get_tree().create_timer(2*Engine.time_scale).timeout
+	player.move_hud_back()
+	black_bar_cutscene.disable()
 	white_animation_player.play("out")
 	music_player.play("chihuahua")
 	animu_fast_fx_whole_screen.visible = false

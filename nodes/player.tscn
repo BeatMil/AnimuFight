@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=146 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d2vdd4fbwjquv" path="res://media/sprites/char1/vanilla_air_slam.png" id="6_2anje"]
 [ext_resource type="AudioStream" uid="uid://esqhx6i0655e" path="res://media/sfxs/gura_a.wav" id="8_g2x0t"]
 [ext_resource type="Texture2D" uid="uid://b8oot3yuu2abo" path="res://media/sprites/char1/FirstChar_block.png" id="11_xlakb"]
+[ext_resource type="PackedScene" uid="uid://bkgbhswmuik12" path="res://nodes/drive_gauge.tscn" id="12_0wbtn"]
 [ext_resource type="Texture2D" uid="uid://lv36w4jharr6" path="res://media/sprites/char1/vanilla_parry.png" id="12_qibk4"]
 [ext_resource type="Texture2D" uid="uid://covcrlilliudq" path="res://media/sprites/char1/vanilla_tech_roll.png" id="13_lt25b"]
 [ext_resource type="AudioStream" uid="uid://bgq36rpoccy71" path="res://media/sfxs/explosion.wav" id="14_3ws5c"]
@@ -4180,7 +4181,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7),
+"times": PackedFloat32Array(0, 0.51666665),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [1],
@@ -7054,6 +7055,12 @@ libraries = {
 libraries = {
 &"": SubResource("AnimationLibrary_7sjys")
 }
+
+[node name="DriveGauge" parent="PlayerCanvasLayer" index="7" instance=ExtResource("12_0wbtn")]
+offset_left = 320.0
+offset_top = 104.0
+offset_right = -1216.0
+offset_bottom = -912.0
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("3_uo2uk")

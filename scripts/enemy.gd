@@ -101,6 +101,8 @@ func _physics_process(delta: float) -> void:
 	_gravity(delta)
 	move_and_slide()
 
+	friction = ground_friction
+
 	## Hitstun
 	## Keep the stun duration while in air
 	## start stun duration when on floor
@@ -134,7 +136,7 @@ func _physics_process(delta: float) -> void:
 
 	_check_block_count()
 
-	if is_on_floor() and state == States.THROWN:
+	if is_on_floor() and state in [States.THROWN]:
 		# state = States.ATTACK
 		print("throw hit ground")
 		self.hitted(
