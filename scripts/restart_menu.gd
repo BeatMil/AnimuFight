@@ -8,6 +8,7 @@ const MAIN_MENU = preload("res://scenes/main_menu.tscn")
 @onready var game_menu: Control = $GameMenu
 @onready var game_button: Button = $VBoxContainer/GameButton
 @onready var key_bind_button: Button = $VBoxContainer/KeyBindButton
+@onready var main_menu_button: Button = $VBoxContainer/MainMenuButton
 
 
 func _ready() -> void:
@@ -28,7 +29,10 @@ func toggle_menu() -> void:
 	self.visible = !self.visible
 	get_tree().paused = !get_tree().paused
 	if get_tree().paused:
-		restart_button.grab_focus()
+		resume_button.visible = true
+		resume_button.grab_focus()
+		restart_button.focus_neighbor_top = NodePath("")
+		main_menu_button.focus_neighbor_bottom = resume_button.get_path()
 		%MenuCursor.move_to(Vector2(778, 500))
 		key_bind_menu.visible = false
 		v_box_container.visible = true
@@ -38,6 +42,9 @@ func toggle_menu() -> void:
 func open_menu() -> void:
 	self.visible = true
 	get_tree().paused = true
+	resume_button.visible = false
+	main_menu_button.focus_neighbor_bottom = restart_button.get_path()
+	restart_button.focus_neighbor_top = main_menu_button.get_path()
 	restart_button.grab_focus()
 	%MenuCursor.move_to(Vector2(778, 530))
 

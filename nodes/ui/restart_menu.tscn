@@ -41,14 +41,12 @@ grow_vertical = 2
 alignment = 1
 
 [node name="ResumeButton" parent="VBoxContainer" instance=ExtResource("2_241t5")]
-visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("../MainMenuButton")
 text = "Resume"
 
 [node name="RestartButton" parent="VBoxContainer" instance=ExtResource("2_241t5")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../MainMenuButton")
 text = "Restart"
 
 [node name="GameButton" parent="VBoxContainer" instance=ExtResource("2_241t5")]
