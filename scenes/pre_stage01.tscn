@@ -1026,7 +1026,7 @@ object = ExtResource("20_ojfvp")
 
 [node name="e3" type="Node" parent="EnemySpawnHelper/Phase1" node_paths=PackedStringArray("position")]
 script = ExtResource("25_e4twh")
-position = NodePath("../../../SpawnPos/pos1")
+position = NodePath("../../../SpawnPos/pos3")
 hp = 12
 object = ExtResource("20_ojfvp")
 

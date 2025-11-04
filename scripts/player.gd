@@ -91,7 +91,8 @@ var thrower: CharacterBody2D
 var throwee: CharacterBody2D
 
 
-var guage_consume_dash: int = 1
+var guage_consume_dash: int = 2
+var guage_consume_tatsu: int = 1
 
 
 # trailing script helper
@@ -1196,6 +1197,16 @@ func _lp_hp() ->  void:
 
 	if Input.is_action_pressed("down"):
 		# animation_player.play("ground_grab")
+
+		# tatsu now consume 1 d.guage
+		if drive_gauge.guage_down(guage_consume_tatsu):
+			var tween = get_tree().create_tween()
+			tween.tween_property(self, "is_trailing_green", true, 0)
+			tween.tween_interval(.9)
+			tween.tween_property(self, "is_trailing_green", false, 0)
+		else:
+			return
+
 		animation_player.play("tatsu")
 	else:
 		animation_player.play("forward_hp")
