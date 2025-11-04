@@ -50,6 +50,6 @@ func _ready() -> void:
 	frame_label.text = str(frame)
 
 
-func increament_frame() -> void:
+func increment_frame() -> void:
 	frame += 1
 	frame_label.text = str(frame)

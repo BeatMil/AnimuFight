@@ -134,7 +134,7 @@ func _process(_delta: float) -> void:
 		debug_label.text = "PlayerState: %s"%States.keys()[state]
 		debug_label.text += "\nthrowee: %s"%throwee_name
 		debug_label.text += "\nanim: %s"%animation_player.current_animation
-		debug_label.text += "\n%0.3f"%block_buffer_timer
+		# debug_label.text += "\n%0.3f"%block_buffer_timer
 		# debug_label.text += "\n%s"%velocity
 		# debug_label.text += "\n%0.3f"%input_buffer_timer
 		# debug_label.text += "\n%0.3f"%block_buffer_timer
@@ -397,7 +397,6 @@ func physic_input(_delta):
 
 	_check_input_history()
 
-	# if state in [States.THROW_BREAKABLE]:
 	match animation_player.current_animation:
 		"throw_stunned_ground":
 			if Input.is_action_just_pressed("lp") and Input.is_action_just_pressed("hp"):
@@ -568,7 +567,7 @@ func _check_input_history() -> void:
 	if current_input == new_input:
 		if input_history:
 			input_history[-1]["frame"] += 1
-		command_history.get_child(0).increament_frame()
+		command_history.get_child(0).increment_frame()
 		command_buffer_count += 1
 	else:
 		var map_input = {"command": new_input, "frame": 1}
@@ -586,6 +585,9 @@ func _check_input_history() -> void:
 		command_box.frame = map_input["frame"]
 		command_history.add_child(command_box)
 		command_history.move_child(command_box, 0)
+
+		if command_history.get_child_count() > 60:
+			command_history.get_children()[-1].queue_free()
 
 	if command_buffer_count >= input_size:
 		input_history.clear()
@@ -643,6 +645,17 @@ func _check_input_history() -> void:
 		queue_move(_EWGF)
 		input_history.clear()
 
+	# Remove orphan node (hopefully fix fps drops)
+	dash_right.queue_free()
+	dash_left.queue_free()
+	wave_dash_right.queue_free()
+	wave_dash_left.queue_free()
+	fake_wave_dash_right.queue_free()
+	fake_wave_dash_left.queue_free()
+	EWGF_right.queue_free()
+	fake_EWGF_right.queue_free()
+	EWGF_left.queue_free()
+	fake_EWGF_left.queue_free()
 
 func profile_player_play(anim_name: String) -> void:
 	profile_player.play(anim_name)
