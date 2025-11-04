@@ -1775,6 +1775,7 @@ func _on_animation_player_animation_started(anim_name: StringName) -> void:
 		if throwee:
 			throwee.air_throw_follow_pos = null
 			throwee.is_gravity = true
+			throwee.animation_player.play("thrown")
 			set_throwee(null)
 
 
