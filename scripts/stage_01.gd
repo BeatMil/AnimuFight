@@ -233,9 +233,9 @@ func _on_boss_intro_trigger_body_entered(body: Node2D) -> void:
 	area_lock_player.play("6_in")
 
 	## Skip phase1 for debug
-	boss_01.queue_free()
-	_boss_second_time()
-	return
+	# boss_01.queue_free()
+	# _boss_second_time()
+	# return
 
 	is_in_boss_intro = true
 	body.is_controllable = false
@@ -421,16 +421,18 @@ func boss_defeated() -> void:
 		# boss_02 --- player
 		boss_pos = player.position + Vector2(-300, 0)
 		boss_02.sprite_2d.flip_h = false
+		player.sprite_2d.flip_h = true
 	else:
 		boss_pos = player.position + Vector2(300, 0)
 		boss_02.sprite_2d.flip_h = true
+		player.sprite_2d.flip_h = false
 	
 	# reset bound for cutscene combo
 	boss_02.is_bound = false
 
 	boss_outro_tween = create_tween()
 	boss_outro_tween.tween_interval(0.5)
-	boss_outro_tween.tween_callback(boss_02.hp_bar.resurrect.bind(27))
+	boss_outro_tween.tween_callback(boss_02.hp_bar.resurrect.bind(24))
 	boss_outro_tween.tween_callback(player.animation_player.play.bind("idle"))
 	boss_outro_tween.tween_property(boss_02, "position", boss_pos, 0.2)
 	boss_outro_tween.tween_callback(boss_02.animation_player.play.bind("burn_knuckle"))

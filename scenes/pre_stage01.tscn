@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="18_2qsap"]
 [ext_resource type="PackedScene" uid="uid://dy6yy7k35k271" path="res://nodes/enemy_spawner.tscn" id="19_kn51f"]
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="20_ojfvp"]
-[ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="21_4n4co"]
+[ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/old_stuff/enemy_02_old3.tscn" id="21_4n4co"]
 [ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="22_2mcn1"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="23_u83if"]
 [ext_resource type="Script" uid="uid://ckudchaksw6pd" path="res://scripts/enemy_spawner_pre_stage01.gd" id="24_34xu6"]
@@ -1285,22 +1285,6 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HeliPlayer"]
 stream = ExtResource("34_mfofa")
-
-[node name="TestWallThrow" type="Node2D" parent="."]
-
-[node name="Enemy" parent="TestWallThrow" node_paths=PackedStringArray("target") instance=ExtResource("20_ojfvp")]
-position = Vector2(1760, 712)
-target = NodePath("../../Player")
-is_notarget = true
-hp = 1
-block_rate = 0
-
-[node name="Enemy2" parent="TestWallThrow" node_paths=PackedStringArray("target") instance=ExtResource("20_ojfvp")]
-position = Vector2(1408, 712)
-target = NodePath("../../Player")
-is_notarget = true
-hp = 1
-block_rate = 0
 
 [connection signal="body_entered" from="DebrisArea2D" to="." method="_on_debris_area_2d_body_entered"]
 [connection signal="body_entered" from="BounceToLeft" to="." method="_on_bounce_to_left_body_entered"]

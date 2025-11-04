@@ -230,6 +230,6 @@ func do_attack() -> void:
 	for attack in attacks.keys():
 		current += attacks[attack]
 		if rand_value < current:
-			print("%s %s %s"%[attack, rand_value, current])
+			# print("%s %s %s"%[attack, rand_value, current])
 			call(attack)
 			return

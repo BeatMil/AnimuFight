@@ -1725,7 +1725,6 @@ z_index = 2
 position = Vector2(14520, -424)
 is_heli_phase = true
 target = NodePath("../../Player")
-hp = 5
 
 [node name="WaitBossPlatform" type="StaticBody2D" parent="Area6"]
 position = Vector2(14336, -176)

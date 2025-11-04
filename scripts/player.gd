@@ -148,6 +148,11 @@ func _process(_delta: float) -> void:
 		# debug_label.text += "\nCameraPos: %s"%$Camera.global_position
 		# print_rich("[color=yellow][b]ground punch[/b][/color]")
 
+	if state in [States.WAVEDASH, States.EXECUTE]:
+		is_trailing_wave_dash = true
+	else:
+		is_trailing_wave_dash = false
+
 	## Trailing animation
 	if is_trailing_wave_dash:
 		trailing_sprite2d(normal, normal_fade)
@@ -652,7 +657,7 @@ func trailing_sprite2d(start_color: Color, fade_color: Color) -> void:
 	## Trailing animation
 	if Engine.get_process_frames() % 6 == 0:
 		var trailingSprite: Sprite2D = sprite_2d.duplicate()
-		trailingSprite.z_index = -1
+		trailingSprite.z_index = 0
 		trailingSprite.self_modulate = start_color
 		trailingSprite.global_position = global_position
 		trailingSprite.set_script(TrailingSprite2d_gd)
@@ -715,11 +720,6 @@ func _dash(to_the_left: bool) -> void:
 func _wave_dash(is_to_the_left: bool) -> void:
 	if state in cant_wave_dash_state:
 		return
-
-	var tween = create_tween()
-	tween.tween_property(self, "is_trailing_wave_dash", true, 0)
-	tween.tween_interval(.3)
-	tween.tween_property(self, "is_trailing_wave_dash", false, 0)
 
 	sprite_2d.flip_h = is_to_the_left
 	animation_player.play("wave_dash")
