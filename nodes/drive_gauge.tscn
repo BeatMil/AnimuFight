@@ -1,9 +1,49 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkgbhswmuik12"]
+[gd_scene load_steps=11 format=3 uid="uid://bkgbhswmuik12"]
 
 [ext_resource type="Script" uid="uid://c2kgkvuvkopsv" path="res://scripts/drive_gauge.gd" id="1_h2mbh"]
 [ext_resource type="Texture2D" uid="uid://ciga5ui4nesw0" path="res://media/sprites/drive_guage/drive_guage_white_part.png" id="1_nbwwk"]
 [ext_resource type="Texture2D" uid="uid://c2m2lq3abpwd6" path="res://media/sprites/drive_guage/drive_guage_black_part.png" id="2_h2mbh"]
 [ext_resource type="AudioStream" uid="uid://dmi6stp5bgp2u" path="res://media/sfxs/DSGNMisc_HIT-Hit Noise_HY_PC-002.wav" id="4_on3ui"]
+[ext_resource type="AudioStream" uid="uid://y21n8lsm2dv8" path="res://media/sfxs/DSGNTonl_SKILL RELEASE-Whimsy Kick_HY_PC-004.wav" id="5_wlyui"]
+
+[sub_resource type="Animation" id="Animation_on3ui"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("group:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("group/DriveGuageWhitePart/ProgressBar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.5770634, 1.3082253, 0.58750856, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_wlyui"]
 resource_name = "guage_down"
@@ -47,6 +87,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1.8582071, 1.8226489, 0.8341319, 1), Color(0.5770634, 1.3082253, 0.58750856, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_ytlw2"]
 resource_name = "guage_up"
@@ -66,38 +118,79 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/0/use_blend = true
-
-[sub_resource type="Animation" id="Animation_on3ui"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("group:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("group/DriveGuageWhitePart/ProgressBar:modulate")
+tracks/1/path = NodePath("AudioStreamPlayer:volume_db")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.5770634, 1.3082253, 0.58750856, 1)]
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_qgjju"]
+resource_name = "guage_not_enough"
+length = 1.0000033
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 1.4978435,
+"start_offset": 0.0,
+"stream": ExtResource("5_wlyui")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("group:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-5, -5), Vector2(3, -2), Vector2(-5, -4), Vector2(-3, 0), Vector2(-2, 1), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("group/DriveGuageWhitePart/ProgressBar:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.36666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1.5053004, 0.46427307, 0.419613, 1), Color(0.5770634, 1.3082253, 0.58750856, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -80.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qgjju"]
 _data = {
 &"RESET": SubResource("Animation_on3ui"),
 &"guage_down": SubResource("Animation_wlyui"),
+&"guage_not_enough": SubResource("Animation_qgjju"),
 &"guage_up": SubResource("Animation_ytlw2")
 }
 

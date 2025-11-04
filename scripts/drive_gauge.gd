@@ -38,6 +38,8 @@ func guage_up(_amount: int) -> void:
 func guage_down(_amount: int) -> bool:
 	# Can't use move if not enough guage
 	if immediate_value - _amount < 0:
+		animation_player.stop()
+		animation_player.play("guage_not_enough")
 		return false
 
 	# Make sure immediate_value doesn't go below 0
