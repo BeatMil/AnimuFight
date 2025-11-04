@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=3 uid="uid://2b1ywpnefvth"]
+[gd_scene load_steps=145 format=3 uid="uid://2b1ywpnefvth"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_gva5u"]
 [ext_resource type="Texture2D" uid="uid://c0two3qvp0fx8" path="res://media/sprites/char1/vanilla_1st_hit.png" id="2_j0iys"]
@@ -48,7 +48,6 @@
 [ext_resource type="AudioStream" uid="uid://dwc8oylpgeeuj" path="res://media/sfxs/PunchAttack5.wav" id="38_3pser"]
 [ext_resource type="AudioStream" uid="uid://u73y4q7hfepr" path="res://media/sfxs/PunchAttack6.wav" id="38_fw64u"]
 [ext_resource type="AudioStream" uid="uid://b6w8h4ewoy3of" path="res://media/sfxs/PunchAttack3.wav" id="39_3pser"]
-[ext_resource type="Texture2D" uid="uid://cjwysqytr0g3w" path="res://media/sprites/char1/vanilla_throw_neutral.png" id="41_7bxpj"]
 [ext_resource type="Texture2D" uid="uid://bmtdtjeuhsf88" path="res://media/sprites/char1/vanilla_shoulder.png" id="42_7sjys"]
 [ext_resource type="AudioStream" uid="uid://ddoql0bljjk1f" path="res://media/sfxs/GroundHit2.wav" id="42_rkgkm"]
 [ext_resource type="Texture2D" uid="uid://bhlsbejhj10rw" path="res://media/sprites/char1/vanilla_late_parry.png" id="45_0xvo4"]
@@ -1508,6 +1507,20 @@ tracks/7/keys = {
 "values": [{
 "args": [],
 "method": &"set_collision_normal"
+}]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"remove_throwee"
 }]
 }
 
@@ -5181,10 +5194,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.31666666),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("41_7bxpj")]
+"values": [ExtResource("29_t2gu5"), ExtResource("32_g1v0p")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -5211,7 +5224,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [11],
+"args": [1],
 "method": &"_set_state"
 }]
 }
@@ -5222,10 +5235,10 @@ tracks/3/path = NodePath("Sprite2D:hframes")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.31666666),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [3]
+"values": [1, 2]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -5274,10 +5287,10 @@ tracks/7/path = NodePath("Sprite2D:frame")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.316667, 0.4, 0.466667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 0]
+"values": [0, 0, 1]
 }
 
 [sub_resource type="Animation" id="Animation_wq1x7"]

@@ -550,8 +550,12 @@ func hitted(
 	## Player Three way throw
 	elif _type == Enums.Attack.P_GROUND_THROW or \
 		(_type == Enums.Attack.P_WALL_THROW and \
-		state in [States.HIT_STUNNED, States.BOUNCE_STUNNED, States.WALL_BOUNCED]):
-		print_rich("[color=yellow][b]ground punch[/b][/color]")
+		state in [States.HIT_STUNNED,
+		States.BOUNCE_STUNNED,
+		States.WALL_BOUNCED,
+		States.THROWN,
+		States.GRABBED,
+		]):
 
 		# priorities wall throw helper
 		

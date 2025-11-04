@@ -472,6 +472,18 @@ func set_is_controllable(value: bool) -> void:
 	is_controllable = value
 
 
+func remove_throwee() -> void:
+	throwee.air_throw_follow_pos = null
+	throwee.is_gravity = true
+	throwee = null
+
+
+func remove_throwee_thrown() -> void:
+	if throwee:
+		throwee.animation_player.play("thrown")
+		remove_throwee()
+
+
 #############################################################
 ## Private function
 #############################################################
@@ -1266,17 +1278,17 @@ func ground_punch_info() ->  void:
 	var info = {
 	"size": Hitbox_type.GROUND_THROW,
 	"time": 0.1,
-	"push_power_ground": Vector2(100, -100),
+	"push_power_ground": Vector2(200, -50),
 	"push_type_ground": Enums.Push_types.KNOCKDOWN,
-	"push_power_air": Vector2(100, 0),
+	"push_power_air": Vector2(400, 100),
 	"push_type_air": Enums.Push_types.KNOCKDOWN,
 	"hitlag_amount_ground": 0,
 	"hitstun_amount_ground": 0,
 	"hitlag_amount_air": 0.2,
-	"hitstun_amount_air": 0.2,
+	"hitstun_amount_air": 0.0,
 	"screenshake_amount": Vector2(20, 0.2),
 	"damage": 5,
-	"type": Enums.Attack.UNBLOCK,
+	"type": Enums.Attack.NORMAL,
 	}
 	dict_to_spawn_hitbox(info)
 
@@ -1628,7 +1640,7 @@ func three_way_throw() -> void:
 				Vector2(0, 200),
 				1,
 				0,
-				1,
+				.3,
 				Vector2(0, 0.1),
 				2,
 				Enums.Attack.NORMAL
@@ -1637,14 +1649,18 @@ func three_way_throw() -> void:
 		1: # Left
 			throwee._push_direct(Vector2(-900, -100))
 			sprite_2d.flip_h = true
-			print("throwee:", throwee)
+			throwee.animation_player.play("thrown")
 		2: # Right
 			throwee._push_direct(Vector2(900, -100))
 			sprite_2d.flip_h = false
+			throwee.animation_player.play("thrown")
 
 	# fix normal throw at wall buggy
 	if throwee:
-		throwee.animation_player.play("thrown")
+		remove_throwee()
+	# if throwee:
+	# 	throwee.animation_player.play("thrown")
+
 
 #############################################################
 ## Signals
@@ -1771,12 +1787,12 @@ func _on_animation_player_animation_started(anim_name: StringName) -> void:
 	"forward_hp",
 	"wall_throw",
 	"wall_abel_combo2",
+	"place_enemy",
 	]:
 		if throwee:
-			throwee.air_throw_follow_pos = null
-			throwee.is_gravity = true
 			throwee.animation_player.play("thrown")
-			set_throwee(null)
+			remove_throwee()
+		
 
 
 func _on_prevent_enemy_on_top_area_2d_body_entered(body: Node2D) -> void:
