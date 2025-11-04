@@ -93,6 +93,18 @@ var throwee: CharacterBody2D
 
 var guage_consume_dash: int = 1
 
+
+# trailing script helper
+const TrailingSprite2d_gd = preload("uid://d1ju3cb06y8o8")
+var normal = Color(1, 1, 1, 0.9)
+var normal_fade = Color(1, 1, 1, 0.0)
+var green = Color(0.5, 1.1, 0.5, 0.6)
+var green_fade = Color(0.5, 1.1, 0.5, 0.0)
+var yellow_fade = Color(0.9, 1.1, 0.5, 0.0)
+var is_trailing_green = false
+var is_trailing_wave_dash = false
+
+
 #############################################################
 ## Built-in
 #############################################################
@@ -134,6 +146,13 @@ func _process(_delta: float) -> void:
 		# debug_label.text += "\n%s"%debug_input_event
 		# debug_label.text += "\n%s"%next_move
 		# debug_label.text += "\nCameraPos: %s"%$Camera.global_position
+		# print_rich("[color=yellow][b]ground punch[/b][/color]")
+
+	## Trailing animation
+	if is_trailing_wave_dash:
+		trailing_sprite2d(normal, normal_fade)
+	elif is_trailing_green:
+		trailing_sprite2d(green, yellow_fade)
 
 
 func _input(event: InputEvent) -> void:
@@ -366,9 +385,9 @@ func physic_input(_delta):
 		queue_move(_charge_attack_release)
 	elif Input.is_action_just_pressed("dash"):
 		if sprite_2d.flip_h:
-			queue_move(_dash_left)
+			queue_move(_dash.bind(true))
 		else:
-			queue_move(_dash_right)
+			queue_move(_dash.bind(false))
 
 	_check_input_history()
 
@@ -588,22 +607,22 @@ func _check_input_history() -> void:
 		EWGF_left.calculate(input_history[i]["command"])
 		fake_EWGF_left.calculate(input_history[i]["command"])
 	if fake_wave_dash_right.get_command_complete():
-		queue_move(_wave_dash_right)
+		queue_move(_wave_dash.bind(false))
 		input_history.clear()
 	if fake_wave_dash_left.get_command_complete():
-		queue_move(_wave_dash_left)
+		queue_move(_wave_dash.bind(true))
 		input_history.clear()
 	if dash_right.get_command_complete(): 
-		queue_move(_dash_right)
+		queue_move(_dash.bind(false))
 		input_history.clear()
 	if dash_left.get_command_complete():
-		queue_move(_dash_left)
+		queue_move(_dash.bind(true))
 		input_history.clear()
 	if wave_dash_left.get_command_complete():
-		queue_move(_wave_dash_left)
+		queue_move(_wave_dash.bind(true))
 		input_history.clear()
 	if wave_dash_right.get_command_complete():
-		queue_move(_wave_dash_right)
+		queue_move(_wave_dash.bind(false))
 		input_history.clear()
 	if EWGF_right.get_command_complete():
 		queue_move(_EWGF)
@@ -627,6 +646,20 @@ func play_EWGF_sfx() -> void:
 	god_fist_player.stream = STRONG_PUNCH
 	god_fist_player.play()
 	ObjectPooling.spawn_EWGF_spark(position, sprite_2d.flip_h)
+
+
+func trailing_sprite2d(start_color: Color, fade_color: Color) -> void:
+	## Trailing animation
+	if Engine.get_process_frames() % 6 == 0:
+		var trailingSprite: Sprite2D = sprite_2d.duplicate()
+		trailingSprite.z_index = -1
+		trailingSprite.self_modulate = start_color
+		trailingSprite.global_position = global_position
+		trailingSprite.set_script(TrailingSprite2d_gd)
+		get_tree().current_scene.add_child(trailingSprite)
+		var tween = get_tree().create_tween()
+		tween.tween_property(trailingSprite, "self_modulate" , fade_color, 0.2)
+		tween.tween_callback(trailingSprite.queue_free)
 
 
 #############################################################
@@ -661,41 +694,34 @@ var cant_wave_dash_state = [
 	States.THROW_BREAKABLE,
 	]
 
-func _dash_left() -> void:
+
+func _dash(to_the_left: bool) -> void:
 	if state in cant_dash_state:
 		return
 
-	if state not in [States.IDLE, States.WAVEDASH]\
-		and not drive_gauge.guage_down(guage_consume_dash):
-		return
+	if state not in [States.IDLE, States.DASH, States.WAVEDASH]:
+		if drive_gauge.guage_down(guage_consume_dash):
+			var tween = get_tree().create_tween()
+			tween.tween_property(self, "is_trailing_green", true, 0)
+			tween.tween_interval(.3)
+			tween.tween_property(self, "is_trailing_green", false, 0)
+		else:
+			return
 
-	sprite_2d.flip_h = true
+	sprite_2d.flip_h = to_the_left
 	animation_player.play("dash")
 
 
-func _dash_right() -> void:
-	if state in cant_dash_state:
-		return
-
-	if state not in [States.IDLE, States.WAVEDASH]\
-		and not drive_gauge.guage_down(guage_consume_dash):
-		return
-
-	sprite_2d.flip_h = false
-	animation_player.play("dash")
-
-
-func _wave_dash_left() -> void:
+func _wave_dash(is_to_the_left: bool) -> void:
 	if state in cant_wave_dash_state:
 		return
-	sprite_2d.flip_h = true
-	animation_player.play("wave_dash")
 
+	var tween = create_tween()
+	tween.tween_property(self, "is_trailing_wave_dash", true, 0)
+	tween.tween_interval(.3)
+	tween.tween_property(self, "is_trailing_wave_dash", false, 0)
 
-func _wave_dash_right() -> void:
-	if state in cant_dash_state:
-		return
-	sprite_2d.flip_h = false
+	sprite_2d.flip_h = is_to_the_left
 	animation_player.play("wave_dash")
 
 
