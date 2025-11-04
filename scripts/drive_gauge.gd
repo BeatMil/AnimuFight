@@ -6,7 +6,7 @@ signal guage_up_sig
 # signal hp_out
 
 
-@onready var progress_bar: ProgressBar = $DriveGuageWhitePart/ProgressBar
+@onready var progress_bar: ProgressBar = $group/DriveGuageWhitePart/ProgressBar
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
@@ -54,8 +54,8 @@ func guage_down(_amount: int) -> bool:
 		# smooth tween animation XD
 		tween.tween_property(progress_bar, "value", immediate_value, 0.1)
 
-		# animation_player.stop()
-		# animation_player.play("guage_down")
+		animation_player.stop()
+		animation_player.play("guage_down")
 
 	return true
 
