@@ -1,11 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://3j7usofbjob2"]
+[gd_scene load_steps=5 format=3 uid="uid://3j7usofbjob2"]
 
 [ext_resource type="Texture2D" uid="uid://dhg03s02r5p3n" path="res://media/backgrounds/rooftop_no_clouds.png" id="1_2is0x"]
+[ext_resource type="PackedScene" uid="uid://eq2tweu0uxq4" path="res://nodes/ui/big_menu.tscn" id="1_uxr5t"]
+[ext_resource type="Texture2D" uid="uid://xj3kjcpg4f7y" path="res://media/sprites/stage01/park_ground.png" id="2_cy281"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxr5t"]
+size = Vector2(1936, 336)
 
 [node name="Test2" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BigMenu" parent="CanvasLayer" instance=ExtResource("1_uxr5t")]
 
 [node name="RooftopNoClouds" type="Sprite2D" parent="."]
 modulate = Color(1, 0.585495, 0.585495, 1)
 z_index = -10
 texture = ExtResource("1_2is0x")
 centered = false
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." groups=["ground"]]
+position = Vector2(968, 680)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-8, 448)
+shape = SubResource("RectangleShape2D_uxr5t")
+
+[node name="ParkGround" type="Sprite2D" parent="StaticBody2D2"]
+texture = ExtResource("2_cy281")

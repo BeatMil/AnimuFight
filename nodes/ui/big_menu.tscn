@@ -1,0 +1,131 @@
+[gd_scene load_steps=8 format=3 uid="uid://eq2tweu0uxq4"]
+
+[ext_resource type="Script" uid="uid://bb5etxdawgeau" path="res://scripts/big_menu.gd" id="1_vmfsf"]
+[ext_resource type="PackedScene" uid="uid://cns0do6e0npq8" path="res://nodes/ui/sub_game_menu.tscn" id="2_c6t7p"]
+[ext_resource type="PackedScene" uid="uid://dbyji7iwvx4lw" path="res://nodes/ui/sub_skill_menu.tscn" id="3_vmfsf"]
+[ext_resource type="PackedScene" uid="uid://d2q6p8qmvnvea" path="res://nodes/ui/sub_figure_menu.tscn" id="4_071ji"]
+[ext_resource type="PackedScene" uid="uid://bntrqme5fs51o" path="res://nodes/ui/sub_note_menu.tscn" id="5_51muq"]
+[ext_resource type="PackedScene" uid="uid://b3qywai3ibjjb" path="res://nodes/ui/sub_settings_menu.tscn" id="6_qhp3f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_071ji"]
+bg_color = Color(0.95484024, 0.27019593, 0.27019593, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.880165, 0.7731926, 0.23748788, 1)
+border_blend = true
+
+[node name="BigMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vmfsf")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.392157)
+metadata/_edit_lock_ = true
+
+[node name="NavBarBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13333334
+anchor_right = 0.8666667
+anchor_bottom = 0.08888889
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06552577, 0.06552577, 0.06552577, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="TabContainer" type="HBoxContainer" parent="NavBarBackground"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+metadata/_edit_use_anchors_ = true
+
+[node name="GameLabel" type="RichTextLabel" parent="NavBarBackground/TabContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 32
+theme_override_styles/background = SubResource("StyleBoxFlat_071ji")
+text = "Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="NavBarBackground/TabContainer/GameLabel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.33674777, 0.41752383, 0.8530103, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Skill" type="RichTextLabel" parent="NavBarBackground/TabContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 32
+text = "Skill"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Figure" type="RichTextLabel" parent="NavBarBackground/TabContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 32
+text = "Figure"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FighterNote" type="RichTextLabel" parent="NavBarBackground/TabContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 32
+text = "Fighter's Note"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Setting" type="RichTextLabel" parent="NavBarBackground/TabContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 32
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubGroups" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SubGameMenu" parent="SubGroups" instance=ExtResource("2_c6t7p")]
+layout_mode = 1
+
+[node name="SubSkillMenu" parent="SubGroups" instance=ExtResource("3_vmfsf")]
+layout_mode = 1
+
+[node name="SubFigureMenu" parent="SubGroups" instance=ExtResource("4_071ji")]
+layout_mode = 1
+
+[node name="SubNoteMenu" parent="SubGroups" instance=ExtResource("5_51muq")]
+layout_mode = 1
+
+[node name="SubSettingsMenu" parent="SubGroups" instance=ExtResource("6_qhp3f")]
+layout_mode = 1

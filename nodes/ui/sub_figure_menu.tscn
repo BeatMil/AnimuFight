@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2q6p8qmvnvea"]
+
+[ext_resource type="PackedScene" uid="uid://cefvk58xqrwpr" path="res://nodes/ui/sub_base_menu.tscn" id="1_4wkg4"]
+
+[node name="SubFigureMenu" instance=ExtResource("1_4wkg4")]
+
+[node name="Group" parent="." index="0"]
+modulate = Color(1, 1, 1, 0)
+
+[node name="TestLabel" parent="Group" index="0"]
+theme_override_colors/default_color = Color(0.4666667, 0.8666667, 0.7925236, 1)
+text = "SUB FIGURE MENU DESU!"

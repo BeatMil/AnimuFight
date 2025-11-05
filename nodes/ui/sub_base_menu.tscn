@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://cefvk58xqrwpr"]
+
+[ext_resource type="Script" uid="uid://bn3ptxipngmwr" path="res://scripts/sub_base_menu.gd" id="1_f7m06"]
+[ext_resource type="AnimationLibrary" uid="uid://ot3tphodfmpr" path="res://nodes/animations/sub_menu.res" id="2_x6x1b"]
+
+[node name="SubBaseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.00048828125
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f7m06")
+metadata/_edit_use_anchors_ = true
+
+[node name="Group" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TestLabel" type="RichTextLabel" parent="Group"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.4674886, 0.621342, 0.86658764, 1)
+theme_override_font_sizes/normal_font_size = 100
+text = "SUB BASE MENU DESU!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="SubMenuPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"sub_menu": ExtResource("2_x6x1b")
+}
