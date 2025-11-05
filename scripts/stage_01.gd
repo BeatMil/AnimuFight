@@ -519,6 +519,9 @@ func _player_learn_tatsu() -> void:
 func boss_defeated_old() -> void:
 	# return control to player
 	player.is_controllable = true
+	
+	# give tatsu skill to player
+	SkillTree.enable_skill("tatsu")
 
 	final_hit_audio_player.play()
 	white_animation_player.play("in")

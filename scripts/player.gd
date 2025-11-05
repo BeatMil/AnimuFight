@@ -1,5 +1,6 @@
 extends "res://scripts/base_character.gd"
 
+
 signal ded
 
 
@@ -1209,7 +1210,10 @@ func _lp_hp() ->  void:
 		sprite_2d.flip_h = false
 
 	if Input.is_action_pressed("down"):
-		# animation_player.play("ground_grab")
+		# check skill tatsu
+		if not SkillTree.check_skill("tatsu"):
+			print("tatsu not available")
+			return
 
 		# tatsu now consume 1 d.guage
 		if drive_gauge.guage_down(guage_consume_tatsu):

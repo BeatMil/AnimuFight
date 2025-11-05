@@ -33,6 +33,7 @@ GlobalSoundPlayer="*res://nodes/global_sound_player.tscn"
 CameraManager="*res://nodes/camera_manager.tscn"
 InputDetector="*res://scripts/input_detector.gd"
 Cheats="*res://scripts/cheats.gd"
+SkillTree="*res://scripts/skill_tree.gd"
 
 [display]
 

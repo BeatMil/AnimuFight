@@ -17,12 +17,13 @@ func _input(_event: InputEvent) -> void:
 	xbox_b.texture = InputDetector.get_icon_from_action("hp")
 
 	# Confirm player input tatsu
-	if Input.is_action_pressed("lp") and Input.is_action_pressed("hp") \
+	if Input.is_action_just_pressed("lp") and Input.is_action_pressed("hp") \
 		and Input.is_action_pressed("down") and visible:
 		animation_player.play("nice")
 		emit_signal("player_learn_tatsu")
 		await get_tree().create_timer(0.8).timeout
 		visible = false
+		set_process_input(false)
 
 
 func spawn_green_spark() -> void:
