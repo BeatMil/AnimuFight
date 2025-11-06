@@ -10,6 +10,10 @@ var groups = []
 @onready var tab_container: HBoxContainer = $NavBarBackground/TabContainer
 var tab_groups = []
 
+@onready var nav_bar_background: Panel = $NavBarBackground
+@onready var panel: Panel = $Panel
+
+@onready var open_close_audio_player: AudioStreamPlayer = $OpenCloseAudioPlayer
 
 var current_menu: int = 0
 
@@ -21,13 +25,29 @@ var normal_white = Color(1, 1, 1, 1)
 func _ready() -> void:
 	groups = sub_groups.get_children()
 	tab_groups = tab_container.get_children()
-	await get_tree().create_timer(1).timeout
 	groups[current_menu].play("sub_menu/fade_in_from_left")
 	tab_groups[current_menu].fade_in()
-	# print("fade in from left")
+	# await get_tree().create_timer(1).timeout
+	# groups[current_menu].play("sub_menu/fade_in_from_left")
+	# tab_groups[current_menu].fade_in()
+	# # print("fade in from left")
+	# open_menu()
+	# await get_tree().create_timer(1).timeout
+	# close_menu()
 
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		if visible:
+			close_menu()
+			print("close big menu!")
+		else:
+			open_menu()
+			print("open big menu!")
+
+	if not visible:
+		return
+
 	if event.is_action_pressed("ui_next_tab"):
 		next_tab_sfx()
 		groups[current_menu].play("sub_menu/fade_out_to_left")
@@ -66,3 +86,47 @@ func next_tab_sfx() -> void:
 func prev_tab_sfx() -> void:
 	audio_stream_player.pitch_scale = 0.8
 	audio_stream_player.play()
+
+
+func open_menu() -> void:
+	# play sfx
+	open_close_audio_player.pitch_scale = 0.7
+	open_close_audio_player.play()
+
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "visible", true, 0)
+
+	# whole modulate
+	tween.tween_property(self, "modulate", Color(1,1,1,1), 0.2).from(Color(1,1,1,0))
+
+	# panel
+	tween.parallel().tween_property(panel, "position",
+	Vector2.ZERO, 0.2).from(Vector2(360, 0))
+
+	# nav_bar
+	tween.parallel().tween_property(nav_bar_background, "position",
+	Vector2(224, 8), 0.2).from(Vector2(0, 8))
+	# tween.parallel().tween_property(panel, "rotation_degrees", 0.0, 0.3) \
+	# .from(30).set_trans(Tween.TRANS_EXPO)
+
+
+func close_menu() -> void:
+	# play sfx
+	open_close_audio_player.pitch_scale = 1
+	open_close_audio_player.play()
+
+	var tween = get_tree().create_tween()
+
+	# whole modulate
+	tween.tween_property(self, "modulate",Color(1,1,1,0) , 0.2).from(Color(1,1,1,1))
+
+	# panel
+	tween.parallel().tween_property(panel, "position",
+	Vector2(360, 0), 0.2).from(Vector2.ZERO)
+
+	# nav_bar
+	tween.parallel().tween_property(nav_bar_background, "position",
+	Vector2(0, 8), 0.2).from(Vector2(224, 8))
+	# tween.parallel().tween_property(panel, "rotation_degrees", 30, 0.3) \
+	# .from(0).set_trans(Tween.TRANS_EXPO)
+	tween.tween_property(self, "visible", false, 0)

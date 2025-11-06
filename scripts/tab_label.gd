@@ -11,21 +11,25 @@ extends RichTextLabel
 
 var stretch_ratio_selected = 2
 var stretch_ratio_normal = 1
-var fade_white = Color(0.735, 0.735, 0.735)
+var fade_white = Color(0.5, 0.5, 0.5)
 var normal_white = Color(1, 1, 1, 1)
 var fade_tab_color: Color
+var fade_tab_color_back_panel: Color
 
 
 func _ready() -> void:
 	tab_label.text = tab_title
 	panel.get("theme_override_styles/panel").bg_color = tab_color
 	fade_tab_color = tab_color.darkened(0.6)
+	fade_tab_color_back_panel = tab_color.darkened(0.8)
 	tab_label.set("theme_override_colors/default_color", Color(0.735, 0.735, 0.735))
 	panel.get("theme_override_styles/panel").bg_color = fade_tab_color
-	back_panel.get("theme_override_styles/panel").bg_color = fade_tab_color
+	back_panel.get("theme_override_styles/panel").bg_color = fade_tab_color_back_panel
+
 
 func fade_in() -> void:
 	panel.get("theme_override_styles/panel").bg_color = tab_color
+	back_panel.get("theme_override_styles/panel").bg_color = fade_tab_color
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "size_flags_stretch_ratio",
 	stretch_ratio_selected, 0.2)
@@ -35,6 +39,7 @@ func fade_in() -> void:
 
 func fade_out() -> void:
 	panel.get("theme_override_styles/panel").bg_color = fade_tab_color
+	back_panel.get("theme_override_styles/panel").bg_color = fade_tab_color_back_panel
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "size_flags_stretch_ratio",
 	stretch_ratio_normal, 0.2)

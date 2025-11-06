@@ -12,6 +12,7 @@ size = Vector2(1936, 336)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BigMenu" parent="CanvasLayer" instance=ExtResource("1_uxr5t")]
+visible = false
 
 [node name="RooftopNoClouds" type="Sprite2D" parent="."]
 modulate = Color(1, 0.585495, 0.585495, 1)
