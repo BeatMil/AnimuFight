@@ -7085,6 +7085,7 @@ script = ExtResource("2_t4427")
 hp = 12
 
 [node name="PlayerCanvasLayer" type="CanvasLayer" parent="." index="0"]
+layer = 0
 
 [node name="DebugLabel" type="Label" parent="PlayerCanvasLayer" index="0"]
 anchors_preset = 5

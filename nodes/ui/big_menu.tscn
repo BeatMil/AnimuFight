@@ -1,110 +1,116 @@
-[gd_scene load_steps=8 format=3 uid="uid://eq2tweu0uxq4"]
+[gd_scene load_steps=13 format=3 uid="uid://eq2tweu0uxq4"]
 
 [ext_resource type="Script" uid="uid://bb5etxdawgeau" path="res://scripts/big_menu.gd" id="1_vmfsf"]
+[ext_resource type="PackedScene" uid="uid://lb3mdayr1mx6" path="res://nodes/ui/big_menu_things/tab_label.tscn" id="2_51muq"]
 [ext_resource type="PackedScene" uid="uid://cns0do6e0npq8" path="res://nodes/ui/sub_game_menu.tscn" id="2_c6t7p"]
 [ext_resource type="PackedScene" uid="uid://dbyji7iwvx4lw" path="res://nodes/ui/sub_skill_menu.tscn" id="3_vmfsf"]
 [ext_resource type="PackedScene" uid="uid://d2q6p8qmvnvea" path="res://nodes/ui/sub_figure_menu.tscn" id="4_071ji"]
 [ext_resource type="PackedScene" uid="uid://bntrqme5fs51o" path="res://nodes/ui/sub_note_menu.tscn" id="5_51muq"]
 [ext_resource type="PackedScene" uid="uid://b3qywai3ibjjb" path="res://nodes/ui/sub_settings_menu.tscn" id="6_qhp3f"]
+[ext_resource type="AudioStream" uid="uid://bctjf21vveuft" path="res://media/sfxs/DSGNTonl_STEP-Magic Step_HY_PC-005.wav" id="8_qhp3f"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_071ji"]
-bg_color = Color(0.95484024, 0.27019593, 0.27019593, 1)
-border_width_left = 20
-border_width_top = 20
-border_width_right = 20
-border_width_bottom = 20
-border_color = Color(0.880165, 0.7731926, 0.23748788, 1)
-border_blend = true
+[sub_resource type="Gradient" id="Gradient_51muq"]
+colors = PackedColorArray(0, 0, 0, 1, 0.31278878, 0.55459046, 0.6018299, 0.8862745)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qhp3f"]
+gradient = SubResource("Gradient_51muq")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_51muq"]
+texture = SubResource("GradientTexture2D_qhp3f")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51muq"]
+bg_color = Color(0.10926201, 0.11554995, 0.1469897, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="BigMenu" type="Control"]
 process_mode = 3
+z_index = 1
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.033333335
+anchor_top = 0.05925926
+anchor_right = 0.96666664
+anchor_bottom = 0.94074076
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vmfsf")
-metadata/_edit_lock_ = true
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.392157)
 metadata/_edit_lock_ = true
 
-[node name="NavBarBackground" type="ColorRect" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(896.00006, 476)
+scale = Vector2(27.999998, 14.875)
+texture = SubResource("GradientTexture2D_qhp3f")
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.8039216)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.13333334
-anchor_right = 0.8666667
-anchor_bottom = 0.08888889
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.1035156e-05
+theme_override_styles/panel = SubResource("StyleBoxTexture_51muq")
+metadata/_edit_use_anchors_ = true
+
+[node name="NavBarBackground" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
+anchor_top = 0.008403362
+anchor_right = 0.8672619
+anchor_bottom = 0.11409897
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.06552577, 0.06552577, 0.06552577, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_51muq")
 metadata/_edit_use_anchors_ = true
 
 [node name="TabContainer" type="HBoxContainer" parent="NavBarBackground"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-metadata/_edit_use_anchors_ = true
-
-[node name="GameLabel" type="RichTextLabel" parent="NavBarBackground/TabContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 32
-theme_override_styles/background = SubResource("StyleBoxFlat_071ji")
-text = "Game"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="NavBarBackground/TabContainer/GameLabel"]
-show_behind_parent = true
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.33674777, 0.41752383, 0.8530103, 1)
+anchors_preset = -1
+anchor_left = 0.0060144346
+anchor_top = 0.0795053
+anchor_right = 0.9939856
+anchor_bottom = 0.9204947
 metadata/_edit_use_anchors_ = true
 
-[node name="Skill" type="RichTextLabel" parent="NavBarBackground/TabContainer"]
+[node name="GameLabel" parent="NavBarBackground/TabContainer" instance=ExtResource("2_51muq")]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 32
-text = "Skill"
-horizontal_alignment = 1
-vertical_alignment = 1
+tab_title = "Game"
+tab_color = Color(0.21015428, 0.7968342, 0.8869536, 1)
 
-[node name="Figure" type="RichTextLabel" parent="NavBarBackground/TabContainer"]
+[node name="SkillLabel" parent="NavBarBackground/TabContainer" instance=ExtResource("2_51muq")]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 32
-text = "Figure"
-horizontal_alignment = 1
-vertical_alignment = 1
+tab_title = "Skill"
+tab_color = Color(0.2117647, 0.6442489, 0.8862745, 1)
 
-[node name="FighterNote" type="RichTextLabel" parent="NavBarBackground/TabContainer"]
+[node name="FigureLabel" parent="NavBarBackground/TabContainer" instance=ExtResource("2_51muq")]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 32
-text = "Fighter's Note"
-horizontal_alignment = 1
-vertical_alignment = 1
+tab_title = "Figure"
+tab_color = Color(0.2117647, 0.47961673, 0.8862745, 1)
 
-[node name="Setting" type="RichTextLabel" parent="NavBarBackground/TabContainer"]
+[node name="NoteLabel" parent="NavBarBackground/TabContainer" instance=ExtResource("2_51muq")]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 32
-text = "Settings"
-horizontal_alignment = 1
-vertical_alignment = 1
+tab_title = "Note"
+tab_color = Color(0.40288663, 0.4810052, 0.90053093, 1)
+
+[node name="SettingsLabel" parent="NavBarBackground/TabContainer" instance=ExtResource("2_51muq")]
+layout_mode = 2
+tab_title = "Settings"
+tab_color = Color(0.6946139, 0.4528398, 0.839433, 1)
 
 [node name="SubGroups" type="Control" parent="."]
 layout_mode = 1
@@ -129,3 +135,7 @@ layout_mode = 1
 
 [node name="SubSettingsMenu" parent="SubGroups" instance=ExtResource("6_qhp3f")]
 layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_qhp3f")
+bus = &"LouderBus"

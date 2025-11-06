@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://n83rybw21ec7"]
+
+[ext_resource type="PackedScene" uid="uid://eq2tweu0uxq4" path="res://nodes/ui/big_menu.tscn" id="1_slfsa"]
+
+[sub_resource type="Environment" id="Environment_slfsa"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 0
+
+[node name="Test5" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BigMenu" parent="CanvasLayer" instance=ExtResource("1_slfsa")]
+custom_minimum_size = Vector2(1920, 1080)
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 80.0
+offset_top = 56.0
+offset_right = 2000.0
+offset_bottom = 1136.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_slfsa")

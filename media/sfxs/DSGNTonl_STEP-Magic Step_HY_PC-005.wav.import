@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bctjf21vveuft"
+path="res://.godot/imported/DSGNTonl_STEP-Magic Step_HY_PC-005.wav-b0c93e2a7ef8eeaf1ec2e5a08edbb8f7.sample"
+
+[deps]
+
+source_file="res://media/sfxs/DSGNTonl_STEP-Magic Step_HY_PC-005.wav"
+dest_files=["res://.godot/imported/DSGNTonl_STEP-Magic Step_HY_PC-005.wav-b0c93e2a7ef8eeaf1ec2e5a08edbb8f7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
