@@ -7,12 +7,30 @@ extends Button
 @onready var kb_icon: Sprite2D = $HBoxContainer/KBIcon
 @onready var joy_icon: Sprite2D = $HBoxContainer/JoyIcon
 
+const BUTTON_FOCUS = preload("uid://bxpjgafdsk0v2")
+const BUTTON_HIT = preload("uid://dptjjc511h1fs")
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
+
+func focus_enter() -> void:
+	audio_stream_player.stream = BUTTON_FOCUS
+	audio_stream_player.play()
+
+
+func button_hit() -> void:
+	audio_stream_player.stream = BUTTON_HIT
+	audio_stream_player.play()
+
 
 func _init():
 	toggle_mode = true
 
 
 func _ready():
+	# play sfx helper
+	focus_entered.connect(focus_enter)
+	pressed.connect(button_hit)
+
 	action_label.text = action_label_show
 	set_process_unhandled_input(false)
 	update_key_text()

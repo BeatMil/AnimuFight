@@ -1685,6 +1685,10 @@ func _set_p_state(new_state: int) -> void:
 
 
 func three_way_throw() -> void:
+	# check if throwee null
+	if not throwee:
+		return
+
 	throwee.air_throw_follow_pos = null
 	match is_pressing_right():
 		0: #neutral

@@ -30,7 +30,7 @@ func _ready() -> void:
 func fade_in() -> void:
 	panel.get("theme_override_styles/panel").bg_color = tab_color
 	back_panel.get("theme_override_styles/panel").bg_color = fade_tab_color
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	tween.tween_property(self, "size_flags_stretch_ratio",
 	stretch_ratio_selected, 0.2)
 	tween.parallel().tween_property(self,
@@ -40,7 +40,7 @@ func fade_in() -> void:
 func fade_out() -> void:
 	panel.get("theme_override_styles/panel").bg_color = fade_tab_color
 	back_panel.get("theme_override_styles/panel").bg_color = fade_tab_color_back_panel
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	tween.tween_property(self, "size_flags_stretch_ratio",
 	stretch_ratio_normal, 0.2)
 	tween.parallel().tween_property(self,

@@ -55,4 +55,6 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(952, 32)
 texture = ExtResource("3_k4q5d")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="toggled" from="." to="." method="_on_toggled"]

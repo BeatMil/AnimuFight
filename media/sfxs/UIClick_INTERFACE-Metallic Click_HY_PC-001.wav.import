@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dptjjc511h1fs"
+path="res://.godot/imported/UIClick_INTERFACE-Metallic Click_HY_PC-001.wav-1d4317c8f14bd24dfc90e588e23172ac.sample"
+
+[deps]
+
+source_file="res://media/sfxs/UIClick_INTERFACE-Metallic Click_HY_PC-001.wav"
+dest_files=["res://.godot/imported/UIClick_INTERFACE-Metallic Click_HY_PC-001.wav-1d4317c8f14bd24dfc90e588e23172ac.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

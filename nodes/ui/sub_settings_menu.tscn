@@ -1,12 +1,77 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3qywai3ibjjb"]
+[gd_scene load_steps=6 format=3 uid="uid://b3qywai3ibjjb"]
 
 [ext_resource type="PackedScene" uid="uid://cefvk58xqrwpr" path="res://nodes/ui/sub_base_menu.tscn" id="1_qlcgo"]
+[ext_resource type="Script" uid="uid://cigkiv8h8basm" path="res://scripts/sub_settings_menu.gd" id="2_boh2e"]
+[ext_resource type="Texture2D" uid="uid://hirwibir5wuk" path="res://media/sprites/controller_icon/xbox/xbox_layout.png" id="2_sqyr1"]
+[ext_resource type="PackedScene" uid="uid://bhyp02lurgb04" path="res://nodes/ui/key_bind_menu.tscn" id="3_7agv2"]
+[ext_resource type="PackedScene" uid="uid://0cplbcadndx8" path="res://nodes/ui/menu_button.tscn" id="3_807un"]
 
-[node name="SubSettingsMenu" instance=ExtResource("1_qlcgo")]
+[node name="SubSettingsMenu" node_paths=PackedStringArray("focus_node", "button_container") instance=ExtResource("1_qlcgo")]
+script = ExtResource("2_boh2e")
+focus_node = NodePath("Group/HBoxContainer/ControllerIconButton")
+button_container = NodePath("Group/HBoxContainer")
 
 [node name="Group" parent="." index="0"]
-modulate = Color(1, 1, 1, 0)
+offset_left = 0.0
+offset_right = 0.0
 
-[node name="TestLabel" parent="Group" index="0"]
+[node name="KeyBindMenu" parent="Group" index="0" instance=ExtResource("3_7agv2")]
+visible = false
+layout_mode = 1
+
+[node name="TestLabel" parent="Group" index="1"]
+visible = false
 theme_override_colors/default_color = Color(0.49321133, 0.49321133, 0.49321133, 1)
 text = "SUB SETTINGS MENU DESU!"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Group" index="2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.166667
+anchor_top = 0.111111
+anchor_right = 0.833333
+anchor_bottom = 0.888889
+grow_horizontal = 2
+grow_vertical = 2
+focus_behavior_recursive = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ControllerIconButton" parent="Group/HBoxContainer" index="0" instance=ExtResource("3_807un")]
+layout_mode = 2
+focus_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Group/HBoxContainer/ControllerIconButton" index="0"]
+layout_mode = 0
+offset_left = -0.00064086914
+offset_top = 4.000122
+offset_right = 671.9994
+offset_bottom = 68.00012
+theme_override_font_sizes/normal_font_size = 24
+text = "Controller Icon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JoyLayout" type="Sprite2D" parent="Group/HBoxContainer/ControllerIconButton" index="1"]
+position = Vector2(953.9994, 34.000122)
+texture = ExtResource("2_sqyr1")
+
+[node name="ChangeKeyBindButton" parent="Group/HBoxContainer" index="1" instance=ExtResource("3_807un")]
+layout_mode = 2
+focus_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Group/HBoxContainer/ChangeKeyBindButton" index="0"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.031251907
+anchor_right = 1.0007801
+anchor_bottom = 1.0312519
+theme_override_font_sizes/normal_font_size = 24
+text = "Change Key Bind"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="close" from="Group/KeyBindMenu" to="." method="_on_key_bind_menu_close"]
+[connection signal="pressed" from="Group/HBoxContainer/ControllerIconButton" to="." method="_on_controller_icon_button_pressed"]
+[connection signal="pressed" from="Group/HBoxContainer/ChangeKeyBindButton" to="." method="_on_change_key_bind_button_pressed"]

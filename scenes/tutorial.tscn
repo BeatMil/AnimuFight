@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_8ho6b"]
 [ext_resource type="Script" uid="uid://lqd56fdmu1nh" path="res://scripts/tutorial.gd" id="1_ph3nu"]
-[ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/ui/restart_menu.tscn" id="2_gbqnl"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="2_ph3nu"]
+[ext_resource type="PackedScene" uid="uid://eq2tweu0uxq4" path="res://nodes/ui/big_menu.tscn" id="3_0epgs"]
 [ext_resource type="AudioStream" uid="uid://bgo7csbocxmca" path="res://media/sfxs/UIMisc_INTERFACE-Lock_HY_PC-004.wav" id="3_nlqja"]
 [ext_resource type="PackedScene" uid="uid://bdvm6x1ynbejn" path="res://nodes/pre_stage01/shelf.tscn" id="4_4kmhl"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="5_cq4me"]
@@ -187,7 +187,7 @@ position = Vector2(1032, 200)
 [node name="nice_pos" type="Marker2D" parent="CanvasLayer"]
 position = Vector2(1256, 88)
 
-[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_gbqnl")]
+[node name="BigMenu" parent="CanvasLayer" instance=ExtResource("3_0epgs")]
 visible = false
 
 [node name="Floor" type="StaticBody2D" parent="." groups=["ground"]]

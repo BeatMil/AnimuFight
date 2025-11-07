@@ -2,11 +2,23 @@
 
 [ext_resource type="PackedScene" uid="uid://cefvk58xqrwpr" path="res://nodes/ui/sub_base_menu.tscn" id="1_16tq2"]
 
-[node name="SubSkillMenu" instance=ExtResource("1_16tq2")]
+[node name="SubSkillMenu" node_paths=PackedStringArray("focus_node", "button_container") instance=ExtResource("1_16tq2")]
+focus_node = NodePath("Group/TestLabel")
+button_container = NodePath("Group/VBoxContainer")
 
 [node name="Group" parent="." index="0"]
-modulate = Color(1, 1, 1, 0)
+offset_left = 0.0
+offset_right = 0.0
 
 [node name="TestLabel" parent="Group" index="0"]
 theme_override_colors/default_color = Color(0.8666667, 0.82479835, 0.4666667, 1)
 text = "SUB SKILL MENU DESU!"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Group" index="1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true

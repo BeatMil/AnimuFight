@@ -25,15 +25,14 @@ var normal_white = Color(1, 1, 1, 1)
 func _ready() -> void:
 	groups = sub_groups.get_children()
 	tab_groups = tab_container.get_children()
+
+	# Make sure every sub_menu is invisible
+	for g in groups:
+		g.play("sub_menu/RESET")
+
+	# Focus on sub game menu
 	groups[current_menu].play("sub_menu/fade_in_from_left")
 	tab_groups[current_menu].fade_in()
-	# await get_tree().create_timer(1).timeout
-	# groups[current_menu].play("sub_menu/fade_in_from_left")
-	# tab_groups[current_menu].fade_in()
-	# # print("fade in from left")
-	# open_menu()
-	# await get_tree().create_timer(1).timeout
-	# close_menu()
 
 
 func _input(event: InputEvent) -> void:
@@ -44,6 +43,10 @@ func _input(event: InputEvent) -> void:
 		else:
 			open_menu()
 			print("open big menu!")
+	elif event.is_action_pressed("ui_cancel"):
+		if visible:
+			close_menu()
+			print("close big menu!")
 
 	if not visible:
 		return
@@ -51,6 +54,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_next_tab"):
 		next_tab_sfx()
 		groups[current_menu].play("sub_menu/fade_out_to_left")
+		groups[current_menu].focus_disable()
 		tab_groups[current_menu].fade_out()
 		
 
@@ -61,11 +65,14 @@ func _input(event: InputEvent) -> void:
 			current_menu += 1
 
 		groups[current_menu].play("sub_menu/fade_in_from_right")
+		groups[current_menu].focus_enable()
+		groups[current_menu].focus_on_me()
 		tab_groups[current_menu].fade_in()
 
 	if event.is_action_pressed("ui_prev_tab"):
 		prev_tab_sfx()
 		groups[current_menu].play("sub_menu/fade_out_to_right")
+		groups[current_menu].focus_disable()
 		tab_groups[current_menu].fade_out()
 
 		# Bring current_menu to the end
@@ -75,6 +82,8 @@ func _input(event: InputEvent) -> void:
 			current_menu -= 1
 
 		groups[current_menu].play("sub_menu/fade_in_from_left")
+		groups[current_menu].focus_enable()
+		groups[current_menu].focus_on_me()
 		tab_groups[current_menu].fade_in()
 
 
@@ -89,11 +98,14 @@ func prev_tab_sfx() -> void:
 
 
 func open_menu() -> void:
+	# pause game
+	get_tree().paused = true
+
 	# play sfx
 	open_close_audio_player.pitch_scale = 0.7
 	open_close_audio_player.play()
 
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	tween.tween_property(self, "visible", true, 0)
 
 	# whole modulate
@@ -109,13 +121,16 @@ func open_menu() -> void:
 	# tween.parallel().tween_property(panel, "rotation_degrees", 0.0, 0.3) \
 	# .from(30).set_trans(Tween.TRANS_EXPO)
 
+	# Focus current_menu
+	tween.parallel().tween_callback(groups[current_menu].focus_on_me)
+
 
 func close_menu() -> void:
 	# play sfx
 	open_close_audio_player.pitch_scale = 1
 	open_close_audio_player.play()
 
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 
 	# whole modulate
 	tween.tween_property(self, "modulate",Color(1,1,1,0) , 0.2).from(Color(1,1,1,1))
@@ -130,3 +145,10 @@ func close_menu() -> void:
 	# tween.parallel().tween_property(panel, "rotation_degrees", 30, 0.3) \
 	# .from(0).set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(self, "visible", false, 0)
+
+	# resume game
+	get_tree().paused = false
+
+
+func _on_sub_game_menu_resume_button_press() -> void:
+	close_menu()

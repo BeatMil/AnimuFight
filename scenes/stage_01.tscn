@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_i6ddm"]
 [ext_resource type="Texture2D" uid="uid://cei5iglc0dohc" path="res://media/sprites/stage01/home.png" id="2_4caca"]
 [ext_resource type="Texture2D" uid="uid://c2anqn8y5dr50" path="res://media/sprites/stage01/floor.png" id="2_fnmkw"]
-[ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/ui/restart_menu.tscn" id="2_nh3b5"]
 [ext_resource type="PackedScene" uid="uid://bw5ja0ukb5vjq" path="res://nodes/black_bar_cutscene.tscn" id="3_4gwik"]
 [ext_resource type="Texture2D" uid="uid://cppqygp1b42a1" path="res://media/sprites/stage01/building.png" id="4_dimc6"]
 [ext_resource type="PackedScene" uid="uid://blr5gifobciq8" path="res://nodes/high_way.tscn" id="4_lrdte"]
 [ext_resource type="Texture2D" uid="uid://nv6dkesnffpt" path="res://media/sprites/stage01/floor_dark.png" id="5_nasqd"]
+[ext_resource type="PackedScene" uid="uid://eq2tweu0uxq4" path="res://nodes/ui/big_menu.tscn" id="6_52agy"]
 [ext_resource type="Script" uid="uid://duxhld58ww51q" path="res://scripts/enemy_spawn_helper.gd" id="6_l457t"]
 [ext_resource type="Texture2D" uid="uid://m74we0184cjq" path="res://media/sprites/stage01/seven_eleven.png" id="6_sgik7"]
 [ext_resource type="PackedScene" uid="uid://c4m5deiee8q8w" path="res://nodes/boss01.tscn" id="7_nh3b5"]
@@ -875,7 +875,7 @@ enemy_to_spawn = Array[Resource]([ExtResource("8_nasqd"), ExtResource("9_dimc6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_nh3b5")]
+[node name="BigMenu" parent="CanvasLayer" instance=ExtResource("6_52agy")]
 visible = false
 
 [node name="BlackBarCutscene" parent="CanvasLayer" instance=ExtResource("3_4gwik")]

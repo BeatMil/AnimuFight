@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bdbpxqqnsa47h" path="res://media/sfxs/DSGNMisc_MOVEMENT-Sparkly Water_HY_PC-001.wav" id="9_da2vg"]
 
 [sub_resource type="Gradient" id="Gradient_51muq"]
-colors = PackedColorArray(0, 0, 0, 1, 0.31278878, 0.55459046, 0.6018299, 0.8862745)
+colors = PackedColorArray(0, 0, 0, 1, 0.3137255, 0.5529412, 0.6, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qhp3f"]
 gradient = SubResource("Gradient_51muq")
@@ -26,33 +26,6 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-
-[sub_resource type="Animation" id="Animation_qhp3f"]
-resource_name = "open_menu"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(360, -504.00003), Vector2(-6.1035156e-05, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.26878070480712635, 0.0]
-}
 
 [sub_resource type="Animation" id="Animation_da2vg"]
 length = 0.001
@@ -81,6 +54,33 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_qhp3f"]
+resource_name = "open_menu"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(360, -504.00003), Vector2(-6.1035156e-05, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.26878070480712635, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_da2vg"]
 _data = {
 &"RESET": SubResource("Animation_da2vg"),
@@ -101,7 +101,7 @@ script = ExtResource("1_vmfsf")
 metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="."]
-self_modulate = Color(1, 1, 1, 0.8039216)
+self_modulate = Color(1, 1, 1, 0.98039216)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2008929
@@ -198,3 +198,5 @@ libraries = {
 [node name="OpenCloseAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_da2vg")
 bus = &"LouderBus"
+
+[connection signal="resume_button_press" from="SubGroups/SubGameMenu" to="." method="_on_sub_game_menu_resume_button_press"]

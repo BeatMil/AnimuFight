@@ -1,11 +1,80 @@
-[gd_scene load_steps=2 format=3 uid="uid://cns0do6e0npq8"]
+[gd_scene load_steps=4 format=3 uid="uid://cns0do6e0npq8"]
 
 [ext_resource type="PackedScene" uid="uid://cefvk58xqrwpr" path="res://nodes/ui/sub_base_menu.tscn" id="1_8e1i4"]
+[ext_resource type="Script" uid="uid://che4csvgcf1o4" path="res://scripts/sub_game_menu.gd" id="2_7ygj8"]
+[ext_resource type="PackedScene" uid="uid://0cplbcadndx8" path="res://nodes/ui/menu_button.tscn" id="2_rc6xl"]
 
-[node name="SubGameMenu" instance=ExtResource("1_8e1i4")]
+[node name="SubGameMenu" node_paths=PackedStringArray("focus_node", "button_container") instance=ExtResource("1_8e1i4")]
+script = ExtResource("2_7ygj8")
+focus_node = NodePath("Group/HBoxContainer/ResumeButton")
+button_container = NodePath("Group/HBoxContainer")
 
 [node name="Group" parent="." index="0"]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 1)
+offset_left = 0.0
+offset_right = 0.0
 
 [node name="TestLabel" parent="Group" index="0"]
+visible = false
 text = "SUB GAME MENU DESU!"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Group" index="1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.166667
+anchor_top = 0.111111
+anchor_right = 0.833333
+anchor_bottom = 0.888889
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ResumeButton" parent="Group/HBoxContainer" index="0" instance=ExtResource("2_rc6xl")]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Group/HBoxContainer/ResumeButton" index="0"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.031251907
+anchor_right = 1.0007801
+anchor_bottom = 1.0312519
+theme_override_font_sizes/normal_font_size = 24
+text = "RESUME"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="RestartButton" parent="Group/HBoxContainer" index="1" instance=ExtResource("2_rc6xl")]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Group/HBoxContainer/RestartButton" index="0"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.031251907
+anchor_right = 1.0007801
+anchor_bottom = 1.0312519
+theme_override_font_sizes/normal_font_size = 24
+text = "RESTART"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MainMenuButton" parent="Group/HBoxContainer" index="2" instance=ExtResource("2_rc6xl")]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Group/HBoxContainer/MainMenuButton" index="0"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.031251907
+anchor_right = 1.0007801
+anchor_bottom = 1.0312519
+theme_override_font_sizes/normal_font_size = 24
+text = "MAIN MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Group/HBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Group/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Group/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

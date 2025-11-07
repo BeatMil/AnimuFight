@@ -1,9 +1,9 @@
 [gd_scene load_steps=70 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/pre_stage_01.gd" id="1_pekkb"]
-[ext_resource type="PackedScene" uid="uid://da0dtoj0kt1oe" path="res://nodes/ui/restart_menu.tscn" id="2_i7cta"]
 [ext_resource type="Texture2D" uid="uid://dvbwvcpefu5qb" path="res://media/sprites/pre_stage01/sky_background.png" id="3_edvyi"]
 [ext_resource type="PackedScene" uid="uid://bw5ja0ukb5vjq" path="res://nodes/black_bar_cutscene.tscn" id="3_i7cta"]
+[ext_resource type="PackedScene" uid="uid://eq2tweu0uxq4" path="res://nodes/ui/big_menu.tscn" id="3_mfofa"]
 [ext_resource type="Texture2D" uid="uid://kma2rfutfsxc" path="res://media/sprites/stage01/boss_fight_place/helicopter.png" id="4_edvyi"]
 [ext_resource type="Script" uid="uid://pwpucxtlx40w" path="res://scripts/parallax_layer.gd" id="4_mfofa"]
 [ext_resource type="Texture2D" uid="uid://decg2r6h1bvnh" path="res://media/vfx/cloud_sprite.png" id="5_rtwsc"]
@@ -788,7 +788,7 @@ script = ExtResource("1_pekkb")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_i7cta")]
+[node name="BigMenu" parent="CanvasLayer" instance=ExtResource("3_mfofa")]
 visible = false
 
 [node name="BlackBarCutscene" parent="CanvasLayer" instance=ExtResource("3_i7cta")]

@@ -382,6 +382,7 @@ func _boss_second_time() -> void:
 		wait_boss_platform.queue_free()
 	CameraManager.set_screen_lock(13317, 15458, -10000000, 1000)
 	boss_02.set_physics_process(true)
+	boss_02.velocity = Vector2.ZERO
 	boss_02.visible = true
 	ObjectPooling.spawn_attack_type_indicator(1, player.position)
 	ObjectPooling.spawn_attack_type_indicator(1, player.position-Vector2(-100, 0))
@@ -398,6 +399,33 @@ func spawn_heli_spear(pos, pitch) -> void:
 
 
 func boss_defeated() -> void:
+	# execute all enemies except boss
+	for child in enemy_backup.get_children():
+		child._set_state(0)
+		child.hitted(
+		self,
+		true,
+		Vector2(0, -50),
+		1,
+		0.5,
+		2,
+		Vector2(10, 0.1),
+		10000,
+		Enums.Attack.UNBLOCK
+		)
+		await get_tree().create_timer(get_physics_process_delta_time()).timeout
+		child._set_state(0)
+		child.hitted(
+		self,
+		true,
+		Vector2(0, -50),
+		1,
+		0.5,
+		2,
+		Vector2(10, 0.1),
+		10000,
+		Enums.Attack.UNBLOCK
+		)
 
 	# remove wall
 	area_lock_player.play("RESET")
@@ -528,34 +556,7 @@ func boss_defeated_old() -> void:
 	CameraManager.zoom(Vector2(0.5, 0.5), 1.2)
 	animu_fast_fx_whole_screen.visible = true
 	ObjectPooling.spawn_ground_spark_2(player.position)
-	for child in enemy_backup.get_children():
-		child._set_state(0)
-		child.hitted(
-		self,
-		true,
-		Vector2(0, -500),
-		1,
-		0.5,
-		2,
-		Vector2(10, 0.1),
-		10000,
-		Enums.Attack.UNBLOCK
-		)
 
-		await get_tree().create_timer(0.1).timeout
-
-		child.hitted(
-		self,
-		true,
-		Vector2(0, -500),
-		1,
-		0.5,
-		2,
-		Vector2(10, 0.1),
-		10000,
-		Enums.Attack.UNBLOCK
-		)
-	
 	await get_tree().create_timer(2*Engine.time_scale).timeout
 	player.move_hud_back()
 	black_bar_cutscene.disable()
