@@ -125,6 +125,10 @@ func open_menu() -> void:
 	tween.parallel().tween_callback(groups[current_menu].focus_on_me)
 
 
+func remove_resume_button() -> void:
+	groups[0].remove_resume_button()
+
+
 func close_menu() -> void:
 	# play sfx
 	open_close_audio_player.pitch_scale = 1

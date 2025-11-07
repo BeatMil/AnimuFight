@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var check_points: Node = $CheckPoints
-@onready var restart_menu: Control = $CanvasLayer/RestartMenu
+@onready var restart_menu: Control = $CanvasLayer/BigMenu
 @onready var animation_player: AnimationPlayer = $MangoBossSitBanana/AnimationPlayer
 @onready var area_lock_player: AnimationPlayer = $AreaLockPlayer
 # @onready var transition_camera: Camera2D = $Cameras/TransitionCamera
@@ -569,4 +569,5 @@ func boss_defeated_old() -> void:
 
 
 func _player_ded() -> void:
+	restart_menu.remove_resume_button()
 	restart_menu.open_menu()

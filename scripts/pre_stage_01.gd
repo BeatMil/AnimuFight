@@ -23,7 +23,7 @@ const BOSS_BOUNCE_SFX = preload("res://media/sfxs/unequip01.wav")
 @onready var light_player: AnimationPlayer = $Lights/AnimationPlayer
 @onready var topLight_area_2d: Area2D = $Lights/topLight/Area2D
 const STAGE_01 = preload("uid://cijpe5mfa2ffb")
-@onready var restart_menu: Control = $CanvasLayer/RestartMenu
+@onready var restart_menu: Control = $CanvasLayer/BigMenu
 @onready var heli_player: AnimationPlayer = $HeliPlayer
 @onready var audio_stream_player: AudioStreamPlayer = $HeliPlayer/AudioStreamPlayer
 
@@ -68,6 +68,7 @@ func _player_ded() -> void:
 		Settings.checkpoint = 0
 		get_tree().change_scene_to_packed(STAGE_01)
 	else:
+		restart_menu.remove_resume_button()
 		restart_menu.open_menu()
 
 
