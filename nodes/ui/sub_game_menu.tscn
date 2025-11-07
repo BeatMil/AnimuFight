@@ -32,6 +32,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ResumeButton" parent="Group/HBoxContainer" index="0" instance=ExtResource("2_rc6xl")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../MainMenuButton")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Group/HBoxContainer/ResumeButton" index="0"]
 layout_mode = 1
@@ -62,6 +63,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="MainMenuButton" parent="Group/HBoxContainer" index="2" instance=ExtResource("2_rc6xl")]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../ResumeButton")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Group/HBoxContainer/MainMenuButton" index="0"]
 layout_mode = 1
