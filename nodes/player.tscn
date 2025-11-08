@@ -7107,9 +7107,8 @@ offset_bottom = 1272.0
 [node name="HpBar2" parent="PlayerCanvasLayer" index="2" instance=ExtResource("4_0a5oy")]
 offset_left = 192.0
 offset_top = 64.0
-offset_right = 448.0
-offset_bottom = 80.0
-scale = Vector2(2, 2)
+offset_right = 704.0
+offset_bottom = 96.0
 size_flags_vertical = 0
 metadata/_edit_use_anchors_ = true
 

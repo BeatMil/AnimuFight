@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://bhw2h1n6yqhk8"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_0oxe2"]
-[ext_resource type="Script" path="res://scripts/enemy_heavy_01.gd" id="2_yb2a0"]
+[ext_resource type="Script" uid="uid://by280wts0rx3u" path="res://scripts/enemy_heavy_01.gd" id="2_yb2a0"]
 [ext_resource type="Texture2D" uid="uid://dvkvo3okdyaia" path="res://media/sprites/enemy04/enemy04_hammer.png" id="3_o3tk8"]
 [ext_resource type="Script" uid="uid://bioqkb8axmstv" path="res://scripts/enemy_04_hammer.gd" id="4_mex7q"]
 [ext_resource type="AudioStream" uid="uid://3eyk8460sfvf" path="res://media/sfxs/charge01.wav" id="5_qhlbo"]
@@ -1181,6 +1181,13 @@ shape = SubResource("RectangleShape2D_8qvtx")
 
 [node name="AttackTimer" type="Timer" parent="." index="14"]
 wait_time = 0.5
+
+[node name="HpBar" parent="." index="15"]
+offset_left = -120.0
+offset_top = -320.0
+offset_right = 392.0
+offset_bottom = -288.0
+scale = Vector2(0.5, 0.5)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

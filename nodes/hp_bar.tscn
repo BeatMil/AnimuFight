@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cwih0xhe7lqho"]
 
 [ext_resource type="Texture2D" uid="uid://c3b6kk7qnc1da" path="res://media/sprites/hp_bar/hp_bar_background.png" id="1_8oovt"]
-[ext_resource type="Texture2D" uid="uid://bwloo3t4ienrm" path="res://media/sprites/hp_bar/hp_bar_foreground_thick.png" id="1_e7xo8"]
+[ext_resource type="Texture2D" uid="uid://cy5vjk7xus3lg" path="res://media/sprites/hp_bar/hp_bar_foreground_thick.png" id="1_e7xo8"]
 [ext_resource type="Script" uid="uid://cflm7852np3ah" path="res://scripts/hp_bar.gd" id="1_rawco"]
 [ext_resource type="Texture2D" uid="uid://dx1iv6cw3fqwe" path="res://media/sprites/hp_bar/hp_bar_inner.png" id="3_gcqa6"]
 [ext_resource type="Texture2D" uid="uid://qgwqsqni7ddo" path="res://media/sprites/hp_bar/hp_bar_red.png" id="5_gcqa6"]
@@ -14,7 +14,7 @@ offset_bottom = 16.0
 theme = SubResource("Theme_cs48e")
 max_value = 5.0
 step = 0.1
-value = 4.0
+value = 5.0
 texture_over = ExtResource("1_e7xo8")
 texture_progress = ExtResource("3_gcqa6")
 script = ExtResource("1_rawco")
@@ -23,7 +23,7 @@ script = ExtResource("1_rawco")
 show_behind_parent = true
 layout_mode = 0
 offset_right = 256.0
-offset_bottom = 20.0
+offset_bottom = 16.0
 max_value = 5.0
 step = 0.1
 value = 5.0

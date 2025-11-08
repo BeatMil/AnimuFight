@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy5vjk7xus3lg"
-path="res://.godot/imported/hp_bar_foreground_thick.png-c0d40fba5a5c1c1fee711238367c49df.ctex"
+uid="uid://cjitfsc6bgcaf"
+path="res://.godot/imported/hp_bar_foreground_thick_OLD.png-de2dbf2ea8d23cf608c68a1aa9de45ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://media/sprites/hp_bar/hp_bar_foreground_thick.png"
-dest_files=["res://.godot/imported/hp_bar_foreground_thick.png-c0d40fba5a5c1c1fee711238367c49df.ctex"]
+source_file="res://media/sprites/hp_bar/hp_bar_foreground_thick_OLD.png"
+dest_files=["res://.godot/imported/hp_bar_foreground_thick_OLD.png-de2dbf2ea8d23cf608c68a1aa9de45ad.ctex"]
 
 [params]
 

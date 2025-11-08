@@ -2457,8 +2457,9 @@ wait_time = 0.1
 [node name="HpBar" parent="." index="13"]
 offset_left = -128.0
 offset_top = -184.0
-offset_right = 128.0
-offset_bottom = -168.0
+offset_right = 384.0
+offset_bottom = -152.0
+scale = Vector2(0.5, 0.5)
 
 [node name="DetectGround" type="Area2D" parent="." index="15"]
 editor_description = "Detect ground to spawn meteo crash spark"
