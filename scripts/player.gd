@@ -135,6 +135,7 @@ func _process(_delta: float) -> void:
 		debug_label.text = "PlayerState: %s"%States.keys()[state]
 		debug_label.text += "\nthrowee: %s"%throwee_name
 		debug_label.text += "\nanim: %s"%animation_player.current_animation
+		# debug_label.text += "\n%s"%input_history
 		# debug_label.text += "\n%0.3f"%block_buffer_timer
 		# debug_label.text += "\n%s"%velocity
 		# debug_label.text += "\n%0.3f"%input_buffer_timer
@@ -150,6 +151,8 @@ func _process(_delta: float) -> void:
 		# debug_label.text += "\nCameraPos: %s"%$Camera.global_position
 		# print_rich("[color=yellow][b]ground punch[/b][/color]")
 
+	# print(input_history)
+
 	if state in [States.WAVEDASH, States.EXECUTE]:
 		is_trailing_wave_dash = true
 	else:
@@ -160,6 +163,7 @@ func _process(_delta: float) -> void:
 		trailing_sprite2d(normal, normal_fade)
 	elif is_trailing_green:
 		trailing_sprite2d(green, yellow_fade)
+
 
 
 func _input(event: InputEvent) -> void:
@@ -366,15 +370,19 @@ func _physics_process(delta: float) -> void:
 		physic_input(delta)
 
 
-func physic_input(_delta):
-	if Input.is_action_pressed("lp") and Input.is_action_pressed("hp"):
-		if input_history.size() > 1:
-			if input_history[-2]["frame"] < 7 and (\
-				input_history[-2]["command"].find("h") > -1 or \
+func press_lp_hp_simu_helper() -> void:
+	if input_history.size() > 0 and input_history[-1]["frame"] < 7:
+		if input_history[-1]["command"].find("h") != -1 or \
+			input_history[-1]["command"].find("l") != -1:
+			_lp_hp()
+	queue_move(_lp_hp)
 
-				input_history[-2]["command"].find("l") > -1):
-				_lp_hp()
-		queue_move(_lp_hp)
+
+func physic_input(_delta):
+	if Input.is_action_pressed("lp") and Input.is_action_just_pressed("hp"):
+		press_lp_hp_simu_helper()
+	elif Input.is_action_pressed("hp") and Input.is_action_just_pressed("lp"):
+		press_lp_hp_simu_helper()
 	elif Input.is_action_just_pressed("lp"):
 		if is_on_floor():
 			if Input.is_action_pressed("down"):
