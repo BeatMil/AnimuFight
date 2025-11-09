@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://bixvcfmu8c77i"]
+[gd_scene load_steps=68 format=3 uid="uid://bixvcfmu8c77i"]
 
 [ext_resource type="Script" uid="uid://bexk85y0phohg" path="res://scripts/pre_stage_01.gd" id="1_pekkb"]
 [ext_resource type="Texture2D" uid="uid://dvbwvcpefu5qb" path="res://media/sprites/pre_stage01/sky_background.png" id="3_edvyi"]
@@ -20,16 +20,14 @@
 [ext_resource type="Texture2D" uid="uid://cwyrh2o0eyugc" path="res://media/sprites/environment/ground_better.png" id="16_dbpcy"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="17_ac4hq"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="18_2qsap"]
-[ext_resource type="PackedScene" uid="uid://dy6yy7k35k271" path="res://nodes/enemy_spawner.tscn" id="19_kn51f"]
 [ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="20_ojfvp"]
-[ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/old_stuff/enemy_02_old3.tscn" id="21_4n4co"]
-[ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="22_2mcn1"]
 [ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="23_u83if"]
 [ext_resource type="Script" uid="uid://ckudchaksw6pd" path="res://scripts/enemy_spawner_pre_stage01.gd" id="24_34xu6"]
 [ext_resource type="Script" uid="uid://duxhld58ww51q" path="res://scripts/enemy_spawn_helper.gd" id="25_e4twh"]
 [ext_resource type="PackedScene" uid="uid://c4m5deiee8q8w" path="res://nodes/boss01.tscn" id="26_m7cni"]
 [ext_resource type="PackedScene" uid="uid://bhw2h1n6yqhk8" path="res://nodes/enemy_heavy_01.tscn" id="27_hkneb"]
 [ext_resource type="AudioStream" uid="uid://ipghqhrcfviu" path="res://media/ost/beat_RCG_Detention_louder.wav" id="28_gcmmw"]
+[ext_resource type="PackedScene" uid="uid://dftt5m6bp8n34" path="res://nodes/enemy_02.tscn" id="28_rtwsc"]
 [ext_resource type="AudioStream" uid="uid://cns33kc20b478" path="res://media/ost/RCG_Detention.mp3" id="29_10fts"]
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="30_qiine"]
 [ext_resource type="AudioStream" uid="uid://b1ca2dun1uldc" path="res://media/sfxs/GlassClash.wav" id="31_4w4lu"]
@@ -982,12 +980,6 @@ texture = ExtResource("17_ac4hq")
 [node name="Player" parent="." instance=ExtResource("18_2qsap")]
 position = Vector2(1112, 704)
 
-[node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("19_kn51f")]
-position = Vector2(1912, -112)
-target = NodePath("../Player")
-enemy_to_spawn = [ExtResource("20_ojfvp"), ExtResource("21_4n4co"), ExtResource("22_2mcn1")]
-is_active = false
-
 [node name="WallInvi2" parent="." instance=ExtResource("23_u83if")]
 position = Vector2(-410, 352)
 scale = Vector2(1.64324, 1)
@@ -1036,15 +1028,15 @@ object = ExtResource("20_ojfvp")
 script = ExtResource("25_e4twh")
 position = NodePath("../../../SpawnPos/pos2")
 hp = 10
-object = ExtResource("21_4n4co")
+object = ExtResource("28_rtwsc")
 
 [node name="Phase3" type="Node" parent="EnemySpawnHelper"]
 
-[node name="e2" type="Node" parent="EnemySpawnHelper/Phase3" node_paths=PackedStringArray("position")]
+[node name="e4" type="Node" parent="EnemySpawnHelper/Phase3" node_paths=PackedStringArray("position")]
 script = ExtResource("25_e4twh")
 position = NodePath("../../../SpawnPos/pos2")
 hp = 30
-object = ExtResource("21_4n4co")
+object = ExtResource("28_rtwsc")
 
 [node name="e1" type="Node" parent="EnemySpawnHelper/Phase3" node_paths=PackedStringArray("position")]
 script = ExtResource("25_e4twh")
@@ -1070,7 +1062,7 @@ object = ExtResource("20_ojfvp")
 script = ExtResource("25_e4twh")
 position = NodePath("../../../SpawnPos/pos2")
 hp = 30
-object = ExtResource("21_4n4co")
+object = ExtResource("28_rtwsc")
 
 [node name="Phase5" type="Node" parent="EnemySpawnHelper"]
 
@@ -1090,27 +1082,27 @@ object = ExtResource("20_ojfvp")
 script = ExtResource("25_e4twh")
 position = NodePath("../../../SpawnPos/pos2")
 hp = 30
-object = ExtResource("21_4n4co")
+object = ExtResource("28_rtwsc")
 
 [node name="e5" type="Node" parent="EnemySpawnHelper/Phase5" node_paths=PackedStringArray("position")]
 script = ExtResource("25_e4twh")
 position = NodePath("../../../SpawnPos/pos2")
 hp = 30
-object = ExtResource("21_4n4co")
+object = ExtResource("28_rtwsc")
 
 [node name="Phase6" type="Node" parent="EnemySpawnHelper"]
 
 [node name="e2" type="Node" parent="EnemySpawnHelper/Phase6" node_paths=PackedStringArray("position")]
 script = ExtResource("25_e4twh")
 position = NodePath("../../../SpawnPos/pos4")
-hp = 10
+hp = 30
 object = ExtResource("20_ojfvp")
 
 [node name="e4" type="Node" parent="EnemySpawnHelper/Phase6" node_paths=PackedStringArray("position")]
 script = ExtResource("25_e4twh")
 position = NodePath("../../../SpawnPos/pos5")
-hp = 10
-object = ExtResource("21_4n4co")
+hp = 30
+object = ExtResource("28_rtwsc")
 
 [node name="Phase7" type="Node" parent="EnemySpawnHelper"]
 
@@ -1131,13 +1123,13 @@ object = ExtResource("27_hkneb")
 [node name="e3" type="Node" parent="EnemySpawnHelper/Phase8" node_paths=PackedStringArray("position")]
 script = ExtResource("25_e4twh")
 position = NodePath("../../../SpawnPos/pos4")
-hp = 10
+hp = 30
 object = ExtResource("20_ojfvp")
 
 [node name="e5" type="Node" parent="EnemySpawnHelper/Phase8" node_paths=PackedStringArray("position")]
 script = ExtResource("25_e4twh")
 position = NodePath("../../../SpawnPos/pos4")
-hp = 10
+hp = 30
 object = ExtResource("20_ojfvp")
 
 [node name="Phase9" type="Node" parent="EnemySpawnHelper"]

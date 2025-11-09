@@ -1,7 +1,7 @@
 [gd_scene load_steps=47 format=3 uid="uid://dftt5m6bp8n34"]
 
 [ext_resource type="PackedScene" uid="uid://kniacsvw6ecd" path="res://nodes/templates/base_character.tscn" id="1_h1jhw"]
-[ext_resource type="Script" uid="uid://hyjgv4558hu" path="res://scripts/enemy_01.gd" id="2_b4tfl"]
+[ext_resource type="Script" uid="uid://b3fed2fp078cc" path="res://scripts/enemy_02.gd" id="2_h1jhw"]
 [ext_resource type="Texture2D" uid="uid://02np5p02m64c" path="res://media/sprites/enemy02/enemy02_idle.png" id="3_b4tfl"]
 [ext_resource type="Texture2D" uid="uid://ca5h1ehiakphp" path="res://media/sprites/enemy02/enemy02_unblock.png" id="4_b4tfl"]
 [ext_resource type="AudioStream" uid="uid://bg8cifedlb5iu" path="res://media/sfxs/attack_warning_01.wav" id="5_d3wxi"]
@@ -2073,14 +2073,8 @@ size = Vector2(144, 304)
 [node name="Enemy" groups=["character", "enemy"] instance=ExtResource("1_h1jhw")]
 collision_layer = 2
 collision_mask = 15
-script = ExtResource("2_b4tfl")
-lp = 3
-unblock = 2
-throw_ground = 1
-throw_float = 1
+script = ExtResource("2_h1jhw")
 is_notarget = false
-hp = 200
-block_rate = 10
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_b4tfl")
