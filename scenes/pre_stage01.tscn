@@ -1208,7 +1208,7 @@ metadata/_edit_group_ = true
 [node name="BounceBossBack" type="Area2D" parent="."]
 position = Vector2(-64, 696)
 collision_layer = 0
-collision_mask = 18
+collision_mask = 146
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceBossBack"]
