@@ -1,24 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbyji7iwvx4lw"]
+[gd_scene load_steps=3 format=3 uid="uid://dbyji7iwvx4lw"]
 
 [ext_resource type="PackedScene" uid="uid://cefvk58xqrwpr" path="res://nodes/ui/sub_base_menu.tscn" id="1_16tq2"]
+[ext_resource type="Script" uid="uid://dabxgvnnkfflk" path="res://scripts/sub_skill_menu.gd" id="2_biuab"]
 
 [node name="SubSkillMenu" node_paths=PackedStringArray("focus_node", "button_container") instance=ExtResource("1_16tq2")]
-focus_node = NodePath("Group/TestLabel")
-button_container = NodePath("Group/VBoxContainer")
+anchors_preset = -1
+script = ExtResource("2_biuab")
+focus_node = NodePath("Group/HBoxContainer")
+button_container = NodePath("Group/HBoxContainer")
 
 [node name="Group" parent="." index="0"]
-offset_left = 0.0
-offset_right = 0.0
+modulate = Color(1, 1, 1, 1)
 
-[node name="TestLabel" parent="Group" index="0"]
-theme_override_colors/default_color = Color(0.8666667, 0.82479835, 0.4666667, 1)
-text = "SUB SKILL MENU DESU!"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Group" index="1"]
+[node name="HBoxContainer" type="VBoxContainer" parent="Group" index="0"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.166667
+anchor_top = 0.111111
+anchor_right = 0.833333
+anchor_bottom = 0.888889
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 metadata/_edit_use_anchors_ = true

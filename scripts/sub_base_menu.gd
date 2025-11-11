@@ -22,8 +22,10 @@ func focus_on_me() -> void:
 func focus_disable() -> void:
 	for c in button_container.get_children():
 		c.focus_mode = FOCUS_NONE
+		c.mouse_filter = MOUSE_FILTER_PASS
 
 
 func focus_enable() -> void:
 	for c in button_container.get_children():
 		c.focus_mode = FOCUS_ALL
+		c.mouse_filter = MOUSE_FILTER_STOP

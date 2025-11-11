@@ -1,0 +1,133 @@
+[gd_scene load_steps=14 format=3 uid="uid://ctsm5eqsj1oa0"]
+
+[ext_resource type="Script" uid="uid://bb5etxdawgeau" path="res://scripts/big_menu.gd" id="1_26ou6"]
+[ext_resource type="PackedScene" uid="uid://lb3mdayr1mx6" path="res://nodes/ui/big_menu_things/tab_label.tscn" id="2_8j7lc"]
+[ext_resource type="PackedScene" uid="uid://cns0do6e0npq8" path="res://nodes/ui/sub_game_menu.tscn" id="3_v6sii"]
+[ext_resource type="PackedScene" uid="uid://dbyji7iwvx4lw" path="res://nodes/ui/sub_skill_menu.tscn" id="4_6otih"]
+[ext_resource type="PackedScene" uid="uid://d2q6p8qmvnvea" path="res://nodes/ui/sub_figure_menu.tscn" id="5_2unud"]
+[ext_resource type="PackedScene" uid="uid://bntrqme5fs51o" path="res://nodes/ui/sub_note_menu.tscn" id="6_nem64"]
+[ext_resource type="PackedScene" uid="uid://b3qywai3ibjjb" path="res://nodes/ui/sub_settings_menu.tscn" id="7_7sikc"]
+[ext_resource type="AudioStream" uid="uid://bctjf21vveuft" path="res://media/sfxs/DSGNTonl_STEP-Magic Step_HY_PC-005.wav" id="8_spvcb"]
+[ext_resource type="AudioStream" uid="uid://bdbpxqqnsa47h" path="res://media/sfxs/DSGNMisc_MOVEMENT-Sparkly Water_HY_PC-001.wav" id="9_sx37f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51muq"]
+bg_color = Color(0.10926201, 0.11554995, 0.1469897, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="Animation" id="Animation_da2vg"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_qhp3f"]
+resource_name = "open_menu"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_da2vg"]
+_data = {
+&"RESET": SubResource("Animation_da2vg"),
+&"open_menu": SubResource("Animation_qhp3f")
+}
+
+[node name="BigMenuTest" type="Control"]
+process_mode = 3
+z_index = 1
+layout_mode = 3
+anchor_left = 0.033333335
+anchor_top = 0.05925926
+anchor_right = 0.96666664
+anchor_bottom = 0.94074076
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_26ou6")
+metadata/_edit_use_anchors_ = true
+
+[node name="NavBarBackground" type="Panel" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
+anchor_top = 0.008403362
+anchor_right = 0.8672619
+anchor_bottom = 0.11409897
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_51muq")
+metadata/_edit_use_anchors_ = true
+
+[node name="TabContainer" type="HBoxContainer" parent="NavBarBackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0060144346
+anchor_top = 0.0795053
+anchor_right = 0.9939856
+anchor_bottom = 0.9204947
+metadata/_edit_use_anchors_ = true
+
+[node name="GameLabel" parent="NavBarBackground/TabContainer" instance=ExtResource("2_8j7lc")]
+layout_mode = 2
+tab_title = "Game"
+tab_color = Color(0.21015428, 0.7968342, 0.8869536, 1)
+
+[node name="SkillLabel" parent="NavBarBackground/TabContainer" instance=ExtResource("2_8j7lc")]
+layout_mode = 2
+tab_title = "Skill"
+tab_color = Color(0.2117647, 0.6442489, 0.8862745, 1)
+
+[node name="FigureLabel" parent="NavBarBackground/TabContainer" instance=ExtResource("2_8j7lc")]
+layout_mode = 2
+tab_title = "Figure"
+tab_color = Color(0.2117647, 0.47961673, 0.8862745, 1)
+
+[node name="NoteLabel" parent="NavBarBackground/TabContainer" instance=ExtResource("2_8j7lc")]
+layout_mode = 2
+tab_title = "Note"
+tab_color = Color(0.40288663, 0.4810052, 0.90053093, 1)
+
+[node name="SettingsLabel" parent="NavBarBackground/TabContainer" instance=ExtResource("2_8j7lc")]
+layout_mode = 2
+tab_title = "Settings"
+tab_color = Color(0.6946139, 0.4528398, 0.839433, 1)
+
+[node name="SubGroups" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="SubGameMenu" parent="SubGroups" instance=ExtResource("3_v6sii")]
+layout_mode = 1
+
+[node name="SubSkillMenu" parent="SubGroups" instance=ExtResource("4_6otih")]
+z_index = 2
+layout_mode = 1
+anchor_top = 0.11764706
+offset_right = 0.0
+
+[node name="SubFigureMenu" parent="SubGroups" instance=ExtResource("5_2unud")]
+layout_mode = 1
+
+[node name="SubNoteMenu" parent="SubGroups" instance=ExtResource("6_nem64")]
+layout_mode = 1
+
+[node name="SubSettingsMenu" parent="SubGroups" instance=ExtResource("7_7sikc")]
+layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_spvcb")
+bus = &"LouderBus"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_da2vg")
+}
+
+[node name="OpenCloseAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_sx37f")
+bus = &"LouderBus"
+
+[connection signal="resume_button_press" from="SubGroups/SubGameMenu" to="." method="_on_sub_game_menu_resume_button_press"]

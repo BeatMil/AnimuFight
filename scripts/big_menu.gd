@@ -64,10 +64,15 @@ func _input(event: InputEvent) -> void:
 		else:
 			current_menu += 1
 
-		groups[current_menu].play("sub_menu/fade_in_from_right")
-		groups[current_menu].focus_enable()
-		groups[current_menu].focus_on_me()
-		tab_groups[current_menu].fade_in()
+		var tween = create_tween()
+		tween.tween_callback(
+		groups[current_menu].play.bind("sub_menu/fade_in_from_right"))
+		tween.tween_callback(
+		groups[current_menu].focus_enable)
+		tween.tween_callback(
+		groups[current_menu].focus_on_me)
+		tween.tween_callback(
+		tab_groups[current_menu].fade_in)
 
 	if event.is_action_pressed("ui_prev_tab"):
 		prev_tab_sfx()
@@ -81,10 +86,15 @@ func _input(event: InputEvent) -> void:
 		else:
 			current_menu -= 1
 
-		groups[current_menu].play("sub_menu/fade_in_from_left")
-		groups[current_menu].focus_enable()
-		groups[current_menu].focus_on_me()
-		tab_groups[current_menu].fade_in()
+		var tween = create_tween()
+		tween.tween_callback(
+		groups[current_menu].play.bind("sub_menu/fade_in_from_left"))
+		tween.tween_callback(
+		groups[current_menu].focus_enable)
+		tween.tween_callback(
+		groups[current_menu].focus_on_me)
+		tween.tween_callback(
+		tab_groups[current_menu].fade_in)
 
 
 func next_tab_sfx() -> void:
@@ -156,3 +166,44 @@ func close_menu() -> void:
 
 func _on_sub_game_menu_resume_button_press() -> void:
 	close_menu()
+
+
+func click_tab_label(_amount: int) -> void:
+	next_tab_sfx()
+	groups[current_menu].play("sub_menu/fade_out_to_left")
+	groups[current_menu].focus_disable()
+	tab_groups[current_menu].fade_out()
+	
+
+	# Bring current_menu to specify
+	current_menu = _amount
+
+	var tween = create_tween()
+	tween.tween_callback(
+	groups[current_menu].play.bind("sub_menu/fade_in_from_right"))
+	tween.tween_callback(
+	groups[current_menu].focus_enable)
+	tween.tween_callback(
+	groups[current_menu].focus_on_me)
+	tween.tween_callback(
+	tab_groups[current_menu].fade_in)
+
+
+func _on_game_label_pressed() -> void:
+	click_tab_label(0)
+
+
+func _on_skill_label_pressed() -> void:
+	click_tab_label(1)
+
+
+func _on_figure_label_pressed() -> void:
+	click_tab_label(2)
+
+
+func _on_note_label_pressed() -> void:
+	click_tab_label(3)
+
+
+func _on_settings_label_pressed() -> void:
+	click_tab_label(4)

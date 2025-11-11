@@ -170,11 +170,11 @@ func _physics_process(delta: float) -> void:
 
 	## debug
 	$DebugLabel.text = ""
-	$DebugLabel.text = "%s, %s"%[
-	States.keys()[state],
-	animation_player.current_animation,
-	# "attack_timer: %.3f"%attack_timer.time_left,
-	]
+	# $DebugLabel.text = "%s, %s"%[
+	# States.keys()[state],
+	# animation_player.current_animation,
+	# # "attack_timer: %.3f"%attack_timer.time_left,
+	# ]
 	# $DebugLabel.text = "%s, %s, %s, %s"%[States.keys()[state], animation_player.current_animation, attack_timer.time_left, attack_timer.is_stopped()]
 	# $DebugLabel.text = "%s, %s %0.3f %0.3f"%[States.keys()[state], animation_player.current_animation, stun_duration, attack_timer.time_left]
 

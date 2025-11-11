@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://q1ydmwguookf"]
+[gd_scene load_steps=15 format=3 uid="uid://q1ydmwguookf"]
 
 [ext_resource type="Script" uid="uid://cgmpx4iqj73rb" path="res://scripts/training.gd" id="1_5jbvl"]
 [ext_resource type="Texture2D" uid="uid://cw6s2gy3svrnh" path="res://media/sprites/environment/ground.png" id="1_ee4pl"]
@@ -7,9 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://j5tjsuf8kmky" path="res://nodes/training_label.tscn" id="2_rxoxm"]
 [ext_resource type="PackedScene" uid="uid://dy6yy7k35k271" path="res://nodes/enemy_spawner.tscn" id="3_0jf8f"]
 [ext_resource type="PackedScene" uid="uid://cctmkul6r5mty" path="res://nodes/ui/training_menu.tscn" id="3_8ihin"]
-[ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="4_wfxnw"]
-[ext_resource type="PackedScene" uid="uid://by4mdvdte0wet" path="res://nodes/enemy_02.tscn" id="5_4aqt5"]
-[ext_resource type="PackedScene" uid="uid://deiem1ppktdd1" path="res://nodes/enemy_03.tscn" id="6_blm5w"]
 [ext_resource type="PackedScene" uid="uid://8bwj2eqc53h4" path="res://nodes/walls/wall.tscn" id="7_8vboe"]
 [ext_resource type="PackedScene" uid="uid://rmniefqiofjx" path="res://nodes/death_zone.tscn" id="8_yi24k"]
 
@@ -270,29 +267,6 @@ hp = 10110
 [node name="EnemySpawner8" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
 position = Vector2(1912, -144)
 target = NodePath("../Player")
-
-[node name="EnemySpawner7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
-position = Vector2(1912, -112)
-target = NodePath("../Player")
-enemy_to_spawn = [ExtResource("4_wfxnw"), ExtResource("5_4aqt5"), ExtResource("6_blm5w")]
-is_active = false
-
-[node name="EnemySpawner11" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
-position = Vector2(1704, -120)
-target = NodePath("../Player")
-is_active = false
-
-[node name="EnemySpawner9" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
-position = Vector2(248, -168)
-target = NodePath("../Player")
-enemy_to_spawn = [ExtResource("5_4aqt5")]
-is_active = false
-
-[node name="EnemySpawner10" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0jf8f")]
-position = Vector2(40, -168)
-target = NodePath("../Player")
-enemy_to_spawn = [ExtResource("5_4aqt5")]
-is_active = false
 
 [node name="WallPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Wall")

@@ -1843,7 +1843,7 @@ func _on_animation_player_animation_started(anim_name: StringName) -> void:
 			drive_gauge.guage_up(3)
 		"wall_throw":
 			drive_gauge.guage_up(2)
-		"execute":
+		"exe_hadoken":
 			drive_gauge.guage_up(3)
 		_:
 			profile_player_play("attack")

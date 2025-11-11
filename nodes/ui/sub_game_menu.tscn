@@ -11,14 +11,8 @@ button_container = NodePath("Group/HBoxContainer")
 
 [node name="Group" parent="." index="0"]
 modulate = Color(1, 1, 1, 1)
-offset_left = 0.0
-offset_right = 0.0
 
-[node name="TestLabel" parent="Group" index="0"]
-visible = false
-text = "SUB GAME MENU DESU!"
-
-[node name="HBoxContainer" type="VBoxContainer" parent="Group" index="1"]
+[node name="HBoxContainer" type="VBoxContainer" parent="Group" index="0"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.166667
@@ -33,13 +27,17 @@ metadata/_edit_use_anchors_ = true
 [node name="ResumeButton" parent="Group/HBoxContainer" index="0" instance=ExtResource("2_rc6xl")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../MainMenuButton")
+theme_override_font_sizes/font_size = 24
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Group/HBoxContainer/ResumeButton" index="0"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Group/HBoxContainer/ResumeButton" index="1"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.031251907
 anchor_right = 1.0007801
 anchor_bottom = 1.0312519
+focus_mode = 0
+focus_behavior_recursive = 1
+mouse_filter = 1
 theme_override_font_sizes/normal_font_size = 24
 text = "RESUME"
 horizontal_alignment = 1
@@ -55,6 +53,7 @@ anchors_preset = -1
 anchor_top = 0.031251907
 anchor_right = 1.0007801
 anchor_bottom = 1.0312519
+mouse_filter = 1
 theme_override_font_sizes/normal_font_size = 24
 text = "RESTART"
 horizontal_alignment = 1
@@ -71,6 +70,7 @@ anchors_preset = -1
 anchor_top = 0.031251907
 anchor_right = 1.0007801
 anchor_bottom = 1.0312519
+mouse_filter = 1
 theme_override_font_sizes/normal_font_size = 24
 text = "MAIN MENU"
 horizontal_alignment = 1
