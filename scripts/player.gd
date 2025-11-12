@@ -50,7 +50,7 @@ var command_buffer_count := 0
 
 var debug_input_event = null
 
-var is_controllable = true
+@export var is_controllable = true
 
 var can_block_states = [
 		States.IDLE,
@@ -515,6 +515,18 @@ func remove_throwee_thrown() -> void:
 	if throwee:
 		throwee.animation_player.play("thrown")
 		remove_throwee()
+
+
+func command_list_dummy() -> void:
+	is_controllable = false
+	$PlayerCanvasLayer.visible = false
+
+	## Why da fuq does this works???
+	## Make player spawn at the correct position
+	set_physics_process(false)
+	await get_tree().create_timer(0.1).timeout
+	set_physics_process(true)
+
 
 
 #############################################################

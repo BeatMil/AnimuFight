@@ -166,7 +166,6 @@ tab_color = Color(0.40288663, 0.4810052, 0.90053093, 1)
 [node name="SettingsLabel" parent="NavBarBackground/TabContainer" instance=ExtResource("2_51muq")]
 layout_mode = 2
 tab_title = "Settings"
-tab_color = Color(0.6946139, 0.4528398, 0.839433, 1)
 
 [node name="SubGroups" type="Control" parent="."]
 layout_mode = 1
@@ -175,7 +174,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="SubGameMenu" parent="SubGroups" instance=ExtResource("2_c6t7p")]
 layout_mode = 1

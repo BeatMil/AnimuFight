@@ -2,7 +2,7 @@ extends MarginContainer
 
 
 # This code sample assumes the current script is extending MarginContainer.
-var margin_value = 160
+@export var margin_value = 160
 
 
 func _ready() -> void:

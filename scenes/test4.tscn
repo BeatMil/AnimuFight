@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://eigpd3xpsx88"]
+[gd_scene load_steps=10 format=3 uid="uid://eigpd3xpsx88"]
 
-[ext_resource type="PackedScene" uid="uid://b3qywai3ibjjb" path="res://nodes/ui/sub_settings_menu.tscn" id="1_4y4fd"]
 [ext_resource type="Texture2D" uid="uid://u3a7t54kbtb8" path="res://media/sprites/pre_stage01/stage01_home.png" id="1_aowbe"]
 [ext_resource type="Script" uid="uid://ctic0c7jx3qoc" path="res://scripts/test_4.gd" id="1_e1b2u"]
 [ext_resource type="Texture2D" uid="uid://cvctqio1skqef" path="res://media/sprites/char1/vanilla_dash_grab.png" id="1_i4d4a"]
-[ext_resource type="PackedScene" uid="uid://cns0do6e0npq8" path="res://nodes/ui/sub_game_menu.tscn" id="2_4y4fd"]
+[ext_resource type="PackedScene" uid="uid://dbyji7iwvx4lw" path="res://nodes/ui/sub_skill_menu.tscn" id="2_4y4fd"]
 [ext_resource type="Texture2D" uid="uid://bswk48xnujm50" path="res://media/sprites/boss01/boss01_tatsu.png" id="2_poaxq"]
 
 [sub_resource type="Gradient" id="Gradient_pk563"]
@@ -27,11 +26,7 @@ script = ExtResource("1_e1b2u")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="SubGameMenu" parent="CanvasLayer" instance=ExtResource("2_4y4fd")]
-
-[node name="SubSettingsMenu" parent="CanvasLayer" instance=ExtResource("1_4y4fd")]
-mouse_filter = 1
-mouse_behavior_recursive = 0
+[node name="SubSkillMenu" parent="CanvasLayer" instance=ExtResource("2_4y4fd")]
 
 [node name="Stage01Home" type="Sprite2D" parent="."]
 position = Vector2(960, 539)

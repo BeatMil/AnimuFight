@@ -17,7 +17,6 @@ var last_focus: Object
 var action: String
 var button_pressed = false
 @onready var h_box_container: VBoxContainer = $HBoxContainer
-@onready var press_any_key_screen: ColorRect = $PressAnyKeyScreen
 @onready var move_left_button: Button = $HBoxContainer/MoveLeftButton
 
 
