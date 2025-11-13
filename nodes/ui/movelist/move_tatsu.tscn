@@ -1,0 +1,91 @@
+[gd_scene load_steps=8 format=3 uid="uid://bus8qi8xc1qvu"]
+
+[ext_resource type="PackedScene" uid="uid://csfesfr8hnpmg" path="res://nodes/ui/movelist/move_base.tscn" id="1_aglcn"]
+[ext_resource type="Texture2D" uid="uid://jvl5weto27rg" path="res://media/arrows_command_history/h_button.png" id="2_o8lr2"]
+[ext_resource type="Texture2D" uid="uid://23876htnnnmr" path="res://media/arrows_command_history/arrow_down.png" id="3_s58i3"]
+[ext_resource type="Texture2D" uid="uid://dcur17po2qbwk" path="res://media/sprites/controller_icon/plus_icon.png" id="4_lu2tt"]
+[ext_resource type="Texture2D" uid="uid://fog6o0hl3dni" path="res://media/arrows_command_history/l_button.png" id="5_m3iyg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxptt"]
+bg_color = Color(0.4235294, 0.59830356, 0.7647059, 0.13333334)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s58i3"]
+bg_color = Color(0.298, 0.45961425, 0.54099995, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="MoveTatsu" instance=ExtResource("1_aglcn")]
+
+[node name="Background" parent="." index="0"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_wxptt")
+
+[node name="MoveName" parent="." index="1"]
+text = "tatsumaki senpukyaku"
+
+[node name="Button5" type="TextureRect" parent="Control" index="0"]
+layout_mode = 2
+texture = ExtResource("2_o8lr2")
+stretch_mode = 3
+
+[node name="Button" type="TextureRect" parent="." index="3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 0.3359375
+anchor_right = 0.746
+anchor_bottom = 0.6359375
+offset_right = 29.440002
+offset_bottom = 25.599998
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_s58i3")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Button2" type="TextureRect" parent="." index="4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7583333
+anchor_top = 0.375
+anchor_right = 0.79583335
+anchor_bottom = 0.625
+offset_right = 36.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_lu2tt")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Button3" type="TextureRect" parent="." index="5"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.81666666
+anchor_top = 0.0625
+anchor_right = 0.85833335
+anchor_bottom = 0.9375
+texture = ExtResource("5_m3iyg")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Button4" type="TextureRect" parent="." index="6"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8666667
+anchor_top = 0.375
+anchor_right = 0.90416664
+anchor_bottom = 0.625
+offset_right = 36.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_lu2tt")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Foreground" parent="." index="8"]
+visible = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_s58i3")

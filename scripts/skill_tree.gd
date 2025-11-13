@@ -1,8 +1,9 @@
 extends Node
 
 
-var Skills = {
+var skill_dict = {
 	"tatsu": false,
+	"jin1+2": true,
 	"burst": false,
 }
 
@@ -11,12 +12,12 @@ var skill_point: int = 0
 
 
 func enable_skill(skill_name: String) -> bool:
-	if Skills.has(skill_name):
+	if skill_dict.has(skill_name):
 		# check skill exists
-		if Skills[skill_name]:
+		if skill_dict[skill_name]:
 			print("%s is already on"%skill_name)
 		else:
-			Skills[skill_name] = true
+			skill_dict[skill_name] = true
 
 		return true
 
@@ -28,8 +29,8 @@ func enable_skill(skill_name: String) -> bool:
 
 
 func check_skill(skill_name: String) -> bool:
-	if Skills.has(skill_name):
-		if Skills[skill_name]:
+	if skill_dict.has(skill_name):
+		if skill_dict[skill_name]:
 			return true
 		else:
 			return false
