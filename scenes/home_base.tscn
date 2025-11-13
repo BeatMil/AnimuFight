@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://blaok6s3t6wgo"]
+
+[ext_resource type="Script" uid="uid://cpbsoltxui0k2" path="res://scripts/home_base.gd" id="1_djn56"]
+[ext_resource type="PackedScene" uid="uid://eq2tweu0uxq4" path="res://nodes/ui/big_menu.tscn" id="1_jwt77"]
+[ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="1_oik7h"]
+[ext_resource type="Texture2D" uid="uid://cwyrh2o0eyugc" path="res://media/sprites/environment/ground_better.png" id="2_jwt77"]
+[ext_resource type="Texture2D" uid="uid://bpjwhsui8ie7h" path="res://media/sprites/pre_stage01/stage01_home_clear.png" id="3_1263f"]
+[ext_resource type="PackedScene" uid="uid://hhiy77ksrkb4" path="res://nodes/ui/move_store_menu.tscn" id="3_u80ru"]
+[ext_resource type="Texture2D" uid="uid://cwjyveicsm2v5" path="res://media/sprites/pre_stage01/kaisouko_point2_bg.png" id="4_2rb2t"]
+[ext_resource type="PackedScene" uid="uid://derpnighpvd6t" path="res://nodes/walls/wall_invisible.tscn" id="5_4cqlv"]
+[ext_resource type="PackedScene" uid="uid://c0bp186y0vvc" path="res://nodes/pre_stage01/desktop.tscn" id="8_8kv0j"]
+[ext_resource type="Texture2D" uid="uid://23876htnnnmr" path="res://media/arrows_command_history/arrow_down.png" id="9_nruf3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_djn56"]
+size = Vector2(3334, 470)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kv0j"]
+size = Vector2(256, 288)
+
+[node name="HomeBase" type="Node2D"]
+script = ExtResource("1_djn56")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BigMenu" parent="CanvasLayer" instance=ExtResource("1_jwt77")]
+visible = false
+
+[node name="MoveStoreMenu" parent="CanvasLayer" instance=ExtResource("3_u80ru")]
+anchor_left = 0.016666668
+anchor_top = 0.02962963
+anchor_right = 0.98333335
+anchor_bottom = 0.97037035
+
+[node name="Background" type="Sprite2D" parent="."]
+self_modulate = Color(0.859799, 0.859799, 0.859799, 1)
+position = Vector2(-96, -54)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("3_1263f")
+centered = false
+
+[node name="Polygon2D" type="Polygon2D" parent="Background"]
+position = Vector2(984, 280)
+color = Color(0.26095, 0.37694, 0.445691, 1)
+polygon = PackedVector2Array(-136, -136, 136, -136, 136, 128, -136, 128)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Background/Polygon2D"]
+texture = ExtResource("4_2rb2t")
+texture_offset = Vector2(121, 137)
+polygon = PackedVector2Array(-128, -128, 128, -128, 128, 120, -128, 120)
+
+[node name="Player" parent="." instance=ExtResource("1_oik7h")]
+position = Vector2(673, 596)
+is_controllable = true
+
+[node name="Floor" type="StaticBody2D" parent="." groups=["ground"]]
+position = Vector2(1178, 1106)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_djn56")
+
+[node name="Ground" type="Sprite2D" parent="Floor"]
+position = Vector2(4.99989, -108)
+texture = ExtResource("2_jwt77")
+
+[node name="WallL" parent="." instance=ExtResource("5_4cqlv")]
+position = Vector2(-264, 376)
+
+[node name="WallL2" parent="." instance=ExtResource("5_4cqlv")]
+position = Vector2(2208, 392)
+
+[node name="Desktop" parent="." instance=ExtResource("8_8kv0j")]
+position = Vector2(992, 736)
+
+[node name="MoveStoreArea2D2" type="Area2D" parent="Desktop"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Desktop/MoveStoreArea2D2"]
+shape = SubResource("RectangleShape2D_8kv0j")
+
+[node name="ButtonHint" type="Sprite2D" parent="Desktop"]
+position = Vector2(8, -256)
+texture = ExtResource("9_nruf3")
+
+[connection signal="close_store_menu" from="CanvasLayer/MoveStoreMenu" to="." method="_on_move_store_menu_close_store_menu"]
+[connection signal="body_entered" from="Desktop/MoveStoreArea2D2" to="." method="_on_move_store_area_2d_2_body_entered"]
+[connection signal="body_exited" from="Desktop/MoveStoreArea2D2" to="." method="_on_move_store_area_2d_2_body_exited"]

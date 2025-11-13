@@ -1,0 +1,133 @@
+[gd_scene load_steps=14 format=3 uid="uid://hhiy77ksrkb4"]
+
+[ext_resource type="PackedScene" uid="uid://cefvk58xqrwpr" path="res://nodes/ui/sub_base_menu.tscn" id="1_heee0"]
+[ext_resource type="Script" uid="uid://de46v4s2bgtmd" path="res://scripts/move_store_menu.gd" id="2_heee0"]
+[ext_resource type="PackedScene" uid="uid://cn2o7n2nqq7q1" path="res://nodes/ui/movelist/move_jin1+2.tscn" id="5_684u3"]
+[ext_resource type="PackedScene" uid="uid://bus8qi8xc1qvu" path="res://nodes/ui/movelist/move_tatsu.tscn" id="6_6dafq"]
+[ext_resource type="Script" uid="uid://c67r1nlqwssnh" path="res://scripts/margin_container.gd" id="7_htaod"]
+[ext_resource type="Texture2D" uid="uid://cwyrh2o0eyugc" path="res://media/sprites/environment/ground_better.png" id="8_hssn5"]
+[ext_resource type="AudioStream" uid="uid://bdbpxqqnsa47h" path="res://media/sfxs/DSGNMisc_MOVEMENT-Sparkly Water_HY_PC-001.wav" id="9_7h1ag"]
+[ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="9_tfgvd"]
+[ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="10_j2ikr"]
+
+[sub_resource type="Gradient" id="Gradient_heee0"]
+colors = PackedColorArray(0, 0, 0, 1, 0.31372547, 0.3927819, 0.6, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qhp3f"]
+gradient = SubResource("Gradient_heee0")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mg56i"]
+texture = SubResource("GradientTexture2D_qhp3f")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8f4a"]
+size = Vector2(3334, 470)
+
+[node name="MoveStoreMenu" instance=ExtResource("1_heee0")]
+process_mode = 3
+anchors_preset = -1
+script = ExtResource("2_heee0")
+button_container = Object(VBoxContainer,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":2,"size_flags_horizontal":3,"size_flags_vertical":3,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":1,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","alignment":0,"script":null)
+
+
+[node name="Panel" type="Panel" parent="." index="0"]
+self_modulate = Color(1, 1, 1, 0.98039216)
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_mg56i")
+
+[node name="Group" parent="." index="1"]
+modulate = Color(1, 1, 1, 1)
+offset_left = 0.0
+offset_right = 0.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Group" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Group/HBoxContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+follow_focus = true
+
+[node name="VBoxContainerL" type="VBoxContainer" parent="Group/HBoxContainer/ScrollContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MoveJin1+2" parent="Group/HBoxContainer/ScrollContainer/VBoxContainerL" index="0" instance=ExtResource("5_684u3")]
+layout_mode = 2
+
+[node name="MoveTatsu" parent="Group/HBoxContainer/ScrollContainer/VBoxContainerL" index="1" instance=ExtResource("6_6dafq")]
+layout_mode = 2
+
+[node name="HBoxContainerR" type="HBoxContainer" parent="Group/HBoxContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Group/HBoxContainer/HBoxContainerR" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("7_htaod")
+margin_value = 16
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer" index="0"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(800, 800)
+render_target_update_mode = 4
+
+[node name="Floor" type="StaticBody2D" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer/SubViewport" index="0" groups=["ground"]]
+visible = false
+position = Vector2(597.99994, 768)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer/SubViewport/Floor" index="0"]
+shape = SubResource("RectangleShape2D_s8f4a")
+
+[node name="Ground" type="Sprite2D" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer/SubViewport/Floor" index="1"]
+position = Vector2(4.99989, -108)
+texture = ExtResource("8_hssn5")
+
+[node name="PlayerPos" type="Marker2D" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer/SubViewport" index="1"]
+position = Vector2(238, 360)
+
+[node name="Player" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer/SubViewport" index="2" instance=ExtResource("9_tfgvd")]
+process_mode = 3
+position = Vector2(238, 360)
+is_controllable = false
+
+[node name="EnemyPos" type="Marker2D" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer/SubViewport" index="3"]
+position = Vector2(598, 360)
+
+[node name="Enemy" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer/SubViewport" index="4" node_paths=PackedStringArray("target") instance=ExtResource("10_j2ikr")]
+process_mode = 3
+position = Vector2(598, 360)
+target = NodePath("../Player")
+is_notarget = true
+hp = 20
+block_rate = 0
+
+[node name="OpenCloseAudioPlayer" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource("9_7h1ag")
+bus = &"LouderBus"
+
+[connection signal="selected" from="Group/HBoxContainer/ScrollContainer/VBoxContainerL/MoveJin1+2" to="." method="_on_move_jin_12_selected"]
+[connection signal="selected" from="Group/HBoxContainer/ScrollContainer/VBoxContainerL/MoveTatsu" to="." method="_on_move_tatsu_selected"]

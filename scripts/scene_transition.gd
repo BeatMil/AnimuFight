@@ -1,7 +1,9 @@
 extends CanvasLayer
 
+
 func _ready() -> void:
 	physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
+
 
 func change_scene(target: String) -> void:
 	$AnimationPlayer.play("in")
