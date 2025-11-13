@@ -68,11 +68,6 @@ func _physics_process(delta: float) -> void:
 		hitlag_timer -= delta
 		return
 
-	if is_notarget:
-		is_player_in_range_lp = false
-		is_player_in_range_attack01 = false
-		attack_timer.stop()
-
 	is_face_right = not sprite_2d.flip_h
 
 	_check_wall_bounce()
@@ -207,7 +202,7 @@ func _move(delta) -> void:
 	if animation_player.has_animation("walk"):
 		animation_player.play("walk")
 
-	if is_instance_valid(target) and not is_notarget:
+	if is_instance_valid(target):
 		var direction = Vector2.ZERO
 		if target.position.distance_to(position) <= 220:
 			direction = (global_position - target.position).normalized()

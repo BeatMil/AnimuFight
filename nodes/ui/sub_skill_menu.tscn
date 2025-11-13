@@ -92,6 +92,7 @@ position = Vector2(598, 360)
 process_mode = 3
 position = Vector2(598, 360)
 target = NodePath("../Player")
+is_notarget = true
 hp = 20
 block_rate = 0
 
