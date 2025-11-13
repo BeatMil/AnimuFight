@@ -37,6 +37,7 @@ alignment = 1
 [node name="ScrollContainer" type="ScrollContainer" parent="Group/HBoxContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
+follow_focus = true
 
 [node name="VBoxContainerL" type="VBoxContainer" parent="Group/HBoxContainer/ScrollContainer" index="0"]
 layout_mode = 2
