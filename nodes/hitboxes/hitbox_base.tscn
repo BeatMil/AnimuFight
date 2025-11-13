@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://6vyccoqw70jj" path="res://scripts/hitbox.gd" id="1_sdtl1"]
 
 [node name="HitboxLP" type="Node2D" groups=["hitbox"]]
+process_mode = 3
 script = ExtResource("1_sdtl1")
 
 [node name="Area2D" type="Area2D" parent="." groups=["hitbox"]]

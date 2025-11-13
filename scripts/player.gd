@@ -486,7 +486,7 @@ func set_throwee(the_guy: CharacterBody2D) -> void:
 
 func play_animation(animation: String) -> void:
 	animation_player.play(animation)
-	print(animation)
+	# print(animation)
 
 
 func set_flip_h(value: bool) -> void:

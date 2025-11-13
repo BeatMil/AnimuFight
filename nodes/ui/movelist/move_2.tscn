@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://08s8dnkw0ii8"]
+
+[ext_resource type="PackedScene" uid="uid://csfesfr8hnpmg" path="res://nodes/ui/movelist/move_base.tscn" id="1_wxptt"]
+[ext_resource type="Texture2D" uid="uid://jvl5weto27rg" path="res://media/arrows_command_history/h_button.png" id="2_wxptt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxptt"]
+bg_color = Color(0.4235294, 0.59830356, 0.7647059, 0.13333334)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="Move2" instance=ExtResource("1_wxptt")]
+
+[node name="Background" parent="." index="0"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_wxptt")
+
+[node name="MoveName" parent="." index="1"]
+text = "Heavy Shoulder"
+
+[node name="Hp" type="TextureRect" parent="Control" index="0"]
+layout_mode = 2
+texture = ExtResource("2_wxptt")
+stretch_mode = 3

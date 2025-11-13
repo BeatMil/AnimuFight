@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://csfesfr8hnpmg"]
+
+[ext_resource type="Script" uid="uid://da6in63qg1v5r" path="res://scripts/move_list.gd" id="1_x0ral"]
+[ext_resource type="AudioStream" uid="uid://bxpjgafdsk0v2" path="res://media/sfxs/button_focus.wav" id="2_x0ral"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3ktq"]
+bg_color = Color(0.4235294, 0.59830356, 0.7647059, 0.13333334)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="MoveBase" type="Control"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 3
+anchor_right = 0.4
+anchor_bottom = 0.11851852
+focus_mode = 2
+script = ExtResource("1_x0ral")
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.006263048
+anchor_top = 0.0625
+anchor_right = 0.9937369
+anchor_bottom = 0.9375
+theme_override_styles/panel = SubResource("StyleBoxFlat_r3ktq")
+metadata/_edit_use_anchors_ = true
+
+[node name="MoveName" type="Label" parent="."]
+layout_mode = 0
+anchor_top = 0.40625
+anchor_right = 0.49582464
+anchor_bottom = 0.5859375
+size_flags_horizontal = 3
+text = "Test Combo Name"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.0625
+anchor_right = 0.96868473
+anchor_bottom = 0.9375
+size_flags_horizontal = 3
+alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_x0ral")
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

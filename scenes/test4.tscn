@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://eigpd3xpsx88"]
+[gd_scene load_steps=14 format=3 uid="uid://eigpd3xpsx88"]
 
 [ext_resource type="Texture2D" uid="uid://u3a7t54kbtb8" path="res://media/sprites/pre_stage01/stage01_home.png" id="1_aowbe"]
 [ext_resource type="Script" uid="uid://ctic0c7jx3qoc" path="res://scripts/test_4.gd" id="1_e1b2u"]
 [ext_resource type="Texture2D" uid="uid://cvctqio1skqef" path="res://media/sprites/char1/vanilla_dash_grab.png" id="1_i4d4a"]
-[ext_resource type="PackedScene" uid="uid://dbyji7iwvx4lw" path="res://nodes/ui/sub_skill_menu.tscn" id="2_4y4fd"]
 [ext_resource type="Texture2D" uid="uid://bswk48xnujm50" path="res://media/sprites/boss01/boss01_tatsu.png" id="2_poaxq"]
+[ext_resource type="PackedScene" uid="uid://eq2tweu0uxq4" path="res://nodes/ui/big_menu.tscn" id="2_rjogl"]
+[ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="6_3uho7"]
+[ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="7_3uho7"]
+[ext_resource type="Texture2D" uid="uid://cwyrh2o0eyugc" path="res://media/sprites/environment/ground_better.png" id="7_rjogl"]
 
 [sub_resource type="Gradient" id="Gradient_pk563"]
 offsets = PackedFloat32Array(0, 0.680451)
@@ -21,12 +24,17 @@ polygon = PackedVector2Array(-30, -4, -77, 27, -196, 166, -182.2, 197, -163.5, 1
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_aowbe"]
 polygon = PackedVector2Array(45, -225.3, 45, -221.4, 41, -209.3, 25, -216.3, 25, -217.8, 7, -219.8, 7, -221.4, -11.4, -218, -15.5, -218, -44.9, -202.8, -60.5, -212, -64.9, -212, -88.9, -184, -90.4, -184, -92, -179.3, -92, -177.7, -126, -131.7, -126, -129.9, -152.9, -101, -155, -101, -155, -94.7, -166, -79, -169, -79, -165.4, -70, -159.4, -70, -124.6, -94.7, -122.2, -94, -119.8, -94, -116, -101.5, -81.6, -127.6, -79.2, -127, -76.9, -127, -74.9, -130, -73.7, -130, -72.6, -132.5, -74.7, -134.5, -58.7, -149.6, -57, -135.8, -57, -134.4, -53, -128.4, -53, -122.9, -42.6, -116, -41.3, -116, -33.4, -98.5, -43.5, -93, -45.8, -93, -54.8, -84, -56.4, -84, -64.4, -61, -65.8, -61, -67.8, -46, -69, -46, -69, -33.2, -61, -24.3, -61, -22, -29.9, -22, -44.4, 17, -45.9, 17, -48, 48.9, -48, 54.5, -44, 62.5, -44, 64.8, -36, 72.8, -36, 74.7, 2.79999, 81, 21.7, 81, 18.2, 112, 17, 112, 17, 155.2, 21, 173.4, 21, 176.6, 9.70001, 204, 8.10001, 204, 7, 222.9, 7, 237, 12, 240.9, 12, 243.1, 38.1, 242, 42.4, 242, 44.4, 237, 46, 237, 46, 213.4, 51.6, 188, 52.2, 188, 53.3, 185.8, 50, 181.3, 56.3, 166, 57.7, 166, 60.8, 144, 61.8, 144, 66, 93.1, 66, 78.3, 69.8, 79, 72.2, 79, 101.4, 73, 102.9, 73, 115, 76.4, 115, 77.8, 148.9, 81, 151.2, 81, 197.4, 72, 204.3, 72, 213.2, 80, 223, 80, 227, 75, 228.8, 75, 232.8, 29, 234.1, 29, 233, 10.9, 233, 4.29999, 225, -5.7, 225, -8, 221, -8, 218.8, -9.3, 214.3, -6, 212.4, -6, 205, 27.8, 205, 31.3, 201.5, 35.6, 49.2, 8, 46.5, 8, 36, -30, 36, -30.6, 48, -28.3, 48, -27, 58.8, -27, 61.8, -30, 64.5, -30, 61, -45, 61, -49.5, 44.1, -81.3, 50.7, -87, 52.2, -87, 58.3, -98, 59.6, -98, 69, -140.8, 69, -144.9, 138, -111.8, 138, -108.8, 142.5, -111, 144.6, -111, 162.6, -104, 166.2, -104, 169, -101.2, 169, -97.8, 175.5, -101, 177.2, -101, 178.3, -103.2, 165, -120.7, 165, -122.9, 132.7, -151, 130.9, -151, 105, -178.9, 105, -179.9, 64, -214, 64, -215.2)
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vfsa7"]
+size = Vector2(3334, 470)
+
+[node name="Test4" type="Node2D"]
 script = ExtResource("1_e1b2u")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="SubSkillMenu" parent="CanvasLayer" instance=ExtResource("2_4y4fd")]
+[node name="BigMenu" parent="." instance=ExtResource("2_rjogl")]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 64.0
+offset_bottom = 64.0
 
 [node name="Stage01Home" type="Sprite2D" parent="."]
 position = Vector2(960, 539)
@@ -73,3 +81,23 @@ region_rect = Rect2(512.718, 0, 758.923, 512)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="lightOcc"]
 occluder = SubResource("OccluderPolygon2D_aowbe")
+
+[node name="Player" parent="." instance=ExtResource("6_3uho7")]
+position = Vector2(734, 631)
+is_controllable = true
+
+[node name="Floor" type="StaticBody2D" parent="." groups=["ground"]]
+position = Vector2(646, 1059)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_vfsa7")
+
+[node name="Ground" type="Sprite2D" parent="Floor"]
+position = Vector2(4.99989, -108)
+texture = ExtResource("7_rjogl")
+
+[node name="Enemy" parent="." instance=ExtResource("7_3uho7")]
+position = Vector2(1125, 604)

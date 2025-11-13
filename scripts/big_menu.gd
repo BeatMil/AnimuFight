@@ -21,6 +21,8 @@ var stretch_ratio = 2
 var fade_white = Color(0.735, 0.735, 0.735)
 var normal_white = Color(1, 1, 1, 1)
 
+@onready var sub_skill_menu: Control = $SubGroups/SubSkillMenu
+
 
 func _ready() -> void:
 	groups = sub_groups.get_children()
@@ -111,6 +113,9 @@ func open_menu() -> void:
 	# pause game
 	get_tree().paused = true
 
+	# enable physics inside viewport
+	PhysicsServer2D.set_active(true)
+
 	# play sfx
 	open_close_audio_player.pitch_scale = 0.7
 	open_close_audio_player.play()
@@ -143,6 +148,9 @@ func close_menu() -> void:
 	# play sfx
 	open_close_audio_player.pitch_scale = 1
 	open_close_audio_player.play()
+
+	# stop skill menu from playing movelist
+	sub_skill_menu.focus_disable()
 
 	var tween = create_tween()
 

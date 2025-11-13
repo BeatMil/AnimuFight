@@ -71,6 +71,7 @@ func _physics_process(delta: float) -> void:
 	if is_notarget:
 		is_player_in_range_lp = false
 		is_player_in_range_attack01 = false
+		attack_timer.stop()
 
 	is_face_right = not sprite_2d.flip_h
 

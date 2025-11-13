@@ -182,7 +182,8 @@ offset_right = 0.0
 [node name="SubSkillMenu" parent="SubGroups" instance=ExtResource("3_vmfsf")]
 z_index = 2
 layout_mode = 1
-anchors_preset = 15
+anchor_left = 0.12946428
+anchor_right = 0.96428573
 offset_right = 0.0
 
 [node name="SubFigureMenu" parent="SubGroups" instance=ExtResource("4_071ji")]

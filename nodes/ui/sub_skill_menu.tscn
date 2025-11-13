@@ -1,17 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbyji7iwvx4lw"]
+[gd_scene load_steps=10 format=3 uid="uid://dbyji7iwvx4lw"]
 
 [ext_resource type="PackedScene" uid="uid://cefvk58xqrwpr" path="res://nodes/ui/sub_base_menu.tscn" id="1_16tq2"]
 [ext_resource type="Script" uid="uid://dabxgvnnkfflk" path="res://scripts/sub_skill_menu.gd" id="2_biuab"]
+[ext_resource type="PackedScene" uid="uid://bqvbnfve40hfn" path="res://nodes/ui/movelist/move_1.tscn" id="3_6baxv"]
 [ext_resource type="Script" uid="uid://c67r1nlqwssnh" path="res://scripts/margin_container.gd" id="3_biuab"]
+[ext_resource type="PackedScene" uid="uid://08s8dnkw0ii8" path="res://nodes/ui/movelist/move_2.tscn" id="4_6baxv"]
 [ext_resource type="PackedScene" uid="uid://2b1ywpnefvth" path="res://nodes/player.tscn" id="4_ava7g"]
 [ext_resource type="Texture2D" uid="uid://cwyrh2o0eyugc" path="res://media/sprites/environment/ground_better.png" id="4_s8f4a"]
+[ext_resource type="PackedScene" uid="uid://b2vaqeiw3q18o" path="res://nodes/enemy_01.tscn" id="6_6baxv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s8f4a"]
 size = Vector2(3334, 470)
 
-[node name="SubSkillMenu" instance=ExtResource("1_16tq2")]
+[node name="SubSkillMenu" node_paths=PackedStringArray("focus_node", "button_container") instance=ExtResource("1_16tq2")]
 anchors_preset = -1
 script = ExtResource("2_biuab")
+focus_node = NodePath("Group/HBoxContainer/VBoxContainerL/Move1")
+button_container = NodePath("Group/HBoxContainer/VBoxContainerL")
 
 [node name="Group" parent="." index="0"]
 modulate = Color(1, 1, 1, 1)
@@ -32,6 +37,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Move1" parent="Group/HBoxContainer/VBoxContainerL" index="0" instance=ExtResource("3_6baxv")]
+layout_mode = 2
+
+[node name="Move2" parent="Group/HBoxContainer/VBoxContainerL" index="1" instance=ExtResource("4_6baxv")]
+layout_mode = 2
+
 [node name="HBoxContainerR" type="HBoxContainer" parent="Group/HBoxContainer" index="1"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -47,11 +58,13 @@ margin_value = 16
 layout_mode = 2
 
 [node name="SubViewport" type="SubViewport" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer" index="0"]
+transparent_bg = true
 handle_input_locally = false
 size = Vector2i(800, 800)
 render_target_update_mode = 4
 
 [node name="Floor" type="StaticBody2D" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer/SubViewport" index="0" groups=["ground"]]
+visible = false
 position = Vector2(597.99994, 768)
 collision_layer = 8
 collision_mask = 0
@@ -65,8 +78,22 @@ position = Vector2(4.99989, -108)
 texture = ExtResource("4_s8f4a")
 
 [node name="PlayerPos" type="Marker2D" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer/SubViewport" index="1"]
-position = Vector2(238, 320)
+position = Vector2(238, 360)
 
 [node name="Player" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer/SubViewport" index="2" instance=ExtResource("4_ava7g")]
-position = Vector2(590, 352)
+process_mode = 3
+position = Vector2(238, 360)
 is_controllable = false
+
+[node name="EnemyPos" type="Marker2D" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer/SubViewport" index="3"]
+position = Vector2(598, 360)
+
+[node name="Enemy" parent="Group/HBoxContainer/HBoxContainerR/MarginContainer/SubViewportContainer/SubViewport" index="4" node_paths=PackedStringArray("target") instance=ExtResource("6_6baxv")]
+process_mode = 3
+position = Vector2(598, 360)
+target = NodePath("../Player")
+hp = 20
+block_rate = 0
+
+[connection signal="selected" from="Group/HBoxContainer/VBoxContainerL/Move1" to="." method="_on_move_1_selected"]
+[connection signal="selected" from="Group/HBoxContainer/VBoxContainerL/Move2" to="." method="_on_move_2_selected"]

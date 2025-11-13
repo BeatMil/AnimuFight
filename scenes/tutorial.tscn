@@ -211,6 +211,7 @@ position = Vector2(1160, 728)
 [node name="Player" parent="." instance=ExtResource("1_8ho6b")]
 position = Vector2(888, 728)
 script = ExtResource("6_ckvwl")
+is_controllable = true
 hp = 12000
 
 [node name="SpawnPos" type="Marker2D" parent="."]
