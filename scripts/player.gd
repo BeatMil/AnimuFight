@@ -903,7 +903,7 @@ func jin1plus2_end_info() -> void:
 	"hitlag_amount_air": 0.1,
 	"hitstun_amount_air": 0.1,
 	"screenshake_amount": Vector2(0, 0),
-	"damage": 4,
+	"damage": 2,
 	"type": Enums.Attack.NORMAL,
 	"pos": $HitBoxPos/LpPos.position,
 	}
